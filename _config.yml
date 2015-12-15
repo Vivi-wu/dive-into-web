@@ -1,0 +1,24 @@
+# Site settings
+title: Dive into WEB
+email: xue.wu0112@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+  This is a place for my notes.
+baseurl: "/dive-into-web"
+
+# Build settings
+markdown: kramdown
+excerpt_separator: <!--more-->
+
+# Markdown Processors
+kramdown:
+  auto_ids: false
+
+# Outputting
+paginate: 4
+paginate_path: "/blog/page/:num/"
+
+defaults:
+  - scope:
+      type: posts
+    values:
+      layout: post

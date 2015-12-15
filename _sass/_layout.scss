@@ -1,0 +1,167 @@
+@font-face {
+  font-family: "entypo-fontello";
+  src: url("../assets/fonts/entypo-fontello.woff") format("woff");
+}
+
+@import
+  "grids",
+  "site-header",
+  "site-footer",
+  "contact-us"
+;
+
+
+/**
+ * Wrapper
+ */
+.wrapper {
+  position: relative;
+  width: 910px;
+  margin-right: auto;
+  margin-left: auto;
+  @extend %clearfix;
+
+  @include media-query-min($desktop-large) {
+    width: 1030px;
+  }
+  @include media-query-max($on-mobile) {
+    width: 268px;
+  }
+  @media only screen and (max-width: 767px) and (min-width: 480px) { // mobile landscape
+    width: 428px;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 989px) { // tablet portrait
+    width: 682px;
+  }
+}
+
+
+.content { // set padding for content area
+  padding-top: $spacing-unit * 2.5;
+  padding-bottom: $spacing-unit * 2.5;
+}
+
+
+/**
+* Common header
+*/
+.content-h2 {
+  font-size: 28px;
+  line-height: 1.1em;
+  color: $header-color;
+  letter-spacing: 1px;
+}
+.content-h2.with-bottom-line {
+  background: url("../assets/images/line.png") no-repeat center bottom;
+  padding-bottom: $spacing-unit * 2.8;
+  margin-bottom: $spacing-unit * 2.5;
+  text-align: center;
+}
+
+.heading-icon {
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  margin-right: $spacing-unit;
+  vertical-align: bottom;
+
+  &.work {
+    background: url("../assets/images/home_icons.png") -38px top no-repeat;
+  }
+  &.service {
+    background: url("../assets/images/home_icons.png") -76px top no-repeat;
+  }
+  &.words {
+    background: url("../assets/images/home_icons.png") 0px top no-repeat;
+  }
+  &.contact {
+    background: url("../assets/images/home_icons.png") -114px top no-repeat;
+  }
+}
+
+.content-p {
+  margin-top: 0;
+  margin-bottom: $spacing-unit * 2;
+}
+
+
+/**
+ * Scroll Top link
+ */
+#go-top-button {
+  position: fixed;
+  right: $spacing-unit * 2.5;
+  bottom: $spacing-unit * 2.5;
+  width: $spacing-unit * 2.5;
+  height: $spacing-unit * 2.5;
+  line-height: $spacing-unit * 2.5;
+  font-family: "entypo-fontello";
+  text-decoration: none;
+  z-index: 100;
+  background-color: white;
+  color: $text-color-dark;
+  border:1px solid $grey-color-light;
+  border-radius: 2px;
+  opacity: 0;
+  visibility: hidden;
+  @include mn-transition(all 0.3s ease-out);
+
+  &:hover {
+    color: $brand-color-dark;
+    background-color: #f8f8f8;
+  }
+
+  &.show-gotop {
+    opacity: 0.7;
+    visibility: visible;
+  }
+}
+
+
+/**
+ * Page content
+ */
+.page-content {
+  @include media-query-min($on-mobile) {
+    padding-top: 88px;
+  }
+}
+
+
+/**
+ * Photo used to separate content
+ */
+.photo-breaker {
+  width: 100%;
+  height: $spacing-unit * 19.5;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+
+  @include media-query-max($on-mobile) {
+    height: $spacing-unit * 12.5 !important;
+  }
+
+  &.above-services {
+    height: $spacing-unit * 23;
+    background-image: url("http://www.mobilenowgroup.com/wp-content/uploads/2013/07/11.jpg");
+  }
+
+  &.above-client-word {
+    height: $spacing-unit * 23;
+    background-image: url("http://www.mobilenowgroup.com/wp-content/uploads/2013/07/pic-62.png");
+  }
+
+  &.above-contact-us {
+    background-image: url("http://www.mobilenowgroup.com/wp-content/uploads/2013/09/3.jpg");
+  }
+
+  &.above-facts {
+    background-image: url("http://www.mobilenowgroup.com/wp-content/uploads/2013/07/pic-8.jpg");
+  }
+
+  &.above-careers {
+    height: $spacing-unit * 25;
+    background-image: url("http://www.mobilenowgroup.com/wp-content/uploads/2013/07/Looking-For-new.jpg");
+  }
+}

@@ -1,0 +1,61 @@
+---
+layout: default
+---
+<div class="wrapper container">
+  <div class="nine units first">
+    <div class="content template-blog">
+      <!-- This loops through the paginated posts -->
+      {% for post in paginator.posts %}
+      <div class="post post-list">
+        <header>
+          <h2><a href="{{ post.url | prepend: site.baseurl }}" title="{{ post.title }}">{{ post.title }}</a></h2>
+          <div class="post-meta-infos">
+            <span>{{ post.date | date_to_string }}</span>
+            <span class="text-sep">/</span>
+            <span>in <a href="{{ site.baseurl }}/category/{{ post.categories }}/" class="post-category">{{ post.categories }}</a></span>
+            <span class="text-sep">/</span>
+            <span>by <a href="{{ site.baseurl }}/author/{{ post.author }}/" class="post-author">{{ post.author }}</a></span>
+          </div>
+        </header>
+        <article>{{ post.excerpt }}</article>
+      </div>
+      {% endfor %}
+
+      <!-- Pagination links -->
+      {% if paginator.total_pages > 1 %}
+      <div class="pagination">
+
+        {% if paginator.previous_page %}
+          {% if paginator.page > 3 %}
+            <a href="{{ '/news/' | prepend: site.baseurl | replace: '//', '/' }}">&laquo;</a>
+          {% endif %}
+          <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&lsaquo;</a>
+        {% endif %}
+
+        {% capture start %}{{ paginator.page | minus: 3 }}{% endcapture %}
+        {% for page in (1..paginator.total_pages) limit: 5 offset: start %}
+          {% if page == paginator.page %}
+            <span class="current-page">{{ page }}</span>
+          {% elsif page == 1 %}
+            <a href="{{ '/news/' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+          {% else %}
+            <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+          {% endif %}
+        {% endfor %}
+
+        {% if paginator.next_page %}
+          <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">&rsaquo;</a>
+          {% assign end = paginator.page | plus: 2 %}
+          {% if paginator.total_pages > end %}
+            <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', paginator.total_pages }}">&raquo;</a>
+          {% endif %}
+        {% endif %}
+
+        <span class="page-number">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% include archives-month-sidebar.html %}
+</div>

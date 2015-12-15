@@ -1,0 +1,29 @@
+.site-footer {
+  padding-top: $spacing-unit * 0.75;
+  padding-bottom: $spacing-unit * 0.75;
+  @extend .solid_top_border;
+  font-size: 12px;
+
+  .copyright { color: $text-color-dark; }
+
+  nav {
+    float: right;
+    @include media-query-max($on-mobile) {
+      display: none;
+    }
+  }
+
+  ul.page-links li {
+    padding-left: $spacing-unit * 0.5;
+    padding-right: $spacing-unit * 0.5;
+    border-left: 1px solid $grey-color-light;
+
+    &:first-of-type { border-left: none; }
+    &:last-of-type { padding-right: 0; }
+
+    &.active a {
+      color: $brand-color-dark;
+      font-weight: 600;
+    }
+  }
+}

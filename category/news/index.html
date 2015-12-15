@@ -1,0 +1,33 @@
+---
+layout: default
+title: News
+---
+<div class="wrapper container">
+  <div class="nine units first">
+    <div class="content template-blog">
+      <div class="post-timeline "></div>
+      {% for post in site.categories.news limit: 10 %}
+      <div class="nothing-wrapper">
+        <div class="nothing-icon">
+          <a href="{{ post.url | prepend: site.baseurl }}"><span>✎</span></a>
+        </div>
+      </div>
+      <div class="post post-list">
+        <header>
+          <h2><a href="{{ post.url | prepend: site.baseurl }}" title="{{ post.title }}">{{ post.title }}</a></h2>
+          <div class="post-meta-infos">
+            <span>{{ post.date | date_to_string }}</span>
+            <span class="text-sep">/</span>
+            <span>in <a href="{{ site.baseurl }}/category/{{ post.categories }}/" class="post-category">{{ post.categories }}</a></span>
+            <span class="text-sep">/</span>
+            <span>by <a href="{{ site.baseurl }}/author/{{ post.author }}/" class="post-author">{{ post.author }}</a></span>
+          </div>
+        </header>
+        <article>{{ post.excerpt }}</article>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% include archives-month-sidebar.html %}
+</div>

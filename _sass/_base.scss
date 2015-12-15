@@ -1,0 +1,203 @@
+@import "variables";
+
+
+/**
+* have padding and border included in the element's total width and height
+*/
+* { box-sizing: border-box; }
+
+
+/**
+ * Basic styling
+ */
+body {
+  margin: 0;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  font-weight: normal;
+  color: $text-color;
+  background-color: $background-color;
+  -webkit-text-size-adjust: 100%;
+}
+
+p {
+  color: $text-color-dark;
+  margin-top: 0;
+  margin-bottom: 0.85em;
+  line-height: 23px;
+}
+
+
+/**
+ * Images
+ */
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+
+/**
+ * Headings
+ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  margin: 0;
+}
+h3 {
+  font-size: 19px;
+  color: $header-color;
+}
+h4 {
+  font-size: 17px;
+  color: $header-color;
+}
+
+
+/**
+ * Links
+ */
+a {
+  color: $brand-color-dark;
+  text-decoration: none;
+
+  &:visited {
+    color: darken($brand-color, 15%);
+  }
+
+  &:hover {
+    // color: $text-color;
+    text-decoration: underline;
+  }
+}
+
+
+/**
+* Mark the selected text
+*/
+::-moz-selection {
+  color: white;
+  background-color: $brand-color-dark;
+}
+::selection {
+  color: white;
+  background-color: $brand-color-dark;
+}
+
+
+/**
+ * Clearfix
+ */
+%clearfix {
+
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+
+/**
+ * Text align
+ */
+.text-center { text-align: center; }
+
+
+/**
+ * Image align
+ */
+.img-align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/**
+* Button, link
+*/
+.contrast_color {
+  color: white;
+  background-color: $brand-color-mid;
+  border-color: $brand-color-mid;
+}
+.contrast_color_2 {
+  color: $brand-color-mid;
+  background-color: $background-color;
+  border: 1px solid $grey-color-light;
+}
+
+.btn-read-more-wrapper {
+  clear: both;
+  padding-top: $spacing-unit * 2;
+  padding-bottom: $spacing-unit;
+}
+
+.mn-button {
+  display: inline-block;
+  @extend .contrast_color_2;
+  border-radius: 3px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  padding: 10px 16px;
+  font-weight: 600;
+  line-height: 16px;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:hover, &.reverse {
+    @extend .contrast_color;
+  }
+
+  &.reverse:hover {
+    @extend .contrast_color_2;
+  }
+}
+
+
+/**
+* List
+*/
+.list-unstyled {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+dl, dt, dd { margin: 0; }
+
+ol {
+  margin-left: $spacing-unit * 1.5;
+  padding-left: 0;
+  color: $text-color-dark;
+
+  li {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    line-height: 1.7;
+  }
+}
+
+
+/**
+ * Border
+ */
+.solid_top_border {
+  border-top: 1px solid $grey-color-light;
+}
+.solid_bottom_border {
+  border-bottom: 1px solid $grey-color-light;
+}
+hr.border-center-shadow {
+  background: url("../assets/images/line.png") no-repeat center bottom;
+  border-width: 1px 0 0;
+  margin: 0;
+  height: 6px;
+}
+.round_border {
+  border-radius: 3px;
+}

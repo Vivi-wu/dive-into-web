@@ -1,0 +1,21 @@
+<footer>
+  <div class="site-footer">
+    <div class="wrapper">
+      <span class="copyright">© Copyright  - <a href="{{ site.baseurl }}/">Vivienne WU</a></span>
+
+      <nav>
+        <ul class="page-links list-unstyled">
+          <li{% if page.url == "/index.html" %} class="active"{% endif %}>
+            <a href="{{ site.baseurl }}/">Home</a>
+          </li>
+          <li{% if page.url == "/blog/index.html" %} class="active"{% endif %}>
+            <a href="{{ site.baseurl }}/blog/">Blog</a>
+          </li>
+          <li{% if page.url == "/contact-me/" %} class="active"{% endif %}>
+            <a href="{{ site.baseurl }}/contact-me/">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</footer>
