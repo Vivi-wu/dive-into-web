@@ -2,14 +2,9 @@
 layout: default
 ---
 <div class="wrapper container">
-  <div class="nine units first">
+  {% include archives-month-sidebar.html %}
+  <div class="nine units no_margin">
     <div class="content template-blog">
-      <div class="nothing-wrapper">
-        <div class="nothing-icon">
-          <span>✎</span>
-        </div>
-      </div>
-
       <div class="post">
         <header>
           <h2>{{ page.title }}</h2>
@@ -23,6 +18,4 @@ layout: default
       </div>
     </div>
   </div>
-
-  {% include archives-month-sidebar.html %}
 </div>

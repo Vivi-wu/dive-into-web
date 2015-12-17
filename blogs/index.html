@@ -2,7 +2,8 @@
 layout: default
 ---
 <div class="wrapper container">
-  <div class="nine units first">
+  {% include archives-month-sidebar.html %}
+  <div class="nine units no_margin">
     <div class="content template-blog">
       <!-- This loops through the paginated posts -->
       {% for post in paginator.posts %}
@@ -54,6 +55,4 @@ layout: default
       {% endif %}
     </div>
   </div>
-
-  {% include archives-month-sidebar.html %}
 </div>

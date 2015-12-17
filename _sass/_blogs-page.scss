@@ -1,7 +1,7 @@
 @include media-query-min($on-mobile) {
   .template-blog {
-    padding-right: $spacing-unit * 2.5;
-    border-right: 1px solid $grey-color-light;
+    padding-left: $spacing-unit * 2.5;
+    border-left: 1px solid $grey-color-light;
   }
 }
 
@@ -20,6 +20,7 @@
   header h2 {
     font-size: 28px;
     line-height: 1.3em;
+    margin-top: 0;
     margin-bottom: 5px;
     a {
       color: $primary-color-dark;
@@ -32,6 +33,7 @@
     height: auto;
   }
 }
+
 
 .post-meta-infos {
   font-size: 12px;
@@ -54,40 +56,9 @@
   }
 }
 
-.pagination {
-  font-size: 12px;
-  a, .current-page {
-    display: inline-block;
-    height: 35px;
-    width: 35px;
-    line-height: 34px;
-    text-align: center;
-    border-radius: 50%;
-    margin-right: 3px;
-    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);
-  }
-  a {
-    color: $text-color;
-    background-color: #f8f8f8;
-    &:hover {
-      color: $background-color;
-      background-color: $text-color;
-      text-decoration: none;
-    }
-  }
-  .current-page {
-    font-weight: bold;
-    color: $primary-color;
-    background-color: $background-color;
-  }
-  .page-number {
-    float: right;
-    line-height: 35px;
-  }
-}
 
 .archives-sidebar {
-  margin-left: $spacing-unit * 2.5;
+  padding-left: $spacing-unit;
 
   @include media-query-max($on-mobile) {
     display: none;
@@ -95,6 +66,7 @@
 
   h3 {
     color: $primary-color-dark;
+    margin-top: 0;
     margin-bottom: $spacing-unit * 0.5;
   }
   a {
@@ -104,5 +76,39 @@
     &:hover {
       color: $primary-color-dark;
     }
+  }
+}
+
+
+.pagination {
+  font-size: 12px;
+  a, .current-page {
+    display: inline-block;
+    height: 35px;
+    width: 35px;
+    line-height: 34px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);
+    margin-right: 3px;
+  }
+  a {
+    color: $text-color;
+    background-color: $primary-color-light;
+    text-decoration: none;
+    &:hover {
+      color: $background-color;
+      background-color: $primary-color;
+    }
+  }
+  .current-page {
+    font-weight: bold;
+    color: $primary-color;
+    background-color: $background-color;
+    border: 1px dashed $grey-color-light;
+  }
+  .page-number {
+    float: right;
+    line-height: $spacing-unit * 3.5;
   }
 }

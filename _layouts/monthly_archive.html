@@ -2,18 +2,13 @@
 layout: default
 ---
 <div class="wrapper container">
-  <div class="nine units first">
+  {% include archives-month-sidebar.html %}
+  <div class="nine units no_margin">
     <div class="content template-blog">
-      <div class="post-timeline "></div>
       {% for post in site.posts %}
       {% capture this_post %}{{ post.date | date: '%Y %b' }}{% endcapture %}
       {% capture archive_page %}{{ page.date | date: '%Y %b' }}{% endcapture %}
       {% if this_post == archive_page %}
-      <div class="nothing-wrapper">
-        <div class="nothing-icon">
-          <a href="{{ post.url | prepend: site.baseurl }}"><span>✎</span></a>
-        </div>
-      </div>
       <div class="post post-list">
         <header>
           <h2><a href="{{ post.url | prepend: site.baseurl }}" title="{{ post.title }}">{{ post.title }}</a></h2>
@@ -29,6 +24,4 @@ layout: default
       {% endfor %}
     </div>
   </div>
-
-  {% include archives-month-sidebar.html %}
 </div>
