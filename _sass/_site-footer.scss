@@ -4,7 +4,7 @@
   @extend .solid_top_border;
   font-size: 12px;
 
-  .copyright { color: $text-color-dark; }
+  .copyright { color: $text-color; }
 
   nav {
     float: right;
@@ -22,7 +22,7 @@
     &:last-of-type { padding-right: 0; }
 
     &.active a {
-      color: $brand-color-dark;
+      color: $primary-color-dark;
       font-weight: 600;
     }
   }

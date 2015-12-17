@@ -1,22 +1,19 @@
 $base-font-family: "cholla-slab", serif;
 $base-font-size:   14px;
-$small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5;
 
-$spacing-unit:     20px;
-
-$text-color:       #919191;
-$text-color-dark:  #666666;
-$header-color:     #222222;
+$text-color:       #575657;
 $background-color: #ffffff;
 
-$brand-color:      #97348c;
-$brand-color-mid:  #96358c; // equals to rgb(150, 53, 140)
-$brand-color-dark: #8718a0;
+$primary-color-light: #FDA8AB;
+$primary-color-mild:  #D3696C;
+$primary-color:       #7E1518; // equals to rgb(150, 53, 140)
+$primary-color-dark:  #540002;
 
-$grey-color:       #828282;
-$grey-color-light: #e1e1e1;
-$grey-color-dark:  #585858;
+$grey-color:       #7B7B7B;
+$grey-color-light: #C3C3C3;
+
+$spacing-unit:     20px;
 
 // Width of the content area
 $content-width:    800px;

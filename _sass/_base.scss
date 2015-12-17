@@ -22,10 +22,8 @@ body {
 }
 
 p {
-  color: $text-color-dark;
   margin-top: 0;
   margin-bottom: 0.85em;
-  line-height: 23px;
 }
 
 
@@ -43,15 +41,18 @@ img {
  */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
-  margin: 0;
+}
+h2, h3, h4 {
+  color: $primary-color-mild;
+}
+h2 {
+  font-size: 23px;
 }
 h3 {
-  font-size: 19px;
-  color: $header-color;
+  font-size: 20px;
 }
 h4 {
   font-size: 17px;
-  color: $header-color;
 }
 
 
@@ -59,16 +60,10 @@ h4 {
  * Links
  */
 a {
-  color: $brand-color-dark;
-  text-decoration: none;
+  color: $primary-color;
 
   &:visited {
-    color: darken($brand-color, 15%);
-  }
-
-  &:hover {
-    // color: $text-color;
-    text-decoration: underline;
+    color: $primary-color-dark;
   }
 }
 
@@ -78,11 +73,11 @@ a {
 */
 ::-moz-selection {
   color: white;
-  background-color: $brand-color-dark;
+  background-color: $primary-color-dark;
 }
 ::selection {
   color: white;
-  background-color: $brand-color-dark;
+  background-color: $primary-color-dark;
 }
 
 
@@ -120,11 +115,11 @@ a {
 */
 .contrast_color {
   color: white;
-  background-color: $brand-color-mid;
-  border-color: $brand-color-mid;
+  background-color: $primary-color-dark;
+  border-color: $primary-color-dark;
 }
 .contrast_color_2 {
-  color: $brand-color-mid;
+  color: $primary-color-dark;
   background-color: $background-color;
   border: 1px solid $grey-color-light;
 }
@@ -173,7 +168,7 @@ dl, dt, dd { margin: 0; }
 ol {
   margin-left: $spacing-unit * 1.5;
   padding-left: 0;
-  color: $text-color-dark;
+  color: $text-color;
 
   li {
     padding-top: 3px;
@@ -191,12 +186,6 @@ ol {
 }
 .solid_bottom_border {
   border-bottom: 1px solid $grey-color-light;
-}
-hr.border-center-shadow {
-  background: url("../assets/images/line.png") no-repeat center bottom;
-  border-width: 1px 0 0;
-  margin: 0;
-  height: 6px;
 }
 .round_border {
   border-radius: 3px;
