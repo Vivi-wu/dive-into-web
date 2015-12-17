@@ -43,7 +43,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 h2, h3, h4 {
-  color: $primary-color-mild;
+  color: $primary-color;
 }
 h2 {
   font-size: 23px;
@@ -78,6 +78,17 @@ a {
 ::selection {
   color: white;
   background-color: $primary-color-dark;
+}
+
+
+/**
+ * Code block
+ */
+pre>code {
+  display: block;
+  height: 20px;
+  color: #076527;
+  background-color: #e7f6ec;
 }
 
 

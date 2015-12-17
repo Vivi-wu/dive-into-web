@@ -22,6 +22,7 @@
     line-height: 1.3em;
     margin-top: 0;
     margin-bottom: 5px;
+    color: $primary-color-dark;
     a {
       color: $primary-color-dark;
       &:hover {
@@ -94,11 +95,12 @@
   }
   a {
     color: $text-color;
-    background-color: $primary-color-light;
+    background-color: $primary-color-mild;
+    border: 1px solid $primary-color-dark;
     text-decoration: none;
     &:hover {
       color: $background-color;
-      background-color: $primary-color;
+      background-color: $primary-color-dark;
     }
   }
   .current-page {
