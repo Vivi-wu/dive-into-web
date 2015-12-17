@@ -1,17 +1,11 @@
 ---
 layout: default
-title: News
 ---
 <div class="wrapper container">
-  <div class="nine units first">
+  {% include archives-month-sidebar.html %}
+  <div class="nine units no_margin">
     <div class="content template-blog">
-      <div class="post-timeline "></div>
-      {% for post in site.categories.news limit: 10 %}
-      <div class="nothing-wrapper">
-        <div class="nothing-icon">
-          <a href="{{ post.url | prepend: site.baseurl }}"><span>✎</span></a>
-        </div>
-      </div>
+      {% for post in site.categories.html %}
       <div class="post post-list">
         <header>
           <h2><a href="{{ post.url | prepend: site.baseurl }}" title="{{ post.title }}">{{ post.title }}</a></h2>
@@ -28,6 +22,4 @@ title: News
       {% endfor %}
     </div>
   </div>
-
-  {% include archives-month-sidebar.html %}
 </div>

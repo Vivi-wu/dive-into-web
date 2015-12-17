@@ -52,7 +52,7 @@ If a browser one day wants to make a text highlighted with the strong feature, i
 ### HTML Text Formatting Tags
 
 + `<b>` bold text 粗体字
-+ `<i>` a part of text in an alternate voice or mood 语气转变，通常斜体显示
++ `<i>` can be used to indicate a technical term 技术词汇, a phrase from another language 其他语言的短语, a thought 一个想法, or a ship name 或者是一个名字, etc.
 + `<strong>` important text
 + `<em>` emphasized text 强调文本
 + `<small>` smaller text
