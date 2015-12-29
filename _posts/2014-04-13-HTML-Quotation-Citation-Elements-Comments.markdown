@@ -11,6 +11,8 @@ categories: HTML
 + `<cite>` defines the title of a work 作品名 (e.g. a book, a song, a movie, a TV show, a painting, a sculpture, etc.) 通常斜体显示
 + `<bdo>` defines bi-directional override 用来重新定义当前文字从左到右（或从右到左）输出方向
 
+<!--more-->
+
 ## HTML Comments
 
 HTML中插入注释用 `<!-- I am a comment -->`, it will not displayed by the browser. 在debug阶段，可以把相关HTML元素放在开闭箭头之间。
@@ -23,24 +25,23 @@ syntax：
 
     <!--[if IE 8]>This is IE 5<br><![endif]-->
 
-<!--more-->
 ### HTML `<dfn>`
 
 该元素的使用方法有三种情况：
 
-1. 如果有 title 属性，则它的title定义这个条款
+1.如果有 _title_ 属性，则它的title定义这个条款
 
-    <p>The <dfn title="World Health Organization">WHO</dfn> was founded in 1948.</p>  
+    <p>The <dfn title="World Health Organization">WHO</dfn> was founded in 1948.</p>
 
-2. 如果该元素包含一个定义了 title 的 <abbr> 元素，则 <abbr> 的title 定义这个条款
+2.如果该元素包含一个定义了 _title_ 的 `<abbr>` 元素，则 `<abbr>` 的 _title_ 定义这个条款
 
     <p>The <dfn><abbr title="World Health Organization">WHO</abbr></dfn> was founded in 1948.</p>  
 
-3. 该元素的内容是条款，而它的父元素则包含该条款的定义。
+3.该元素的内容是条款，而它的父元素则包含该条款的定义。
 
     <p>The <dfn>WHO</dfn> World Health Organization was founded in 1948.</p>
 
-`<noscript>` tag
+#### `<noscript>` tag
 
 The `<noscript>` tag is used to provide an alternate content for users that have disabled scripts in their browser or have a browser that doesn't support client-side scripting.
 

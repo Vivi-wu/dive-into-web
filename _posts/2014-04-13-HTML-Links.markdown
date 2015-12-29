@@ -8,11 +8,13 @@ The HTML `<a>` tag defines a hyperlink that you can click on to jump to another 
 
     <a href="url">Link text</a>
 
-Tips:
+**Tips**:
 
 + The "Link text " is the visible part and doesn't have to be text. It can be an image or any other HTML element
-标签 `<a>` 的内容也可以是图片或者其他HTML元素，只要用`<a>`标签将那个元素包围住。
-+ 记得在子文件索引后加一个结尾斜杠。否则可能会向服务器发送两个request。Many servers will automatically add a trailing slash to the address, and then create a new request.
+标签 `<a>` 的内容也可以是**图片**或者**其他HTML元素**，只要用 `<a>` 标签将那个元素包围住。
++ 记得在子文件索引后加一个 **trailing slash** 结尾斜杠。否则可能会向服务器发送两个request。Many servers will automatically add a trailing slash to the address, and then create a new request.
+
+<!--more-->
 
 #### Local links
 
@@ -22,22 +24,22 @@ An absolute URL (a full web address, like: http://www.w3schools.com/html/), a lo
 
 默认情况下在所有浏览器中，一个链接有以下几种状态：
 
-+ An unvisited link is underlined and blue 未访问的链接，下划线，蓝色
-+ A visited link is underlined and purple 已访问过的链接，下划线，紫色
-+ An active link is underlined and red 活跃的链接（moveover时），下划线，红色
++ An <span style="color:blue;text-decoration:underline;">unvisited</span> link is underlined and blue 未访问的链接，下划线，蓝色
++ A <span style="color:purple;text-decoration:underline;">visited</span> link is underlined and purple 已访问过的链接，下划线，紫色
++ An <span style="color:red;text-decoration:underline;">active</span> link is underlined and red 活跃的链接（mouseover时），下划线，红色
 
-### The href Attribute
+### The _href_ Attribute
 
 The most important attribute of the `<a>` element is the href attribute which specifies the destination addresse. 
 属性 _href_ 指定了一个超级链接的目的地.
 
-常用对例子，创建一个 _email_ 链接:
+常用对例子，创建一个 email 链接:
 
     <a href="mailto:xxx@yyy">  
 
-### The target Attribute
+### The _target_ Attribute
 
-The target attribute specifies where to open the linked document. 属性_target_指定在哪里打开所链接的文件。 
+The target attribute specifies where to open the linked document. 属性 _target_ 指定在哪里打开所链接的文件。该特性不同取值的表现如下表所示：
 
 <table>
   <tbody>
@@ -63,7 +65,7 @@ The target attribute specifies where to open the linked document. 属性_target_
 
 在HTML文件内创建书签 to allow readers jump to specific parts of a web page.
 
-首先在目标元素上添加id特性，
+首先在目标元素上添加 _id_ 特性，
 
     <a id="tips">Useful Tips Section</a>
 
