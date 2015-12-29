@@ -8,6 +8,19 @@
 
 
 /**
+* Mark the selected text
+*/
+::-moz-selection {
+  color: white;
+  background-color: $primary-color-dark;
+}
+::selection {
+  color: white;
+  background-color: $primary-color-dark;
+}
+
+
+/**
  * Basic styling
  */
 body {
@@ -24,6 +37,10 @@ body {
 p {
   margin-top: 0;
   margin-bottom: 0.85em;
+}
+
+em {
+  color: $primary-color;
 }
 
 
@@ -43,7 +60,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 h2, h3, h4 {
-  color: $primary-color;
+  color: black;
 }
 h2 {
   font-size: 23px;
@@ -69,26 +86,55 @@ a {
 
 
 /**
-* Mark the selected text
-*/
-::-moz-selection {
-  color: white;
-  background-color: $primary-color-dark;
-}
-::selection {
-  color: white;
-  background-color: $primary-color-dark;
-}
-
-
-/**
  * Code block
  */
+code {
+  color: $primary-color;
+}
 pre>code {
   display: block;
   height: 20px;
   color: #076527;
   background-color: #e7f6ec;
+}
+
+
+/**
+* table
+*/
+table, th, td {
+  border: 1px solid $grey-color-light;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px $spacing-unit;
+}
+tr:nth-of-type(2n) {
+  background-color: $primary-color-light;
+}
+
+
+/**
+* List
+*/
+.list-unstyled {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+dl, dt, dd { margin: 0; }
+
+ol {
+  margin-left: $spacing-unit * 1.5;
+  padding-left: 0;
+  color: $text-color;
+
+  li {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    line-height: 1.7;
+  }
 }
 
 
@@ -166,30 +212,6 @@ pre>code {
 
 
 /**
-* List
-*/
-.list-unstyled {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-dl, dt, dd { margin: 0; }
-
-ol {
-  margin-left: $spacing-unit * 1.5;
-  padding-left: 0;
-  color: $text-color;
-
-  li {
-    padding-top: 3px;
-    padding-bottom: 3px;
-    line-height: 1.7;
-  }
-}
-
-
-/**
  * Border
  */
 .solid_top_border {
@@ -197,7 +219,4 @@ ol {
 }
 .solid_bottom_border {
   border-bottom: 1px solid $grey-color-light;
-}
-.round_border {
-  border-radius: 3px;
 }
