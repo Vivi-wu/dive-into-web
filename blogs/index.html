@@ -26,7 +26,7 @@ layout: default
 
         {% if paginator.previous_page %}
           {% if paginator.page > 3 %}
-            <a href="{{ '/news/' | prepend: site.baseurl | replace: '//', '/' }}">&laquo;</a>
+            <a href="{{ '/blogs/' | prepend: site.baseurl | replace: '//', '/' }}">&laquo;</a>
           {% endif %}
           <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&lsaquo;</a>
         {% endif %}
@@ -36,7 +36,7 @@ layout: default
           {% if page == paginator.page %}
             <span class="current-page">{{ page }}</span>
           {% elsif page == 1 %}
-            <a href="{{ '/news/' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+            <a href="{{ '/blogs/' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
           {% else %}
             <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
           {% endif %}
