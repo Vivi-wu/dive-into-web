@@ -10,7 +10,7 @@ HTML elements 可以有一些 attributes 特性。
 
 <!--more-->
 
-### lang 特性
+### _lang_ 特性
 
 The document language can be declared in the `<html>` tag with the _lang_ attribute.
 
@@ -20,7 +20,7 @@ The document language can be declared in the `<html>` tag with the _lang_ attrib
 
 Declaring a language is important for accessibility applications (screen readers) and search engines.定义文档语言，对于屏幕阅读器和搜索引擎可获取性很重要。
 
-### alt 特性
+### _alt_ 特性
 
 The _alt_ attribute specifies an alternative text to be used, when an HTML element cannot be displayed. The value of the attribute can be read by "screen readers".
 该特性设定了作为替代的文本，当该元素的内容无法展示时， alt 的值还能被屏幕阅读器读取。
@@ -57,16 +57,16 @@ W3C **recommends** lowercase in HTML4, and **demands** lowercase for stricter do
 <table>
   <tbody>
     <tr>
-      <td>class</td><td>one or more class names for an element (refers to a class in a style sheet)</td>
+      <td><i>class</i></td><td>one or more class names for an element (refers to a class in a style sheet)</td>
     </tr>
     <tr>
-      <td>id</td><td>a unique id for an element</td>
+      <td><i>id</i></td><td>a unique id for an element</td>
     </tr>
     <tr>
-      <td>style</td><td>an inline CSS style for an element</td>
+      <td><i>style</i></td><td>an inline CSS style for an element</td>
     </tr>
     <tr>
-      <td>title</td><td>extra information about an element (when mouse over the element, title displayed as a tool tip 提示框)</td>
+      <td><i>title</i></td><td>extra information about an element (when mouse over the element, title displayed as a tool tip 提示框)</td>
     </tr>
   </tbody>
 </table>

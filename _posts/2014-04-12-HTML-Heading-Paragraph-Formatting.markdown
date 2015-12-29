@@ -6,13 +6,15 @@ categories: HTML
 
 Headings are defined with the `<h1>` (the most important heading) to `<h6>` (the least important) heading tags.
 
-注意：Use HTML headingsfor headings only. Don't use headings to make text **BIG** or **bold**. 不要使用heading来实现文本字体的加粗或加大效果。
+**Note**：Use HTML headingsfor headings only. Don't use headings to make text **BIG** or **bold**. 不要使用heading来实现文本字体的加粗或加大效果。
 
 Search engines use your headings to index the structure and content of your web pages. 搜索引擎使用heading来索引网页的结构和内容。
 
+<!--more-->
+
 ## Horizontal Rules
 
-The **`<hr>`** tag creates a horizontal line in an HTML page. 在网页中创建水平横线，可用于分隔内容。
+The `<hr>` tag creates a horizontal line in an HTML page. 在网页中创建水平横线，可用于分隔内容。
 
 ## Paragraphs
 
@@ -55,9 +57,9 @@ If a browser one day wants to make a text highlighted with the strong feature, i
 + `<i>` can be used to indicate a technical term 技术词汇, a phrase from another language 其他语言的短语, a thought 一个想法, or a ship name 或者是一个名字, etc.
 + `<strong>` important text
 + `<em>` emphasized text 强调文本
-+ `<small>` smaller text
-+ `<mark>` new in H5 marked/highlighted text, 高亮或标注文本，IE8及之前不支持
-+ `<del>` defines **deleted** (removed) text, 效果同给文本加删除线
-+ `<ins>` defines **inserted** (added)text, 效果同给文本加下划线
-+ `<sub>` appears half a character below the baseline 低于基准线半个字符高度，用于化学式
-+ `<sup>` superscripted text 高于基准线半个字符, 用于脚注：WWW[1]
++ `<small>` <small>smaller</small> text
++ `<mark>` new in H5 <mark>marked/highlighted</mark> text, 高亮或标注文本，IE8及之前不支持
++ `<del>` defines <del>deleted</del> (removed) text, 效果同给文本加删除线
++ `<ins>` defines <ins>inserted</ins> (added)text, 效果同给文本加下划线
++ `<sub>` appears half a character <sub>below</sub> the baseline 低于基准线半个字符高度，用于化学式
++ `<sup>` superscripted text 高于基准线半个字符, 用于脚注：WWW<sup>[1]</sup>
