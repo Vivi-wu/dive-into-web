@@ -1,0 +1,77 @@
+---
+title:  "HTML Head"
+categories: HTML
+---
+## HTML `<head>` Element
+
+该元素用于封装 meta 数据。HTML meta 数据不会显示在页面里，通常用来定义文件的 标题、样式、链接、脚本和其他meta信息。
+
+### 缺省 `<html>`, `<head>`, `<body>`
+
+在 HTML5 标准里，这三个标签都可以缺省，但**不建议缺省** `<html>` 和 `<body>` 标签。前者是被推荐用来放置设置网页语言的地方，声明语言对于屏幕阅读器和搜索引擎很重要。此外缺省二者之一，可能引起 DOM 和XML软件崩溃，后者缺省会在旧浏览器（IE9）中产生错误。
+
+如果缺省 `<head>` 标签，**默认地，浏览器会把所有写在 `<body>` 前的元素添加到一个默认的 `<head>` 元素里**。
+
+<!--more-->
+
+### HTML `<title>`
+
+`<title>` 元素定义了文档点标题，在所有HTML／XHTML文档里都是 **required** 的。该元素
+
++ defines a **title in the browser toolbar** 定义在浏览器工具条里显示的文档标题
++ provides a title for the page when it is added to favorites 当添加到收藏夹时为该页面提供一个标题
++ displays a title for the page in search-engine results 在搜索引擎结果里的该页面要显示的标题
+
+### HTML `<style>`
+
+该元素用来定义一个HTML文档的样式信息，在该元素内所写的CSS代码即internal CSS。
+
+### HTML `<link>`
+
+定义页面和一个外部资源的关系，最**常用来链接外部样式表文件**。
+
+    <link rel="stylesheet" href="mystyle.css">
+  
+**注意**：该元素是一个空元素，只包含一些attributes，only 出现在 `<head>`区域，但可以出现多次。
+
+### HTML `<meta>`
+
+该标签提供关于HTML文件的元数据，虽不显示在网页中，但是机器可解析的。
+
+The metadata can be used by browsers (how to display content or reload page), search engines (keywords), or other web services. 元数据可被浏览器用来决定如何显示内容或者重新加载页面，提供关键词给搜索引擎
+
+Examples;
+
+1.Specify page description, keywords, author of the document and charset.
+
+    <meta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript">
+    <meta name="description" content="Free Web tutorials on HTML and CSS">
+    <meta name="author" content="Hege Refsnes">
+    <meta charset="UTF-8">
+
+2.Refresh document every 30 seconds: 每隔30秒刷新页面
+
+    <meta http-equiv="refresh" content="30">
+
+### HTML `<script>`
+
+该元素用来定义客户端的JavaScript，在该元素内所写的JS代码在页面加载时会被parser，当然 `<script>`也可以写在 `<body>` 里任何地方。
+
+## HTML `<base>`
+
+The `<base>` tag **specifies the base URL/target for all relative URLs in a document**. <span style="color:mediumblue;">该标签指定了一个文件中所有相对URL的基地址和target目标地址</span>(具体取值参考links章节)。比如 `<img>` 标签引用images文件夹里的图片，其属性 _src_的值可以直接写文件名。
+
+    <head>
+      <base href="http://blog.csdn.net/images/" target="_blank">
+    </head>
+    <body>
+      <img src="stickman.gif" width="24" height="24" alt="stickman">
+    </body>
+
+**注意**:
+
+1.There can be at **maximum one** `<base>` element in a document, and it **must be inside** the `<head>` element. <span style="background-color:lightblue;">一个文件里最多有一个 `<base>` 元素，且必须写在 `<head>` 元素里。</span>
+
+2.`<base>` 元素要写在 `<head>` 里**第一个元素**的位置上。So that other elements in the head section uses the information from the `<base>` element.
+
+3.如果有`<base>` 元素出现，则它必须含有一个 _href_ 特性或者 _target_ 特性，或者两者都有。
