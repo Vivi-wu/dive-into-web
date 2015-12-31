@@ -43,10 +43,8 @@ syntax：
 
 #### `<noscript>` tag
 
-The `<noscript>` tag is used to provide an alternate content for users that have disabled scripts in their browser or have a browser that doesn't support client-side scripting.
+The `<noscript>` tag is used to provide an alternate content for users that have disabled scripts in their browser or have a browser that doesn't support client-side scripting. 该标签旨在当用户浏览器禁止scripts或者浏览器不支持客户端脚本运行时，提供并显示可替换的内容。
 
-该标签旨在当用户浏览器禁止scripts或者浏览器不支持客户端脚本运行时，提供并显示可替换的内容。
+The `<noscript>` element can contain all the elements that you can find inside the `<body>` element of a normal HTML page. 该元素可以包含所有那些适用于正常HTML页面`<body>`元素中的元素。
 
-The `<noscript>` element can contain all the elements that you can find inside the `<body>` element of a normal HTML page.
-
-该元素可以包含所有那些适用于正常HTML页面`<body>`元素中的元素。
+只有在客户端不支持或者禁用了JS的情况下，才会显示该标签里的内容。
