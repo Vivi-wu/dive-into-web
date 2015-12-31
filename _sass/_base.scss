@@ -108,7 +108,7 @@ table, th, td {
 th, td {
   padding: 5px $spacing-unit;
 }
-tr:nth-of-type(2n) {
+table tr:nth-child(even) {
   background-color: $primary-color-light;
 }
 
