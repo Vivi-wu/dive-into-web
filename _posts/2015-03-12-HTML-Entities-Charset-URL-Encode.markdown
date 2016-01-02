@@ -18,6 +18,8 @@ OR
 
 缺点：The disadvantage is that browsers may not support all entity names, but the support for numbers （十进制或十六进制）is good. **浏览器不一定支持所有的实体名称**。
 
+<!--more-->
+
 **Tips**：
 
 + If you use an HTML entity name, or number, the character will always display correctly. This is independent of what character set (encoding) your page uses!

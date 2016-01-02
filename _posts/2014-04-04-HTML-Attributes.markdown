@@ -7,6 +7,7 @@ HTML elements 可以有一些 attributes 特性。
 + Attributes provide **additional information** about an element, always **specified in the start tag**
 + Attributes come in name/value pairs like: **name="value"**
 + 特性名称是 case-insensitive 大小写不敏感的
++ 特性值可以为空，不写它的value。如：disabled
 
 <!--more-->
 
@@ -33,7 +34,7 @@ HTML5 并没有要求用引号将特性值限制起来，但是最好记得使�
 
 避免由属性值里面的空格引起的显示错误。
 
-此外，W3C在HTML4中建议使用引号，在XHTML中要求使用引号将attribute值包围起来。
+此外，W3C在 HTML4 中建议使用引号，在XHTML中要求使用引号将 attribute 值包围起来。
 
 ### 单/双引号
 
@@ -46,8 +47,7 @@ Double style quotes are the most common, but single style quotes are also allowe
 
 当属性值包含双引号，则必须使用单引号把它括起来。
 
-
-### Attribute建议使用lowercase
+### Attribute建议使用 lowercase
 
 W3C **recommends** lowercase in HTML4, and **demands** lowercase for stricter document types like XHTML.
 因此，尽管HTML5没有要求属性要小写(Title and/or TITLE都是被允许的)，通常使用小写的特性名称。
