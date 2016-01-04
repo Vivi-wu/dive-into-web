@@ -1,5 +1,22 @@
 ---
 layout: default
 ---
-Hello world!
-Check out my blog <a href="{{ site.baseurl }}/blogs/">here</a>.
+<p>Today is：<span id="today"></span></p>
+<p>Chinese New Year 2016 is: <span id="nYear"></span></p>
+<p>Days left: <strong><span id="dLeft"></span></strong> !</p>
+
+<p>Check out my blog <a href="{{ site.baseurl }}/blogs/">here</a>.</p>
+<script>
+  var d = new Date(),
+      a = new Date(2016, 1, 8);
+
+  var ms = 24 * 60 * 60 * 1000,
+    days = a.getTime() - d.getTime();
+
+    days = Math.abs(days);
+    days = Math.round(days/ms);
+
+  document.getElementById("today").innerHTML = d.toDateString();
+  document.getElementById("nYear").innerHTML = a.toDateString();
+  document.getElementById("dLeft").innerHTML = days;
+</script>
