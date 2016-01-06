@@ -42,3 +42,7 @@ Strictly speaking, an HTML **element** is everything between the start tag and t
 文件后缀
 
 HTML files should have a .html extension (not .htm).
+
+.htm "smells" of early DOS systems where the system limited the extensions to 3 characters.
+
+.html "smells" of Unix operating systems that did not have this limitation.
