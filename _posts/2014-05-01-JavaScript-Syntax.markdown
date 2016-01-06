@@ -33,7 +33,7 @@ JS语法定义了两种类型的值，fixed 固定的值和 variable 变换的�
 
 ### Literals
 
-+ **Number**，数字常量，可以带小数，也可以没有
++ **Number**，JS只有一种数字常量，使用时可以带小数，也可以没有
 + **String**，字符串，可以用单引号，也可以用双引号限制起来
 
 ## Variables
@@ -131,9 +131,10 @@ If you add a number and a string, the result will be a **string**! <span style="
 
 条件（三元）操作符：variablename = (condition) `?` value1:value2 满足条件取value1，否则取value2.
 
-### Type operator
+### 类型操作符
 
-类型操作符：typeof， instanceof
++ `typeof`，returns a **string** containing the type of the operand，以字符串形式，返回操作数的类型
++ `instanceof`，
 
 ## 表达式
 
