@@ -97,4 +97,4 @@ Booleans to Strings，Dates to Strings 方法同上。Date 转为字符串有更
 
 Boolean to number 就简单来，false 是 _0_，true 是 _1_
 
-Date to Number 可以使用 Number(), 或者 getTime() 函数，得到的是 milliseconds since January 1, 1970
+Date to Number 可以使用 Number(), 或者 getTime() 函数，得到的是 milliseconds since January 1, 1970, 00:00:00

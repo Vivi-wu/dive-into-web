@@ -63,9 +63,11 @@ h2, h3, h4 {
   color: black;
 }
 h2 {
+  margin-top: $spacing-unit * 2.5;
   font-size: 23px;
 }
 h3 {
+  margin-top: $spacing-unit * 1.5;
   font-size: 20px;
 }
 h4 {
@@ -95,12 +97,16 @@ pre>code {
   display: block;
   color: #076527;
   background-color: #e7f6ec;
+  padding: 5px;
 }
 
 
 /**
 * table
 */
+table {
+  margin-bottom: $spacing-unit;
+}
 table, th, td {
   border: 1px solid $grey-color-light;
   border-collapse: collapse;
