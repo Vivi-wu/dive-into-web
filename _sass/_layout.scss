@@ -1,6 +1,5 @@
 @import
   "grids",
-  "site-header",
   "site-footer"
 ;
 
@@ -72,8 +71,6 @@
  * Page content
  */
 .page-content {
-  @include media-query-min($on-mobile) {
-    padding-top: 88px;
-  }
+
 }
 

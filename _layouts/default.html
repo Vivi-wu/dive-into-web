@@ -5,8 +5,6 @@
 
   <body id="top">
 
-    {% include header.html %}
-
     <div class="page-content">
       {{ content }}
     </div>
@@ -15,5 +13,5 @@
 
     <a href="#top" id="go-top-button" class="text-center"></a>
   </body>
-
+  <script src="{{ "/js/fixed-header-gotop-button.js" | prepend: site.baseurl }}"></script>
 </html>
