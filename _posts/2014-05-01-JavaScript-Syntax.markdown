@@ -134,7 +134,7 @@ If you add a number and a string, the result will be a **string**! <span style="
 ### 类型操作符
 
 + `typeof`，returns a **string** containing the type of the operand，以字符串形式，返回操作数的类型
-+ `instanceof`，
++ `instanceof`，returns **true** if an object is created by a given constructor，返回布尔值为 true，如果对象是由指定的 constructor 构造的。可用来识别 array 和 date，后面还会提到。
 
 ## 表达式
 

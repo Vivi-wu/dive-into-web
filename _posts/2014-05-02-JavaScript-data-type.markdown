@@ -6,7 +6,7 @@ categories: JavaScript
 
 + JS中有**5**种可以包含 values 的类型：string, number, boolean, object and function。
 + 有**2**种不含 value 的类型：undefined，null
-+ 有**3**种不同类型的 object：Object，Date，Array。_所有 `typeof` 操作符不能判断出一个变量是否是 array 或 date 变量，因为返回结果都是 `object`_
++ 有**3**种不同类型的 object：Object，Date，Array。_所以使用 `typeof` 操作符不能判断出一个变量是否是 array 或 date 变量，因为返回结果都是 `object`_
 
 <!--more-->
 
@@ -22,7 +22,7 @@ categories: JavaScript
     new Date().constructor             // Returns function Date()    { [native code] }
     function () {}.constructor         // Returns function Function(){ [native code] }
 
-可以用来判断一个变量类型是否是 array，判断 date 方法同。
+<span style="color:blue;">可以用来判断一个变量类型是否是 array</span>，判断 date 方法同。
 
     function isArray(myArray) {
       return myArray.constructor.toString().indexOf("Array") > -1;
