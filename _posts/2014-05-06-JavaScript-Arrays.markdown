@@ -79,6 +79,14 @@ _改变数组项_：array-name[index] = value;
 + `join(separator)`，功能同上，但是**可以指定特殊的分隔符**，**默认**分隔符是**逗号**
 + `valueOf()`，convert an array to a string when a primitive value is expected。该方法是 array 的默认行为，同 `toString()`
 
+关于 `array.join()` 的用法：
+
+    var fruits = ["Banana", "Orange", "Apple", "Mango"];
+    fruits.join("");    // 结果是：BananaOrangeAppleMango
+    fruits.join();      // 结果是：Banana,Orange,Apple,Mango
+
+可以看到不指定分隔符，和分隔符为空字符串是有区别的。
+
 ### Remove elements
 
 + `pop()`，remove the **last element** from an array，返回值是被 pop 出来的元素。

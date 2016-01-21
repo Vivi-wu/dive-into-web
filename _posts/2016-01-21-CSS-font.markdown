@@ -1,0 +1,135 @@
+---
+title:  "CSS Font"
+categories: CSS
+---
+总的来说一共有两种字体集：
+
++ **generic family** 通用字体系统 - a group of font families with a similar look 一组拥有相似外观的字体系统
++ **font family** 特定字体系统 - a specific font family (like "Times New Roman" or "Arial")
+
+<table>
+  <thead>
+    <tr>
+      <th>Generic family</th><th>Font family</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Serif</td><td>Times New Roman, Georgia，宋体，仿宋，楷体</td><td>这类型的字体每个字符的末端有突出的小线</td>
+    </tr>
+    <tr>
+      <td>Sans-serif</td><td>Arial, Verdana，微软雅黑</td><td>字符末端不会有多出来的小线</td>
+    </tr>
+    <tr>
+      <td>Monospace</td><td>Courier New, Lucida Console</td><td>每一个字符宽度相同</td>
+    </tr>
+  </tbody>
+</table>
+
+**Tip**：_sans-serif_ fonts are considered **easier to read** than serif fonts. 前者被认为比后者更容易阅读。
+
+<!--more-->
+
+## font-family
+
+It should hold several font names as a "fallback" system. If the browser does not support the first font, it tries the next font. Start with the font you want, and end with a generic family. 该特性像一个“后备”系统，拥有一些字体名称。每一个名称之间由逗号分开，从你希望使用的字体开始，以一个通用字体系统结束，这样如果浏览器不支持第一个字体，它会尝试后面的选项。
+
+对于以中文为使用语言的web应用，<span style="color:blue;">把类似中文字体的英文字体集，写在最前面</span>。因为英文字体集没有中文字符，但是中文字体集却包含所有英文字符。中文字体放在前面，会优先显示，而中文字体显示的英文字符通常比较丑。
+
+对于仿宋、楷体，最好在字号大于14px的情况下使用，否则影响清晰度。
+
+<span style="color:blue;">目前在 ios、android、winphone，三种手机操作系统中的默认字体都是类似**微软雅黑**的 Sans-serif 字体。</span>
+
+Note: 如果字体集名称多余一个单词，则必须用**双引号**括起来。like: "Times New Roman".
+
+## Font style
+
+The _font-style_ property has three values:
+
++ normal 正常显示
++ italic 斜体
++ oblique 倾斜, oblique is very similar to italic, but less supported
+
+斜体（italic）是一种简单的字体风格，对每个字母的结构有一些小改动，来反映变化的外观。与此不同，倾斜（oblique）文本则是正常竖直文本的倾斜版本。通常情况下，italic 和 oblique 文本在 web 浏览器中看上去完全一样。
+
+## Font size
+
+The _font-size_ 属性设定字体大小。
+
+Note: You should **not use** font size adjustments to make paragraphs look like headings, or headings look like paragraphs. Always use the proper HTML tags, like `<h1>` - `<h6>` for headings and `<p>` for paragraphs.不要通过调整字体大小来使段落看起来像是标题，使用恰当的HTML标签来实现。
+
+### absolute-size
+
++ 设为指定的大小
++ 不是在所有浏览器里都允许用户改变字体大小
++ 设置字体大小为一个特定的值，当输出设备物理尺寸已知时很有用。
+
+Possible values include the following: xx-small, x-small, small, medium, large, x-large, xx-large.
+
+### relative-size
+
+大小相对于 the font size of the parent object. Possible values include the following: smaller, larger.
+
+**Note**: 如不指定 font size，正常段落文本的默认字体大小为 16px.
+
+### 字体大小取值
+
+_length_：Floating-point number, followed by an absolute units designator (cm, mm, in, pt, or pc) or a relative units designator (em, ex, or px).
+
+_percentage_：Floating-point number, followed by a percent (%). The value is a percentage of the parent object's font size.
+
+### Set font-size with em 
+
+em 允许用户 resize 文本字体大小，许多开发者使用 _em_ 而不是 _px_。使用 em 使得在所有浏览器里都有相同的 text size
+
+1em 等于当前字体大小。default text size in browser is 16px，所有 1em=16px
+
+The em size unit is recommended by the W3C.
+
+The size can be calculated from pixels to em using this formula: pixels/16=em
+
+## Font weight
+
+font-weight 该性质用来设定字体的粗细，取值：
+
++ normal 默认值
++ bold 粗体
++ bolder 更粗
++ lighter 细体
+
+整百数字（100-900）**400** is the same as **normal**, and **700** is the same as **bold**
+
+## Font variant
+
+_font-variant_ 属性用来设定文本是否以 small-caps 字体输出
+
++ normal 默认值
++ small-caps 
+
+In a small-caps font, all lowercase letters are converted to uppercase letters. However, the converted uppercase letters appears in a smaller font size than the original uppercase letters in the text.
+
+所有小写字母被转换成大写字母，但是，这些被转换成大写的字母，要比文本中本来的大写字母要小。效果如下：
+
+<span style="font-variant:small-caps;color:red;background-color:rgb(204,204,255);">Hey we are Small Caps Fonts.</span>
+
+## All properties in one declaration
+
+_font_ 该属性用来将所有 font 相关的属性写在一起,  (in order):
+
+font-style font-variant font-weight font-size/line-height font-family
+
+The _font-size_ and _font-family_ values are **required**. If one of the other values are missing, the default values will be inserted, if any.
+
+## @font-face 规则
+
+使用方法如下：
+
+    @font-face {
+    	font-family: myFont;
+    	src: url(font_file.otf);
+    }
+    div {
+    	font-family: myFont;
+    }
+
+TTF/OTF，WOFF 格式的字体文件被所有浏览器支持。
