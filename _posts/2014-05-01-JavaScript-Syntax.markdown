@@ -119,7 +119,7 @@ After the declaration, the variable has no value. (Technically it has the value 
     txt1 = "What a very ";
     txt1 += "nice day";
 
-<p style="background-color:aliceblue;">If you add a number and a string, the result will be a **string**! <span style="color:blue;">数字和字符串相加，结果将是一个字符串</span>。</p>
+<p style="background-color:skyblue;">If you add a number and a string, the result will be a <strong>string</strong>! <span style="color:blue;">数字和字符串相加，结果将是一个字符串</span>。</p>
 
 ### Comparison and Logical Operators
 
