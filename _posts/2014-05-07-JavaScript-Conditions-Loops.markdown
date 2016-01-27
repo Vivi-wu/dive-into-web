@@ -1,0 +1,105 @@
+---
+title:  "JavaScript Conditions and Loop"
+categories: JavaScript
+---
+JS 条件语句，根据不同决定执行不同操作。
+
+## if ... else 语句
+
+### `if` Statements
+
+条件为 true 时，执行一段代码。
+
+### `else` Statements
+
+条件为 false 时，执行一段代码。
+
+### `else if` Statements
+
+如果第一个条件为 false 时，检查新的条件。if (condition1) {...} else if (condition2) {...} else {...}
+
+<!--more-->
+
+## `switch` Statement
+
+语法：
+
+    switch(expression) {
+        case n:
+            code block
+            break;
+        case n:
+            code block
+            break;
+        default:
+            default code block
+    }
+
+注意：
+
++ expression 表达式 evaluated once 评估一次。
++ 将表达式的值与每一个case的值相比较，如果找到匹配的case，就执行相对应的代码
++ 遇到 **break** 关键字，跳出 switch 体，避免执行更多的代码或 case testing
++ **default** 关键字指明，当没有找到匹配的 case 时，要执行的操作。
++ different cases can use the same code
++ 如果 default 不是最后一个 case，remember to end it with a **break**
+
+## For Loops 循环
+
+语法：
+
+    for (statement 1; statement 2; statement 3) {
+        code block to be executed
+    }
+
++ 语句1在 loop 开始前执行，通常用来**初始化**控制 loop 的变量值。语句2指定循环条件，每次循环前都要判断一下是否满足条件。语句3在每一次循环体内代码执行完之后执行，通常作为变量
++ You can initiate many values in statement 1 (separated by comma)，可以在语句1里初始化多个变量。
++ 语句1可以缺省，把初始化变量放在 for 体上面。
++ 语句2也可以缺省，但是必须在循环体内提供一个 break
++ 语句3也可以缺省，把 increment 放在循环体内
+
+### For/In Loop
+
+用来在 object 对象的属性中做循环。
+
+    var person = {fname:"John", lname:"Doe", age:25}; 
+    var text = "";
+    var x;
+    for (x in person) {
+        text += person[x];
+    }
+
+## While Loops 循环
+
+语法：
+
+    while (condition) {
+        code block to be executed
+    }
+
+只要循环条件满足，就执行代码，所以记得在循环体内写明 increment，
+
+### Do/While Loop
+
+先执行一遍循环体，在 check 循环条件。
+
+    do {
+        code block to be executed
+    }
+    while (condition);
+
+## Break and Continue
+
+区别：
+
++ **break** statement "**jumps out**" of a loop or a switch. 直接跳出循环体，执行后面的代码
++ **continue** statement "**jumps over**"/ "**skip**" one iteration in the loop. 跳过本次循环要执行的代码，进入下一次循环。
+
+### JavaScript Labels
+
+JS标签语法
+
+    labelname:
+    statements
+    break labelname; 
+    continue labelname;
