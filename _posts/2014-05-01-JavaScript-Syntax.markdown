@@ -119,17 +119,16 @@ After the declaration, the variable has no value. (Technically it has the value 
     txt1 = "What a very ";
     txt1 += "nice day";
 
-<p style="background-color:skyblue;">If you add a number and a string, the result will be a <strong>string</strong>! <span style="color:blue;">数字和字符串相加，结果将是一个字符串</span>。</p>
+<p style="background-color:lightblue;">If you add a number and a string, the result will be a <strong>string</strong>! <span style="color:blue;">数字和字符串相加，结果将是一个字符串</span>。</p>
 
 ### Comparison and Logical Operators
 
 比较和逻辑操作符用于测试 true 还是 false。
 
-比较操作符：`==`， `===` （值和data type都相同）， `!=`， `!==`， `>`_， `<`， `>=`， `<=` 不同type数据之间比较将在JS Type Conversion章节讨论。
-
-逻辑操作符：`&&`（同真则真）， `||`（同假才假）， `!`
-
-条件（三元）操作符：variablename = (condition) `?` value1:value2 满足条件取value1，否则取value2.
++ 比较操作符：`==`， `===`（值 和 data type 都要相同）， `!=`， `!==`（值 或 data type 不相同）， `>`_， `<`， `>=` (greater than or equal to)， `<=`。 不同 type 数据之间比较将在JS Type Conversion 章节讨论。
++ 逻辑操作符：`&&`（同真则真）， `||`（同假才假）， `!`
++ 条件（三元）操作符：variablename = (condition) `?` value1:value2 满足条件取 value1，否则取 value2.
++ 位操作符：`&` 逻辑与，`|` 逻辑或，`~` 逻辑非，`^` 逻辑异或，`<<` 左移几位，`>>` 右移几位. 作用于 32-bit numbers，result is converted back to a JavaScript number
 
 ### 类型操作符
 

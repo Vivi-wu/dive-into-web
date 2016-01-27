@@ -86,6 +86,24 @@ Booleans to Strings，Dates to Strings 方法同上。Date 转为字符串有更
     Number("")        // returns 0
     Number("99 88")   // returns NaN
 
+When comparing a string with a number, JavaScript will convert the string to a number when doing the comparison. <span style="color:blue;">当比较一个字符串和一个数字，JS会自动将字符串转换成一个数字，然后做比较</span>。
+
+An empty string converts to 0. A non-numeric string converts to **NaN** which is always **false**. 空字串转为 0，非数字式字符串转换成 `NaN`, 比较结果为 false
+
+两个数字式字符串做比较：
+
+    "2" > "12"  // true，because (alphabetically) 1 is less than 2
+    2 < "12"    // true，"12" 转换成数字12进行了比较
+
+为了保证正确的结果，在比较之前，需要把变量转换成合适的类型。
+
+    age = Number(age);
+    if (isNaN(age)) {
+        voteable = "Error in input";
+    } else {
+        voteable = (age < 18) ? "Too young" : "Old enough";
+    }
+
 ### Unary + Operator
 
 一元操作符

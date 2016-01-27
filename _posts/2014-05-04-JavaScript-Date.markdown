@@ -107,13 +107,15 @@ JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写
 </tr>
 </tbody></table>
 
-In JavaScript, the first of the week (0) means "Sunday"，JS中的星期**从星期天开始**。`getDay()` 方法获得的是表示星期的数字，如果希望显示名称，可以这样做：
+In JavaScript, <span style="background-color:lightblue;">the first (0) of the <b>week</b> means "Sunday"，JS中的星期是<b>从星期天开始</b></span>。
+
+`getDay()` 方法获得的是表示星期的数字，如果希望显示名称，可以这样做：
 
     var d = new Date();
     var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     document.getElementById("demo").innerHTML = days[d.getDay()];
 
-<span style="color:blue;">JS中表示 month 的数字也是从 0 开始的，January 一月对应数字是 0，December 十二月是 11。</span>
+<span style="background-color:lightblue;">JS中表示 <b>month</b> 的数字也是从 0 开始的，January 一月对应数字是 0，December 十二月是 11。</span>
 
 ## Set Date
 

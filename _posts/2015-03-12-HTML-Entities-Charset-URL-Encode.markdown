@@ -16,14 +16,14 @@ OR
 
 优点：使用前者（实体名字）便于记忆。
 
-缺点：The disadvantage is that browsers may not support all entity names, but the support for numbers （十进制或十六进制）is good. **浏览器不一定支持所有的实体名称**。
+缺点：The browsers may not support all entity names, but the support for numbers（十进制或十六进制）is good. **浏览器不一定支持（能识别）所有的实体名称**。
 
 <!--more-->
 
 **Tips**：
 
 + If you use an HTML entity name, or number, the character will always display correctly. This is independent of what character set (encoding) your page uses!
-无论用实体名还是数字，字符都会正确显示，这个是独立于网页所使用的编码字符集。
+无论用实体名还是数字，字符都会正确显示，这个是独立于网页所使用的编码字符集的。
 + Remember that **browsers will always truncate spaces in HTML pages**. If you write 10 spaces in your text, the browser will remove 9 of them. To add real spaces to your text, you can use the _&nbsp;_ character entity. 为了在文本中加入1个以上的空格，可以使用 _&nbsp;_ 字符实体
 + Symbols 实体用法一样。
 

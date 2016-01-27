@@ -67,8 +67,8 @@ Number properties belongs to the JavaScript's number object wrapper called **Num
 
 ### Converting Variables to Numbers 全局函数
 
-+ `Number()`，	Returns a number, converted from its argument. 注意字符串转数字，看下面的例子。
-+ `parseFloat()`，	Parses its argument and returns a floating point number
++ `Number()`， Returns a number, converted from its argument. 注意字符串转数字，看下面的例子。
++ `parseFloat()`， Parses its argument and returns a floating point number
 + `parseInt()`， Parses its argument and returns an integer. **Spaces are allowed. Only the first number is returned**，空格是允许的，但是只返回第一个数字。
 + This function determines if the first character in the specified string is a number. If it is, it parses the string until it reaches the end of the number, and returns the number **as a number**, not as a string.
 + Leading and trailing spaces are allowed。第一个数字前和后允许有空格。
@@ -105,4 +105,4 @@ Number properties belongs to the JavaScript's number object wrapper called **Num
 
 所有 number 的方法均不改变原来的变量，返回一个新的值。
 
-<span style="color:blue;">In JavaScript, all data types have a **valueOf()** and a **toString()** method</span>.
+<span style="background-color:lightblue;">In JavaScript, all data types have a <b>valueOf()</b> and a <b>toString()</b> method</span>.
