@@ -11,7 +11,7 @@ JS只有一种 Number 类型的数，可以带小数写，也可以不用。特�
 
 Integers (numbers without a period or exponent notation) are considered accurate up to 15 digits，整数可以保证是精确的最多位数是15位，超出则不精确了。
 
-The maximum number of decimals is 17。小数最多位数是17，因此浮点数相加也不一定准确。
+The maximum number of decimals is 17。小数最多位数是17，因此<span style="color:blue;">浮点数相加也不一定准确</span>。
 
     var x = 0.2 + 0.1;         // x will be 0.30000000000000004
     var x = (0.2 * 10 + 0.1 * 10) / 10;       // x will be 0.3

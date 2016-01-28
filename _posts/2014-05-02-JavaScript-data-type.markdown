@@ -47,6 +47,21 @@ JS中 `null` 表示什么都不是、不存在。<span style="color:blue;">与 u
 
 可以用 null 来**清空**一个 object 变量。当然用 undefined 来清空也是可以的，但是注意结果如前所述是有区别的。
 
+`null` is for **objects**, `undefined` is for **variables**, **properties**, and **methods**.
+
+### test if an object exists
+
+测试一个对象是否存在，必须如下先检查该对象是否被定义了。
+
+    if (typeof myObj !== "undefined" && myObj !== null)
+    if (myObj !== null && typeof myObj !== "undefined")  // 这样写会 throw error exception，两句的区别见下面
+    var person = {};
+    typeof person;       // object
+    person.valueOf();    // [object Object]
+    (person !== null);   // true
+    typeof persons;      // undefined
+    (persons !== null);  // 浏览器报错，JS停止执行，没有显示结果。
+
 ## Type Conversion
 
 JS从左到右依次评估 expression，操作数据类型不同的变量，左右位置不同，得到的结果可能很不一样。因为JS变量是 dynamic 类型，可以被JS自动变换类型。

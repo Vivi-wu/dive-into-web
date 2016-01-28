@@ -8,7 +8,27 @@ categories: JavaScript
 
 ### 分号
 
+It is a **default** JavaScript behavior to close a statement automatically at the **end** of a line。JS的默认表现是，在每一行代码结尾处关闭语句（认为一个语句结束了）。
+
 JS语句由 **semicolons 分号**分隔开。虽然结尾的分号不是必须的，但是**建议保留**！有分号结尾的JS语句可以被写在同一行里。
+
+    function myFunction(a) {
+        var power = 10
+        return a * power
+    }
+    function myFunction(a) {
+        var power = 10;
+        return a * power;
+    }
+    function myFunction(a) {
+        var
+        power = 10;
+        return a * power;
+    }
+
+上面三种写法结果都一样。第三个例子中，当JS遇到不完整的语句时，会读取下一行，试着完成这个语句。
+
+**注意**：**Never** break a `return` 语句。因为它自己就可以是一个完整的语句。
 
 ### 空格
 
@@ -61,13 +81,20 @@ w3schools 使用首字母小写的驼峰式: firstName
 
 ### 变量的声明和赋值
 
-在JS中创建一个变量又称为“声明”一个变量。JS中使用 **var** keyword to **declare** variables 声明变量, use **equal sign** (=) 此时等号是赋值符 to **assign values** to variables 给变量赋值.
+在JS中创建一个变量又称为“声明”一个变量。JS中使用 **var** keyword to **declare** variables 声明变量, use **equal sign `=` **, 此时等号是赋值符, to **assign values** to variables 给变量赋值.
+
+After the declaration, the variable has no value. (Technically it has the value of **undefined**) **注意**：_声明变量后，变量是没有值的，或者说此时变量值为 undefined_。
 
 可以先声明，后赋值，分两步。也可以声明的同时赋值，即初始化变量。
 
     var today = "Monday";
 
-After the declaration, the variable has no value. (Technically it has the value of **undefined**) **注意**：_声明变量后，变量是没有值的，或者说此时变量值为 undefined_。
+<span style="color:blue;">An assignment always returns the value of the assignment</span>. 赋值语句返回的值，就是被赋予的值。
+
+    var x = 0;
+    if (x = 10)
+
+这里 if 判断的条件为 true。因为赋值语句 `x＝10` 的返回值是 10，只要是 real 的值，都是 true 的。
 
 你也可以使用 **comma** 逗号分隔，同时声明多个变量。
 
