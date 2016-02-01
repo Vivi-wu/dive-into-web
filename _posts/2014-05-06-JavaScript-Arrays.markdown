@@ -94,7 +94,7 @@ _改变数组项_：array-name[index] = value;
 
 ### Delet elements
 
-因为JS array 是特殊的对象，所有可以使用操作符 **delete**
+因为JS array 是特殊的对象，所有可以使用操作符 **delete**。（原因见 Object 章节）
 
     var fruits = ["Banana", "Orange", "Apple", "Mango"];
     delete fruits[0];    // 数组 fruits 中第一个元素将变成 undefined

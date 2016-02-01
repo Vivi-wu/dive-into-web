@@ -4,6 +4,8 @@ categories: JavaScript
 ---
 ## Math Object
 
+Math is a global object. The **new** keyword **cannot** be used on Math. 数学对象不可以使用 new 关键字创建。
+
 Math 对象可以让你做一些数学的任务。
 
 + `Math.random()`，返回一个［0，1）之间的随机数，always lower than 1
