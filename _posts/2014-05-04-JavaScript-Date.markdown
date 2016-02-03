@@ -10,7 +10,7 @@ Date 对象用来与年月日时分秒毫秒打交道的。
 
 `new Date()`，创建一个新的日期对象 with **current date and time**，当前的日期和时间
 
-`new Date(milliseconds)`，按照 zero time（01 January 1970 00:00:00 UTC）加上参数创建新的日期对象。JS一天包含 86,400,000 millisecond
+`new Date(milliseconds)`，按照 <span style="color:blue;">zero time</span>（01 January 1970 00:00:00 UTC）加上参数创建新的日期对象。JS一天包含 86,400,000 millisecond
 
 `new Date(dateString)`，按指定的日期字符串创建一个新的日期对象，dateString格式参考下面讲的 Date formats
 
@@ -71,7 +71,7 @@ JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写
 </tr>
 <tr>
   <td>getDate()</td>
-  <td>Get the day as a number (1-31) 几号</td>
+  <td>Get the day as a number 一个月中的 (1-31) 几号</td>
 </tr>
 <tr>
   <td>getDay()</td>
@@ -107,7 +107,7 @@ JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写
 </tr>
 </tbody></table>
 
-In JavaScript, <span style="background-color:lightblue;">the first (0) of the <b>week</b> means "Sunday"，JS中的星期是<b>从星期天开始</b></span>。
+In JavaScript, <span style="background-color:lightblue;">the first (0) of the <b>week</b> means "Sunday"</span>，JS中的星期是<b>从星期天开始</b>。
 
 `getDay()` 方法获得的是表示星期的数字，如果希望显示名称，可以这样做：
 
@@ -115,7 +115,7 @@ In JavaScript, <span style="background-color:lightblue;">the first (0) of the <b
     var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     document.getElementById("demo").innerHTML = days[d.getDay()];
 
-<span style="background-color:lightblue;">JS中表示 <b>month</b> 的数字也是从 0 开始的，January 一月对应数字是 0，December 十二月是 11。</span>
+<span style="background-color:lightblue;">JS中表示 <b>month</b> 的数字也是从 0 开始的</span>，January 一月对应数字是 0，December 十二月是 11。
 
 ## Set Date
 
@@ -132,7 +132,7 @@ In JavaScript, <span style="background-color:lightblue;">the first (0) of the <b
 </tr>
 <tr>
   <td>setFullYear(year,month,day)</td>
-  <td>Set the year (optionally month and day) 参数均为数字</td>
+  <td>Set the year (<b>optionally month and day</b>) 参数均为数字</td>
 </tr>
 <tr>
   <td>setHours()</td>

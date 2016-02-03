@@ -30,6 +30,8 @@ JS语句由 **semicolons 分号**分隔开。虽然结尾的分号不是必须�
 
 **注意**：**Never** break a `return` 语句。因为它自己就可以是一个完整的语句。
 
+<!--more-->
+
 ### 空格
 
 JS忽略掉多个空格，所以我们可以在代码里添加空格方便阅读。
@@ -44,8 +46,6 @@ JS忽略掉多个空格，所以我们可以在代码里添加空格方便阅读
 
     document.getElementById("demo").innerHTML =
     "Hello world, this is my first js code."
-
-<!--more-->
 
 ## Values
 
@@ -106,7 +106,7 @@ After the declaration, the variable has no value. (Technically it has the value 
 
 ### 算术操作符：+， -， *， /， %， ++， --
 
-当语句中出现多个操作符，注意操作符优先级[Operator Precedence Values](http://www.w3schools.com/js/js_arithmetic.asp)
+当语句中出现多个操作符，注意操作符优先级 [Operator Precedence Values](http://www.w3schools.com/js/js_arithmetic.asp)
 
 **NOTE**：`()` 括号拥有**最高优先级**，写在括号中的表达式会优先于剩下的表达式被计算。
 
@@ -152,7 +152,7 @@ After the declaration, the variable has no value. (Technically it has the value 
 
 比较和逻辑操作符用于测试 true 还是 false。
 
-+ 比较操作符：`==`， `===`（值 和 data type 都要相同）， `!=`， `!==`（值 或 data type 不相同）， `>`_， `<`， `>=` (greater than or equal to)， `<=`。 不同 type 数据之间比较将在JS Type Conversion 章节讨论。
++ 比较操作符：`==`， `===`（值 和 data type 都要相同）， `!=`， `!==`（值 或 data type 不相同）， `>`， `<`， `>=` (greater than or equal to)， `<=`。 不同 type 数据之间比较将在JS Type Conversion 章节讨论。
 + 逻辑操作符：`&&`（同真则真）， `||`（同假才假）， `!`
 + 条件（三元）操作符：variablename = (condition) `?` value1:value2 满足条件取 value1，否则取 value2.
 + 位操作符：`&` 逻辑与，`|` 逻辑或，`~` 逻辑非，`^` 逻辑异或，`<<` 左移几位，`>>` 右移几位. 作用于 32-bit numbers，result is converted back to a JavaScript number
@@ -161,6 +161,28 @@ After the declaration, the variable has no value. (Technically it has the value 
 
 + `typeof`，returns a **string** containing the type of the operand，以字符串形式，返回操作数的类型
 + `instanceof`，returns **true** if an object is created by a given constructor，返回布尔值为 true，如果对象是由指定的 constructor 构造的。可用来识别 array 和 date，后面还会提到。
+
+### `in` 操作符
+
+判断指定的属性是否在某个对象中。
+
+    // Arrays
+    var cars = ["Saab", "Volvo", "BMW"];
+    "Saab" in cars          // Returns false (specify the index number instead of value)
+    0 in cars               // Returns true
+    1 in cars               // Returns true
+    4 in cars               // Returns false (does not exist)
+    "length" in cars        // Returns true  (length is an Array property)
+
+    // Objects
+    var person = {firstName:"John", lastName:"Doe", age:50};
+    "firstName" in person   // Returns true
+    "age" in person         // Returns true
+
+    // Predefined objects
+    "PI" in Math            // Returns true
+    "NaN" in Number         // Returns true
+    "length" in String      // Returns true
 
 ## 表达式
 

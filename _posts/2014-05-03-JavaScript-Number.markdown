@@ -33,7 +33,7 @@ JS默认数字是**十进制**显示。以 `0x` 开头的数字为十六进制�
 
 ### Infinity or (-Infinity)
 
-JS计算中最大（或最小）可能取的数。比如一个数字常数除以0的结果。该常量的类型是 number。
+无限大或无限小常量，是JS计算中最大（或最小）可能取的数。比如一个数字常数除以0的结果。该常量的类型是 number。
 
     typeof Infinity;        // returns "number"
 
@@ -61,9 +61,9 @@ JS计算中最大（或最小）可能取的数。比如一个数字常数除以
 
 ## 属性和方法
 
-Number properties belongs to the JavaScript's number object wrapper called **Number**. These properties can **only be accessed** as `Number.MAX_VALUE`. JS中数字对象的属性只能被 Number 调用。
+Number 的一些属性是 **<span style="color:red;">static</span>** property of the JavaScript **Number** object.
 
-属性有：MAX_VALUE，MIN_VALUE，NEGATIVE_INFINITY，POSITIVE_INFINITY，NaN
+JS中只能被 Number 对象调用的属性有：MAX_VALUE，MIN_VALUE，NEGATIVE_INFINITY，POSITIVE_INFINITY，NaN, 使用方法如 `Number.MAX_VALUE`
 
 ### Converting Variables to Numbers 全局函数
 

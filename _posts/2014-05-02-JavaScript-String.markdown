@@ -19,7 +19,7 @@ JS String 用来存储一系列字符，用**单**引号或**双**引号限制�
 
 最糟的情况是两个变量都用 **new** 创建，因为 <span style="color:blue;">JavaScript objects cannot be compared</span>。两者无法比较。
 
-前者创建的是 primitive values，没有属性和方法，但是 **in JavaScript, methods and properties are also available to primitive values**
+前者创建的是 primitive values，没有属性和方法，但是 **in JavaScript, methods and properties are also available to primitive values**.
 
 <!--more-->
 
@@ -29,15 +29,15 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
 
 ### Find
 
-+ `indexOf(searchvalue, start)`，返回一个字符串中指定文本第一次出现的位置 **index** of (the position of) the **first** occurrence of a specified text in a string
++ `indexOf(searchvalue, start)`，返回 **index** of (the position of) the **first** occurrence of a specified text in a string，<span style="color:blue;">字符串中指定文本第一次出现的位置</span>
 + `lastIndexOf(searchvalue, start)`，返回返回一个字符串中指定文本 **last** occurrence 最后一次出现的位置
 + `search(searchvalue)`，效果同 `indexOf()`，因为 A string will automatically be converted to a regular expression，字符串可以被自动转为一个正则表达式。
 
-1.JavaScript counts positions from zero. 0 is the first position in a string.
+1.**0** is the **first** position in a string.
 
 2.如果没有找到指定文本，则返回 `－1`。
 
-3.前两者 _searchvalue_ 是一个 string，_start_ 默认是 0
+3.前两者 _searchvalue_ 是一个 string，_start_ 默认是 0，表示开始查找的位置，该参数是可选的。
 
 4.`search()` 的 searchvalue 是一个 regular expressions，比 `indexOf()` 有更强大的搜索能力。
 

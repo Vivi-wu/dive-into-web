@@ -4,7 +4,7 @@ categories: JavaScript
 ---
 ## Math Object
 
-Math is a global object. The **new** keyword **cannot** be used on Math. 数学对象不可以使用 new 关键字创建。
+`Math` is a global object. The **new** keyword **cannot** be used on Math. 数学对象不是一个 constructor，不可以/不需要使用 new 关键字来创建。
 
 Math 对象可以让你做一些数学的任务。
 
@@ -22,6 +22,8 @@ Math 对象可以让你做一些数学的任务。
     Math.round(4.7);            // returns 5
     Math.ceil(4.7);             // returns 5
     Math.floor(4.7);            // returns 4
+
+完整的 JS [Math对象的方法](http://www.w3schools.com/jsref/jsref_obj_math.asp)
 
 ### Math Constants
 
@@ -41,11 +43,9 @@ Math 对象可以让你做一些数学的任务。
 
 `Math.LOG10E` (approx. 0.434)
 
-完整的 JS [Math对象的方法](http://www.w3schools.com/jsref/jsref_obj_math.asp)
-
 ## Booleans
 
-JS的布尔类型数据只有两个值：true 或者 false。
+JS的布尔类型数据只有两个值：**true** 或者 **false**。
 
 ### 判断一个表达式或值的真假
 
