@@ -48,12 +48,14 @@ JS函数可以使用表达式来定义。
 
 ## Hoisting
 
-Hoisting 提升 is JavaScript's default behavior of moving declarations to the **top** of the current scope (to the top of the **current script** or the **current function**)。把声明放置到当前脚本或当前函数的顶部。
+Hoisting 提升 is JavaScript's default behavior of moving declarations to the **top** of the current scope (to the top of the **current script** or the **current function**)。<span style="color:blue;">JS默认行为：把声明放置到当前脚本或当前函数的顶部</span>。
 
 + In JS, a variable can be used before it has been declared. 变量可以在声明之前被使用。
 + JavaScript only hoists declarations, **not** initializations. 只提升声明，而不是初始化赋值。
-+ Hoisting applies to **variable** declarations **and** to **function** declarations。提升适用于变量声明和函数声明。
-+ 但是使用表达式定义的函数 are **not** hoisted 不能被提升，
++ Hoisting applies to **variable** declarations **and** to **function** declarations。提升适用于<span style="color:red;">变量声明</span>和<span style="color:red;">函数声明</span>。
++ 但是使用函数表达式定义的函数 are **not** hoisted 不能被提升，
+
+最后两点很好地表述了，函数声明和函数表达式的 **不同** ：函数调用可以写在函数声明前（因为声明可以被提升，不会出现 undefined 的错误），但不能早于函数表达式（表达式定义的函数不能被提升）。
 
 下例中，因为变量 y 的声明可以提升到顶部，但是初始化赋值 `=7` 不行，所以 y 的值为 undefined。
 
