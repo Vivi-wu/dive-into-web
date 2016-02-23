@@ -69,9 +69,12 @@ JS中只能被 Number 对象调用的属性有：MAX_VALUE，MIN_VALUE，NEGATIV
 
 + `Number()`， Returns a number, converted from its argument. 注意字符串转数字，看下面的例子。
 + `parseFloat()`， Parses its argument and returns a floating point number
-+ `parseInt()`， Parses its argument and returns an integer. **Spaces are allowed. Only the first number is returned**，空格是允许的，但是只返回第一个数字。
-+ This function determines if the first character in the specified string is a number. If it is, it parses the string until it reaches the end of the number, and returns the number **as a number**, not as a string.
-+ Leading and trailing spaces are allowed。第一个数字前和后允许有空格。
++ `parseInt(string, radix)`， Parses its argument and returns an integer. **Spaces are allowed. Only the first number is returned**，空格是允许的，但是只返回第一个数字。
+
+    + This function determines if the first character in the specified string is a number. If it is, it parses the string until it reaches the end of the number, and returns the number **as a number**, not as a string.
+    + Leading and trailing spaces are allowed。第一个数字前和后允许有空格。
+    + _radix_, 是一个 (from 2 to 36) 的数字 that represents the numeral system to be used，表示 string 用的是哪一种进制。比如：`parseInt("20",16)`，表示第一个参数是十六进制的，运算结果以十进制显示，即 `32`。
+    + 缺省 _radix_ 参数，看第一个参数。若以 `0x` 开始，则为十六进制，若以 `0` 开始，则为八进制。任何其他 value，都认为是十进制的。
 
 示例：
 
