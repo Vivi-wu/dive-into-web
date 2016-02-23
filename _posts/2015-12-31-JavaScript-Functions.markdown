@@ -76,7 +76,7 @@ Hoisting 提升 is JavaScript's default behavior of moving declarations to the *
 + 传递参数时不检查参数 type
 + 不检查传递的参数个数
 + 如果函数接收到的参数个数小于函数声明参数列表里的，the missing values are set to: **undefined**，最好给参数设置一个默认值。
-+ 如果接收到的参数个数多于声明参数列表里的，这些参数 can be reached using the **arguments object**（JS函数内置对象，包含一个 array 放置函数调用时传递进来的参数）
++ 如果接收到的参数个数多于声明参数列表里的，这些参数 can be reached using the `arguments` object（JS函数内置对象，包含一个 array 放置函数调用时传递进来的参数）
 
     function myFunction(x, y) {
         if (y === undefined) {
@@ -135,7 +135,7 @@ Hoisting 提升 is JavaScript's default behavior of moving declarations to the *
 
 Function expressions will execute automatically if the expression is followed by `()`. 在函数表达式后面加 `()`，可以使函数自动执行。
 
-函数声明不能被自调用，必须先用括号扩起来，如下，又称为 **anonymous self-invoking function** 
+函数声明不能被自调用，必须先用括号括起来，如下，又称为 **anonymous self-invoking function**
 
     (function () {
         var x = "Hello!!";      // I will invoke myself
