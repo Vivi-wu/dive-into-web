@@ -2,16 +2,17 @@ $base-font-family: "Josefin Sans", sans-serif;
 $base-font-size:   16px;
 $base-line-height: 1.5;
 
-$text-color:       #575657;
-$background-color: #ffffff;
+$text-color:       #7B7B7B; // paragraph
+$text-em-color:    rgba(255, 255, 255, 0.8); // heading
+
+$background-color: rgba(0, 0, 0, 0.8);
 
 $primary-color-light: #FFF1F1;
 $primary-color-mild:  #FFBDBD;
 $primary-color:       #D3696C; // equals to rgb(150, 53, 140)
 $primary-color-dark:  #540002;
 
-$grey-color:       #7B7B7B;
-$grey-color-light: #C3C3C3;
+$grey-color:       #C3C3C3; // border
 
 $spacing-unit:     20px;
 

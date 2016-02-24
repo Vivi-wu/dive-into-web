@@ -12,11 +12,11 @@
 */
 ::-moz-selection {
   color: white;
-  background-color: $primary-color-dark;
+  background-color: $primary-color-light;
 }
 ::selection {
   color: white;
-  background-color: $primary-color-dark;
+  background-color: $primary-color-light;
 }
 
 
@@ -43,6 +43,9 @@ em {
   color: $primary-color;
 }
 
+strong {
+  color: $text-em-color;
+}
 
 /**
  * Images
@@ -61,7 +64,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 h2, h3, h4 {
   margin-top: $spacing-unit * 3;
-  color: black;
+  color: $text-em-color;
 }
 h2 {
   font-size: 25px;
@@ -78,11 +81,8 @@ h4 {
  * Links
  */
 a {
-  color: $primary-color;
+  color: $primary-color-mild;
 
-  &:visited {
-    color: $primary-color-dark;
-  }
 }
 
 
@@ -106,16 +106,19 @@ pre>code {
 */
 table {
   margin-bottom: $spacing-unit;
+  background-color: white;
+
+  th, tr:nth-child(even) {
+    background-color: $primary-color-light;
+  }
+  th, td {
+    padding: 5px $spacing-unit;
+  }
 }
+
 table, th, td {
-  border: 1px solid $grey-color-light;
+  border: 1px solid $grey-color;
   border-collapse: collapse;
-}
-th, td {
-  padding: 5px $spacing-unit;
-}
-table tr:nth-child(even) {
-  background-color: $primary-color-light;
 }
 
 
@@ -133,7 +136,6 @@ dl, dt, dd { margin: 0; }
 ol {
   margin-left: $spacing-unit * 1.5;
   padding-left: 0;
-  color: $text-color;
 
   li {
     padding-top: 3px;
@@ -165,5 +167,5 @@ ol {
  * Border
  */
 .solid_top_border {
-  border-top: 1px solid $grey-color-light;
+  border-top: 1px solid $grey-color;
 }
