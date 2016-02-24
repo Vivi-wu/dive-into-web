@@ -6,7 +6,7 @@ JS函数就是一段当被调用时，要执行某个动作的代码。使用函
 
 函数可以被视为 value 使用，可以被用在表达式里。
 
-The `typeof` operator in JavaScript returns "**function**" for functions. But, JavaScript functions can best be described as objects. <span style="color:blue;">JS函数最好被描述为对象</span>。
+The `typeof` operator in JavaScript returns "**function**" for functions. But, JavaScript functions can best be described as objects. <span class="blue-text">JS函数最好被描述为对象</span>。
 
 使用 `arguments.length` property 可以返回函数调用是接收到的参数个数。
 
@@ -48,7 +48,7 @@ JS函数可以使用表达式来定义。
 
 ## Hoisting
 
-Hoisting 提升 is JavaScript's default behavior of moving declarations to the **top** of the current scope (to the top of the **current script** or the **current function**)。<span style="color:blue;">JS默认行为：把声明放置到当前脚本或当前函数的顶部</span>。
+Hoisting 提升 is JavaScript's default behavior of moving declarations to the **top** of the current scope (to the top of the **current script** or the **current function**)。<span class="blue-text">JS默认行为：把声明放置到当前脚本或当前函数的顶部</span>。
 
 + In JS, a variable can be used before it has been declared. 变量可以在声明之前被使用。
 + JavaScript only hoists declarations, **not** initializations. 只提升声明，而不是初始化赋值。
@@ -66,7 +66,7 @@ Hoisting 提升 is JavaScript's default behavior of moving declarations to the *
 
     var y = 7; // Initialize y
 
-<span style="color:blue;">To avoid bugs, always declare all variables at the beginning of every scope</span>.
+<span class="blue-text">To avoid bugs, always declare all variables at the beginning of every scope</span>.
 
 ## Function Parameters and Arguments
 
@@ -112,7 +112,7 @@ Hoisting 提升 is JavaScript's default behavior of moving declarations to the *
     }
     window.myFunction(10, 2);    // window.myFunction(10, 2) will also return 20
 
-<span style="color:blue;">Global variables, methods, or functions can easily create name conflicts and bugs in the global object</span>. 全局的变量和函数很容易在全局对象中产生命名冲突和bug。
+<span class="blue-text">Global variables, methods, or functions can easily create name conflicts and bugs in the global object</span>. 全局的变量和函数很容易在全局对象中产生命名冲突和bug。
 
 2.以对象的方法形式调用函数：`myObject.fullName();`
 

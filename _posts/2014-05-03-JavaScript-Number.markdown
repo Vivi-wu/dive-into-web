@@ -11,7 +11,7 @@ JS只有一种 Number 类型的数，可以带小数写，也可以不用。特�
 
 Integers (numbers without a period or exponent notation) are considered accurate up to 15 digits，整数可以保证是精确的最多位数是15位，超出则不精确了。
 
-The maximum number of decimals is 17。小数最多位数是17，因此<span style="color:blue;">浮点数相加也不一定准确</span>。
+The maximum number of decimals is 17。小数最多位数是17，因此<span class="blue-text">浮点数相加也不一定准确</span>。
 
     var x = 0.2 + 0.1;         // x will be 0.30000000000000004
     var x = (0.2 * 10 + 0.1 * 10) / 10;       // x will be 0.3
@@ -57,7 +57,7 @@ JS默认数字是**十进制**显示。以 `0x` 开头的数字为十六进制�
 
 最好不要用后者，减缓执行速度。且 `x===y` 是 false 的，因为后者的 type 是 object。
 
-最糟的情况是两个变量都用 **new** 创建，因为 <span style="color:blue;">JavaScript objects cannot be compared</span>。两者不能进行比较。
+最糟的情况是两个变量都用 **new** 创建，因为 <span class="blue-text">JavaScript objects cannot be compared</span>。两者不能进行比较。
 
 ## 属性和方法
 

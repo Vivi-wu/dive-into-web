@@ -34,11 +34,11 @@ categories: CSS
 
 It should hold several font names as a "fallback" system. If the browser does not support the first font, it tries the next font. Start with the font you want, and end with a generic family. 该特性像一个“后备”系统，拥有一些字体名称。每一个名称之间由逗号分开，从你希望使用的字体开始，以一个通用字体系统结束，这样如果浏览器不支持第一个字体，它会尝试后面的选项。
 
-对于以中文为使用语言的web应用，<span style="color:blue;">把类似中文字体的英文字体集，写在最前面</span>。因为英文字体集没有中文字符，但是中文字体集却包含所有英文字符。中文字体放在前面，会优先显示，而中文字体显示的英文字符通常比较丑。
+对于以中文为使用语言的web应用，<span class="blue-text">把类似中文字体的英文字体集，写在最前面</span>。因为英文字体集没有中文字符，但是中文字体集却包含所有英文字符。中文字体放在前面，会优先显示，而中文字体显示的英文字符通常比较丑。
 
 对于仿宋、楷体，最好在字号大于14px的情况下使用，否则影响清晰度。
 
-<span style="color:blue;">目前在 ios、android、winphone，三种手机操作系统中的默认字体都是类似**微软雅黑**的 Sans-serif 字体。</span>
+<span class="blue-text">目前在 ios、android、winphone，三种手机操作系统中的默认字体都是类似**微软雅黑**的 Sans-serif 字体。</span>
 
 Note: 如果字体集名称多余一个单词，则必须用**双引号**括起来。like: "Times New Roman".
 

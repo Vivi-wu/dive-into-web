@@ -10,7 +10,7 @@ Date 对象用来与年月日时分秒毫秒打交道的。
 
 `new Date()`，创建一个新的日期对象 with **current date and time**，当前的日期和时间
 
-`new Date(milliseconds)`，按照 <span style="color:blue;">zero time</span>（01 January 1970 00:00:00 UTC）加上参数创建新的日期对象。JS一天包含 86,400,000 millisecond
+`new Date(milliseconds)`，按照 <span class="blue-text">zero time</span>（01 January 1970 00:00:00 UTC）加上参数创建新的日期对象。JS一天包含 86,400,000 millisecond
 
 `new Date(dateString)`，按指定的日期字符串创建一个新的日期对象，dateString格式参考下面讲的 Date formats
 
@@ -55,7 +55,7 @@ JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写
 
 无论以何种日期格式输入，默认输出格式都是 full text string 格式：Sun May 04 2014 08:00:00 GMT+0800 (CST)
 
-<span style="color:blue;">Date objects are **static**, not dynamic. The computer time is ticking, but date objects, once created, are not.</span> 日期对象是静态的，一旦创建，就是一个常量，不会自己更新。
+<span class="blue-text">Date objects are **static**, not dynamic. The computer time is ticking, but date objects, once created, are not.</span> 日期对象是静态的，一旦创建，就是一个常量，不会自己更新。
 
 + `toString()`，输出日期会自动转为一个字符串，不写也行。
 + `toUTCString()`，

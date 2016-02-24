@@ -22,7 +22,7 @@ categories: JavaScript
     new Date().constructor             // Returns function Date()    { [native code] }
     function () {}.constructor         // Returns function Function(){ [native code] }
 
-<span style="color:blue;">可以用来判断一个变量类型是否是 array</span>，判断 date 方法同。
+<span class="blue-text">可以用来判断一个变量类型是否是 array</span>，判断 date 方法同。
 
     function isArray(myArray) {
       return myArray.constructor.toString().indexOf("Array") > -1;
@@ -40,7 +40,7 @@ categories: JavaScript
 
 ### Null
 
-JS中 `null` 表示什么都不是、不存在。<span style="color:blue;">与 undefined 不同，`typeof null` 的结果是 `object`</span>。
+JS中 `null` 表示什么都不是、不存在。<span class="blue-text">与 undefined 不同，`typeof null` 的结果是 `object`</span>。
 
     null == undefined;  // true
     null === undefined; // false
@@ -101,7 +101,7 @@ Booleans to Strings，Dates to Strings 方法同上。Date 转为字符串有更
     Number("")        // returns 0
     Number("99 88")   // returns NaN
 
-When comparing a string with a number, JavaScript will convert the string to a number when doing the comparison. <span style="color:blue;">当比较一个字符串和一个数字，JS会自动将字符串转换成一个数字，然后做比较</span>。
+When comparing a string with a number, JavaScript will convert the string to a number when doing the comparison. <span class="blue-text">当比较一个字符串和一个数字，JS会自动将字符串转换成一个数字，然后做比较</span>。
 
 An empty string converts to 0. A non-numeric string converts to **NaN** which is always **false**. 空字串转为 0，非数字式字符串转换成 `NaN`, 比较结果为 false
 

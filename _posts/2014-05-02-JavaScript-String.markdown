@@ -17,7 +17,7 @@ JS String 用来存储一系列字符，用**单**引号或**双**引号限制�
 
 最好不要用后者，减缓执行速度。且 `x===y` 是 false 的，因为后者的 type 是 object。
 
-最糟的情况是两个变量都用 **new** 创建，因为 <span style="color:blue;">JavaScript objects cannot be compared</span>。两者无法比较。
+最糟的情况是两个变量都用 **new** 创建，因为 <span class="blue-text">JavaScript objects cannot be compared</span>。两者无法比较。
 
 前者创建的是 primitive values，没有属性和方法，但是 **in JavaScript, methods and properties are also available to primitive values**.
 
@@ -29,7 +29,7 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
 
 ### Find
 
-+ `indexOf(searchvalue, start)`，返回 **index** of (the position of) the **first** occurrence of a specified text in a string，<span style="color:blue;">字符串中指定文本第一次出现的位置</span>
++ `indexOf(searchvalue, start)`，返回 **index** of (the position of) the **first** occurrence of a specified text in a string，<span class="blue-text">字符串中指定文本第一次出现的位置</span>
 + `lastIndexOf(searchvalue, start)`，返回返回一个字符串中指定文本 **last** occurrence 最后一次出现的位置
 + `search(searchvalue)`，效果同 `indexOf()`，因为 A string will automatically be converted to a regular expression，字符串可以被自动转为一个正则表达式。
 
@@ -63,7 +63,7 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
 
 结果为 Mr BLUE has a BLUE HOUSE and a BLUE CAR.
 
-默认情况下，<span style="color:blue;">只替换找到的**第一个匹配**</span>。希望全部替换，使用 regular expression 作为搜索项。
+默认情况下，<span class="blue-text">只替换找到的**第一个匹配**</span>。希望全部替换，使用 regular expression 作为搜索项。
 
 ### 字符大小写转换
 
@@ -76,7 +76,7 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
     var text = "Hello" + " " + "World!";
     var text = "Hello".concat(" ","World!");
 
-All string methods return a new string. They **don't** modify the original string. <span style="color:blue;">所有字符串的方法将返回一个新的字符串，而不改变原始字符串</span>。
+All string methods return a new string. They **don't** modify the original string. <span class="blue-text">所有字符串的方法将返回一个新的字符串，而不改变原始字符串</span>。
 
 ### Converting a String to an Array
 

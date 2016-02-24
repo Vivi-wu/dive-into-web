@@ -89,7 +89,7 @@ After the declaration, the variable has no value. (Technically it has the value 
 
     var today = "Monday";
 
-<span style="color:blue;">An assignment always returns the value of the assignment</span>. 赋值语句返回的值，就是被赋予的值。
+<span class="blue-text">An assignment always returns the value of the assignment</span>. 赋值语句返回的值，就是被赋予的值。
 
     var x = 0;
     if (x = 10)
@@ -146,7 +146,7 @@ After the declaration, the variable has no value. (Technically it has the value 
     txt1 = "What a very ";
     txt1 += "nice day";
 
-<p style="background-color:lightblue;">If you add a number and a string, the result will be a <strong>string</strong>! <span style="color:blue;">数字和字符串相加，结果将是一个字符串</span>。</p>
+If you add a number and a string, the result will be a <strong>string</strong>! <span class="blue-text">数字和字符串相加，结果将是一个字符串</span>。
 
 ### Comparison and Logical Operators
 

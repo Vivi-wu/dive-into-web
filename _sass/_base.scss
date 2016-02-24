@@ -97,7 +97,7 @@ code {
 pre>code {
   display: block;
   color: #076527;
-  background-color: #e7f6ec;
+  background-color:  rgba(231, 246, 236, 0.9);
   padding: 5px;
 }
 
@@ -159,9 +159,13 @@ ol {
 
 
 /**
- * Text align
+ * Text
  */
 .text-center { text-align: center; }
+
+.blue-text {
+  color: skyblue;
+}
 
 
 /**

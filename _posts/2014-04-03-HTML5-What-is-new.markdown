@@ -84,7 +84,7 @@ Geolocation，Drag and Drop，Local Storage，Application Cache，Web Workers，
 
 ## HTML5 Browser Support
 
-所有浏览器，不论新版还是旧版，<span style="color:blue;">对于识别不了的 HTML 元素自动按 _inline_ 行内级元素处理</span>。因此，我们可以教旧浏览器正确处理“未知的” HTML 元素。
+所有浏览器，不论新版还是旧版，<span class="blue-text">对于识别不了的 HTML 元素自动按 _inline_ 行内级元素处理</span>。因此，我们可以教旧浏览器正确处理“未知的” HTML 元素。
 
 为了在旧浏览器中安全地正确地显示 `<header>` `<section>` `<footer>` `<aside>` `<nav>` `<main>` `<article>` `<figure>` 这些 block-level 块级元素，通过CSS _display_ 属性设定为 block 来实现
 
