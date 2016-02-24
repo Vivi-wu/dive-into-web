@@ -44,20 +44,19 @@
   bottom: $spacing-unit * 2.5;
   width: $spacing-unit * 2.5;
   height: $spacing-unit * 2.5;
-  line-height: $spacing-unit * 2.5;
-  text-decoration: none;
   z-index: 100;
-  background-color: white;
   color: $text-color;
-  border:1px solid $grey-color;
+  background-color: white;
   border-radius: 2px;
+  border: 1px solid $grey-color;
   opacity: 0;
   visibility: hidden;
+  cursor: pointer;
   @include mn-transition(all 0.3s ease-out);
 
   &:hover {
     color: $primary-color-dark;
-    background-color: #f8f8f8;
+    opacity: 0.9;
   }
 
   &.show-gotop {

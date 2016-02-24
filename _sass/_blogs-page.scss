@@ -71,12 +71,16 @@
 
 
 .archives-sidebar {
-  padding-left: $spacing-unit;
 
   @include media-query-max($on-mobile) {
     display: none;
   }
+}
 
+#archives-sidebar {
+  position: fixed;
+  top: 55px;
+  width: 220px;
   h3 {
     color: $primary-color;
     margin-top: 0;
@@ -94,7 +98,6 @@
     }
   }
 }
-
 
 .pagination {
   font-size: 12px;
