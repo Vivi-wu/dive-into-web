@@ -1,20 +1,22 @@
-<div class="content three units first archives-sidebar">
-  <h3>ARCHIVES</h3>
-  <ul class="list-unstyled">
-  {% for post in site.posts %}
-    {% unless post.next %}
-      <li>
-        <a href="{{ post.date | date: "/%Y/%m/" | prepend: site.baseurl }}">{{ post.date | date: "%B %Y" }}</a>
-      </li>
-    {% else %}
-      {% capture this_month %}{{ post.date | date: '%Y %b' }}{% endcapture %}
-      {% capture next_month %}{{ post.next.date | date: '%Y %b' }}{% endcapture %}
-      {% if this_month != next_month %}
+<div class="three units first archives-sidebar">
+  <div id="archives-sidebar">
+    <h3>ARCHIVES</h3>
+    <ul class="list-unstyled">
+    {% for post in site.posts %}
+      {% unless post.next %}
         <li>
           <a href="{{ post.date | date: "/%Y/%m/" | prepend: site.baseurl }}">{{ post.date | date: "%B %Y" }}</a>
         </li>
-      {% endif %}
-    {% endunless %}
-  {% endfor %}
-  </ul>
+      {% else %}
+        {% capture this_month %}{{ post.date | date: '%Y %b' }}{% endcapture %}
+        {% capture next_month %}{{ post.next.date | date: '%Y %b' }}{% endcapture %}
+        {% if this_month != next_month %}
+          <li>
+            <a href="{{ post.date | date: "/%Y/%m/" | prepend: site.baseurl }}">{{ post.date | date: "%B %Y" }}</a>
+          </li>
+        {% endif %}
+      {% endunless %}
+    {% endfor %}
+    </ul>
+  </div>
 </div>
