@@ -18,7 +18,7 @@
 .post {
   overflow: hidden;
   header h2 {
-    font-size: 28px;
+    font-size: 30px;
     line-height: 1.3em;
     margin-top: 0;
     margin-bottom: 5px;
@@ -34,7 +34,7 @@
     height: auto;
   }
   article li {
-    margin-bottom: $spacing-unit;
+    margin-bottom: 1rem;
     ul { margin-top: $spacing-unit; }
   }
 }
@@ -42,7 +42,7 @@
 
 .post-meta-infos {
   font-size: 12px;
-  margin-bottom: $spacing-unit * 2;
+  margin-bottom: $spacing-unit * 2.5;
 
   .text-sep {
     padding-left: 3px;
@@ -75,11 +75,13 @@
     margin-bottom: $spacing-unit * 0.5;
   }
   a {
-    color: $text-color;
+    color: $grey-color;
     display: block;
     margin-bottom: 3px;
+    text-decoration: none;
     &:hover {
       color: $primary-color-dark;
+      text-decoration: underline;
     }
   }
 }

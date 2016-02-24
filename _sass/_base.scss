@@ -36,7 +36,7 @@ body {
 
 p {
   margin-top: 0;
-  margin-bottom: 0.85em;
+  margin-bottom: 1rem;
 }
 
 em {
@@ -57,21 +57,20 @@ img {
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
+  font-weight: 700;
 }
 h2, h3, h4 {
+  margin-top: $spacing-unit * 3;
   color: black;
 }
 h2 {
-  margin-top: $spacing-unit * 2.5;
-  font-size: 23px;
+  font-size: 25px;
 }
 h3 {
-  margin-top: $spacing-unit * 1.5;
-  font-size: 20px;
+  font-size: 22px;
 }
 h4 {
-  font-size: 17px;
+  font-size: 18px;
 }
 
 
@@ -91,6 +90,7 @@ a {
  * Code block
  */
 code {
+  font-size: 15px;
   color: $primary-color;
 }
 pre>code {
@@ -138,7 +138,6 @@ ol {
   li {
     padding-top: 3px;
     padding-bottom: 3px;
-    line-height: 1.7;
   }
 }
 
@@ -163,65 +162,8 @@ ol {
 
 
 /**
- * Image align
- */
-.img-align-center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-/**
-* Button, link
-*/
-.contrast_color {
-  color: white;
-  background-color: $primary-color-dark;
-  border-color: $primary-color-dark;
-}
-.contrast_color_2 {
-  color: $primary-color-dark;
-  background-color: $background-color;
-  border: 1px solid $grey-color-light;
-}
-
-.btn-read-more-wrapper {
-  clear: both;
-  padding-top: $spacing-unit * 2;
-  padding-bottom: $spacing-unit;
-}
-
-.magic-button {
-  display: inline-block;
-  @extend .contrast_color_2;
-  border-radius: 3px;
-  margin-top: 3px;
-  margin-bottom: 3px;
-  padding: 10px 16px;
-  font-weight: 600;
-  line-height: 16px;
-
-  &:hover {
-    text-decoration: none;
-  }
-
-  &:hover, &.reverse {
-    @extend .contrast_color;
-  }
-
-  &.reverse:hover {
-    @extend .contrast_color_2;
-  }
-}
-
-
-/**
  * Border
  */
 .solid_top_border {
   border-top: 1px solid $grey-color-light;
-}
-.solid_bottom_border {
-  border-bottom: 1px solid $grey-color-light;
 }

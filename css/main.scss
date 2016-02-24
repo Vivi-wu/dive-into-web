@@ -18,7 +18,7 @@
 @mixin embed-font($font-name, $font-filename) {
   @font-face {
     font-family: $font-name;
-    src: url("../assets/fonts/" + $font-filename + ".ttf") format("truetype");
+    src: url("../assets/fonts/" + $font-filename + ".woff") format("woff");
   }
 }
 
@@ -32,7 +32,7 @@
           transition: $var;
 }
 
-@include embed-font("cholla-slab", "ChollaSlabRegular");
+@include embed-font("Josefin Sans", "Josefin Sans");
 
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
