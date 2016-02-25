@@ -26,13 +26,14 @@
     font-size: 30px;
     margin-top: 0;
     margin-bottom: 0.5rem;
+    color: $primary-color-mild;
 
     a {
       display: block;
       padding-top: 0.5rem;
       line-height: 1;
       text-decoration: none;
-      color: $primary-color-mild;
+
       &:hover {
         @extend .contrast_color;
       }
