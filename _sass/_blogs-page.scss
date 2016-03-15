@@ -6,12 +6,10 @@
 }
 
 .post-list {
-  padding-bottom: $spacing-unit * 2.5;
-  margin-bottom: $spacing-unit * 2.5;
+  margin-bottom: $spacing-unit * 9;
 
   @include media-query-max($on-mobile) {
-    padding-bottom: $spacing-unit * 1.5;
-    margin-bottom: $spacing-unit * 1.5;
+    margin-bottom: $spacing-unit * 2.5;
   }
 }
 

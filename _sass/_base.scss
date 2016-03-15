@@ -23,6 +23,10 @@
 /**
  * Basic styling
  */
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: $base-font-family;
@@ -33,6 +37,14 @@ body {
   background-color: $background-color;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: subpixel-antialiased;
+  position: relative;
+  min-height: 100%;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 p {
