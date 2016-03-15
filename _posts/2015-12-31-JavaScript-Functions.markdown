@@ -135,11 +135,15 @@ Hoisting 提升 is JavaScript's default behavior of moving declarations to the *
 
 Function expressions will execute automatically if the expression is followed by `()`. 在函数表达式后面加 `()`，可以使函数自动执行。
 
-函数声明不能被自调用，必须先用括号括起来，如下，又称为 **anonymous self-invoking function**
+函数声明不能被自调用，必须先用括号括起来，如下，又称为 **anonymous self-invoking function**。好像普遍称为 Immediately-invoked function expression。
 
     (function () {
         var x = "Hello!!";      // I will invoke myself
     })();
+    (function (a, b) {
+        // a == 'hello'
+        // b == 'world'
+    })('hello', 'world');
 
 ## Function Return 函数返回
 
