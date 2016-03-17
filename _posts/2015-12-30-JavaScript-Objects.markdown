@@ -77,7 +77,7 @@ JS对象是一系列无序属性的集合。
 
 该操作不仅删掉了属性的值，也删掉了属性本身。
 
-The delete operator is **designed** to be used on **object properties**. It has no effect on variables or functions. 删除操作符专为对象属性设计，对于变量和函数没有效果。
+The delete operator is **designed** to be used on **object properties**. <span class="blue-text">It has no effect on variables or functions. 删除操作符专为对象属性设计，对于变量和函数没有效果</span>。
 
 The delete keyword does **not** delete inherited properties, but if you delete a prototype property, it will affect all objects inherited from the prototype. 删除操作符不会删掉继承的属性，但是如果你删掉了一个 prototype 属性，它会影响所有继承这个原型的对象。
 
