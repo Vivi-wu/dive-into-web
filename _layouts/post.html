@@ -11,7 +11,7 @@ layout: default
           <div class="post-meta-infos">
             <span>{{ page.date | date_to_string }}</span>
             <span class="text-sep">/</span>
-            <span>in <a href="{{ site.baseurl }}/category/{{ page.categories }}/" class="post-category">{{ page.categories }}</a></span>
+            <span>in <a href="{{ site.baseurl }}/{{ page.categories }}/" class="post-category">{{ page.categories }}</a></span>
           </div>
         </header>
         <article>{{ content }}</article>

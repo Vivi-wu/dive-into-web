@@ -5,14 +5,14 @@ layout: default
   {% include archives-month-sidebar.html %}
   <div class="nine units no_margin">
     <div class="content template-blog">
-      {% for post in site.categories.html %}
+      {% for post in page.posts %}
       <div class="post post-list">
         <header>
           <h2><a href="{{ post.url | prepend: site.baseurl }}" title="{{ post.title }}">{{ post.title }}</a></h2>
           <div class="post-meta-infos">
             <span>{{ post.date | date_to_string }}</span>
             <span class="text-sep">/</span>
-            <span>in <a href="{{ site.baseurl }}/category/{{ post.categories }}/" class="post-category">{{ post.categories }}</a></span>
+            <span>in <a href="{{ site.baseurl }}/{{ post.categories }}/" class="post-category">{{ post.categories }}</a></span>
           </div>
         </header>
         <article>{{ post.excerpt }}</article>

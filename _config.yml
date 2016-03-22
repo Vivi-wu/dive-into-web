@@ -9,11 +9,17 @@ baseurl: "/dive-into-web"
 markdown: kramdown
 excerpt_separator: <!--more-->
 
+# Plugins
+gems:
+  - jekyll-paginate
+  - jekyll-coffeescript
+
 # Markdown Processors
 kramdown:
   auto_ids: false
 
 # Outputting
+permalink: none
 paginate: 4
 paginate_path: "/blogs/page/:num/"
 
