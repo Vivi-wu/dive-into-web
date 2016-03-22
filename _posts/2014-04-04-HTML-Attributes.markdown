@@ -1,6 +1,6 @@
 ---
 title:  "HTML Attributes"
-categories: HTML
+category: HTML
 ---
 HTML elements 可以有一些 attributes 特性。
 

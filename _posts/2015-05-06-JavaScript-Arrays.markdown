@@ -1,6 +1,6 @@
 ---
 title:  "JavaScript Arrays"
-categories: JavaScript
+category: JavaScript
 ---
 JS数组用于在一个变量名下存储多个具有共性的数值。
 

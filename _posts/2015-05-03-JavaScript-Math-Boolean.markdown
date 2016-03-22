@@ -1,6 +1,6 @@
 ---
 title:  "JavaScript Math and Boolean"
-categories: JavaScript
+category: JavaScript
 ---
 ## Math Object
 

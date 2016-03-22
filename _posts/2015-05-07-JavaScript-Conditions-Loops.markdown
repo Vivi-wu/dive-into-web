@@ -1,6 +1,6 @@
 ---
 title:  "JavaScript Conditions and Loop"
-categories: JavaScript
+category: JavaScript
 ---
 JS 条件语句，根据不同决定执行不同操作。
 

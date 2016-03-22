@@ -1,6 +1,6 @@
 ---
 title:  "What's new in HTML5?"
-categories: HTML
+category: HTML
 ---
 HTML5 is the latest standard for HTML. It was specially designed to deliver rich content without the need for additional plugins. HTML5 is also cross-platform. It is designed to work whether you are using a PC, or a Tablet, a Smartphone, or a Smart TV. HTML5 是 HTML 的最新标准，特别地，HTML5被设计用于传达丰富的多媒体内容而无需额外的插件。它同时也是跨平台的。
 

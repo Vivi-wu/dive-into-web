@@ -1,6 +1,6 @@
 ---
 title:  "HTML Images"
-categories: HTML
+category: HTML
 ---
 ## Images Syntax
 

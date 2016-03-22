@@ -1,6 +1,6 @@
 ---
 title:  "JavaScript Data Types and Type Conversion"
-categories: JavaScript
+category: JavaScript
 ---
 为了正确操作一个变量，需要知道它的数据类型。
 

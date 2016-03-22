@@ -1,6 +1,6 @@
 ---
 title:  "JavaScript Numbers and Number Method"
-categories: JavaScript
+category: JavaScript
 ---
 JS只有一种 Number 类型的数，可以带小数写，也可以不用。特别大或特别小大数可以用 scientific (exponent) notation 写。
 

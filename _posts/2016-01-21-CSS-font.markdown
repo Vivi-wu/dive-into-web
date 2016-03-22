@@ -1,6 +1,6 @@
 ---
 title:  "CSS Font"
-categories: CSS
+category: Style
 ---
 总的来说一共有两种字体集：
 

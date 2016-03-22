@@ -1,6 +1,6 @@
 ---
 title:  "HTML Tables"
-categories: HTML
+category: HTML
 ---
 Tables are defined with the `<table>` tag.
 

@@ -1,6 +1,6 @@
 ---
 title:  "HTML Lists"
-categories: HTML
+category: HTML
 ---
 ## Unordered HTML List 无序列表
 

@@ -1,6 +1,6 @@
 ---
 title:  "HTML Entities & Charset & URL Encode"
-categories: HTML
+category: HTML
 ---
 ## HTML Entities
 

@@ -1,6 +1,6 @@
 ---
 title:  "HTML Responsive, iframes"
-categories: HTML
+category: HTML
 ---
 ## HTML Responsive Web Design
 

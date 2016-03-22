@@ -1,6 +1,6 @@
 ---
 title:  "HTML Quotation & Citation Elements, Comments"
-categories: HTML
+category: HTML
 ---
 ## HTML Quotation and Citation Elements
 

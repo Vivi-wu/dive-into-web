@@ -1,6 +1,6 @@
 ---
 title:  "JavaScript Dates"
-categories: JavaScript
+category: JavaScript
 ---
 Date 对象用来与年月日时分秒毫秒打交道的。
 

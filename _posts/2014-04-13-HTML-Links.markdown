@@ -1,6 +1,6 @@
 ---
 title:  "HTML Links"
-categories: HTML
+category: HTML
 ---
 ## HTML Links - Hyperlinks
 

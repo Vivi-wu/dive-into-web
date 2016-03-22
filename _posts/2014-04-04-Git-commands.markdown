@@ -1,6 +1,6 @@
 ---
 title:  "Practical Git commands"
-categories: Other
+category: Other
 ---
 ## Setting up a repository
 

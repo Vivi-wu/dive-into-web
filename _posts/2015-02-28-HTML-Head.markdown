@@ -1,6 +1,6 @@
 ---
 title:  "HTML Head"
-categories: HTML
+category: HTML
 ---
 ## HTML `<head>` Element
 

@@ -1,6 +1,6 @@
 ---
 title:  "HTML Input Types"
-categories: HTML
+category: HTML
 ---
 本章中将总结所有 `<input>` 元素的 _type_ 特性可取的值。
 

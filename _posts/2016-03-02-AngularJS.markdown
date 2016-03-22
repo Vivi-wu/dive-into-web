@@ -1,6 +1,6 @@
 ---
 title:  "Angular JS 复习笔记"
-categories: AngularJS
+category: Other
 ---
 ## isolate Scope
 

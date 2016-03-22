@@ -1,6 +1,6 @@
 ---
 title:  "HTML Heading & Paragraph & Text Formatting"
-categories: HTML
+category: HTML
 ---
 ## Headings
 

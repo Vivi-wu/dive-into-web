@@ -1,6 +1,6 @@
 ---
 title:  "HTML Forms and Form Elements"
-categories: HTML
+category: HTML
 ---
 ## Overview
 

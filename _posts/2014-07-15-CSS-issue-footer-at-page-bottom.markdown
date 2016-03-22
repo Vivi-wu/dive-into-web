@@ -1,6 +1,6 @@
 ---
 title:  "Keep your footer at the bottom of the page"
-categories: CSS
+category: Style
 ---
 项目里遇到的问题，让 footer 显示在**页面**最下方。注意，这里讨论的不是让 footer 固定在 viewport（或浏览器窗口）的底部。具体来说分两种情况。
 

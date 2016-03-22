@@ -1,6 +1,6 @@
 ---
 title:  "HTML5 Style Guide and Coding Conventions"
-categories: HTML
+category: HTML
 ---
 ## Programming style guidelines
 

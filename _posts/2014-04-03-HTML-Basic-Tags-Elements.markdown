@@ -1,6 +1,6 @@
 ---
 title:  "HTML Basic, Tags and Elements"
-categories: HTML
+category: HTML
 ---
 ## What is HTML?
 

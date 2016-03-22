@@ -1,6 +1,6 @@
 ---
 title:  "JavaScript Syntax"
-categories: JavaScript
+category: JavaScript
 ---
 ## Statements
 

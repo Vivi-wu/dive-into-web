@@ -1,6 +1,6 @@
 ---
 title:  "JavaScript Functions and Scope"
-categories: JavaScript
+category: JavaScript
 ---
 JS函数就是一段当被调用时，要执行某个动作的代码。使用函数可以实现代码重用，通过传递不同的参数，产生不一样的结果。
 

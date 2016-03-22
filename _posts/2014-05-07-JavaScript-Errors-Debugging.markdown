@@ -1,6 +1,6 @@
 ---
 title:  "JavaScript Errors and Debugging"
-categories: JavaScript
+category: JavaScript
 ---
 JS中的错误可能是程序员代码的错误，也可能使错误的输入或其他不可预见的原因导致的。
 

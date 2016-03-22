@@ -1,7 +1,6 @@
 ---
 title:  "谷歌：打造面向跨屏时代用户的网站"
-categories: HTML,CSS
-permalink: /google-multiscreen-consumer/
+categories: [HTML, CSS]
 ---
 <small>发布时间2014年3月，时隔近一年才看到，落后了。把自己觉得有用的信息摘录在这里。</small>
 

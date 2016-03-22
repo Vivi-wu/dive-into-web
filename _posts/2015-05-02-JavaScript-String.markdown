@@ -1,6 +1,6 @@
 ---
 title:  "JavaScript Strings and String Method"
-categories: JavaScript
+category: JavaScript
 ---
 JS String 用来存储一系列字符，用**单**引号或**双**引号限制起来。
 

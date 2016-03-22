@@ -1,6 +1,6 @@
 ---
 title:  "HTML Input Attributes"
-categories: HTML
+category: HTML
 ---
 本章将总结所有 Input 元素的特性。
 

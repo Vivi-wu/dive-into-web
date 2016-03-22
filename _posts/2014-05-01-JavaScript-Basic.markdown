@@ -1,6 +1,6 @@
 ---
 title:  "JavaScript Basic"
-categories: JavaScript
+category: JavaScript
 ---
 JavaScript 是web开发人员必学的三大基本语言之一。It makes HTML pages more dynamic and interactive.
 

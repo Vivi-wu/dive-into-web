@@ -1,6 +1,6 @@
 ---
 title:  "JavaScript Objects"
-categories: JavaScript
+category: JavaScript
 ---
 在JS中，除了 **primitive values**（string "John Doe"，numbers 3.14，true，false，null and undefined），所有值都是 objects。
 

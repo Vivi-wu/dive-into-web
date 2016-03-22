@@ -1,6 +1,6 @@
 ---
 title:  "ECMAScript 6 入门读书笔记"
-categories: JavaScript
+category: JavaScript
 ---
 [在线电子书及相关讨论地址：](http://es6.ruanyifeng.com/#docs/let)
 
