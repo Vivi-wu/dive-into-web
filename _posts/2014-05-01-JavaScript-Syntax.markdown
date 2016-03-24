@@ -42,10 +42,15 @@ JS忽略掉多个空格，所以我们可以在代码里添加空格方便阅读
 
 ### 换行
 
-避免一行代码过长，w3Schools 建议不超过 _80_ 个字符。如果换行，最好是在一个 _operator_ 操作符之后；
+避免一行代码过长，w3Schools 建议不超过 _80_ 个字符。语句换行，最好是在一个 _operator_ 操作符之后；
 
     document.getElementById("demo").innerHTML =
     "Hello world, this is my first js code."
+
+直接在字符串中 break 语句，是**不能**实现换行的，而且会引起 SyntaxError。如果一定要在字符串中断行，使用 backslash `\`，如下：
+
+    document.getElementById("demo").innerHTML = "Hello world, this \
+    is my first js code."
 
 ## Values
 

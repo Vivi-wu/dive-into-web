@@ -37,10 +37,10 @@ JS 条件语句，根据不同决定执行不同操作。
 
 注意：
 
-+ expression 表达式 evaluated once 评估一次。
-+ 将表达式的值与每一个case的值相比较，如果找到匹配的case，就执行相对应的代码
++ expression evaluated once 表达式评估一次
++ 将表达式的值与每一个 case 的值相比较（使用 **strict comparison**，值和类型都要相等），如果找到匹配的 case，就执行相对应的代码
 + 遇到 **break** 关键字，跳出 switch 体，避免执行更多的代码或 case testing
-+ **default** 关键字指明，当没有找到匹配的 case 时，要执行的操作。
++ **default** 关键字指明，当没有找到匹配的 case 时，要执行的操作
 + different cases can use the same code
 + 如果 default 不是最后一个 case，remember to end it with a **break**
 
