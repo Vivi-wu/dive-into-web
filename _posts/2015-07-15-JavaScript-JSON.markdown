@@ -12,6 +12,8 @@ JSON 文件的后缀名为 _.json_
 
 数据以 name/value 成对出现，由**逗号**分隔，**大括号**里放对象，对象可以包含多个 name/value 对；**方括号**里放数组，数组可以包含多个对象。
 
+<!--more-->
+
 注意：<span class="blue-text">JSON 的 name 需要以**双引号**括起来，这一点区别于 JavaScript name</span>。
 
 ### JSON Value
