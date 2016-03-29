@@ -66,7 +66,7 @@ JS对象是一系列无序属性的集合。
 
 这些 name:value 称为 **properties** 属性。
 
-获取对象的属性有两种方法：`objectName.propertyName` 或者 `objectName["propertyName"]`
+**获取对象的属性有两种方法**：`objectName.propertyName` 或者 `objectName["propertyName"]`
 
 后者也可以使用 expression 表达式：`objectName[expression]`，只要表达式被评估是属性的 name。
 
