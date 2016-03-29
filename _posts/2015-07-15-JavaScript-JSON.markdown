@@ -32,6 +32,6 @@ JS 程序可以容易将 JSON 数据转为原生的 JS 对象。
 
 当然，对于 AJAX 应用来说，JSON 比 XML 更快更容易。
 
-使用 XML，需要 fetch XML 文件，使用 XML DOM 循环遍历文件，然后提取 values 并将它们存储在变量中。
+使用 XML，需要 fetch XML 文件，使用 XML DOM 循环遍历文件（使用 document.getElemenById 或者 document.getElemenByTagName 方法来 extract data），然后提取 values 并将它们存储在变量中。
 
 而使用 JSON 只需要 fetch JSON string，然后使用 `JSON.parse` 解析这个 JSON 字符串。
