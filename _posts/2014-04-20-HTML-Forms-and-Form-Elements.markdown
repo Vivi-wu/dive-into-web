@@ -37,9 +37,9 @@ If the form submission is passive (like a search engine query), and without sens
 
 ## The _name_ Attribute
 
-To be submitted correctly, each input field must have a name attribute. 为了正确地提交数据，表单里每一个 输入域都必须包含 _name_ 特性。
+To be submitted correctly, each input field **must have** a name attribute. 为了正确地提交数据，表单里每一个 输入域都必须包含 _name_ 特性。
 
-<span style="background-color:lightblue;">注意：没有设定 _name_ 特性的 input field 的值将不被提交。</span>
+<span class="blue-text">注意：没有设定 _name_ 特性的 input field 的值将不被提交。</span>
 
 ## Grouping Form Data
 

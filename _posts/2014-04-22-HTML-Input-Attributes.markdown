@@ -66,7 +66,7 @@ category: HTML
       <input type="submit">
     </form>
 
-该特性是 `<form>` 特性，指定表单数据在提交时不应该被证实有效。
+该特性是 `<form>` 特性，说明表单在提交时不必对其验证。<span class="blue-text">Form has the _novalidate_ attribute it will submit even though it contains an empty required input.</span>
 
 注意：IE9以前版本和 Sarari 不支持该特性。
 
