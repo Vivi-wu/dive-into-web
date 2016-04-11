@@ -50,6 +50,12 @@ JS中被称为 this 的东西 is the object that "owns" the JavaScript code。
 + when used in an **object**, is the object itself.
 + when used in an **object constructor**, is only a substitute 替代 for the new object. The value of `this` will become the new object when the constructor is used to create an object. 构造函数里的 this 没有值，当函数被用来创建新的对象时，this 的值就是新的对象。
 
+我们还可以在 HTML 元素的 event 事件绑定里使用 _this_
+
+    <h1 onclick="this.innerHTML='Ooops!'">Click on this text!</h1>
+    <h1 onclick="changeTest(this)">Click on this text!</h1>
+
+
 ### JavaScript Objects are Mutable
 
 JS对象是易变的，由 reference 获取，而不是 value。

@@ -47,7 +47,11 @@ Evaluates the expression and inserts the resulting HTML into the element in a se
     </ANY>
     <div ng-bind-html="ctrl.content"></div>
 
+### ngChange
 
+用来作为 input change 的 react。该指令用来代替 `$watch` 用来监视 obj 的状态，考虑到 Angular 2 不再使用 `$watch`。
+
+该指令需要 ngModel to be present
 
 
 
