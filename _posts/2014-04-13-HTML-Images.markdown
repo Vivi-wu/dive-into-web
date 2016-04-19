@@ -61,3 +61,17 @@ It contains a number of `<area>` elements. 它包含一系列定义了地图上�
 该标签总是内嵌在 `<map>` 标签里，它没有闭合标签。
 
 **Note**: 在 H5 中，如果要设定 `<map>` 标签的 _id_ 特性，且必须和 _name_ 特性值相同。
+
+## `<picture>` Element
+
+H5引入 `<picture>` 元素让我们可以像 `video` 和 `audio` 元素一样，定义不同的源文件。
+
+    <picture>
+      <source srcset="img_smallflower.jpg" media="(max-width: 400px)">
+      <source srcset="img_flowers.jpg">
+      <img src="img_flowers.jpg" alt="Flowers">
+    </picture>
+
+_srcset_ 特性是必须的，用来定义图片源。_media_ 特性是可选的，接受像 CSS @media 查询规则。
+
+由于目前全球支持该元素的浏览器不到 60%，需要定义一个 `<img>` 元素用于那些不支持 `<picture>` 元素的浏览器。
