@@ -121,7 +121,7 @@ table {
   margin-bottom: $spacing-unit;
   background-color: white;
 
-  th, tr:nth-child(even) {
+  tr:nth-child(odd) {
     background-color: $primary-color-light;
   }
   th, td {
