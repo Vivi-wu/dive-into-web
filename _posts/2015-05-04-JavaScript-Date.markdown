@@ -58,8 +58,14 @@ JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写
 <span class="blue-text">Date objects are **static**, not dynamic. The computer time is ticking, but date objects, once created, are not.</span> 日期对象是静态的，一旦创建，就是一个常量，不会自己更新。
 
 + `toString()`，输出日期会自动转为一个字符串，不写也行。
-+ `toUTCString()`，
-+ `toDateString()`，converts the date (not the time) of a Date object into a readable string (结果为 Sun May 04 2014)
++ `toTimeSting()`，把日期对象的时间部分转为字符串（_15:19:06 GMT+0800 (CST)_）
++ `toLocaleSting()`，使用本地转换法，把日期对象转为字符串（_2015/05/04 下午3:20:54_）
++ `toLocaleTimeSting()`，使用本地转换法，把日期对象的时间部分转为字符串（_下午3:21:58_）
++ `toLocaleDateSting()`，使用本地转换法，把日期对象的日期部分转为字符串（_2015/05/04_）
++ `toISOSting()`，使用 ISO 标准将日期对象转为字符串。格式为（_YYYY-MM-DDTHH:mm:ss.sssZ_）
++ `toJSON()`，将日期对象转为 JSON 日期格式的字符串（_2015-05-04T07:23:23.047Z_），格式同上。
++ `toUTCString()`，根据世界时间将日期对象转为字符串（_Sun, 04 May 2015 07:29:18 GMT_）
++ `toDateString()`，converts the date (not the time) of a Date object into a readable string (结果为 _Sun May 04 2014_)
 
 ## Get Date
 
@@ -75,7 +81,7 @@ JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写
 </tr>
 <tr>
   <td>getDay()</td>
-  <td>Get the weekday as a number (<strong>0-6</strong>) 星期几</td>
+  <td>Get the weekday as a number (<b>0-6</b>) 星期几</td>
 </tr>
 <tr>
   <td>getFullYear()</td>
@@ -95,7 +101,7 @@ JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写
 </tr>
 <tr>
   <td>getMonth()</td>
-  <td>Get the month (<strong>0-11</strong>) 几月</td>
+  <td>Get the month (<b>0-11</b>) 几月</td>
 </tr>
 <tr>
   <td>getSeconds()</td>
@@ -105,9 +111,17 @@ JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写
   <td>getTime()</td>
   <td>Get the time (milliseconds since January 1, 1970)</td>
 </tr>
+<tr>
+  <td>Date.now()</td>
+  <td>返回自从 January 1, 1970 00:00:00 UTC 到现在的毫秒数</td>
+</tr>
+<tr>
+  <td>Date.UTC(year,month,day,hours,minutes,seconds,millisec</td>
+  <td>前三个参数是 required 的，该方法根据世界时间，返回自从1970年1月1日午夜开始到指定日期的毫秒数</td>
+</tr>
 </tbody></table>
 
-In JavaScript, <span style="background-color:lightblue;">the first (0) of the <b>week</b> means "Sunday"</span>，JS中的星期是<b>从星期天开始</b>。
+In JavaScript, <span class="blue-text">the first (0) of the <em>week</em> means "Sunday"</span>，JS中的星期是<b>从星期天开始</b>。
 
 `getDay()` 方法获得的是表示星期的数字，如果希望显示名称，可以这样做：
 
@@ -115,7 +129,7 @@ In JavaScript, <span style="background-color:lightblue;">the first (0) of the <b
     var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     document.getElementById("demo").innerHTML = days[d.getDay()];
 
-<span style="background-color:lightblue;">JS中表示 <b>month</b> 的数字也是从 0 开始的</span>，January 一月对应数字是 0，December 十二月是 11。
+<span class="blue-text">JS中表示 <em>month</em> 的数字也是从 0 开始的</span>，January 一月对应数字是 0，December 十二月是 11。
 
 ## Set Date
 
@@ -164,7 +178,7 @@ In JavaScript, <span style="background-color:lightblue;">the first (0) of the <b
 
 ### Parsing Date
 
-如果你有一个有效格式的日期字符串，使用 `Date.parse()` 方法可以得到距离 zero time 的毫秒数，然后使用 `new Date(milliseconds)` 就可以得到想要的日期对象了。
+如果你有一个有效格式的日期字符串，使用 `Date.parse(dateString)` 方法可以得到距离 zero time 的毫秒数，然后使用 `new Date(milliseconds)` 就可以得到想要的日期对象了。
 
 ### Compare Dates
 
