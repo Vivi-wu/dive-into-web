@@ -45,7 +45,7 @@ Coding convention 代码公约，通常包含：
 
 短的法则写在一行，如：
 
-    p.into {font-family:"Verdana"; font-size:16em;}  
+    p.into {font-family: "Verdana"; font-size: 16em;}
 
 长的写多行，
 

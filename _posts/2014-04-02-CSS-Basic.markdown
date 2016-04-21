@@ -1,0 +1,112 @@
+---
+title:  "CSS Basic"
+category: CSS
+---
+CSS 是一种样式层叠语言，用来描述一个 HTML（或 XML）文档的应该如何在屏幕、纸张或其他媒体上渲染。
+
+## What is CSS?
+
+**C**ascading **S**tyle **S**heets（层叠样式表）缩写为 CSS。
+
+CSS 解决了 HTML 的问题。HTML was **never intended to** contain tags for formatting a document, but to define the content of a document. HTML从来没有打算包含一些用于定义文档的格式的标签，而是用来定义文档的内容。
+
+## CSS Syntax
+
+A CSS rule-set consists of a selector (指向你希望样式化的 HTML 元素) and a declaration block (包含一个或多个由分号分隔开的声明). 每一个声明包含 a property name (属性名称) and a value (值), 并由冒号隔开.
+
+<!--more-->
+
+Example:
+
+    p {color: red; text-align: center;}
+
+## CSS Selectors
+
+CSS选择器用于查找或选择 HTML 元素，可以是以下几种：
+
+1. element Selector: 基于元素名称选取
+2. id Selector: 使用一个 HTML 元素的 id 特性来选取指定元素 (如果你想要选择一个唯一的元素，那么确保 id 在页面中是唯一存在的。) 
+
+        #exIdSelector {
+          text-align: center;
+          color: red;
+        }
+
+3. class Selector: 选取含有指定的 class 特性的元素。
+
+        .exClassSelector {
+          text-align: center;
+          color: red;
+        }
+
+也可以指定只有特定的 HTML 元素需要受这个 class 的样式的影响。如：`p.center`
+
+注意：**id、name 的名字不要以数字开头**。
+
+### 组合选择器
+
+用逗号隔开、组合拥有相同 CSS 代码的 HTML 元素，以简化代码。
+
+    h1, h2, p {
+      text-align: center;
+      color:red;
+    }
+
+## CSS Comments
+
+A CSS comment starts with `/*` and ends with `*/`，也可以有多行. 
+
+## 如何使用 CSS
+
+有三种插入 CSS 的方法: 外部样式表，内部样式表，行内级样式。
+
+### External Style Sheet
+
+每个页面需要在 `<link>` 元素中添加指向外部样式表文件的引用，`<link>` 元素需要定义在页面 `<head>` 区域。
+
+样式保存在以 _.css_ 为后缀的文件中。这样的好处是只需改变一个文件，就修改来整个网站（或多个页面）的样式。
+
+    <head>  
+    <link rel="stylesheet" type="text/css" href="mystyle.css">  
+    </head>
+
+注意： The _type_ attribute is **not necessary** in HTML5.
+
+### Internal style sheet
+
+当**一个页面**需要有唯一的样式时，将样式写在 `<style>` 元素里，放在页面 `<head>` 区域.
+
+    <head>
+    <style>
+    body {background-image: url("images/background.gif");}
+    p {margin-left: 20px;}
+    </style>  
+    </head>
+
+### Inline Styling
+
+当**一个元素**需要使用唯一的样式时，使用 _style_ 特性。小心使用，不然失去了样式表的优势（把内容与表现混合在一起了）
+
+    <p style="color:sienna;margin-left:20px;">This is a paragraph.</p>  
+
+## CSS Cascading Order
+
+一个重要的概念，关于 CSS 样式表层叠优先级。
+
+Generally speaking we can say that all the styles will "cascade" into a new "virtual" style sheet by the following rules, where number four has the highest priority: 
+
+<span class="blue-text">当我们对同一个 HTML 元素进行多次 CSS 样式定义时，这些样式将层叠起来就像形成了一个新的虚拟的样式表。层叠规则如下，**数字越大**优先级**越高**。
+
+1. _Browser default_ 浏览器默认
+2. _External style_ sheet and _Internal style_ sheet (in the head section) 注意：外部样式表和内部样式表在头部**书写的顺序也会影响优先级**，写在后面的优先级高。
+3. _Inline style_ (inside an HTML element)
+
+对同一个HTML元素同时使用多个 CSS class 时，class 选择器**写在越后面层叠优先级越高**。
+
+    <style>
+    .a1{color:red;}
+    .a2{color:green;}
+    .a3{color:blue;}
+    </style>
+    <p class="a1 a2 a3">test</p>
+    <!--文字颜色最终为blue-->
