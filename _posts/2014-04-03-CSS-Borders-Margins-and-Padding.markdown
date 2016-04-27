@@ -20,7 +20,7 @@ category: CSS
     + `outset`: 3D突出的
     + `hidden`: The same as "none"
 
-+ _border-width_ 性质用于设定四条边的边框宽度。宽度可以用指定的尺寸（以 px，pt，cm，em 等为单位），或者使用三个预定义的值（thin, medium, or thick）
++ _border-width_ 性质用于设定四条边的边框宽度。宽度可以用指定的尺寸（以 px，pt，cm，em 等为单位），或者使用三个预定义的值（**thin**, **medium**, or **thick**）
 + _border-color_ 性质用于设定四条边的边框颜色。颜色可以按照 CSS color 的 **name**, **RGB**, **HEX** 设定，也可以设为 **transparent** 透明的。
 
 <!--more-->
