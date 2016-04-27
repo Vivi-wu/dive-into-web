@@ -86,11 +86,11 @@ CSS3 使我们可以给任何元素设定圆角边框，给边框加阴影，使
 
 + _box-shadow_ 属性给元素添加水平和（或）竖直方向上的阴影，设定阴影的颜色、模糊效果。通过给 _::before_ and _::after_ 伪类添加 shadow，可以实现有趣的效果。
 
-    该属性可以给一个元素添加**一个**或**多个**阴影，使用逗号来区分每一种阴影效果。
+    该属性可以给一个元素添加**一个**或**多个**阴影，使用逗号来分隔开每一种阴影效果。
 
     `box-shadow: none|h-shadow v-shadow blur spread color |inset|initial|inherit;`
 
-    + none: 默认不显示阴影
+    + `none`: 默认不显示阴影
     + h-shadow: **required**, 水平阴影的位置，允许负值
     + v-shadow: **required**, 竖直阴影的位置，允许负值
     + blur: 可选的, 模糊的距离
