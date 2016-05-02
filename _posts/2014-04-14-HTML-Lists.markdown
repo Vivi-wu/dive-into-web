@@ -11,7 +11,7 @@ Starts with the `<ul>` tag. Each list item starts with the `<li>` tag. 无序列
       <li>Milk</li>
     </ul>
 
-在 `<ul>` 中定义 _list-style-type_ ，可以取值 : disc（实心小圆，**default**）, circle （空心小圆）, square （实心正方形）, none.
+在 `<ul>` 中定义 _list-style-type_ ，可以取值 : `disc`（实心小圆，**default**）, `circle`（空心小圆）, `square`（实心正方形）, `none`.
 
 **注意**：HTML5中 `<ul>` 标签不支持 _type_ 属性值.
 
