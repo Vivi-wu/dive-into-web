@@ -124,6 +124,9 @@ table {
   tr:nth-child(odd) {
     background-color: $primary-color-light;
   }
+  th {
+    color: black;
+  }
   th, td {
     padding: 5px $spacing-unit;
   }
