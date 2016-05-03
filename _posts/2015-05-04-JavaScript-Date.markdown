@@ -116,7 +116,7 @@ JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写
   <td>返回自从 January 1, 1970 00:00:00 UTC 到现在的毫秒数</td>
 </tr>
 <tr>
-  <td>Date.UTC(year,month,day,hours,minutes,seconds,millisec</td>
+  <td>Date.UTC(year,month,day,hours,minutes,seconds,milliseconds)</td>
   <td>前三个参数是 required 的，该方法根据世界时间，返回自从1970年1月1日午夜开始到指定日期的毫秒数</td>
 </tr>
 </tbody></table>

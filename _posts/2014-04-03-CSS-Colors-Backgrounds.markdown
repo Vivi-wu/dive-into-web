@@ -42,7 +42,7 @@ CSS 背景属性用来定义元素的背景效果。
 
 <table>
   <tr>
-    <td style="width:8em;">取值</td><td>描述</td>
+    <th style="width:8em;">取值</th><th>描述</th>
   </tr>
   <tr>
     <td>left top<br>left center<br>left bottom<br>right top<br>right center<br>right bottom<br>
@@ -97,7 +97,7 @@ CSS 背景属性用来定义元素的背景效果。
 
 <table>
   <tr>
-    <td>取值</td><td>描述</td>
+    <th style="width:10em;">取值</th><th>描述</th>
   </tr>
   <tr>
     <td>auto</td><td>默认值。背景图尺寸就是图片实际大小</td>
