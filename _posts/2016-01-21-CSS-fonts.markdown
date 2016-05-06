@@ -18,11 +18,11 @@ category: CSS
       <td>Sans-serif</td><td>Arial, Verdana，微软雅黑</td><td>字符末端不会有多出来的衬线</td>
     </tr>
     <tr style="font-family: monospace;">
-      <td>Monospace</td><td>Courier New, Lucida Console</td><td>每一个字符宽度相同(Safari 好想不支持，这行效果需要在 Chrome 里查看)</td>
+      <td>Monospace</td><td>Courier New, Lucida Console</td><td>每一个字符宽度相同(Safari 好像不支持，这行效果需要在 Chrome 里查看)</td>
     </tr>
 </table>
 
-**Tip**：_sans-serif_ fonts are considered **easier to read** than _serif_ fonts. 前者被认为比后者在电脑屏幕上更容易阅读。
+**Tip**：_sans-serif_ fonts are considered **easier to read** than _serif_ fonts. 无衬线字体被认为比后者在电脑屏幕上更容易阅读，有人比较过同样为 14px 的中文字体，**黑体**看起来比宋体和楷体更**大**。
 
 <!--more-->
 
@@ -34,7 +34,7 @@ The _font-family_ property should hold several font names as a "fallback" system
 
 对于仿宋、楷体，最好在字号大于 14px 的情况下使用，否则影响清晰度。
 
-<span class="blue-text">目前在 ios、android、winphone，三种手机操作系统中的默认字体都是类似**微软雅黑**的 Sans-serif 字体。</span>
+<span class="blue-text">目前在 ios、android、winphone，三种手机操作系统中的默认字体都是类似**微软雅黑**的 Sans-serif 无衬线字体。</span>
 
 **注意**: 如果字体集名称多余一个单词，则必须用**双引号**括起来。like: "Times New Roman".
 

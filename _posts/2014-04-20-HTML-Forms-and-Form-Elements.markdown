@@ -57,18 +57,47 @@ To be submitted correctly, each input field **must have** a name attribute. 为�
 
 该元素定义了一个下拉菜单：
 
-    <select name="cars">
+    <select>
       <optgroup label="Swedish Cars">
         <option value="volvo">Volvo</option>
         <option value="saab">Saab</option>
       </optgroup>
       <optgroup label="German Cars">
-        <option value="mercedes">Fiat</option>
+        <option value="mercedes">Mercedes</option>
         <option value="audi">Audi</option>
       </optgroup>
     </select>
+<div>
+<span>Options 分组： </span>
+<select>
+  <optgroup label="Swedish Cars">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+  </optgroup>
+  <optgroup label="German Cars">
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </optgroup>
+</select>
+<span style="margin-left:2em;">指定默认被选值： </span>
+<select>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="mercedes">Mercedes</option>
+  <option value="audi" selected>Audi</option>
+</select><br>
+<span>自定义默认显示文本（而不是某个 Option 文本）： </span>
+<select>
+  <option value="">-- Pls choose one car ---</option>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="mercedes">Mercedes</option>
+  <option value="audi">Audi</option>
+</select>
+</div>
+<br/>
 
-通常 `<select>` 显示的值是**第一个选项的值**，可以通过在 `<option>` 元素上添加 _selected_ 特性，让它作为默认被选项。
+通常 `<select>` 显示的文本是**第一个选项的文本**，可以通过在指定的 `<option>` 元素上添加 _selected_ 特性，让它作为默认被选项。
 
 与之相关的还有 `<optgroup>` 元素，用来把下拉列表里相关的 options 分组到一起。
 
