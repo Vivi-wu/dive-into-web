@@ -5,7 +5,7 @@ layout: default
   {% include archives-month-sidebar.html %}
   <div class="nine units no_margin">
     <div class="content template-blog">
-      {% for post in page.posts %}
+      {% for post in page.posts reversed %}
       <div class="post post-list">
         <header>
           <h2><a href="{{ post.url | prepend: site.baseurl }}" title="{{ post.title }}">{{ post.title }}</a></h2>
