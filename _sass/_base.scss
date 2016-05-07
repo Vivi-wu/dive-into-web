@@ -107,7 +107,7 @@ code {
   color: $primary-color;
 }
 pre {
-  white-space: pre-line;
+  white-space: pre-wrap;
 }
 pre>code {
   display: block;
