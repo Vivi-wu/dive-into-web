@@ -106,6 +106,9 @@ code {
   font-size: 15px;
   color: $primary-color;
 }
+pre {
+  white-space: pre-line;
+}
 pre>code {
   display: block;
   color: #076527;
