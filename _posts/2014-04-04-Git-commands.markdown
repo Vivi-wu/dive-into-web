@@ -119,7 +119,7 @@ Rename the current branch to branch_new_name. 当前分支重命名。
 
 `git branch -r`
 
-To view your remote branches, remote branches are prefixed by the remote they belong to.查看你在远端的分支，远端分支由他们所属的分支名开始，以便与本地区分。
+To view your remote branches, remote branches are prefixed by the remote they belong to.查看你在远端的分支，远端分支由他们所属的 remote 名开始，以区别于本地分支。
 
 `git checkout <existing-branch>`
 
@@ -183,4 +183,4 @@ tracked 又分为三种状态：
 
 ### Bonus:
 
-Gitk 一个基于 Tcl/Tk 的 Git 浏览器（For Unix/Linux），主要用于用户查看仓库的各类信息（更改信息、提交信息、版本信息、图形显示等） 
+**Gitk** 一个基于 Tcl/Tk 的 Git 浏览器（For Unix/Linux），主要用于用户查看仓库的各类信息（更改信息、提交信息、版本信息、图形显示等）
