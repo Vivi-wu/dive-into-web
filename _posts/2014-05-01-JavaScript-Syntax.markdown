@@ -86,7 +86,7 @@ w3schools 使用首字母小写的驼峰式: firstName
 
 ### 变量的声明和赋值
 
-在JS中创建一个变量又称为“声明”一个变量。JS中使用 **var** keyword to **declare** variables 声明变量, use **equal sign `=` **, 此时等号是赋值符, to **assign values** to variables 给变量赋值.
+在JS中创建一个变量又称为“声明”一个变量。JS中使用 **var** keyword to **declare** variables 声明变量, use **equal sign `=`**, 此时等号是赋值符, to **assign values** to variables 给变量赋值.
 
 After the declaration, the variable has no value. (Technically it has the value of **undefined**) **注意**：_声明变量后，变量是没有值的，或者说此时变量值为 undefined_。
 
