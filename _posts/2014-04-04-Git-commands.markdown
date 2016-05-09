@@ -195,7 +195,7 @@ tracked 又分为三种状态：
     + 初学者都会遇到的一个问题：假设你有一个**已经 checked in** 的文件，你突然想要忽略它，<span class="blue-text">Git 将**不会** untrack 这个文件，只是因为你突然把它写进了 .gitignore 文件里。它已经在仓库里里，你 **必须** 先在仓库里删掉这个文件</span>。
 
         // 记得先 git add，git commit 你想要追踪的其他文件，然后执行：
-        git rm -r -cached .
+        git rm -r --cached .
         git add .
         git commit -m "fixed tracking unwanted files"
         // 上述操作将从仓库里删掉所有文件，再按照新的 .gitignore 中的规则，把需要的文件都加回来
