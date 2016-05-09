@@ -181,6 +181,29 @@ tracked 又分为三种状态：
 + 已暂存（ staged ） 表示把已修改的文件放在下次提交时要保存的清单中；
 + 已提交（ committed ） 表示文件已被安全地保存在本地仓库中了。
 
-### Bonus:
+### 视图化查看 Commits 插件
 
 **Gitk** 一个基于 Tcl/Tk 的 Git 浏览器（For Unix/Linux），主要用于用户查看仓库的各类信息（更改信息、提交信息、版本信息、图形显示等）
+
+### .gitignore 文件的使用
+
+该文件用来告诉 Git 哪些文件（我们不想 Git to check in GitHub）需要忽略。三种方法：
+
+1. 创建局部 .gitignore 文件：在项目 repository 下创建这个文件，Git 将使用它来决定忽略哪些文件和文件目录**在你做一个 commit 之前**。
+
+    + **这个文件需要被提交到项目仓库里**，这样其他人复制项目时将分享同样的忽略规则。
+    + 初学者都会遇到的一个问题：假设你有一个**已经 checked in** 的文件，你突然想要忽略它，<span class="blue-text">Git 将**不会** untrack 这个文件，只是因为你突然把它写进了 .gitignore 文件里。它已经在仓库里里，你 **必须** 先在仓库里删掉这个文件</span>。
+
+        // 记得先 git add，git commit 你想要追踪的其他文件，然后执行：
+        git rm -r -cached .
+        git add .
+        git commit -m "fixed tracking unwanted files"
+        // 上述操作将从仓库里删掉所有文件，再按照新的 .gitignore 中的规则，把需要的文件都加回来
+
+2. 创建全局 .gitignore 文件：这样你电脑上每一个 Git 仓库都会执行文件里的规则。
+
+    git config --global core.excludesfile ~/.gitignore_global
+
+3. 在仓库里明确排除：如果你不想创建 .gitignore 文件与其他人分享，你可以为指定仓库创建规则，指出不需要提交的文件。（使用该技术用于你不希望其他人生成的本地产文件，比如你编辑器产生的文件。）
+
+    使用文本编辑器，打开项目根目录下 **.git/info/exclude** 的文件，你在这里添加的任何规则，将只会在你本地仓库里被忽略。
