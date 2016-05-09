@@ -71,6 +71,25 @@ Tip: 同样的，可以只针对一条边来一次性设定边框样式。规则
 
 _border-top_, _border-right_, _border-bottom_, _border-left_
 
+### 用 CSS 画三角形
+
+<div>
+<span>上：</span><div style="display:inline-block;width:0;height:0;border-width:20px;border-style:solid;border-color:transparent transparent yellow transparent;"></div>
+<span>右：</span><div style="display:inline-block;width:0;height:0;border-width:20px;border-style:solid;border-color:transparent transparent transparent yellow;"></div>
+<span>下：</span><div style="display:inline-block;width:0;height:0;border-width:20px;border-style:solid;border-color:yellow transparent transparent transparent;"></div>
+<span>左：</span><div style="display:inline-block;width:0;height:0;border-width:20px;border-style:solid;border-color:transparent yellow transparent transparent;"></div>
+</div><br>
+
+代码如下：
+
+    div {
+      width: 0;
+      height: 0;
+      border-width: 20px;
+      border-style: solid;
+      border-color: transparent transparent yellow transparent;
+    }
+
 ## CSS3 Border 新属性
 
 CSS3 使我们可以给任何元素设定圆角边框，给边框加阴影，使用图片作为边框。

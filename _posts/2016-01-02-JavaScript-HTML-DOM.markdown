@@ -16,6 +16,8 @@ HTML DOM 是针对 HTML 的一个标准对象模型和编程接口。规定了�
 
 ### HTML DOM Document
 
+当一个 HTML 文档加载入浏览器中，它就变成了一个 document object.
+
 HTML DOM Document 对象是页面中所有其他元素的主人。如果你想获取一个页面中的某个元素，always 从获取 document 对象开始。
 
 第一个 HTML DOM Level 1（1998）定义了11个对象，对象集合和属性。下面列举一些：

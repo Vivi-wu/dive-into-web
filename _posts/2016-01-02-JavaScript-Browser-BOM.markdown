@@ -8,7 +8,7 @@ category: JavaScript
 
 所有浏览器都支持窗口对象。全局变量是 window 对象的属性，而全局函数是 window 对象的方法。
 
-甚至 HTML DOM 的 document 对象也是窗口对象的属性。
+甚至 HTML DOM 的 document 对象也是窗口对象的属性，可以由 `window.document` 来获取。
 
 ### Window Size
 
