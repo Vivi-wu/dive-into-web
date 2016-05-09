@@ -47,6 +47,31 @@ The CSS box model consists of: **margins**, **borders**, **padding**, and the ac
 
 正如上面所写到的，当我们用 CSS 设定元素的宽和高时，我们只是设定了 the width and height of the **content area**. 所以在计算元素完整的尺寸时，要加上内边距、边框和外边距。
 
+## CSS3 Box Sizing
+
+上面提到 CSS 设定元素的宽和高，只是限定了实际内容区域的大小，是针对默认情况。CSS3 引入 _box-sizing_ 属性，因此再讲宽高就要看情况了。
+
+该属性**默认值**是 `content-box`，也就是上面提到的一般情况。
+
+如果设定元素的 `box-sizing: border-box;` ，那么 <span class="blue-text">CSS 宽、高 属性值相同的两个元素，即使其中一个含内边距、边框，它们看起来也是一样大小</span>。
+
+新属性的引入是解决：虽然我们用 CSS 指定了元素的 _width_, _height_ 属性，但如果元素还设有内边距和边框，最终看到的元素看起来比预想的要大。长久以来，为了让元素满足设计尺寸，不得不减小 CSS _width_, _height_ 的值。
+
+通过 DOM Element 查看，两个元素**有无内边距、边框**得到了**完全一样的值**：
+
+    element.offsetWidth = width + padding + border + (scrollbar)
+    element.clientWidth = width + padding
+
+那么它们有区别吗？通过浏览器开发工具 Computed 和模型图可以看到，含内边距和边框的元素，它的内容区域宽要小得多。
+
+因为 _box-sizing_ 属性使得设置元素尺寸更加 intuitive 直觉性，许多浏览器已经使用 `box-sizing: border-box;` 在许多表单元素上。（除了 `<input>`, `<textarea>`）
+
+在所有元素上应用边框和模型的方法如下：
+
+    * {
+      box-sizing: border-box;
+    }
+
 ## CSS Outline
 
 _outline_ 该属性用来设定元素的轮廓——围绕元素所画的线，**outside the border**。
