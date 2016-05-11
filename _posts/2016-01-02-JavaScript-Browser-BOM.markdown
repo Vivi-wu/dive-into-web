@@ -123,7 +123,7 @@ Cookies 以 name-value 形式存储。（如 username = Viivenne）当浏览器�
 
 ### Read a Cookie
 
-读取同样适用 _document.cookie_，将在**一个字符串中**返回**所有** cookie. （比如: cookie1=value; cookie2=value; cookie3=value;）
+读取同样使用 _document.cookie_，将在**一个字符串中**返回**所有** cookie. （比如: cookie1=value; cookie2=value; cookie3=value;）
 
 如果你想要找到指定 cookie 的值，必须使用 JS 查询方法在 cookie 字符串里查找。
 

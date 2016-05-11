@@ -14,7 +14,7 @@ JSON 文件的后缀名为 _.json_
 
 <!--more-->
 
-注意：<span class="blue-text">JSON 的 name 需要以**双引号**括起来，这一点区别于 JavaScript name</span>。
+注意：<span class="blue-text">JSON 的 name 需要以**双引号**括起来，这一点区别于 JavaScript Object name</span>。
 
 ### JSON Value
 

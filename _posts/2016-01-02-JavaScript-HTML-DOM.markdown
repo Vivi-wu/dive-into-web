@@ -101,10 +101,10 @@ HTML DOM Document 对象是页面中所有其他元素的主人。如果你想�
 
 常见的查找 HTML 元素的方法:
 
-+ `getElementById('myEle')`, 如果找到，返回该元素作为一个 object，没找到，返回 _null_
-+ `getElementsByTagName('p')`, 以标签名查找。该方法返回一个 **node list**（像 array 一样的 nodes 集合），因此 nodes 可以使用 **index number** 像数组那样获取，也可使用 _length_ 属性，获取 node list 长度。但是 <span class="blue-text">node list 不是数组！</span>不能使用数组的方法，比如 `valueOf()` 或者 `join()`
-+ `getElementsByClassName('test')`, 以 CSS 样式名查找。
-+ `document.querySelectorAll(p.test)`, 查找所有匹配一个特定 CSS 选择器的某 HTML 元素。只返回第一个匹配到元素使用 `document.querySelector(CSS selectors)`
++ `getElementById(`'myEle'`)`, 如果找到，返回该元素作为一个 object，没找到，返回 _null_
++ `getElementsByTagName(`'p'`)`, 以标签名查找。该方法返回一个 **node list**（像 array 一样的 nodes 集合），因此 nodes 可以使用 **index number** 像数组那样获取，也可使用 _length_ 属性，获取 node list 长度。但是 <span class="blue-text">node list 不是数组！</span>不能使用数组的方法，比如 `valueOf()` 或者 `join()`
++ `getElementsByClassName(`'test'`)`, 以 CSS 样式名查找。
++ `document.querySelectorAll(`p.test`)`, 查找所有匹配一个特定 CSS 选择器的某 HTML 元素。只返回第一个匹配到元素使用 `document.querySelector(`CSS selectors`)`
 + 以 HTML Object Collections 查找元素，比如查找 id 为 frm1 的表单，`document.form['frm1']`, 其他可以获取的文档对象集合可参考上面的表格。
 
 ### 改变 HTML
@@ -182,6 +182,6 @@ _nodeType_ 也是只读的：Element, Attribute, Text, Comment, Document.
 
 常见的操作如添加和删除。
 
-1. 添加操作可以使用 `createElement(tagname)`, `createTextNode(string)`, `appendChild(node)`, `element.insertBefore(node, child)`
-2. 删除操作使用 `parent.removeChild(child)`。虽然删除元素如果不需要 referring 父元素的话会更好，但是 DOM 操作需要知道你想删掉的元素和它的父元素。常用的方法是 `child.parentNode.removeChild(child)`
-3. 替换操作使用 `parent.replaceChild(newchild, oldchild)`
+1. 添加操作可以使用 `createElement(`tagname`)`, `createTextNode(`string`)`, `appendChild(`node`)`, `parentNode.insertBefore(`newNode, existingNode`)`
+2. 删除操作使用 `parent.removeChild(`child`)`。虽然删除元素如果不需要 referring 父元素的话会更好，但是 DOM 操作需要知道你想删掉的元素和它的父元素。常用的方法是 `child.parentNode.removeChild(`child`)`
+3. 替换操作使用 `parent.replaceChild(`newchild, oldchild`)`
