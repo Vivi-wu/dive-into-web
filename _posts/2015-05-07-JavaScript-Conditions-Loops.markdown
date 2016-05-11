@@ -60,7 +60,7 @@ JS 条件语句，根据不同决定执行不同操作。
 
 ### For/In Loop
 
-用来在 object 对象的属性中做循环。
+用来**在对象的属性中做循环**。
 
     var person = {fname:"John", lname:"Doe", age:25}; 
     var text = "";

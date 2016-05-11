@@ -51,7 +51,7 @@ category: JavaScript
     var x3 = 0;            // new primitive number
     var x4 = false;        // new primitive boolean
     var x5 = [];           // new array object
-    var	x6 = /()/;         // new regexp object
+    var x6 = /()/;         // new regexp object
     var x7 = function(){}; // new function object
 
 ### 小心变量类型的自动转换
@@ -97,9 +97,9 @@ ES6允许为函数的参数设置默认值，即直接写在参数定义的后�
 
 把获取数组长度代码放在循环之外，使得循环执行更快。
 
-### 减少 DOM 获取和大小
+### 减少 DOM 获取操作和 DOM 大小
 
-保持 HTML DOM 里面的元素数量小而精，可以提高页面加载、渲染速度。
+保持 HTML DOM 里面的元素数量少而精，可以提高页面加载、渲染速度。
 
 比起其他 JS 语句，获取 HTML DOM 速度慢，如果需要多次获取一个 DOM 元素，最好获取一次，然后作为局部变量来使用。
 

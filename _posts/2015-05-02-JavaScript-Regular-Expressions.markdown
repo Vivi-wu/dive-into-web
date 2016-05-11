@@ -2,7 +2,7 @@
 title:  "JavaScript Regular Expressions"
 category: JavaScript
 ---
-一个 Regular Expression (正则表达式)是组成一个 search pattern (搜索模式)的一系列字符，它是一个 object。可用于文本查找和文本替换操作。
+一个 Regular Expression (**正则表达式**)是组成一个 search pattern (搜索模式)的一系列字符，它**是一个对象**。可用于文本查找和文本替换操作。
 
 ## 语法
 
@@ -34,16 +34,16 @@ category: JavaScript
 
 表示数量的：
 
-+ `n+`, contains at least one, 至少包含一个 n
-+ `n*`, contains zero or more occurrences of n, 包含**0个**或**多个** n
-+ `n?`, contains zero or one occurrences of n, 包含**0个**或**1个** n
-+ `n{X}`, contains a sequence of X n's, 包含X个连续的n
-+ `n{X,Y}`, contains a sequence of X to Y n's，包含X到Y个连续的n
-+ `n{X,}`, contains a sequence of at least X n's，包含**至少**X个连续的n
-+ `n$`, any string with n **at the end** of it
-+ `^n`, any string with n **at the beginning** of it
-+ `?=n`, any string that **is followed by** a specific string n
-+ `?!n`, any string that is **not** followed by a specific string n
++ `n+`, contains at least one, **至少**包含**一个** n
++ `n*`, contains zero or more occurrences of n, 包含 **0 个**或**多个** n
++ `n?`, contains zero or one occurrences of n, 包含 **0 个**或 **1 个** n
++ `n{X}`, contains a sequence of X n's, 包含 **X 个连续的** n
++ `n{X,Y}`, contains a sequence of X to Y n's，包含 **X 到 Y 个连续的** n
++ `n{X,}`, contains a sequence of at least X n's，包含**至少 X 个连续的** n
++ `n$`, any string with n at the end of it，n 在**结尾**处
++ `^n`, any string with n at the beginning of it，n 在**开头**处
++ `?=n`, any string that is followed by a specific string n，**后面跟着** n
++ `?!n`, any string that is not followed by a specific string n，后面**不**跟着 n
 
 还可以使用反斜杠开始的特殊字符。
 
@@ -55,4 +55,4 @@ category: JavaScript
 
 不需要把正则表达式对象放在一个变量里，就可以使用 test() 方法。如果搜索字符串中有匹配，返回 _true_， 否则返回 false。
 
-`exec()` 方法在字符串中查找匹配，返回找到的文本，如果没有找到，返回 _null_。
+`exec()` 方法在字符串中查找匹配，**返回找到的文本**，如果没有找到，返回 _null_。

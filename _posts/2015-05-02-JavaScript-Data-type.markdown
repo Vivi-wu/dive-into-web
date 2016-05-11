@@ -6,23 +6,23 @@ category: JavaScript
 
 + JS中有**5**种可以包含 values 的类型：string, number, boolean, object and function。
 + 有**2**种不含 value 的类型：undefined，null
-+ 有**3**种不同类型的 object：Object，Date，Array。_所以使用 `typeof` 操作符不能判断出一个变量是否是 array 或 date 变量，因为返回结果都是 `object`_
++ 有**3**种不同类型的 object：Object，Date，Array。所以<span class="blue-text">使用 `typeof` 操作符不能判断出一个变量是否是 Array 或 Date 变量</span>，因为返回结果都是 `object`。
 
 <!--more-->
 
 ## constructor Property
 
-该性质返回所有JS变量的 constructor 函数。
+该性质**返回**所有JS变量的 **constructor 函数**。
 
-    "John".constructor                 // Returns function String()  { [native code] }
-    (3.14).constructor                 // Returns function Number()  { [native code] }
-    false.constructor                  // Returns function Boolean() { [native code] }
-    [1,2,3,4].constructor              // Returns function Array()   { [native code] }
+    "John".constructor         // Returns function String()  { [native code] }
+    (3.14).constructor         // Returns function Number()  { [native code] }
+    false.constructor          // Returns function Boolean() { [native code] }
+    [1,2,3,4].constructor      // Returns function Array()   { [native code] }
     {name:'John', age:34}.constructor  // Returns function Object()  { [native code] }
-    new Date().constructor             // Returns function Date()    { [native code] }
-    function () {}.constructor         // Returns function Function(){ [native code] }
+    new Date().constructor       // Returns function Date()    { [native code] }
+    function () {}.constructor   // Returns function Function(){ [native code] }
 
-<span class="blue-text">可以用来判断一个变量类型是否是 array</span>，判断 date 方法同。
+<span class="blue-text">可以用来判断一个变量类型是否是 Array</span>，判断 Date 方法同。
 
     function isArray(myArray) {
       return myArray.constructor.toString().indexOf("Array") > -1;
@@ -121,7 +121,7 @@ An empty string converts to 0. A non-numeric string converts to **NaN** which is
 
 ### Unary + Operator
 
-一元操作符
+一元操作符 `+`
 
     var y = "5";      // y is a string
     var x = + y;      // x is a number

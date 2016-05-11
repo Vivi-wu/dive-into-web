@@ -72,7 +72,7 @@ identifiers are used to name variables (and keywords, and functions, and labels)
 + Names can contain **letters** 字母, **digits** 数字, **underscores** 下划线, and **dollar signs** 美元符号.
 + Names **must begin** with a **letter**, a **$** or an `_` (尽量避免使用 **$**，会跟例如jQuery这样的函数库里的变量冲突)
 + Names are **case sensitive** 大小写敏感 (y and Y are different variables)
-+ Reserved words (like [JavaScript keywords](http://www.w3schools.com/js/js_reserved.asp)) cannot be used as names
++ Reserved words (like [JavaScript keywords](http://www.w3schools.com/js/js_reserved.asp)) 保留字不能用来作为变量名。
 
 ### 连接多个单词命名方式
 
@@ -94,7 +94,7 @@ After the declaration, the variable has no value. (Technically it has the value 
 
     var today = "Monday";
 
-<span class="blue-text">An assignment always returns the value of the assignment</span>. 赋值语句返回的值，就是被赋予的值。
+An assignment always returns the value of the assignment. <span class="blue-text">赋值语句返回的值，就是被赋予的值</span>。
 
     var x = 0;
     if (x = 10)
@@ -157,7 +157,7 @@ If you add a number and a string, the result will be a <strong>string</strong>! 
 
 比较和逻辑操作符用于测试 true 还是 false。
 
-+ 比较操作符：`==`， `===`（值 和 data type 都要相同）， `!=`， `!==`（值 或 data type 不相同）， `>`， `<`， `>=` (greater than or equal to)， `<=`。 不同 type 数据之间比较将在JS Type Conversion 章节讨论。
++ 比较操作符：`==`， `===`（值 和 data type 都要相同）， `!=`， `!==`（值 或 data type 不相同）， `>`， `<`， `>=` (greater than or equal to)， `<=`。 不同 type 数据之间比较将在 JS Type Conversion 章节讨论。
 + 逻辑操作符：`&&`（同真则真）， `||`（同假才假）， `!`
 + 条件（三元）操作符：variablename = (condition) `?` value1:value2 满足条件取 value1，否则取 value2.
 + 位操作符：`&` 逻辑与，`|` 逻辑或，`~` 逻辑非，`^` 逻辑异或，`<<` 左移几位，`>>` 右移几位. 作用于 32-bit numbers，result is converted back to a JavaScript number
@@ -165,7 +165,7 @@ If you add a number and a string, the result will be a <strong>string</strong>! 
 ### 类型操作符
 
 + `typeof`，returns a **string** containing the type of the operand，以字符串形式，返回操作数的类型
-+ `instanceof`，returns **true** if an object is created by a given constructor，返回布尔值为 true，如果对象是由指定的 constructor 构造的。可用来识别 array 和 date，后面还会提到。
++ `instanceof`，returns **true** if an object is created by a given constructor，返回布尔值为 true，如果**一个对象**是由指定的 constructor 构造的。可用来识别 Array 和 Date，后面还会提到。
 
 ### `in` 操作符
 

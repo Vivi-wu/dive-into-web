@@ -32,7 +32,7 @@ W3C 在这个纷争里选择了中立态度，在 W3C 事件模型里，任何�
 
 作为开发人员，可以决定是在捕捉阶段，还是冒泡阶段来注册事件处理函数，通过 `addEventListener()` 方法。
 
-该函数最后一个参数如果为 `true`，表示为 capturing 捕捉阶段注册事件 handler，若设为 `false`，则表示为 bubbling 阶段注册事件 handler。
+该函数最后一个参数如果为 `true`，表示为 capturing **捕捉阶段注册事件 handler**，若设为 `false`，则表示为 **冒泡阶段注册事件 handler**。
 
 ## 区别举例
 
@@ -64,7 +64,7 @@ W3C 在这个纷争里选择了中立态度，在 W3C 事件模型里，任何�
 
     element1.onclick = doSomething2;
 
-被**视为是在 bubbling 冒泡阶段的注册**。
+被**视为**是在 bubbling **冒泡阶段的注册**。
 
 ## 使用
 

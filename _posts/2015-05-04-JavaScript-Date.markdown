@@ -12,7 +12,7 @@ Date 对象用来与年月日时分秒毫秒打交道的。
 
 `new Date(milliseconds)`，按照 <span class="blue-text">zero time</span>（01 January 1970 00:00:00 UTC）加上参数创建新的日期对象。JS一天包含 86,400,000 millisecond
 
-`new Date(dateString)`，按指定的日期字符串创建一个新的日期对象，dateString格式参考下面讲的 Date formats
+`new Date(dateString)`，按指定的日期字符串创建一个新的日期对象，dateString 格式参考下面讲的 Date formats
 
 `new Date(year, month, day, hours, minutes, seconds, milliseconds)`，按7个参数的顺序创建指定日期和时间的日期对象。
 
@@ -24,13 +24,13 @@ Date 对象用来与年月日时分秒毫秒打交道的。
 
 1.**ISO Dates**，ISO 8601 是用于表示日期和时间的国际标准，syntax (YYYY-MM-DD)。JS prefer 这种格式，当然缺省 month 和 day 比如 (YYYY-MM)，(YYYY) 也是允许的。
 
-上面说了完整的日期对象有7个参数，这里缺省的参数将按照最小值算。没有指定 day，就算 1号，没有指定 month，就是 1月1日。
+上面说了完整的日期对象有7个参数，这里**缺省的参数**将**按照最小值算**。没有指定 day，就算 1号，没有指定 month，就是 1月1日。
 
 设定完整的日期时间 (YYY-MM-DDTHH:MM:SS)
 
     var d = new Date("2015-03-25T12:00:00");    //Wed Mar 25 2015 20:00:00 GMT+0800 (CST)
 
-The _T_ in the date string, between the date and time, indicates UTC time.
+The _T_ in the date string, between the date and time, **indicates UTC time**.
 
 **Note**: _UTC_ (Universal Time Coordinated)  is the **same** as _GMT_ (Greenwich Mean Time).
 
@@ -65,7 +65,7 @@ JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写
 + `toISOSting()`，使用 ISO 标准将日期对象转为字符串。格式为（_YYYY-MM-DDTHH:mm:ss.sssZ_）
 + `toJSON()`，将日期对象转为 JSON 日期格式的字符串（_2015-05-04T07:23:23.047Z_），格式同上。
 + `toUTCString()`，根据世界时间将日期对象转为字符串（_Sun, 04 May 2015 07:29:18 GMT_）
-+ `toDateString()`，converts the date (not the time) of a Date object into a readable string (结果为 _Sun May 04 2014_)
++ `toDateString()`，converts the date (not the time **不含时间**) of a Date object into a readable string (结果为 _Sun May 04 2014_)
 
 ## Get Date
 

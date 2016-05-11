@@ -22,7 +22,7 @@ The **finally** statement lets you execute code, after try and catch, regardless
         Block of code to be executed regardless of the try / catch result
     }
 
-JS的 `try` 和 `catch` **come in pairs** 是成对出现的。
+JS的 `try` 和 `catch` come in pairs 是**成对出现**的。
 
 <!--more-->
 
@@ -43,14 +43,14 @@ The **throw** statement allows you to **create a custom error**。该语句用�
         message.innerHTML = "";
         x = document.getElementById("demo").value;
         try { 
-            if(x == "") throw "is empty";
-            if(isNaN(x)) throw "is not a number";
+            if(x == "") throw "empty";
+            if(isNaN(x)) throw "not a number";
             x = Number(x);
-            if(x > 10) throw "is too high";
-            if(x < 5) throw "is too low";
+            if(x > 10) throw "too high";
+            if(x < 5) throw "too low";
         }
         catch(err) {
-            message.innerHTML = "Error: " + err + ".";
+            message.innerHTML = "Input is " + err + ".";
         }
         finally {
             document.getElementById("demo").value = "";

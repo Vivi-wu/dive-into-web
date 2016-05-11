@@ -8,7 +8,7 @@ JavaScript 是web开发人员必学的三大基本语言之一。It makes HTML p
 
 JavaScript 代码可以放在 HTML 页面的 `<head>` 和/或 `<body>` 部分。
 
-+ JS 代码必须写在 `<script>` 和 `</script>` 标签之间
++ HTML 页面里的 JS 代码必须写在 `<script>` 和 `</script>` 标签之间
 + 在 HTML 文档里可以放置任意数量的 scripts
 + keep all codes in one place is always a good practice
 + 把脚本放在 `<body>` 元素的底部可以提高页面加载速度，因为脚本编译会减缓页面显示

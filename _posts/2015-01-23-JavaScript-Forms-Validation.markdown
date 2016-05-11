@@ -12,7 +12,7 @@ category: JavaScript
 
 ## DOM Methods and Properties
 
-与 constraint calidation 有关的 DOM 方法和属性是：
+与 constraint validation 有关的 DOM 方法和属性是：
 
 + `checkValidity()`, 如果一个输入元素包含 valid data，返回 true
 + `setCustomValidity()`, 设置一个输入元素的 validationMessage 属性
@@ -32,6 +32,6 @@ category: JavaScript
 + _tooLong_, 如果一个元素的值超过了它的 maxLength 特性
 + _typeMismatch_, 如果一个元素的值不符合它的 type 特性
 + _valueMissing_, 如果一个元素设定了 required 特性，但是没有输入值，这个属性为 true。
-+ _valid_, 如果一个元素对值是 valid 时
++ _valid_, 如果一个元素的值是 valid 时
 
-**注意**：也就是说 <span class="blue-text">an input field with an empty value will be excluded from constraint validation</span>，一个输入域如果没有值，将会从 constraint validation 中**排除**。The empty string is considered valid (no misMatch) unless the required attribute is present as well (valueMissing).
+**注意**：也就是说 <span class="blue-text">an input field with an empty value will be excluded from constraint validation</span>，一个输入域如果没有值，将会从 constraint validation 中**排除**。The empty string is considered valid (no misMatch) unless the _required_ attribute is present as well (valueMissing).
