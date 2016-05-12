@@ -89,6 +89,22 @@ A CSS comment starts with `/*` and ends with `*/`，也可以有多行.
 
     <p style="color:sienna;margin-left:20px;">This is a paragraph.</p>  
 
+### @import
+
+`@import` 是 CSS at-rule，用来**从其他样式表里引入样式规则**。
+
+用户可以指定 media-dependent 的 `@import` 规则，通过在 URL 后面指定以**逗号分隔**的 media queries。这样避免去请求设备不支持的 CSS 规则。
+
+    @import url; /* 不指定任何媒体查询，则表示无条件用于所有媒体设备 */
+
+_url_ 可以是**字符串**，也可以是 **url()**。
+
+    @import "custom.css";
+    @import url("common.css") screen, projection;
+    @import url("landscape.css") screen and (orientation: landscape);
+
+**避免使用** `@import`，因为这样做会**导致样式文件无法并行下载**。使用 @import 引用的文件只有在引用它的那个 css 文件被下载、解析之后，浏览器才知道还有另外一个 css 文件需要下载，然后去下载，完了之后再开始解析、构建render tree等一系列操作，会出现页面闪烁。有些浏览器中 css @import 引起的 css 解析延迟，会加长页面留白期。
+
 ## CSS Cascading Order
 
 一个重要的概念，关于 CSS 样式表层叠优先级。
