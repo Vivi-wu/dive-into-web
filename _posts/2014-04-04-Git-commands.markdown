@@ -73,26 +73,6 @@ This command provide a convenient way to fix up the most recent commit. It lets 
 
 该指令提供了一种修补最新提交的简便方法。使你能够把新集结的改变（通过 `git add`）结合到前一个提交中，而不需要创建一个全新的快照来提交。也可以在不改变快照的情况下，单纯用来修改前一个提交的 message。
 
-`git rebase`
-
-一种好的工作方式是，在把新功能的 commit 推到远端之前，检查一下主分支有没有更新，有的话，把更新合并到这个提交里，并在本地把冲突解决掉，这样别人在远端 code review 时，省掉了许多麻烦。
-
-假设已经运行 `git pull <remote> <本地主分支>`， git checkout `<新功能分支>`，然后分两种情况：
-
-1.新功能还没有推到远端
-
-`git rebase <本地主分支>`
-
-如果有冲突，解决冲突 → save file → `git add` → `git rebase --continue`
-
-2.新功能分支已经推到远端
-
-`git merge <本地主分支>`
-
-如果有冲突，解决冲突 → save file → `git add` → `git commit`
-
-两者的区别就是，前者并不创建新的提交。
-
 ## Using Branches
 
 By developing features in branches, it's not only possible to work on both of them in parallel, but it also keeps the main master branch free from questionable code. 通过在分支里开发功能，不仅使同时开发不同功能成为可能，而且保持主 master 分支不会遭到有问题代码的伤害。
@@ -163,6 +143,47 @@ Push the specified branch to remote, along with all of the necessary commits and
 
 把指定分支推到远端，通过该指令把本地仓库的提交传到远端仓库。该指令在目的仓库创建一个本地分支，以阻止你重写提交，在远端仓库造成冲突。
 
+### 将一个分支里的更新集成到另一个分支上
+
+有两种方法 `git rebase` 和 `git merge`。
+
+Both of these commands are designed to integrate changes from one branch into another branch—they just do it in very different ways.
+
+使用到这两个命令的情况比如，你从主分支切出来做 feature，同时其他人提交了新的 commit，并且合并到了主分支，也许你的功能需要依赖这些提交，
+
+最简单的做法是使用 merge 命令，你需要先更新本地的主分支（保持本地主分支最新），然后
+
+    git merge master feature
+    // 或者
+    git checkout feature
+    git merge master
+    // 如果有冲突，解决冲突 → save file → `git add` → `git commit`
+
+这样会在 feature 分支创建新的 merge 提交.
+
++ **优点**是保留／连接两个分支的历史，是 non-destructive 操作。
++ **缺点**是当 master 分支非常活跃时，你的 feature 分支会出现许多 merge 提交，使 feature 分支的提交历史看起来有点被污染，使其他开发人员比较难理解项目的历史。
+
+另一种做法是使用 rebase 命令，把 feature 分支的提交 rebase (更换基托) 到主分支上。
+
+    git checkout feature
+    git rebase master
+    // 如果有冲突，解决冲突 → save file → `git add` → `git rebase --continue`
+
+这样相比起建立新的提交，rebase 是**重写项目历史**（moves the entire feature branch to begin on the top of the master branch）
+
++ **优点**是使项目历史干净，避免了不必要的 merge commits，得到近乎完美的线性项目历史，可以很方便地使用 `git log` 和 `gitk` 查询各个提交。
+
+    <img src="{{ "/assets/images/feature_to_master.png" | prepend: site.baseurl }}" alt="Rebase feature onto master">
+
++ **缺点**是如果没有遵从一定的规则（<span class="blue-text">never use git rebase on public branch</span>），重写项目历史会给 collaboration 工作流带来灾难性的问题。
+
+    <img src="{{ "/assets/images/master_to_feature.png" | prepend: site.baseurl }}" alt="Rebase master onto feature">
+
+### Interactive Rebasing
+
+使用 `i` 选项，手动设置 rebase（与 automated rebase 相对），控制分支的提交历史。主要用于 clean up a messy history before merging a feature branch into master. 具体使用方法参考[这里](https://www.atlassian.com/git/tutorials/merging-vs-rebasing/conceptual-overview)
+
 ## Undoing Changes
 
 `git reset --hard <commit>`
@@ -194,16 +215,25 @@ tracked 又分为三种状态：
     + **这个文件需要被提交到项目仓库里**，这样其他人复制项目时将分享同样的忽略规则。
     + 初学者都会遇到的一个问题：假设你有一个**已经 checked in** 的文件，你突然想要忽略它，<span class="blue-text">Git 将**不会** untrack 这个文件，只是因为你突然把它写进了 .gitignore 文件里。它已经在仓库里里，你 **必须** 先在仓库里删掉这个文件</span>。
 
-        // 记得先 git add，git commit 你想要追踪的其他文件，然后执行：
-        git rm -r --cached .
-        git add .
-        git commit -m "fixed tracking unwanted files"
-        // 上述操作将从仓库里删掉所有文件，再按照新的 .gitignore 中的规则，把需要的文件都加回来
+          // 记得先 git add，git commit 你想要追踪的其他文件，然后执行：
+          git rm -r --cached .
+          git add .
+          git commit -m "fixed tracking unwanted files"
+          // 上述操作将从仓库里删掉所有文件，再按照新的 .gitignore 中的规则，把需要的文件都加回来
 
 2. 创建全局 .gitignore 文件：这样你电脑上每一个 Git 仓库都会执行文件里的规则。
 
-    git config --global core.excludesfile ~/.gitignore_global
+       git config --global core.excludesfile ~/.gitignore_global
 
 3. 在仓库里明确排除：如果你不想创建 .gitignore 文件与其他人分享，你可以为指定仓库创建规则，指出不需要提交的文件。（使用该技术用于你不希望其他人生成的本地产文件，比如你编辑器产生的文件。）
 
     使用文本编辑器，打开项目根目录下 **.git/info/exclude** 的文件，你在这里添加的任何规则，将只会在你本地仓库里被忽略。
+
+## Git 代码提交准则
+
+在使用 Git 时应该遵守一个基本原则——使提交记录尽可能简洁详细，看它就像读一本书。要达到这种效果，只需牢记几点：
+
++ 控制提交粒度；最好控制为一个小 feature 或者一个 bug fix，这样进行恢复等操作时能够将「误伤」减到最低
++ 填好提交信息；用一句简练的话写在第一行，然后空一行，略微详细地阐述该提交所增加或修改的地方
++ 调节推送频率；不要每提交一次就推送一次，多积攒几个提交后一次性推送（可以避免前一个提交后发现代码中还有小错误）。
++ 多衍合少合并。通过衍合进行提交的合并或者信息修改。
