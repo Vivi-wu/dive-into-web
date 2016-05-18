@@ -20,13 +20,31 @@ JSON 文件的后缀名为 _.json_
 
 可以是 number（整数或浮点型的）、string（**双引号**括起来）、Boolean（true 或 false）、array、object、`null`
 
-### Convert JSON text to JS Object
+### Convert JSON string to JS Object
 
 JS 程序可以容易将 JSON 数据转为原生的 JS 对象。
 
 假设得到一个包含 JSON 语法的 JS 字符串，使用 JS 内置的 `JSON.parse()` 函数将这个字符串转为 JS 对象。
 
     var obj = JSON.parse(text);
+
+### Convert JS value to JSON string
+
+使用 JS 内置的 `JSON.stringify(`value[, replacer[, space]]`)` 函数将 JS 值转换成 JSON string。
+
+    JSON.stringify([1, 'false', false]); // '[1,"false",false]'
+    JSON.stringify({ x: 5 });            // '{"x":5}'
+
++ non-array 对象不会保证 stringified 成任何指定的顺序。
++ Boolean, Number, 和 String 对象被转为对应的 primitive 值。
+
+其他注意事项参考[这里 ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
+
+用 ajax 传数据时，前端可以将数据转为 JSON string 格式发给后端，并指定 request header，这样后端（目前服务器端都支持）接受到数据可以自动解析为 JSON 数据来用。
+
+Note: JSON text SHALL be encoded in Unicode. The default encoding is UTF-8.
+
+     XHR.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
 
 ### JSON vs. XML
 
