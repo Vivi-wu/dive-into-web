@@ -1,0 +1,147 @@
+---
+title:  "CSS Float"
+category: CSS
+---
+display 为 inline 的元素，只设定 float 为 left／right，其 display 值自动变为了 block。不知道为嘛，`<a>` `<img>` 都是
+
+With CSS float, an element can be pushed to theleft or right, allowing other elements to wrap around it.
+
+Float is very often used for images, but it is also useful when working with layouts.
+
+使用 CSS 浮动，一个元素可以被水平地推到左边或右边（not up or down 不可以上下浮动），它可以移动到包裹着它的元素的尽可能远的左/右边，其后的元素将环绕它，而它前面的元素不受影响。
+
+通常用于图片。但在处理页面布局时也很有用。
+
+If you place several floating elements after each other, they will float next to each other if there is room.
+
+如果把一些浮动元素一个接一个放在一起（例如 float:left），它们将一个个相挨着从左往右排列，只要有地方。
+
+地方不够会自动换行。换行的元素依然遵循相同的浮动规律（从左开始依次排开）
+
+取值：
+
+none 默认值， The element will be displayed just where it occurs in the text.
+left 浮动到左边
+right 浮动到右边
+Tips: 利用浮动性质这样排列图片，就好像图片gallery一样。
+
+Examples
+1. 实现报纸上首行第一个字母大写，并突出显示的功能，参看w3school上float的例子。
+
+[css] view plain copy 在CODE上查看代码片派生到我的代码片
+span  
+{  
+float:left;  
+width:0.7em;  
+font-size:400%;  
+font-family:algerian,courier;  
+line-height:80%;  
+}  
+[html] view plain copy 在CODE上查看代码片派生到我的代码片
+<p>  
+<span>T</span>his is some text.  
+This is some text. This is some text.  
+This is some text. This is some text. This is some text.  
+This is some text. This is some text. This is some text.  
+This is some text. This is some text. This is some text.  
+This is some text. This is some text. This is some text.  
+This is some text. This is some text. This is some text.  
+This is some text. This is some text. This is some text.  
+</p>  
+2. 创建一个水平方向的菜单
+
+[html] view plain copy
+<ul>  
+<li><a href="#">Link one</a></li>  
+<li><a href="#">Link two</a></li>  
+<li><a href="#">Link three</a></li>  
+<li><a href="#">Link four</a></li>  
+</ul>  
+方法一： Inline List Items
+[css] view plain copy 在CODE上查看代码片派生到我的代码片
+ul  
+{  
+float:left;   
+/*使导航条占满一行，实现清除浮动效果*/  
+width:100%;  
+/*去掉列表项目前的小圆圈、内外边距，避免跨浏览器诧异*/  
+list-style-type:none;  
+margin:0;  
+padding:0;  
+}  
+<pre name="code" class="css">li {  
+display:inline; /*去掉块级元素前后的line break，使显示在一行*/  
+}  
+a{display:block; /*把链接显示为块级元素，这样就可以定义它的宽度*/width:60px;text-decoration:none;color:white;background-color:purple;padding:0.2em 0.6em;border-right:1px solid white;}a:hover {background-color:#ff3300;}
+方法二： Float List Items
+
+[css] view plain copy
+li {  
+float: left; /*让块级元素一个挨着一个显示*/  
+}  
+a {  
+display: block;  
+width: 60px;  
+}  
+3. 用CSS实现页面布局，头部，脚部，中间有一个固定宽度的侧边栏，一个占满剩余width的主要内容区域。
+
+[css] view plain copy
+div.container  
+{  
+width:100%;  
+margin:0px;  
+border:1px solid gray;  
+line-height:150%;  
+}  
+div.header,div.footer  
+{  
+padding:0.5em;  
+color:white;  
+background-color:gray;  
+}  
+div.footer {  
+clear:left;  
+}  
+h1.header  
+{  
+padding:0;  
+margin:0;  
+}  
+div.left  
+{  
+float:left;  
+width:160px;  
+margin:0;  
+padding:1em;  
+}  
+div.content  
+{  
+margin-left:190px;  
+border-left:1px solid gray;  
+padding:1em;  
+}  
+[html] view plain copy 在CODE上查看代码片派生到我的代码片
+<body>  
+<div class="container">  
+<span style="white-space:pre">    </span><div class="header"><h1 class="header">W3Schools.com</h1></div>  
+<span style="white-space:pre">    </span><div class="left"><p>"Never increase, beyond what is necessary, the number of entities required to explain anything." William of Ockham (1285-1349)</p></div>  
+<span style="white-space:pre">    </span><div class="content">  
+<span style="white-space:pre">        </span><h2>Free Web Building Tutorials</h2>  
+<span style="white-space:pre">        </span><p>At W3Schools you will find all the Web-building tutorials you need,from basic HTML and XHTML to advanced XML, XSL, Multimedia and WAP.</p>  
+<span style="white-space:pre">        </span><p>W3Schools - The Largest Web Developers Site On The Net!</p></div>  
+<span style="white-space:pre">    </span><div class="footer">Copyright 1999-2005 by Refsnes Data.</div>  
+</div>  
+</body>  
+Turn Off Float
+Elements after the floating element will flow around it. 因为跟随在浮动元素后面的元素将环绕它，使用 clear 性质来避免不想要这种情况的发生。
+The clear property specifies which sides of an elementother floating elements are not allowed.
+
+使用该性质来指定元素哪一边不允许其他浮动元素存在。
+
+取值：
+
+none 默认值，两边都允许有浮动的元素存在
+both 左右两边都不允许有浮动元素存在，效果如同<div>强制换行，其后元素重新另起一行
+left
+right
+Tip: 前一个元素 float: left, 实现重启一行效果（即左边不允许有浮动元素存在），设置clear:left or both都行
