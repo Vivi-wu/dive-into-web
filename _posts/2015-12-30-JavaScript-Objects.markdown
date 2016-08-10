@@ -46,15 +46,15 @@ JS对象是可以包含多个值的变量。这些值以 `name:value` 对的形
 
 JS中被称为 this 的东西 is the object that "owns" the JavaScript code。
 
+By default this refers to the outer most global object, the _window_. 默认情况下，this 指的是全局对象 window。
+
 + when used in a **function**, is the object that "owns" the function.
 + when used in an **object**, is the object itself.
 + when used in an **object constructor**, is only a substitute 替代 for the new object. The value of `this` will become the new object when the constructor is used to create an object. 构造函数里的 this 没有值，当函数被用来创建新的对象时，this 的值就是新的对象。
-
-我们还可以在 HTML 元素的 event 事件绑定里使用 _this_，指的是触发事件的对象。（JS Event Order 章节有提到）
++ 还可以在 HTML 元素事件绑定里使用 _this_，指的是触发事件的 HTML element。（JS Event Order 章节有提到）
 
     <h1 onclick="this.innerHTML='Ooops!'">Click on this text!</h1>
     <h1 onclick="changeTest(this)">Click on this text!</h1>
-
 
 ### JavaScript Objects are Mutable
 
