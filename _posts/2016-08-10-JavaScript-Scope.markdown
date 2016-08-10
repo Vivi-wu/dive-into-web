@@ -20,6 +20,8 @@ Any locally scoped items are not visible in the global scope - **unless exposed*
 
 在函数内部以 **var** 关键字声明的变量，就是局部变量。声明在函数外部的变量，就是全局变量。
 
+<!--more-->
+
 ## Function Scope
 
 All scopes in JavaScript are created with Function Scope **only**，JS中所有作用域只能由**函数作用域**创建。
