@@ -1,33 +1,28 @@
 ---
-title:  "Component CSS, 了解 ionic"
+title:  "Component CSS"
 category: CSS
 ---
-## Component CSS
+## Component CSS or CCSS
 
-组件化的 CSS 是一种针对大型 web 应用，简化 CSS 创建体验的结构。本文主要观点摘自[这篇文章](http://www.sitepoint.com/introducing-ccss-component-css/)。
+组件化的 CSS 是一种针对大型 web 应用，简化 CSS 创建体验的架构。本文主要观点摘自[这篇文章](http://www.sitepoint.com/introducing-ccss-component-css/)。
 
-大型 web 应用通常有许多开发人员同时工作在大量的 CSS 文件上，开发人员需要一个可维护、可管理和可扩展的 CSS 结构。
+大型 web 应用通常会采用许多框架、工具，会有许多开发人员对一些 CSS 文件同时进行修改，因此我们需要一个可维护、可管理和可扩展的 CSS 体系结构。
 
-文章里关于 CCSS 的基本原则感觉说得比较模棱两可，这里就不一一列举了。
+基于组件化的 Web 开发将是大势所趋。Web 组件把标记和样式封装成可重用的 HTML 元素，这就意味着我们需要考虑**基于组件的 CSS 开发**。
 
-赞同的一点：关于 Documentation，许多人认为 CSS 是可自我解释的，但实际上，通常不是这样的。<span class="blue-text">CSS 组件必须有一个清晰的文档，用来描述它们是做什么，应该怎么使用</span>。
+CCSS 的基本原则：
 
-### Naming Convention
++ 可重用的 CSS 组件**不是**仅仅存在 DOM 树上某个特殊部分，或者需要配合使用特定的元素类型。
++ 每一个组件应该是隔离的，它不直接改变、依赖其他 CSS 组件。
++ **隔离比代码重用更重要！**，因为重用可能增加依赖，导致 css 可管理性降低
 
-作者的举例：
-
-+ u-className，全局的 base/utility 类
-+ img-className，全局图片类
-+ animate-className，全局动态效果类
-+ ComponentName，标准组件
-+ ComponentName-elementName，组建的元素
-+ ComponentName--modifierName，组建的修饰
+还有一些说得模棱两可，此处省略。
 
 <!--more-->
 
-注意：不要使用 hyphen （`-`）来分隔开组建的名称。
+非常赞同的一点：关于 Documentation 文档/注释，许多人认为 CSS 是可自我解释的，但实际上，通常不是这样。 <span class="blue-text">CSS 组件必须有一个清晰的文档，用来描述它们是做什么，应该怎么使用</span>。
 
-### File Organization
+## File Organization / Directory Structure
 
 <pre>
 styles
@@ -48,30 +43,42 @@ styles
        |   |-- _bootstrap-overrides.scss
        |   |__ images.scss
        |-- components
+       |   |-- pages
+       |   |   |-- _404.scss
+       |   |   |-- _redirect.scss
+       |   |__ standard
+       |       |-- _dialog.scss
+       |       |-- _modal.scss
+       |       |__ _alarm-state.scss
        |-- main.scss
        |__ mixins
            |-- _animation.scss
-           |-- _icon.scss
+           |__ _icon.scss
 </pre>
 
-1. 考虑到一些应用使用外部 CSS 框架，将它们的 CSS 文件放在样式根目录下，可配置可编译的 scss 文件放在 **ext/** 目录下。方便更新外部 CSS 样式库。**不要修改这里的文件**，对于框架里代码的重写和扩展，放到 **base/** 目录下。
-2. **base/** 目录用来放置 global base style **全局基本样式**。其中 **_base.scss** 只用来写 element selectors **元素选择器样式**（某种意义上的 CSS resets）
-3. **_base－classes.scss** 用来写所有 application－wide 用于多页面、views、components 的 **utility 样式** 。以（`u-`）作为类名前缀。
-4. **images.scss** 是作为 styles/image.css 文件 SCSS 编译的源文件，用来定义和 inline all site images 作为 _Data URLs_ 。
-5. **_bootstrap-overrides.scss** 只用来放置**对于框架重写的代码**。有时框架里的选择器有非常高的特殊性（CSS 权重高），重写它们需要很长的特殊选择器，因此对于框架的重写不要放在组件的环境里，而是放在这里。
-6. 以上没有提到的，任何可重用的 CSS 单元被认为是一个组件，放到 **components** 目录下。
-7. 有一点很重要，组建里 CSS 类的定义顺序反应了 HTML 的结构。遵循 CSS/Sass guideline
+1. 只编辑 `scss/` 文件夹下面的文件，这样方便更新位于 `ext/` 中的外部样式库。
+2. 外部 CSS 框架，样式文件放在根目录下，可配置可编译的 scss 文件放在 `ext/` 目录下。**不要修改这里的文件**，对于框架里代码的重写和扩展，放到 `base/` 目录下。
+3. `base/` 目录用来放置**全局基本样式**。
 
-## 了解 ionic
+    + 其中 `_base.scss` 只用来写 element selectors **元素选择器样式**（某种意义上的 CSS resets）
+    + `_base－classes.scss` 用来写应用范围内（application－wide） 用于多页面、views、components 的 **utility 样式** 。以（`u-`）作为类名前缀。
+    + `images.scss` 是作为 styles/image.css 文件的 SCSS 编译源文件，用来定义整站使用到的、 _Data URLs_ 形式的图片。
+    + `bootstrap-overrides.scss` 只用来放置**覆盖框架源码的CSS**。
 
-碰巧看到的，就了解一下。[官网](http://ionicframework.com/) 。
+4. 以上没有提到的，任何可重用的 CSS 单元被认为是一个组件，放到 `components/` 目录下。
+5. 有一点很重要，组建里 CSS 类的定义顺序反应了 HTML 的结构。遵循 CSS/Sass guideline
 
-<span class="blue-text">使用 web 技术（针对移动设备优化的 HTML、CSS、JS 组件和工具）创建高互动的原生 mobile apps 的工具</span>。开源免费。搭配 Sass，为 AngularJS 优化。
+## Naming Convention 命名规范
 
-实际上是一个 HTML5 应用开发框架（需要一个本地的包装层如 **Cordova** 或 PhoneGap 将它运行在一个本地应用中），构建混合移动应用。混合移动应用是运行在 app 浏览器壳里的网站（就像 iOS 中的 UIWebView 或者安卓里的 WebView，这个网站不能通过一个 URL 进行链接，只能在内部进行跳转），同时可以访问本地平台层。
+作者的举例：
 
-可以理解成针对本地应用开发的 Bootstrap 框架，它支持很多常见本地移动组件，设计精美。
++ u-className，全局的 base/utility 类
++ img-className，全局图片类
++ animate-className，全局动态效果类
++ ComponentName，标准组件
++ ComponentName-elementName，组建的元素
++ ComponentName--modifierName，组建的修饰
 
-PS：谷歌搜索中的结果，对于 Cordova 和 PhoneGap 的区别是这样说的：
+使用 UpperCamelCase 命名组件，来表明它是 master 元素。
 
-PhoneGap 是 Apache Cordova 的一个 distribution，可以认为 Apache Cordova 是支持 PhoneGap 的引擎，与 Webkit 是 power Chrome 和 safari 相似。
+注意：不要使用 hyphen （`-`）来分隔开组建的名称。
