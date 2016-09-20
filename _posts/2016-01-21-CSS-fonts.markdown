@@ -74,11 +74,11 @@ _length_：Floating-point number, followed by an absolute units designator (cm, 
 
 _%_：以父元素字体大小为百分比
 
-### Set font-size with em 
+### Set font-size with em
 
-em 允许用户 resize 文本字体大小，许多开发者使用 _em_ 而不是 _px_。使用 em 使得在所有浏览器里都有相同的 text size
+em 允许用户 resize 文本字体大小，许多开发者使用 _em_ 而不是 _px_。
 
-1em 等于当前字体大小。default text size in browser is 16px，所有 1em=16px
+1em 等于当前字体大小（字体 font-size 默认从父元素继承）。default text size in browser is 16px，所有 1em=16px
 
 The em size unit is recommended by the W3C.
 
