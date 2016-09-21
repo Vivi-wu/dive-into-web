@@ -45,23 +45,24 @@ box-sizing 作为 CSS3 的属性，给前端人员的尺寸测量带来了极大
 实现方法：
 
     html { //设置页面的rem大小
-      font-size: calc(100vw/3.75);
+      font-size: calc(100vw/7.5);
     }
 
 解释：
 
 1. `vm` 是css一种单位，代表视图 viewport 宽的 `1%`。那么 `100vm` 就表示整个 viewport 宽度。（视图高度的百分之几则用 `vh` 表示）
 2. CSS `calc()` 函数，提供加减乘除四则运算，可混合使用各种 CSS 单位（如百分比、px、em、rem等单位）
-3. 比如高清视觉稿按照 iPhone6 的宽度来设计，ps中看到宽为 750px，实际设备宽度为 375px。上面的 calc 计算可得根元素字体大小为 100px。那么:
+3. 比如高清视觉稿按照 iPhone6 的宽度来设计，ps中看到宽为 750px，实际设备宽度为 375px。上面的 calc 计算可得根元素字体大小为 50px。那么:
 
-    1rem = 100px;
-    0.85rem = 85px; // 视觉稿上量的 85px 对应于实际 css 代码里的 0.85rem
+    1rem = 50px;
+    0.28rem = 14px; // 视觉稿上量的 28px，代码直接写 0.28rem 即可
+    // 换算为实际 CSS 尺寸：28px 除以2 得 14px。
 
-4. 这样在 iPhone6 下，所有元素的尺寸还是和视觉稿的尺寸一样，而 iPhone5 中，因为设备的宽度变小了，`100vw/3.75` 得到的值相应地变小，即rem的单位值会变小，页面中所有的尺寸会等比例缩放。
+4. 这样在 iPhone6 下，所有元素的尺寸还是和视觉稿的尺寸一样，而 iPhone5 中，因为设备的宽度变小了，`100vw/7.5` 得到的值相应地变小，即rem的单位值会变小，页面中所有的尺寸会等比例缩放。
 
 跨浏览器兼容方案：
 
-    document.documentElement.style.fontSize = document.documentElement.clientWidth/3.75 + 'px'
+    document.documentElement.style.fontSize = document.documentElement.clientWidth/7.5 + 'px'
 
 注意: `clientwidth` 以像素计。该属性包括 padding，但不包括垂直滚动条（如果有的话）、border 和 margin。
 

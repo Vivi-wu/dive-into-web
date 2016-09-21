@@ -78,7 +78,7 @@ JS默认数字是**十进制**显示。以 `0x` 开头的数字为十六进制�
 
 Number 的一些属性是 JavaScript **Number** 对象的<span style="color:red;">静态</span>属性.
 
-JS中**只能被 Number 对象调用**的属性有：`MAX_VALUE`，`MIN_VALUE`，`NEGATIVE_INFINITY`，`POSITIVE_INFINITY`，`NaN`, 
+JS中**只能被 Number 对象调用**的属性有：`MAX_VALUE`，`MIN_VALUE`，`NEGATIVE_INFINITY`，`POSITIVE_INFINITY`，`NaN`
 
 使用方法如 `Number.MAX_VALUE`
 
@@ -95,6 +95,8 @@ JS中**只能被 Number 对象调用**的属性有：`MAX_VALUE`，`MIN_VALUE`�
     + _radix_, 是一个 (from 2 to 36) 的数字 that represents the numeral system to be used，表示 string 用的是哪一种进制。比如：`parseInt("20",16)`，表示第一个参数是十六进制的，**运算结果**以**十进制**显示，即 `32`。
     + 缺省 _radix_ 参数，看第一个参数。若以 `0x` 开始，则为十六进制，若以 `0` 开始，则为八进制。任何其他 value，都认为是十进制的。
 
+    **注意**：该函数在不同浏览器中表现有差异。比如 `parseInt('09')`，谷歌，IE9+ 等高级浏览器，返回结果为 `9`。09开头，如果按八进制，则无效（八进制一位上取值为0-7）。IE8-的游览器则返回 `0`。屏蔽浏览器差异的解决办法是，指定 radix，即 `parseInt('09',10)`。这样都返回 9
+
 示例：
 
     Number("10");            // returns 10
@@ -103,7 +105,7 @@ JS中**只能被 Number 对象调用**的属性有：`MAX_VALUE`，`MIN_VALUE`�
     parseInt("10 years");    // returns 10
     parseInt("years 10");    // returns NaN
     parseFloat("10.33");     // returns 10.33
-    parseFloat("10 20 30");  // returns 10 
+    parseFloat("10 20 30");  // returns 10
 
 ### Number 的方法
 
