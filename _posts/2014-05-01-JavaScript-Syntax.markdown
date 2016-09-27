@@ -6,32 +6,6 @@ category: JavaScript
 
 在编程语言中，被计算机执行的语句称为 statements。语句按照它们书写的顺序，一条接一条地被执行。
 
-### 分号
-
-It is a **default** JavaScript behavior to close a statement automatically at the **end** of a line。JS的默认表现是，在每一行代码结尾处关闭语句（认为一个语句结束了）。
-
-JS语句由 **semicolons 分号**分隔开。虽然结尾的分号不是必须的，但是**建议保留**！有分号结尾的JS语句可以被写在同一行里。
-
-    function myFunction(a) {
-        var power = 10
-        return a * power
-    }
-    function myFunction(a) {
-        var power = 10;
-        return a * power;
-    }
-    function myFunction(a) {
-        var
-        power = 10;
-        return a * power;
-    }
-
-上面三种写法结果都一样。第三个例子中，当JS遇到不完整的语句时，会读取下一行，试着完成这个语句。
-
-**注意**：**Never** break a `return` 语句。因为它自己就可以是一个完整的语句。
-
-<!--more-->
-
 ### 空格
 
 JS忽略掉多个空格，所以我们可以在代码里添加空格方便阅读。
@@ -47,10 +21,129 @@ JS忽略掉多个空格，所以我们可以在代码里添加空格方便阅读
     document.getElementById("demo").innerHTML =
     "Hello world, this is my first js code."
 
-直接在字符串中 break 语句，是**不能**实现换行的，而且会引起 SyntaxError。如果一定要在字符串中断行，使用 backslash `\`，如下：
+直接在字符串中 break 语句，是**不能**实现换行的，而且会引起 SyntaxError。如果一定要在字符串中断行，使用 **backslash** 反斜杠 `\`，如下：
 
     document.getElementById("demo").innerHTML = "Hello world, this \
     is my first js code."
+
+有五种符号可以出现在一个语句的开头，也可作为一个完整语句的扩展。这意味着**不是**所有的情况下 line break 换行可以取代语句之间的 semicolon 分号。
+
+这种种符号是：
+
++ open parenthesis 开圆括号 `(`
++ open square brace 开方括号`[`
++ slash 斜杠 `/`
++ plus 加号 `+`
++ minus 减号 `-`
+
+    a = b + c
+    (d + e).print()
+    a = b + c(d + e).print()  // 上面两个语句会变成这样一个语句，不会有分号的自动插入
+
+<!--more-->
+
+比较麻烦的斜杠符号，不仅可以作为正则表达式的开头，还可以作为除法操作符。下面这种情况实践中还是较少出现的，
+
+    var i,s
+    s="here is a string"
+    i=0
+    /[a-z]/g.exec(s)  // 这一行会被认为是上一行的延续，即 i=0/[a-z]/g.exec(s)
+
+## 分号
+
+这里 [JavaScript Semicolon Insertion Everything you need to know](http://inimino.org/~inimino/blog/javascript_semicolons) 详细全面地解释了 JavaScript automatic semicolon insertion。
+
+### 在哪里可以写分号？
+
+在 ECMAScript 规范中给出的正式语言的语法中，分号可以出现在任何一种 statement 结尾。
+
+可以在 `var` 变量声明语句，表达式语句 (such as "4+4;" or "f();"), `continue`, `return`, `break`, `throw` 和 `debugger` 语句的结尾处。
+
+一个分号本身就是一个**空语句**，在 JS 中是合法的语句。比如 `;;;` 是一个合法的 JS 程序，它解析了三个空语句，运行了三次 doing nothing.
+
+分号出现在 for ( Expression ; Expression ; Expression ) 循环语句中。
+
+### 哪里可以缺省分号？
+
+以下给出了三种语句截止不需分号的基本规则和两种例外：
+
+1. 在 closing brace 闭括号之前。
+2. 在一个 program 结尾处。
+3. 当下一个 token 符号不能通过其他方式被解析，且在语法中的某些地方，如果出现一个 line break，它无条件地终止该语句。
+4. 例外1，分号 never inserted 在 for loop 头部 for ( Expression ; Expression ; Expression )
+5. 例外2，分号 never inserted if it would be parsed as an empty statement.
+
+    for (node=getNode();
+     node.parent;
+     node=node.parent) ; // 该 for 循环执行读取节点的父节点，直到遇到一个没有父节点的节点，所有操作在 for 循环的头部进行。
+    // 尽管不需要循环体，但 for 循环语法需要一个语句，因此使用了 `;` 空语句。
+
+    上面例子中三个分号都在行尾，但是都不可缺少。原因见 4 & 5
+
+6. Semicolons are **not optional** between statements appearing on the same line. 写在同一行语句之间的分号，是不可缺省的。
+
+    42; "hello!" // valid
+    42\n"hello!" // valid，“\n” 代表一个实际的换行
+    42 "hello!"  // no valid，whitespace 空格不能触发分号插入
+    if(x){y()}   // "y()" 语句表达式可用分号结尾，但因为后面跟着闭合大括号，分号是可选的。
+
+7. 当JS遇到不完整的语句时，会读取下一行，试着完成这个语句。
+
+    function myFunction(a) {
+        var
+        power = 10;
+        return a * power;
+    }
+
+### Restricted productions
+
+受限输出是指在那里，换行不能出现在特定的位置。如果出现了，它将会阻止程序按期望的方式解析，从而解析成了别的结果。
+
+语法中有**五种**受限输出：
+
++ postfix 后缀式操作符 `++` `--`
++ `continue`
++ `break`，其中 return 和 break 语句可以使用可行的标识符，用来对 labeled loop 操作。如果是这种情况，标识符 **must** 写在同一行。
++ `return`，因为返回语句是受限输出，方便程序员写一个空的 return statement，而不会不小心返回了下一行语句的值。
++ `throw`
+
+    var i=1;
+    i
+    ++; // parse error
+    i
+    ++
+    j  // parses as "i; ++j", 因为前置自增\减 不是受限输出。
+    return {
+      i:i, j:j}
+    return (
+      {i:i, j:j})
+    return {i:i
+           ,j:j}  // return 语句在表达式之间可以包含换行
+    throw
+      new MyComplexError(a, b, c, more, args);   // parse error
+    // 不同于返回、中断、继续语句，throw 语句后的表达式不是可选的，so the above will not parse at all.
+    throw new MyComplexError(a, b, c, more, args);  // correct
+    throw new MyComplexError(
+        a, b, c, more, args);                       // also correct
+    // Any variation with 'new' and 'throw' on the same line is correct.
+
+在上面五种受限输出的情况，换行导致的错误在实践中很少遇到，除了把返回值放在 return 符号的下一行。尤其是当返回值是一个大的对象、数组或者多行的字符串。
+
+    return obj.method('abc')
+          .method('xyz')
+          .method('pqr')
+    return "a long string\n"
+         + "continued across\n"
+         + "several lines"
+    totalArea = rect_a.height * rect_a.width
+              + rect_b.height * rect_b.width
+              + circ.radius * circ.radius * Math.PI
+
+规则只考虑跟随行的第一个符号，如果这个符号可以被解析成语句的一部分，则认为这个语句是被延续的 **is continued**。
+
+如果跟随行的第一个符号不能扩展语句，则认为新的语句开始了。A semicolon is inserted.
+
+There is no reason to be concerned about browser compatibility in regard to semicolon insertion: all browsers implement the same rules and they are the rules given by the spec and explained above. 所有的浏览器实行着相同的规则，这些规则是由 spec 给出的，如上面所解释的。关于分号插入，没有理由担心浏览器兼容性问题。
 
 ## Values
 

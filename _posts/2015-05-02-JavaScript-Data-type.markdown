@@ -121,7 +121,7 @@ An empty string converts to 0. A non-numeric string converts to **NaN** which is
 
 ### Unary + Operator
 
-一元操作符 `+`
+单目运算符 `+`，把一个值转换成 Number 类型。`-` 减号时，表示负数 reverse the sign.
 
     var y = "5";      // y is a string
     var x = + y;      // x is a number
