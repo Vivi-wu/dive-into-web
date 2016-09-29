@@ -125,6 +125,8 @@ An empty string converts to 0. A non-numeric string converts to **NaN** which is
 
     var y = "5";      // y is a string
     var x = + y;      // x is a number
+    var z = "apple";
+    x = +z;  // x is NaN
 
 如果 y 不是一个可以转为 number 的变量，x 的类型依然会变成 number，但是值为 `NaN`
 

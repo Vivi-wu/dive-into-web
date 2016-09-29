@@ -255,6 +255,22 @@ If you add a number and a string, the result will be a <strong>string</strong>! 
 + 条件（三元）操作符：variablename = (condition) `?` value1:value2 满足条件取 value1，否则取 value2.
 + 位操作符：`&` 逻辑与，`|` 逻辑或，`~` 逻辑非，`^` 逻辑异或，`<<` 左移几位，`>>` 右移几位. 作用于 32-bit numbers，result is converted back to a JavaScript number
 
+在逻辑运算中，如果第一个操作数满足结果条件，第二个操作数就不会被评估。
+
+巧用逻辑操作符，可以缩短代码。如下：
+
+    let add = key => !data[key] && (data[key] = rand()) || data[key];
+    // 等价的一般写法
+    add = key => {
+       // If the value is not yet set...
+       if (!data[key]) {
+          // set it!
+          data[key] = rand();
+       }
+       // Always, do return the value
+       return data[key];
+    };
+
 ### 类型操作符
 
 + `typeof`，returns a **string** containing the type of the operand，以字符串形式，返回操作数的类型
