@@ -35,12 +35,12 @@ JS 程序可以容易将 JSON 数据转为原生的 JS 对象。
     JSON.stringify([1, 'false', false]); // '[1,"false",false]'
     JSON.stringify({ x: 5 });            // '{"x":5}'
 
-+ non-array 对象不会保证 stringified 成任何指定的顺序。
++ non-array 无序性， stringified 对象不能保证遵循任何指定的顺序。
 + Boolean, Number, 和 String 对象被转为对应的 primitive 值。
 
 其他注意事项参考[这里 ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 
-用 ajax 传数据时，前端可以将数据转为 JSON string 格式发给后端，并指定 request header，这样后端（目前服务器端都支持）接受到数据可以自动解析为 JSON 数据来用。
+用 ajax 传数据时，前端可以将数据转为 JSON string 格式发给后端，并指定 request header，这样后端（目前服务器端都支持）可将接收到的数据自动解析为 JSON 数据来用。
 
 Note: JSON text SHALL be encoded in Unicode. The default encoding is UTF-8.
 

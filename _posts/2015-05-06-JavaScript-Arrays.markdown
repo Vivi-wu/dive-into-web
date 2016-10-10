@@ -161,3 +161,15 @@ _start_ 表示切片开始位置（包含这个位置上的元素），负值表
 以上三种方法都是类似的结构：
 
 `array.every(`function(currentValue, index, arr), thisValue`)`，其中 index，arr，thisValue 都是可选的。
+
+### 补充
+
+对数组中每一项执行一个操作：
+
++ `forEach(callback[, thisArg])`，让数组中每一项都执行一次给定的函数操作。
+
+    此处 callback 参数同上面的 every() 等函数，多了一个可选的 thisArg 参数，用来指定 callback 函数内 this 的值的对象。
+
+    特别要注意的是：**没有办法中止或者跳出 forEach 循环，除了抛出一个异常**。如有要中断的必要，不如使用一个简单的 for 循环实现。
+
++ `map(callback[, thisArg])` ，该方法返回一个由原数组中的**每个元素调用一个指定方法**的返回值组成的新数组。
