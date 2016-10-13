@@ -88,11 +88,106 @@ Improper use of the innerHTML can open you up to a cross-site scripting (XSS) at
 + `React.createClass()` 用来创建新的 React component. 其中最重要的一个方法叫 `render()` —— 返回一个最终将渲染成 HTML 的 React 组件树。
 + `ReactDOM.render()` 该方法初始化 root 组件，把组件的 markup 注入到 raw DOM 元素（由第二个参数提供的）中。该方法需要放在脚本的最下面，只有 composite 组件被定义了才可以调用。
 + Data passed in from a parent component is available as a 'property' on the child component. 数据通过成为子组件属性的方式，从父组件传递到子组件
-+ We access **named attributes** passed to the component as keys on `this.props`, 通过 props 对象的属性读取写在父组件上有命名的 attribute 传递给子组件的值，and any **nested elements** as `this.props.children` 任何内嵌在组件里的元素都通过该 props 对象的 _children_ 属性获取.
++ We access **named attributes** passed to the component as keys on `this.props`, 通过 props 对象的属性读取写在父组件上有命名的 attribute 传递给子组件的值，and any **nested elements** as `this.props.children` 任何内嵌在父组件里的元素都通过该 props 对象的 _children_ 属性获取.
 + `.props` 对象是 immutable 不可变的额，"owned" by the parent。
 + 为实现 mutable 状态，使用 `this.state` which is private to the component and can be changed by calling `this.setState()`. 当状态改变时，组件自己重新 render 自己。
 + `getInitialState()` executes exactly once during the lifecycle of the component 该函数在组件的生命周期内只执行一次，用来设置组件的初始 state。
 + `componentDidMount` 函数在组件**第一次**被渲染时由 React 自动调用。
 + React 使用 camelCase 命名规则绑定事件处理函数。区别于 HTML 元素上的事件绑定是全小写 `onclick`, `onsubmit`
++ 当你的组件不需要 local state 或者 lifecycle hooks 时, 最好使用 function 来声明. 此为官方建议使用 ES6 语法。
+
+    const Greeting = (props) => (
+      <h1>Hello, {props.name}</h1>
+    );
+    ReactDOM.render(
+      <Greeting name="Sebastian" />,
+      document.getElementById('example')
+    );
+
+    用函数声明，仍然可用使用 `.propTypes` （检查 props 值的类型）和 `.defaultProps`。
 
 One **limitation**: React 组件只能渲染一个 **single root node** 单独的一个根节点. 如果你想要返回过个节点，它们必须要 be wrapped 被包裹在一个唯一的根节点元素里。
+
+## 什么样的组件应该拥有 State
+
+有时你需要响应用户输入、一个服务器请求或者时间的流逝，这时就要用到 State。
+
+但是尽可能得使你的大部分组件 stateless。一个常见的模式就是创建一些没有状态的组件，仅用来渲染数据，把它们内嵌在一个 stateful 的父组件里。父组件把 state 通过 props 传递给子组件。
+
+### Dynamic Children
+
+当子节点为动态插入（如搜索结果，或者流中加入新的组件）时，需要使用唯一标识符，通过 _key_ 属性配置给每一个 child。
+
+    render() {
+      return (
+        <ol>
+          {this.props.results.map((result) => (
+            <li key={result.id}>{result.text}</li>
+          ))}
+        </ol>
+      );
+    }
+
+这个 _key_ 属性必须直接在数组中提供给组件，而不是每个组件的 HTML 子元素的容器上。如下，text 可以，但是 key 不行.
+
+    // WRONG!
+    class ListItemWrapper extends React.Component {
+      render() {
+        return <li key={this.props.data.id}>{this.props.data.text}</li>;
+      }
+    }
+    class MyComponent extends React.Component {
+      render() {
+        return (
+          <ul>
+            {this.props.results.map((result) => (
+              <ListItemWrapper data={result} />   // <ListItemWrapper key={result.id} data={result} />
+            ))}
+          </ul>
+        );
+      }
+    }
+
+### Default Prop values
+
+给 _props_ 设置默认值，`defaultProps` 用来保证指定的 _props_ 的属性有值，如果父组件没有指定。使我们可以安全地使用 props，不必担心没有值，也避免重复书写。
+
+    class Greeting extends React.Component {
+      render() {
+        return (
+          <h1>Hello, {this.props.name}</h1>
+        );
+      }
+    }
+    // Specifies the default values for props:
+    Greeting.defaultProps = {
+      name: 'Stranger'
+    };
+    // Renders "Hello, Stranger":
+    ReactDOM.render(
+      <Greeting />,
+      document.getElementById('example')
+    );
+
+### JSX spread syntax 传递属性
+
+有时我们需要复制 HTML attributes 到组件内的 HTML 元素上，此时可用 JSX 传递语法来实现。
+
+    class CheckLink extends React.Component {
+      render() {
+        // This takes any props passed to CheckLink and copies them to <a>
+        return (
+          <a {...this.props}>{'√ '}{this.props.children}</a>
+        );
+      }
+    }
+    ReactDOM.render(
+      <CheckLink href="/checked.html">
+        Click here!
+      </CheckLink>,
+      document.getElementById('example')
+    );
+
+还可以用 JSX spread attributes 来合并老的 props 和额外的值，如下:
+
+    <Component {...this.props} more="values" />
