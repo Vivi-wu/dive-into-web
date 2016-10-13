@@ -58,17 +58,6 @@ JS 条件语句，根据不同决定执行不同操作。
 + 语句2也可以缺省，但是必须在循环体内提供一个 break
 + 语句3也可以缺省，把 increment 放在循环体内
 
-### For/In Loop
-
-用来**在对象的属性中做循环**。
-
-    var person = {fname:"John", lname:"Doe", age:25}; 
-    var text = "";
-    var x;
-    for (x in person) {
-        text += person[x];
-    }
-
 ## While Loops 循环
 
 语法：

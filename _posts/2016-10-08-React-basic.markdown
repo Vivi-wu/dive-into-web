@@ -11,7 +11,9 @@ React 中模板使用 JSX，当然并不是必须使用 JSX 才能使用 React�
     <HelloMessage name="John" />
     <div>Hello {this.props.name}</div>
 
-使用 JSX 的好处是：比起 function calls 和 object literals使得大型的树结构易于阅读。
+使用 JSX 的好处是：比起 function calls 和 object literals，JSX 使得大型的树结构易于阅读。
+
+JSX lets you create JavaScript objects using HTML syntax.
 
 React JSX code 可以写在单独的文件里，通过
 
@@ -64,20 +66,27 @@ React JSX code 可以写在单独的文件里，通过
     </Nav>
   );
 
-+ `React.createClass()` 用来创建新的 React component. 其中最重要的一个方法叫 `render()` —— 返回一个最终将渲染成 HTML 的 React 组件树。
-+ `ReactDOM.render()` 该方法初始化 root 组件，把组件的 markup 注入到 raw DOM 元素（由第二个参数提供的）中。该方法需要放在脚本的最下面，只有 composite 组件被定义了才可以调用。
-
 ### 输出 HTML tag 而不是 string
 
-Improper use of the innerHTML can open you up to a cross-site scripting (XSS) attack.
-
-而 React 的设计哲学是让制作东西很容易是安全的。开发人员需要明确指出他们要进行 unsafe 的操作。因此想要输出 HTML tag 时，需要做到两点：
+Improper use of the innerHTML can open you up to a cross-site scripting (XSS) attack. 而 React 的设计哲学是让制作东西很容易是安全的。开发人员需要明确指出他们要进行 unsafe 的操作。因此想要输出 HTML tag 时，需要做到两点：
 
 1. 在要改变 innerHTML 属性的元素上添加 `dangerouslySetInnerHTML` prop name，通常给它绑定一个自定义函数，把需要 render 的值传进去.
 2. 自定义函数只需要返回一个只包含 `__html` 属性的对象。属性值为传进去的 DOM string. 确保 HTML provided must be well-formed (ie., pass XML validation).
 
-## 数据操作
+### 在动态内容中输出 HTML Entity
 
+比如 `<div>{'First &middot; Second'}</div>`，结果 HTML 实体并不能按预期展示出来。解决方法：
+
+1. 最简单的办法是在 JS 中直接写 Unicode 字符。需要**保证文件按 UTF-8 格式保存**.
+2. 更安全的可选项是找到**实体对应的 unicode number**，如下：
+
+    <div>{'First \u00b7 Second'}</div>
+    <div>{'First ' + String.fromCharCode(183) + ' Second'}</div>
+
+## React 的数据操作
+
++ `React.createClass()` 用来创建新的 React component. 其中最重要的一个方法叫 `render()` —— 返回一个最终将渲染成 HTML 的 React 组件树。
++ `ReactDOM.render()` 该方法初始化 root 组件，把组件的 markup 注入到 raw DOM 元素（由第二个参数提供的）中。该方法需要放在脚本的最下面，只有 composite 组件被定义了才可以调用。
 + Data passed in from a parent component is available as a 'property' on the child component. 数据通过成为子组件属性的方式，从父组件传递到子组件
 + We access **named attributes** passed to the component as keys on `this.props`, 通过 props 对象的属性读取写在父组件上有命名的 attribute 传递给子组件的值，and any **nested elements** as `this.props.children` 任何内嵌在组件里的元素都通过该 props 对象的 _children_ 属性获取.
 + `.props` 对象是 immutable 不可变的额，"owned" by the parent。
@@ -85,3 +94,5 @@ Improper use of the innerHTML can open you up to a cross-site scripting (XSS) at
 + `getInitialState()` executes exactly once during the lifecycle of the component 该函数在组件的生命周期内只执行一次，用来设置组件的初始 state。
 + `componentDidMount` 函数在组件**第一次**被渲染时由 React 自动调用。
 + React 使用 camelCase 命名规则绑定事件处理函数。区别于 HTML 元素上的事件绑定是全小写 `onclick`, `onsubmit`
+
+One **limitation**: React 组件只能渲染一个 **single root node** 单独的一个根节点. 如果你想要返回过个节点，它们必须要 be wrapped 被包裹在一个唯一的根节点元素里。

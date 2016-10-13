@@ -125,3 +125,18 @@ Prototype properties can have prototype values (default values) 原型的属性�
     };
 
 注意：不用改变标准JS对象的原型。
+
+### for...in 语句
+
+以 arbitrary order （任意顺序）遍历对象的属性。对于每一个 distinct 不同的属性，该语句都可以被执行。
+
+用法：
+
+    for (variable in object) {...
+        // 在一趟遍历中每一个不同的属性名称被赋值给 _variable_
+    }
+
+### 操作‘对象属性’可用的方法
+
+1. `Object.getOwnPropertyNames(obj)` 和 `Object.keys(obj)`，两者返回 obj 对象中由所有属性的名称（string）所组成的数组。注意：两者 IE9 以下都不支持。
+2. `obj.hasOwnProperty(prop)`，该方法返回 boolean 值，表示 obj 对象中是否含有指定的属性。

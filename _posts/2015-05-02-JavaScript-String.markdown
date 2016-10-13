@@ -27,7 +27,9 @@ JS String 用来存储一系列字符，用**单**引号或**双**引号限制�
 
 _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 _prototype_ 两个属性。
 
-### Find
+## String functions
+
+### Find 查找
 
 + `indexOf(`searchvalue, start`)`，返回 **index** of (the position of) the **first** occurrence of a specified text in a string，<span class="blue-text">字符串中指定文本第一次出现的位置</span>
 + `lastIndexOf(`searchvalue, start`)`，返回返回一个字符串中指定文本 **last** occurrence 最后一次出现的位置
@@ -43,11 +45,13 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
 
 3.前两者 _searchvalue_ 是一个**字符串**，_start_ 默认是 0，表示开始查找的位置，该参数是可选的。
 
-### Extract
+### Extract 抽取
 
 + `slice(`start, end`)`，从 start 位置（包含 start 位的字符），到 end 位置（但**不包含** end 位的字符）截取一段字符放置到新的字符串中。缺省 _end_，则认为一直到 end of the string。位置取值**负数**，表示从末尾开始。
 + `substring(`start, end`)`，同上。但**不接受**负数。如果 _start_ 小于0，则认为从 0 开始。如果 "start" is greater than "end", this method will swap the two arguments **交换**开始和结束位置参数, meaning <span style="background-color:lightblue;">str.substring(1,4) == str.substring(4,1)</span>.
-+ `substr(`start, length`)`，同 `slice()`，但是因为**第二个参数是长度**，所有不能为负数。
++ `substr(`start, length`)`，同 `slice()`，start 位置可取负值。但此处**第二个参数表示长度**，因此**不能**为负数。
+
+    "hello world".substr(-4, 4); // 表示从倒数第四位开始，向后取四位字符，返回"orld"
 
 以上三个方法的共同点是缺省第二个参数， the method will slice out the rest of the string。
 
@@ -56,7 +60,7 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
 
 **注意**：Accessing a String as an Array is Unsafe！<span class="blue-text">不要使用数组形式接近一个字符串</span>。
 
-### Replace
+### Replace 替换
 
 `replace(`searchvalue, newvalue`)`，第一个参数是 a value, or regular expression，第二个参数也可以是一个函数。
 
@@ -71,7 +75,7 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
 
 使用 `toUpperCase()`，`toLowerCase()` 方法。
 
-### Concate
+### Concate 拼接
 
 使用 `concat()` 连接两个或多个字符串，效果同使用连接操作符 `+`
 
@@ -80,7 +84,11 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
 
 All string methods return a new string. They don't modify the original string. <span class="blue-text">所有字符串的方法将返回一个新的字符串，而**不改变**原始字符串</span>。
 
-### Converting a String to an Array
+### 根据 Unicode 输出对应字符
+
+使用字符串对象的静态方法 `String.fromCharCode(num1, ..., numN) ` ，其中参数是一组序列数字，表示 Unicode 值。该方法返回一个字符串，而不是一个 String 对象。
+
+### Converting a String to an Array 字符串转成数组
 
 使用 `split(`separator, limit`)` 方法，把字符串转为数组。两个参数都是 optional 的。
 
@@ -93,6 +101,6 @@ Separate each charater, **including white-space**，按单个字符分割，包�
     var str = "How are you doing today?";
     var res = str.split("");
 
-### Match
+### Match 匹配
 
 使用方法 `match(`regexp`)`，在字符串中查找，返回一个 **Array**，该返回数组中每一个项目是一个 match。没找到匹配，返回 `null`。
