@@ -30,7 +30,7 @@ Date 对象用来与年月日时分秒毫秒打交道的。
 
     var d = new Date("2015-03-25T12:00:00");    //Wed Mar 25 2015 20:00:00 GMT+0800 (CST)
 
-The _T_ in the date string, between the date and time, **indicates UTC time**.
+日期和时间字符串中间的 _T_ 表示 **UTC time**. 北京时间（UTC+8）需要在这个时间上加8小时。
 
 **Note**: _UTC_ (Universal Time Coordinated)  is the **same** as _GMT_ (Greenwich Mean Time).
 
