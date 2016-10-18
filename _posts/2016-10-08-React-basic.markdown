@@ -30,41 +30,42 @@ React JSX code 可以写在单独的文件里，通过
 + 那些看起来像（上面也称之为）HTML tag 的标记 **not actual** DOM nodes 并非真正的 DOM 结点; they are instantiations of React  components. 它们是 React 组件的实例，You can think of these as markers or pieces of data that React knows how to handle. 你可以把它们想象成是 React 知道如何处理的一些标记或数据。
 + 组件名必须以变量形式声明，如下：
 
-    var Nav;
-    var app = <Nav color="blue" />;
+        var Nav;
+        var app = <Nav color="blue" />;
 
 + Namespaced Components, 命名空间式的组件使得只需使用一个组件变量，其他子组件作为其属性来获取。
 
-    var MyFormComponent = React.createClass({ ... });
-    var Form = MyFormComponent;
-    var App = (
-      <Form>
-        <Form.Row>
-          <Form.Label />
-          <Form.Input />
-        </Form.Row>
-      </Form>
-    );
+        var MyFormComponent = React.createClass({ ... });
+        var Form = MyFormComponent;
+        var App = (
+          <Form>
+            <Form.Row>
+              <Form.Label />
+              <Form.Input />
+            </Form.Row>
+          </Form>
+        );
 
-    MyFormComponent.Row = React.createClass({ ... });
-    MyFormComponent.Label = React.createClass({ ... });
-    MyFormComponent.Input = React.createClass({ ... });
+        MyFormComponent.Row = React.createClass({ ... });
+        MyFormComponent.Label = React.createClass({ ... });
+        MyFormComponent.Input = React.createClass({ ... });
 
 + 当使用 JS 表达式设置 attribute 的值时，使用大括号 `{}` 包裹，代替一般情况下使用的双引号。
 + 不设置一个 attribute 的值时，JSX 认为它就是 true。因此，为了明确指定某个 attribute 是 false，要么不写这个特性，要么使用大括号设定，如： `disabled={false}`
 + 注释标记跟 JS 的 comment 一样，有单行和多行注释。需要注意的是，当你为一个 tag 的子区域写注释时，需要使用大括号将这条注释括起来。
 
-    var content = (
-    <Nav>
-      {/* child comment, put {} around */}
-      <Person
-        /* multi
-           line
-           comment */
-        name={window.isLoggedIn ? window.name : ''} // end of line comment
-      />
-    </Nav>
-  );
+        var content = (
+          <Nav>
+            {/* child comment, put {} around */}
+            <Person
+              /* multi
+                 line
+                 comment */
+              name={window.isLoggedIn ? window.name : ''} // end of line comment
+            />
+          </Nav>
+        );
++ React 会在生成的 raw HTML 中自动插入类似 `<!-- react-text: 4 --><!-- /react-text -->` 的注释，据说是它用来识别如何在 DOM 添加和替换节点。
 
 ### 输出 HTML tag 而不是 string
 
@@ -80,8 +81,8 @@ Improper use of the innerHTML can open you up to a cross-site scripting (XSS) at
 1. 最简单的办法是在 JS 中直接写 Unicode 字符。需要**保证文件按 UTF-8 格式保存**.
 2. 更安全的可选项是找到**实体对应的 unicode number**，如下：
 
-    <div>{'First \u00b7 Second'}</div>
-    <div>{'First ' + String.fromCharCode(183) + ' Second'}</div>
+        <div>{'First \u00b7 Second'}</div>
+        <div>{'First ' + String.fromCharCode(183) + ' Second'}</div>
 
 ## React 的数据操作
 
@@ -96,13 +97,13 @@ Improper use of the innerHTML can open you up to a cross-site scripting (XSS) at
 + React 使用 camelCase 命名规则绑定事件处理函数。区别于 HTML 元素上的事件绑定是全小写 `onclick`, `onsubmit`
 + 当你的组件不需要 local state 或者 lifecycle hooks 时, 最好使用 function 来声明. 此为官方建议使用 ES6 语法。
 
-    const Greeting = (props) => (
-      <h1>Hello, {props.name}</h1>
-    );
-    ReactDOM.render(
-      <Greeting name="Sebastian" />,
-      document.getElementById('example')
-    );
+        const Greeting = (props) => (
+          <h1>Hello, {props.name}</h1>
+        );
+        ReactDOM.render(
+          <Greeting name="Sebastian" />,
+          document.getElementById('example')
+        );
 
     用函数声明，仍然可用使用 `.propTypes` （检查 props 值的类型）和 `.defaultProps`。
 
