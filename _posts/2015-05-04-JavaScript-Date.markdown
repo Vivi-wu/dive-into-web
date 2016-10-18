@@ -57,15 +57,15 @@ JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写
 
 <span class="blue-text">Date objects are **static**, not dynamic. The computer time is ticking, but date objects, once created, are not.</span> 日期对象是静态的，一旦创建，就是一个常量，不会自己更新。
 
-+ `toString()`，输出日期会自动转为一个字符串，不写也行。
-+ `toTimeString()`，把日期对象的时间部分转为字符串（_15:19:06 GMT+0800 (CST)_）
-+ `toLocaleString()`，使用本地转换法，把日期对象转为字符串（_2015/05/04 下午3:20:54_）
-+ `toLocaleTimeString()`，使用本地转换法，把日期对象的时间部分转为字符串（_下午3:21:58_）
-+ `toLocaleDateString()`，使用本地转换法，把日期对象的日期部分转为字符串（_2015/5/14_）
++ `toString()`，输出日期会自动转为一个字符串，不写也行。(_Tue Oct 18 2016 19:46:01 GMT+0800 (中国标准时间)_)
++ `toTimeString()`，把日期对象的时间部分转为字符串（_19:46:01 GMT+0800 (中国标准时间)_）
++ `toLocaleString()`，使用本地转换法，把日期对象转为字符串（_2016/10/18 下午7:46:01_）
++ `toLocaleTimeString()`，使用本地转换法，把日期对象的时间部分转为字符串（_下午7:46:01_）
++ `toLocaleDateString()`，使用本地转换法，把日期对象的日期部分转为字符串（_2016/10/18_）
 + `toISOString()`，使用 ISO 标准将日期对象转为字符串。格式为（_YYYY-MM-DDTHH:mm:ss.sssZ_）
-+ `toJSON()`，将日期对象转为 <strong>JSON 日期格式</strong>的字符串（_2015-05-04T07:23:23.047Z_），JSON dates have the same format as the ISO-8601 standard: YYYY-MM-DDTHH:mm:ss.sssZ。
-+ `toUTCString()`，根据世界时间将日期对象转为字符串（_Sun, 04 May 2015 07:29:18 GMT_）
-+ `toDateString()`，converts the date (not the time **不含时间**) of a Date object into a readable string (结果为 _Sun May 04 2014_)
++ `toJSON()`，将日期对象转为 <strong>JSON 日期格式</strong>的字符串（_2016-10-18T11:46:01.970Z_），格式同 toISOString()（ISO-8601 standard）.
++ `toUTCString()`，`toGMLString()`，根据世界时间将日期对象转为字符串（_Tue, 18 Oct 2016 11:46:01 GMT_）
++ `toDateString()`，converts the date (not the time **不含时间**) of a Date object into a readable string (结果为 _Tue Oct 18 2016_)
 
 ## Get Date
 
