@@ -87,18 +87,53 @@ React JSX code 可以写在单独的文件里，通过
 
 当组件的所有属性 props 可预知时，可以把它们一一写在组件上传递给子组件。但有时不能预知全部属性，而 props 作为 immutable 的对象，不要给对象写属性如：`component.props.foo = x;`
 
-此时可以使用 JSX 的新特性，被称作 spread attributes。不直接对 `component.props` 操作
+此时可以使用 JSX 的新特性，被称作 **spread attributes**。不直接对 `component.props` 操作也能解决前面的问题。
 
     var props = {};
     props.foo = x;
     props.bar = y;
     var component = <Component {...props} />;
 
-还可以用来合并老的 `props` 和额外的属性值，如下:
+`{...this.props}` 属性的传递把组件上的 HTML attributes 都复制到底层的 HTML 元素上，save typing！
+
+此外还可以用来合并老的 `props` 和额外的属性值，如下:
 
     <Component {...this.props} more="values" />
 
 注意：attribute 的**书写顺序很重要**，写在右边的覆盖前面的同名特性。
+
+还可以指定哪个属性不往下面传递：
+
+    function FancyCheckbox(props) {
+      var { checked, ...other } = props;
+      var fancyClass = checked ? 'FancyChecked' : 'FancyUnchecked';
+      // `other` contains { onClick: console.log } but not the checked property
+      return (
+        <div {...other} className={fancyClass} />
+      );
+    }
+    ReactDOM.render(
+      <FancyCheckbox checked={true} onClick={console.log.bind(console)}>
+        Hello world!
+      </FancyCheckbox>,
+      document.getElementById('example')
+    );
+
+如果既想要消费一个属性，又想把它传递下去，就在子组件上再明确地写下这个属性即可：
+
+    function FancyCheckbox(props) {
+      var { checked, title, ...other } = props;
+      var fancyClass = checked ? 'FancyChecked' : 'FancyUnchecked';
+      var fancyTitle = checked ? 'X ' + title : 'O ' + title;
+      return (
+        <label>
+          <input {...other} checked={checked} className={fancyClass}
+            type="checkbox"
+          />
+          {fancyTitle}
+        </label>
+      );
+    }
 
 ## 实践中遇到的问题
 
