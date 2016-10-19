@@ -2,7 +2,7 @@
 title:  "关于程序员职业的思考"
 category: Others
 ---
-摘录一些自己认同的观点和启发。
+摘录一些自己认同的观点。中文翻译多处与原文有出入，自己稍微改动了。
 
 [英文原版](http://ferd.ca/the-little-printf.html)
 
@@ -22,7 +22,9 @@ Cela signifie que le moment vous vous sentez être bon vous-même, vous êtes en
 
 Dans tous les cas, la compétence a très peu à voir avec tout cela. La réputation est très important cependant. Les gens embauchent des amis, et les personnes qui ne sont pas aimé et non essentiels se font virer en premier; essayez de changer le système et vous devenez détesté. Tout est un jeu très social. C'est comme ça que ça fonctionne dans l'industrie, et probablement dans le milieu universitaire aussi, bien que je ne sais pas? Tout est une question de qui vous connaissez, il faut savoir vous vendre, et faire connaître votre marque personnelle vous savez? Voilà comment vous obtenez des emplois dans ce buisness.
 
-好的工具是为了解决问题而被制造出来的，它们本身不应该变成问题。
+工具是为了帮我们解决问题而生的，它们本身不应该变成一个问题。
+
+Tools are meant to solve problems for us, but for you, the tools themselves have become a problem.
 
 Les outils sont destinés à résoudre des problèmes pour nous, mais pour vous, les outils eux-mêmes sont devenus un problème.
 
