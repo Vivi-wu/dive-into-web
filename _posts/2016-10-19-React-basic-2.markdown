@@ -33,6 +33,8 @@ React 保证所有事件在各种浏览器中表现一致，与 W3C spec 的冒�
       }
     }
 
+<!--more-->
+
 ## 状态
 
 当数据变化时，通过调用 `this.setState(data, callback)` 把数据合并到组件私有属性 `this.state` 中。组件会重新 render 自己。其中 callback 是可选的。

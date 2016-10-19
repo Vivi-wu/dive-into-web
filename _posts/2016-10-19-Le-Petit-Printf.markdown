@@ -4,11 +4,7 @@ category: Others
 ---
 摘录一些自己认同的观点。中文翻译多处与原文有出入，自己稍微改动了。
 
-[英文原版](http://ferd.ca/the-little-printf.html)
-
-[中文翻译版](http://www.cnblogs.com/xueweihan/p/5220513.html)
-
-[法语翻译版](http://www.cipherbliss.com/le-petit-printf/)
+[英文原版](http://ferd.ca/the-little-printf.html)  [中文翻译版](http://www.cnblogs.com/xueweihan/p/5220513.html)  [法语翻译版](http://www.cipherbliss.com/le-petit-printf/)
 
 当你认为自己足够好了，你就放松了，也就没有了前进的动力。
 
@@ -24,11 +20,11 @@ Dans tous les cas, la compétence a très peu à voir avec tout cela. La réputa
 
 工具是为了帮我们解决问题而生的，它们本身不应该变成一个问题。
 
+<!--more-->
+
 Tools are meant to solve problems for us, but for you, the tools themselves have become a problem.
 
 Les outils sont destinés à résoudre des problèmes pour nous, mais pour vous, les outils eux-mêmes sont devenus un problème.
-
-<!--more-->
 
 如果你没有解决真正有价值的问题，如果你忘记了提出问题的人，你永远不会真正得到满足。
 
