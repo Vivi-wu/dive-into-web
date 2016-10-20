@@ -6,6 +6,10 @@ category: CSS
 
 参考 [一篇真正教会你开发移动端页面的文章-二](http://hcysun.me/2015/10/19/%E4%B8%80%E7%AF%87%E7%9C%9F%E6%AD%A3%E6%95%99%E4%BC%9A%E4%BD%A0%E5%BC%80%E5%8F%91%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%A1%B5%E9%9D%A2%E7%9A%84%E6%96%87%E7%AB%A0-%E4%BA%8C/)
 
+95%会使用的基本设定：
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+
 ### iframe
 
 通过设置页面缩放比例 `initial-scale`，需要考虑页面中是否中含有 iframe，因为 iframe 同样会被缩放。
