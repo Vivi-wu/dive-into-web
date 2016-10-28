@@ -76,8 +76,10 @@ JS对象是一系列无序属性的集合。
 
 后者也可以使用 expression 表达式：`objectName[expression]`，只要表达式被评估是属性的 name。
 
-+ add 属性，对已经存在的对象，用获取属性的方法，给这个属性赋值即可。
-+ delete 属性，使用关键字 **delete**。
+如果对象中不含要找的属性，则返回 `undefined`
+
++ 添加属性，对已经存在的对象，用获取属性的方法，给这个属性赋值即可。
++ 删除属性，使用关键字 **delete**。
 
       delete person.age;   // or delete person["age"];
 
@@ -124,7 +126,7 @@ Prototype properties can have prototype values (default values) 原型的属性�
         return this.firstName + " " + this.lastName;
     };
 
-注意：不用改变标准JS对象的原型。
+注意：最好不要改变标准JS对象的原型。若创建新属性，首先确认原型里不存在。
 
 ### for...in 语句
 

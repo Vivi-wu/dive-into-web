@@ -2,15 +2,11 @@
 title:  "JavaScript Functions"
 category: JavaScript
 ---
-JS函数就是一段当被调用时，要执行某个动作的代码。使用函数可以实现代码重用，通过传递不同的参数，产生不一样的结果。
-
-函数可以被视为 value 使用，可以被用在表达式里。
-
 The `typeof` operator in JavaScript returns "**function**" for functions. But, JavaScript functions can best be described as objects. <span class="blue-text">JS函数最好被描述为对象</span>。
 
 使用 `arguments.length` property 可以返回函数调用时，**接收到的实际参数个数**。
 
-## Syntax
+## 函数语句 Syntax
 
 使用关键字 **function** 后面跟函数名，括号，由逗号分隔开的参数（参数不是必须的），再跟一个大括号。
 
@@ -24,7 +20,7 @@ Function names can contain letters 字母, digits 数字, underscores 下划线,
 
 ### Function Declarations 函数声明
 
-使用上面例子的格式声明函数，函数被声明以后不会立即执行。
+使用**函数语句**声明函数，函数被声明以后不会立即执行。
 
 Since a function declaration is not an executable statement, it is not common to end it with a semicolon. 因为函数声明不是一个可执行的语句，所以在结尾处不加分号。
 
@@ -38,6 +34,12 @@ JS函数可以使用表达式来定义。
 上面定义的函数是一个 **anonymous function** 无名函数，因为函数表达式存储在一个变量里，所以使用**变量名**来调用。
 
 本例中的函数结尾有分号，因为它作为可执行语句的一部分。
+
+### 两种创建 JS 函数的区别
+
+前者在闭包的开始被创建（JS不会等待条件语句执行后再决定是否创建函数，尽管浏览器允许把函数放在if里面），因此想有条件地定义函数时，不能使用函数语句。
+
+函数表达式在程序执行到这一点时创建，可以有条件地定义一个函数。下面讲JS提升也解释了原因。
 
 ### Function() 构造函数
 
@@ -53,7 +55,7 @@ Hoisting 提升 is JavaScript's default behavior of moving declarations to the *
 + In JS, a variable can be used before it has been declared. 变量可以在声明之前被使用。
 + JavaScript only hoists declarations, **not** initializations. 只提升声明，而不是初始化赋值。
 + Hoisting applies to **variable** declarations **and** to **function** declarations。提升适用于<span style="color:red;">变量声明</span>和<span style="color:red;">函数声明</span>。
-+ 但是使用函数表达式定义的函数 are **not** hoisted 不能被提升，
++ 使用函数表达式定义的函数 are **not** hoisted 不能被提升，
 
 最后两点很好地表述了，函数声明和函数表达式的 **不同** ：函数调用可以写在函数声明前（因为声明可以被提升，不会出现 undefined 的错误），但不能早于函数表达式（表达式定义的函数不能被提升）。
 
@@ -75,14 +77,7 @@ Hoisting 提升 is JavaScript's default behavior of moving declarations to the *
 + 函数定义不指定参数的 data type
 + 传递参数时不检查参数 type
 + 不检查传递的参数个数
-+ 如果函数接收到的参数个数小于函数声明参数列表里的，the missing values are set to: **undefined**，最好给参数设置一个默认值。
-
-      function myFunction(x, y) {
-        if (y === undefined) {
-          y = 0;
-        }
-      }
-
++ 如果函数接收到的参数个数小于函数声明参数列表里的，the missing values are set to: **undefined**，最好给参数设置一个默认值。(参看 JavaScript Strict Mode 章节)
 + 如果接收到的参数个数多于声明参数列表里的，这些参数 can be reached using the `arguments` object（JS函数内置对象，包含一个 array 放置函数调用时传递进来的参数）
 
     使用函数**内置参数对象** `arguments`，可以轻松实现输入值相加等操作。

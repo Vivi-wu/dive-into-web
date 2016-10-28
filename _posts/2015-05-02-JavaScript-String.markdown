@@ -32,7 +32,7 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
 ### Find 查找
 
 + `indexOf(`searchvalue, start`)`，返回 **index** of (the position of) the **first** occurrence of a specified text in a string，<span class="blue-text">字符串中指定文本第一次出现的位置</span>
-+ `lastIndexOf(`searchvalue, start`)`，返回返回一个字符串中指定文本 **last** occurrence 最后一次出现的位置
++ `lastIndexOf(`searchvalue, start`)`，返回一个字符串中指定文本 **last** occurrence (最后一次出现的位置)，以 start 位置开始，从字符串的后面向前查找。
 + `search(`searchvalue`)`，效果同 `indexOf()`。
 
     因为 A string will automatically be converted to a regular expression，<span class="blue-text">字符串可以被自动转为一个正则表达式</span>。
@@ -62,7 +62,9 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
 
 ### Replace 替换
 
-`replace(`searchvalue, newvalue`)`，第一个参数是 a value, or regular expression，第二个参数也可以是一个函数。
+`replace(`searchvalue, newvalue`)`，第一个参数是 a value, or regular expression。
+
+第二个参数是 new string，也可以是一个函数 function (replacement)，该函数的返回值将替换掉第一个参数匹配到的结果
 
     var str = "Mr Blue has a blue house and a blue car";
     var res = str.replace(/blue|house|car/gi, function myFunction(x){return x.toUpperCase();});

@@ -4,6 +4,8 @@ category: JavaScript
 ---
 Scope is the set of variables, objects, and functions you have access to. 你可以获取的变量、对象和函数的集合称为 scope **作用域**。
 
+当一个函数在 JS 中创建时，该函数可以对其生成环境中任何语法空间的变量进行访问。
+
 ## Global Scope
 
 通过全局作用域创建 Modules/APIs 实现功能复用。
@@ -32,7 +34,7 @@ All scopes in JavaScript are created with Function Scope **only**，JS中所有�
 
 嵌套在一个函数中的 inner 函数，能够使用 outer 函数的作用域，这称为**词法作用域**或**闭包**，也叫 Static Scope **静态作用域**。
 
-Any variables/objects/functions defined in its parent scope, are available in the scope chain. 任何定义在**父作用域**的变量、对象、函数，在作用域链上都是可用的。反之，则不然 does not work backwards。
+Any variables/objects/functions defined in its parent scope, are available in the scope chain. 任何定义在**父作用域**的变量、对象、函数，在作用域链上都是可用的。反之，则不然。
 
 ### Scope Chain
 
