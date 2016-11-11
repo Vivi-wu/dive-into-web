@@ -50,7 +50,7 @@ box-sizing 作为 CSS3 的属性，给前端人员的尺寸测量带来了极大
 
     这种方式比较适合图片小而且不经常更换的场景，因此该方案不能作为主体方案。
 
-+ CSS sprite 图，不能 100% 还原视觉稿，在任何手机下看到的图标大小都是固定的。如果视觉接受这种烦啊，可以采用 compass 方式自动生成雪碧图。
++ CSS sprite 图，不能 100% 还原视觉稿，在任何手机下看到的图标大小都是固定的。如果视觉接受这种方案，可以采用 compass 方式自动生成雪碧图。
 
 ## 强大的 rem
 
@@ -64,30 +64,32 @@ box-sizing 作为 CSS3 的属性，给前端人员的尺寸测量带来了极大
 
 解释：
 
-1. `vm` 是 CSS 一种单位，代表视图 viewport 宽的 `1%`。那么 `100vm` 就表示整个 viewport 宽度。（视图高度的百分之几则用 `vh` 表示）
-2. CSS `calc()` 函数，提供加减乘除四则运算，可混合使用各种 CSS 单位（如百分比、px、em、rem等单位）
+1. `vm` 是 CSS 单位，代表 viewport 宽的 `1%`。那么 `100vm` 就表示整个 viewport 宽度。（视图高度的百分之几则用 `vh` 表示）
+2. CSS `calc()` 函数，提供加减乘除四则运算，可混合使用各种 CSS 单位（如百分比、px、em、rem 等单位）计算长度。
 3. 比如高清视觉稿按照 iPhone6 的宽度来设计，ps中看到宽为 750px，实际设备宽度为 375px。上面的 calc 计算可得根元素字体大小为 50px。那么:
 
     1rem = 50px;
-    0.28rem = 14px; // 视觉稿上量的 28px，除以 100 转换成 rem 单位 0.28rem 即可
-    // 要想知道实际 CSS 尺寸只需：28px 除以 2 得 14px。
+    0.28rem = 14px; // 视觉稿上量的 28px，除以 100 转换成 rem 单位 0.28rem
 
-4. 这样在 iPhone6 下，所有元素的尺寸还是和视觉稿的尺寸一样，而 iPhone5 中，因为设备的宽度变小了，`100vw/7.5` 得到的值相应地变小，即rem的单位值会变小，页面中所有的尺寸会等比例缩放。
-5. 这个 `7.5` 是让根元素 font-size 等于 100px 计算所得的比例（750px / 100px = 7.5）。换成 iPhone5 则为 6.4 （640px / 100px = 6.4）
+4. 这样在 iPhone6 下，所有元素的尺寸还是和视觉稿的尺寸一样，而 iPhone5 中，因为设备的宽度变小了，`100vw/7.5` 得到的值相应地变小，即 rem 的单位值变小，页面中所有的尺寸会等比例缩放。
+5. `7.5` 是让根元素 `<html>` 的 font-size 等于 100px（为了换算方便）计算所得的比例，换成 iPhone5 则为 `6.4` （640px / 100px = 6.4）。
 
 跨浏览器兼容方案：
 
     document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px'
 
-注意: `clientwidth` 以像素计。该属性包括 padding，但不包括垂直滚动条（如果有的话）、border 和 margin。
+**注意**:
 
-document.documentElement.clientWidth 也可用 window.innerWidth （IE9 以下不支持）
++ `clientwidth` 以像素计。该属性包括 padding，但不包括垂直滚动条（如果有的话）、border 和 margin。
++ document.documentElement.clientWidth 也可用 `window.innerWidth` （但 IE9 以下不支持）。
 
 ### initial-scale, maximum-scale
 
+这里的 px 是 CSS 逻辑像素，与设备的物理像素是有区别的。如 iPhone 6 使用的是 Retina 视网膜屏幕，使用 2px x 2px 的 device pixel 代表 1px x 1px 的 CSS pixel。
+
 我们知道 CSS 编写的样式尺寸是基于布局视口 viewport 计算的。我们说 iPhone6 设备像素尺寸是 750px，其设备像素比 DPR 是 2。理想视口像素个数 device-width 等于 375px = 设备像素个数 / DPR。
 
-这就提供了另一种思路，既然 CSS像素可以放大或缩小，我们讲 CSS 像素缩放至与设备像素宽度相等，那么 750 个设备像素也就能显示 750 个 CSS 像素。就可以直接使用 PSD 中所量得的元素尺寸了。
+这就提供了另一种思路，既然 CSS像素可以放大或缩小，我们将 CSS 像素缩放至与设备像素宽度相等，那么 750 个设备像素也就能显示 750 个 CSS 像素。就可以直接使用 PSD 中所量得的元素尺寸了。
 
     var scale = 1 / window.devicePixelRatio;
     document.querySelector('meta[name="viewport"]').setAttribute('content','width=device-width,initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
@@ -98,7 +100,28 @@ document.documentElement.clientWidth 也可用 window.innerWidth （IE9 以下�
 
 rem 简单粗暴的实现，使得“屏幕越大按钮越大”。设计师认为“屏幕的尺寸和字体的大小不应该是一个完全正比或者说线性的关系”。
 
-可行的方案是通过 `media query`，对某一宽度范围内的手机，设定 html 根元素的 font-size 为一个确定的以 px 为单位的值。页面其他元素的尺寸再通过 rem 来指定。
+可行的方案：针对不同断点（宽度区间）设置 html 元素的字体大小，当屏幕尺寸大于当前我们认同的手机尺寸时，根元素字体恒为 100px。
+
+### 设置 `<html>` 字体大小完整方案
+
+综上，下面给出原生 JS 实现设置 html 元素字体大小的方法。
+
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if(clientWidth >= 750){
+                docEl.style.fontSize = '100px';
+            }else{
+                docEl.style.fontSize = clientWidth / 7.5 + 'px';
+            }
+        };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
 
 ## 文字
 

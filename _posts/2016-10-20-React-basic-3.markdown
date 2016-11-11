@@ -22,17 +22,35 @@ category: JavaScript
 
 React 提供 **will**（在事件发生前）和 **did**（在事件发生后）方法。
 
-### Mounting 组件被插入 DOM 的过程
+### Mounting
 
-`getInitialState()`，用来初始化 state 数据。
+一个组件的实例被创建和插入 DOM 的过程
+
+`constructor()`（`getInitialState()`），用来初始化 state 数据。
 
 `componentWillMount()`，mounting 发生之前调用
 
+`render()`
+
 `componentDidMount()`，mounting 发生之后调用，需要 DOM 节点的初始化写在这里
 
-### Updating 组件被重新渲染去决定是否更新 DOM
+### Updating
 
-### Unmounting 组件被从 DOM 中移除
+一次更新可以由 props 或者 state 的变化引起。当一个组件被重新渲染时，以下方法被调用。
+
+`componentWillReceiveProps()`
+
+`shouldComponentUpdate()`
+
+`componentWillUpdate()`
+
+`render()`
+
+`componentDidUpdate()`
+
+### Unmounting
+
+当一个组件被从 DOM 中移除时调用以下方法
 
 `componentWillUnmount()`，组件被移除之前调用，Cleanup 写在这里
 
@@ -61,3 +79,9 @@ By default, use the Reactive data flow and save refs for use cases that are inhe
 使用 Babel 把 JSX 语法的文件翻译成可以直接在浏览器中运行的 JS 文件。
 
 更多使用中可能遇到的问题参考官网的[tips](https://facebook.github.io/react/tips/introduction.html)
+
+## animation
+
++ You must provide the key attribute for all children of ReactCSSTransitionGroup, even when only rendering a single item. This is how React will determine which children have entered, left, or stayed.
++ You'll notice that animation durations need to be specified in both the CSS and the render method; this tells React when to remove the animation classes from the element and -- if it's leaving -- when to remove the element from the DOM. 自定义 animation 样式时不仅在 css 中要指定时间，在组件的属性上也要指定。
++ 
