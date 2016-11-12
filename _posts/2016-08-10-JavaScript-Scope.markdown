@@ -64,9 +64,9 @@ Simply accessing variables outside of the immediate lexical scope creates a clos
 下面的例子使用闭包，解决了自增计数的问题。
 
     var add = (function () {
-            var counter = 0;
-            return function () {return counter += 1;}
-        })();
+        var counter = 0;
+        return function () {return counter += 1;}
+    })();
     add();
     add();
     add();
