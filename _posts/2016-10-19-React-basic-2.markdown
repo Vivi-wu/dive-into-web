@@ -90,7 +90,7 @@ React 保证所有事件在各种浏览器中表现一致，与 W3C spec 的冒�
 + 官方建议使用 ES6 语法。
 
 
-One **limitation**: React 组件只能渲染一个 **single root node** 单独的一个根节点. 如果你想要返回过个节点，它们必须要 be wrapped 被包裹在一个唯一的根节点元素里。
+One **limitation**: React 组件只能渲染一个 **single root node** 单独的一个根节点. 如果你想要返回过个节点，它们必须要 be wrapped 在一个唯一的根节点元素里。
 
 ### Dynamic Children
 

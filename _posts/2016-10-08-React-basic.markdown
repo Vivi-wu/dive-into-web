@@ -2,17 +2,17 @@
 title:  "React.js 入门（一）"
 category: JavaScript
 ---
-本系列日志主要记录自学过程、知识点。
+本系列日志主要记录自学过程中总结的知识点。
 
-官网指出 React 是为了解决一个问题而生：创建数据随时更新的大型应用。
+官网自述 React 是为了解决一个问题而生：创建数据随时更新的大型应用。
 
-当底层数据改变 React 将自动管理所有 UI 更新，且只更新改变的部分。React 本质就是写一些可重用的组件，组件呢又是一些函数，操作 `props` 和 `state`，然后渲染 HTML。
+当底层数据改变 React 将自动管理所有 UI 更新，且只更新改变的部分。React 本质就是写一些可重用的组件，React 组件是一些操作 `props` 和 `state` 的函数。
 
-有事没事先写一个组件，我觉得这个也会是弊端。
+有事没事先写一个组件。
 
-此外按官网说法，React 直接从 JS 代码生成 HTML 和组件树，那么从加载 JS 到生成页面这段时间的白屏问题可能会有点恼人。
+此外按官网说法，React 直接从 JS 代码生成 HTML 和组件树，在网络环境差的情况下，从加载 JS 到生成页面这段时间的白屏问题不可避免。
 
-既然是以数据为重，首先介绍 React 中怎么展示数据。
+既然是以数据为重，首先介绍 React 中如何展示数据。
 
 ## JSX
 
@@ -23,7 +23,7 @@ React 中使用 JSX 创建树节点，当然 JSX is optional and **not required*
 
 JSX 作为 JS 语法的扩展让我们能使用 HTML 的语法创建 JavaScript objects。
 
-其他的好处如：比起 function calls 和 object literals，JSX 类似 XML 的开闭标签，使得大型的树结构易于阅读。
+其他优点如：比起 function calls 和 object literals，JSX 类似 XML 的开闭标签，使得大型的树结构易于阅读。
 
 <!--more-->
 
@@ -34,8 +34,6 @@ React JSX code 可以写在单独的文件里，通过
 方式引用。注意这里 _type_ 特性的值。
 
 ### 用法
-
-[JSX 语法](https://facebook.github.io/react/docs/jsx-in-depth.html)
 
 + HTML 标签使用 lower case 书写
 + React component 使用**首字母大写的驼峰**书写标记
@@ -64,7 +62,7 @@ React JSX code 可以写在单独的文件里，通过
         MyFormComponent.Label = React.createClass({ ... });
         MyFormComponent.Input = React.createClass({ ... });
 
-+ 使用 JS 表达式作为 attribute 值的时候，使用大括号 `{ }` 包裹，代替一般情况下使用的双引号 `" "`。
++ 使用 JS 表达式作为 attribute 值的时候，需要使用大括号 `{ expression }` 包裹，代替一般情况下使用的双引号 `"value"`。
 + 缺省特性值时，JSX 认为它就是 `true`。因此，为了明确指定某个 attribute 是 `false`，要么不写这个特性，要么使用大括号赋值，如： `disabled={false}`
 + 注释标记跟 JS 的 comment 一样，有单行和多行注释。需要注意的是，当你为一个 tag 的子区域写注释时，需要使用大括号将这条注释括起来。
 
@@ -82,6 +80,8 @@ React JSX code 可以写在单独的文件里，通过
 
 + React 会在生成的 raw HTML 中自动插入类似 `<!-- react-text: 4 --><!-- /react-text -->` 的注释，据说是它用来识别如何在 DOM 添加和替换节点。
 + React **不会渲染原生 HTML 元素中不存在的特性**，除非以 `data-` 作为其前缀。而以 `aria-` 为前缀的 Web 可用性特性则可以被正确地渲染。
+
+更多用法参考这里：[JSX 语法](https://facebook.github.io/react/docs/jsx-in-depth.html)
 
 ### JSX Spread Attributes 属性的传递
 

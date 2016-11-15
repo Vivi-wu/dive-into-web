@@ -2,7 +2,7 @@
 title:  "React.js 入门（三）"
 category: JavaScript
 ---
-表单组件
+## 表单组件
 
 通过 `onChange` 属性侦听输入域值的变化，在各浏览器中表现一致：
 
@@ -18,7 +18,7 @@ category: JavaScript
 
 可通过 `defautChecked` 给多选框、单选框，`defaultValue` 下拉选项、文本输入框等设置初始值。
 
-组件生命周期
+## 组件生命周期
 
 React 提供 **will**（在事件发生前）和 **did**（在事件发生后）方法。
 

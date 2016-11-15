@@ -65,7 +65,7 @@ box-sizing 作为 CSS3 的属性，给前端人员的尺寸测量带来了极大
 解释：
 
 1. `vm` 是 CSS 单位，代表 viewport 宽的 `1%`。那么 `100vm` 就表示整个 viewport 宽度。（视图高度的百分之几则用 `vh` 表示）
-2. CSS `calc()` 函数，提供加减乘除四则运算，可混合使用各种 CSS 单位（如百分比、px、em、rem 等单位）计算长度。
+2. CSS `calc()` 函数，提供加减乘除四则运算，可混合使用各种 CSS 单位（如百分比、px、em、rem 等单位）计算长度。`calc((100% - 20px * 2) / 3);`  The + and - operators must always be surrounded by whitespace。加号、减号前后的空格不能省略
 3. 比如高清视觉稿按照 iPhone6 的宽度来设计，ps中看到宽为 750px，实际设备宽度为 375px。上面的 calc 计算可得根元素字体大小为 50px。那么:
 
     1rem = 50px;
