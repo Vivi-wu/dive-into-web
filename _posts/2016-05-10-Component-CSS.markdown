@@ -82,3 +82,7 @@ styles
 使用 UpperCamelCase 命名组件，来表明它是 master 元素。
 
 注意：不要使用 hyphen （`-`）来分隔开组建的名称。
+
+### 补充
+
+单独的 layout.css 用来书写布局相关的 class

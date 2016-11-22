@@ -16,13 +16,15 @@ category: HTML,CSS,JavaScript
 
 本书中使用 jQuery 编写示例，下面的例子，外层函数将内层函数作为返回值返回。这个例子的结果是把变量 updateElement 的值设为内层 set() 函数。当一个程序调用 updateElement 并传入 CSS 选择器后，updateElement 会返回一个可用来设置**被该选择器选中的HTML元素**的内容的函数。<- <- 有的绕
 
-    // 例 2-5
-    var updateElement = function factory(el) {
-      return function set(html) {
-        $(el).html(html)
-      };
-    };
-    updateElement($('body'))('Hello world.')
+```js
+// 例 2-5
+var updateElement = function factory(el) {
+  return function set(html) {
+    $(el).html(html)
+  };
+};
+updateElement($('body'))('Hello world.')
+```
 
 再看一个例子，创建多个在同一空间内的关闭的函数。如果一个函数把多个函数返回到一个对象或数组中，所有这些函数都有机会获得创建函数的内部变量。
 

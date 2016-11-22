@@ -25,9 +25,11 @@ category: Others
 
 但是事实证明 android 也支持这属性，所以索性都用 woindow.scroll
 
-## Chrome插件 Page Ruler
+## Chrome插件 Page Ruler 和 QR code
 
 超好用的神器，可选择Element Mode（鼠标移动到元素上就可以显示尺寸、位置信息），也可以手动模式，自己定位
+
+后者可以把链接转成二维码
 
 ## 面向设计的半封装web组件
 
@@ -94,7 +96,9 @@ Cache-Control 不仅仅可以在响应头中设置，还可以在请求头中设
 
 + 在"Element"面板中选择某个DOM元素，点击"Console"并输入 `$0` 可以获取当前元素
 + 元素Style面板里，选择“Toggle Element State”可以触发伪类状态，便于调试样式
-
++ `console.info(obj/msg)` 自动换行打印，FF和Chrome中每条信息开头有一个“！”图标
++ `console.log('%o', DOMnode)` 打印DOM节点，`console.log('%O', DOMnode)` 像JS对象那样访问DOM元素，可查看DOM元素的属性
++ `console.dir(obj)` 打印对象所有的属性和方法
 
 ## 银行理财产品如何计算
 
@@ -155,3 +159,99 @@ how？
 + 感谢他们然后继续前进。如果被问起原因，可以说 the work isn't a fit for my business anymore. Thanks for the experiences you have provided me with along the way
 + 一旦你们进行过沟通，以书面形式把结果发给他们（Email 就行）。
 + 所有客户端的对话都应该是 professional 应该被小心处理，这是 business 关系，即使是一个结束的关系。
+
+## 巧用 ps 切片工具切图和生成 HTML 代码
+
+打开原图，快捷键 C 调出“切片工具”（与“裁剪工具”在一个工具图标菜单里），鼠标左键框选切图区域（可看到切出的几个区域左上角有 01 、02 等蓝色数字编号和一个小图标）
+
+编辑要导出的切片区域，右键-编辑切片选项，名称：图片文件的名称，Alt标记：最好填写图片上有的文字（图片获取失败时，用户可看到的文字）。如果图片点击可以跳转，则需要填写 URL（链接的地址），目标（是否在新tab打开）
+
+文件-导出-存储为web所用格式，预设选 PNG-heigh，点“存储”。
+
+格式：HTML和图像，设置：默认设置，切片：所有切片（默认），也可以只导出“选中的切片”（按住 Shift，左键点选想要导出的切片），点“保存”。
+
+可看到 HTML 文件里的 img 标签 PS 都帮我们写好了。
+
+### Bonus 快速生成九宫格
+
+打开正方形原图（或把原图裁剪成正方形）。调出“切片选择工具”，鼠标左键点击图片，此时上方工具栏中的“划分...”按钮变为可选状态，点击“划分”。
+
+勾选“水平划分”、“垂直划分”复选框，纵/横向切片个数都改成 3，点击“确定”。
+
+Alt+Shift+Ctrl+S（文件-导出-存储为web所用格式），剩下保存步骤同上。
+
+## 快速且“完美”还原视觉稿
+
+切图神器 [cutterman](http://www.cutterman.cn/zh/cutterman)
+
+标记神器 [markman](http://www.getmarkman.com/) 非 PS 插件
+
+视觉稿比对自动调整代码神器 [AlloyDesigner](http://alloyteam.github.io/AlloyDesigner/)
+
+## 前后端分离
+
+真正 senior 的人必须了解整个 end-to-end 过程。掌握大局同时了解细节。因为具体的问题可以丢给 junior 的人去解决。
+
+性能优化只在瓶颈上做，做在非瓶颈上是浪费资源。
+
+使用js模板，然后在浏览器端执行，这是存在一些问题的，比如说seo不友好，首屏性能不够，尤其对于首页DOM量很大的电商类网站，差距很明显。
+
+工程师团队有两种类型工程师：工程师类型和科学家类型。工程师类型，在他们眼中一切皆工具，能快速实现和为工程服务，他们的技能是追求横向的，一切皆我所用。能快速实现，用可以掌握的技术解决工程问题。这样的人，无所谓前后端了。如果这类人，愿意跟随公司业务一起成长，擅长解决遇到各种技术问题，所以在他们眼里无所谓前后端。
+
+科学家类型，做技术就要做到极致，追求更深入研究和细节。用什么东西喜欢研究透。这种工程师会在纵向细分领域研究很深入。这些人倾向于做细分领域也就是前后端分离倾向。
+
+科学家类型像学术方向，工程师类型像应用方向，没有谁绝对好或者不好。
+
+## web 安全
+
+CSP(Content Security Policy), 并不是用来防止 XSS 攻击的，而是最小化 XSS 发生后所造成的伤害。事实上，除了开发者自己做好 XSS 转义，并没有别的方法可以防止 XSS 的发生。CSP 的作用是限制一个页面的行为，不论是否是 javacript 控制的。
+
+目前使用的 X-Frame-Options，但以后可以被 CSP 的 frame-ancestors 取代。
+
+    `<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">`
+
+更大的攻击面，HTML5带来来更多的标签和更多的属性，XSS发生的可能性更大。更大的危害，HTML5更多的资源可以被XSS利用。黑客可以利用浏览器的一切权限，比如本地存储，GEO，WebSocket，Webworker。
+
+遗憾的是HTML并没有针止XSS和XSRF带来系统性解决方案。在这个前提下，CSP变得非常重要，可以大大降低XSS后的危害。
+
+## Mozilla 添加中文翻译
+
+选择中文，点击“编辑”。另开一个页面，把英文原版内容区域 `<article id="wikiArticle">` 标签里的 HTML 内容复制过来，直接修改，保证结构和样式一致。
+
+    {{CommunityBox("Security", "dev-security", "mozilla.dev.security", "security", "Blog|https://blog.mozilla.com/security/|Mozilla Security Blog||Twitter|https://twitter.com/mozsec|@mozsec")}}
+
+以上代码是 Mozilla 自动帮你生成的社区相关蓝色模块。
+
+    {{MakeSimpleQuickLinks("/zh-CN/docs/Mozilla/Security")}}
+
+以上代码自动生成左侧边栏的 ‘“See also” 链接。
+
+    {{LandingPageListSubpages}}
+
+以上代码自动继承页面中已有的内容。
+
+## Jekyll 博客 code 高亮
+
+[官方文档](https://jekyllrb.com/docs/templates/)
+
+[prismjs](http://prismjs.com/)
+
+## CSS 开发者大会相关
+
+OOCSS，object oriented CSS，把结构和样式分离，把容器和内容分离。避免使用 IDs 作为样式块。
+
+SMACSS，
+
+### CSS 动效
+
+CSS 书写动效：**命令式**（如 jQuery.animate，显示调用动画函数触发效果）和**声明式**（CSS Transition，Animation，声明式地定义各个“状态”下的CSS规则，通过切换CSS class来触发动效）。
+
+前者把动画状态和应用状态混在一起，逻辑复杂后不易维护。
+
+### CSS 性能
+
++ 慎重选择高消耗的样式（绘制前需要浏览器进行大量计算的 expensive styles）：`box-shadows`,`border-radius`,`transparency`,`transforms`,`CSS filters`
++ 避免过分 reflow（浏览器重新计算布局**位置**和**大小**）。常见引起重排的属性：width/height，padding，margin，display，border，border-width，position，top/bottom/left/right，font-size，font-weight，font-family，float，text-align，vertical-align，line-height，min-height，overflow，clear，white-space
++ 避免过分 repaints，常见引起重绘的属性：color，border-style，visibility，text-decoratoiin，background，background-image，background-position，background-repeat，background-size，outline，outline-color，outline-style，outline-width，border-radius，box-shadow
++ CSS `will-change`，优化动效的方法（适用于 transform，opacity 等），通过告知浏览器哪些元素将会改变，以及哪些属性将要改变。（除IE主流的浏览器都支持）
++ `requestAnimationFrame`，一种提供更高效运行基于脚本动效的 API（让视觉更新按照浏览器的最优时间来安排计划），相比于传统的 timeouts 方法。
