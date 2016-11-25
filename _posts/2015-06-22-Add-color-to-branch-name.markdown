@@ -1,5 +1,5 @@
 ---
-title:  "Add color to Git branch name (Mac)"
+title:  "Highlight Git branch name (Mac)"
 category: Other
 ---
 参考[这里](http://martinfitzpatrick.name/article/add-git-branch-name-to-terminal-prompt-mac/)实践成功。效果如下：
@@ -8,28 +8,30 @@ category: Other
 
 <!--more-->
 
-1. 打开 terminal，创建一个名为 .bash_profile 的文件。
+1. 打开 terminal，创建一个名为 .bash_profile 的文件（名字随意）。
 
     touch ~/.bash_profile
 
-2. 用代码 editor 打开这个文件，并把以下内容复制并粘贴到该文件里。图方便此处选用 linux vi
+2. 打开这个文件，图方便此处使用 vi 编辑器。
 
-    <pre><code>
+    vi ~/.bash_profile
+
+3. 复制粘贴以下代码。
+
     # Git branch in prompt.
     parse_git_branch() {
         git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
     }
-    export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
-    </code></pre>
+    export PS1="\u@\h \[\033[33m\]\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
 
-    vi ~/.bash_profile
+4. 保存并退出文件。
 
-    command + v
+    `Esc` + `:wq
 
-    Esc + :wq
-
-3. 重新加载这个文件
+5. 在当前 terminal 重新加载这个文件。
 
     source ~/.bash_profile
 
-ok, 这样就可以实现上图的效果。如果想要改变颜色，可以参考原文里面对于参数的设置。
+这样就可以实现上图的效果。
+
+PS：通过 `\[\033[33m\]` 给紧跟其后的文本添加颜色。33 表示黄色，32 表示绿色，00 表示默认颜色。
