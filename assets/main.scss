@@ -3,33 +3,11 @@
 ---
 @charset "utf-8";
 
-@mixin media-query-max($device) {
-  @media screen and (max-width: $device) {
-    @content;
-  }
-}
-
-@mixin media-query-min($device) {
-  @media screen and (min-width: $device) {
-    @content;
-  }
-}
-
 @mixin embed-font($font-name, $font-filename) {
   @font-face {
     font-family: $font-name;
     src: url("../assets/fonts/" + $font-filename + ".woff") format("woff");
   }
-}
-
-@mixin mn-transform($var){
-  -webkit-transform: $var;
-          transform: $var;
-}
-
-@mixin mn-transition($var){
-  -webkit-transition: $var;
-          transition: $var;
 }
 
 @include embed-font("Josefin Sans", "Josefin Sans");
@@ -38,5 +16,5 @@
 @import
   "base",
   "layout",
-  "blogs-page"
+  "post"
 ;

@@ -5,14 +5,12 @@
 
   <body>
 
-    <div class="page-content">
-      {{ content }}
-    </div>
+    {{ content }}
 
     {% include footer.html %}
 
-    <button type="button" id="go-top-button"><i class="fa fa-angle-double-up"></i></button>
+    <button type="button" id="go-top-button">TOP &#10514;</button>
   </body>
-  <script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
-  <script src="{{ "/js/page-scroll-tricks.js" | prepend: site.baseurl }}"></script>
+
+  <script src="{{ '/assets/js/goTop.js' | prepend: site.baseurl }}"></script>
 </html>

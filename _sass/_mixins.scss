@@ -1,0 +1,65 @@
+.horizontal-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*
+ * Clearfix
+ */
+%clearfix {
+
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+
+/*
+ * Text
+ */
+.text-center { text-align: center; }
+
+.blue-text {
+  color: skyblue;
+}
+
+
+/*
+ * Border
+ */
+.solid_top_border {
+  border-top: 1px solid $grey-color;
+}
+
+/**
+ * Scroll Top link
+ */
+#go-top-button {
+  position: fixed;
+  right: $spacing-unit * 2.5;
+  bottom: $spacing-unit * 2.5;
+  width: $spacing-unit * 2.5;
+  height: $spacing-unit * 2.5;
+  z-index: 100;
+  color: $text-color;
+  background-color: white;
+  border-radius: 2px;
+  border: 1px solid $grey-color;
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+
+  &:hover {
+    color: $primary-color-dark;
+    opacity: 0.9;
+  }
+
+  &.show {
+    opacity: 0.7;
+    visibility: visible;
+  }
+}

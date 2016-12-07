@@ -1,15 +1,19 @@
 @import "variables";
 
 
-/**
-* have padding and border included in the element's total width and height
-*/
-* { box-sizing: border-box; }
+/*
+ * have padding and border included in the element's total width and height
+ */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
 
 
-/**
-* Mark the selected text
-*/
+/*
+ * Mark the selected text
+ */
 ::-moz-selection {
   color: white;
   background-color: $primary-color-light;
@@ -20,35 +24,31 @@
 }
 
 
-/**
+/*
  * Basic styling
  */
 html {
-  height: 100%;
+  font-size: 16px;
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 12px;
+  }
 }
 
 body {
   margin: 0;
-  font-family: $base-font-family;
-  font-size: $base-font-size;
+  font-family: $font-family-sans-serif;
+  font-size: 1rem;
   line-height: $base-line-height;
   font-weight: normal;
   color: $text-color;
   background-color: $background-color;
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-smoothing: subpixel-antialiased;
-  position: relative;
-  min-height: 100%;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+h1, h2, h3, h4, h5, h6, p {
+  margin-top: 0;
 }
 
 p {
-  margin-top: 0;
   margin-bottom: 1rem;
 }
 
@@ -60,16 +60,15 @@ strong {
   color: $text-em-color;
 }
 
-/**
+/*
  * Images
  */
 img {
   max-width: 100%;
-  vertical-align: middle;
 }
 
 
-/**
+/*
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
@@ -90,8 +89,8 @@ h4 {
 }
 
 
-/**
- * Links
+/*
+ * Link
  */
 a {
   color: $primary-color-mild;
@@ -99,27 +98,9 @@ a {
 }
 
 
-/**
- * Code block
+/*
+ * table
  */
-code {
-  font-size: 15px;
-  color: $primary-color;
-}
-pre {
-  white-space: pre-wrap;
-}
-pre>code {
-  display: block;
-  color: #076527;
-  background-color:  rgba(231, 246, 236, 0.9);
-  padding: 5px;
-}
-
-
-/**
-* table
-*/
 table {
   margin-bottom: $spacing-unit;
   background-color: white;
@@ -141,9 +122,9 @@ table, th, td {
 }
 
 
-/**
-* List
-*/
+/*
+ * List
+ */
 .list-unstyled {
   list-style-type: none;
   margin: 0;
@@ -160,35 +141,4 @@ ol {
     padding-top: 3px;
     padding-bottom: 3px;
   }
-}
-
-
-/**
- * Clearfix
- */
-%clearfix {
-
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-}
-
-
-/**
- * Text
- */
-.text-center { text-align: center; }
-
-.blue-text {
-  color: skyblue;
-}
-
-
-/**
- * Border
- */
-.solid_top_border {
-  border-top: 1px solid $grey-color;
 }

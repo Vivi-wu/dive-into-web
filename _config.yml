@@ -1,30 +1,28 @@
 # Site settings
-title: Dive into WEB
+title: Dive into Web
 email: xue.wu0112@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  This is a place for my notes.
+  Personal tech blogs.
 baseurl: "/dive-into-web"
 
 # Build settings
 markdown: kramdown
-excerpt_separator: <!--more-->
 
 # Plugins
 gems:
-  - jekyll-paginate
   - jekyll-coffeescript
 
-# Markdown Processors
+# Markdown Processors: override default settings
 kramdown:
   auto_ids: false
 
-# Outputting
+# Outputting: override default settings
 permalink: none
-paginate: 4
-paginate_path: "/blogs/page/:num/"
+excerpt_separator: <!--more-->
 
 defaults:
   - scope:
+      path: "" # an empty string here means all files in the project
       type: posts
     values:
       layout: post

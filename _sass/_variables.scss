@@ -1,11 +1,21 @@
-$base-font-family: "Josefin Sans", sans-serif;
-$base-font-size:   16px;
+$font-family-sans-serif:
+  "Josefin Sans",
+  // Safari for OS X and iOS (San Francisco)
+  -apple-system,
+  // Chrome for OS X (San Francisco)
+  BlinkMacSystemFont,
+  // Windows
+  "Segoe UI",
+  // Android
+  "Roboto",
+  // Basic web fallback
+  "Helvetica Neue", Arial, sans-serif;
 $base-line-height: 1.5;
 
 $text-color:       #7B7B7B; // paragraph
 $text-em-color:    rgba(255, 255, 255, 0.8); // heading
 
-$background-color: rgba(0, 0, 0, 0.8);
+$background-color: #fff;
 
 $primary-color-light: #FFF1F1;
 $primary-color-mild:  #FFBDBD;
@@ -17,8 +27,4 @@ $grey-color:       #C3C3C3; // border
 $spacing-unit:     20px;
 
 // Width of the content area
-$content-width:    800px;
-
-$on-mobile:        767px;
-$desktop-large:    1140px;
-$desktop-ex-large: 1340px;
+$breakpoint-mobile: 544px;

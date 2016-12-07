@@ -1,1 +1,3 @@
-# dive-into-web
+个人技术博客，目前主要包含web前端开发领域相关知识。
+
+2016-12-06 Last update

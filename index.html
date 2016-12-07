@@ -1,24 +1,9 @@
 ---
 layout: default
 ---
-<div class="wrapper content">
-<p>Today is：<span id="today"></span></p>
-<p>The Chinese New Year 2017 is: <span id="nYear"></span></p>
-<p>Days left: <strong><span id="dLeft"></span></strong> !</p>
-
-<p>Take time to review your notes <a href="{{ site.baseurl }}/blogs/">here</a>.</p>
+<div class="content-wrapper">
+<a class="item" href="{{ site.baseurl }}/html/">html</a>
+<a class="item" href="{{ site.baseurl }}/css/">css</a>
+<a class="item" href="{{ site.baseurl }}/javascript/">js</a>
+<a class="item" href="{{ site.baseurl }}/other/">other</a>
 </div>
-<script>
-  var d = new Date(),
-      a = new Date(2017, 0, 28);
-
-  var ms = 24 * 60 * 60 * 1000,
-    days = a.getTime() - d.getTime();
-
-    days = Math.abs(days);
-    days = Math.round(days/ms);
-
-  document.getElementById("today").innerHTML = d.toDateString();
-  document.getElementById("nYear").innerHTML = a.toDateString();
-  document.getElementById("dLeft").innerHTML = days;
-</script>
