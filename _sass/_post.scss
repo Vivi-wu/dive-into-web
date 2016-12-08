@@ -1,60 +1,77 @@
-.post-list {
-  margin-bottom: $spacing-unit * 9;
+@import "syntax";
 
-  @media (max-width: $breakpoint-mobile) {
-    margin-bottom: $spacing-unit * 2.5;
-  }
+// override syntax.scss
+.highlighter-rouge {
+  margin-bottom: 1.25rem;
 }
-
-.contrast_color {
-  color: $primary-color-light;
-  background-color: rgba(255, 189, 189, 0.4);
-}
-
-.post {
-  overflow: hidden;
-  header h2 {
-    font-size: 30px;
-    margin-top: 0;
-    margin-bottom: 0.8rem;
-    color: $primary-color-mild;
-
-    a {
-      display: block;
-      text-decoration: none;
-
-      &:hover {
-        @extend .contrast_color;
-      }
-    }
+figure.highlight {
+  margin-bottom: 1rem;
+  table, th, td {
+    border: none;
   }
-  img {
-    height: auto;
+  table {
+    margin-bottom: 0;
+    .code {padding-left: 0.75rem;}
   }
-  article li {
-    margin-bottom: 1rem;
-    ul { margin-top: $spacing-unit; }
+  table tr:nth-child(odd) {
+    background-color: inherit;
   }
 }
 
 
-.post-meta-infos {
-  font-size: 12px;
-  margin-bottom: $spacing-unit * 2.5;
-
-  .text-sep {
-    padding-left: 3px;
-    padding-right: 3px;
-  }
-
-  .post-category {
-    text-transform: capitalize;
-  }
-  .post-category, .post-author {
-    color: $text-color;
+// 分类文章列表页、文章详情页
+.post header {
+  a {
     text-decoration: none;
     &:hover {
-      @extend .contrast_color;
+      text-decoration: underline;
     }
   }
+  h1, h2 {
+    margin-bottom: 0.25rem;
+    font-size: 2rem;
+    color: $heading-color;
+  }
 }
+
+.post article {
+  ul {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+  }
+  li {
+    margin-bottom: 0.75rem;
+    p {
+      margin-bottom: 0.5rem;
+    }
+  }
+  h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.post-wrapper {
+  .post article h3 {
+    margin-top: 4rem;
+  }
+}
+.post-list-wrapper {
+  .post-meta-infos {
+    @extend .border_bottom;
+  }
+}
+
+.post-meta-infos {
+  font-size: 13px;
+  margin-bottom: 2rem;
+  .text-sep {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+  .post-category {
+    text-transform: capitalize;
+    color: $text-color;
+  }
+}
+

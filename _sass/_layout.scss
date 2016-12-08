@@ -23,11 +23,18 @@
 /*
  * Post list page
  */
-.postlist-wrapper, .post-wrapper {
+.post-list-wrapper, .post-wrapper {
   max-width: 1200px;
-  @extend .horizontal-center;
+  @extend .horizontal_center;
   padding: 2rem;
   @media (max-width: $breakpoint-mobile) {
     padding: 1rem;
+  }
+}
+
+.post-list-wrapper .post {
+  margin-bottom: 6rem;
+  @media (max-width: $breakpoint-mobile) {
+    margin-bottom: 3rem;
   }
 }

@@ -1,3 +1,4 @@
+// 字体
 $font-family-sans-serif:
   "Josefin Sans",
   // Safari for OS X and iOS (San Francisco)
@@ -10,21 +11,14 @@ $font-family-sans-serif:
   "Roboto",
   // Basic web fallback
   "Helvetica Neue", Arial, sans-serif;
-$base-line-height: 1.5;
 
-$text-color:       #7B7B7B; // paragraph
-$text-em-color:    rgba(255, 255, 255, 0.8); // heading
+// 颜色
+$bg-color:        #fffafa; // 雪色
+$bg-mild-color:   #FFF1F1; // 浅粉
+$text-color:      #363532; // 烟草灰，paragraph
+$heading-color:   #dd3b44; // 银朱，heading
+$highlight-color: #2ec3e7; // 天青，strong
+$em-color:     #bca590; // 纸棕，em 斜体：attribute
 
-$background-color: #fff;
-
-$primary-color-light: #FFF1F1;
-$primary-color-mild:  #FFBDBD;
-$primary-color:       #D3696C; // equals to rgb(150, 53, 140)
-$primary-color-dark:  #540002;
-
-$grey-color:       #C3C3C3; // border
-
-$spacing-unit:     20px;
-
-// Width of the content area
+// 媒体查询断点
 $breakpoint-mobile: 544px;

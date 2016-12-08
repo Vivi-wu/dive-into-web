@@ -12,19 +12,6 @@
 
 
 /*
- * Mark the selected text
- */
-::-moz-selection {
-  color: white;
-  background-color: $primary-color-light;
-}
-::selection {
-  color: white;
-  background-color: $primary-color-light;
-}
-
-
-/*
  * Basic styling
  */
 html {
@@ -38,10 +25,10 @@ body {
   margin: 0;
   font-family: $font-family-sans-serif;
   font-size: 1rem;
-  line-height: $base-line-height;
+  line-height: 1.5;
   font-weight: normal;
   color: $text-color;
-  background-color: $background-color;
+  background-color: $bg-color;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -49,15 +36,19 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 p {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+pre {
+  margin: 0;
 }
 
 em {
-  color: $primary-color;
+  color: $em-color;
 }
 
 strong {
-  color: $text-em-color;
+  color: $highlight-color;
 }
 
 /*
@@ -74,16 +65,6 @@ img {
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
-h2, h3, h4 {
-  margin-top: $spacing-unit * 3;
-  color: $text-em-color;
-}
-h2 {
-  font-size: 25px;
-}
-h3 {
-  font-size: 22px;
-}
 h4 {
   font-size: 18px;
 }
@@ -93,8 +74,7 @@ h4 {
  * Link
  */
 a {
-  color: $primary-color-mild;
-
+  color: $heading-color;
 }
 
 
@@ -102,22 +82,18 @@ a {
  * table
  */
 table {
-  margin-bottom: $spacing-unit;
-  background-color: white;
+  margin-bottom: 1.5rem;
 
   tr:nth-child(odd) {
-    background-color: $primary-color-light;
-  }
-  th {
-    color: black;
+    background-color: $bg-mild-color;
   }
   th, td {
-    padding: 5px $spacing-unit;
+    padding: 0.25rem 1rem;
   }
 }
 
 table, th, td {
-  border: 1px solid $grey-color;
+  border: 1px solid $em-color;
   border-collapse: collapse;
 }
 
@@ -134,7 +110,7 @@ table, th, td {
 dl, dt, dd { margin: 0; }
 
 ol {
-  margin-left: $spacing-unit * 1.5;
+  margin-left: 1.5rem;
   padding-left: 0;
 
   li {
