@@ -4,46 +4,39 @@ category: CSS
 ---
 CSS 是一种样式层叠语言，用来描述一个 HTML（或 XML）文档的应该如何在屏幕、纸张或其他媒体上渲染。
 
-## What is CSS?
-
-**C**ascading **S**tyle **S**heets（层叠样式表）缩写为 CSS。
+What is CSS? **C**ascading **S**tyle **S**heets（层叠样式表）缩写为 CSS。
 
 CSS 解决了 HTML 的问题。HTML was **never intended to** contain tags for formatting a document, but to define the content of a document. HTML从来没有打算包含一些用于定义文档的格式的标签，而是用来定义文档的内容。
 
 ## CSS Syntax
 
-A CSS rule-set consists of a selector (指向你希望样式化的 HTML 元素) and a declaration block (包含一个或多个由分号分隔开的声明). 每一个声明包含 a property name (属性名称) and a value (值), 并由冒号隔开.
+A CSS rule-set consists of a selector (指向你希望样式化的 HTML 元素) 和 a declaration block (包含一个或多个由分号分隔开的声明).
+
+每一个声明包含 a property name (属性名称) 和 a value (值), 并由冒号隔开.
 
 <!--more-->
 
-Example:
+例如:
 
     p {color: red; text-align: center;}
 
 ## CSS Selectors
 
-CSS选择器用于查找或选择 HTML 元素，可以是以下几种：
+CSS 选择器用于查找或选择 HTML 元素，可以是以下几种：
 
-1. element Selector: 基于元素名称选取
-2. id Selector: 使用一个 HTML 元素的 id 特性来选取指定元素 (如果你想要选择一个唯一的元素，那么确保 id 在页面中是唯一存在的。) 
+1. Type selector: `E`, 选取 E 类型的元素，等同于 `*|E`，选取任何 namespace 里的 E 元素
+2. Id Selector: 以 `#` 开始，后跟 HTML 元素的 id 特性值，用来选取指定元素
 
-        #exIdSelector {
-          text-align: center;
-          color: red;
-        }
+    如果你想要选择一个唯一的元素，那么确保 id 在页面中是唯一存在的。
 
-3. class Selector: 选取含有指定的 class 特性的元素。
+3. Class Selector: 以 `.` 开始，后跟指定的 class 特性名
+4. Universal selector: `*`，选取任何元素
 
-        .exClassSelector {
-          text-align: center;
-          color: red;
-        }
-
-也可以指定只有特定的 HTML 元素需要受这个 class 的样式的影响。如：`p.center`
+选择满足特定 class 或 id 的元素。如：`E.myclass`，`E#myid`
 
 注意：**id、name 的名字不要以数字开头**。
 
-### 组合选择器
+### 选择器组 groups of selectors
 
 用逗号隔开、组合拥有相同 CSS 代码的 HTML 元素，以简化代码。
 
@@ -54,7 +47,7 @@ CSS选择器用于查找或选择 HTML 元素，可以是以下几种：
 
 ## CSS Comments
 
-A CSS comment starts with `/*` and ends with `*/`，也可以有多行. 
+CSS 注释以 `/*` 开始，以 `*/` 结束，可以单行注释，也可以有多行.
 
 ## 如何使用 CSS
 
@@ -66,9 +59,11 @@ A CSS comment starts with `/*` and ends with `*/`，也可以有多行.
 
 样式保存在以 _.css_ 为后缀的文件中。这样的好处是只需改变一个文件，就修改来整个网站（或多个页面）的样式。
 
-    <head>  
-    <link rel="stylesheet" type="text/css" href="mystyle.css">  
-    </head>
+```html
+<head>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+```
 
 注意： The _type_ attribute is **not necessary** in HTML5.
 
@@ -76,12 +71,14 @@ A CSS comment starts with `/*` and ends with `*/`，也可以有多行.
 
 当**一个页面**需要有唯一的样式时，将样式写在 `<style>` 元素里，放在页面 `<head>` 区域.
 
-    <head>
-    <style>
-    body {background-image: url("images/background.gif");}
-    p {margin-left: 20px;}
-    </style>  
-    </head>
+```html
+<head>
+<style>
+body {background-image: url("images/background.gif");}
+p {margin-left: 20px;}
+</style>
+</head>
+```
 
 ### Inline Styling
 
@@ -99,9 +96,11 @@ A CSS comment starts with `/*` and ends with `*/`，也可以有多行.
 
 _url_ 可以是**字符串**，也可以是 **url()**。
 
-    @import "custom.css";
-    @import url("common.css") screen, projection;
-    @import url("landscape.css") screen and (orientation: landscape);
+```css
+@import "custom.css";
+@import url("common.css") screen, projection;
+@import url("landscape.css") screen and (orientation: landscape);
+```
 
 **避免使用** `@import`，因为这样做会**导致样式文件无法并行下载**。使用 @import 引用的文件只有在引用它的那个 css 文件被下载、解析之后，浏览器才知道还有另外一个 css 文件需要下载，然后去下载，完了之后再开始解析、构建render tree等一系列操作，会出现页面闪烁。有些浏览器中 css @import 引起的 css 解析延迟，会加长页面留白期。
 
@@ -117,12 +116,14 @@ Generally speaking we can say that all the styles will "cascade" into a new "vir
 2. _External style_ sheet and _Internal style_ sheet (in the head section) 注意：外部样式表和内部样式表在头部**书写的顺序也会影响优先级**，写在后面的优先级高。
 3. _Inline style_ (inside an HTML element)
 
-对同一个HTML元素同时使用多个 CSS class 时，class 选择器**写在越后面层叠优先级越高**。
+对同一个HTML元素同时使用多个 CSS class 时，class 选择器写在**越靠右边**层叠优**先级越高**。
 
-    <style>
-    .a1{color:red;}
-    .a2{color:green;}
-    .a3{color:blue;}
-    </style>
-    <p class="a1 a2 a3">test</p>
-    <!--文字颜色最终为blue-->
+```html
+<style>
+.a1{color:red;}
+.a2{color:green;}
+.a3{color:blue;}
+</style>
+<p class="a1 a2 a3">test</p>
+<!--文字颜色最终为blue-->
+```

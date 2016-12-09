@@ -47,8 +47,15 @@ em {
   color: $em-color;
 }
 
-strong {
-  color: $highlight-color;
+code {
+  padding: 1px 8px;
+  border: 1px solid $border-color;
+  border-radius: 3px;
+}
+
+pre code {
+  padding: 0;
+  border: none;
 }
 
 /*
@@ -93,7 +100,7 @@ table {
 }
 
 table, th, td {
-  border: 1px solid $em-color;
+  border: 1px solid $border-color;
   border-collapse: collapse;
 }
 

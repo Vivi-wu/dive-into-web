@@ -44,6 +44,9 @@ figure.highlight {
     p {
       margin-bottom: 0.5rem;
     }
+    &>p:last-child {
+      margin-bottom: 0;
+    }
   }
   h3 {
     font-size: 1.4rem;
@@ -52,6 +55,7 @@ figure.highlight {
 }
 
 .post-wrapper {
+  .post article h2,
   .post article h3 {
     margin-top: 4rem;
   }
