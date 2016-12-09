@@ -8,7 +8,7 @@ title: CSS | Dive into Web
     <header>
       <h2><a href="{{ post.url | prepend: site.baseurl }}" title="{{ post.title }}">{{ post.title }}</a></h2>
       <div class="post-meta-infos">
-        <span>发布于 {{ post.date | date_to_string }}</span>
+        <span>初发布于 {{ post.date | date_to_string }}</span>
         <span class="text-sep">|</span>
         <span>in
           {% for category in post.categories %}

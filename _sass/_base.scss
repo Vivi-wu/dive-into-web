@@ -31,24 +31,31 @@ body {
   background-color: $bg-color;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+
+/*
+ * Headings
+ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
   margin-top: 0;
 }
 
-p {
-  margin-bottom: 1.25rem;
-}
 
-pre {
-  margin: 0;
+p {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
 }
 
 em {
   color: $em-color;
 }
 
+pre {
+  margin: 0;
+}
+
 code {
-  padding: 1px 8px;
+  padding: 2px 6px 3px;
   border: 1px solid $border-color;
   border-radius: 3px;
 }
@@ -58,22 +65,20 @@ pre code {
   border: none;
 }
 
+
+/*
+ * Quotation
+ */
+q {
+  cursor: help;
+}
+
+
 /*
  * Images
  */
 img {
   max-width: 100%;
-}
-
-
-/*
- * Headings
- */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-}
-h4 {
-  font-size: 18px;
 }
 
 
