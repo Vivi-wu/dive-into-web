@@ -1,5 +1,5 @@
 ---
-title:  "CSS Borders, Margins and Paddings"
+title:  "CSS Borders"
 category: CSS
 ---
 
@@ -147,34 +147,3 @@ div { /* 向上的三角形 */
     当取值为 `space` 时，也是要求按整数个 tiles 重复排列来填充，如果不满足，剩余的空间将平均分配到 tiles 的周围。
 
 **注意**：<span class="t-blue">要使用图片边框，需要设置 **border** 性质</span>。
-
-## CSS Margins
-
-_margin_ 属性用来设定元素边框外边空白区域（**outside** the border）的大小。
-
-**注意**：<span class="t-blue">外边距是完全**透明的**，没有 background color</span>。
-
-_margin_ 属性实际上是 _margin-top_, _margin-right_, _margin-bottom_, _margin-left_ 四个属性的 all in one 缩写形式。设定方式同 border。
-
-可以取值类型：
-
-+ `auto`，浏览器来计算外边距。
-+ length，以 px，pt，cm 等为单位来指定，默认值是**0**
-+ %，以所包含元素的宽度的百分比来指定
-+ inherit
-
-外边距可以取<span class="t-red">负值</span>，因为两个元素可以重叠 overlap。
-
-## CSS Padding
-
-_padding_ 属性用来设定元素的内容和元素的边框之间空白区域（**inside** the border）的大小。
-
-**注意**：<span class="t-blue">内边距受到元素的 background color 影响</span>。
-
-_padding_ 属性实际上是 _padding-top_, _padding-right_, _padding-bottom_, _padding-left_ 四个属性的 all in one 缩写形式。设定方式同 border。
-
-可以取值类型：
-
-+ length，以 px，pt，cm 等为单位来指定，默认值是**0**
-+ %，以所包含元素的宽度的百分比来指定
-+ inherit
