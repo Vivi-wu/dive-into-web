@@ -95,12 +95,14 @@ a {
  */
 table {
   margin-bottom: 1.5rem;
-
-  tr:nth-child(odd) {
+  thead>tr {
+    background-color: rgba(188, 165, 144, 0.3);
+  }
+  tbody>tr:nth-child(even) {
     background-color: $bg-mild-color;
   }
   th, td {
-    padding: 0.25rem 1rem;
+    padding: 0.5rem 1rem 0.25rem;
   }
 }
 
