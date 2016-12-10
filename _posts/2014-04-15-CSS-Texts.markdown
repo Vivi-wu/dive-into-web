@@ -1,24 +1,24 @@
 ---
-title:  "CSS Text"
+title:  "CSS Texts"
 category: CSS
 ---
 跟文本有关的 CSS 属性有：
 
-+ _color_，用来设置文本的颜色。通常以颜色的 name, HEX 值, RGB 值来指定。对于符合 W3C 的 CSS，如果你定义了 color 这个性质，也要定义 _background-color_ 属性。
-+ _text-align_，设置文本的**水平对齐**方式。如果文本的书写方向为 left-to-right 从左到右，则默认是**左对齐**，反之，为右对齐。可取值为：left, right, center, **justify**（每行文本将拉伸，以满足相同的宽度，就像报纸和杂志上的文本样式）
++ _color_，设置文本的颜色。通常以颜色的 name, HEX 值, RGB 值来指定。对于符合 W3C 的 CSS，如果你定义了 color 这个性质，也要定义 _background-color_ 属性。
++ _text-align_，设置文本的**水平对齐**方式。如果文本的书写方向为 left-to-right 从左到右，则默认是**左对齐**，反之，为右对齐。可取值为：left, right, center, **justify**（每行文本将拉伸，达到相同的宽度，就像报纸和杂志上的文字排版）
 + _text-decoration_，用来设置或移除文本的装饰。可取的值为：none（无装饰），overline <span style="text-decoration:overline;">文字上方划线</span>，line-through <span style="text-decoration:line-through;">横线穿过文字</span>，underline <span style="text-decoration:underline;">文字下方划线</span>（`<a>` 链接的默认文本样式）
 
-    **注意**：<span class="blue-text">不建议设置那些**非链接**的文字带有下划线，这样经常会误导用户</span>.
+    **注意**：<span class="t-blue">不建议设置那些**非链接**的文字带有下划线，这样经常会误导用户</span>.
 
 <!--more-->
 
-+ _text-transform_，用来设定文本中的大小写字母。可取的值为：
++ _text-transform_，设定文本中的大小写字母。可取的值为：
 
     + `uppercase`, 全部转为大写。<span style="text-transform:uppercase">This is some text</span>.
     + `lowercase`, 全部转为小写。<span style="text-transform:lowercase">This is some text</span>.
     + `capitalize`, 每个单词的**首字母转为大写**。<span style="text-transform:capitalize">This is some text</span>.
 
-+ _text-indent_，**首行缩进**是用于指定一段文字中段落开始处与左边线的距离（如一般书写，每段开始空两个汉字。）
++ _text-indent_，**首行缩进**，指定一段文字中段落开始处与左边线的距离。可取的值为：
 
     + length: 使用 px, pt, cm, em 指定间距，默认值是 **0**
     + %，以父元素宽度的百分比
@@ -33,11 +33,11 @@ category: CSS
     + `normal`: **默认值**
     + number: 使用当前行高乘以这个数字得出的值为新的行高
     + length
-    + %，in percent of the **current font size**
+    + %，**当前字体 font size 的百分比**
 
 + _direction_，通常与 _unicode-bidi_ 一起用，设定同一个文件中的文本是否需要改变书写方向，以支持多种语言。前者取值：
 
-    + `ltr`: 默认值，left-to-right
+    + `ltr`: **默认值**，left-to-right
     + `rtl`: right-to-left
 
     后者取值：
@@ -46,24 +46,24 @@ category: CSS
     + `embed`, 加一层额外嵌入
     + `bidi-override`, 加一层额外嵌入，根据 direction 性质所指定的方向来重新书写文字。
 
-+ _white-space_，用来指定如何处理元素里的**空白符**（对源文档中的空格、换行和 tab 字符的处理）。
++ _white-space_，指定如何处理元素里的**空白符**（<span class="t-red">对源文档中的空格、换行和 tab 字符的处理</span>）。
 
-    <span class="blue-text">以下三个值都会使**多个相连**空白符折叠成为**一个**</span>:
+    <span class="t-blue">以下三个值都会使**多个相连**空白符折叠成为**一个**</span>:
 
     + `normal`，默认值，文本在必要时会换行。
     + `nowrap`，文本**不**允许自动换行，除非遇到 `<br>` 一个换行符
     + `pre-line`，文本在必要时会换行，遇到 line breaks 也会换行
 
-    <span class="blue-text">以下取值浏览器将**不处理**空白符（**不合并**空格，**不忽略**换行）</span>
+    <span class="t-blue">以下取值浏览器将**不处理**空白符（**不合并**空格，**不忽略**换行）</span>
 
     + `pre`，文本只在 line breaks 处换行，**不**会自动换行
     + `pre-wrap`，文本在必要时会换行，遇到 line breaks 也会换行
 
-+ _vertical-align_，用来设定元素垂直对齐的方式。可取值：
++ _vertical-align_，设定元素垂直对齐的方式。只影响 inline, inline-block, inline-table, 和 table cell 等元素。可取值：
 
-    + `baseline`  默认值， 使得元素的baseline（基线）与父元素的基线对齐
+    + `baseline`  默认值， 使得元素的 baseline（基线）与父元素的基线对齐
     + length      以指定的值来**升高**或**降低**元素，**允许负值**（设为负值降低元素）
-    + %           以 _line-height_ 性质值的百分之几来升高或降低元素，**允许负值**
+    + %           <span class="t-red">以 _line-height_ 性质值的百分之几来升高或降低元素</span>，**允许负值**
     + `sub`         元素像<span style="vertical-aglin:sub;">下标</span>一样对齐
     + `super`       元素像<span style="vertical-aglin:super;">上标</span>一样对齐
     + `top`         元素的 top 与所在行最高的元素的 top 对齐
@@ -87,20 +87,20 @@ category: CSS
     + spread: 可选的, 阴影的尺寸大小，允许负值
     + color: 可选的
 
-+ _text-overflow_，用来设定那些**溢出**而**不被显示**的内容应该如何提示给用户（父元素设定了固定的 width，且 _overflow_ 属性值为 `hidden`）。可取值：
++ _text-overflow_，用来设定那些**溢出**而**不被显示**的内容应该如何提示给用户（需父元素设定了固定的 width，且 _overflow_ 属性值为 `hidden`）。可取值：
 
-   + `clip`，默认值，直接剪切掉文本，好像被橡皮擦掉超出部分一样。
+   + `clip`，**默认值**，直接剪切掉文本，好像被橡皮擦掉超出部分一样。
    + `ellipsis`，将在临界处文本末尾添加 `...` 来代表有文本被隐藏。
    + string，显示给定的字符串，来代表被隐藏的文本。(很遗憾，目前只有 Firefox 支持)
 
 + _word-wrap_，允许长的单词能够被分隔开，绕到下一行。取值为：
 
-   + `normal`，默认值，针对英语类单词，只在允许的分隔处分开单词。
+   + `normal`，**默认值**，针对英语类单词，只在允许的分隔处分开单词。
    + `break-word`，允许单词被分割，即使在单词的中间。
 
-+ _word-break_，对于非 CJK 脚本（比如中文、日语、韩语），指定换行规则。可取值：
++ _word-break_，<span class="t-red">对于非 CJK 脚本（比如中文、日语、韩语）指定换行规则</span>。可取值：
 
-   + `normal`，默认值，根据常用规则分隔单词。
+   + `normal`，**默认值**，根据常用规则分隔单词。
    + `break-all`，允许在任何两个字之间换行
    + `keep-all`，禁止词组之间断行
 

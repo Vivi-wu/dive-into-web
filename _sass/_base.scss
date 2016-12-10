@@ -40,7 +40,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
 }
 
-
 p {
   margin-top: 0;
   margin-bottom: 1.25rem;
@@ -48,6 +47,12 @@ p {
 
 em {
   color: $em-color;
+}
+
+hr {
+  border-color: $border-color;
+  border-style: dashed;
+  margin-bottom: 1.5rem;
 }
 
 pre {
@@ -66,10 +71,6 @@ pre code {
 }
 
 
-hr {
-  border-color: $border-color;
-  border-style: dashed;
-}
 /*
  * Quotation
  */
