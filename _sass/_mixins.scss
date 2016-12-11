@@ -28,7 +28,10 @@
  */
 #go-top-button {
   position: fixed;
-  right: 1.5rem;
+  right: 2rem;
+  @media (max-width: $breakpoint-mobile) {
+    right: 1rem;
+  }
   bottom: 1.5rem;
   padding: 1rem 0.75rem;
   z-index: 2;
@@ -47,5 +50,74 @@
       color: $heading-color;
       opacity: 0.9;
     }
+  }
+}
+
+
+/*
+ * Tooltip
+ */
+.tooltip-wrapper {
+  max-width: 200px;
+  padding: 5px 8px;
+  text-align: center;
+  line-height: normal;
+  color: $text-color-reverse;
+  background-color: $text-color;
+  border-radius: .25rem;
+  &::before {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+  }
+}
+.tooltip.left .tooltip-wrapper::before {
+    top: 50%;
+    right: -5px;
+    margin-top: -5px;
+    content: "";
+    border-width: 5px 0 5px 5px;
+    border-left-color: $text-color;
+}
+
+.sidebar-wrapper .tooltip {
+  position: absolute;
+  left: -4rem;
+  top: 1rem;
+}
+
+/*
+ * Sidebar
+ */
+.sidebar-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: -75px;
+  width: 5rem;
+  transition: right 0.3s ease-in-out;
+  &:hover {
+    right: 0;
+  }
+}
+.sidebar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  &>.item {
+    flex-grow: 1;
+    padding-top: 100%;
+    color: $text-color-reverse;
+    background-color: $heading-color;
+    @extend .t-center;
+    transition: color 0.3s ease-out, font-size 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  }
+  &>.item:hover {
+    font-size: 2rem;
+    color: $heading-color;
+    background-color: $bg-mild-color;
+    text-decoration: none;
   }
 }
