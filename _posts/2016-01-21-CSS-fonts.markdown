@@ -4,13 +4,16 @@ category: CSS
 ---
 在 CSS 中，总的来说有两种字体集：
 
-+ **generic family** 通用字体系统 - a group of font families with a similar look 一组拥有相似外观的字体系统
-+ **font family** 特定字体系统 - a specific font family (like "Times New Roman" or "Arial")
++ **generic family** 通用字体系统，一组拥有相似外观的字体系统
++ **font family** 特定字体系统 (like "Times New Roman" 或 "Arial")
 
 <table>
+  <thead>
     <tr>
-      <th>Generic family</th><th>Font family</th><th>Description</th>
+      <th>Generic family</th><th>Font family</th><th>描述</th>
     </tr>
+  </thead>
+  <tbody>
     <tr style="font-family: serif;">
       <td>Serif</td><td>Times New Roman, Georgia，宋体，仿宋，楷体</td><td>这类型的字体每个字符的末端有突出的小线</td>
     </tr>
@@ -20,23 +23,24 @@ category: CSS
     <tr style="font-family: monospace;">
       <td>Monospace</td><td>Courier New, Lucida Console</td><td>每一个字符宽度相同(Safari 好像不支持，这行效果需要在 Chrome 里查看)</td>
     </tr>
+  </tbody>
 </table>
 
-**Tip**：_sans-serif_ fonts are considered **easier to read** than _serif_ fonts. 无衬线字体被认为比后者在电脑屏幕上更容易阅读，有人比较过同样为 14px 的中文字体，**黑体**看起来比宋体和楷体更**大**。
+**Tip**：_sans-serif_  无衬线字体被认为比有衬线 _serif_ 字体在电脑屏幕上**更容易阅读**，有人比较过同样为 14px 的中文字体，**黑体**看起来比宋体和楷体更**大**。
 
 <!--more-->
 
 ## font-family
 
-The _font-family_ property should hold several font names as a "fallback" system. If the browser does not support the first font, it tries the next font. Start with the font you want, and end with a generic family. 该特性像一个“后备”系统，拥有一些字体名称。每一个名称之间由**逗号分开**，从你希望使用的字体开始，以一个通用字体系统结束，这样如果浏览器不支持第一个字体，它会尝试后面的选项。
+_font-family_ 属性像一个“后备”系统，拥有一些字体名称。每一个名称之间由**逗号分开**，**从你希望使用的字体开始，以一个通用字体系统结束**，这样如果浏览器不支持第一个字体，它会尝试后面的选项。
 
-对于以中文为使用语言的 web 应用，<span class="blue-text">把类似中文字体的英文字体集，写在最前面</span>。因为英文字体集没有中文字符，但是中文字体集却包含所有英文字符。中文字体放在前面，会优先显示，而中文字体显示的英文字符通常比较丑。
+对于以中文为使用语言的 web 应用，<span class="t-blue">把英文字体集，写在最前面</span>。因为英文字体集没有中文字符，但是中文字体集却包含所有英文字符。中文字体放在前面，会优先显示，而中文字体显示的英文字符通常比较丑。
 
 对于仿宋、楷体，最好在字号大于 14px 的情况下使用，否则影响清晰度。
 
-<span class="blue-text">目前在 ios、android、winphone，三种手机操作系统中的默认字体都是类似**微软雅黑**的 Sans-serif 无衬线字体。</span>
+<span class="t-blue">目前在 ios、android、winphone，三种手机操作系统中的默认字体都是类似**微软雅黑**的 Sans-serif 无衬线字体。</span>
 
-**注意**: 如果字体集名称多余一个单词，则必须用**双引号**括起来。like: "Times New Roman".
+**注意**: 如果字体集名称多余一个单词，则必须用**双引号**括起来。如: "Times New Roman".
 
 ## Font style
 
@@ -50,9 +54,9 @@ _font-style_ 属性有 3 种值：
 
 ## Font size
 
-_font-size_ 该属性用来设定字体大小。
+_font-size_ 用来设定字体大小。
 
-**注意**: **不要**通过调整字体大小来使段落看起来像是标题，或者是标题看起来像段落。<span class="blue-text">请使用恰当的 HTML 标签来实现。</span> Always use the proper HTML tags, like `<h1>` - `<h6>` for headings and `<p>` for paragraphs.
+注意: **不要**通过调整字体大小来使段落看起来像是标题，或者使标题看起来像段落。<span class="t-blue">请使用恰当的 HTML 标签来实现</span>。
 
 ### absolute-size
 
@@ -64,9 +68,9 @@ Possible values include the following: `xx-small`, `x-small`, `small`, `medium`,
 
 ### relative-size
 
-大小相对于父元素的字体大小. Possible values include the following: `smaller`, `larger`.
+大小**相对于父元素的字体大小**. Possible values include the following: `smaller`, `larger`.
 
-**注意**: 如不指定 font size，正常段落文本的默认字体大小为 **16px**.
+注意: 如不指定 font size，正常段落文本的默认字体大小为 **16px**.
 
 ### 字体大小取值
 
@@ -78,22 +82,20 @@ _%_：以父元素字体大小为百分比
 
 em 允许用户 resize 文本字体大小，许多开发者使用 _em_ 而不是 _px_。
 
-1em 等于当前字体大小（字体 font-size 默认从父元素继承）。default text size in browser is 16px，所有 1em=16px
+1em 等于当前字体大小（字体 font-size 默认从父元素继承）。浏览器默认字体大小为 16px，所有 1em=16px
 
-The em size unit is recommended by the W3C.
-
-The size can be calculated from pixels to em using this formula: `pixels/16=em`
+pixel to em: `pixels/16=em`
 
 ## Font weight
 
-font-weight 该性质用来设定字体的粗细，取值：
+_font-weight_ 用来设定字体的粗细，取值：
 
-+ normal 默认值
++ normal **默认值**
 + bold 粗体
 + bolder 更粗
 + lighter 细体
 
-整百数字（100-900）**400** is the same as **normal**, and **700** is the same as **bold**
+整百数字（100-900）**400** 等同于 **normal**，**700** 等同于 **bold**。
 
 ## Font variant
 
@@ -101,8 +103,6 @@ _font-variant_ 属性用来设定文本是否以 small-caps 字体输出
 
 + `normal` 默认值
 + `small-caps`
-
-In a small-caps font, all lowercase letters are converted to uppercase letters. However, the converted uppercase letters appears in a smaller font size than the original uppercase letters in the text.
 
 所有小写字母被转换成大写字母，但是，这些被转换成大写的字母，要比文本中本来的大写字母要小。效果如下：
 
@@ -114,7 +114,7 @@ _font_ 属性用来将所有 font 相关的属性写在一起,  (in order):
 
 font-style font-variant font-weight font-size/line-height font-family
 
-The _font-size_ and _font-family_ values are **required**. If one of the other values are missing, the default values will be inserted, if any.
+其中 _font-size_ 和 _font-family_ 是 **required**. If one of the other values are missing, the default values will be inserted, if any.
 
 ## CSS3 Web Fonts
 
@@ -122,15 +122,16 @@ The _font-size_ and _font-family_ values are **required**. If one of the other v
 
 自有字体使用 CSS3 的 `@font-face` 规则定义，使用方法如下：
 
-    @font-face {
-      font-family: myFont; /* 定义字体名称 */
-      src: url(font_file.otf); /* 指向字体文件 */
-    }
-    div {
-      font-family: myFont;
-    }
+```css
+@font-face {
+  font-family: myFont; /* 定义字体名称 */
+  src: url(font_file.otf); /* 指向字体文件 */
+}
+div {
+  font-family: myFont;
+}
+```
 
 **TTF/OTF**，**WOFF** 格式的字体文件被所有浏览器支持。
 
-**注意**：最好使用**小写**字体来写 URL，避免 IE 中出现意外结果。
-
+注意：最好使用**小写**字体来写 URL，避免 IE 中出现意外结果。

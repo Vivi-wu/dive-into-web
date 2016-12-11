@@ -2,7 +2,7 @@
 title:  "CSS 选择器实现列表元素占满视图效果"
 category: CSS
 ---
-[Using CSS Mod Queries with Range Selectors](http://alistapart.com/article/using-css-mod-queries-with-range-selectors)
+参考文章 [Using CSS Mod Queries with Range Selectors](http://alistapart.com/article/using-css-mod-queries-with-range-selectors)
 
 问题描述：
 
@@ -10,7 +10,9 @@ category: CSS
 
 实现方法：
 
-使用 CSS 的 quantity queries 就可以满足需求。
+使用 CSS 的 quantity queries。
+
+<!--more-->
 
 ### :nth-child(an+b)
 
