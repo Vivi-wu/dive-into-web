@@ -49,18 +49,17 @@ category: [CSS, HTML]
 
 解释：
 
-1. `vm` 是 CSS3 新增的单位，代表 viewport 宽的 `1%`。那么 `100vm` 就表示整个 viewport 宽度。（视图高度的百分之几则用 `vh` 表示）
-2. CSS `calc()` 函数，提供加减乘除四则运算，可混合使用各种 CSS 单位（如：%、px、em、rem 等单位）计算长度。如：`calc((100% - 20px * 2) / 3);`
+1. CSS `calc()` 函数，提供加减乘除四则运算，可混合使用各种 CSS 单位（如：%、px、em、rem 等单位）计算长度。如：`calc((100% - 20px * 2) / 3);`
 
     <span class="t-blue">加号、减号前后的空格不能省略！</span>
 
-3. 以 iPhone6 为基准的高清视觉稿，ps 中看到宽为 750px，实际设备宽度为 375px。上面的 calc 计算可得根元素实际字体大小为 50px。那么:
+2. 以 iPhone6 为基准的高清视觉稿，ps 中看到宽为 750px，实际设备宽度为 375px。上面的 calc 计算可得根元素实际字体大小为 50px。那么:
 
         1rem = 50px;
         0.28rem = 14px; // 视觉稿上量的 28px，除以 100 转换成 rem 单位 0.28rem
 
-4. 这样在 iPhone6 下，所有元素的尺寸还是和视觉稿的尺寸一样，而 iPhone5 中，因为设备的宽度变小了，`100vw/7.5` 得到的值相应地变小，即 rem 的单位值变小，页面中所有的尺寸会等比例缩放。
-5. `7.5` 是让根元素 `<html>` 的 _font-size_ 等于 100px（为了换算方便）计算所得的比例，换成 iPhone5 则为 `6.4` （640px / 100px = 6.4）。
+3. 这样在 iPhone6 下，所有元素的尺寸还是和视觉稿的尺寸一样，而 iPhone5 中，因为设备的宽度变小了，`100vw/7.5` 得到的值相应地变小，即 rem 的单位值变小，页面中所有的尺寸会等比例缩放。
+4. `7.5` 是让根元素 `<html>` 的 _font-size_ 等于 100px（为了换算方便）计算所得的比例，换成 iPhone5 则为 `6.4` （640px / 100px = 6.4）。
 
 跨浏览器兼容方案：
 
@@ -156,3 +155,12 @@ rem 简单粗暴的实现，使得“屏幕越大按钮越大”。设计师认�
 ## box-sizing
 
 _box-sizing_ 使用它后，不用再单独计算元素宽度和间距，全部根据视觉稿测量的为准。
+
+## 辅助开发工具
+
+切图神器 [cutterman](http://www.cutterman.cn/zh/cutterman)
+
+标记神器 [markman](http://www.getmarkman.com/) 非 PS 插件
+
+视觉稿比对自动调整代码神器 [AlloyDesigner](http://alloyteam.github.io/AlloyDesigner/)
+

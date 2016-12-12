@@ -74,7 +74,7 @@ Possible values include the following: `xx-small`, `x-small`, `small`, `medium`,
 
 ### 字体大小取值
 
-_length_：Floating-point number, followed by an absolute units designator (cm, mm, in, pt, or pc) or a relative units designator (em, ex, or px).
+_length_：Floating-point number, 后跟 CSS Unit.
 
 _%_：以父元素字体大小为百分比
 

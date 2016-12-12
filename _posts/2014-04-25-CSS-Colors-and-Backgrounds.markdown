@@ -131,3 +131,17 @@ The background of an element is the total size of the element, including **paddi
     + `content-box`: 背景图从内容区域左上角开始
 
 4. _background-clip_，指定**背景上色区域**。取值种类同 _background-origin_。但**默认值**是 `border-box`。
+
+## CSS3 Gradients
+
+定义了两种渐变：
+
+1. Linear Gradients 线性渐变。 方向可以向 (down/up/left/right/diagonally 对角地)，**默认方向**是 Top to Bottom，
+
+    除了使用预定义的表示方向的关键字，还可以使用 Angles 角度，**指定一条水平线和渐变线之间的角度**，<span class="t-blue">沿逆时针</span>。
+
+        background: linear-gradient(direction, color-stop1, color-stop2, ...); // color-stop 是你希望实现平滑过度的颜色
+
+2. Radial Gradients 径向渐变。由它们的 center 定义，必须**至少定义两个 color stops**。默认 shape 取值是**椭圆**，size 是 farthest 最远的角落， position 是中心位置。
+
+        background: radial-gradient(shape size at position, start-color, ..., last-color);

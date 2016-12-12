@@ -117,3 +117,27 @@ category: CSS
    + `left`，`right`，`center` 左／右／中间对齐
    + `justify`，拉伸最后一行文本，以满足和其他行相同的宽度
    + `start`，`end`，在文本行开始／结尾处对齐（根据 _direction_ 属性的值确定是左对齐，还是右对齐）
+
+## CSS3 Multiple Columns
+
+新增为文本布局创建 multiple columns，就像报纸上的多列显示.
+
++ _column-width_ 列宽，指定一个建议的最优的列宽度。可取值：`auto` 和 length 。
++ _column-count_ 列数，指定元素分成几列。可取值：`auto` 和 integer 。
+
+以上两个属性 all in one 的简写属性是 _columns_ 。
+
+两列之间可以绘制分割线。
+
++ _column-rule-style_ 分割线的样式，取值参考 _border-style_
++ _column-rule-width_ 分割线的宽度，**不允许负值**
++ _column-rule-color_ 分隔线的颜色，可取值：color 。
+
+以上两个属性 all in one 的简写属性是 _column-rule_。
+
+此外还有：
+
++ _column-gap_ 定义列间距，可取值：`normal` 和 length 。
++ _column-fill_ 指定是否把文字尽可能平均分配到每一列。可取值：`balance` 、 `balance-all` 和 `auto` 。
+
+目前除 Edge 大部分浏览器不支持 break-before, break-after, break-inside 还不支持。火狐不支持 column-span，
