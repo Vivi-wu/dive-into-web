@@ -30,10 +30,17 @@ category: CSS
 
 + _line-height_，指定**每行文本之间的距离**。
 
-    + `normal`: **默认值**
-    + number: 使用当前行高乘以这个数字得出的值为新的行高
-    + length
-    + %，**当前字体 font size 的百分比**
+    + `normal`: **默认值**，值取决于 user-agent 和字体集，桌面浏览器一般为 1.2
+    + number，行高为**当前元素的 _font-size_ 乘以这个数字**计算而得
+    + length，使用 css 单位表示大小
+    + `%`，**元素本身 _font-size_ 的百分比**
+
+    注意：如果不明确设置子元素行高，当其父元素的行高值为 length 和 % ，子元素会直接继承。<span class="t-blue">为避免意外，尽量使用 **number** 设置行高</span>。
+
+    看演示：
+
+    <p data-height="265" data-theme-id="0" data-slug-hash="VmGpWo" data-default-tab="result" data-user="VivienneWU" data-embed-version="2" data-pen-title="Different value for line-height" class="codepen">See the Pen <a href="http://codepen.io/VivienneWU/pen/VmGpWo/">Different value for line-height</a> by Vivienne (<a href="http://codepen.io/VivienneWU">@VivienneWU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+    <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
 + _direction_，通常与 _unicode-bidi_ 一起用，设定同一个文件中的文本是否需要改变书写方向，以支持多种语言。前者取值：
 
