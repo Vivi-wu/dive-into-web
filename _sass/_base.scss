@@ -26,6 +26,9 @@ body {
   font-family: $font-family-sans-serif;
   font-size: 1rem;
   line-height: 1.5;
+  @media (max-width: $breakpoint-mobile) {
+    line-height: 2;
+  }
   font-weight: normal;
   color: $text-color;
   background-color: $bg-color;
@@ -128,6 +131,12 @@ table, th, td {
 }
 
 dl, dt, dd { margin: 0; }
+
+ul {
+  @media (max-width: $breakpoint-mobile) {
+    padding-left: 1rem;
+  }
+}
 
 ol {
   margin-left: 1.5rem;

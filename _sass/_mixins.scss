@@ -210,13 +210,13 @@ svg text {
     stroke-dashoffset: 555;
   }
   &.csstext {
-    @include animation(3s text-outline-css 2s 1 alternate forwards);
+    @include animation(4s text-outline-css 1s 1 alternate forwards);
   }
   &.jstext {
-    @include animation(5s text-outline-css 3s 3 alternate forwards);
+    @include animation(5s text-outline-css 2s 3 alternate forwards);
   }
   &.othertext {
-    @include animation(3s text-outline-css 4s 3 alternate forwards);
+    @include animation(3s text-outline-css 3s 3 alternate forwards);
   }
 }
 

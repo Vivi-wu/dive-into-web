@@ -16,6 +16,7 @@
   }
   &>.item {
     flex-grow: 1;
+    text-decoration: none;
     @media (max-width: $breakpoint-mobile) {
       height: 25%;
     }

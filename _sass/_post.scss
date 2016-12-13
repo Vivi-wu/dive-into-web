@@ -47,6 +47,9 @@ figure.highlight {
     margin-bottom: 0.25rem;
     font-size: 3rem;
     color: $heading-color;
+    @media (max-width: $breakpoint-mobile) {
+      line-height: normal;
+    }
   }
 }
 

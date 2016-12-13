@@ -98,13 +98,19 @@ div {
 }
 ```
 
-除了上面提到的两个性质，还包括 _animation-timing-function_（**默认值**是 ease）、_animation-delay_、_animation-iteration-count_ （设定动画播放次数，可以是 integer 数字或关键字 infinite，**默认值**是 1）、_animation-direction_。
+除了上面提到的两个性质，还包括：
 
-六个性质的 all in one 简写形式是 _animation_ 。
++ _animation-timing-function_（**默认值**是 ease）
++ _animation-delay_（**默认值**是 0s）
++ _animation-iteration-count_ （设定动画播放次数，可以是 integer 数字或关键字 infinite，**默认值**是 1）
++ _animation-direction_（**默认值**是 normal）
++ _animation-fill-mode_ 指定当动画结束或有 delay 时给元素应用的一些样式，可以取值：
 
-此外，还有 _animation-fill-mode_（指定当动画结束或有 delay 时给元素应用的一些样式，可以取值：
+    + `none` **默认值**
+    + `forwards`，tells the browser to stop the animation on the last keyframe at the end of the last iteration and not revert back to its pre-animation state
+    + `backwards`，makes the element Go directly to keyframe 0% when the page loads, even if there is an animation-delay, staying there until the animation starts
+    + `both`，applies both backwards and forwards, sitting on the first keyframe until the animation begins (no matter the length of the positive animation delay) and staying on the last keyframe at the end of the last animation
 
-+ `none` **默认值**
-+ `forwards`，tells the browser to stop the animation on the last keyframe at the end of the last iteration and not revert back to its pre-animation state
-+ `backwards`，makes the element Go directly to keyframe 0% when the page loads, even if there is an animation-delay, staying there until the animation starts
-+ `both`，applies both backwards and forwards, sitting on the first keyframe until the animation begins (no matter the length of the positive animation delay) and staying on the last keyframe at the end of the last animation
++ _animation-play-state_（**默认值**是 running) 设定当前动画是运行还是暂停。
+
+所有性质的 all in one 简写形式是 _animation_ 。
