@@ -8,6 +8,20 @@
   margin-right: auto;
 }
 
+.mobile-only {
+  display: none;
+  @media (max-width: $breakpoint-mobile) {
+    display: block;
+  }
+}
+
+.pc-only {
+  display: block;
+  @media (max-width: $breakpoint-mobile) {
+    display: none;
+  }
+}
+
 
 /*
  * Text
@@ -65,6 +79,10 @@
   color: $text-color-reverse;
   background-color: $text-color;
   border-radius: .25rem;
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 2rem;
+    background-color: rgba(54, 53, 50,0.2);
+  }
   &::before {
     position: absolute;
     width: 0;
@@ -74,19 +92,26 @@
   }
 }
 .tooltip.left .tooltip-wrapper::before {
-    top: 50%;
-    right: -5px;
-    margin-top: -5px;
-    content: "";
-    border-width: 5px 0 5px 5px;
-    border-left-color: $text-color;
+  top: 50%;
+  right: -5px;
+  margin-top: -5px;
+  content: "";
+  border-width: 5px 0 5px 5px;
+  border-left-color: $text-color;
+  @media (max-width: $breakpoint-mobile) {
+    border-left-color: rgba(54, 53, 50,0.2);
+  }
 }
 
 .sidebar-wrapper .tooltip {
   position: absolute;
   left: -4rem;
   top: 1rem;
+  @media (max-width: $breakpoint-mobile) {
+    left: -6rem;
+  }
 }
+
 
 /*
  * Sidebar
@@ -95,7 +120,10 @@
   position: fixed;
   top: 0;
   bottom: 0;
-  right: -75px;
+  right: -70px;
+  @media (max-width: $breakpoint-mobile) {
+    right: -60px;
+  }
   width: 5rem;
   transition: right 0.3s ease-in-out;
   &:hover {
@@ -120,4 +148,94 @@
     background-color: $bg-mild-color;
     text-decoration: none;
   }
+}
+
+
+/*
+ * Navigation SVG
+ */
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+@mixin animation($val) {
+  -webkit-animation: $val;
+  animation: $val;
+}
+
+@include keyframes(text-outline-html) {
+  from{
+    opacity: 0.2;
+    stroke-dashoffset: 810;
+  }
+  to{
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+@include keyframes(text-outline-css) {
+  from{
+    opacity: 0.2;
+    stroke-dashoffset: 555;
+  }
+  to{
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+svg text {
+  font-size: 4.7rem;
+  opacity: 0;
+  fill: none;
+  stroke-width: 2px;
+  &.htmltext {
+    stroke: $text-color;
+    stroke-dasharray: 810;
+    stroke-dashoffset: 810;
+    @include animation(5s text-outline-html 3 alternate forwards);
+  }
+  &.csstext, &.jstext, &.othertext {
+    stroke: $text-color-reverse;
+    stroke-dasharray: 555;
+    stroke-dashoffset: 555;
+  }
+  &.csstext {
+    @include animation(3s text-outline-css 2s 1 alternate forwards);
+  }
+  &.jstext {
+    @include animation(5s text-outline-css 3s 3 alternate forwards);
+  }
+  &.othertext {
+    @include animation(3s text-outline-css 4s 3 alternate forwards);
+  }
+}
+
+
+/*
+ * Navigation menu on mobile
+ */
+#nav-trigger-show, #nav-trigger-hide {
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  z-index: 2;
+  border: 1px solid $border-color;
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 2px;
+  font-size: 2rem;
+  padding: 5px 1rem;
+}
+
+#nav-trigger-hide, #nav-target {
+  display: none;
 }

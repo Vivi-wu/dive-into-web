@@ -19,7 +19,23 @@ figure.highlight {
 }
 
 
-// 分类文章列表页、文章详情页
+
+/*
+ * Post list page & Post detail page
+ */
+.post-meta-infos {
+  font-size: 13px;
+  font-family: "Josefin Sans", $font-family-sans-serif;
+  .text-sep {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+  .post-category {
+    text-transform: capitalize;
+    color: $text-color;
+  }
+}
+
 .post header {
   a {
     text-decoration: none;
@@ -57,6 +73,10 @@ figure.highlight {
   }
 }
 
+
+/*
+ * Post detail page
+ */
 .post-wrapper {
   .post article {
     h2 {
@@ -65,17 +85,5 @@ figure.highlight {
     h3 {
       margin-top: 3rem;
     }
-  }
-}
-
-.post-meta-infos {
-  font-size: 13px;
-  .text-sep {
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-  }
-  .post-category {
-    text-transform: capitalize;
-    color: $text-color;
   }
 }

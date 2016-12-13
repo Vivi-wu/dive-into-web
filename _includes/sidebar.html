@@ -1,4 +1,4 @@
-<div class="sidebar-wrapper">
+<div class="sidebar-wrapper pc-only">
 <div class="tooltip left">
     <div class="tooltip-wrapper">导航</div>
 </div>
@@ -9,3 +9,10 @@
     <a class="item" href="{{ site.baseurl }}/other/">other</a>
 </nav>
 </div>
+
+<button type="button" class="mobile-only" id="nav-trigger-show">More</button>
+<button type="button" id="nav-trigger-hide">Hide</button>
+<div id="nav-target">
+{% include navigation.html %}
+</div>
+<script src="{{ '/assets/js/navTrigger.js' | prepend: site.baseurl }}"></script>

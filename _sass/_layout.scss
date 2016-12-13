@@ -16,6 +16,21 @@
   }
   &>.item {
     flex-grow: 1;
+    @media (max-width: $breakpoint-mobile) {
+      height: 25%;
+    }
+    &.html {
+      background-color: $bg-mild-color;
+    }
+    &.css {
+      background-color: $heading-color;
+    }
+    &.js {
+      background-color: $text-color;
+    }
+    &.other {
+      background-color: $em-color;
+    }
   }
 }
 
