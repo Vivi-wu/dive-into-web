@@ -17,7 +17,7 @@ JS String 用来存储一系列字符，用**单**引号或**双**引号限制�
 
 最好不要用后者，减缓执行速度。且 `x === y` 是 false 的，因为后者的 type 是 object。
 
-最糟的情况是两个变量都用 **new** 创建，因为 <span class="blue-text">JavaScript objects cannot be compared</span>。两者无法比较。
+最糟的情况是两个变量都用 **new** 创建，因为 <span class="t-blue">JavaScript objects cannot be compared</span>。两者无法比较。
 
 前者创建的是 primitive values，没有属性和方法，但是 **in JavaScript, methods and properties are also available to primitive values**.
 
@@ -31,11 +31,11 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
 
 ### Find 查找
 
-+ `indexOf(`searchvalue, start`)`，返回 **index** of (the position of) the **first** occurrence of a specified text in a string，<span class="blue-text">字符串中指定文本第一次出现的位置</span>
++ `indexOf(`searchvalue, start`)`，返回 **index** of (the position of) the **first** occurrence of a specified text in a string，<span class="t-blue">字符串中指定文本第一次出现的位置</span>
 + `lastIndexOf(`searchvalue, start`)`，返回一个字符串中指定文本 **last** occurrence (最后一次出现的位置)，以 start 位置开始，从字符串的后面向前查找。
 + `search(`searchvalue`)`，效果同 `indexOf()`。
 
-    因为 A string will automatically be converted to a regular expression，<span class="blue-text">字符串可以被自动转为一个正则表达式</span>。
+    因为 A string will automatically be converted to a regular expression，<span class="t-blue">字符串可以被自动转为一个正则表达式</span>。
 
     `search()` 的 searchvalue 是一个正则表达式，所以它比 `indexOf()` 有更强大的搜索能力。
 
@@ -51,14 +51,16 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
 + `substring(`start, end`)`，同上。但**不接受**负数。如果 _start_ 小于0，则认为从 0 开始。如果 "start" is greater than "end", this method will swap the two arguments **交换**开始和结束位置参数, meaning <span style="background-color:lightblue;">str.substring(1,4) == str.substring(4,1)</span>.
 + `substr(`start, length`)`，同 `slice()`，start 位置可取负值。但此处**第二个参数表示长度**，因此**不能**为负数。
 
-    "hello world".substr(-4, 4); // 表示从倒数第四位开始，向后取四位字符，返回"orld"
+  ```js
+  "hello world".substr(-4, 4); // 表示从倒数第四位开始，向后取四位字符，返回"orld"
+  ```
 
-以上三个方法的共同点是缺省第二个参数， the method will slice out the rest of the string。
+    以上三个方法的共同点是缺省第二个参数， the method will slice out the rest of the string。
 
 + `charAt(`position`)`，返回指定位置上的字符
 + `charCodeAt(`position`)`，返回指定位置上字符的 unicode
 
-**注意**：Accessing a String as an Array is Unsafe！<span class="blue-text">不要使用数组形式接近一个字符串</span>。
+**注意**：Accessing a String as an Array is Unsafe！<span class="t-blue">不要使用数组形式接近一个字符串</span>。
 
 ### Replace 替换
 
@@ -66,12 +68,14 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
 
 第二个参数是 new string，也可以是一个函数 function (replacement)，该函数的返回值将替换掉第一个参数匹配到的结果
 
-    var str = "Mr Blue has a blue house and a blue car";
-    var res = str.replace(/blue|house|car/gi, function myFunction(x){return x.toUpperCase();});
+```js
+var str = "Mr Blue has a blue house and a blue car";
+var res = str.replace(/blue|house|car/gi, function myFunction(x){return x.toUpperCase();});
+```
 
 结果为 Mr BLUE has a BLUE HOUSE and a BLUE CAR.
 
-<span class="blue-text">默认只替换找到的**第一个匹配**</span>。希望全部替换，使用 regular expression 作为搜索项。
+<span class="t-blue">默认只替换找到的**第一个匹配**</span>。希望全部替换，使用 regular expression 作为搜索项。
 
 ### 字符大小写转换
 
@@ -84,7 +88,7 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
     var text = "Hello" + " " + "World!";
     var text = "Hello".concat(" ","World!");
 
-All string methods return a new string. They don't modify the original string. <span class="blue-text">所有字符串的方法将返回一个新的字符串，而**不改变**原始字符串</span>。
+All string methods return a new string. They don't modify the original string. <span class="t-blue">所有字符串的方法将返回一个新的字符串，而**不改变**原始字符串</span>。
 
 ### 根据 Unicode 输出对应字符
 
@@ -100,8 +104,10 @@ All string methods return a new string. They don't modify the original string. <
 
 Separate each charater, **including white-space**，按单个字符分割，包括空格。
 
-    var str = "How are you doing today?";
-    var res = str.split("");
+```js
+var str = "How are you doing today?";
+var res = str.split("");
+```
 
 ### Match 匹配
 

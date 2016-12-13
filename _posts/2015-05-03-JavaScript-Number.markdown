@@ -11,7 +11,7 @@ JS只有一种 Number 类型的数，可以带小数写，也可以不用。特�
 
 Integers (numbers without a period or exponent notation) are considered accurate up to 15 digits，**整数可以保证是精确的最多位数是15位**，超出则不精确了。
 
-The maximum number of decimals is 17。**小数最多位数是 17**，因此<span class="blue-text">浮点数相加也不一定准确</span>。
+The maximum number of decimals is 17。**小数最多位数是 17**，因此<span class="t-blue">浮点数相加也不一定准确</span>。
 
     var x = 0.2 + 0.1;         // x will be 0.30000000000000004
     var x = (0.2 * 10 + 0.1 * 10) / 10;       // x will be 0.3
@@ -26,10 +26,12 @@ JS默认数字是**十进制**显示。以 `0x` 开头的数字为十六进制�
 
 可以使用 `toString()` 方法实现不同进制显示。
 
-    var myNumber = 128;
-    myNumber.toString(16);     // returns 80
-    myNumber.toString(8);      // returns 200
-    myNumber.toString(2);      // returns 10000000
+```js
+var myNumber = 128;
+myNumber.toString(16);     // returns 80
+myNumber.toString(8);      // returns 200
+myNumber.toString(2);      // returns 10000000
+```
 
 ### Infinity or (-Infinity)
 
@@ -37,22 +39,28 @@ JS默认数字是**十进制**显示。以 `0x` 开头的数字为十六进制�
 
 该常量的类型是 number。
 
-    typeof Infinity;        // returns "number"
+```js
+typeof Infinity;        // returns "number"
+```
 
 ### 0
 
 JS 中有两个 0 ：`+0` 和 `-0`。两者输出皆为 0. 他们事实上也相等.
 
-    +0 === -0  // true
-    +0 > -0  // false
-    +0 < -0  //false
+```js
++0 === -0  // true
++0 > -0  // false
++0 < -0  //false
+```
 
 使用一个非零的整数除以它们可以用来判断到底是正0，还是负0。
 
-    42 / 0
-    → Infinity
-    42 / -0
-    → -Infinity
+```js
+42 / 0
+→ Infinity
+42 / -0
+→ -Infinity
+```
 
 ### NaN - Not a Number
 
@@ -68,18 +76,20 @@ JS 中有两个 0 ：`+0` 和 `-0`。两者输出皆为 0. 他们事实上也相
 
 注意一些特殊值：
 
-    isNaN('')         // false，Converted to Number is 0
-    isNaN('0')        // false，Converted to Number is 0
-    isNaN([])         // false，Converted to Number is 0
-    isNaN([20])       // false，Converted to Number is 20
-    isNaN(true)       // false，Converted to Number is 1
-    isNaN(undefined)  // true
-    isNaN('NaN')      // true
-    isNaN(NaN)        // true
-    isNaN(0 / 0)      // true
-    isNaN([20,10])    // true
-    isNaN({})         // true
-    isNaN(function(){})  // true
+```js
+isNaN('')         // false，Converted to Number is 0
+isNaN('0')        // false，Converted to Number is 0
+isNaN([])         // false，Converted to Number is 0
+isNaN([20])       // false，Converted to Number is 20
+isNaN(true)       // false，Converted to Number is 1
+isNaN(undefined)  // true
+isNaN('NaN')      // true
+isNaN(NaN)        // true
+isNaN(0 / 0)      // true
+isNaN([20,10])    // true
+isNaN({})         // true
+isNaN(function(){})  // true
+```
 
 ### Numbers Can be Objects
 
@@ -90,7 +100,7 @@ JS 中有两个 0 ：`+0` 和 `-0`。两者输出皆为 0. 他们事实上也相
 
 最好不要用后者，减缓执行速度。且 `x === y` 是 false 的，因为后者的 type 是 object。
 
-最糟的情况是两个变量都用 **new** 创建，因为 <span class="blue-text">JavaScript objects cannot be compared</span>。两者不能进行比较。
+最糟的情况是两个变量都用 **new** 创建，因为 <span class="t-blue">JavaScript objects cannot be compared</span>。两者不能进行比较。
 
 ## 属性和方法
 
@@ -117,13 +127,15 @@ JS中**只能被 Number 对象调用**的属性有：`MAX_VALUE`，`MIN_VALUE`�
 
 示例：
 
-    Number("10");            // returns 10
-    Number("10 20");         // returns NaN
-    parseInt("10 20 30");    // returns 10
-    parseInt("10 years");    // returns 10
-    parseInt("years 10");    // returns NaN
-    parseFloat("10.33");     // returns 10.33
-    parseFloat("10 20 30");  // returns 10
+```js
+Number("10");            // returns 10
+Number("10 20");         // returns NaN
+parseInt("10 20 30");    // returns 10
+parseInt("10 years");    // returns 10
+parseInt("years 10");    // returns NaN
+parseFloat("10.33");     // returns 10.33
+parseFloat("10 20 30");  // returns 10
+```
 
 ### Number 的方法
 
@@ -135,16 +147,18 @@ JS中**只能被 Number 对象调用**的属性有：`MAX_VALUE`，`MIN_VALUE`�
 
 示例：
 
-    var x = 9.656;
-    x.toExponential(2);     // returns 9.66e+0
-    x.toExponential(4);     // returns 9.6560e+0
-    x.toFixed(2);           // returns 9.66
-    x.toFixed();            // returns 10
-    x.toPrecision();        // returns 9.656
-    x.toPrecision(2);       // returns 9.7
-    var num = 0.001658853;
-    var b = num.toPrecision(2); // returns 0.0017
+```js
+var x = 9.656;
+x.toExponential(2);     // returns 9.66e+0
+x.toExponential(4);     // returns 9.6560e+0
+x.toFixed(2);           // returns 9.66
+x.toFixed();            // returns 10
+x.toPrecision();        // returns 9.656
+x.toPrecision(2);       // returns 9.7
+var num = 0.001658853;
+var b = num.toPrecision(2); // returns 0.0017
+```
 
 所有 number 的方法均不改变原来的变量，返回一个新的值。
 
-<span style="background-color:lightblue;">In JavaScript, all data types have a <b>valueOf()</b> and a <b>toString()</b> method</span>.
+<span class="t-blue">In JavaScript, all data types have a <code>valueOf()</code> and a <code>toString()</code> method</span>.

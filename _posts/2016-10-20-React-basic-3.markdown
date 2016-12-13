@@ -62,12 +62,14 @@ When attaching a ref to a DOM component like `<div />`, you get the DOM node bac
 
 看以下代码片段：
 
-    render: function() {
-      return <TextInput ref={(c) => this._input = c} />;
-    },
-    componentDidMount: function() {
-      this._input.focus();
-    },
+```js
+render: function() {
+  return <TextInput ref={(c) => this._input = c} />;
+},
+componentDidMount: function() {
+  this._input.focus();
+}
+```
 
 when attaching a `ref` to a composite component like `<TextInput />`, you'll get the **React class instance**. 这样就可以像上例中所示，调用那个组件的 class 定义中对外暴露的方法。
 
@@ -86,4 +88,3 @@ By default, use the Reactive data flow and save refs for use cases that are inhe
 
 + You must provide the key attribute for all children of ReactCSSTransitionGroup, even when only rendering a single item. This is how React will determine which children have entered, left, or stayed.
 + You'll notice that animation durations need to be specified in both the CSS and the render method; this tells React when to remove the animation classes from the element and -- if it's leaving -- when to remove the element from the DOM. 自定义 animation 样式时不仅在 css 中要指定时间，在组件的属性上也要指定。
-+ 

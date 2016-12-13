@@ -10,6 +10,8 @@ JS数组用于在一个变量名下存储多个具有共性的数值。
 + 最后一个数组项目后没有逗号！
 + 操作数组项目通过 **index number**, Array indexes **start with 0**
 
+<!--more-->
+
 ## Basic
 
 1. 创建数组：
@@ -26,22 +28,24 @@ JS数组用于在一个变量名下存储多个具有共性的数值。
 2. 获取数组项：`var item = array-name[index];`
 3. 改变数组项：`array-name[index] = value;`
 
-<!--more-->
-
 ## Arrays are Objects
 
 使用 typeof 检查一个 array 返回结果是 object。But, **JavaScript arrays are best described as arrays**. 数组和标准对象的区别如下：
 
-    var person = ["John", "Doe", 46];    // person[0] = "John"
-    var person = {firstName:"John", lastName:"Doe", age:46};    // person.firstName = "John"
+```js
+var person = ["John", "Doe", 46];    // person[0] = "John"
+var person = {firstName:"John", lastName:"Doe", age:46};    // person.firstName = "John"
+```
 
 最好用 _numbered indexes_ 而**不是** _named indexes_ 读取数组的元素。If you use a named index, **JavaScript will redefine the array to a standard object**. After that, all array methods and properties will produce incorrect results.
 
-    var person = [];
-    person["firstName"] = "John";
-    person["lastName"] = "Doe";
-    var x = person.length;         // person.length will return 0
-    var y = person[0];             // person[0] will return undefined
+```js
+var person = [];
+person["firstName"] = "John";
+person["lastName"] = "Doe";
+var x = person.length;         // person.length will return 0
+var y = person[0];             // person[0] will return undefined
+```
 
 因为**数组是一种特殊的 object**，we can have variables of different types in the same Array 同一个数组中可以有不同数据类型的变量。
 
@@ -55,9 +59,9 @@ JS数组用于在一个变量名下存储多个具有共性的数值。
 2. 变量的 `constructor` 属性，在 Data type 章节有提到。
 3. 使用 `instanceof` 操作符判断，Syntax 章节有提到。
 
-        var fruits = ["Banana", "Orange", "Apple", "Mango"];
-        fruits instanceof Array;     // returns true
-        fruits instanceof Object;    // Returns true
+    var fruits = ["Banana", "Orange", "Apple", "Mango"];
+    fruits instanceof Array;     // returns true
+    fruits instanceof Object;    // Returns true
 
 ## Array Properties
 
@@ -81,9 +85,11 @@ JS数组也有 `indexOf()`，`lastIndexOf()` 方法，返回数组中指定项�
 
 关于 `array.join()` 的用法：
 
-    var fruits = ["Banana", "Orange", "Apple", "Mango"];
-    fruits.join("");    // 结果是：BananaOrangeAppleMango
-    fruits.join();      // 结果是：Banana,Orange,Apple,Mango
+```js
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.join("");    // 结果是：BananaOrangeAppleMango
+fruits.join();      // 结果是：Banana,Orange,Apple,Mango
+```
 
 可以看到不指定分隔符，和分隔符为空字符串是有区别的。
 
@@ -130,15 +136,19 @@ _start_ 是一个整数，表示第一个新元素要放的位置。_deleteCount
 
 **升序**排列数字数组：
 
-    var points = [40, 100, 1, 5, 25, 10];
-    points.sort(function(a, b){return a-b});
-    points.sort(function(a, b){return a>b});    // 两种方法结果一样
+```js
+var points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return a-b});
+points.sort(function(a, b){return a>b});    // 两种方法结果一样
+```
 
 **降序**排列数字数组：
 
-    var points = [40, 100, 1, 5, 25, 10];
-    points.sort(function(a, b){return b-a});
-    points.sort(function(a, b){return b>a});    // 两种方法结果一样
+```js
+var points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return b-a});
+points.sort(function(a, b){return b>a});    // 两种方法结果一样
+```
 
 这样如果要找出数组中的最大或最小值，首先要对数组进行排序。
 

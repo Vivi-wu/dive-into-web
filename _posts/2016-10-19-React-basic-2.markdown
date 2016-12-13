@@ -12,28 +12,30 @@ React 保证所有事件在各种浏览器中表现一致，与 W3C spec 的冒�
 
 每个事件处理函数自动绑定它所属的组件实例，除了使用 ES6 class 语法时。
 
-    class SayHello extends React.Component {
-      constructor(props) {
-        super(props);
-        // This line is important! 需要手动绑定 this 到实例
-        this.handleClick = this.handleClick.bind(this);
-      }
-
-      handleClick() {
-        alert('Hello!');
-      }
-
-      render() {
-        // Because `this.handleClick` is bound, we can use it as an event handler.
-        return (
-          <button onClick={this.handleClick}>
-            Say hello
-          </button>
-        );
-      }
-    }
-
 <!--more-->
+
+```js
+class SayHello extends React.Component {
+  constructor(props) {
+    super(props);
+    // This line is important! 需要手动绑定 this 到实例
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    alert('Hello!');
+  }
+
+  render() {
+    // Because `this.handleClick` is bound, we can use it as an event handler.
+    return (
+      <button onClick={this.handleClick}>
+        Say hello
+      </button>
+    );
+  }
+}
+```
 
 ## 状态
 
@@ -45,14 +47,16 @@ React 保证所有事件在各种浏览器中表现一致，与 W3C spec 的冒�
 
 但是尽可能使你的大部分组件 stateless 无状态，减少冗余。一个常见的模式就是创建一些没有状态的组件，仅用来渲染数据，称为 Stateless Function。然后把它们内嵌在一个 stateful 的父组件里。父组件把 state 通过 props 传递给子组件。
 
-    // Stateless Function
-    const Greeting = (props) => (
-      <h1>Hello, {props.name}</h1>
-    );
-    ReactDOM.render(
-      <Greeting name="Sebastian" />,
-      document.getElementById('example')
-    );
+```js
+// Stateless Function
+const Greeting = (props) => (
+  <h1>Hello, {props.name}</h1>
+);
+ReactDOM.render(
+  <Greeting name="Sebastian" />,
+  document.getElementById('example')
+);
+```
 
 ### 什么不应该放在 State 中
 
@@ -70,20 +74,22 @@ React 保证所有事件在各种浏览器中表现一致，与 W3C spec 的冒�
 + `.props` 对象是 immutable 不可变的，"owned" by the parent。
 + `getInitialState()` 该函数在组件的生命周期内只执行一次，用来设置组件的初始 state。ES6 classes 中，初始状态写在 `constructor()` 中
 
-        class Counter extends React.Component {
-          constructor(props) {
-            super(props);
-            this.state = {count: props.initialCount};
-          }
-          // ...
-        }
-        // 等价写法
-        var Counter = React.createClass({
-          getInitialState: function() {
-            return {count: this.props.initialCount};
-          },
-          // ...
-        });
+  ```js
+  class Counter extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {count: props.initialCount};
+    }
+    // ...
+  }
+  // 等价写法
+  var Counter = React.createClass({
+    getInitialState: function() {
+      return {count: this.props.initialCount};
+    },
+    // ...
+  });
+  ```
 
 + `componentDidMount` 函数在组件**第一次**被渲染时由 React 自动调用。
 + 无状态的函数仍然可以设置 `propTypes` 和 `defaultProps`。
@@ -96,50 +102,56 @@ One **limitation**: React 组件只能渲染一个 **single root node** 单独�
 
 当子节点为动态插入（如搜索结果，或者流中加入新的组件）时，每个子节点的标识和状态在渲染过程必须保持，这时需要通过 _key_ 属性给每一个 child 分配一个标识符。
 
-    render() {
-      return (
-        <ol>
-          {this.props.results.map((result, index) => (
-            <li key={index}>{result.text}</li>
-          ))}
-        </ol>
-      );
-    }
+```js
+render() {
+  return (
+    <ol>
+      {this.props.results.map((result, index) => (
+        <li key={index}>{result.text}</li>
+      ))}
+    </ol>
+  );
+}
+```
 
 这个 _key_ 属性必须直接在数组中提供给组件，而不是组件的 HTML 子元素的容器上。如下，_text_ 可以，但是 _key_ 不行.
 
-    // WRONG!
-    class ListItemWrapper extends React.Component {
-      render() {
-        return <li key={this.props.data.id}>{this.props.data.text}</li>;
-      }
-    }
-    class MyComponent extends React.Component {
-      render() {
-        return (
-          <ul>
-            {this.props.results.map((result) => (
-              <ListItemWrapper data={result} />   // <ListItemWrapper key={result.id} data={result} />
-            ))}
-          </ul>
-        );
-      }
-    }
+```js
+// WRONG!
+class ListItemWrapper extends React.Component {
+  render() {
+    return <li key={this.props.data.id}>{this.props.data.text}</li>;
+  }
+}
+class MyComponent extends React.Component {
+  render() {
+    return (
+      <ul>
+        {this.props.results.map((result) => (
+          <ListItemWrapper data={result} />   // <ListItemWrapper key={result.id} data={result} />
+        ))}
+      </ul>
+    );
+  }
+}
+```
 
 ### Prop Validation
 
 出于性能考虑，仅在开发阶段通过 `propTypes` 属性检查组件接受到的数据类型是否正确。若是 invalid value，在浏览器 JS console 中报错。
 
-    class Greeting extends React.Component {
-      render() {
-        return (
-          <h1>Hello, {this.props.name}</h1>
-        );
-      }
-    }
-    Greeting.propTypes = {
-      name: React.PropTypes.string
-    };
+```js
+class Greeting extends React.Component {
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
+    );
+  }
+}
+Greeting.propTypes = {
+  name: React.PropTypes.string
+};
+```
 
 更多用法参考[这里](https://facebook.github.io/react/docs/reusable-components.html).
 
@@ -147,19 +159,21 @@ One **limitation**: React 组件只能渲染一个 **single root node** 单独�
 
 通过 `defaultProps` 给父组件的 _props_ 设置默认值。使我们可以安全地使用 props，不必担心没有值，也避免重复书写。
 
-    class Greeting extends React.Component {
-      render() {
-        return (
-          <h1>Hello, {this.props.name}</h1>
-        );
-      }
-    }
-    // Specifies the default values for props:
-    Greeting.defaultProps = {
-      name: 'Stranger'
-    };
-    // Renders "Hello, Stranger":
-    ReactDOM.render(
-      <Greeting />,
-      document.getElementById('example')
+```js
+class Greeting extends React.Component {
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
     );
+  }
+}
+// Specifies the default values for props:
+Greeting.defaultProps = {
+  name: 'Stranger'
+};
+// Renders "Hello, Stranger":
+ReactDOM.render(
+  <Greeting />,
+  document.getElementById('example')
+);
+```

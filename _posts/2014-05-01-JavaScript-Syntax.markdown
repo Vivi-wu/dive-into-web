@@ -21,12 +21,12 @@ JS忽略掉多个空格，所以我们可以在代码里添加空格方便阅读
     document.getElementById("demo").innerHTML =
     "Hello world, this is my first js code."
 
+<!--more-->
+
 直接在字符串中 break 语句，是**不能**实现换行的，而且会引起 SyntaxError。如果一定要在字符串中断行，使用 **backslash** 反斜杠 `\`，如下：
 
     document.getElementById("demo").innerHTML = "Hello world, this \
     is my first js code."
-
-<!--more-->
 
 有五种符号可以出现在一个语句的开头，也可作为一个完整语句的扩展。这意味着**不是**所有的情况下 line break 换行可以取代语句之间的 semicolon 分号。
 
@@ -73,27 +73,33 @@ JS忽略掉多个空格，所以我们可以在代码里添加空格方便阅读
 4. 例外1，分号 never inserted 在 for loop 头部 for ( Expression ; Expression ; Expression )
 5. 例外2，分号 never inserted if it would be parsed as an empty statement.
 
+    ```js
     for (node=getNode();
      node.parent;
      node=node.parent) ; // 该 for 循环执行读取节点的父节点，直到遇到一个没有父节点的节点，所有操作在 for 循环的头部进行。
     // 尽管不需要循环体，但 for 循环语法需要一个语句，因此使用了 `;` 空语句。
+    ```
 
     上面例子中三个分号都在行尾，但是都不可缺少。原因见 4 & 5
 
 6. Semicolons are **not optional** between statements appearing on the same line. 写在同一行语句之间的分号，是不可缺省的。
 
+    ```js
     42; "hello!" // valid
     42\n"hello!" // valid，“\n” 代表一个实际的换行
     42 "hello!"  // no valid，whitespace 空格不能触发分号插入
     if(x){y()}   // "y()" 语句表达式可用分号结尾，但因为后面跟着闭合大括号，分号是可选的。
+    ```
 
 7. 当JS遇到不完整的语句时，会读取下一行，试着完成这个语句。
 
+    ```js
     function myFunction(a) {
         var
         power = 10;
         return a * power;
     }
+    ```
 
 ### Restricted productions
 
@@ -107,37 +113,41 @@ JS忽略掉多个空格，所以我们可以在代码里添加空格方便阅读
 + `return`，因为返回语句是受限输出，方便程序员写一个空的 return statement，而不会不小心返回了下一行语句的值。
 + `throw`
 
-    var i=1;
-    i
-    ++; // parse error
-    i
-    ++
-    j  // parses as "i; ++j", 因为前置自增\减 不是受限输出。
-    return {
-      i:i, j:j}
-    return (
-      {i:i, j:j})
-    return {i:i
-           ,j:j}  // return 语句在表达式之间可以包含换行
-    throw
-      new MyComplexError(a, b, c, more, args);   // parse error
-    // 不同于返回、中断、继续语句，throw 语句后的表达式不是可选的，so the above will not parse at all.
-    throw new MyComplexError(a, b, c, more, args);  // correct
-    throw new MyComplexError(
-        a, b, c, more, args);                       // also correct
-    // Any variation with 'new' and 'throw' on the same line is correct.
+  ```js
+  var i=1;
+  i
+  ++; // parse error
+  i
+  ++
+  j  // parses as "i; ++j", 因为前置自增\减 不是受限输出。
+  return {
+    i:i, j:j}
+  return (
+    {i:i, j:j})
+  return {i:i
+         ,j:j}  // return 语句在表达式之间可以包含换行
+  throw
+    new MyComplexError(a, b, c, more, args);   // parse error
+  // 不同于返回、中断、继续语句，throw 语句后的表达式不是可选的，so the above will not parse at all.
+  throw new MyComplexError(a, b, c, more, args);  // correct
+  throw new MyComplexError(
+      a, b, c, more, args);                       // also correct
+  // Any variation with 'new' and 'throw' on the same line is correct.
+  ```
 
 在上面五种受限输出的情况，换行导致的错误在实践中很少遇到，除了把返回值放在 return 符号的下一行。尤其是当返回值是一个大的对象、数组或者多行的字符串。
 
-    return obj.method('abc')
-          .method('xyz')
-          .method('pqr')
-    return "a long string\n"
-         + "continued across\n"
-         + "several lines"
-    totalArea = rect_a.height * rect_a.width
-              + rect_b.height * rect_b.width
-              + circ.radius * circ.radius * Math.PI
+```js
+return obj.method('abc')
+      .method('xyz')
+      .method('pqr')
+return "a long string\n"
+     + "continued across\n"
+     + "several lines"
+totalArea = rect_a.height * rect_a.width
+          + rect_b.height * rect_b.width
+          + circ.radius * circ.radius * Math.PI
+```
 
 规则只考虑跟随行的第一个符号，如果这个符号可以被解析成语句的一部分，则认为这个语句是被延续的 **is continued**。
 
@@ -187,7 +197,7 @@ After the declaration, the variable has no value. (Technically it has the value 
 
     var today = "Monday";
 
-An assignment always returns the value of the assignment. <span class="blue-text">赋值语句返回的值，就是被赋予的值</span>。
+An assignment always returns the value of the assignment. <span class="t-blue">赋值语句返回的值，就是被赋予的值</span>。
 
     var x = 0;
     if (x = 10)
@@ -211,12 +221,14 @@ An assignment always returns the value of the assignment. <span class="blue-text
 ### 赋值操作符：
 
 <table>
-  <tbody>
+  <thead>
     <tr>
       <th>Operator</th>
       <th>Example</th>
       <th>Same As</th>
     </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>=</td>
       <td>x = y</td>
@@ -244,7 +256,7 @@ An assignment always returns the value of the assignment. <span class="blue-text
     txt1 = "What a very ";
     txt1 += "nice day";
 
-If you add a number and a string, the result will be a <strong>string</strong>! <span class="blue-text">数字和字符串相加，结果将是一个字符串</span>。
+If you add a number and a string, the result will be a <strong>string</strong>! <span class="t-blue">数字和字符串相加，结果将是一个字符串</span>。
 
 ### Comparison and Logical Operators
 
@@ -259,17 +271,19 @@ If you add a number and a string, the result will be a <strong>string</strong>! 
 
 巧用逻辑操作符，可以缩短代码。如下：
 
-    let add = key => !data[key] && (data[key] = rand()) || data[key];
-    // 等价的一般写法
-    add = key => {
-       // If the value is not yet set...
-       if (!data[key]) {
-          // set it!
-          data[key] = rand();
-       }
-       // Always, do return the value
-       return data[key];
-    };
+```js
+let add = key => !data[key] && (data[key] = rand()) || data[key];
+// 等价的一般写法
+add = key => {
+   // If the value is not yet set...
+   if (!data[key]) {
+      // set it!
+      data[key] = rand();
+   }
+   // Always, do return the value
+   return data[key];
+};
+```
 
 ### 类型操作符
 
@@ -280,23 +294,25 @@ If you add a number and a string, the result will be a <strong>string</strong>! 
 
 判断指定的属性是否在某个对象中。
 
-    // Arrays
-    var cars = ["Saab", "Volvo", "BMW"];
-    "Saab" in cars          // Returns false (specify the index number instead of value)
-    0 in cars               // Returns true
-    1 in cars               // Returns true
-    4 in cars               // Returns false (does not exist)
-    "length" in cars        // Returns true  (length is an Array property)
+```js
+// Arrays
+var cars = ["Saab", "Volvo", "BMW"];
+"Saab" in cars          // Returns false (specify the index number instead of value)
+0 in cars               // Returns true
+1 in cars               // Returns true
+4 in cars               // Returns false (does not exist)
+"length" in cars        // Returns true  (length is an Array property)
 
-    // Objects
-    var person = {firstName:"John", lastName:"Doe", age:50};
-    "firstName" in person   // Returns true
-    "age" in person         // Returns true
+// Objects
+var person = {firstName:"John", lastName:"Doe", age:50};
+"firstName" in person   // Returns true
+"age" in person         // Returns true
 
-    // Predefined objects
-    "PI" in Math            // Returns true
-    "NaN" in Number         // Returns true
-    "length" in String      // Returns true
+// Predefined objects
+"PI" in Math            // Returns true
+"NaN" in Number         // Returns true
+"length" in String      // Returns true
+```
 
 ## 表达式
 

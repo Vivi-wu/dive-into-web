@@ -12,12 +12,14 @@ JS对象是可以包含多个值的变量。这些值以 `name:value` 对的形
 
 同数组一样，空格和换行不重要。
 
-    var person = {firstName:"John", lastName:"Doe", age:50};
-    var person = {
-        firstName:"John",
-        lastName:"Doe",
-        age:50
-    };
+```js
+var person = {firstName:"John", lastName:"Doe", age:50};
+var person = {
+    firstName:"John",
+    lastName:"Doe",
+    age:50
+};
+```
 
 <!--more-->
 
@@ -34,13 +36,15 @@ JS对象是可以包含多个值的变量。这些值以 `name:value` 对的形
 
 有时我们希望使用 **an object type** 一种对象类型，创建多个对象。这时可以使用一个构造函数来创建相同类型的对象。
 
-    function person(first, last, age, eye) {
-        this.firstName = first;
-        this.lastName = last;
-        this.age = age;
-    }
-    var myFather = new person("John", "Doe", 50);
-    var myMother = new person("Sally", "Rally", 48);
+```js
+function person(first, last, age, eye) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+}
+var myFather = new person("John", "Doe", 50);
+var myMother = new person("Sally", "Rally", 48);
+```
 
 ### _this_ keyword
 
@@ -85,7 +89,7 @@ JS对象是一系列无序属性的集合。
 
 该操作不仅删掉了属性的值，也删掉了属性本身。
 
-The delete operator is **designed** to be used on **object properties**. <span class="blue-text">It has no effect on variables or functions. 删除操作符专为对象属性设计，对于变量和函数没有效果</span>。
+The delete operator is **designed** to be used on **object properties**. <span class="t-blue">It has no effect on variables or functions. 删除操作符专为对象属性设计，对于变量和函数没有效果</span>。
 
 The delete keyword does **not** delete inherited properties, but if you delete a prototype property, it will affect all objects inherited from the prototype. 删除操作符不会删掉所继承的父类属性，但是如果你删掉了一个 prototype 属性，它会影响所有继承这个原型的对象。
 

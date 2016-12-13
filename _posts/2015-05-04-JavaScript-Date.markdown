@@ -10,7 +10,7 @@ Date 对象用来与年月日时分秒毫秒打交道的。
 
 `new Date()`，创建一个新的日期对象 with **current date and time**，当前的日期和时间
 
-`new Date(milliseconds)`，按照 <span class="blue-text">zero time</span>（01 January 1970 00:00:00 UTC）加上参数创建新的日期对象。JS一天包含 86,400,000 millisecond
+`new Date(milliseconds)`，按照 <span class="t-blue">zero time</span>（01 January 1970 00:00:00 UTC）加上参数创建新的日期对象。JS一天包含 86,400,000 millisecond
 
 `new Date(dateString)`，按指定的日期字符串创建一个新的日期对象，dateString 格式参考下面讲的 Date formats
 
@@ -45,7 +45,9 @@ Date 对象用来与年月日时分秒毫秒打交道的。
 
 JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写，帮你更正。
 
-    var d = new Date("Wed Mar 25 2015 09:56:24 GMT+0100 (W. Europe Standard Time)");
+```js
+var d = new Date("Wed Mar 25 2015 09:56:24 GMT+0100 (W. Europe Standard Time)");
+```
 
 ### 时区
 
@@ -55,7 +57,7 @@ JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写
 
 无论以何种日期格式输入，默认输出格式都是 full text string 格式：Sun May 04 2014 08:00:00 GMT+0800 (CST)
 
-<span class="blue-text">Date objects are **static**, not dynamic. The computer time is ticking, but date objects, once created, are not.</span> 日期对象是静态的，一旦创建，就是一个常量，不会自己更新。
+<span class="t-blue">Date objects are **static**, not dynamic. The computer time is ticking, but date objects, once created, are not.</span> 日期对象是静态的，一旦创建，就是一个常量，不会自己更新。
 
 + `toString()`，输出日期会自动转为一个字符串，不写也行。(_Tue Oct 18 2016 19:46:01 GMT+0800 (中国标准时间)_)
 + `toTimeString()`，把日期对象的时间部分转为字符串（_19:46:01 GMT+0800 (中国标准时间)_）
@@ -70,11 +72,13 @@ JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写
 ## Get Date
 
 <table>
+<thead>
+  <tr>
+    <th>方法</th>
+    <th>描述</th>
+  </tr>
+</thead>
 <tbody>
-<tr>
-  <th>Method</th>
-  <th>Description</th>
-</tr>
 <tr>
   <td>getDate()</td>
   <td>Get the day as a number 一个月中的 (1-31) 几号</td>
@@ -121,25 +125,30 @@ JS会忽略掉 day name（星期几）和 time 括号里面的错误，随便写
 </tr>
 </tbody></table>
 
-In JavaScript, <span class="blue-text">the first (0) of the <em>week</em> means "Sunday"</span>，JS中的星期是<b>从星期天开始</b>。
+In JavaScript, <span class="t-blue">the first (0) of the <em>week</em> means "Sunday"</span>，JS中的星期是<b>从星期天开始</b>。
 
 `getDay()` 方法获得的是表示星期的数字，如果希望显示名称，可以这样做：
 
-    var d = new Date();
-    var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    document.getElementById("demo").innerHTML = days[d.getDay()];
+```js
+var d = new Date();
+var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+document.getElementById("demo").innerHTML = days[d.getDay()];
+```
 
-<span class="blue-text">JS中表示 <em>month</em> 的数字也是从 0 开始的</span>，January 一月对应数字是 0，December 十二月是 11。
+<span class="t-blue">JS中表示 <em>month</em> 的数字也是从 0 开始的</span>，January 一月对应数字是 0，December 十二月是 11。
 
 ## Set Date
 
 通常拿到一个日期对象，改变这个日期的一部分。
 
 <table>
-<tbody><tr>
-  <th>Method</th>
-  <th>Description</th>
-</tr>
+<thead>
+  <tr>
+    <th>方法</th>
+    <th>描述</th>
+  </tr>
+</thead>
+<tbody>
 <tr>
   <td>setDate()</td>
   <td>Set the day as a number (1-31)</td>

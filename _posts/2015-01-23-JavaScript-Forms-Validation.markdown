@@ -34,4 +34,4 @@ category: JavaScript
 + _valueMissing_, 如果一个元素设定了 required 特性，但是没有输入值，这个属性为 true。
 + _valid_, 如果一个元素的值是 valid 时
 
-**注意**：也就是说 <span class="blue-text">an input field with an empty value will be excluded from constraint validation</span>，一个输入域如果没有值，将会从 constraint validation 中**排除**。The empty string is considered valid (no misMatch) unless the _required_ attribute is present as well (valueMissing).
+**注意**：也就是说 <span class="t-blue">an input field with an empty value will be excluded from constraint validation</span>，一个输入域如果没有值，将会从 constraint validation 中**排除**。The empty string is considered valid (no misMatch) unless the _required_ attribute is present as well (valueMissing).

@@ -20,9 +20,11 @@ Math 对象可以让你做一些数学的任务。
 
 示例：
 
-    Math.round(4.7);            // returns 5
-    Math.ceil(4.7);             // returns 5
-    Math.floor(4.7);            // returns 4
+```js
+Math.round(4.7);            // returns 5
+Math.ceil(4.7);             // returns 5
+Math.floor(4.7);            // returns 4
+```
 
 完整的 JS [Math对象的方法](http://www.w3schools.com/jsref/jsref_obj_math.asp)
 
@@ -52,9 +54,11 @@ JS的布尔类型数据只有两个值：**true** 或者 **false**。
 
 以下三个方法相同：
 
-    Boolean(10 > 9);
-    (10 > 9);
-    10 > 9;
+```js
+Boolean(10 > 9);
+(10 > 9);
+10 > 9;
+```
 
 表达式的布尔值是 JS comparison、condition 的基础。
 

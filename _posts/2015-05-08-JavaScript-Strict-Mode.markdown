@@ -34,7 +34,7 @@ category: JavaScript
 + 最少程度地使用全局变量，因为全局变量可以被其他 scripts 重写，相对地，使用局部变量和使用闭包（参考 JS function closure 内容）
 + 函数中所有的局部变量，必须使用 `var` 提前声明
 + 尽管 JS 默认会把所有 declarations 移到顶端 （JS Hoisting），自己在写的时候，在最上面书写所有声明
-+ <span class="blue-text">最好在声明变量的时候，就初始化赋值</span>，这样可以提供一目了然的 intended use（intended data type），避免 undefined 值
++ <span class="t-blue">最好在声明变量的时候，就初始化赋值</span>，这样可以提供一目了然的 intended use（intended data type），避免 undefined 值
 
 ### 避免使用 `new`
 
@@ -46,30 +46,34 @@ category: JavaScript
 
 所有类型变量的初始赋值：
 
-    var x1 = {};           // new object
-    var x2 = "";           // new primitive string
-    var x3 = 0;            // new primitive number
-    var x4 = false;        // new primitive boolean
-    var x5 = [];           // new array object
-    var x6 = /()/;         // new regexp object
-    var x7 = function(){}; // new function object
+```js
+var x1 = {};           // new object
+var x2 = "";           // new primitive string
+var x3 = 0;            // new primitive number
+var x4 = false;        // new primitive boolean
+var x5 = [];           // new array object
+var x6 = /()/;         // new regexp object
+var x7 = function(){}; // new function object
+```
 
 ### 小心变量类型的自动转换
 
 JS data type 是松散的类型。比如一个数字变量和一个字符串变量相加，加号视为字符串链接操作符，结果变为字符串。
 
-    var x = 5 + 7;       // x.valueOf() is 12,  typeof x is a number
-    var x = 5 + "7";     // x.valueOf() is 57,  typeof x is a string
-    var x = "5" + 7;     // x.valueOf() is 57,  typeof x is a string
-    var x = 5 - 7;       // x.valueOf() is -2,  typeof x is a number
-    var x = 5 - "7";     // x.valueOf() is -2,  typeof x is a number
-    var x = "5" - 7;     // x.valueOf() is -2,  typeof x is a number
-    var x = 5 - "x";     // x.valueOf() is NaN, typeof x is a number
-    var x = "Hello" - "Dolly";    // returns NaN
+```js
+var x = 5 + 7;       // x.valueOf() is 12,  typeof x is a number
+var x = 5 + "7";     // x.valueOf() is 57,  typeof x is a string
+var x = "5" + 7;     // x.valueOf() is 57,  typeof x is a string
+var x = 5 - 7;       // x.valueOf() is -2,  typeof x is a number
+var x = 5 - "7";     // x.valueOf() is -2,  typeof x is a number
+var x = "5" - 7;     // x.valueOf() is -2,  typeof x is a number
+var x = 5 - "x";     // x.valueOf() is NaN, typeof x is a number
+var x = "Hello" - "Dolly";    // returns NaN
+```
 
 ### 使用 === 进行比较
 
-因为 `==` 操作符总是<span class="blue-text">在比较前将操作符两边的变量进行转换</span>（to matching types），所以是不严格的比较。
+因为 `==` 操作符总是<span class="t-blue">在比较前将操作符两边的变量进行转换</span>（to matching types），所以是不严格的比较。
 
 ### 给函数形参设定 default 值
 
@@ -91,9 +95,11 @@ ES6允许为函数的参数设置默认值，即直接写在参数定义的后�
 
 循环中的每一条语句，包括 for 语句，在每一次循环遍历时都要执行一遍。
 
-    var i, l, arr = [];
-    l = arr.length;
-    for (i = 0; i < l; i++) {｝
+```js
+var i, l, arr = [];
+l = arr.length;
+for (i = 0; i < l; i++) {｝
+```
 
 把获取数组长度代码放在循环之外，使得循环执行更快。
 
@@ -116,14 +122,16 @@ ES6允许为函数的参数设置默认值，即直接写在参数定义的后�
 
 如果可能，可以在页面加载完之后，通过代码把脚本加进来。
 
-    <script>
-    window.onload = downScripts;
+```html
+<script>
+window.onload = downScripts;
 
-    function downScripts() {
-        var element = document.createElement("script");
-        element.src = "myScript.js";
-        document.body.appendChild(element);
-    }
-    </script>
+function downScripts() {
+    var element = document.createElement("script");
+    element.src = "myScript.js";
+    document.body.appendChild(element);
+}
+</script>
+```
 
 也可以在 script 标签里添加 `defer="true"`，该特性 specifies that the script should be executed after the page has finished parsing, but it **only works for external scripts**.

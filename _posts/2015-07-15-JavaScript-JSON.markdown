@@ -14,7 +14,7 @@ JSON 文件的后缀名为 _.json_
 
 <!--more-->
 
-注意：<span class="blue-text">JSON 的 name 需要以**双引号**括起来，这一点区别于 JavaScript Object name</span>。
+注意：<span class="t-blue">JSON 的 name 需要以**双引号**括起来，这一点区别于 JavaScript Object name</span>。
 
 ### JSON Value
 
@@ -32,8 +32,10 @@ JS 程序可以容易将 JSON 数据转为原生的 JS 对象。
 
 使用 JS 内置的 `JSON.stringify(`value[, replacer[, space]]`)` 函数将 JS 值转换成 JSON string。
 
-    JSON.stringify([1, 'false', false]); // '[1,"false",false]'
-    JSON.stringify({ x: 5 });            // '{"x":5}'
+```js
+JSON.stringify([1, 'false', false]); // '[1,"false",false]'
+JSON.stringify({ x: 5 });            // '{"x":5}'
+```
 
 + non-array 无序性， stringified 对象不能保证遵循任何指定的顺序。
 + Boolean, Number, 和 String 对象被转为对应的 primitive 值。

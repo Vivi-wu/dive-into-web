@@ -57,9 +57,11 @@ category: JavaScript
 
 创建正则表达式对象：**字面量**和**构造函数**。
 
-    /ab+c/i;
-    new RegExp('ab+c', 'i');
-    new RegExp(/ab+c/, 'i');
+```js
+/ab+c/i;
+new RegExp('ab+c', 'i');
+new RegExp(/ab+c/, 'i');
+```
 
 当正则表达式保持为常量时使用字面量。
 
@@ -111,15 +113,15 @@ category: JavaScript
 
 用于查找某个内容（但不包括这些内容）之前或之后的东西，就像 `\b`, `^` 等只**匹配一个位置**，并不消费任何字符。
 
-<table>
+<table style="width:100%">
   <thead>
     <tr>
-      <th>分类</th><th style="width:140px;">代码/语法</th><th>说明</th>
+      <th>分类</th><th style="width:200px;">代码/语法</th><th>说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th rowspan="3">捕获</td>
+      <td rowspan="3">捕获</td>
       <td><code>(exp)</code></td>
       <td>匹配exp,并捕获文本到默认命名的组里</td>
     </tr>
@@ -132,7 +134,7 @@ category: JavaScript
       <td>匹配exp,但不捕获匹配的文本，也不给此分组分配组号</td>
     </tr>
     <tr>
-      <th rowspan="2">零宽断言</td>
+      <td rowspan="2">零宽断言</td>
       <td><code>(?=exp)</code></td>
       <td>匹配exp前面的位置</td>
     </tr>

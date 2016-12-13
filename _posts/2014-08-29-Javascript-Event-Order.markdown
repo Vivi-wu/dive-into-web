@@ -8,7 +8,7 @@ category: JavaScript
 
 假设有两个元素：element 1 和 element 2，
 
-元素 1 是元素 2 的父元素，两者都绑定了 _onClick_ 事件处理函数，现在<span class="blue-text">用户点击了元素 2</span>，那么问题来了：
+元素 1 是元素 2 的父元素，两者都绑定了 _onClick_ 事件处理函数，现在<span class="t-blue">用户点击了元素 2</span>，那么问题来了：
 
 该行为在两个元素上都引起了点击事件，那么哪一个元素上的事件处理函数**先执行**？
 
@@ -74,7 +74,7 @@ Setting **document–wide** event handlers is **necessary** in **drag–and–dr
 
 ### currentTarget
 
-理解<span class="blue-text">在 capturing 和 bubbling 阶段（if any），目标元素 **dose not change** 不变</span>，这一点很重要！
+理解<span class="t-blue">在 capturing 和 bubbling 阶段（if any），目标元素 **dose not change** 不变</span>，这一点很重要！
 
 在上面的例子里，目标 _target_ 总是保留一个指向**元素 2** 的 reference.
 
@@ -91,7 +91,7 @@ _target_ / _srcElement_ 都不能给出答案，因为他们都指向元素 2（
 
 也可以使用关键字 `this`，用法同 _currentTarget_ 。
 
-<span class="blue-text">不幸的是， Microsoft 事件注册模型中，`this` 关键字不指向 HTML 元素，也不包含类似 currentTarget 的属性</span>。
+<span class="t-blue">不幸的是， Microsoft 事件注册模型中，`this` 关键字不指向 HTML 元素，也不包含类似 currentTarget 的属性</span>。
 
 ### Turning it off
 
@@ -103,16 +103,22 @@ Besides, if your document structure is very complex (lots of nested tables and s
 
 在 Microsoft 模型里：
 
-    window.event.cancelBubble = true
+```js
+window.event.cancelBubble = true
+```
 
 在 W3C 模型里：
 
-    e.stopPropagation()
+```js
+event.stopPropagation()
+```
 
 跨浏览器：
 
-    function doSomething(e) {
-      if (!e) var e = window.event;
-      e.cancelBubble = true;  // 在不支持该属性的浏览器里这样做，也没事
-      if (e.stopPropagation) e.stopPropagation();
-    }
+```js
+function doSomething(e) {
+  if (!e) var e = window.event;
+  e.cancelBubble = true;  // 在不支持该属性的浏览器里这样做，也没事
+  if (e.stopPropagation) e.stopPropagation();
+}
+```

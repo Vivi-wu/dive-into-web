@@ -14,15 +14,17 @@ The **finally** statement lets you execute code, after try and catch, regardless
 
 <!--more-->
 
-    try {
-        Block of code to try
-    }
-    catch(err) {
-        Block of code to handle errors
-    }
-    finally {
-        Block of code to be executed regardless of the try / catch result
-    }
+```js
+try {
+    // Block of code to try
+}
+catch(err) {
+    // Block of code to handle errors
+}
+finally {
+    // Block of code to be executed regardless of the try / catch result
+}
+```
 
 JS的 `try` 和 `catch` come in pairs 是**成对出现**的。
 
@@ -32,31 +34,33 @@ JS的 `try` 和 `catch` come in pairs 是**成对出现**的。
 
 The **throw** statement allows you to **create a custom error**。该语句用来定义自己的错误信息。
 
-    <p>Please input a number between 5 and 10:</p>
-    <input id="demo" type="text">
-    <button type="button" onclick="myFunction()">Test Input</button>
-    <p id="message"></p>
-    <script>
-    function myFunction() {
-        var message, x;
-        message = document.getElementById("message");
-        message.innerHTML = "";
-        x = document.getElementById("demo").value;
-        try { 
-            if(x == "") throw "empty";
-            if(isNaN(x)) throw "not a number";
-            x = Number(x);
-            if(x > 10) throw "too high";
-            if(x < 5) throw "too low";
-        }
-        catch(err) {
-            message.innerHTML = "Input is " + err + ".";
-        }
-        finally {
-            document.getElementById("demo").value = "";
-        }
+```html
+<p>Please input a number between 5 and 10:</p>
+<input id="demo" type="text">
+<button type="button" onclick="myFunction()">Test Input</button>
+<p id="message"></p>
+<script>
+function myFunction() {
+    var message, x;
+    message = document.getElementById("message");
+    message.innerHTML = "";
+    x = document.getElementById("demo").value;
+    try { 
+        if(x == "") throw "empty";
+        if(isNaN(x)) throw "not a number";
+        x = Number(x);
+        if(x > 10) throw "too high";
+        if(x < 5) throw "too low";
     }
-    </script>
+    catch(err) {
+        message.innerHTML = "Input is " + err + ".";
+    }
+    finally {
+        document.getElementById("demo").value = "";
+    }
+}
+</script>
+```
 
 上例中，无论是否出错，最终都会清空输入框里用户键入的值。
 
@@ -68,4 +72,4 @@ Use `console.log()` to display JavaScript values in the debugger window. 使用�
 
 The **debugger** keyword stops the execution of JavaScript, and calls (if available) the debugging function. 效果跟在浏览器调试器里设置 breakpoint 一样。
 
-If no debugging is available, the debugger statement has no effect. 如果没有可用的 debugging，这个关键字没有什么效果。
+如果没有可用的 debugging，这个关键字没有什么效果。

@@ -110,11 +110,11 @@ Cookies 以 name-value 形式存储。（如 username = Viivenne）当浏览器�
 
     document.cookie = "username=Vivienne WU";
 
-也可以添加一个过期日期（以 UTC 时间格式）<span class="blue-text">默认地，当浏览器关闭时，cookie 被删除</span>
+也可以添加一个过期日期（以 UTC 时间格式）<span class="t-blue">默认地，当浏览器关闭时，cookie 被删除</span>
 
     document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";
 
-可以添加一个 path 参数，告诉浏览器 cookie 属于哪一个路径。<span class="blue-text">默认地，cookie 属于当前页面</span>
+可以添加一个 path 参数，告诉浏览器 cookie 属于哪一个路径。<span class="t-blue">默认地，cookie 属于当前页面</span>
 
     document.cookie = "username=John Doe; expires=Thu," +
                       " 18 Dec 2013 12:00:00 UTC; path=/";

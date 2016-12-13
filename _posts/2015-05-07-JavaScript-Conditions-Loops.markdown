@@ -24,16 +24,18 @@ JS 条件语句，根据不同决定执行不同操作。
 
 语法：
 
-    switch(expression) {
-        case n:
-            code block
-            break;
-        case n:
-            code block
-            break;
-        default:
-            default code block
-    }
+```js
+switch(expression) {
+    case n:
+        code block
+        break;
+    case n:
+        code block
+        break;
+    default:
+        default code block
+}
+```
 
 注意：
 

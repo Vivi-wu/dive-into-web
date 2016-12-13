@@ -30,21 +30,23 @@ updateElement($('body'))('Hello world.')
 
 再看一个例子，创建多个在同一空间内的关闭的函数。如果一个函数把多个函数返回到一个对象或数组中，所有这些函数都有机会获得创建函数的内部变量。
 
-    // 例 2-6
-    function Ready(){
-      var button, tools;
-      tools = ['save', 'add', 'delete'];
-      console.info($('body'));
-      tools.forEach(function(tool){
-        console.info(tool);
-        var button = $('<button>').text(tool).attr({type: 'button'}).css({position: 'relative'}).appendTo('body');
-        button.click(function clickHandler(){
-          console.info(tool, button);
-          alert('User clicked '+tool);
-        })
-      })
-    }
-    $('document').ready(Ready);
+```js
+// 例 2-6
+function Ready(){
+  var button, tools;
+  tools = ['save', 'add', 'delete'];
+  console.info($('body'));
+  tools.forEach(function(tool){
+    console.info(tool);
+    var button = $('<button>').text(tool).attr({type: 'button'}).css({position: 'relative'}).appendTo('body');
+    button.click(function clickHandler(){
+      console.info(tool, button);
+      alert('User clicked '+tool);
+    })
+  })
+}
+$('document').ready(Ready);
+```
 
 ## 函数式编程
 
@@ -60,37 +62,41 @@ JS 函数默认不返回值，除非使用 `return` 语句。无返回语句时�
 
 下例选择页面中所有图片，过滤掉宽度小于 300px 的，然后按比例缩放列表中剩下的图片。
 
-    // JavaScript
-    var max = 300;
-    var scaleImages = (function (maxWidth) {
-      return function() {
-        $('img').filter(function(){
-          return $(this).width() > maxWidth;
-        }).each(function(){
-          $(this).width(maxWidth);
-        });
-      };
-    })(max);
-    // HTML
-    <button type="button" onclick="scaleImages()">缩放</button>
+```js
+var max = 300;
+var scaleImages = (function (maxWidth) {
+  return function() {
+    $('img').filter(function(){
+      return $(this).width() > maxWidth;
+    }).each(function(){
+      $(this).width(maxWidth);
+    });
+  };
+})(max);
+```
+
+```html
+<button type="button" onclick="scaleImages()">缩放</button>
+```
 
 ### 原型及扩展对象
 
 下面方法通过给 String.prototype 添加方法实现模板插值。一般情况下，最好不要修改调用了方法的对象，但是要返回一个新的对象实例。
 
-    String.prototype.populate = function (params) { // 也可以是有名函数
-      var str = this.replace(/\{\w+\}/g, function (match) { // 以第一个匹配作为实参；也可以是有名函数
-        var text = params[match.substr(1, match.length-2)]; // 考虑到传入对象中不含关键字，text 为 undefined 的情况
-        return text ? text : '';
-      });
-      return str;
-    };
-
-    $(function(){
-      $('p').html('Hello {name}'.populate({
-        name: "Vivienne"
-      }));
-    })
+```js
+String.prototype.populate = function (params) { // 也可以是有名函数
+  var str = this.replace(/\{\w+\}/g, function (match) { // 以第一个匹配作为实参；也可以是有名函数
+    var text = params[match.substr(1, match.length-2)]; // 考虑到传入对象中不含关键字，text 为 undefined 的情况
+    return text ? text : '';
+  });
+  return str;
+};
+$(function(){
+  $('p').html('Hello {name}'.populate({
+    name: "Vivienne"
+  }));
+})
+```
 
 ### 用原型扩展函数
 
@@ -100,29 +106,31 @@ JS 函数默认不返回值，除非使用 `return` 语句。无返回语句时�
 
 需要在函数外部把执行时的 this （参考JS object章节，当 this 用在函数内，它指拥有这个函数的对象）传进来。
 
-    Function.prototype.createInterceptor = function createInterceptor(fn) { // 也可以是无名函数
-      var scope = {};
-      var _this = this;    // 运行时，此处的 this 指拥有 createInterceptor() 函数的对象
-      return function() {
-        if (fn.apply(scope, arguments)) {
-          return _this.apply(scope, arguments);    // 因为JS函数本身是对象，此处运行时指 function interceptMe(x){}
-        } else {
-          return null;
-        }
-      }
+```js
+Function.prototype.createInterceptor = function createInterceptor(fn) { // 也可以是无名函数
+  var scope = {};
+  var _this = this;    // 运行时，此处的 this 指拥有 createInterceptor() 函数的对象
+  return function() {
+    if (fn.apply(scope, arguments)) {
+      return _this.apply(scope, arguments);    // 因为JS函数本身是对象，此处运行时指 function interceptMe(x){}
+    } else {
+      return null;
     }
+  }
+}
 
-    var interceptMe = function (x) { // 也可以是有名函数
-      console.info(x);
-      return Math.pow(x, 3);
-    };
+var interceptMe = function (x) { // 也可以是有名函数
+  console.info(x);
+  return Math.pow(x, 3);
+};
 
-    var cube = interceptMe.createInterceptor(function(x) {
-      return typeof x === 'number';
-    });
+var cube = interceptMe.createInterceptor(function(x) {
+  return typeof x === 'number';
+});
 
-    cube(3)    // 27
-    cube('test')  // null
+cube(3)    // 27
+cube('test')  // null
+```
 
 ### 柯里化和对象参数
 
@@ -136,20 +144,22 @@ JS 函数默认不返回值，除非使用 `return` 语句。无返回语句时�
 
 这里提一下如何把 jQuery 选择器得到的 jQuery 对象组成的列表（typeof 这个列表得到类型是 object，用 Array.isArray() 检查，结果是 false，但它可以用 for 循环语句遍历）转换成 JS array：借助 jQuery 的 `toArray()` 方法，return the DOM Elements as an Array。
 
-    // HTML
-    <ul id="unorderList">
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-    </ul>
-    // JavaScript
-    var $li = $('#unorderList li')
-    $li.toArray().forEach(function(element){
-      $(element).bind('click', function(){
-        console.info(element);
-      });
-    });
+```html
+<ul id="unorderList">
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+  <li>4</li>
+</ul>
+```
+```js
+var $li = $('#unorderList li')
+$li.toArray().forEach(function(element){
+  $(element).bind('click', function(){
+    console.info(element);
+  });
+});
+```
 
 ## 测试 JavaScript 应用
 
@@ -165,4 +175,3 @@ JavaScript 中的测试步骤：
 4. 为动作的结果检查 DOM
 
 可用的测试库或工具有：QUnit、Selenium. 作者花了大量篇幅写如何使用 Selenium 测试，真的不是夹杂私货??
-

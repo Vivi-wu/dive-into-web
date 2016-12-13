@@ -6,7 +6,7 @@ category: JavaScript
 
 + JS中有**5**种可以包含 values 的类型：string, number, boolean, object and function。
 + 有**2**种不含 value 的类型：undefined，null
-+ 有**3**种不同类型的 object：Object，Date，Array。所以<span class="blue-text">使用 `typeof` 操作符不能判断出一个变量是否是 Array 或 Date 变量</span>，因为返回结果都是 `object`。
++ 有**3**种不同类型的 object：Object，Date，Array。所以<span class="t-blue">使用 `typeof` 操作符不能判断出一个变量是否是 Array 或 Date 变量</span>，因为返回结果都是 `object`。
 
 <!--more-->
 
@@ -14,19 +14,23 @@ category: JavaScript
 
 该性质**返回**所有JS变量的 **constructor 函数**。
 
-    "John".constructor         // Returns function String()  { [native code] }
-    (3.14).constructor         // Returns function Number()  { [native code] }
-    false.constructor          // Returns function Boolean() { [native code] }
-    [1,2,3,4].constructor      // Returns function Array()   { [native code] }
-    {name:'John', age:34}.constructor  // Returns function Object()  { [native code] }
-    new Date().constructor       // Returns function Date()    { [native code] }
-    function () {}.constructor   // Returns function Function(){ [native code] }
+```js
+"John".constructor         // Returns function String()  { [native code] }
+(3.14).constructor         // Returns function Number()  { [native code] }
+false.constructor          // Returns function Boolean() { [native code] }
+[1,2,3,4].constructor      // Returns function Array()   { [native code] }
+{name:'John', age:34}.constructor  // Returns function Object()  { [native code] }
+new Date().constructor       // Returns function Date()    { [native code] }
+function () {}.constructor   // Returns function Function(){ [native code] }
+```
 
-<span class="blue-text">可以用来判断一个变量类型是否是 Array</span>，判断 Date 方法同。
+<span class="t-blue">可以用来判断一个变量类型是否是 Array</span>，判断 Date 方法同。
 
-    function isArray(myArray) {
-      return myArray.constructor.toString().indexOf("Array") > -1;
-    }
+```js
+function isArray(myArray) {
+  return myArray.constructor.toString().indexOf("Array") > -1;
+}
+```
 
 ### Undefined
 
@@ -40,7 +44,7 @@ category: JavaScript
 
 ### Null
 
-JS中 `null` 表示什么都不是、不存在。<span class="blue-text">与 undefined 不同，`typeof null` 的结果是 `object`</span>。
+JS中 `null` 表示什么都不是、不存在。<span class="t-blue">与 undefined 不同，`typeof null` 的结果是 `object`</span>。
 
     null == undefined;  // true
     null === undefined; // false
@@ -53,14 +57,16 @@ JS中 `null` 表示什么都不是、不存在。<span class="blue-text">与 und
 
 测试一个对象是否存在，必须如下先检查该对象是否被定义了。
 
-    if (typeof myObj !== "undefined" && myObj !== null)
-    if (myObj !== null && typeof myObj !== "undefined")  // 这样写会 throw error exception，两句的区别见下面
-    var person = {};
-    typeof person;       // object
-    person.valueOf();    // [object Object]
-    (person !== null);   // true
-    typeof persons;      // undefined
-    (persons !== null);  // 浏览器报错，JS停止执行，没有显示结果。
+```js
+if (typeof myObj !== "undefined" && myObj !== null)
+if (myObj !== null && typeof myObj !== "undefined")  // 这样写会 throw error exception，两句的区别见下面
+var person = {};
+typeof person;       // object
+person.valueOf();    // [object Object]
+(person !== null);   // true
+typeof persons;      // undefined
+(persons !== null);  // 浏览器报错，JS停止执行，没有显示结果。
+```
 
 ## Type Conversion
 
@@ -72,14 +78,16 @@ JS从左到右依次评估 expression，操作数据类型不同的变量，左�
 
 注意：在JS输出时，会自动调用 toString() 方法。
 
-    document.getElementById("demo").innerHTML = myVar;
+```js
+document.getElementById("demo").innerHTML = myVar;
 
-    // if myVar = {name:"Fjohn"}  // toString converts to "[object Object]"
-    // if myVar = [1,2,3,4]       // toString converts to "1,2,3,4"
-    // if myVar = new Date()      // toString converts to "Fri Jul 18 2014 09:08:55 GMT+0200"
-    // if myVar = 123             // toString converts to "123"
-    // if myVar = true            // toString converts to "true"
-    // if myVar = false           // toString converts to "false"
+// if myVar = {name:"Fjohn"}  // toString converts to "[object Object]"
+// if myVar = [1,2,3,4]       // toString converts to "1,2,3,4"
+// if myVar = new Date()      // toString converts to "Fri Jul 18 2014 09:08:55 GMT+0200"
+// if myVar = 123             // toString converts to "123"
+// if myVar = true            // toString converts to "true"
+// if myVar = false           // toString converts to "false"
+```
 
 ### Numbers to Strings
 
@@ -96,12 +104,14 @@ Booleans to Strings，Dates to Strings 方法同上。Date 转为字符串有更
 
 使用全局函数 Number()，其他方法参考 Number 章节。
 
-    Number("3.14")    // returns 3.14
-    Number(" ")       // returns 0 
-    Number("")        // returns 0
-    Number("99 88")   // returns NaN
+```js
+Number("3.14")    // returns 3.14
+Number(" ")       // returns 0 
+Number("")        // returns 0
+Number("99 88")   // returns NaN
+```
 
-When comparing a string with a number, JavaScript will convert the string to a number when doing the comparison. <span class="blue-text">当比较一个字符串和一个数字，JS会自动将字符串转换成一个数字，然后做比较</span>。
+When comparing a string with a number, JavaScript will convert the string to a number when doing the comparison. <span class="t-blue">当比较一个字符串和一个数字，JS会自动将字符串转换成一个数字，然后做比较</span>。
 
 An empty string converts to 0. A non-numeric string converts to **NaN** which is always **false**. 空字串转为 0，非数字式字符串转换成 `NaN`, 比较结果为 false
 
@@ -112,12 +122,14 @@ An empty string converts to 0. A non-numeric string converts to **NaN** which is
 
 为了保证正确的结果，在比较之前，需要把变量转换成合适的类型。
 
-    age = Number(age);
-    if (isNaN(age)) {
-        voteable = "Error in input";
-    } else {
-        voteable = (age < 18) ? "Too young" : "Old enough";
-    }
+```js
+age = Number(age);
+if (isNaN(age)) {
+    voteable = "Error in input";
+} else {
+    voteable = (age < 18) ? "Too young" : "Old enough";
+}
+```
 
 ### Unary + Operator
 

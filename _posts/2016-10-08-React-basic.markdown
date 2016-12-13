@@ -20,8 +20,10 @@ category: JavaScript
 
 React 中使用 JSX 创建树节点，当然 JSX is optional and **not required** to use React。
 
-    <HelloMessage name="John" />
-    <div>Hello {this.props.name}</div>
+```js
+<HelloMessage name="John" />
+<div>Hello {this.props.name}</div>
+```
 
 JSX 作为 JS 语法的扩展让我们能使用 HTML 的语法创建 JavaScript objects。
 
@@ -42,41 +44,45 @@ React JSX code 可以写在单独的文件里，通过
 
 + 组件名必须以变量形式声明，如下：
 
-        var Nav;
-        var app = <Nav color="blue" />;
+    var Nav;
+    var app = <Nav color="blue" />;
 
 + Namespaced Components 命名空间式的组件使得只需**声明一个**组件变量，让其他子组件作为其属性来获取。
 
-        var MyFormComponent = React.createClass({ ... });
-        var Form = MyFormComponent;
-        var App = (
-          <Form>
-            <Form.Row>
-              <Form.Label />
-              <Form.Input />
-            </Form.Row>
-          </Form>
-        );
+  ```js
+  var MyFormComponent = React.createClass({ ... });
+  var Form = MyFormComponent;
+  var App = (
+    <Form>
+      <Form.Row>
+        <Form.Label />
+        <Form.Input />
+      </Form.Row>
+    </Form>
+  );
 
-        MyFormComponent.Row = React.createClass({ ... });
-        MyFormComponent.Label = React.createClass({ ... });
-        MyFormComponent.Input = React.createClass({ ... });
+  MyFormComponent.Row = React.createClass({ ... });
+  MyFormComponent.Label = React.createClass({ ... });
+  MyFormComponent.Input = React.createClass({ ... });
+  ```
 
 + 使用 JS 表达式作为 attribute 值的时候，需要使用大括号 `{ expression }` 包裹，代替一般情况下使用的双引号 `"value"`。
 + 缺省特性值时，JSX 认为它就是 `true`。因此，为了明确指定某个 attribute 是 `false`，要么不写这个特性，要么使用大括号赋值，如： `disabled={false}`
 + 注释标记跟 JS 的 comment 一样，有单行和多行注释。需要注意的是，当你为一个 tag 的子区域写注释时，需要使用大括号将这条注释括起来。
 
-        var content = (
-          <Nav>
-            {/* child comment, put {} around */}
-            <Person
-              /* multi
-                 line
-                 comment */
-              name={window.isLoggedIn ? window.name : ''} // end of line comment
-            />
-          </Nav>
-        );
+  ```js
+  var content = (
+    <Nav>
+      {/* child comment, put {} around */}
+      <Person
+        /* multi
+           line
+           comment */
+        name={window.isLoggedIn ? window.name : ''} // end of line comment
+      />
+    </Nav>
+  );
+  ```
 
 + React 会在生成的 raw HTML 中自动插入类似 `<!-- react-text: 4 --><!-- /react-text -->` 的注释，据说是它用来识别如何在 DOM 添加和替换节点。
 + React **不会渲染原生 HTML 元素中不存在的特性**，除非以 `data-` 作为其前缀。而以 `aria-` 为前缀的 Web 可用性特性则可以被正确地渲染。
@@ -89,51 +95,59 @@ React JSX code 可以写在单独的文件里，通过
 
 此时可以使用 JSX 的新特性，被称作 **spread attributes**。不直接对 `component.props` 操作也能解决前面的问题。
 
-    var props = {};
-    props.foo = x;
-    props.bar = y;
-    var component = <Component {...props} />;
+```js
+var props = {};
+props.foo = x;
+props.bar = y;
+var component = <Component {...props} />;
+```
 
 `{...this.props}` 属性的传递把组件上的 HTML attributes 都复制到底层的 HTML 元素上，save typing！
 
 此外还可以用来合并老的 `props` 和额外的属性值，如下:
 
-    <Component {...this.props} more="values" />
+```js
+<Component {...this.props} more="values" />
+```
 
 注意：attribute 的**书写顺序很重要**，写在右边的覆盖前面的同名特性。
 
 还可以指定哪个属性不往下面传递：
 
-    function FancyCheckbox(props) {
-      var { checked, ...other } = props;
-      var fancyClass = checked ? 'FancyChecked' : 'FancyUnchecked';
-      // `other` contains { onClick: console.log } but not the checked property
-      return (
-        <div {...other} className={fancyClass} />
-      );
-    }
-    ReactDOM.render(
-      <FancyCheckbox checked={true} onClick={console.log.bind(console)}>
-        Hello world!
-      </FancyCheckbox>,
-      document.getElementById('example')
-    );
+```js
+function FancyCheckbox(props) {
+  var { checked, ...other } = props;
+  var fancyClass = checked ? 'FancyChecked' : 'FancyUnchecked';
+  // `other` contains { onClick: console.log } but not the checked property
+  return (
+    <div {...other} className={fancyClass} />
+  );
+}
+ReactDOM.render(
+  <FancyCheckbox checked={true} onClick={console.log.bind(console)}>
+    Hello world!
+  </FancyCheckbox>,
+  document.getElementById('example')
+);
+```
 
 如果既想要消费一个属性，又想把它传递下去，就在子组件上再明确地写下这个属性即可：
 
-    function FancyCheckbox(props) {
-      var { checked, title, ...other } = props;
-      var fancyClass = checked ? 'FancyChecked' : 'FancyUnchecked';
-      var fancyTitle = checked ? 'X ' + title : 'O ' + title;
-      return (
-        <label>
-          <input {...other} checked={checked} className={fancyClass}
-            type="checkbox"
-          />
-          {fancyTitle}
-        </label>
-      );
-    }
+```js
+function FancyCheckbox(props) {
+  var { checked, title, ...other } = props;
+  var fancyClass = checked ? 'FancyChecked' : 'FancyUnchecked';
+  var fancyTitle = checked ? 'X ' + title : 'O ' + title;
+  return (
+    <label>
+      <input {...other} checked={checked} className={fancyClass}
+        type="checkbox"
+      />
+      {fancyTitle}
+    </label>
+  );
+}
+```
 
 ## 实践中遇到的问题
 
@@ -153,5 +167,7 @@ Improper use of the innerHTML can open you up to a cross-site scripting (XSS) at
 1. 最简单的办法是在 JS 中直接写 Unicode 字符。需要**保证文件按 UTF-8 格式保存**，浏览器也按照 UTF-8 格式显示。
 2. 一种更安全的方法是找到**实体对应的 unicode number**，如下：
 
-        <div>{'First \u00b7 Second'}</div>
-        <div>{'First ' + String.fromCharCode(183) + ' Second'}</div>
+```js
+<div>{'First \u00b7 Second'}</div>
+<div>{'First ' + String.fromCharCode(183) + ' Second'}</div>
+```

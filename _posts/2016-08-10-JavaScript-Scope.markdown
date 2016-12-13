@@ -46,14 +46,16 @@ Any variables/objects/functions defined in its parent scope, are available in th
 
 下面的例子中要实现计数加1的功能，但因为局部变量的生命周期只维持在函数调用期间，所以无论调用多少次 add 函数，结果都是 1.
 
-    function add() {
-        var counter = 0;
-        counter += 1;
-    }
-    add();
-    add();
-    add();
-    // the counter should now be 3, but it does not work !
+```js
+function add() {
+    var counter = 0;
+    counter += 1;
+}
+add();
+add();
+add();
+// the counter should now be 3, but it does not work !
+```
 
 A better example of how the closure side of things works, can be seen when returning a function reference。能展现**闭包**是如何起作用的例子，就**是返回一个函数索引**。
 
@@ -63,14 +65,16 @@ Simply accessing variables outside of the immediate lexical scope creates a clos
 
 下面的例子使用闭包，解决了自增计数的问题。
 
-    var add = (function () {
-        var counter = 0;
-        return function () {return counter += 1;}
-    })();
-    add();
-    add();
-    add();
-    // the counter is now 3
+```js
+var add = (function () {
+    var counter = 0;
+    return function () {return counter += 1;}
+})();
+add();
+add();
+add();
+// the counter is now 3
+```
 
 结合上面提到的自调用解释一下：
 
@@ -93,21 +97,25 @@ Simply accessing variables outside of the immediate lexical scope creates a clos
 
 有时需要对作用域进行操作实现一些目标。看下例：
 
-    var links = document.querySelectorAll('nav li');
-    for (var i = 0; i < links.length; i++) {
-      console.log(this); // [object Window]
-    }
+```js
+var links = document.querySelectorAll('nav li');
+for (var i = 0; i < links.length; i++) {
+  console.log(this); // [object Window]
+}
+```
 
 因为并没有 invoke 什么或者改变作用域，这里的 this 指的就是默认的全局作用域中拥有这段js的 window 对象。
 
 使用 .call() 和 .apply() 可以把一个作用域传进函数中。
 
-    var links = document.querySelectorAll('nav li');
-    for (var i = 0; i < links.length; i++) {
-      (function () {
-        console.log(this); // each element in the array
-      }).call(links[i]);
-    }
+```js
+var links = document.querySelectorAll('nav li');
+for (var i = 0; i < links.length; i++) {
+  (function () {
+    console.log(this); // each element in the array
+  }).call(links[i]);
+}
+```
 
 两者的区别在 JS Functions 章节已经讲过 .call(scope, arg1, arg2, arg3) takes individual arguments, comma separated, whereas .apply(scope, [arg1, arg2]) takes an Array of arguments。
 
@@ -120,16 +128,18 @@ Simply accessing variables outside of the immediate lexical scope creates a clos
 
 绑定事件处理函数时，有时会遇到需要传参数
 
-    // works
-    nav.addEventListener('click', toggleNav, false);
+```js
+// works
+nav.addEventListener('click', toggleNav, false);
 
-    // will invoke the function immediately
-    nav.addEventListener('click', toggleNav(arg1, arg2), false);
+// will invoke the function immediately
+nav.addEventListener('click', toggleNav(arg1, arg2), false);
 
-    // 解决办法
-    nav.addEventListener('click', function () {
-      toggleNav(arg1, arg2);
-    }, false);
+// 解决办法
+nav.addEventListener('click', function () {
+  toggleNav(arg1, arg2);
+}, false);
+```
 
 但是上面的办法改变了作用域，还写了一个没什么用的函数。使用 .bind() 不同于 call 和 apply，不会 invoke 一个函数。
 
@@ -141,51 +151,57 @@ Note:the scope can be changed if needed
 
 JS 中没有私有域和共有域的说法，最简单的创建私有域的做法是，把函数写在另一个函数里。（如上面提到，函数创建 scope，将会把内容保持在全局作用域之外）
 
-    (function () {
-      // private scope inside here
-      var myFunction = function () {
-        // do some stuff here
-      };
-    })()；
-    myFunction(); // Uncaught ReferenceError: myFunction is not defined
+```js
+(function () {
+  // private scope inside here
+  var myFunction = function () {
+    // do some stuff here
+  };
+})()；
+myFunction(); // Uncaught ReferenceError: myFunction is not defined
+```
 
 上面我们模拟出了私有作用域的效果，如何实现公有作用域呢？
 
-    // define module
-    var Module = (function () {
-      var privateMethod = function () {
+```js
+// define module
+var Module = (function () {
+  var privateMethod = function () {
 
-      };
-      return {
-        myMethod: function () {
-        },
-        publicMethod: function () {
-          // has access to `privateMethod`, we can call it:
-          // privateMethod();
-        }
-      };
-    })();
+  };
+  return {
+    myMethod: function () {
+    },
+    publicMethod: function () {
+      // has access to `privateMethod`, we can call it:
+      // privateMethod();
+    }
+  };
+})();
 
-    // call module + methods
-    Module.myMethod();
-    Module.publicMethod();
+// call module + methods
+Module.myMethod();
+Module.publicMethod();
+```
 
 这里 Module 被返回可以被全局作用域使用，并且作为命名空间，包含许多方法供我们使用。没有写在 `return` 所含对象中的方法，就变成了私有函数(方法)。
 
 下面举例如何通过返回一个对象，使用公有和私有方法。
 
-    var Module = (function () {
-      var myModule = {};
-      var privateMethod = function () {
-      };
-      myModule.publicMethod = function () {
-      };
-      myModule.anotherPublicMethod = function () {
-      };
-      return myModule; // returns the Object with public methods
-    })();
+```js
+var Module = (function () {
+  var myModule = {};
+  var privateMethod = function () {
+  };
+  myModule.publicMethod = function () {
+  };
+  myModule.anotherPublicMethod = function () {
+  };
+  return myModule; // returns the Object with public methods
+})();
 
-    // usage
-    Module.publicMethod();
+// usage
+Module.publicMethod();
+```
 
 我们可以通过在方法**名字前加下划线**来区分私有方法和公有方法。

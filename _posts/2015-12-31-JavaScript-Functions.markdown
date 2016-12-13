@@ -2,7 +2,7 @@
 title:  "JavaScript Functions"
 category: JavaScript
 ---
-The `typeof` operator in JavaScript returns "**function**" for functions. But, JavaScript functions can best be described as objects. <span class="blue-text">JS函数最好被描述为对象</span>。
+The `typeof` operator in JavaScript returns "**function**" for functions. But, JavaScript functions can best be described as objects. <span class="t-blue">JS函数最好被描述为对象</span>。
 
 使用 `arguments.length` property 可以返回函数调用时，**接收到的实际参数个数**。
 
@@ -50,7 +50,7 @@ JS函数可以使用表达式来定义。
 
 ## Hoisting
 
-Hoisting 提升 is JavaScript's default behavior of moving declarations to the **top** of the current scope (to the top of the **current script** or the **current function**)。<span class="blue-text">JS默认行为：把声明放置到当前脚本或当前函数的顶部</span>。
+Hoisting 提升 is JavaScript's default behavior of moving declarations to the **top** of the current scope (to the top of the **current script** or the **current function**)。<span class="t-blue">JS默认行为：把声明放置到当前脚本或当前函数的顶部</span>。
 
 + In JS, a variable can be used before it has been declared. 变量可以在声明之前被使用。
 + JavaScript only hoists declarations, **not** initializations. 只提升声明，而不是初始化赋值。
@@ -61,14 +61,16 @@ Hoisting 提升 is JavaScript's default behavior of moving declarations to the *
 
 下例中，因为变量 y 的声明可以提升到顶部，但是初始化赋值 `=7` 不行，所以 y 的值为 undefined。
 
-    var x = 5; // Initialize x
+```js
+var x = 5; // Initialize x
 
-    elem = document.getElementById("demo"); // Find an element
-    elem.innerHTML = x + " " + y;           // Display x and y
+elem = document.getElementById("demo"); // Find an element
+elem.innerHTML = x + " " + y;           // Display x and y
 
-    var y = 7; // Initialize y
+var y = 7; // Initialize y
+```
 
-<span class="blue-text">To avoid bugs, always declare all variables at the beginning of every scope</span>.
+<span class="t-blue">To avoid bugs, always declare all variables at the beginning of every scope</span>.
 
 ## Function Parameters and Arguments
 
@@ -80,16 +82,18 @@ Hoisting 提升 is JavaScript's default behavior of moving declarations to the *
 + 如果函数接收到的参数个数小于函数声明参数列表里的，the missing values are set to: **undefined**，最好给参数设置一个默认值。(参看 JavaScript Strict Mode 章节)
 + 如果接收到的参数个数多于声明参数列表里的，这些参数 can be reached using the `arguments` object（JS函数内置对象，包含一个 array 放置函数调用时传递进来的参数）
 
-    使用函数**内置参数对象** `arguments`，可以轻松实现输入值相加等操作。
+使用函数**内置参数对象** `arguments`，可以轻松实现输入值相加等操作。
 
-      x = sumAll(1, 123, 500, 115, 44, 88);
-      function sumAll() {
-        var i, sum = 0;
-        for (i = 0; i < arguments.length; i++) {
-          sum += arguments[i];
-        }
-        return sum;
-      }
+```js
+x = sumAll(1, 123, 500, 115, 44, 88);
+function sumAll() {
+  var i, sum = 0;
+  for (i = 0; i < arguments.length; i++) {
+    sum += arguments[i];
+  }
+  return sum;
+}
+```
 
 ### 参数传递
 
@@ -103,25 +107,28 @@ Hoisting 提升 is JavaScript's default behavior of moving declarations to the *
 
     注意: 在JS中有一个 default global object，下面这个函数看起来不属于任何对象，在 HTML 页面中，它属于页面对象，而在浏览器中，页面对象就是浏览器 window，所以这个函数自动变成窗口对象的函数。
 
-       function myFunction(a, b) {
-          return a * b;
-       }
-       myFunction(10, 2);  // window.myFunction(10, 2) will also return 20
-
-    <span class="blue-text">Global variables, methods, or functions can easily create name conflicts and bugs in the global object</span>. 全局的变量和函数很容易在全局对象中产生命名冲突和bug。
+    ```js
+    function myFunction(a, b) {
+      return a * b;
+    }
+    myFunction(10, 2);  // window.myFunction(10, 2) will also return 20
+    ```
+    <span class="t-blue">Global variables, methods, or functions can easily create name conflicts and bugs in the global object</span>. 全局的变量和函数很容易在全局对象中产生命名冲突和bug。
 
 2. 以对象的方法形式调用函数：`myObject.fullName();`
 3. 在函数前加关键字 new，以构造函数形式调用函数：`var x = new myFunction("John","Doe");`
 4. 使用 **call()** 和 **apply()** (JS预定义函数)调用函数：
 
-       function myFunction(a, b) {
-         return a * b;
-       }
-       myObject = myFunction.call(myObject, 10, 2);     // Will return 20
-       myArray = [10, 2];
-       myObject = myFunction.apply(myObject, myArray);
+    ```js
+    function myFunction(a, b) {
+      return a * b;
+    }
+    myObject = myFunction.call(myObject, 10, 2);     // Will return 20
+    myArray = [10, 2];
+    myObject = myFunction.apply(myObject, myArray);
+    ```
 
-    上面的例子中可以看到，`apply()` 方法从数组中获取函数实参，而前者则一一获取实参。
+  上面的例子中可以看到，`apply()` 方法从数组中获取函数实参，而前者则一一获取实参。
 
 ### Self-Invoking Functions
 
@@ -131,13 +138,15 @@ Function expressions will execute automatically if the expression is followed by
 
 函数声明不能被自调用，必须先用括号括起来，如下，又称为 **anonymous self-invoking function**。好像普遍称为 Immediately-invoked function expression。
 
-    (function () {
-        var x = "Hello!!";      // I will invoke myself
-    })();
-    (function (a, b) {
-        // a == 'hello'
-        // b == 'world'
-    })('hello', 'world');
+```js
+(function () {
+    var x = "Hello!!";      // I will invoke myself
+})();
+(function (a, b) {
+    // a == 'hello'
+    // b == 'world'
+})('hello', 'world');
+```
 
 ## Function Return 函数返回
 

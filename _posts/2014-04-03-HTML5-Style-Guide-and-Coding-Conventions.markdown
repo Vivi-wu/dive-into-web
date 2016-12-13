@@ -18,9 +18,9 @@ Coding convention 代码公约，通常包含：
 
 1. element的特性在等号前后的加空格是合法的，如
 
-    <link rel = "stylesheet" href = "styles.css">
+    &lt;link rel = "stylesheet" href = "styles.css"&gt;
 
-但是**不写空格**更易于阅读，和组织相关的实体。
+    但是**不写空格**更易于阅读，和组织相关的实体。
 
 2. 一行代码尽量控制在**80个字符长度**，超出换行
 
