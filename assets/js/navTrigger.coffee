@@ -10,7 +10,7 @@ eleTriggerShow.addEventListener 'click', =>
     eleTarget.style.display = 'block'
     eleTriggerShow.style.display = 'none'
     eleTriggerHide.style.display = 'block'
-    document.body.style.overflow = 'hidden'
+    document.documentElement.style.overflow = 'hidden'
     window.scrollTo 0,0
 
 
@@ -18,4 +18,4 @@ eleTriggerHide.addEventListener 'click', =>
     eleTarget.style.display = 'none'
     eleTriggerHide.style.display = 'none'
     eleTriggerShow.style.display = 'block'
-    document.body.style.overflow = 'auto'
+    document.documentElement.style.overflow = 'auto'
