@@ -10,9 +10,9 @@ The HTML `<a>` tag defines a hyperlink that you can click on to jump to another 
 
 **Tips**:
 
-+ The "Link text " is the visible part and doesn't have to be text. It can be an image or any other HTML element
++ The "Link text" is the visible part and doesn't have to be text.
 标签 `<a>` 的内容也可以是**图片**或者**其他HTML元素**，只要用 `<a>` 标签将那个元素包围住。
-+ 记得在子文件索引后加一个 **trailing slash** 结尾斜杠。否则可能会向服务器发送两个request。Many servers will automatically add a trailing slash to the address, and then create a new request.
++ <span class="t-blue">记得在子文件索引后加一个 **trailing slash** 结尾斜杠</span>。否则可能会向服务器发送两个request。Many servers will automatically add a trailing slash to the address, and then create a new request.
 
 <!--more-->
 

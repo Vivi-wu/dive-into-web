@@ -1,6 +1,6 @@
 ---
 title:  "HTML5 Style Guide and Coding Conventions"
-category: HTML
+categories: [HTML, CSS, JavaScript]
 ---
 ## Programming style guidelines
 
@@ -16,21 +16,21 @@ Coding convention 代码公约，通常包含：
 
 ### HTML 书写建议
 
-1.element的特性在等号前后的加空格是合法的，如
+1. element的特性在等号前后的加空格是合法的，如
 
     <link rel = "stylesheet" href = "styles.css">
 
-但是不写空格更易于阅读，和组织相关的实体。
+但是**不写空格**更易于阅读，和组织相关的实体。
 
-2.一行代码尽量控制在**80个字符长度**，超出换行
+2. 一行代码尽量控制在**80个字符长度**，超出换行
 
-3.使用 **2** 个空格用于行首缩进，不要使用 **TAB**
+3. 使用 **2** 个空格用于行首缩进，不要使用 **TAB**
 
-4.It's not necessary to indent every element，没必要对每一个元素都缩进
+4. 没必要对每一个元素都缩进
 
-5.不要添加不必要的空行 blank line，未来便于阅读，用空行来分开大的或者逻辑相关的代码块
+5. 不要添加不必要的空行 blank line，未来便于阅读，用空行来分开大的或者逻辑相关的代码块
 
-6.关于HTML注释，短的注释写在一行，如：
+6. 关于HTML注释，短的注释写在一行，如：
 
     <!-- This is a comment -->  
 
@@ -76,7 +76,7 @@ Coding convention 代码公约，通常包含：
 5. 对于 function，loops，conditions，开大括号放在第一行的结尾处，括号前面加一个空格。闭大括号放在新的一行，前面不要有空格。复杂语句结尾不要加分号
 6. 对于 object，开大括号放在对象名同一行。属性名和属性值之间使用冒号加一个空格。字符串类型的值用引号包围起来。最有一对 property-value 后面不要加逗号。闭大括号放在新的一行，前面不要有空格。对象定义结尾处要加分号。
 7. 短的对象可以写在一行，只在属性之间使用一个空格来分隔
-8. 一行代码长度不要超出80个 characters，<span class="blue-text">best place to break it 是在一个操作符或一个逗号之后</span>
+8. 一行代码长度不要超出80个 characters，<span class="t-blue">best place to break it 是在一个操作符或一个逗号之后</span>
 
 ### 其他
 

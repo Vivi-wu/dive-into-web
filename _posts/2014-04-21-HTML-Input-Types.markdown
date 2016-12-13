@@ -22,6 +22,8 @@ category: HTML
 
 定义了一个用于提交表格的按钮。如果缺省提交按钮的 value 属性的值，则按钮将会显示一个默认的文本（Submit）。
 
+<!--more-->
+
 ### radio
 
     <input type="radio">
@@ -39,8 +41,6 @@ category: HTML
     <input type="button">
 
 定义了一个可以点击的按钮，按钮上显示的文字由 _value_ 特性决定。
-
-<!--more-->
 
 ## HTML5 Input Types
 

@@ -10,6 +10,7 @@ Block level elements always start on a new line and takes up the full width avai
 **块级元素**通常**以新的一行开始，左右伸展，占满一整行宽度**。
 
 常见的块级元素有: `<div>`, `<h1>`-`<h6>`, `<p>`, `<form>`, `<ul>`, `<ol>`
+
 <!--more-->
 
 ## Inline Elements

@@ -12,6 +12,8 @@ The **catch** statement allows you to define a block of code to be executed, if 
 
 The **finally** statement lets you execute code, after try and catch, regardless of the result。定义了不论try和catch的结果如何，在他们之后要执行的代码。
 
+<!--more-->
+
     try {
         Block of code to try
     }
@@ -23,8 +25,6 @@ The **finally** statement lets you execute code, after try and catch, regardless
     }
 
 JS的 `try` 和 `catch` come in pairs 是**成对出现**的。
-
-<!--more-->
 
 ### Raise Errors
 

@@ -22,11 +22,13 @@ category: HTML
 
 一个 disabled 的元素是 **un-usable** 不可以被使用，且 **un-clickable** 不可以点击，也**不会被提交**。该特性不需要有一个值。It is the same as writing disabled="disabled".
 
+<!--more-->
+
 ### size
 
     <input type="text" name="firstname" value="John" size="40">
 
-该特性以 _characters_ 为单位设定一个输入区域的大小(宽度)。
+该特性**以 _characters_ 为单位**设定一个输入区域的大小(宽度)。
 
 ### maxlength
 
@@ -35,8 +37,6 @@ category: HTML
 该特性指定一个输入区域的最多允许输入的字符长度。但是该特性不提供任何反馈，如果你想提醒用户，必须写JS代码来实现。
 
 **注意：为了安全地严格的输入，必须在接收端（服务器）也检查是否满足约束条件**。
-
-<!--more-->
 
 ## HTML5 Attributes
 
@@ -48,12 +48,14 @@ category: HTML
 
 你可以给一个 `<form>` 表单开启自动填充功能，然后针对某个 input 输入区域关闭自动填充。如下：
 
-    <form action="action_page.php" autocomplete="on">
-      First name:<input type="text" name="fname"><br>
-      Last name: <input type="text" name="lname"><br>
-      E-mail: <input type="email" name="email" autocomplete="off"><br>
-      <input type="submit">
-    </form>
+```html
+<form action="action_page.php" autocomplete="on">
+  First name:<input type="text" name="fname"><br>
+  Last name: <input type="text" name="lname"><br>
+  E-mail: <input type="email" name="email" autocomplete="off"><br>
+  <input type="submit">
+</form>
+```
 
 支持 autocomplete 特性的输入类型有：**text**，**search**，**url**，**tel**，**email**，**password**，**datepickers**，**range** 和 **color**。有些浏览器需要开启自动填充功能该特性才有效。
 
@@ -66,9 +68,9 @@ category: HTML
       <input type="submit">
     </form>
 
-该特性是 `<form>` 特性，说明表单在提交时不必对其验证。<span class="blue-text">Form has the _novalidate_ attribute it will submit even though it contains an empty required input.</span>
+该特性是 `<form>` 特性，说明表单在提交时不必对其验证。<span class="t-blue">Form has the _novalidate_ attribute it will submit even though it contains an empty required input.</span>
 
-注意：IE9以前版本和 Sarari 不支持该特性。
+注意：IE9 以前版本和 Sarari 不支持该特性。
 
 ### autofocus
 
@@ -80,15 +82,17 @@ category: HTML
 
 ### form
 
-    <pre name="code" class="html"><form action="action_page.php" id="form1">
-      First name: <input type="text" name="fname"><br>
-      <input type="submit" value="Submit">
-    </form>
-    Last name: <input type="text" name="lname" form="form1">
+```html
+<pre name="code" class="html"><form action="action_page.php" id="form1">
+  First name: <input type="text" name="fname"><br>
+  <input type="submit" value="Submit">
+</form>
+Last name: <input type="text" name="lname" form="form1">
+```
 
-该特性指定一个 input 输入元素属于一个或多个表单。这样即使 input 元素没有嵌套写在 `<form>`元素里，仍然可以作为这个 form 的表单数据被提交。如果想让一个 input 同时指向多个 form，用 _space-separated 列出表单的id_。
+该特性指定一个 input 输入元素属于一个或多个表单。这样<span class="t-blue">即使 input 元素没有嵌套写在 `<form>`元素里，仍然可以作为这个 form 的表单数据被提交</span>。如果想让一个 input 同时指向多个 form，用 _space-separated 列出表单的 id_。
 
-注意：IE不支持该特性。
+注意：IE 不支持该特性。
 
 ### formaction
 
@@ -134,12 +138,14 @@ category: HTML
 
 ### min， max
 
-    Enter a date before 1980-01-01:   
-    <input type="date" name="bday" max="1979-12-31">
-    Enter a date after 2000-01-01:
-    <input type="date" name="bday" min="2000-01-02">
-    Quantity (between 1 and 5):
-    <input type="number" name="quantity" min="1" max="5">
+```html
+Enter a date before 1980-01-01:
+<input type="date" name="bday" max="1979-12-31">
+Enter a date after 2000-01-01:
+<input type="date" name="bday" min="2000-01-02">
+Quantity (between 1 and 5):
+<input type="number" name="quantity" min="1" max="5">
+```
 
 这两个特性指定了一个 input 元素的最小值和最大值，支持该特性的输入类型有：**number**，**range**，**date**，**datetime-local**，**month**，**time** 和 **week**。
 
@@ -157,7 +163,7 @@ category: HTML
 
 该特性指定一个输入元素的值需要遵循的 regular expression 常规表达式。支持这个特性的输入类型有：**text**，**search**，**url**，**tel**，**email** 和 **password**。
 
-注意：IE9及之前版本和 Sarari 不支持该特性。
+注意：IE9 及之前版本和 Sarari 不支持该特性。
 
 ### placeholder
 
@@ -181,4 +187,4 @@ category: HTML
 
 为了配合step特性，HTML5引入了 stepUp 和 stepDown 两个函数来根据 step 特性的值来增加或减少控件的值。
 
-注意：IE9及之前版本和 FF 不支持该特性。
+注意：IE9 及之前版本和 FF 不支持该特性。

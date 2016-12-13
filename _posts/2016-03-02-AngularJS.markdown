@@ -18,6 +18,8 @@ category: Other
     HTML2:
     Name: {{customerInfo.name}}
 
+<!--more-->
+
 1. 使用 `=attr` set up a bidirectional binding between a local scope property and an expression passed via the attribute attr. 通过 directive 的 attr **属性的值**在局部 scope 的属性和父 scope 属性名之间建立双向绑定。以上面代码的例子表示 isolate scope 中的属性 customerInfo 从实际使用指令上的 _info_ 特性接受 data-binding。
 2. 使用 `&attr` provides a way to execute an expression in the context of the parent scope. 当希望你的 directive 给绑定行为暴露一个API时，（在父 scope 的上下文中执行一个表达式）。
 3. 使用 `@attr` bind a local scope property to the value of DOM attribute, <span class="blue-text">把 DOM attr 的值，直接赋予局部 scope 某特性，注意与下面第4种的区别。</span>
@@ -52,17 +54,3 @@ Evaluates the expression and inserts the resulting HTML into the element in a se
 用来作为 input change 的 react。该指令用来代替 `$watch` 用来监视 obj 的状态，考虑到 Angular 2 不再使用 `$watch`。
 
 该指令需要 ngModel to be present
-
-
-
-
-
-
-
-
-
-
-
-
-
-

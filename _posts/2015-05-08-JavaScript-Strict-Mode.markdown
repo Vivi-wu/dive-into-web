@@ -13,6 +13,8 @@ category: JavaScript
 1. 在 JS 文件最开始的地方声明，则表示所有代码将在严格模式下被执行。
 2. 在 function 内部最开始的地方声明，则只有该函数内的代码需要在严格模式下被执行。
 
+<!--more-->
+
 ### Not Allowed in Strict Mode
 
 1. 不声明，就使用一个变量或对象。（非严格模式下，这个变量会自动变为全局变量，现在则会报错）
@@ -24,8 +26,6 @@ category: JavaScript
 7. 删除一个 undeletable 的属性
 8. 保留字 _eval_, _arguments_, _implements_, _interface_, _let_, _package_, _private_, _public_, _protected_, _static_, _yield_ 
 9. 不允许使用 `with` 语句
-
-<!--more-->
 
 ## 最佳实践
 

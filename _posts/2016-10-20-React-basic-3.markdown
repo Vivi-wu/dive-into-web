@@ -14,6 +14,8 @@ category: JavaScript
 
 输入组件包含 `value` 属性的称为 controlled component 受控组件。它的值完全反应其属性的值，而不受用户输入影响。因此要实现交互，给 onChange 属性绑定处理函数。
 
+<!--more-->
+
 如果输入组件不含 `value` 属性的称为 uncontrolled component 不受控组件。任何用户输入都直接反应在渲染的元素上。可以像受控组件一样给 onChange 属性绑定处理函数。
 
 可通过 `defautChecked` 给多选框、单选框，`defaultValue` 下拉选项、文本输入框等设置初始值。

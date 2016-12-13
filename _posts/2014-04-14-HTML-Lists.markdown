@@ -56,15 +56,17 @@ Starts with the `<ol>` tag. Each list item starts with the `<li>` tag and are ma
 A description list is a list of terms, with a description of each term. 描述列表由一系列**项目条款**和它们的**描述**组成。
 The `<dl>` tag defines a **description list**. `<dt>` (定义描述元素 **description terms**/names) and `<dd>` (每个元素的描述 **description data**)
 
-    <dl>
-      <dt>Coffee</dt>
-      <dd>- black hot drink</dd>
-      <dt>Milk</dt>
-      <dd>- white cold drink</dd>
-    </dl>
+```html
+<dl>
+  <dt>Coffee</dt>
+  <dd>- black hot drink</dd>
+  <dt>Milk</dt>
+  <dd>- white cold drink</dd>
+</dl>
+```
 
 ### Horizontal Lists
 
 一种常用的使用方式是水平列表，只需要将列表项目 `<li>` 设置为 _display: inline;_ 即可。
 
-**Tip**: List items `<li>` can contain new list and other HTML elements. 列表元素可包含新列表或其他HTML元素。
+**Tip**: 列表元素 `<li>` 可包含新列表或其他 HTML 元素。

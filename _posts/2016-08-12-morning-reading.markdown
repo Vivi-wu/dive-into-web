@@ -1,8 +1,9 @@
 ---
 title:  "各种花边各种tip"
-category: Others
+category: Other
 ---
 ## favicon 引入问题
+
     <link rel="short icon" style="image/x-icon" href="taobaoLogo.ico" >
 
 一般这个Logo图标不但可以运用在浏览器tab的标题中，而且还可以放在收藏夹中去使用，只需将 `rel="short icon"` 改为 `rel="bookmark"` 即可
@@ -17,7 +18,9 @@ category: Others
 
     <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL" />
 
-以上代码的作用是告诉浏览器这个网站对应的app，并在页面上显示下载banner
+以上代码的作用是告诉浏览器这个网站对应的app，并在页面上显示下载 banner
+
+<!--more-->
 
 ## 获取滚动条的滚动值
 
@@ -114,34 +117,6 @@ Cache-Control 不仅仅可以在响应头中设置，还可以在请求头中设
 
 假如一个猫友投入10万元买了一款银行理财产品，到期收益率为5%，投资期限180天，他的到期收益就为10万元×5%×180/365=2465元，而非10万元×5%=5000元。
 
-## 怎么建立满足响应式设计的栅格系统？
-
-原文地址：[How to build a responsive grid system](https://zellwk.com/blog/responsive-grid-system/)
-
-主要从以下三方面考虑：
-
-+ 设计栅格：等宽？多少列？栅格列和间距的尺寸？
-+ 在不同宽度的视区栅格如何表现：栅格列resize？间距固定？在特定的断点改变栅格数量？
-+ HTML（如 Bootstrap，栅格样式写在 HTML 中，这就要求必须使用一定的结构）还是CSS式（栅格定义在 CSS 里，一定程度上减少markup）的栅格系统
-
-具体步骤：
-
-1. 选择一种技术实现你的栅格：CSS Grid（目前主流浏览器都不支持），Flexbox，最简单的 floats
-2. 设置所有元素的盒模型为边框盒： `*,*:before,*:after {box-sizing: inherit;}`
-3. 创建栅格最外层容器，设定最大宽度，左右外边距 auto
-4. 计算栅格列的宽度，这里讨论有间距的栅格系统（无间距的宽度平均分就好了）。四种实现方法：
-
-    + 右边 margin，需要清除最右边的栅格的右边 margin，且设置它为右浮动，避免浏览器 round 半px导致它掉下来。
-    + 左右均分 margin，没什么难的，`calc((100% - 20px * 3) / 3)`
-    + 右边 padding（不推荐）
-    + 左右均分 padding，与第二种类似，但是不需要使用 `calc()` 计算，因为 padding 包含在 width 中。
-
-    巧用 CSS 的计算方法，比如 `calc((100% - 20px * 2) / 3);` 得到除去两个20px宽度，平均分成3个栅格列的列宽。
-
-5. 页面最下面写一行用来 debug 的栅格列
-6. 创建布局变量，使用可读性强的 CSS class，借助 Sass 计算栅格列宽，比如 `percentage(2/12)`
-7. 针对手机、平板、PC 设置断点，在每一个断点处，重新计算 CSS 栅格 class 的宽度
-
 ## 怎么结束跟客户（雇主）的关系
 
 when？
@@ -180,14 +155,6 @@ how？
 
 Alt+Shift+Ctrl+S（文件-导出-存储为web所用格式），剩下保存步骤同上。
 
-## 快速且“完美”还原视觉稿
-
-切图神器 [cutterman](http://www.cutterman.cn/zh/cutterman)
-
-标记神器 [markman](http://www.getmarkman.com/) 非 PS 插件
-
-视觉稿比对自动调整代码神器 [AlloyDesigner](http://alloyteam.github.io/AlloyDesigner/)
-
 ## 前后端分离
 
 真正 senior 的人必须了解整个 end-to-end 过程。掌握大局同时了解细节。因为具体的问题可以丢给 junior 的人去解决。
@@ -208,33 +175,11 @@ CSP(Content Security Policy), 并不是用来防止 XSS 攻击的，而是最小
 
 目前使用的 X-Frame-Options，但以后可以被 CSP 的 frame-ancestors 取代。
 
-    `<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">`
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 
 更大的攻击面，HTML5带来来更多的标签和更多的属性，XSS发生的可能性更大。更大的危害，HTML5更多的资源可以被XSS利用。黑客可以利用浏览器的一切权限，比如本地存储，GEO，WebSocket，Webworker。
 
 遗憾的是HTML并没有针止XSS和XSRF带来系统性解决方案。在这个前提下，CSP变得非常重要，可以大大降低XSS后的危害。
-
-## Mozilla 添加中文翻译
-
-选择中文，点击“编辑”。另开一个页面，把英文原版内容区域 `<article id="wikiArticle">` 标签里的 HTML 内容复制过来，直接修改，保证结构和样式一致。
-
-    {{CommunityBox("Security", "dev-security", "mozilla.dev.security", "security", "Blog|https://blog.mozilla.com/security/|Mozilla Security Blog||Twitter|https://twitter.com/mozsec|@mozsec")}}
-
-以上代码是 Mozilla 自动帮你生成的社区相关蓝色模块。
-
-    {{MakeSimpleQuickLinks("/zh-CN/docs/Mozilla/Security")}}
-
-以上代码自动生成左侧边栏的 ‘“See also” 链接。
-
-    {{LandingPageListSubpages}}
-
-以上代码自动继承页面中已有的内容。
-
-## Jekyll 博客 code 高亮
-
-[官方文档](https://jekyllrb.com/docs/templates/)
-
-[prismjs](http://prismjs.com/)
 
 ## CSS 开发者大会相关
 

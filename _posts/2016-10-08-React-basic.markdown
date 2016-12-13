@@ -12,6 +12,8 @@ category: JavaScript
 
 此外按官网说法，React 直接从 JS 代码生成 HTML 和组件树，在网络环境差的情况下，从加载 JS 到生成页面这段时间的白屏问题不可避免。
 
+<!--more-->
+
 既然是以数据为重，首先介绍 React 中如何展示数据。
 
 ## JSX
@@ -24,8 +26,6 @@ React 中使用 JSX 创建树节点，当然 JSX is optional and **not required*
 JSX 作为 JS 语法的扩展让我们能使用 HTML 的语法创建 JavaScript objects。
 
 其他优点如：比起 function calls 和 object literals，JSX 类似 XML 的开闭标签，使得大型的树结构易于阅读。
-
-<!--more-->
 
 React JSX code 可以写在单独的文件里，通过
 

@@ -42,16 +42,18 @@ The metadata can be used by browsers (how to display content or reload page), se
 
 Examples;
 
-1.Specify page description, keywords, author of the document and charset.
+1. Specify page description, keywords, author of the document and charset.
 
+    ```html
     <meta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript">
     <meta name="description" content="Free Web tutorials on HTML and CSS">
     <meta name="author" content="Hege Refsnes">
     <meta charset="UTF-8">
+    ```
 
-2.Refresh document every 30 seconds: 每隔30秒刷新页面
+2. 每隔30秒刷新页面
 
-    <meta http-equiv="refresh" content="30">
+        <meta http-equiv="refresh" content="30">
 
 ### HTML `<script>`
 
@@ -59,7 +61,7 @@ Examples;
 
 ## HTML `<base>`
 
-The `<base>` tag **specifies the base URL/target for all relative URLs in a document**. <span style="color:mediumblue;">该标签指定了一个文件中所有相对URL的基地址和target目标地址</span>(具体取值参考links章节)。比如 `<img>` 标签引用images文件夹里的图片，其属性 _src_的值可以直接写文件名。
+The `<base>` tag **specifies the base URL/target for all relative URLs in a document**. <span class="t-blue">该标签指定了一个文件中所有相对URL的基地址和target目标地址</span>(具体取值参考links章节)。比如 `<img>` 标签引用images文件夹里的图片，其属性 _src_的值可以直接写文件名。
 
     <head>
       <base href="http://blog.csdn.net/images/" target="_blank">
@@ -70,8 +72,6 @@ The `<base>` tag **specifies the base URL/target for all relative URLs in a docu
 
 **注意**:
 
-1.There can be at **maximum one** `<base>` element in a document, and it **must be inside** the `<head>` element. <span style="background-color:lightblue;">一个文件里最多有一个 `<base>` 元素，且必须写在 `<head>` 元素里。</span>
-
-2.`<base>` 元素要写在 `<head>` 里**第一个元素**的位置上。So that other elements in the head section uses the information from the `<base>` element.
-
-3.如果有`<base>` 元素出现，则它必须含有一个 _href_ 特性或者 _target_ 特性，或者两者都有。
+1. <span class="t-red">一个文件里最多有一个 `<base>` 元素，且必须写在 `<head>` 元素里。</span>
+2. `<base>` 元素要写在 `<head>` 里**第一个元素**的位置上。So that other elements in the head section uses the information from the `<base>` element.
+3. 如果有`<base>` 元素出现，则它必须含有一个 _href_ 特性或者 _target_ 特性，或者两者都有。

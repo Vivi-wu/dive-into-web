@@ -14,24 +14,26 @@ The `<tr>` element defines a **table row** 表格行, the `<th>` element defines
 
 ### `<colgroup>` and `<col>`
 
-`<colgroup>` 该标签用来指定表格中**一列或多列**的formatting。The `<colgroup>` tag **must** be a child of a `<table>` element, **after** any `<caption>` elements and **before** any `<thead>`, `<tbody>`, `<tfoot>` and `<tr>` elements. 该标签要结合 `<col>` 标签一起使用。其中 _span_ 特性指定了 a column group 需要扩展的列数。
+`<colgroup>` 该标签用来指定表格中**一列或多列**的 formatting。The `<colgroup>` tag **must** be a child of a `<table>` element, **after** any `<caption>` elements and **before** any `<thead>`, `<tbody>`, `<tfoot>` and `<tr>` elements. 该标签要结合 `<col>` 标签一起使用。其中 _span_ 特性指定了 a column group 需要扩展的列数。
 
-    <table>
-      <colgroup>
-        <col span="2" style="background-color:red">
-        <col style="background-color:yellow">
-      </colgroup>
-      <tr>
-        <th>ISBN</th>
-        <th>Title</th>
-        <th>Price</th>
-      </tr>
-      <tr>
-        <td>3476896</td>
-        <td>My first HTML</td>
-        <td>$53</td>
-      </tr>
-    </table>
+```html
+<table>
+  <colgroup>
+    <col span="2" style="background-color:red">
+    <col style="background-color:yellow">
+  </colgroup>
+  <tr>
+    <th>ISBN</th>
+    <th>Title</th>
+    <th>Price</th>
+  </tr>
+  <tr>
+    <td>3476896</td>
+    <td>My first HTML</td>
+    <td>$53</td>
+  </tr>
+</table>
+```
 
 效果如下：
 
@@ -97,20 +99,22 @@ Use the CSS _border-spacing_ property to set the space between the cells. 设置
 
 1.竖直显示表头
 
-    <table>
-      <tr>
-        <th>Name:</th>
-        <td>Bill Gates</td>
-      </tr>
-      <tr>
-        <th>Telephone:</th>
-        <td>555 77 854</td>
-      </tr>
-      <tr>
-        <th>Telephone:</th>
-        <td>555 77 855</td>
-      </tr>
-    </table>
+```html
+<table>
+  <tr>
+    <th>Name:</th>
+    <td>Bill Gates</td>
+  </tr>
+  <tr>
+    <th>Telephone:</th>
+    <td>555 77 854</td>
+  </tr>
+  <tr>
+    <th>Telephone:</th>
+    <td>555 77 855</td>
+  </tr>
+</table>
+```
 
 <table>
   <tr>
@@ -129,17 +133,19 @@ Use the CSS _border-spacing_ property to set the space between the cells. 设置
 
 2.使用 `<caption>` 设置表格标题
 
-    <table>
-      <caption>Monthly savings</caption>
-      <tr>
-        <th>Month</th>
-        <th>Savings</th>
-      </tr>
-      <tr>
-        <td>January</td>
-        <td>$100</td>
-      </tr>
-    </table>
+```html
+<table>
+  <caption>Monthly savings</caption>
+  <tr>
+    <th>Month</th>
+    <th>Savings</th>
+  </tr>
+  <tr>
+    <td>January</td>
+    <td>$100</td>
+  </tr>
+</table>
+```
 
 <table>
   <caption>Monthly savings</caption>
@@ -155,17 +161,19 @@ Use the CSS _border-spacing_ property to set the space between the cells. 设置
 
 3.单元格 列扩展 _colspan_ ：make a cell span more than one column
 
-    <table>
-      <tr>
-        <th>Name</th>
-        <th colspan="2">Telephone</th>
-      </tr>
-      <tr>
-        <td>Bill Gates</td>
-        <td>555 77 854</td>
-        <td>555 77 855</td>
-      </tr>
-    </table>
+```html
+<table>
+  <tr>
+    <th>Name</th>
+    <th colspan="2">Telephone</th>
+  </tr>
+  <tr>
+    <td>Bill Gates</td>
+    <td>555 77 854</td>
+    <td>555 77 855</td>
+  </tr>
+</table>
+```
 
 <table>
   <tr>
@@ -181,19 +189,21 @@ Use the CSS _border-spacing_ property to set the space between the cells. 设置
 
 4.单元格 行扩展 _rowspan_ ：make a cell span more than one row
 
-    <table style="width:100%">
-      <tr>
-        <th>Name:</th>
-        <td>Bill Gates</td>
-      </tr>
-      <tr>
-        <th rowspan="2">Telephone:</th>
-        <td>555 77 854</td>
-      </tr>
-      <tr>
-        <td>555 77 855</td>
-      </tr>
-    </table>
+```html
+<table style="width:100%">
+  <tr>
+    <th>Name:</th>
+    <td>Bill Gates</td>
+  </tr>
+  <tr>
+    <th rowspan="2">Telephone:</th>
+    <td>555 77 854</td>
+  </tr>
+  <tr>
+    <td>555 77 855</td>
+  </tr>
+</table>
+```
 
 <table style="width:100%">
   <tr>

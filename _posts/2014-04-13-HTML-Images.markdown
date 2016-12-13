@@ -29,10 +29,10 @@ Note: A web page will not validate correctly without the image's Alt attribute.
 Tip:
 
 + It is a good practice to specify both the height and width attributes for an image. If these attributes are set, the space required for the image is reserved when the page is loaded.
-在 `<img>` 上设定的宽高属性值，是个好的实践，因为如果设定了这些属性，当页面加载的时候，图片的所占空间就会被预留下来。
-如不指定，图片加载时页面会有flicker闪动。
-+ If an HTML file contains ten images - eleven files are required to display the page right. Loading images takes time, so use images carefully.
-如果一个HTML文件包含10张图，为了正确显示这个页面则需要11个文件。加载图片花时间，请小心地使用图片。
+  
+    在 `<img>` 上设定的宽高属性值，是个好的实践，因为如果设定了这些属性，当页面加载的时候，图片的所占空间就会被预留下来。如不指定，图片加载时页面会有flicker闪动。
+
++ 如果一个HTML文件包含10张图，为了正确显示这个页面则需要11个文件。加载图片花时间，请小心地使用图片。
 
 ## Image Floating
 
@@ -47,18 +47,18 @@ Tip:
 The `<map>` tag is used to define a client-side image-map which is an image with clickable areas.
 该标签用于定义一个客户端的图片地图（有可点击区域的图片）
 
-    <img src="planets.gif" width="145" height="126" alt="Planets" usemap="#planetmap">
-    <map name="planetmap">
-      <area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sun">
-      <area shape="circle" coords="90,58,3" href="mercur.htm" alt="Mercury">
-      <area shape="circle" coords="124,58,8" href="venus.htm" alt="Venus">
-    </map>
+```html
+<img src="planets.gif" width="145" height="126" alt="Planets" usemap="#planetmap">
+<map name="planetmap">
+  <area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sun">
+  <area shape="circle" coords="90,58,3" href="mercur.htm" alt="Mercury">
+  <area shape="circle" coords="124,58,8" href="venus.htm" alt="Venus">
+</map>
+```
 
-The **required** _name_ attribute of the `<map>` element is associated with the `<img>`'s _usemap_ attribute
-该元素的name属性值和与之相关的图片的 _usemap_ 属性值#号后面内容一致。
+`<map>` 元素的 _name_ 属性(**required**)值与相关联的 `<img>` 元素 的 _usemap_ 属性值 # 号后面内容一致。
 
-It contains a number of `<area>` elements. 它包含一系列定义了地图上可以点击的区域元素 `<area>`。The `<area>` element is always nested inside a `<map>` tag and has no end tag.
-该标签总是内嵌在 `<map>` 标签里，它没有闭合标签。
+它包含一系列定义了地图上可以点击的区域元素 `<area>`。该标签总是内嵌在 `<map>` 标签里，它**没有闭合标签**。
 
 **Note**: 在 H5 中，如果要设定 `<map>` 标签的 _id_ 特性，且必须和 _name_ 特性值相同。
 
@@ -66,11 +66,13 @@ It contains a number of `<area>` elements. 它包含一系列定义了地图上�
 
 H5引入 `<picture>` 元素让我们可以像 `video` 和 `audio` 元素一样，定义不同的源文件。
 
-    <picture>
-      <source srcset="img_smallflower.jpg" media="(max-width: 400px)">
-      <source srcset="img_flowers.jpg">
-      <img src="img_flowers.jpg" alt="Flowers">
-    </picture>
+```html
+<picture>
+  <source srcset="img_smallflower.jpg" media="(max-width: 400px)">
+  <source srcset="img_flowers.jpg">
+  <img src="img_flowers.jpg" alt="Flowers">
+</picture>
+```
 
 _srcset_ 特性是必须的，用来定义图片源。_media_ 特性是可选的，接受像 CSS @media 查询规则。
 

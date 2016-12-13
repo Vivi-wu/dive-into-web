@@ -18,11 +18,11 @@ Scope is the set of variables, objects, and functions you have access to. 你可
 
 每个定义的函数都有自己的局部作用域，local scope 可以层层嵌套。
 
+<!--more-->
+
 Any locally scoped items are not visible in the global scope - **unless exposed**，局部作用域里的东西对全局作用域不可见，除非对外暴露。
 
 在函数内部以 **var** 关键字声明的变量，就是局部变量。声明在函数外部的变量，就是全局变量。
-
-<!--more-->
 
 ## Function Scope
 

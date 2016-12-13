@@ -39,7 +39,7 @@ If the form submission is passive (like a search engine query), and without sens
 
 To be submitted correctly, each input field **must have** a name attribute. 为了正确地提交数据，表单里每一个 输入域都必须包含 _name_ 特性。
 
-<span class="blue-text">注意：没有设定 _name_ 特性的 input field 的值将不被提交。</span>
+注意：<span class="t-red">没有设定 _name_ 特性的 input field 的值将不被提交</span>。
 
 ## Grouping Form Data
 
@@ -57,16 +57,19 @@ To be submitted correctly, each input field **must have** a name attribute. 为�
 
 该元素定义了一个下拉菜单：
 
-    <select>
-      <optgroup label="Swedish Cars">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-      </optgroup>
-      <optgroup label="German Cars">
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </optgroup>
-    </select>
+```html
+<select>
+  <optgroup label="Swedish Cars">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+  </optgroup>
+  <optgroup label="German Cars">
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </optgroup>
+</select>
+```
+
 <div>
 <span>Options 分组： </span>
 <select>
@@ -125,33 +128,37 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
 
 该元素为传统的 `<input>` 单行输入区域元素提供了一列 pre-defined options，方便用户从下拉列表里选择其中一个作为输入数据。**用户仍可以在输入框中键入自己想要的值**，区别与 `<select>` 元素。
 
-    <input list="browsers">
-    <datalist id="browsers">
-      <option value="Internet Explorer">
-      <option value="Firefox">
-      <option value="Chrome">
-      <option value="Opera">
-      <option value="Safari">
-    </datalist>
+```html
+<input list="browsers">
+<datalist id="browsers">
+  <option value="Internet Explorer">
+  <option value="Firefox">
+  <option value="Chrome">
+  <option value="Opera">
+  <option value="Safari">
+</datalist>
+```
 
 注意：
 
-+ Safari 和 IE9之前版本目前不支持这个元素
++ Safari 和 IE9 之前版本目前不支持这个元素
 + `<input>` 的 _list_ 特性值必须指向 `<datalist>` 的 _id_ 特性（保持一致）。
 
 ## HTML5 `<output>` Element
 
 该元素显示一个运算的结果，就像被一段脚本执行。
 
-    <form action="action_page.asp" oninput="x.value=parseInt(a.value)+parseInt(b.value)">
-      0
-      <input type="range"  id="a" name="a" value="50">
-      100 +
-      <input type="number" id="b" name="b" value="50">
-      =
-      <output name="x" for="a b"></output>
-      <input type="submit">
-    </form>
+```html
+<form action="action_page.asp" oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+  0
+  <input type="range"  id="a" name="a" value="50">
+  100 +
+  <input type="number" id="b" name="b" value="50">
+  =
+  <output name="x" for="a b"></output>
+  <input type="submit">
+</form>
+```
 
 #### 针对像 range 这样的控件（改变 range 的值，并没有显示效果）可像下面这样用：
 
@@ -163,13 +170,15 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
 
 如何用表单发送email，点击提交，弹出默认邮件客户端，各个定义了 _name_ 特性的输入域的值，将被自动写入邮件内容区域。
 
-    <form action="MAILTO:someone@example.com" method="post" enctype="text/plain">
-      Name:<br>
-      <input type="text" name="name" value="your name"><br>
-      E-mail:<br>
-      <input type="text" name="mail" value="your email"><br>
-      Comment:<br>
-      <input type="text" name="comment" value="your comment" size="50"><br>
-      <input type="submit" value="Send">
-      <input type="reset" value="Reset">
-    </form>
+```html
+<form action="MAILTO:someone@example.com" method="post" enctype="text/plain">
+  Name:<br>
+  <input type="text" name="name" value="your name"><br>
+  E-mail:<br>
+  <input type="text" name="mail" value="your email"><br>
+  Comment:<br>
+  <input type="text" name="comment" value="your comment" size="50"><br>
+  <input type="submit" value="Send">
+  <input type="reset" value="Reset">
+</form>
+```

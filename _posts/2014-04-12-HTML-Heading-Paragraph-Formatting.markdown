@@ -1,20 +1,20 @@
 ---
-title:  "HTML Heading & Paragraph & Text Formatting"
+title:  "HTML Heading, Paragraph, Text Formatting"
 category: HTML
 ---
 ## Headings
 
 Headings are defined with the `<h1>` (the most important heading) to `<h6>` (the least important) heading tags.
 
-**Note**：Use HTML headingsfor headings only. Don't use headings to make text **BIG** or **bold**. 不要使用heading来实现文本字体的加粗或加大效果。
+**Note**：不要使用heading来实现文本字体的**加粗**或<span style="font-size:large;">加大</span>效果。
 
-Search engines use your headings to index the structure and content of your web pages. 搜索引擎使用heading来索引网页的结构和内容。
+因为<span class="t-blue">搜索引擎使用 heading 来索引网页的结构和内容</span>。
 
 <!--more-->
 
 ## Horizontal Rules
 
-The `<hr>` tag creates a horizontal line in an HTML page. 在网页中创建水平横线，可用于分隔内容。
+`<hr>` 元素在网页中创建水平横线，可用于分隔内容。
 
 ## Paragraphs
 
@@ -22,17 +22,17 @@ HTML使用 `<p>` 元素来定义段落。
 
 ### HTML Display
 
-You cannot change the output by adding extra spaces or extra lines in your HTML code. 在HTML代码中写额外的空格或者是换行都不能改变文档的输出结果。
+在 HTML 代码中写额外的空格或者是换行都不能改变文档的输出结果。
 
-The browser will remove extra spaces and extra lines when the page is displayed. Any number of new lines, and any number of spaces **count as one space**. 浏览器会删除多余的空格和分段，不论你在同一个元素里代码写了多少个空格（或新段落），都将被记为一个空格。
+浏览器会删除多余的空格和分段，<span class="t-blue">不论你在同一个元素里代码写了多少个空格（或新段落），都将被记为一个空格</span>。
 
 ### Line Break
 
-Use `<br>` if you want a line break without starting a new paragraph. 需要在同一个 `<p>` 里换行可以使用标签 `<br>`
+需要在同一个 `<p>` 里换行可以使用标签 `<br>` 元素。
 
 ### HTML `<pre>` Element
 
-该元素定义了 pre-formatted text, use it if you want to preserve spaces and lines. 写在这个元素中的文本可以保留代码里的空格和分段格式。
+该元素定义了 pre-formatted text, 使用该元素来保留其中 text node 里的空格和分段格式。
 
 ## Text Formatting
 
