@@ -176,7 +176,7 @@ Both of these commands are designed to integrate changes from one branch into an
 
     <img src="{{ "/assets/images/feature_to_master.png" | prepend: site.baseurl }}" alt="Rebase feature onto master">
 
-+ **缺点**是如果没有遵从一定的规则（<span class="blue-text">never use git rebase on public branch</span>），重写项目历史会给 collaboration 工作流带来灾难性的问题。
++ **缺点**是如果没有遵从一定的规则（<span class="t-blue">never use git rebase on public branch</span>），重写项目历史会给 collaboration 工作流带来灾难性的问题。
 
     <img src="{{ "/assets/images/master_to_feature.png" | prepend: site.baseurl }}" alt="Rebase master onto feature">
 
@@ -213,7 +213,7 @@ tracked 又分为三种状态：
 1. 创建局部 .gitignore 文件：在项目 repository 下创建这个文件，Git 将使用它来决定忽略哪些文件和文件目录**在你做一个 commit 之前**。
 
     + **这个文件需要被提交到项目仓库里**，这样其他人复制项目时将分享同样的忽略规则。
-    + 初学者都会遇到的一个问题：假设你有一个**已经 checked in** 的文件，你突然想要忽略它，<span class="blue-text">Git 将**不会** untrack 这个文件，只是因为你突然把它写进了 .gitignore 文件里。它已经在仓库里里，你 **必须** 先在仓库里删掉这个文件</span>。
+    + 初学者都会遇到的一个问题：假设你有一个**已经 checked in** 的文件，你突然想要忽略它，<span class="t-blue">Git 将**不会** untrack 这个文件，只是因为你突然把它写进了 .gitignore 文件里。它已经在仓库里里，你 **必须** 先在仓库里删掉这个文件</span>。
 
           // 记得先 git add，git commit 你想要追踪的其他文件，然后执行：
           git rm -r --cached .

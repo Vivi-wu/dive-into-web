@@ -1,14 +1,16 @@
 ---
 title:  "HTML5应用开发实践指南"
-category: HTML,CSS,JavaScript
+category: JavaScript
 ---
 ## JavaScript的力量
 
 推荐阅读《JavaScript语言精粹》（JavaScript, The Good Parts, Douglas Crockford），《JavaScript权威指南》（Javascript: The Definitive Guide, David Flanagan），《高性能JavaScript编程》（High Performance JavaScript, Nicholas C.Zakas），《JavaScript模式》（JavaScript Patterns, Stoyan Stefanov）
 
-因为JS是单线程的，如果函数被阻塞，用户界面就冻结了。所有JS要采用不同于传统语言处理I/O
+因为JS是单线程的，如果函数被阻塞，用户界面就冻结了。所有JS要采用不同于传统语言处理 I/O
 
-事件驱动编程。操作异步，先在某个地方创建操作，当外部事件发生后再执行。JS中所有外部的I/O（数据库，调用服务器）都应该是非阻塞的，学习使用闭包和回调至关重要。
+事件驱动编程。操作异步，先在某个地方创建操作，当外部事件发生后再执行。JS中所有外部的 I/O（数据库，调用服务器）都应该是非阻塞的，学习使用闭包和回调至关重要。
+
+<!--more-->
 
 在 C 和类似的语言中，函数和数据作用于两个独立的空间。而在JS中，**函数就是数据**，可以用在每一个可以使用数据的地方：函数可以分配给一个变量、作为参数传递、作为函数的返回值，另外还可通过简单的赋值改变函数。
 

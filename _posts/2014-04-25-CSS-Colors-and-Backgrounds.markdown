@@ -57,7 +57,7 @@ The background of an element is the total size of the element, including **paddi
       <td>x% y%</td><td>前者是水平位置，后者是垂直位置。左上角取值 <b>0% 0%</b>，右下角 <b>100% 100%</b>。如果只设定了一个值，另一个值默认为 <b>50%</b></td>
     </tr>
     <tr>
-      <td>xpos ypos</td><td>左上角是 <b>0 0</b>，其他非零取值要使用 CSS units。<span class="blue-text">如果只设定一个值，另一个值默认为 <b>50%</b>。可以混合 ％ 和 带有 CSS 单位的 position 取值</span></td>
+      <td>xpos ypos</td><td>左上角是 <b>0 0</b>，其他非零取值要使用 CSS units。<span class="t-blue">如果只设定一个值，另一个值默认为 <b>50%</b>。可以混合 ％ 和 带有 CSS 单位的 position 取值</span></td>
     </tr>
     <tr><td>initial</td><td>设为默认值</td></tr>
     <tr><td>inherit</td><td>继承父元素的取值</td></tr>

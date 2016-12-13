@@ -20,7 +20,7 @@ CCSS 的基本原则：
 
 还有一些说得模棱两可，此处省略。
 
-非常赞同的一点：关于 Documentation 文档/注释，许多人认为 CSS 是可自我解释的，但实际上，通常不是这样。 <span class="blue-text">CSS 组件必须有一个清晰的文档，用来描述它们是做什么，应该怎么使用</span>。
+非常赞同的一点：关于 Documentation 文档/注释，许多人认为 CSS 是可自我解释的，但实际上，通常不是这样。 <span class="t-blue">CSS 组件必须有一个清晰的文档，用来描述它们是做什么，应该怎么使用</span>。
 
 ## File Organization / Directory Structure
 

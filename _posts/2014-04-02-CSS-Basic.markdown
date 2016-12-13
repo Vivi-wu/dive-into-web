@@ -110,7 +110,7 @@ _url_ 可以是**字符串**，也可以是 **url()**。
 
 Generally speaking we can say that all the styles will "cascade" into a new "virtual" style sheet by the following rules, where number four has the highest priority: 
 
-<span class="blue-text">当我们对同一个 HTML 元素进行多次 CSS 样式定义时，这些样式将层叠起来就像形成了一个新的虚拟的样式表。层叠规则如下，**数字越大**优先级**越高**。
+<span class="t-blue">当我们对同一个 HTML 元素进行多次 CSS 样式定义时，这些样式将层叠起来就像形成了一个新的虚拟的样式表。层叠规则如下，**数字越大**优先级**越高**。
 
 1. _Browser default_ 浏览器默认
 2. _External style_ sheet and _Internal style_ sheet (in the head section) 注意：外部样式表和内部样式表在头部**书写的顺序也会影响优先级**，写在后面的优先级高。
