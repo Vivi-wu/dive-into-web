@@ -20,7 +20,7 @@ _window.innerHeight_ 和 _window.innerWidth_ 这两个属性可用来测量浏�
 
 常用的窗口方法：
 
-+ `window.open()`，打开一个新窗口
++ `window.open(strUrl, strWindowName, [strWindowFeatures])`，打开一个新窗口
 + `window.close()`，关闭当前窗口
 + `window.moveTo()`，移动当前窗口
 + `window.resizeTo()`，重新缩放当前窗口

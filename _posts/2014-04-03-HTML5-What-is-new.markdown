@@ -41,15 +41,12 @@ A semantic element clearly describes its meaning to both the browser and the dev
 + `<mark>` 定义被标记或高亮显示的文字
 
 **语义化 HTML 的意义**：
-<details>语义化的(X)HTML文档有助于提升你的网站对访客的易用性，比如使用PDA、文字浏览器以及残障人士将从中受益。对于搜索引擎或者爬虫软件来说，则有助于它们建立索引，并可能给予一个较高的权值。</details>
+<details>语义化的(X)HTML文档有助于提升你的网站对访客的易用性，比如使用 PDA、文字浏览器以及残障人士将从中受益。对于搜索引擎或者爬虫软件来说，则有助于它们建立索引，并可能给予一个较高的权值。</details>
 
-+ 和搜索引擎建立良好沟通，有助于爬虫抓取更多的有效信息，比如h1~h6、strong用于不同权重的标题；隐藏文本等等
-+ 提升用户体验 例如title、alt用于解释名词或解释图片信息、例如label标签的活用；
++ 和搜索引擎建立良好沟通，有助于爬虫抓取更多的有效信息，比如 `<h1>`~`<h6>`、`<strong>` 用于不同权重的标题
++ 提升用户体验，例如 _title_ 用于解释名词，_alt_ 作为图片替代文字信息，`<label>` 标签包裹 `<input>` 元素扩大可点击区域
 + 使页面结构清晰、代码可读、便于维护、易于扩展
-
-新的语义化/结构化的元素取代了传统 `<div id="nav">`, `<div class="header">`, or `<div id="footer">` 的表示方法，带来网页布局的改变，提升对搜索引擎的友好。
-
-正如W3C所建议的：Allows data to be shared and reused across applications, enterprises, and communities
++ 对辅助设备(如 screen reader 屏幕阅读器)友好，如 _role_ 提供机器可读取的语义信息解释一个元素的用途
 
 3.图形元素
 

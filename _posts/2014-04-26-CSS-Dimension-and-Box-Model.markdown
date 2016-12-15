@@ -47,6 +47,8 @@ The CSS box model consists of: **margins**, **borders**, **padding**, and the ac
 
 正如上面所写到的，当我们用 CSS 设定元素的宽和高时，只是设定了 the width and height of the **content area**. 因此<span class="t-red">在计算元素完整的尺寸时，要加上内边距、边框和外边距</span>。
 
+在 IE 早期浏览器中如果 `!DOCTYPE` 文档声明没有指定 standards-compliant 模式渲染，则 _width_ 宽高属性除了包含 content box 还加上左右 padding 和左右 border。
+
 ### CSS Margins
 
 _margin_ 属性用来设定元素边框外边空白区域（**outside** the border）的大小。

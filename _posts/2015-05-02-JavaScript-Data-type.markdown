@@ -6,7 +6,7 @@ category: JavaScript
 
 + JS中有**5**种可以包含 values 的类型：string, number, boolean, object and function。
 + 有**2**种不含 value 的类型：undefined，null
-+ 有**3**种不同类型的 object：Object，Date，Array。所以<span class="t-blue">使用 `typeof` 操作符不能判断出一个变量是否是 Array 或 Date 变量</span>，因为返回结果都是 `object`。
++ 有**3**种不同类型的 object：Object，Date，Array。所以<span class="t-red">使用 `typeof` 操作符不能判断出一个变量是否是 Array 或 Date 变量</span>，因为返回结果都是 `object`。
 
 <!--more-->
 
