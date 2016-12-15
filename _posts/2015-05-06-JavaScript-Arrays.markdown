@@ -47,7 +47,7 @@ var x = person.length;         // person.length will return 0
 var y = person[0];             // person[0] will return undefined
 ```
 
-因为**数组是一种特殊的 object**，we can have variables of different types in the same Array 同一个数组中可以有不同数据类型的变量。
+因为**数组是一种特殊的 object**，同一个数组中的 item 可以是不同的数据类型。
 
     myArray[0] = Date.now;
     myArray[1] = myFunction;
@@ -59,9 +59,11 @@ var y = person[0];             // person[0] will return undefined
 2. 变量的 `constructor` 属性，在 Data type 章节有提到。
 3. 使用 `instanceof` 操作符判断，Syntax 章节有提到。
 
-    var fruits = ["Banana", "Orange", "Apple", "Mango"];
-    fruits instanceof Array;     // returns true
-    fruits instanceof Object;    // Returns true
+```js
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits instanceof Array;     // returns true
+fruits instanceof Object;    // returns true
+```
 
 ## Array Properties
 
@@ -107,7 +109,7 @@ fruits.join();      // 结果是：Banana,Orange,Apple,Mango
     var fruits = ["Banana", "Orange", "Apple", "Mango"];
     delete fruits[0];    // 数组 fruits 中第一个元素将变成 undefined
 
-这样会在数组中产生一些 undefined 的空洞，**最好使用 pop() or shift()**
+这样会在数组中产生一些 undefined 的空洞，**最好使用 pop() 或 shift()**
 
 ### Add elements
 
@@ -128,7 +130,7 @@ _start_ 是一个整数，表示第一个新元素要放的位置。_deleteCount
 
 注意：该方法的**返回**值是**由被删掉的元素组成的新数组**。如果没有删除元素，则返回空数组。
 
-此方法会改变原有数组。
+此方法会**改变**原有数组。
 
 ### Sorting 排序
 
@@ -150,11 +152,13 @@ points.sort(function(a, b){return b-a});
 points.sort(function(a, b){return b>a});    // 两种方法结果一样
 ```
 
-这样如果要找出数组中的最大或最小值，首先要对数组进行排序。
+<span class="t-blue">如果要找出数组中的最大或最小值，首先要对数组进行排序</span>。
+
+此方法会**改变**原有数组。
 
 ### Joining 连接
 
-使用 `array1.concat(`array2, ..., arrayX`)` 该方法来连接两个或多个数组，不改变现有的数组，返回值是连接后的数组。
+使用 `array1.concat(`array2, ..., arrayX`)` 该方法来连接两个或多个数组，**不改变*原有数组，返回值是连接后的数组。
 
 ### Slicing 取样
 
@@ -162,7 +166,7 @@ points.sort(function(a, b){return b>a});    // 两种方法结果一样
 
 _start_ 表示切片开始位置（包含这个位置上的元素），负值表示从数组末端开始（末端第一个元素为 `-1`，依次类推）。_end_ 是可选的，表示切片结束的位置（**不包括**该位置上的元素）。缺省表示 to the end of the array。
 
-此方法不改变原有数组。
+此方法**不改变**原有数组。
 
 ## 检验数组
 

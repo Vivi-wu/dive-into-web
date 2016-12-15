@@ -99,9 +99,6 @@ Cache-Control 不仅仅可以在响应头中设置，还可以在请求头中设
 
 + 在"Element"面板中选择某个DOM元素，点击"Console"并输入 `$0` 可以获取当前元素
 + 元素Style面板里，选择“Toggle Element State”可以触发伪类状态，便于调试样式
-+ `console.info(obj/msg)` 自动换行打印，FF和Chrome中每条信息开头有一个“！”图标
-+ `console.log('%o', DOMnode)` 打印DOM节点，`console.log('%O', DOMnode)` 像JS对象那样访问DOM元素，可查看DOM元素的属性
-+ `console.dir(obj)` 打印对象所有的属性和方法
 
 ## 银行理财产品如何计算
 

@@ -8,7 +8,7 @@ category: JavaScript
 
 假设有两个元素：element 1 和 element 2，
 
-元素 1 是元素 2 的父元素，两者都绑定了 _onClick_ 事件处理函数，现在<span class="t-blue">用户点击了元素 2</span>，那么问题来了：
+元素 1 是元素 2 的父元素，两者都绑定了 _onClick_ 事件处理函数，现在用户点击了元素 2，那么问题来了：
 
 该行为在两个元素上都引起了点击事件，那么哪一个元素上的事件处理函数**先执行**？
 
@@ -91,7 +91,7 @@ _target_ / _srcElement_ 都不能给出答案，因为他们都指向元素 2（
 
 也可以使用关键字 `this`，用法同 _currentTarget_ 。
 
-<span class="t-blue">不幸的是， Microsoft 事件注册模型中，`this` 关键字不指向 HTML 元素，也不包含类似 currentTarget 的属性</span>。
+<ins>不幸的是， Microsoft 事件注册模型中，`this` 关键字不指向 HTML 元素，也不包含类似 currentTarget 的属性</ins>。
 
 ### Turning it off
 
@@ -101,7 +101,7 @@ Besides, if your document structure is very complex (lots of nested tables and s
 
 下面说一下停止冒泡阶段的传递的方法。
 
-在 Microsoft 模型里：
+IE 8 及以前版本的浏览器：
 
 ```js
 window.event.cancelBubble = true

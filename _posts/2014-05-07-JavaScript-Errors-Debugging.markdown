@@ -6,11 +6,11 @@ JS中的错误可能是程序员代码的错误，也可能使错误的输入或
 
 ### JavaScript try and catch
 
-The **try** statement allows you to define a block of code to be tested for errors while it is being executed. 用于检查这块代码执行时是否有错误出现。
+The **try** statement 用于检查这块代码执行时是否有错误出现。
 
-The **catch** statement allows you to define a block of code to be executed, if an error occurs in the try block. 当 try 部分有错误出现时，执行此处的代码。
+The **catch** statement 在 try 部分有错误出现时，执行此处的代码。
 
-The **finally** statement lets you execute code, after try and catch, regardless of the result。定义了不论try和catch的结果如何，在他们之后要执行的代码。
+The **finally** statement 定义了不论 try 和 catch 的结果如何，在他们之后要执行的代码。
 
 <!--more-->
 
@@ -32,7 +32,7 @@ JS的 `try` 和 `catch` come in pairs 是**成对出现**的。
 
 当遇到错误时，JS会停下来，生成一个error message，raise (or throw) an exception。
 
-The **throw** statement allows you to **create a custom error**。该语句用来定义自己的错误信息。
+The **throw** statement 用来定义自己的错误信息。
 
 ```html
 <p>Please input a number between 5 and 10:</p>
@@ -66,10 +66,10 @@ function myFunction() {
 
 ### JS Debugging
 
-查找代码里的错误称为调试。所有现代浏览器都有内置调试器。
+查找代码里的错误称为调试。所有现代浏览器都有内置调试器。比一般的 `console.log()` 看起来高级的用法：
 
-Use `console.log()` to display JavaScript values in the debugger window. 使用该语句在浏览器调试器里查看JS的值。
++ `console.info(obj/msg)` 自动换行打印，FF和Chrome中每条信息开头有一个“！”图标
++ `console.log('%o', DOMnode)` 打印DOM节点，`console.log('%O', DOMnode)` 像JS对象那样访问DOM元素，可查看DOM元素的属性
++ `console.dir(obj)` 打印对象所有的属性和方法
 
 The **debugger** keyword stops the execution of JavaScript, and calls (if available) the debugging function. 效果跟在浏览器调试器里设置 breakpoint 一样。
-
-如果没有可用的 debugging，这个关键字没有什么效果。

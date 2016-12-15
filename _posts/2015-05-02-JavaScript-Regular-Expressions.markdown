@@ -24,7 +24,7 @@ category: JavaScript
 
 ### Patterns
 
-表示字符区间的：
+表示**字符区间**的：
 
 + `[abc]`, 匹配在方括号之间的任意一个字符，如匹配一个标点符号：`[.?!]`，任何一个英文元音字母：`[aeiou]`
 + `[^abc]`, 匹配任何一个**不在**方括号内的字符
@@ -34,16 +34,16 @@ category: JavaScript
 
     注意 x 和 y 条件的顺序很重要！因为匹配分枝条件时，会从左到右地测试每个条件，如果满足了某个分枝的话，就不会去再管其它分支的条件了。
 
-表示数量的：
+表示**数量**的：
 
 + `n+`, contains at least one, **至少**包含**一个** n
 + `n*`, contains zero or more occurrences of n, 包含 **0 个**或**多个** n，贪婪匹配（匹配**尽可能多**的字符）
 + `n?`, contains zero or one occurrences of n, 包含 **0 个**或 **1 个** n，懒惰匹配（匹配**尽可能少**的字符）
-+ `n{X}`, contains a sequence of X n's, 必须连续匹配 X 个 n
++ `n{X}`, contains a sequence of X n's, 必须**连续匹配 X 个 n**
 + `n{X,Y}`, contains a sequence of X to Y n's，包含 **X 到 Y 个连续的** n，不少于 X 个，不多于 Y 个
 + `n{X,}`, contains a sequence of at least X n's，重复匹配 X 次或更多次
 + `n$`, any string with n at the end of it，n 在**结尾**处
-+ `^n`, any string with n at the beginning of it，匹配输入开始位置的 n。如果多行匹配标志开启，则也匹配换行符后紧跟的位置
++ `^n`, any string with n at the beginning of it，匹配**输入开始位置的 n**。<span class="t-blue">如果多行匹配标志开启，则也匹配换行符后紧跟的位置</span>
 + `?=n`, any string that is followed by a specific string n，**后面跟着** n
 + `?!n`, any string that is not followed by a specific string n，后面**不**跟着 n
 
@@ -71,9 +71,9 @@ new RegExp(/ab+c/, 'i');
 
     /e/.test("The best things in lifr are free!");
 
-不需要把正则表达式对象放在一个变量里，就可以使用 test() 方法。如果搜索字符串中有匹配，返回 _true_， 否则返回 false。
+不需要把正则表达式对象放在一个变量里，就可以使用 test() 方法。如果搜索字符串中**有匹配**，返回 `true`， 否则返回 false。
 
-`exec()` 方法在字符串中查找匹配，**返回找到的文本**，如果没有找到，返回 _null_。
+`exec()` 方法在字符串中查找匹配，**返回找到的文本**，如果没有找到，返回 `null`。
 
 ## 实践
 

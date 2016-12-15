@@ -24,7 +24,7 @@ JS默认数字是**十进制**显示。以 `0x` 开头的数字为十六进制�
 
     var x = 0xFF;             // x will be 255
 
-可以使用 `toString()` 方法实现不同进制显示。
+可以使用 `toString(n)` 方法实现 n 进制显示。
 
 ```js
 var myNumber = 128;
@@ -56,10 +56,8 @@ JS 中有两个 0 ：`+0` 和 `-0`。两者输出皆为 0. 他们事实上也相
 使用一个非零的整数除以它们可以用来判断到底是正0，还是负0。
 
 ```js
-42 / 0
-→ Infinity
-42 / -0
-→ -Infinity
+42 / 0   // Infinity
+42 / -0  //-Infinity
 ```
 
 ### NaN - Not a Number
@@ -70,7 +68,7 @@ JS 中有两个 0 ：`+0` 和 `-0`。两者输出皆为 0. 他们事实上也相
     var x = 100 / "10";     // x will be 10
 
 + `NaN` 的 type 是 number。
-+ NaN 不等于 NaN，不论是 `===` 还是 `==`，结果都是 false。因此如果你想从一个 array 中用原生的 `indexOf()` 找到 NaN是不行的。可以通过判断 `x!==x`, 该方法比用 isNaN(x) 效率高。
++ NaN 不等于 NaN，不论是 `===` 还是 `==`，结果都是 false。因此如果你想从一个 array 中用原生的 `indexOf()` 找到 NaN**是不行的**。<span class="t-blue">可以通过判断 `x!==x`</span>，该方法比用 isNaN(x) 效率高。
 + 数字和 `NaN` 相加，结果也是 `NaN`。但是字符串和 `NaN` 相加，结果是字符串的 concatenation。
 + `isNaN()` 该全局函数可以用来判断一个值，是否是一个 number（**是否可以转为一个数字**）。
 
@@ -104,7 +102,7 @@ isNaN(function(){})  // true
 
 ## 属性和方法
 
-Number 的一些属性是 JavaScript **Number** 对象的<span style="color:red;">静态</span>属性.
+Number 的一些属性是 JavaScript **Number** 对象的<span class="t-red">静态</span>属性.
 
 JS中**只能被 Number 对象调用**的属性有：`MAX_VALUE`，`MIN_VALUE`，`NEGATIVE_INFINITY`，`POSITIVE_INFINITY`，`NaN`
 

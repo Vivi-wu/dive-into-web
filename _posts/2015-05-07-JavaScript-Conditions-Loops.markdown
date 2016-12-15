@@ -27,13 +27,13 @@ JS 条件语句，根据不同决定执行不同操作。
 ```js
 switch(expression) {
     case n:
-        code block
+        // code block
         break;
     case n:
-        code block
+        // code block
         break;
     default:
-        default code block
+        // default code block
 }
 ```
 
@@ -43,8 +43,8 @@ switch(expression) {
 + 将表达式的值与每一个 case 的值相比较（使用 **strict comparison**，值和类型都要相等），如果找到匹配的 case，就执行相对应的代码
 + 遇到 **break** 关键字，跳出 switch 体，避免执行更多的代码或 case testing
 + **default** 关键字指明，当没有找到匹配的 case 时，要执行的操作
-+ different cases can use the same code
-+ 如果 default 不是最后一个 case，remember to end it with a **break**
++ 不同 case 可以使用相同的执行 code
++ 如果 default **不是最后一个** case，记得在它的代码后加 **break**
 
 ## For Loops 循环
 

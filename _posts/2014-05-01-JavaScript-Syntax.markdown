@@ -28,9 +28,9 @@ JS忽略掉多个空格，所以我们可以在代码里添加空格方便阅读
     document.getElementById("demo").innerHTML = "Hello world, this \
     is my first js code."
 
-有五种符号可以出现在一个语句的开头，也可作为一个完整语句的扩展。这意味着**不是**所有的情况下 line break 换行可以取代语句之间的 semicolon 分号。
+有五种符号可以出现在一个语句的开头，也可作为一个完整语句的扩展。这意味着<span class="t-red">**不是**所有的情况下 line break 换行可以取代语句之间的分号</span>。
 
-这种种符号是：
+这5种符号是：
 
 + open parenthesis 开圆括号 `(`
 + open square brace 开方括号`[`
@@ -38,16 +38,20 @@ JS忽略掉多个空格，所以我们可以在代码里添加空格方便阅读
 + plus 加号 `+`
 + minus 减号 `-`
 
-    a = b + c
-    (d + e).print()
-    a = b + c(d + e).print()  // 上面两个语句会变成这样一个语句，不会有分号的自动插入
+```js
+a = b + c
+(d + e).print()
+a = b + c(d + e).print()  // 上面两个语句会变成这样一个语句，不会有分号的自动插入
+```
 
 比较麻烦的斜杠符号，不仅可以作为正则表达式的开头，还可以作为除法操作符。下面这种情况实践中还是较少出现的，
 
-    var i,s
-    s="here is a string"
-    i=0
-    /[a-z]/g.exec(s)  // 这一行会被认为是上一行的延续，即 i=0/[a-z]/g.exec(s)
+```js
+var i,s
+s="here is a string"
+i=0
+/[a-z]/g.exec(s)  // 这一行会被认为是上一行的延续，即 i=0/[a-z]/g.exec(s)
+```
 
 ## 分号
 
@@ -82,7 +86,7 @@ JS忽略掉多个空格，所以我们可以在代码里添加空格方便阅读
 
     上面例子中三个分号都在行尾，但是都不可缺少。原因见 4 & 5
 
-6. Semicolons are **not optional** between statements appearing on the same line. 写在同一行语句之间的分号，是不可缺省的。
+6. Semicolons are **not optional** between statements appearing on the same line. <span class="t-red">写在同一行语句之间的分号，是不可缺省的</span>。
 
     ```js
     42; "hello!" // valid
@@ -135,7 +139,9 @@ JS忽略掉多个空格，所以我们可以在代码里添加空格方便阅读
   // Any variation with 'new' and 'throw' on the same line is correct.
   ```
 
-在上面五种受限输出的情况，换行导致的错误在实践中很少遇到，除了把返回值放在 return 符号的下一行。尤其是当返回值是一个大的对象、数组或者多行的字符串。
+除上面五种受限输出的情况，换行导致的错误在实践中很少遇到。
+
+Extend statements across multiple lines 在实践中遇到大的对象和数组时，可以如下：
 
 ```js
 return obj.method('abc')
@@ -149,11 +155,11 @@ totalArea = rect_a.height * rect_a.width
           + circ.radius * circ.radius * Math.PI
 ```
 
-规则只考虑跟随行的第一个符号，如果这个符号可以被解析成语句的一部分，则认为这个语句是被延续的 **is continued**。
+规则只考虑跟随行的第一个符号，如果这个符号可以被解析成当前语句的一部分，则认为这个语句是被延续的 **is continued**。
 
 如果跟随行的第一个符号不能扩展语句，则认为新的语句开始了。A semicolon is inserted.
 
-There is no reason to be concerned about browser compatibility in regard to semicolon insertion: all browsers implement the same rules and they are the rules given by the spec and explained above. 所有的浏览器实行着相同的规则，这些规则是由 spec 给出的，如上面所解释的。关于分号插入，没有理由担心浏览器兼容性问题。
+所有的浏览器实行着相同的规则，这些规则是由 spec 给出的，如上面所解释的。关于分号插入，没有理由担心浏览器兼容性问题。
 
 ## Values
 
@@ -189,15 +195,15 @@ w3schools 使用首字母小写的驼峰式: firstName
 
 ### 变量的声明和赋值
 
-在JS中创建一个变量又称为“声明”一个变量。JS中使用 **var** keyword to **declare** variables 声明变量, use **equal sign `=`**, 此时等号是赋值符, to **assign values** to variables 给变量赋值.
+在JS中创建一个变量又称为“声明”一个变量。JS中使用 **var** keyword to **declare** variables 声明变量, 使用 **equal sign `=`**（此时等号是赋值符）, **assign values** to variables 给变量赋值.
 
-After the declaration, the variable has no value. (Technically it has the value of **undefined**) **注意**：_声明变量后，变量是没有值的，或者说此时变量值为 undefined_。
+After the declaration, the variable has no value. (Technically it has the value of **undefined**) 。
 
 可以先声明，后赋值，分两步。也可以声明的同时赋值，即初始化变量。
 
     var today = "Monday";
 
-An assignment always returns the value of the assignment. <span class="t-blue">赋值语句返回的值，就是被赋予的值</span>。
+<span class="t-blue">一个赋值语句返回的值，就是被赋予的值</span>。
 
     var x = 0;
     if (x = 10)
@@ -212,7 +218,7 @@ An assignment always returns the value of the assignment. <span class="t-blue">�
 
 ## Operators
 
-### 算术操作符：+， -， *， /， %， ++， --
+### 算术操作符：+， -， *， /， %， ++，`--`
 
 当语句中出现多个操作符，注意操作符优先级 [Operator Precedence Values](http://www.w3schools.com/js/js_arithmetic.asp)
 
@@ -256,7 +262,7 @@ An assignment always returns the value of the assignment. <span class="t-blue">�
     txt1 = "What a very ";
     txt1 += "nice day";
 
-If you add a number and a string, the result will be a <strong>string</strong>! <span class="t-blue">数字和字符串相加，结果将是一个字符串</span>。
+<span class="t-blue">数字和字符串相加，结果将是一个字符串</span>。
 
 ### Comparison and Logical Operators
 
@@ -287,8 +293,8 @@ add = key => {
 
 ### 类型操作符
 
-+ `typeof`，returns a **string** containing the type of the operand，以字符串形式，返回操作数的类型
-+ `instanceof`，returns **true** if an object is created by a given constructor，返回布尔值为 true，如果**一个对象**是由指定的 constructor 构造的。可用来识别 Array 和 Date，后面还会提到。
++ `typeof`，以**字符串**形式，返回操作数的类型
++ `instanceof`，返回布尔值为 true，如果**一个对象**是由指定的 constructor 构造的。可用来识别 Array 和 Date，后面还会提到。
 
 ### `in` 操作符
 

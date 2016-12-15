@@ -15,7 +15,7 @@ category: JavaScript
 与 constraint validation 有关的 DOM 方法和属性是：
 
 + `checkValidity()`, 如果一个输入元素包含 valid data，返回 true
-+ `setCustomValidity()`, 设置一个输入元素的 validationMessage 属性
++ `setCustomValidity()`, 设置一个输入元素的 _validationMessage_ 属性
 + _validity_, 包含与一个输入元素的 validity 有关的一系列 boolean 属性，见下面详细列表
 + _validationMessage_, 包含当输入元素的 validity 是 false 时，浏览器将要显示的消息。
 + _willValidate_, 显示一个输入元素是否将要 validated
@@ -34,4 +34,4 @@ category: JavaScript
 + _valueMissing_, 如果一个元素设定了 required 特性，但是没有输入值，这个属性为 true。
 + _valid_, 如果一个元素的值是 valid 时
 
-**注意**：也就是说 <span class="t-blue">an input field with an empty value will be excluded from constraint validation</span>，一个输入域如果没有值，将会从 constraint validation 中**排除**。The empty string is considered valid (no misMatch) unless the _required_ attribute is present as well (valueMissing).
+**注意**：<span class="t-blue">一个输入域如果没有值，将会从 constraint validation 中**排除**</span>。The empty string is considered valid (no misMatch) unless the _required_ attribute is present as well (符合 valueMissing).

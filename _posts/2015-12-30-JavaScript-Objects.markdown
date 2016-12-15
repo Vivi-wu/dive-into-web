@@ -37,7 +37,7 @@ var person = {
 有时我们希望使用 **an object type** 一种对象类型，创建多个对象。这时可以使用一个构造函数来创建相同类型的对象。
 
 ```js
-function person(first, last, age, eye) {
+function person(first, last, age) {
     this.firstName = first;
     this.lastName = last;
     this.age = age;
@@ -50,7 +50,7 @@ var myMother = new person("Sally", "Rally", 48);
 
 JS中被称为 this 的东西 is the object that "owns" the JavaScript code。
 
-By default this refers to the outer most global object, the _window_. 默认情况下，this 指的是全局对象 window。
+默认情况下，this 指的是全局对象 `window`。
 
 + when used in a **function**, is the object that "owns" the function.
 + when used in an **object**, is the object itself.
@@ -58,7 +58,6 @@ By default this refers to the outer most global object, the _window_. 默认情�
 + 还可以在 HTML 元素事件绑定里使用 _this_，指的是触发事件的 HTML element。（JS Event Order 章节有提到）
 
     <h1 onclick="this.innerHTML='Ooops!'">Click on this text!</h1>
-    <h1 onclick="changeTest(this)">Click on this text!</h1>
 
 ### JavaScript Objects are Mutable
 
@@ -87,11 +86,11 @@ JS对象是一系列无序属性的集合。
 
       delete person.age;   // or delete person["age"];
 
-该操作不仅删掉了属性的值，也删掉了属性本身。
+该操作<span class="t-red">不仅删掉了属性的值，也删掉了属性本身</span>。
 
-The delete operator is **designed** to be used on **object properties**. <span class="t-blue">It has no effect on variables or functions. 删除操作符专为对象属性设计，对于变量和函数没有效果</span>。
+The delete operator is **designed** to be used on **object properties**. <span class="t-blue">It has no effect on variables or functions. </span>。
 
-The delete keyword does **not** delete inherited properties, but if you delete a prototype property, it will affect all objects inherited from the prototype. 删除操作符不会删掉所继承的父类属性，但是如果你删掉了一个 prototype 属性，它会影响所有继承这个原型的对象。
+删除操作符不会删掉所继承的父类属性，但是如果你删掉了一个 prototype 属性，它会影响所有继承这个原型的对象。
 
 ## JavaScript Object methods
 

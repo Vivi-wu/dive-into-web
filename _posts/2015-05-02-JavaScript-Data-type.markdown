@@ -65,7 +65,7 @@ typeof person;       // object
 person.valueOf();    // [object Object]
 (person !== null);   // true
 typeof persons;      // undefined
-(persons !== null);  // 浏览器报错，JS停止执行，没有显示结果。
+(persons !== null);  // 浏览器报错，ReferenceError: Can't find variable: persons
 ```
 
 ## Type Conversion
@@ -111,7 +111,7 @@ Number("")        // returns 0
 Number("99 88")   // returns NaN
 ```
 
-When comparing a string with a number, JavaScript will convert the string to a number when doing the comparison. <span class="t-blue">当比较一个字符串和一个数字，JS会自动将字符串转换成一个数字，然后做比较</span>。
+<span class="t-blue">当比较一个字符串和一个数字，JS会自动将字符串转换成一个数字，然后做比较</span>。
 
 An empty string converts to 0. A non-numeric string converts to **NaN** which is always **false**. 空字串转为 0，非数字式字符串转换成 `NaN`, 比较结果为 false
 
@@ -142,6 +142,6 @@ if (isNaN(age)) {
 
 如果 y 不是一个可以转为 number 的变量，x 的类型依然会变成 number，但是值为 `NaN`
 
-Boolean to number 就简单来，false 是 _0_，true 是 _1_
+Boolean to number 很简单，false 是 _0_，true 是 _1_
 
-Date to Number 可以使用 Number(), 或者 getTime() 函数，得到的是 milliseconds since January 1, 1970, 00:00:00
+Date to Number 可以使用 `Number()`, 或者 `getTime()` 函数，得到的是 milliseconds since January 1, 1970, 00:00:00

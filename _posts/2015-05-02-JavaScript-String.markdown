@@ -19,23 +19,23 @@ JS String 用来存储一系列字符，用**单**引号或**双**引号限制�
 
 最糟的情况是两个变量都用 **new** 创建，因为 <span class="t-blue">JavaScript objects cannot be compared</span>。两者无法比较。
 
-前者创建的是 primitive values，没有属性和方法，但是 **in JavaScript, methods and properties are also available to primitive values**.
+前者创建的是 primitive values，但是 in JavaScript, methods and properties are **also available** to primitive values.
 
 <!--more-->
 
 ## String properties
 
-_length_ property为 String 自带属性。除此之外还有 _constructor_ 和 _prototype_ 两个属性。
+_length_ 是 String 自带属性。除此之外还有 _constructor_ 和 _prototype_ 两个属性。
 
 ## String functions
 
 ### Find 查找
 
-+ `indexOf(`searchvalue, start`)`，返回 **index** of (the position of) the **first** occurrence of a specified text in a string，<span class="t-blue">字符串中指定文本第一次出现的位置</span>
++ `indexOf(`searchvalue, start`)`，返回 **index** of (the position of) the **first** occurrence（第一次出现的位置） of a specified text in a string。
 + `lastIndexOf(`searchvalue, start`)`，返回一个字符串中指定文本 **last** occurrence (最后一次出现的位置)，以 start 位置开始，从字符串的后面向前查找。
 + `search(`searchvalue`)`，效果同 `indexOf()`。
 
-    因为 A string will automatically be converted to a regular expression，<span class="t-blue">字符串可以被自动转为一个正则表达式</span>。
+    因为<span class="t-blue">字符串可以被自动转成一个正则表达式</span>。
 
     `search()` 的 searchvalue 是一个正则表达式，所以它比 `indexOf()` 有更强大的搜索能力。
 
@@ -64,7 +64,7 @@ _length_ property为 String 自带属性。除此之外还有 _constructor_ 和 
 
 ### Replace 替换
 
-`replace(`searchvalue, newvalue`)`，第一个参数是 a value, or regular expression。
+`replace(`searchvalue, newvalue`)`，第一个参数是 a value, 或 regular expression。
 
 第二个参数是 new string，也可以是一个函数 function (replacement)，该函数的返回值将替换掉第一个参数匹配到的结果
 
@@ -88,7 +88,7 @@ var res = str.replace(/blue|house|car/gi, function myFunction(x){return x.toUppe
     var text = "Hello" + " " + "World!";
     var text = "Hello".concat(" ","World!");
 
-All string methods return a new string. They don't modify the original string. <span class="t-blue">所有字符串的方法将返回一个新的字符串，而**不改变**原始字符串</span>。
+<span class="t-blue">所有字符串的方法将返回一个新的字符串，而**不改变** original 字符串</span>。
 
 ### 根据 Unicode 输出对应字符
 
@@ -99,10 +99,10 @@ All string methods return a new string. They don't modify the original string. <
 使用 `split(`separator, limit`)` 方法，把字符串转为数组。两个参数都是 optional 的。
 
 + 前者可以是一个字符，也可以是 regular expression
-+ 缺省 separator，返回整段字符串（return **an Array with only one item**）
++ **缺省** separator，返回 **an Array with only one item** 整段字符串
 + 后者表示 split 个数，比如转换的数组包含10个item，但我只想要前3个，则设 _limit_ 为 3
 
-Separate each charater, **including white-space**，按单个字符分割，包括空格。
+按单个字符分割, **including white-space** 包括空格，如下：
 
 ```js
 var str = "How are you doing today?";
