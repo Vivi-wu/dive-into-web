@@ -16,9 +16,11 @@ The HTML `<a>` tag defines a hyperlink that you can click on to jump to another 
 
 <!--more-->
 
-#### Local links
+#### URL
 
-An absolute URL (a full web address, like: http://www.w3schools.com/html/), a local link (链接到同一个网站) is specified with a relative URL (without http://www....)
+绝对 URL (full web address）, 如: `http://www.w3schools.com/scripts/example.js`。
+
+相对 URL（local link） (指向站点内的文件) (without http://www....)，如：`/scripts/example.js`。
 
 ### Links - Colors
 
