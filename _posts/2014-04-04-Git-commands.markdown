@@ -2,6 +2,18 @@
 title:  "Practical Git commands"
 category: Other
 ---
+初次下载安装后常用的配置：
+
+    git config --global user.name "Vivienne"
+    git config --global user.email vivienne@example.com
+    git config --global alias.st status
+
+在 `～/.gitconfig` 文件里可以查看全局配置。或使用以下命令：
+
+    git config --list
+
+<!--more-->
+
 ## Setting up a repository
 
     git init
@@ -14,8 +26,6 @@ This command creates a .git subdirectory in the project root, which contains all
 注意：<span class="t-blue">Git will **not** create a master branch until you commit something. 运行此命令后，只有在你提交了一些东西，Git才会创建 master 分支。</span>
 
 Add one or more files to your directory, and git add them to prepare a commit. Then git commit to create your initial commit and master branch. 随便在目录里添加一个文件，添加并提交，此时才真正完成master分支的创建。
-
-<!--more-->
 
     git clone
 
@@ -119,11 +129,11 @@ List the remote connections you have to other repositories. 列出所有你与�
 
     git remote add myOrigin remote_repository_URL
 
-添加一个名为 myOrigin 的新的，与远端仓库的链接。
+**添加**一个名为 myOrigin 的新的，与远端仓库的链接。
 
     git remote set-url origin remote_repository_URL
 
-修改名为 origin 与远端的链接的 url 值。
+**修改**名为 origin 与远端的链接的 url 值。
 
     git fetch <remote>
 
