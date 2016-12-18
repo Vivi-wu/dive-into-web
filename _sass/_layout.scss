@@ -3,14 +3,16 @@
 /*
  * Home page
  */
+$category: (
+  'html': $bg-mild-color,
+  'css': $heading-color,
+  'js': $text-color,
+  'other': $em-color
+);
+
 .content-wrapper {
   display: flex;
-  flex-direction: row;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  height: 100vh;
   @media (max-width: $breakpoint-mobile) {
     flex-direction: column;
   }
@@ -20,17 +22,10 @@
     @media (max-width: $breakpoint-mobile) {
       height: 25%;
     }
-    &.html {
-      background-color: $bg-mild-color;
-    }
-    &.css {
-      background-color: $heading-color;
-    }
-    &.js {
-      background-color: $text-color;
-    }
-    &.other {
-      background-color: $em-color;
+    @each $name, $color in $category {
+      &.#{$name} {
+        background-color: $color;
+      }
     }
   }
 }

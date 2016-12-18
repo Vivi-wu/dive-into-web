@@ -1,0 +1,57 @@
+---
+title:  "Sass(SCSS) 实用技巧"
+category: CSS
+---
+## Loop 循环
+
+比较好理解但实用性一般的 [@for](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_10) 和 [@while](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#_12)。
+
+### @each
+
+语法：`@each $var in <list or map>`
+
+在 SassScript 定义的表达式**列表**中循环，如：
+
+```scss
+@each $animal in puma, sea-slug, egret, salamander {
+  .#{$animal}-icon {
+    // ...
+  }
+}
+```
+
+<!--more-->
+
+支持 multiple assignment 多赋值匹配，`@each $var1, $var2, ... in <list>`
+
+```scss
+@each $animal, $color, $cursor in (puma, black, default), (sea-slug, blue, pointer), (egret, white, move) {
+  .#{$animal}-icon {
+    border: 2px solid $color;
+    cursor: $cursor;
+  }
+}
+```
+
+map 是 a list of map，因此多赋值匹配也适用。
+
+为了美观也可以把 `<list or map>` 放在一个变量里，写在循环外边。
+
+```scss
+$category: (
+  'html': $bg-mild-color,
+  'css': $heading-color,
+  'js': $text-color,
+  'other': $em-color
+);
+.item {
+    // ...
+    @each $name, $color in $category {
+      &.#{$name} {
+        background-color: $color;
+      }
+    }
+}
+```
+
+注意：<span class="t-red">写在 CSS 选择器里的 `$key` 需要放在 `#{}` 之间才能被解析</span>。
