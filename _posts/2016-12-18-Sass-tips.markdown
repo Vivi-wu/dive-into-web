@@ -1,5 +1,5 @@
 ---
-title:  "Sass(SCSS) 实用技巧"
+title:  "Sass(SCSS): things you may not know"
 category: CSS
 ---
 ## Loop 循环
@@ -54,4 +54,197 @@ $category: (
 }
 ```
 
-注意：<span class="t-red">写在 CSS 选择器里的 `$key` 需要放在 `#{}` 之间才能被解析</span>。
+注意：<span class="t-red">写在 CSS 选择器里的 SassScript **string** 变量，需要使用 `#{}` 实现 interpolation 插值</span>。
+
+## 以 `$` 开始的变量
+
+最直接使用 SassScript 的情况就是 Sass 的变量。以 `$` 开始定义变量名并初始化赋值，然后在任何 property value 里可以使用这个变量（变量值需符合对应的情况）。
+
+局部变量通过 `!global` 变为全局变量。
+
+```scss
+.example {
+  $width: 5em !global;
+  width: $width;
+}
+```
+
+## 除号和属性值分隔符 `/`
+
+SassScript 中满足这些条件时，分隔符 `/` 表示除法运算。
+
++ 值，或它的任何部分，保存在一个变量里
++ 由函数返回
++ 由括号包围，但不是 SassScript list 类型变量
++ 值作为另一个数学表达式的一部分
+
+## 指向父选择器的 `&`
+
+`&` 标志符表示从插入的位置开始，直到最外层的 ancestor selector 组成的组合选择器。
+
+`&` 标志符除了用在设定同一个元素不同状态（如：`&:hover`）、元素拥有不同 class (`&.custom`)，还可以用来明确地指出，**父选择器应该插入到其他选择器的位置**。
+
+如下：
+
+```scss
+a {
+  // ...
+  body.firefox & { font-weight: normal; }
+}
+```
+编译后：
+
+```css
+body.firefox a {
+    font-weight: normal; }
+```
+
+此外，`&` 可以接一个 suffix 后缀。如果父选择器中不能运用后缀，Sass 会报错。
+
+```scss
+.sidebar {
+  // ...
+  &-wrapper {
+    // ...
+}
+```
+编译后：
+
+```css
+.sidebar { /* ... */ }
+.sidebar-wrapper { /* ... */ }
+```
+
+## 嵌套的属性名
+
+CSS 中有些属性名拥有相同的前缀（类似 namespace，比如 _font-size_，_font-family_）。Sass 允许以属性共同的前缀（比如 _font_）为“选择器”，内部嵌套 sub-properties。
+
+属性名的前缀 **namespace 本身也可以有值**。
+
+```scss
+.htmltext {
+  stroke: $text-color {
+    dasharray: 810;
+    dashoffset: 810;
+  }
+}
+```
+编译后：
+
+```css
+.htmltext {
+  stroke: #363532;
+  stroke-dasharray: 810;
+  stroke-dashoffset: 810;
+}
+```
+
+## 占位选择器标志 `%`
+
+占位选择器标志 `%` (placeholder selector) <span class="t-blue">用在需要继承样式，而**不直接**在 HTML 里当 CSS class 使用的情况</span>。
+
+占位选择器定义的样式**不会**自己输出，必须配合 `@extend` 指令一起使用。
+
+```scss
+%horizontal-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.post-list-wrapper, .post-wrapper {
+  // ...
+  @extend %horizontal-center;
+}
+```
+编译后：
+
+```css
+.post-list-wrapper, .post-wrapper {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+```
+
+## 复杂选择器的继承
+
+`@extend` 指令不仅可以继承 class selector，还可以继承任何只涉及一个元素的复杂选择器，如：`.user[href^="http://"]`。编译结果会把主动继承的 selector 替换并插入到被继承的复杂选择器中。
+
+```scss
+.hoverlink {
+  @extend a:hover;
+}
+.comment a.user:hover {
+  font-weight: bold;
+}
+```
+编译后：
+
+```css
+.comment a.user:hover, .comment .user.hoverlink {
+  font-weight: bold; }margin-right: auto;
+}
+```
+
+此外：
+
+1. 一个 `@extend` 指令里可以继承多个选择器，以逗号分隔。
+
+    如：`@extend .error, .attention;`，等价于 `@extend .error; @extend .attention;`。
+2. 支持链式继承。B 继承 A，C 继承 B，则 C 也拥有 A 的样式规则。
+3. 选择器序列，比如后代选择器 `.foo .bar` 或者立即跟随兄弟选择器 `.foo + .bar` 目前不支持**被继承**。但它们内部可使用继承指令。
+4. Sass 支持选择器序列的合并，参看[官方文档](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#merging_selector_sequences)。个人觉得应当尽量避免这种情况，看编译好的 CSS 选择器名称，自己写 CSS 肯定不会长那个样子。
+
+## @media
+
+该指令跟纯 CSS 里的表现一致，但是更方便地是可以直接嵌套在 CSS 规则里。这样就不用另外 repeat 选择器再添加基于媒体查询地样式。
+
+If a @media directive appears within a CSS rule, it will be bubbled up to the top level of the stylesheet, putting all the selectors on the way inside the rule. 
+
+而且一个 `@media` 指令还可以嵌套在另一个 `@media` 指令里。
+
+```scss
+@media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+  .sidebar {
+    @media (orientation: landscape) {
+      width: 500px;
+    }
+  }
+}
+```
+编译后：
+
+```css
+@media screen and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: landscape) {
+  .sidebar {
+      width: 500px; } }
+```
+
+此外该指令里的 feature names 和 feature values 可以用 SassScript 表达式代替。
+
+## 其他
+
+### 关于 注释
+
+跟 JS 一样，用 `/*` 和 `*/` 进行多行注释，`//` 进行单行注释。不同的是多行注释将被保留在编译后的 CSS 文件里，而<span class="t-blue">单行注释不会输出</span>。
+
+### 关于 partial
+
+partial 的概念类似于子模版。如果你想引入一个 SCSS 文件但又不希望这个文件单独编译出来，在文件名开头使用 `_` 下划线即可。
+
+之后在引用这个它的文件 import 名字的地方不需要写下划线。比如引入一个 _colors.scss 文件。
+
+```scss
+@import "colors";
+```
+不会有 _colors.css 被编译出来。
+
+注意：同一个目录下，**不能同时存在相同名字的 partial 和 a non-partial**（名字前不带下划线）比如：_colors.scss 不能和 colors.scss 放在一个目录下.
+
+### 关于 sass cache
+
+默认地，Sass 缓存编译好的模版和 partials。这样极大地提升了大型 Sass 文件集合的**再编译**速度。
+
+如果 Sass 模版被细分成单独的文件，并全部使用 `@imported` 引入一个大文件，它将发挥最大的优势 work best。
+
+在不使用框架的情况下，Sass 作为一个 standalone 的 Ruby 模块，把缓存的模版放在 .sass-cache 目录下。
