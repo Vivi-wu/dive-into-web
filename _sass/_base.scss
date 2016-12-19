@@ -1,6 +1,3 @@
-@import "variables";
-
-
 /*
  * have padding and border included in the element's total width and height
  */
@@ -124,12 +121,6 @@ table, th, td {
 /*
  * List
  */
-.list-unstyled {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
 dl, dt, dd { margin: 0; }
 
 ul {

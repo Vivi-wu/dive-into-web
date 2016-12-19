@@ -3,6 +3,36 @@
 ---
 @charset "utf-8";
 
+// 字体
+$font-family-sans-serif:
+  // Safari for OS X and iOS (San Francisco)
+  -apple-system,
+  // Chrome for OS X (San Francisco)
+  BlinkMacSystemFont,
+  // Windows
+  "Segoe UI",
+  // Android
+  "Roboto",
+  // Basic web fallback
+  "Helvetica Neue", Arial, sans-serif;
+
+
+// 颜色
+$bg-color:        #fffafa; // 雪色
+$bg-mild-color:   #FFF1F1; // 浅粉
+$text-color:      #363532; // 烟草灰，paragraph
+$heading-color:   #dd3b44; // 银朱，heading
+$highlight-color: #2ec3e7; // 天青，strong
+$em-color:     #bca590; // 纸棕，em 斜体：attribute
+
+$border-color: #bca590;
+$text-color-reverse: #fffafa;
+
+
+// 媒体查询断点
+$breakpoint-mobile: 544px;
+
+
 @mixin embed-font($font-name, $font-filename) {
   @font-face {
     font-family: $font-name;
@@ -12,9 +42,12 @@
 
 @include embed-font("Josefin Sans", "Josefin Sans");
 
+
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
   "base",
+  "utility-classes",
   "layout",
-  "post"
+  "post",
+  "mixins"
 ;

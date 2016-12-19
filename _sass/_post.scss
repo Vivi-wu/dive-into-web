@@ -12,9 +12,9 @@ figure.highlight {
   table {
     margin-bottom: 0;
     .code {padding-left: 0.75rem;}
-  }
-  table tr:nth-child(odd) {
-    background-color: inherit;
+    & tr:nth-child(odd) {
+      background-color: inherit;
+    }
   }
 }
 

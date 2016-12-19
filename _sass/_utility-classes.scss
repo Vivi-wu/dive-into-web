@@ -1,0 +1,30 @@
+// alignment
+%horizontal-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+// h5 show/hide
+.mobile-only {
+  display: none;
+  @media (max-width: $breakpoint-mobile) {
+    display: block;
+  }
+}
+.pc-only {
+  display: block;
+  @media (max-width: $breakpoint-mobile) {
+    display: none;
+  }
+}
+
+
+// text
+.t-blue {
+  color: $highlight-color;
+}
+.t-red {
+  color: $heading-color;
+}

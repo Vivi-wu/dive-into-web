@@ -1,0 +1,38 @@
+.tooltip-content {
+  max-width: 200px;
+  padding: 5px 8px;
+  text-align: center;
+  line-height: normal;
+  color: $text-color-reverse;
+  background-color: $text-color;
+  border-radius: .25rem;
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 2rem;
+    background-color: rgba(54, 53, 50,0.2);
+  }
+  &::before {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+
+    .tooltip.left & {
+      top: 50%;
+      right: -5px;
+      margin-top: -5px;
+      content: "";
+      border-width: 5px 0 5px 5px;
+      border-left-color: $text-color;
+    }
+  }
+}
+
+.sidebar-wrapper .tooltip {
+  position: absolute;
+  left: -4rem;
+  top: 1rem;
+  @media (max-width: $breakpoint-mobile) {
+    left: -6rem;
+  }
+}

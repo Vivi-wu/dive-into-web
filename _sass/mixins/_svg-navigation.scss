@@ -1,0 +1,66 @@
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+@mixin animation($val) {
+  -webkit-animation: $val;
+  animation: $val;
+}
+
+@include keyframes(text-outline-html) {
+  from{
+    opacity: 0.2;
+    stroke-dashoffset: 810;
+  }
+  to{
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+@include keyframes(text-outline-css) {
+  from{
+    opacity: 0.2;
+    stroke-dashoffset: 555;
+  }
+  to{
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+.content-wrapper svg {
+  width: 100%;
+  min-height: 100%;
+  & text {
+    font-size: 4.7rem;
+    opacity: 0;
+    fill: none;
+    stroke-width: 2px;
+    &.htmltext {
+      stroke: $text-color {
+        dasharray: 810;
+        dashoffset: 810;
+      }
+      @include animation(5s text-outline-html 3 alternate forwards);
+    }
+    &.csstext, &.jstext, &.othertext {
+      stroke: $text-color-reverse {
+        dasharray: 555;
+        dashoffset: 555;
+      }
+    }
+    &.csstext {
+      @include animation(4s text-outline-css 1s 1 alternate forwards);
+    }
+    &.jstext {
+      @include animation(5s text-outline-css 2s 3 alternate forwards);
+    }
+    &.othertext {
+      @include animation(3s text-outline-css 3s 3 alternate forwards);
+    }
+  }
+}

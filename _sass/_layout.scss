@@ -1,5 +1,3 @@
-@import "mixins";
-
 /*
  * Home page
  */
@@ -36,7 +34,7 @@ $category: (
  */
 .post-list-wrapper, .post-wrapper {
   max-width: 1200px;
-  @extend .horizontal_center;
+  @extend %horizontal-center;
   padding: 2rem;
   @media (max-width: $breakpoint-mobile) {
     padding: 1rem;

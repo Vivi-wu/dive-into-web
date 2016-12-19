@@ -1,0 +1,33 @@
+.sidebar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  &>.item {
+    flex-grow: 1;
+    padding-top: 100%;
+    color: $text-color-reverse;
+    background-color: $heading-color;
+    text-align: center;
+    transition: color 0.3s ease-out, font-size 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    &:hover {
+      font-size: 2rem;
+      color: $heading-color;
+      background-color: $bg-mild-color;
+      text-decoration: none;
+    }
+  }
+  &-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: -70px;
+    @media (max-width: $breakpoint-mobile) {
+      right: -60px;
+    }
+    width: 5rem;
+    transition: right 0.3s ease-in-out;
+    &:hover {
+      right: 0;
+    }
+  }
+}
