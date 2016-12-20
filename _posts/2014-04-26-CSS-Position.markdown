@@ -18,11 +18,18 @@ HTML 元素总是<span class="t-blue">根据正常的页面流，从上到下，
 
 元素位置属性值为 `relative` 时，是 <span class="t-blue">relative to its normal position</span> 相对于正常情况下它应该在的位置放置。
 
-其他元素并不会自动调整，去填充这个元素移动所产生的空白。<span class="t-blue">Other content will not be adjusted to fit into any gap left by the element</span>.
+**其他元素并不会自动调整**，去填充由这个元素移动所产生的空隙。
 
-<span class="t-blue">the reserved space for the element is still preserved in the normal flow</span>. 相对放置的元素可以被移动并覆盖住其他元素，但是它在正常页面流里本来占据的空间仍然有效（**没有**被从页面流里**剔除**）。
+<span class="t-blue">The reserved space for the element is still preserved in the normal flow</span>. 
 
-Tips：Relatively positioned 元素通常用做 absolutely positioned 元素的容器.
+相对放置的元素在正常页面流里本来占据的空间仍然有效，（**没有**被从页面流里**剔除**，也不影响布局）。
+
+<div style="background-color:#FFF1F1">Box 1 Normal positioning</div>
+<div style="background-color:#bca590">Box 2 Normal positioning</div>
+<div style="position:relative;top:10px;left:10px;background-color:#FFF1F1">Box 1 Relative positioning</div>
+<div style="background-color:#bca590;margin-bottom:1rem">Box 2 Normal positioning</div>
+
+上例中设置 Box 1 为 relative 放置并分别设 _top_ 和 _left_ 为 10px，可以看到**相对放置的元素移动，并不影响其后元素的摆放**。
 
 ## Fixed Positioning
 
