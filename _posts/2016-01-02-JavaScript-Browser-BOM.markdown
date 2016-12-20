@@ -100,39 +100,39 @@ JS 有三种弹出框：Alert box，Confirm box，Prompt box
 
 ## JS Cookies
 
-Cookies 是一些数据，在你的电脑里，用文本文件里存储网页用户信息。Cookies 的发明是用来解决“如何记住用户信息”的问题。
+Cookies 是一些数据，在你的电脑里用文本文件里存储网页用户信息。Cookies 的发明是用来解决“如何记住用户信息”的问题。
 
 Cookies 以 name-value 形式存储。（如 username = Viivenne）当浏览器向服务器请求一个网页时，属于那个页面的 cookies 被添加到请求里。
 
-### Create a Cookie
+### Create
 
-使用 _document.cookie_ 属性创建、读取、改变和删除 cookies
+使用 _document.cookie_ 属性创建、读取、更新、删除（CRUD） cookies
 
     document.cookie = "username=Vivienne WU";
 
-也可以添加一个过期日期（以 UTC 时间格式）<span class="t-blue">默认地，当浏览器关闭时，cookie 被删除</span>
++ 可以添加一个过期日期（以 UTC 时间格式）<span class="t-blue">默认地，当浏览器关闭时，cookie 被删除</span>
 
     document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";
 
-可以添加一个 path 参数，告诉浏览器 cookie 属于哪一个路径。<span class="t-blue">默认地，cookie 属于当前页面</span>
++ 可以添加一个 path 参数，告诉浏览器 cookie 属于哪一个路径。<span class="t-blue">默认地，cookie 属于当前页面</span>
 
     document.cookie = "username=John Doe; expires=Thu," +
                       " 18 Dec 2013 12:00:00 UTC; path=/";
 
-如果你设置一个新的 cookie，旧的 cookie 不会被覆盖，而是添加到了 _document.cookie_ 里。
+使用 _document.cookie_ 多次赋值，旧的 cookie **不会**被覆盖，而是追加到 cookies 里。
 
-### Read a Cookie
+### Read
 
-读取同样使用 _document.cookie_，将在**一个字符串中**返回**所有** cookie. （比如: cookie1=value; cookie2=value; cookie3=value;）
+使用 _document.cookie_ 在**一个字符串中**返回**所有** cookie. （比如: cookie1=value; cookie2=value; cookie3=value;）
 
 如果你想要找到指定 cookie 的值，必须使用 JS 查询方法在 cookie 字符串里查找。
 
-### Change a Cookie
+### Change/Update
 
-用创建 cookie 的方法来改变cookie的值。旧的 cookie 就会被覆盖住。
+使用 `document.cookie = “key=value”`，key 是要更新的 cookie 名称，value 是新的值。
 
-### Delete a Cookie
+### Delete
 
-删除 cookie 的方法很简单，只要**将 _expires_ 参数设置为一个已经过去的时间**。不需要指定 cookie 的值。
+删除方法很简单，只要**将 _expires_ 参数设置为一个已经过去的时间**。不需要指定 cookie 的值。
 
     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
