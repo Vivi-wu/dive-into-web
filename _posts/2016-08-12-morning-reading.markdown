@@ -199,8 +199,57 @@ CSS 书写动效：**命令式**（如 jQuery.animate，显示调用动画函数
 + 慎重选择高消耗的样式（绘制前需要浏览器进行大量计算的 expensive styles）：`box-shadows`,`border-radius`,`transparency`,`transforms`,`CSS filters`
 + 避免过分 reflow（浏览器重新计算布局**位置**和**大小**）。常见引起重排的属性：width/height，padding，margin，display，border，border-width，position，top/bottom/left/right，font-size，font-weight，font-family，float，text-align，vertical-align，line-height，min-height，overflow，clear，white-space
 + 避免过分 repaints，常见引起重绘的属性：color，border-style，visibility，text-decoratoiin，background，background-image，background-position，background-repeat，background-size，outline，outline-color，outline-style，outline-width，border-radius，box-shadow
-+ CSS `will-change`，优化动效的方法（适用于 transform，opacity 等），通过告知浏览器哪些元素将会改变，以及哪些属性将要改变。（除IE主流的浏览器都支持）
 + `requestAnimationFrame`，一种提供更高效运行基于脚本动效的 API（让视觉更新按照浏览器的最优时间来安排计划），相比于传统的 timeouts 方法。
+
+Hardware Acceleration means that the Graphics Processing Unit (GPU) will assist your browser in rendering a page by doing some of the heavy lifting, instead of throwing it all onto the Central Processing Unit (CPU) to do. 硬件加速是指GPU帮助浏览器在渲染一个页面时做一些繁重的工作，代替传统地把全部工作扔给CPU来做。
+
+a GPU is designed specifically for performing the complex mathematical and geometric calculations that are necessary for graphics rendering. GPU专门用来执行那些对于图像渲染必要的复杂数学、几何运算。
+
+Hardware acceleration (a.k.a. GPU acceleration) relies on a layering model used by the browser as it renders a page. When certain operations (such as 3D transforms) are performed on an element on a page, that element is moved to its own “layer”, where it can render independently from the rest of the page and be composited in (drawn onto the screen) later. This isolates the rendering of the content so that the rest of the page doesn’t have to be rerendered if the element’s transform is the only thing that changes between frames, and often provides significant speed benefits. It is worth mentioning here that only 3D transforms qualify for their own layer; 2D transforms don’t.
+
+硬件加速依赖于浏览器渲染页面时使用的 layering 模型。当页面中某个元素上执行特定操作时，元素被移到它自己的 layer，在那里它将被独立渲染然后画到屏幕上。
+
+如果元素的 transform 是frames之间唯一改变的东西，页面剩余内容都不需要 rerender，极大地提升渲染速度。
+
+值得一提的是**只有 3D transforms**有自己的图层。
+
+硬件加速的 CSS 属性有 _opacity_, _translate3d(0, 0, 0)_
+
+Layer creation 技术催生了页面速度，但也有相应的代价——占有系统的RAM和GPU，在确保操作真的提高了页面性能的情况下明智地使用。
+
+由此也诞生了新的 _will-change_ 属性，通过告知浏览器哪些元素以及哪些属性将要改变，让浏览器能提前优化处理这些任务的方案。（除IE主流的浏览器都支持）。
+
+使用该属性能够使 animation 平滑地开始，不会有以前动效开始时短暂的跳动 flicker。
+
+把将要改变的属性名，以逗号分隔形式赋值给 _will-change_ 属性。
+
+    will-change: transform, opacity;
+
+实际使用中需要给浏览器一些时间去优化。比如，点击某元素的时候有动效，可以把 _will-change_ 写在该元素的 hover 状态里。
+
+```css
+.element {
+    /* style rules */
+    transition: transform 1s ease-out;
+}
+.element:hover {
+    will-change: transform;
+}
+.element:active {
+    transform: rotateY(180deg);
+}
+```
+
+如果 hover 元素时就要有动效，_will-change_ 写在这里就没什么作用（hover 已经发生了）。可以把 _will-change_ 写在该元素的祖先元素的 hover 状态里。 
+
+建议使用 JS 来 set 和 unset will-change 属性，这样浏览器在动效结束时可以回收用于优化的资源。
+
+当元素数量较少、用户在这些元素上会频繁交互时，可以把 will-change 属性写在 CSS 样式文件里。比如：滑出一个侧边栏、元素根据用户鼠标移动而改变状态。
+
+tip：
+
++ 当 will-change 取值为 `scroll-position` 时，会使长页面或快速滚动页面平滑地进行。
++ 当 will-change 取值为 `contents` 时，浏览器会减少在该元素上的缓存。因为如果一个元素的内容频繁改变，保留元素内容的缓存将没什么用还费时间。
 
 ## CDN
 
