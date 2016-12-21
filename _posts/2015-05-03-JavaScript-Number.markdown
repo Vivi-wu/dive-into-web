@@ -158,5 +158,3 @@ var b = num.toPrecision(2); // returns 0.0017
 ```
 
 所有 number 的方法均不改变原来的变量，返回一个新的值。
-
-<span class="t-blue">In JavaScript, all data types have a <code>valueOf()</code> and a <code>toString()</code> method</span>.
