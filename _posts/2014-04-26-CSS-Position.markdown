@@ -24,10 +24,10 @@ HTML 元素总是<span class="t-blue">根据正常的页面流，从上到下，
 
 相对放置的元素在正常页面流里本来占据的空间仍然有效，（**没有**被从页面流里**剔除**，也不影响布局）。
 
-<div style="background-color:#FFF1F1">Box 1 Normal positioning</div>
-<div style="background-color:#bca590">Box 2 Normal positioning</div>
-<div style="position:relative;top:10px;left:10px;background-color:#FFF1F1">Box 1 Relative positioning</div>
-<div style="background-color:#bca590;margin-bottom:1rem">Box 2 Normal positioning</div>
+<div style="background-color:#FFF1F1;width:20rem;">Box 1 Normal positioning</div>
+<div style="background-color:#bca590;width:20rem;">Box 2 Normal positioning</div>
+<div style="position:relative;top:10px;left:10px;background-color:#FFF1F1;width:20rem;">Box 1 Relative positioning</div>
+<div style="background-color:#bca590;margin-bottom:1rem;width:20rem;">Box 2 Normal positioning</div>
 
 上例中设置 Box 1 为 relative 放置并分别设 _top_ 和 _left_ 为 10px，可以看到**相对放置的元素移动，并不影响其后元素的摆放**。
 

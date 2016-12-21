@@ -75,22 +75,36 @@ JS对象是一系列无序属性的集合。
 
 这些 name:value 称为 **properties** 属性。
 
-**获取对象的属性有两种方法**：`objectName.propertyName` 或者 `objectName["propertyName"]`
+**获取**对象的**属性**有两种方法：`objectName.propertyName` 或者 `objectName["propertyName"]`。
 
 后者也可以使用 expression 表达式：`objectName[expression]`，只要表达式被评估是属性的 name。
 
-如果对象中不含要找的属性，则返回 `undefined`
+如果对象中**不含**要找的属性，则返回 `undefined`。
 
-+ 添加属性，对已经存在的对象，用获取属性的方法，给这个属性赋值即可。
-+ 删除属性，使用关键字 **delete**。
++ **添加**属性，对已经存在的对象，用获取属性的方法给这个属性赋值即可。
++ **删除**属性，使用关键字 **delete**。
 
       delete person.age;   // or delete person["age"];
 
 该操作<span class="t-red">不仅删掉了属性的值，也删掉了属性本身</span>。
 
-The delete operator is **designed** to be used on **object properties**. <span class="t-blue">It has no effect on variables or functions. </span>。
+### delete 操作符
 
-删除操作符不会删掉所继承的父类属性，但是如果你删掉了一个 prototype 属性，它会影响所有继承这个原型的对象。
+The `delete` operator is **designed** to be used on **object properties**.
+
+关于返回值：
+
+1. 删除成功返回 true，失败返回 false。在 `"use strict";` 模式下不能删除的情况 raise _SyntaxError_。
+2. 删除一个对象里**不存在的属性**，并没有什么效果，也<span class="t-red">返回 true</span>。
+3. 只对自己的属性有效，删除不会影响该对象原型链上的同名属性。
+4. 任何**通过 `var` 声明**的属性，不能被从 global 作用域或一个函数的 local 作用域里删除：
+
+    + 不通过 `var` 声明的属性可以被删除
+    + 全局作用域不能删除函数
+    + 作为一个对象的函数可以被删除
+
+5. 使用 `let` 或 `const` 声明的属性**不能**被删除（from the scope within which they were defined）。
+6. 不可配置的属性不能被删除。包括，内置对象 `Math`, `Array`, `Object`，以及通过 `Object.defineProperty(...,...,{configurable: false})` 方法创建的不可配置属性。`delete` 删除没有什么效果，返回 false。
 
 ## JavaScript Object methods
 

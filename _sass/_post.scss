@@ -63,7 +63,7 @@ figure.highlight {
     p {
       margin-bottom: 0.5rem;
     }
-    &>p:last-child {
+    &>p:last-child, &:last-child, ul {
       margin-bottom: 0;
     }
   }
