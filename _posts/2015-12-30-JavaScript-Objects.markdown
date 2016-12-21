@@ -4,6 +4,8 @@ category: JavaScript
 ---
 在JS中，除了 **primitive values**（string "John Doe"，numbers 3.14，true，false，null and undefined），所有值都是 objects。
 
+因此 <span class="t-blue">all data types have a `valueOf()` 和 `toString()` 方法</span>.
+
 JS对象是可以包含多个值的变量。这些值以 `name:value` 对的形式、**逗号**为分隔符（最后一个值后面没有逗号）。
 
 ## 创建对象
@@ -34,7 +36,7 @@ var person = {
 
 3.Using an **Object Constructor**
 
-有时我们希望使用 **an object type** 一种对象类型，创建多个对象。这时可以使用一个构造函数来创建相同类型的对象。
+有时我们希望使用 **an object type**，创建多个对象。这时可以使用一个构造函数来创建相同类型的对象。
 
 ```js
 function person(first, last, age) {
@@ -46,18 +48,39 @@ var myFather = new person("John", "Doe", 50);
 var myMother = new person("Sally", "Rally", 48);
 ```
 
+### new 关键字
+
+参看[这里](https://zhuanlan.zhihu.com/p/23987456)解释得简单易懂。
+
+```js
+function A (arg) {
+    var tmp = {};  // 1.创建临时空对象
+    tmp.prototype = A.prototype  // 2.把构造函数的原型赋给临时对象的原型
+    tmp.arg = arg
+    return tmp  // 3.返回这个临时对象
+}
+A.prototype = {
+    prop: propvalue,
+    func: function(){}
+}
+```
+
+构造函数 A 可以简写成：
+
+    function A (arg) {this.arg = arg} // this 指向临时对象，与下面解释关键字this用法的观点一致
+
+`new A('参数')` 中的 new 所做的事情就是上面数字标记注释的三个步骤。
+
 ### _this_ keyword
 
-JS中被称为 this 的东西 is the object that "owns" the JavaScript code。
+JS中被称为 this 的东西就是<span class="t-blue explain" title="the object that &quot;owns&quot; the JavaScript code">拥有 JS 代码的对象</span>。
 
 默认情况下，this 指的是全局对象 `window`。
 
-+ when used in a **function**, is the object that "owns" the function.
-+ when used in an **object**, is the object itself.
-+ when used in an **object constructor**, is only a substitute 替代 for the new object. The value of `this` will become the new object when the constructor is used to create an object. 构造函数里的 this 没有值，当函数被用来创建新的对象时，this 的值就是新的对象。
-+ 还可以在 HTML 元素事件绑定里使用 _this_，指的是触发事件的 HTML element。（JS Event Order 章节有提到）
-
-    <h1 onclick="this.innerHTML='Ooops!'">Click on this text!</h1>
++ when used in a **function**, 指的是拥有这个函数的对象。
++ when used in an **object**, 就是对象本身。
++ when used in an **object constructor**, is only a substitute 替代 for the new object. 构造函数里的 this 本没有值，<span class="explain" title="The value of this will become the new object when the constructor is used to create an object.">当函数被用来创建新的对象时，this 的值变为新对象</span>。
++ 还可以在 HTML 元素事件绑定里使用 _this_，指的是触发事件的 HTML DOM element。（JS Event Order 章节有提到）
 
 ### JavaScript Objects are Mutable
 
