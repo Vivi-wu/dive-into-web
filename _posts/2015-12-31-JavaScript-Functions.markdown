@@ -123,12 +123,12 @@ function sumAll() {
     function myFunction(a, b) {
       return a * b;
     }
-    myObject = myFunction.call(myObject, 10, 2);     // Will return 20
-    myArray = [10, 2];
-    myObject = myFunction.apply(myObject, myArray);
+    var myResult = myFunction.call(null, 10, 2);     // myResult return 20
+    var myArray = [10, 2];
+    var myResult2 = myFunction.apply(null, myArray);  // myResult2 return 20
     ```
 
-  上面的例子中可以看到，`apply()` 方法从数组中获取函数实参，而前者则一一获取实参。
+    上面的例子中可以看到，`apply()` 方法从数组中获取函数实参，而前者则一一获取实参。
 
 ### Self-Invoking Functions
 
