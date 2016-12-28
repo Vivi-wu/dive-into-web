@@ -78,7 +78,7 @@ add();
 
 结合上面提到的自调用解释一下：
 
-1. 自调用函数 only runs once，初始化变量 counter 赋值为0.
+1. 自调用函数 only runs once，初始化变量 counter 赋值为0
 2. 将无名函数返回并赋值给变量 add
 3. 变量 add 成为一个可以获取父 scope 中变量 counter 的函数
 4. The counter is protected by the scope of the anonymous function（我认为这里指的是父函数）, and can only be changed using the add function
@@ -88,14 +88,14 @@ add();
 在 HTML 中，全局 scope 就是窗口对象，因此 all global variables belong to the window object.
 
 + 局部变量只可以被定义它的函数使用，可以与全局变量重名。
-+ 不使用关键字 **var** 创建的变量, are always global, even if they are created inside a function，即使写在一个函数内部，也自动变为全局变量。
++ 不使用关键字 **var** 创建的变量, are always global, 即使写在一个函数内部，也自动变为全局变量。
 + 只要你的应用（浏览器窗口或网页）在运行，全局变量就存在。
 + 局部变量在函数调用时创建，在函数执行结束时删除。
 + function argument 函数参数作为局部变量在函数内被使用。
 
 ## Changing scope with .call() .apply() 和 .bind()
 
-有时需要对作用域进行操作实现一些目标。看下例：
+有时需要改变作用域来进行操作，实现一些目标。看下例：
 
 ```js
 var links = document.querySelectorAll('nav li');
@@ -106,7 +106,7 @@ for (var i = 0; i < links.length; i++) {
 
 因为并没有 invoke 什么或者改变作用域，这里的 this 指的就是默认的全局作用域中拥有这段js的 window 对象。
 
-使用 .call() 和 .apply() 可以把一个作用域传进函数中。
+使用 .call() 和 .apply() 可以把一个作用域传进函数中。<span class="t-blue">改变运行时的 scope</span>
 
 ```js
 var links = document.querySelectorAll('nav li');
@@ -141,11 +141,25 @@ nav.addEventListener('click', function () {
 }, false);
 ```
 
-但是上面的办法改变了作用域，还写了一个没什么用的函数。使用 .bind() 不同于 call 和 apply，不会 invoke 一个函数。
+上面的办法改变了作用域，但是写了一个没什么用的函数。使用 `.bind()` 不同于 call 和 apply，不会 invoke 一个函数（即立即执行）。<span class="t-blue">改变定义时的 scope</span>
 
     nav.addEventListener('click', toggleNav.bind(scope, arg1, arg2), false);
 
-Note:the scope can be changed if needed
+此外，还可以借助**闭包**实现定义时改变上下文。
+
+```js
+function A() {
+  init: function() {
+    this.$element.on('click', this._switchThis(this.ajaxSubmit, this))
+  },
+  _switchThis: function (fn, obj) {
+      return function () {
+          fn.apply(obj, arguments)
+      }
+  },
+  ajaxSubmit: function () {}
+}
+```
 
 ## Private and Public Scope
 
@@ -184,9 +198,11 @@ Module.myMethod();
 Module.publicMethod();
 ```
 
-这里 Module 被返回可以被全局作用域使用，并且作为命名空间，包含许多方法供我们使用。没有写在 `return` 所含对象中的方法，就变成了私有函数(方法)。
+这里将返回对象赋给 Module，可以被全局作用域使用。Module 作为命名空间，其包含的方法作为公有函数使用。
 
-下面举例如何通过返回一个对象，使用公有和私有方法。
+没有写在 `return` 所含对象中的方法，就变成了私有函数(方法)。
+
+下面举例如何通过返回一个对象，使用公有和私有的方法。
 
 ```js
 var Module = (function () {

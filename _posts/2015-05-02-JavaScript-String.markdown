@@ -66,7 +66,7 @@ _length_ 是 String 自带属性。除此之外还有 _constructor_ 和 _prototy
 
 `replace(`searchvalue, newvalue`)`，第一个参数是 a value, 或 regular expression。
 
-第二个参数是 new string，也可以是一个函数 function (replacement)，该函数的返回值将替换掉第一个参数匹配到的结果
+第二个参数是 new string，也可以是一个函数 function (replacement)，该函数的返回值是**第一个参数匹配到的结果**的替换值。
 
 ```js
 var str = "Mr Blue has a blue house and a blue car";

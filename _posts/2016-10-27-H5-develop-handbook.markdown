@@ -6,7 +6,7 @@ category: JavaScript
 
 推荐阅读《JavaScript语言精粹》（JavaScript, The Good Parts, Douglas Crockford），《JavaScript权威指南》（Javascript: The Definitive Guide, David Flanagan），《高性能JavaScript编程》（High Performance JavaScript, Nicholas C.Zakas），《JavaScript模式》（JavaScript Patterns, Stoyan Stefanov）
 
-因为JS是单线程的，如果函数被阻塞，用户界面就冻结了。所有JS要采用不同于传统语言处理 I/O
+因为JS是**单线程的**，如果函数被阻塞，用户界面就冻结了。 所以JS要采用不同于传统语言处理 I/O
 
 事件驱动编程。操作异步，先在某个地方创建操作，当外部事件发生后再执行。JS中所有外部的 I/O（数据库，调用服务器）都应该是非阻塞的，学习使用闭包和回调至关重要。
 
@@ -16,7 +16,7 @@ category: JavaScript
 
 ### 闭包
 
-本书中使用 jQuery 编写示例，下面的例子，外层函数将内层函数作为返回值返回。这个例子的结果是把变量 updateElement 的值设为内层 set() 函数。当一个程序调用 updateElement 并传入 CSS 选择器后，updateElement 会返回一个可用来设置**被该选择器选中的HTML元素**的内容的函数。<- <- 有的绕
+本书中使用 jQuery 编写示例，下面的例子，外层函数将内层函数作为返回值返回。这个例子的结果是把变量 updateElement 的值设为内层 set() 函数。当一个程序调用 updateElement 并传入 CSS 选择器后，updateElement 会返回一个可用来设置**被该选择器选中的HTML元素**的内容的函数。
 
 ```js
 // 例 2-5
@@ -54,9 +54,9 @@ $('document').ready(Ready);
 
 + 函数可以在任何能使用其他值的地方使用它
 + 可通过组合简单的函数构建复杂的行为
-+ 函数有返回值，多数情况下，对于同样的输入可定函数总是返回相同的值
++ 函数有返回值，多数情况下，对于同样的输入特定函数总是返回相同的值
 
-JS 函数默认不返回值，除非使用 `return` 语句。无返回语句时，函数返回 `undefined`。
+JS 函数**默认不返回值**，除非使用 `return` 语句。无返回语句时，函数返回 `undefined`。
 
 可以用简单的函数生成一个函数连，使链中的每个函数都返回 `this`，从而允许调用下一个函数。参考 jQuery 的链式调用。多数jQuery方法返回一个值，使它们能够被链接。
 
@@ -142,7 +142,9 @@ cube('test')  // null
 
 例2-18 和例2-19 比较 `for` 循环和数组的 `forEach()` 方法在给数组中每个元素绑定事件的区别。
 
-这里提一下如何把 jQuery 选择器得到的 jQuery 对象组成的列表（typeof 这个列表得到类型是 object，用 Array.isArray() 检查，结果是 false，但它可以用 for 循环语句遍历）转换成 JS array：借助 jQuery 的 `toArray()` 方法，return the DOM Elements as an Array。
+这里提一下如何把 jQuery 选择器得到的 jQuery 对象组成的列表（typeof 这个列表得到类型是 object，用 Array.isArray() 检查，结果是 false，但它可以用 for 循环语句遍历）。
+
+借助 jQuery 的 `toArray()` 方法可以把该**类数组对象**转换成 JS array。
 
 ```html
 <ul id="unorderList">

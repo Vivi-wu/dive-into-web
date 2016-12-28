@@ -14,7 +14,7 @@ IE9以下浏览器不支持 `<video>` Tant pis.
 
 4. 浏览器支持性检测：
 
-    var hasVideo = !!(document.createElement('video').canPlayType);  // 动态创建一个video元素，然后检测 canPlayType()函数是否存在。
+        var hasVideo = !!(document.createElement('video').canPlayType);  // 动态创建一个video元素，然后检测 canPlayType()函数是否存在。
 
     通过‘!!'运算符将结果转换成布尔值。
 
@@ -36,7 +36,7 @@ IE9以下浏览器不支持 `<video>` Tant pis.
 
 之前有用到觉得比较简单，一直没总结，今天老大问怎么避免 iPhone Safari 中全屏播放视频，谷歌找了下解决办法，亲自试验，得出了当前可行的 solution。
 
-针对 iOS9（只测试了手上的iPhone4s），借助 [这个插件](https://github.com/bfred-it/iphone-inline-video)。
+针对 iOS9（只测试了手上的iPhone4s），借助 [这个插件](https://github.com/bfred-it/iphone-inline-video){:target="_blank"}。
 
 ```css
 video {height:auto;}
