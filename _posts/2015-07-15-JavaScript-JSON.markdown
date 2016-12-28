@@ -1,5 +1,5 @@
 ---
-title:  "JavaScript JSON"
+title:  "JavaScript JSON, JSONP"
 category: JavaScript
 ---
 JSON 是指 **J**ava**S**cript **O**bject **N**otation, 是一种轻量级的数据存储和传输格式，独立于语言（text only，可用任何编程语言来读取和生产 JSON 数据）。
@@ -57,3 +57,25 @@ Note: JSON text SHALL be encoded in Unicode. The default encoding is UTF-8.
 使用 XML，需要 fetch XML 文件，使用 XML DOM 循环遍历文件（使用 document.getElemenById 或者 document.getElemenByTagName 方法来 extract data），然后提取 values 并将它们存储在变量中。
 
 而使用 JSON 只需要 fetch JSON string，然后使用 `JSON.parse` 解析这个 JSON 字符串。
+
+## JSONP
+
+目前并没有遇到需要使用 JSONP 的场景，但是有至少两次面试都被问到这个问题😓
+
+常见的答案是：用来解决纯前端 Ajax 不能跨域请求资源文件的问题。
+
+一句话说明：引用一段脚本，执行页面里定义的方法。
+
+详细地说：页面动态添加 `<script>` 标签，标签的 _src_ 属性值 url 后添加 `?callback=myFunction` 参数。以该链接向服务器端发起请求，服务器检测到 callback 参数（myFunction），把要发给客户端的数据包裹在函数名里，如：`myFunction("foobar");` 以 js 文件形式返回。客户端接到请求结果，调用页面里自定义的函数 myFunction 处理数据。
+
+前提是**后台服务支持 jsonp 协议**，对 json 数据进行了函数包装。
+
+补充：
+
+1. jQuery 把 jsonp 作为 ajax 的一种形式进行了封装，但 ajax 和 jsonp 本质上是不同的东西。ajax 的核心是通过 XMLHttpRequest 获取非本页内容，而 jsonp 的核心则是在需要的时候，通过动态添加 `<script>` 标签请求数据执行定义在页面里的方法。
+2. Ajax 通过服务端代理一样可以实现跨域，jsonp 本身也不排斥同域的数据的获取。
+3. jsonp 是一种方式或者说非强制性协议，如同 ajax 一样，它也不一定非要用 json 格式来传递数据，只不过提供公共通用服务还是选择支持广泛的数据格式，以便不同端处理数据。
+4. jsonp 的 Content-Type 是 `text/javascript`。
+5. jsonp 只支持 get 请求。
+
+对于拥有 _src_ 属性的标签都拥有跨域的能力，比如 `<script>`、`<img>`、`<iframe>`。
