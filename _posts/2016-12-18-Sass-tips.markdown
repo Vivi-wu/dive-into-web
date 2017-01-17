@@ -78,6 +78,30 @@ SassScript 中满足这些条件时，分隔符 `/` 表示除法运算。
 + 由括号包围，但不是 SassScript list 类型变量
 + 值作为另一个数学表达式的一部分
 
+## 嵌套的属性名
+
+CSS 中有些属性名拥有相同的前缀（类似 namespace，比如 _font-size_，_font-family_）。Sass 允许以属性共同的前缀（比如 _font_）为“选择器”，内部嵌套 sub-properties。
+
+属性名的前缀 **namespace 本身也可以有值**。
+
+```scss
+.htmltext {
+  stroke: $text-color {
+    dasharray: 810;
+    dashoffset: 810;
+  }
+}
+```
+编译后：
+
+```css
+.htmltext {
+  stroke: #363532;
+  stroke-dasharray: 810;
+  stroke-dashoffset: 810;
+}
+```
+
 ## 指向父选择器的 `&`
 
 `&` 标志符表示从插入的位置开始，直到最外层的 ancestor selector 组成的组合选择器。
@@ -115,35 +139,11 @@ body.firefox a {
 .sidebar-wrapper { /* ... */ }
 ```
 
-## 嵌套的属性名
-
-CSS 中有些属性名拥有相同的前缀（类似 namespace，比如 _font-size_，_font-family_）。Sass 允许以属性共同的前缀（比如 _font_）为“选择器”，内部嵌套 sub-properties。
-
-属性名的前缀 **namespace 本身也可以有值**。
-
-```scss
-.htmltext {
-  stroke: $text-color {
-    dasharray: 810;
-    dashoffset: 810;
-  }
-}
-```
-编译后：
-
-```css
-.htmltext {
-  stroke: #363532;
-  stroke-dasharray: 810;
-  stroke-dashoffset: 810;
-}
-```
-
 ## 占位选择器标志 `%`
 
-占位选择器标志 `%` (placeholder selector) <span class="t-blue">用在需要继承样式，而**不直接**在 HTML 里当 CSS class 使用的情况</span>。
+`%` 又称为 @extend-Only Selectors，其定义的样式仅用来继承（必须配合 `@extend` 指令一起），**不直接**在 HTML 里使用。
 
-占位选择器定义的样式**不会**自己输出，必须配合 `@extend` 指令一起使用。
+They can be used anywhere a class or id could, and on their own they **prevent** rulesets **from being rendered to CSS**。
 
 ```scss
 %horizontal-center {
@@ -168,7 +168,9 @@ CSS 中有些属性名拥有相同的前缀（类似 namespace，比如 _font-si
 
 ## 复杂选择器的继承
 
-`@extend` 指令不仅可以继承 class selector，还可以继承任何只涉及一个元素的复杂选择器，如：`.user[href^="http://"]`。编译结果会把主动继承的 selector 替换并插入到被继承的复杂选择器中。
+Class selector 不是唯一可以被 `@extend` 指令继承的，任何只涉及一个元素的选择器都可以被继承，如：`.user[href^="http://"]`，`a:hove`。
+
+编译结果会<span class="t-blue">把主动继承的 selector 替换成拥有 extend 指令的 selector，然后插入到被继承的复杂选择器中</span>。
 
 ```scss
 .hoverlink {
@@ -182,7 +184,7 @@ CSS 中有些属性名拥有相同的前缀（类似 namespace，比如 _font-si
 
 ```css
 .comment a.user:hover, .comment .user.hoverlink {
-  font-weight: bold; }margin-right: auto;
+  font-weight: bold;
 }
 ```
 
@@ -193,13 +195,14 @@ CSS 中有些属性名拥有相同的前缀（类似 namespace，比如 _font-si
     如：`@extend .error, .attention;`，等价于 `@extend .error; @extend .attention;`。
 2. 支持链式继承。B 继承 A，C 继承 B，则 C 也拥有 A 的样式规则。
 3. 选择器序列，比如后代选择器 `.foo .bar` 或者立即跟随兄弟选择器 `.foo + .bar` 目前不支持**被继承**。但它们内部可使用继承指令。
-4. Sass 支持选择器序列的合并，参看[官方文档](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#merging_selector_sequences)。个人觉得应当尽量避免这种情况，看编译好的 CSS 选择器名称，自己写 CSS 肯定不会长那个样子。
+4. Sass 支持选择器序列的合并，参看[官方文档](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#merging_selector_sequences)。原理同蓝字部分，个人觉得应当尽量避免使用，无法预知编译后的 CSS 样式产生的影响。
+5. Sass 目前**不支持**在 @media 指令模块内应用定义在其**外部**的 CSS 样式，即定义在媒体查询指令模块外的样式不能使用 `@extend` 继承。定义在内部的样式可正常继承。
 
 ## @media
 
 该指令跟纯 CSS 里的表现一致，但是更方便地是可以直接嵌套在 CSS 规则里。这样就不用另外 repeat 选择器再添加基于媒体查询地样式。
 
-If a @media directive appears within a CSS rule, it will be bubbled up to the top level of the stylesheet, putting all the selectors on the way inside the rule. 
+If a @media directive appears within a CSS rule, it will be bubbled up to the top level of the stylesheet, putting all the selectors on the way inside the rule.
 
 而且一个 `@media` 指令还可以嵌套在另一个 `@media` 指令里。
 
@@ -239,12 +242,12 @@ partial 的概念类似于子模版。如果你想引入一个 SCSS 文件但又
 ```
 不会有 _colors.css 被编译出来。
 
-注意：同一个目录下，**不能同时存在相同名字的 partial 和 a non-partial**（名字前不带下划线）比如：_colors.scss 不能和 colors.scss 放在一个目录下.
+注意：同一个目录下，**不能同时存在相同名字的 partial 和 a non-partial**。比如：_colors.scss 不能和 colors.scss 放在一个目录下.
 
 ### 关于 sass cache
 
 默认地，Sass 缓存编译好的模版和 partials。这样极大地提升了大型 Sass 文件集合的**再编译**速度。
 
-如果 Sass 模版被细分成单独的文件，并全部使用 `@imported` 引入一个大文件，它将发挥最大的优势 work best。
+如果 Sass 模版被细分成单独的文件，并全部使用 `@import` 引入一个大文件，它将 work best。
 
 在不使用框架的情况下，Sass 作为一个 standalone 的 Ruby 模块，把缓存的模版放在 .sass-cache 目录下。
