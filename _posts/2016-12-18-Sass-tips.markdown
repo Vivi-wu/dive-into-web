@@ -19,20 +19,20 @@ category: CSS
   }
 }
 ```
-
 <!--more-->
 
 支持 multiple assignment 多赋值匹配，`@each $var1, $var2, ... in <list>`
 
 ```scss
-@each $animal, $color, $cursor in (puma, black, default), (sea-slug, blue, pointer), (egret, white, move) {
+@each $animal, $color, $cursor in (puma, black, default),
+                                  (sea-slug, blue, pointer),
+                                  (egret, white, move) {
   .#{$animal}-icon {
     border: 2px solid $color;
     cursor: $cursor;
   }
 }
 ```
-
 map 是 a list of map，因此多赋值匹配也适用。
 
 为了美观也可以把 `<list or map>` 放在一个变量里，写在循环外边。
@@ -53,8 +53,21 @@ $category: (
     }
 }
 ```
-
 注意：<span class="t-red">写在 CSS 选择器里的 SassScript **string** 变量，需要使用 `#{}` 实现 interpolation 插值</span>。
+
+## 控制指令和表达式
+
+条件语句：
+
+1. 内置函数 `if(boolean, value1, value2)`。
+2. @if 指令后跟一个 Sass 表达式，若表达式值为 true，则使用大括号中的样式规则。`@if 1 + 1 == 2 { border: 1px solid; }`
+3. 支持多条件判断，如 `@if ... { ... } @else if ... { ... } @else { ... }`。
+
+循环语句：
+
+1. `@for $var from <start> through <end>`， &lt;start&gt; 和 &lt;end&gt; 是返回 integer 的 SassScript 表达式。通常是 increment，如果 start 值比 end 大，则采用 decrement。
+2. `@for $var from <start> to <end>`，与上面语句的区别是，$var 的取值**不包含** end
+3. @while ... { ... }, 可以实现更复杂的循环
 
 ## 以 `$` 开始的变量
 
@@ -68,6 +81,207 @@ $category: (
   width: $width;
 }
 ```
+
+##  @mixin 指令
+
+用来定义可重用的样式规则。
+
+mixin 可以传递参数，可以包含 selector（如 parent reference 选择器 `&`），可以包含其他 mixin。
+
+因为历史原因，mixin 命名规则可以是 hyphens（dashes） 和 underscores，相互可识别。如定义时为 add-column，使用 add_column 也没问题。反之亦然。
+
+### 参数
+
+是 SassScript 的变量名，separated by commas。
+
+1. 可以设置默认值，当引用时没有传入该变量，则采用默认值。
+
+    ```scss
+    @mixin sexy-border($color, $width: 1in) {
+      border: {
+        color: $color;
+        width: $width;
+        style: dashed;
+      }
+    }
+    p { @include sexy-border(blue); }
+    ```
+2. 可以使用 named argument（写明行参和实参的对应关系），这样便于理解和阅读。**传参的顺序不再重要**。
+
+    ```scss
+    @mixin colors($text, $background, $border) {
+      color: $text;
+      background-color: $background;
+      border-color: $border;
+    }
+
+    $value-map: (text: #00ff00, background: #0000ff, border: #ff0000);
+    .secondary {
+      @include colors($value-map...);
+    }
+    ```
+3. 支持**传递不确定个数**的参数。一些支持多值的 CSS 属性就可以方便使用了。
+
+    ```scss
+    @mixin box-shadow($shadows...) {
+      -moz-box-shadow: $shadows;
+      -webkit-box-shadow: $shadows;
+      box-shadow: $shadows;
+    }
+    ```
+4. 参数可以从一个 mixin 直接传递给内嵌的子 mixin
+
+### 用法
+
+定义： @mixin mixinName(arguments) { ... }
+
+引用：@include mixinName(variables)
+
+除了用 `()` 传递变量，还可以用 `{}` 传递整个内容。
+
+```scss
+@mixin apply-to-ie6-only {
+  main {
+    @content;
+  }
+}
+@include apply-to-ie6-only {
+  #logo {
+    background-image: url(/logo.gif);
+  }
+}
+```
+编译后：
+
+```css
+main #logo {
+  background-image: url(/logo.gif);
+}
+```
+注意：定义在 mixin 里的局部变量对于 @content 代码块是**不可见**的。
+
+## 自定义函数 @function
+
+使用该指令定义函数，通过 @return 语句返回值。像 @mixin 一样，函数内可以使用传递进来的参数，也可以使用全局定义的变量。
+
+## 指向父选择器的 `&`
+
+`&` 标志符表示从插入的位置开始，直到最外层的 ancestor selector 组成的组合选择器。
+
+`&` 标志符除了用在设定同一个元素不同状态（如：`&:hover`）、元素拥有不同 class (`&.custom`)，还可以用来明确地指出，**父选择器应该插入到其他选择器的位置**。
+
+如下：
+
+```scss
+a {
+  // ...
+  body.firefox & { font-weight: normal; }
+}
+```
+编译后：
+
+    body.firefox a {
+        font-weight: normal; }
+
+此外，`&` 可以接一个 suffix 后缀。如果父选择器中不能运用后缀，Sass 会报错。
+
+```scss
+.sidebar {
+  // ...
+  &-wrapper {
+    // ...
+}
+```
+编译后：
+
+    .sidebar { /* ... */ }
+    .sidebar-wrapper { /* ... */ }
+
+## 占位选择器标志 `%`
+
+`%` 又称为 @extend-Only Selectors，其定义的样式仅用来继承（必须配合 @extend 指令一起），**不直接**在 HTML 里使用。
+
+They can be used anywhere a class or id could, and on their own they **prevent** rulesets **from being rendered to CSS**。
+
+```scss
+%horizontal-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.post-list-wrapper, .post-wrapper {
+  // ...
+  @extend %horizontal-center;
+}
+```
+编译后：
+
+```css
+.post-list-wrapper, .post-wrapper {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+```
+
+## 复杂选择器的继承
+
+Class selector 不是唯一可以被 @extend 指令继承的，任何只涉及一个元素的选择器都可以被继承，如：`.user[href^="http://"]`，`a:hove`。
+
+编译结果会<span class="t-blue">把主动继承的 selector 替换成拥有 extend 指令的 selector，然后插入到被继承的复杂选择器中</span>。
+
+```scss
+.hoverlink {
+  @extend a:hover;
+}
+.comment a.user:hover {
+  font-weight: bold;
+}
+```
+编译后：
+
+```css
+.comment a.user:hover, .comment .user.hoverlink {
+  font-weight: bold;
+}
+```
+
+此外：
+
+1. 一个 @extend 指令里可以继承多个选择器，以逗号分隔。
+
+    如：`@extend .error, .attention;`，等价于 `@extend .error; @extend .attention;`。
+2. 支持链式继承。B 继承 A，C 继承 B，则 C 也拥有 A 的样式规则。
+3. 选择器序列，比如后代选择器 `.foo .bar` 或者立即跟随兄弟选择器 `.foo + .bar` 目前不支持**被继承**。但它们内部可使用继承指令。
+4. Sass 支持选择器序列的合并，参看[官方文档](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#merging_selector_sequences)。原理同蓝字部分，个人觉得应当尽量避免使用，无法预知编译后的 CSS 样式产生的影响。
+5. Sass 目前**不支持**在 @media 指令模块内应用定义在其**外部**的 CSS 样式，即定义在媒体查询指令模块外的样式不能使用 `@extend` 继承。定义在内部的样式可正常继承。
+
+## @media
+
+该指令跟纯 CSS 里的表现一致，但是更方便地是可以直接嵌套在 CSS 规则里。这样就不用另外 repeat 选择器再添加基于媒体查询地样式。
+
+If a @media directive appears within a CSS rule, it will be bubbled up to the top level of the stylesheet, putting all the selectors on the way inside the rule.
+
+而且一个 @media 指令还可以嵌套在另一个 @media 指令里。
+
+```scss
+@media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+  .sidebar {
+    @media (orientation: landscape) {
+      width: 500px;
+    }
+  }
+}
+```
+编译后：
+
+```css
+@media screen and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: landscape) {
+  .sidebar {
+      width: 500px; } }
+```
+
+此外该指令里的 feature names 和 feature values 可以用 SassScript 表达式代替。
 
 ## 除号和属性值分隔符 `/`
 
@@ -102,129 +316,6 @@ CSS 中有些属性名拥有相同的前缀（类似 namespace，比如 _font-si
 }
 ```
 
-## 指向父选择器的 `&`
-
-`&` 标志符表示从插入的位置开始，直到最外层的 ancestor selector 组成的组合选择器。
-
-`&` 标志符除了用在设定同一个元素不同状态（如：`&:hover`）、元素拥有不同 class (`&.custom`)，还可以用来明确地指出，**父选择器应该插入到其他选择器的位置**。
-
-如下：
-
-```scss
-a {
-  // ...
-  body.firefox & { font-weight: normal; }
-}
-```
-编译后：
-
-```css
-body.firefox a {
-    font-weight: normal; }
-```
-
-此外，`&` 可以接一个 suffix 后缀。如果父选择器中不能运用后缀，Sass 会报错。
-
-```scss
-.sidebar {
-  // ...
-  &-wrapper {
-    // ...
-}
-```
-编译后：
-
-```css
-.sidebar { /* ... */ }
-.sidebar-wrapper { /* ... */ }
-```
-
-## 占位选择器标志 `%`
-
-`%` 又称为 @extend-Only Selectors，其定义的样式仅用来继承（必须配合 `@extend` 指令一起），**不直接**在 HTML 里使用。
-
-They can be used anywhere a class or id could, and on their own they **prevent** rulesets **from being rendered to CSS**。
-
-```scss
-%horizontal-center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-.post-list-wrapper, .post-wrapper {
-  // ...
-  @extend %horizontal-center;
-}
-```
-编译后：
-
-```css
-.post-list-wrapper, .post-wrapper {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-```
-
-## 复杂选择器的继承
-
-Class selector 不是唯一可以被 `@extend` 指令继承的，任何只涉及一个元素的选择器都可以被继承，如：`.user[href^="http://"]`，`a:hove`。
-
-编译结果会<span class="t-blue">把主动继承的 selector 替换成拥有 extend 指令的 selector，然后插入到被继承的复杂选择器中</span>。
-
-```scss
-.hoverlink {
-  @extend a:hover;
-}
-.comment a.user:hover {
-  font-weight: bold;
-}
-```
-编译后：
-
-```css
-.comment a.user:hover, .comment .user.hoverlink {
-  font-weight: bold;
-}
-```
-
-此外：
-
-1. 一个 `@extend` 指令里可以继承多个选择器，以逗号分隔。
-
-    如：`@extend .error, .attention;`，等价于 `@extend .error; @extend .attention;`。
-2. 支持链式继承。B 继承 A，C 继承 B，则 C 也拥有 A 的样式规则。
-3. 选择器序列，比如后代选择器 `.foo .bar` 或者立即跟随兄弟选择器 `.foo + .bar` 目前不支持**被继承**。但它们内部可使用继承指令。
-4. Sass 支持选择器序列的合并，参看[官方文档](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#merging_selector_sequences)。原理同蓝字部分，个人觉得应当尽量避免使用，无法预知编译后的 CSS 样式产生的影响。
-5. Sass 目前**不支持**在 @media 指令模块内应用定义在其**外部**的 CSS 样式，即定义在媒体查询指令模块外的样式不能使用 `@extend` 继承。定义在内部的样式可正常继承。
-
-## @media
-
-该指令跟纯 CSS 里的表现一致，但是更方便地是可以直接嵌套在 CSS 规则里。这样就不用另外 repeat 选择器再添加基于媒体查询地样式。
-
-If a @media directive appears within a CSS rule, it will be bubbled up to the top level of the stylesheet, putting all the selectors on the way inside the rule.
-
-而且一个 `@media` 指令还可以嵌套在另一个 `@media` 指令里。
-
-```scss
-@media screen and (-webkit-min-device-pixel-ratio: 1.5) {
-  .sidebar {
-    @media (orientation: landscape) {
-      width: 500px;
-    }
-  }
-}
-```
-编译后：
-
-```css
-@media screen and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: landscape) {
-  .sidebar {
-      width: 500px; } }
-```
-
-此外该指令里的 feature names 和 feature values 可以用 SassScript 表达式代替。
-
 ## 其他
 
 ### 关于 注释
@@ -248,6 +339,6 @@ partial 的概念类似于子模版。如果你想引入一个 SCSS 文件但又
 
 默认地，Sass 缓存编译好的模版和 partials。这样极大地提升了大型 Sass 文件集合的**再编译**速度。
 
-如果 Sass 模版被细分成单独的文件，并全部使用 `@import` 引入一个大文件，它将 work best。
+如果 Sass 模版被细分成单独的文件，并全部使用 @import 引入一个大文件，它将 work best。
 
 在不使用框架的情况下，Sass 作为一个 standalone 的 Ruby 模块，把缓存的模版放在 .sass-cache 目录下。
