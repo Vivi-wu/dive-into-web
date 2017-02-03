@@ -130,7 +130,7 @@ Last name: <input type="text" name="lname" form="form1">
 
     <input type="image" src="img_submit.gif" alt="Submit" width="48" height="48">
 
-这两个特性指定了一个 input 元素的高和宽，只能用在 **type="image"** 的元素上。
+这两个特性指定了一个 input 元素的高和宽，**只能用在** type="image" 的元素上。
 
 ### list
 

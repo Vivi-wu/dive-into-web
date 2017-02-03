@@ -64,6 +64,6 @@ Boolean(10 > 9);
 
 + 只要有 real 值的都是 true.
 
-    `"0"` 是 true，`[]` 是 true，`{}` 是 true，`function(){}` 是 true
+    `"0"` 是 true，`[]` 是 true，`{}` 是 true，`function(){}` 是 true，`"false"` 是 true
 
 + **没有 real 值**的就是 **false**，比如：`0`，`－0`，`""` empty string 空字符串，`undefined`，`null`，`false`，`NaN`
