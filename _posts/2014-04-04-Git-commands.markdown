@@ -8,7 +8,9 @@ category: Other
     git config --global user.email vivienne@example.com
     git config --global alias.st status
 
-在 `～/.gitconfig` 文件里可以查看全局配置。或使用以下命令：
+可在 `～/.gitconfig` 文件里查看 Git 全局配置。
+
+或使用以下命令：
 
     git config --list
 
@@ -18,24 +20,32 @@ category: Other
 
     git init
 
-该命令通常是新项目中你会运行的第一个命令。
+创建本地仓库（该命令通常是新项目中你会运行的第一个命令）
 
 This command creates a .git subdirectory in the project root, which contains all of the necessary metadata for the repo, and makes it possible to start recording revisions of the project.
-该命令在项目根目录里创建了这个子目录。使得它可以开始记录项目的版本。
+该命令在项目根目录里创建了 `.git` 子目录，使得它可以开始记录项目的版本。
 
 注意：<span class="t-blue">Git will **not** create a master branch until you commit something. 运行此命令后，只有在你提交了一些东西，Git才会创建 master 分支。</span>
 
-Add one or more files to your directory, and git add them to prepare a commit. Then git commit to create your initial commit and master branch. 随便在目录里添加一个文件，添加并提交，此时才真正完成master分支的创建。
+随便在目录里添加一个文件，git add them then git commit，此时才真正完成 master 分支的创建。
 
     git clone
 
-This command copies an existing Git repository. 如果项目已经有人开始做，此时需要把远端的 repository 复制到本地。Cloning automatically creates a remote connection called **origin** pointing back to the original repository.
+This command copies an existing Git repository. 复制远端仓库到本地。
+
+Cloning automatically creates a remote connection called **origin** pointing back to the original repository.
 
 ## Inspecting a repository
 
     git status
 
 This command displays the state of the working directory and the staging area. List which files are staged, unstaged, and untracked. 该命令显示工作分支和临时集结区域的状态，哪些文件集结了，没有被集结，还是没有被追踪。
+
+    git log
+    git log -p <file>
+    git log --pretty=oneline
+
+显示当前分支的版本历史，含提交的 hash ID 和提交信息。
 
 ## Saving changes
 
@@ -45,19 +55,25 @@ This command displays the state of the working directory and the staging area. L
 
     git add <filename>
 
-Stage all changes in filename for the next commit. 为下一个提交/托付集结所有 filename 中的改变。
+Stage all changes in filename for the next commit. 添加指定文件到暂存区。
+
+    git commit -a
+
+把被修改、被删除的文件从暂存区提交到本地仓库，没有被 git 管理/追踪到的 new file 不会受影响。
 
     git commit -m "Commit message"
 
-提交改动，并附上相关信息 message。
+提交暂存区的改动到本地仓库，并附上说明信息。
 
-### 使用emacs来编写 git commit 注释
+### 使用指定编辑器来编写 commit 信息
 
-Git 默认会调用你的环境变量 editor 定义的值作为文本编辑器，如果没有定义，则调用 **Vi** 来创建和编辑提交以及标签信息， 可以使用 `core.editor` 改变默认编辑器：
+Git 默认会调用你的环境变量 editor 定义的值作为文本编辑器，如果没有定义，则调用 **Vi** 来创建和编辑提交信息。
+
+使用 `core.editor` 改变默认编辑器：
 
     git config --global core.editor emacs
 
-这样 git commit 会自动打开 emacs 编辑器，让你来编辑提交信息。
+这样输入 git commit --> enter，会自动打开 emacs 编辑器。
 
     git stash
 
@@ -85,102 +101,97 @@ This command provide a convenient way to fix up the most recent commit. It lets 
 
 ## Using Branches
 
-By developing features in branches, it's not only possible to work on both of them in parallel, but it also keeps the main master branch free from questionable code. 通过在分支里开发功能，不仅使同时开发不同功能成为可能，而且保持主 master 分支不会遭到有问题代码的伤害。
+通过在分支里开发功能，不仅使同时开发不同功能成为可能，而且保持主 master 分支不会遭到有问题代码的伤害。
 
     git branch
 
-List all of the branches in your repository. 列出仓库中所有分支。
+List all of the branches in your repository. 列出本地仓库中所有分支。
 
+    git branch -r
+
+To view your remote branches, remote branches are prefixed by the remote they belong to. 列出所有远端仓库的分支，分支名由他们所属的 remote 名开始，以区别于本地分支。
 The current branch will be highlighted with an asterisk 星号(*). 当前所在分支前以星号标记。
 
     git branch <branch_name>
 
-Create a new branch called branch_name. 以任务名称创建一个新分支。
-
-    git branch -d <branch_name>
-
-Delete the specified branch. This is a "safe" operation in that Git prevents you from deleting the branch if it has unmerged changes.
-
-删除指定分支，如果该分支还没有 merge 到当前分支，则提示 error。此时若要强制删除分支，使用 `-D` 作为参数。
-
-    git branch -m <branch_new_name>
-
-Rename the current branch to branch_new_name. 当前分支重命名。
-
-    git branch -r
-
-To view your remote branches, remote branches are prefixed by the remote they belong to.查看你在远端的分支，远端分支由他们所属的 remote 名开始，以区别于本地分支。
-
-    git checkout <existing-branch>
-
-Check out the specified branch, which should have already been created with git branch. This makes existing-branch the current branch, and updates the working directory to match. 跳转到已经通过 `git branch` 创建的指定分支上，使得它成为当前工作分支。
+Create a new branch called branch_name. 创建一个新分支（停留在当前分支）。
 
     git checkout -b <new-branch>
 
-Create and check out new-branch. 加 `-b` 选项，告诉 Git 先创建，再跳转。
+Create and check out new-branch. 创建一个新分支，并切换到该分支。
+
+    git branch -d <branch_name>
+
+Delete the specified branch. This is a "safe" operation in that Git prevents you from deleting the branch if it has unmerged changes. 删除指定分支。如果该分支还没有 merge 到当前分支，则提示 error。
+
+此时若要强制删除分支，使用 `-D` 作为参数。
+
+    git checkout <existing-branch>
+
+Check out the specified branch. This makes existing-branch the current branch, and updates the working directory to match. 跳转到已经创建的指定分支上，使得它成为当前工作分支。
+
+    git branch -m <branch_new_name>
+
+Rename the current branch to branch_new_name. 重命名当前分支。
 
 ## Syncing
 
     git remote -v
 
-List the remote connections you have to other repositories. 列出所有你与其他仓库的远端链接，以及它们对应的 url。
+List the remote connections you have to other repositories. 列出所有与其他远端仓库的链接名，以及它们对应的 url。
 
 不加 `-v` 参数，则只显示 remote name。
 
     git remote add myOrigin remote_repository_URL
 
-**添加**一个名为 myOrigin 的新的，与远端仓库的链接。
+**添加**一个名为 myOrigin 的新的与远端仓库的链接。
 
     git remote set-url origin remote_repository_URL
 
-**修改**名为 origin 与远端的链接的 url 值。
+**修改**名为 origin 的与远端仓库的链接的 url 值。
 
     git fetch <remote>
 
-Fetch all of the branches from the repository. This also downloads all of the required commits and files from the other repository. Since fetched content is represented as a remote branch, it has absolutely no effect on your local development work. This makes fetching a safe way to review commits before integrating them with your local repository.
+Fetch all of the branches from the repository. This also downloads all of the required commits and files from the other repository. Since fetched content is represented as a remote branch, it has absolutely no effect on your local development work. This makes fetching a safe way to review commits before integrating them with your local repository.  把远端仓库的分支都取下来，取下来的内容也被视为远端分支，所以不会影响你本地开发工作。
 
-把远端仓库的分支都取下来，取下来的内容也被视为远端分支，所以不会影响你本地开发工作。与人合作同一个任务时，先运行 `git fetch`命令，把他的分支取下来，然后 `git checkout <分支名>`，在本地创建同名新分支，并跳转过去。
+与人合作同一个任务时，先运行 `git fetch`命令，把他的分支取下来，然后 `git checkout <分支名>`，在本地创建同名新分支，并跳转过去。
 
     git pull <remote>
 
 Fetch the specified remote's copy of the **current** branch and immediately merge it into the local copy. This is the same as `git fetch <remote>` followed by `git merge origin/<current-branch>`.
 
-取得指定的在远端的当前分支的副本，然后立刻把它合并到当前副本。
+取得指定的在远端的当前分支的副本，然后立刻把它合并到当前工作分支。
 
     git push <remote> <branch>
 
-Push the specified branch to remote, along with all of the necessary commits and internal objects. This creates a local branch in the destination repository. To prevent you from overwriting commits, Git won't let you push when it results in a non-fast-forward merge in the destination repository.
-
-把指定分支推到远端，通过该指令把本地仓库的提交传到远端仓库。该指令在目的仓库创建一个本地分支，以阻止你重写提交，在远端仓库造成冲突。
+Push the specified branch to remote, along with all of the necessary commits and internal objects. This creates a local branch in the destination repository. To prevent you from overwriting commits, Git won't let you push when it results in a non-fast-forward merge in the destination repository. 把指定分支推到远端，通过该指令把本地仓库的提交传到远端仓库。该指令在目的仓库创建一个本地分支，以阻止你重写提交，在远端仓库造成冲突。
 
 ### 将一个分支里的更新集成到另一个分支上
 
 有两种方法 `git rebase` 和 `git merge`。
 
-Both of these commands are designed to integrate changes from one branch into another branch—they just do it in very different ways.
+使用到这两个命令的情况比如，你从主分支切出来做 feature，同时其他人提交了新的 commit，并且合并到了 master 分支，而你的功能需要依赖这些提交，
 
-使用到这两个命令的情况比如，你从主分支切出来做 feature，同时其他人提交了新的 commit，并且合并到了主分支，也许你的功能需要依赖这些提交，
+最简单的做法是使用 merge 命令：先更新本地的 master 分支（保持本地主分支最新），然后
 
-最简单的做法是使用 merge 命令，你需要先更新本地的主分支（保持本地主分支最新），然后
-
-    git merge master feature
+    git merge master feature-branch
     // 或者
-    git checkout feature
+    git checkout feature-branch
     git merge master
     // 如果有冲突，解决冲突 → save file → `git add` → `git commit`
 
 这样会在 feature 分支创建新的 merge 提交.
 
-+ **优点**是保留／连接两个分支的历史，是 non-destructive 操作。
-+ **缺点**是当 master 分支非常活跃时，你的 feature 分支会出现许多 merge 提交，使 feature 分支的提交历史看起来有点被污染，使其他开发人员比较难理解项目的历史。
++ **优点**是保留/连接两个分支的历史，是 non-destructive 操作。
++ **缺点**是当 master 分支非常活跃时，你的 feature 分支会出现许多 merge 提交，使 feature 分支的提交历史看起来“非线性”，使其他开发人员比较难理解项目的历史。
 
-另一种做法是使用 rebase 命令，把 feature 分支的提交 rebase (更换基托) 到主分支上。
+另一种做法是使用 rebase 命令：把 feature 分支上新的 commit 都在 master 分支上重演一遍。
 
     git checkout feature
     git rebase master
     // 如果有冲突，解决冲突 → save file → `git add` → `git rebase --continue`
 
-这样相比起建立新的提交，rebase 是**重写项目历史**（moves the entire feature branch to begin on the top of the master branch）
+相比起建立新的提交，rebase 是**重写项目历史**（moves the entire feature branch to begin on the top of the master branch）
 
 + **优点**是使项目历史干净，避免了不必要的 merge commits，得到近乎完美的线性项目历史，可以很方便地使用 `git log` 和 `gitk` 查询各个提交。
 
@@ -190,15 +201,19 @@ Both of these commands are designed to integrate changes from one branch into an
 
     <img src="{{ "/assets/images/master_to_feature.png" | prepend: site.baseurl }}" alt="Rebase master onto feature">
 
-### Interactive Rebasing
-
-使用 `i` 选项，手动设置 rebase（与 automated rebase 相对），控制分支的提交历史。主要用于 clean up a messy history before merging a feature branch into master. 具体使用方法参考[这里](https://www.atlassian.com/git/tutorials/merging-vs-rebasing/conceptual-overview)
-
 ## Undoing Changes
 
     git reset --hard <commit>
 
-Move the current branch tip backward to commit and reset both the staging area and the working directory to match. 把当前分支返回到指定 hashID 的提交，重置暂存/集结区和工作目录。
+Move the current branch tip backward to commit and reset both the staging area and the working directory to match. 把当前分支返回到指定 hashID 的提交，暂存区、工作区的内容都会被修改到与提交点完全一致的状态。
+
+    git revert <commit>
+
+用一个新提交来消除一个历史提交所做的任何修改。通常用于修正最近的一个commit。
+
+与 git reset 的区别是，产生新的commit，把 HEAD 向前移动。
+
+在回滚这一操作上看，效果差不多。但是在日后继续merge以前的老版本时有区别。因为git revert是用一次逆向的commit“中和”之前的提交，因此日后合并老的branch时，导致这部分改变不会再次出现，减少冲突。但是git reset是之间把某些commit在某个branch上删除，因而和老的branch再次merge时，这些被回滚的commit应该还会被引入，产生很多冲突。
 
 ## Git 文件状态
 
@@ -229,7 +244,7 @@ tracked 又分为三种状态：
           git rm -r --cached .
           git add .
           git commit -m "fixed tracking unwanted files"
-          // 上述操作将从仓库里删掉所有文件，再按照新的 .gitignore 中的规则，把需要的文件都加回来
+          // 上述操作将从仓库里删掉所有文件，再按照新的 .gitignore 中的过滤规则，把当前目录所有的文件都加回来
 
 2. 创建全局 .gitignore 文件：这样你电脑上每一个 Git 仓库都会执行文件里的规则。
 
