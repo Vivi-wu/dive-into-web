@@ -192,3 +192,10 @@ document.getElementById("demo").innerHTML = days[d.getDay()];
 ### Compare Dates
 
 JS两个日期对象可以直接进行比较大小。
+
+```js
+function validDate (date) { // 判断输入的日期是否晚于今天
+  var today = new Date(), tmp = new Date(date)
+  return tmp > today
+}
+```

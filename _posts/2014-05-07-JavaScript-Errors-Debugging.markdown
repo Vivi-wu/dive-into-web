@@ -28,6 +28,8 @@ finally {
 
 JS的 `try` 和 `catch` come in pairs 是**成对出现**的。
 
+当使用 `JSON.parse()` 解析未知数据时，用上 try catch。
+
 ### Raise Errors
 
 当遇到错误时，JS会停下来，生成一个error message，raise (or throw) an exception。
@@ -45,7 +47,7 @@ function myFunction() {
     message = document.getElementById("message");
     message.innerHTML = "";
     x = document.getElementById("demo").value;
-    try { 
+    try {
         if(x == "") throw "empty";
         if(isNaN(x)) throw "not a number";
         x = Number(x);

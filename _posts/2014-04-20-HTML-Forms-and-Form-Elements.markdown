@@ -27,7 +27,7 @@ The **default method** is **GET**.
 If the form submission is passive (like a search engine query), and without sensitive information.  When you use GET, the form data will be visible in the page address.
 如果表单提交是被动的（如搜索引擎查询），且没有敏感信息时，使用 GET，因为这种方法表单的数据将会在URL上可见。
 
-     action_page.php?firstname=Mickey&lastname=Mouse  
+     action_page.php?firstname=Mickey&lastname=Mouse
 
 这种方法特别适合小量数据。 Size limitation is set in your browser。
 
@@ -122,7 +122,7 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
 
 该元素的内容可以是文字或图片，**有别与使用 `<input>` 元素创建的按钮**
 
-**Tips**: 记住指定该元素的 _type_ 特性（**button**，**reset**，**submit**），因为不同的浏览器针对 `<button>` 元素使用不同的默认类型。如果你想点击按钮执行特定脚本，而又没有指定它的类型是 button，谷歌浏览器会当作 submit 处理。
+**Tips**: 记住指定该元素的 _type_ 特性（**button**，**reset**，**submit**），因为不同的浏览器针对 `<button>` 元素使用不同的默认类型。如果你想点击按钮执行特定脚本，而又没有指定它的类型是 button，谷歌浏览器会当作表单 submit 处理。
 
 ## HTML5 `<datalist>` Element
 
@@ -182,3 +182,10 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
   <input type="reset" value="Reset">
 </form>
 ```
+
+### Best Practise
+
+1. 当表单中只有唯一的input输入区域，当侦听到键盘事件keycode为13时，则自动提交表单
+2. 提交方法为 post、patch 等，设置禁止连续点击按钮效果
+3. 对于输入域的值做 trim 处理，去掉首位的空格
+4. 指定表单里某个输入域获取光标焦点 `form['myName'].focus()`，采用的是指定元素获得焦点的方法 `HTMLElement.focus()`

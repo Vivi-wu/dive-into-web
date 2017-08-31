@@ -112,3 +112,7 @@ var res = str.split("");
 ### Match 匹配
 
 使用方法 `match(`regexp`)`，在字符串中查找，返回一个 **Array**，该返回数组中每一个项目是一个 match。没找到匹配，返回 `null`。
+
+### trim 去空格
+
+使用方法 `trim()`，删除字符串首尾的空格. Whitespace in this context is all the whitespace characters (space, tab, no-break space, etc.) and all the line terminator characters (LF, CR, etc.

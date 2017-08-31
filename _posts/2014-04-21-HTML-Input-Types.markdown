@@ -20,7 +20,7 @@ category: HTML
 
     <input type="submit" value="Submit">
 
-定义了一个用于提交表格的按钮。如果缺省提交按钮的 value 属性的值，则按钮将会显示一个默认的文本（Submit）。
+定义了一个用于提交表单的按钮。如果缺省提交按钮的 value 属性的值，则按钮将会显示一个默认的文本（Submit）。
 
 <!--more-->
 
