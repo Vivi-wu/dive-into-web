@@ -163,6 +163,8 @@ Quantity (between 1 and 5):
 
 该特性指定一个输入元素的值需要遵循的 regular expression 常规表达式。支持这个特性的输入类型有：**text**，**search**，**url**，**tel**，**email** 和 **password**。
 
+要求输入的值是完全符合 pattern 要求的规则（换句话说，pattern 特性的值 has to match the entire string）
+
 注意：IE9 及之前版本和 Sarari 不支持该特性。
 
 ### placeholder

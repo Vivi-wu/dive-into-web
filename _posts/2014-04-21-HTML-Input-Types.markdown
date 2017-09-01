@@ -42,6 +42,12 @@ category: HTML
 
 定义了一个可以点击的按钮，按钮上显示的文字由 _value_ 特性决定。
 
+### file
+
+    <input type="file">
+
+通过绑定 onclick（清空输入域的value） 和 onchange（提交表单）事件，可以实现"点击"按钮——>打开文件系统对话框——>选择一个文件——>"确定"——>关闭对话框后上传文件的功能。
+
 ## HTML5 Input Types
 
 不用担心，不被旧浏览器支持的输入类型，将以 type="text" 的形式显示。
