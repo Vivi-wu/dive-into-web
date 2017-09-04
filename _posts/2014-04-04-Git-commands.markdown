@@ -126,6 +126,10 @@ Delete the specified branch. This is a "safe" operation in that Git prevents you
 
 此时若要强制删除分支，使用 `-D` 作为参数。
 
+    git push origin --delete <branch_name>
+
+自动删除远端仓库工作分支（代替在 bitbucket 上手动删除）。**注意**：确保该分支代码已上线再删除。
+
     git checkout <existing-branch>
 
 Check out the specified branch. This makes existing-branch the current branch, and updates the working directory to match. 跳转到已经创建的指定分支上，使得它成为当前工作分支。
