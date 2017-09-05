@@ -38,6 +38,8 @@ category: JavaScript
 
 + select 元素值为 primitive values, 而 option 的值是 object 时，通过绑定 select 的值回填数据的方法不起作用。解决办法：在 option 元素上给 _selected_ 特性绑定 method，通过判断对象某属性的值是否与默认值一致，设置该 `<option>` 的 _selected_ 特性值为 `true`
 + 在 data 初始化绑定时，对 object 型数组中 item 进行深层对象声明，避免加载时 console 报错
++ 列表过渡时，使用 `<transition-group>` 元素作为 `v-for` 列表的父元素
++ 使用 v-move 或定义对应的 css 样式，使得过渡平滑
 
 ## vue-router
 

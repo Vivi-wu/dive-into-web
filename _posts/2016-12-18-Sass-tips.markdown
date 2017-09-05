@@ -65,7 +65,7 @@ $category: (
 
 循环语句：
 
-1. `@for $var from <start> through <end>`， &lt;start&gt; 和 &lt;end&gt; 是返回 integer 的 SassScript 表达式。通常是 increment，如果 start 值比 end 大，则采用 decrement。
+1. `@for $var from <start> through <end>`， &lt;start&gt; 和 &lt;end&gt; 是返回 integer 整数的 SassScript 表达式。通常是 increment，如果 start 值比 end 大，则采用 decrement。
 2. `@for $var from <start> to <end>`，与上面语句的区别是，$var 的取值**不包含** end
 3. @while ... { ... }, 可以实现更复杂的循环
 
@@ -92,7 +92,7 @@ mixin 可以传递参数，可以包含 selector（如 parent reference 选择�
 
 ### 参数
 
-是 SassScript 的变量名，separated by commas。
+是 SassScript 的变量名，以**逗号**分隔。
 
 1. 可以设置默认值，当引用时没有传入该变量，则采用默认值。
 
@@ -289,7 +289,7 @@ SassScript 中满足这些条件时，分隔符 `/` 表示除法运算。
 
 + 值，或它的任何部分，保存在一个变量里
 + 由函数返回
-+ 由括号包围，但不是 SassScript list 类型变量
++ 由**括号**包围，但不是 SassScript list 类型变量
 + 值作为另一个数学表达式的一部分
 
 ## 嵌套的属性名
@@ -318,7 +318,11 @@ CSS 中有些属性名拥有相同的前缀（类似 namespace，比如 _font-si
 
 ## 其他
 
-### 关于 注释
+### 关于属性值的运算
+
+当属性值由数学运算得到时，操作符前后**各保留一个空格**。
+
+### 关于注释
 
 跟 JS 一样，用 `/*` 和 `*/` 进行多行注释，`//` 进行单行注释。不同的是多行注释将被保留在编译后的 CSS 文件里，而<span class="t-blue">单行注释不会输出</span>。
 
