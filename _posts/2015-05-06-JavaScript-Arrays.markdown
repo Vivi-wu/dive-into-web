@@ -8,7 +8,7 @@ JS数组用于在一个变量名下存储多个具有共性的数值。
 
 + 数组中空格和换行不重要
 + 最后一个数组项目后没有逗号！
-+ 操作数组项目通过 **index number**, Array indexes **start with 0**
++ 操作数组项目通过 **index number**, Array 索引 **start with 0**
 
 <!--more-->
 
@@ -37,7 +37,7 @@ var person = ["John", "Doe", 46];    // person[0] = "John"
 var person = {firstName:"John", lastName:"Doe", age:46};    // person.firstName = "John"
 ```
 
-最好用 _numbered indexes_ 而**不是** _named indexes_ 读取数组的元素。If you use a named index, **JavaScript will redefine the array to a standard object**. After that, all array methods and properties will produce incorrect results.
+最好用 _numbered_ 索引而**不是** _named_ 索引来读取数组的元素。If you use a named index, **JavaScript will redefine the array to a standard object**. After that, all array methods and properties will produce incorrect results.
 
 ```js
 var person = [];
@@ -71,21 +71,21 @@ fruits instanceof Object;    // returns true
 
     var fruits = ["Banana", "Orange", "Apple", "Mango"];
     fruits[fruits.length] = "Lemon";    // add "Lemon" at the end of fruits
-    fruits[10] = "Lemon";
+    fruits[10] = "Pear";
 
-注意上面第二个添加语句，因为使用了比数组长度更大的 index，所以会给数组添加 undefined 空洞。
+注意上面第二个添加语句，因为使用了**大于数组长度**的 index，所以给数组添加了5个 `undefined` 空洞。
 
 ## Array Methods
 
-JS数组也有 `indexOf()`，`lastIndexOf()` 方法，返回数组中指定项目的位置，没找到返回 `-1`。
+JS数组也有 `indexOf()`，`lastIndexOf()` 方法，返回数组中指定 item 的位置，没找到返回 `-1`。
 
 ### Convert Arrays to Strings
 
 + `toString()`，把数组转换成**以逗号为分隔符**、以数组值串联而成的字符串。
-+ `join(separator)`，功能同上，但是**可以指定特殊的分隔符**，**默认**分隔符是**逗号**
++ `join(separator)`，功能同上，但是**可以指定特殊的分隔符**，**默认**分隔符是**逗号**。
 + `valueOf()`，convert an array to a string when a primitive value is expected。该方法是 array 的默认行为，同 `toString()`
 
-关于 `array.join()` 的用法：
+栗子：
 
 ```js
 var fruits = ["Banana", "Orange", "Apple", "Mango"];
@@ -97,28 +97,28 @@ fruits.join();      // 结果是：Banana,Orange,Apple,Mango
 
 ### Remove elements
 
-返回移除的元素
+返回**被移除的元素**
 
-+ `pop()`，remove the **last element** from an array，返回值是被 pop 出来的元素。
-+ `shift()`，remove the **first element** of an array，然后剩下的所有元素自动向前移动一位。返回值就是被 shift 出来的元素。
++ `pop()`，remove the **last element** from an array。
++ `shift()`，remove the **first element** of an array，然后剩下的所有元素自动向前移动一位。。
 
-### Delet elements
+### Delete elements
 
-因为JS array 是特殊的对象，所有可以使用操作符 **delete**。（原因见 Object 章节）
+因为JS Array 是特殊的 object，因此可以使用操作符 **delete**。（原因见 Object 章节）
 
     var fruits = ["Banana", "Orange", "Apple", "Mango"];
     delete fruits[0];    // 数组 fruits 中第一个元素将变成 undefined
 
-这样会在数组中产生一些 undefined 的空洞，**最好使用 pop() 或 shift()**
+这样会在数组中产生一些 `undefined` 的空洞，因此删除数组首尾的元素时**最好使用 pop() 或 shift()**。
 
 ### Add elements
 
-返回新数组长度
+返回**新数组的长度**
 
 + `push(`item1, item2, ..., itemX`)`，add a new element **at the end** of an array
 + `unshift(`item1, item2, ..., itemX`)`，add a new element **at the beginning** of an array
 
-以上四种方法都要改变数组的长度。
+以上四种方法都会**改变**原有数组。
 
 ### Splicing 剔除
 
@@ -134,7 +134,9 @@ _start_ 是一个整数，表示第一个新元素要放的位置。_deleteCount
 
 ### Sorting 排序
 
-使用 `sort()` 方法将数组元素按照字符升序 alphabetically 排序。使用 `reverse()` 将升序排列的数组反相（降序）输出。这**两种方法用在数组值是 String 的情况下**。不适用于数字排序，因为 “25” 大于 “100”，“2” 大于 “1”。
+使用 `sort()` 方法将数组元素按照字符升序 alphabetically 排序。使用 `reverse()` 将升序排列的数组反相（降序）输出。
+
+这**两种方法用在数组值是 String 的情况下**。不适用于数字排序，因为 “25” 大于 “100”，“2” 大于 “1”。
 
 **升序**排列数字数组：
 
@@ -152,13 +154,23 @@ points.sort(function(a, b){return b-a});
 points.sort(function(a, b){return b>a});    // 两种方法结果一样
 ```
 
-<span class="t-blue">如果要找出数组中的最大或最小值，首先要对数组进行排序</span>。
+按中文**拼音首字母** A-Z 排列数组：
+
+```js
+var people = ['童亚丽', '张子新', '谢丹丹', '陈梦如', '魏秀秀', '陈建'];
+people.sort(function(a, b){return a.localeCompare(b, 'zh-CN')});
+// 输出结果： ["陈建", "陈梦如", "童亚丽", "魏秀秀", "谢丹丹", "张子新"]
+```
+
+<span class="t-blue">如果要找出数组中的最大或最小值，可以先对数组进行排序</span>。
 
 此方法会**改变**原有数组。
 
 ### Joining 连接
 
-使用 `array1.concat(`array2, ..., arrayX`)` 该方法来连接两个或多个数组，**不改变*原有数组，返回值是连接后的数组。
+使用 `array1.concat(`array2, ..., arrayX`)` 该方法来连接两个或多个数组，返回值是连接后的数组。
+
+此方法**不改变**原有数组。
 
 ### Slicing 取样
 
@@ -168,7 +180,7 @@ _start_ 表示切片开始位置（包含这个位置上的元素），负值表
 
 此方法**不改变**原有数组。
 
-## 检验数组
+## 数组检验
 
 有时我们需要对数组中每个元素进行测试。
 
@@ -188,7 +200,7 @@ _start_ 表示切片开始位置（包含这个位置上的元素），负值表
 
     此处 callback 参数同上面的 every() 等函数，多了一个可选的 thisArg 参数，用来指定 callback 函数内 this 的值的对象。
 
-    特别要注意的是：**没有办法中止或者跳出 forEach 循环，除了抛出一个异常**。如有要中断的必要，不如使用一个简单的 for 循环实现。
+    特别要注意的是：**没有办法中止或者跳出 forEach 循环，除非抛出一个异常**。如有要中断的必要，不如使用一个简单的 for 循环实现。
 
 + `arr.map(callback[, thisArg])` ，该方法返回一个由原数组中的**每个元素调用指定方法的返回值**组成的新数组。
 + `arr.reduce(function(previousValue, currentValue, currentIndex, array), initialValue)`，**从左到右**对数组中每个值进行操作，最终得到一个值。

@@ -64,6 +64,16 @@ category: Other
 3. 动态样式控制
 4. 核心API接口设计
 
+## 查看Chrome自带组件的样式
+
+自定义 date 输入框时，发现浏览器自带的 datepicker 样式是由类似 `::-webkit-inner-spin-button` 等 CSS 伪元素样式定义的。
+
+如何在 devtool 里定位和修改这些元素呢？
+
+打开开发这工具，点击 Element、Network,...工具栏上最后边的图标 “Customize and control DevTools” ——> Settings ——> Elements 部分选中 “Show user agent shadow DOM”
+
+注：当前Chrome版本 61.0.3163.79
+
 ## 看不到的设计
 
 Good design is often invisible. Much of design is about "feeling right." Users want to engage and interact with something. They don't necessarily understand why. That's invisible design.

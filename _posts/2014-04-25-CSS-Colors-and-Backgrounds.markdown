@@ -145,3 +145,21 @@ The background of an element is the total size of the element, including **paddi
 2. Radial Gradients 径向渐变。由它们的 center 定义，必须**至少定义两个 color stops**。默认 shape 取值是**椭圆**，size 是 farthest 最远的角落， position 是中心位置。
 
         background: radial-gradient(shape size at position, start-color, ..., last-color);
+
+## CSS3 filter
+
+_filter_ 属性给元素应用**一个或多个** graphical 效果，如：模糊、锐化、反色等。通常用来调整图片、背景和边框渲染。
+
+可使用的函数有：
+
++ `blur(px)`，模糊。值越大越模糊。不指定任何值，则为 0
++ `brightness(%)`，调整图片亮度。0% 全黑；100% 是默认值，表示原图；大于 100%，比原图亮
++ `contrast(%)`，调整图片对比度。0% 全黑；100% 是默认值，表示原图；大于 100%，表现低对比度
++ `drop-shadow()`，给图片添加阴影效果，同 _box-shadow_
++ `grayscale(%)`，把图片转成灰色系。0% 是默认值，表示原图；100% 是黑白图片。不允许负值
++ `invert(%)`，反色，效果同旧照片的底片
++ `opacity(%)`，透明度
++ `saturate(%)`，饱和度
++ `sepia(%)`，深褐色调
++ `hue-rotate(deg)`，色调
++ `url()` SVG 过滤器，目前浏览器支持情况不好
