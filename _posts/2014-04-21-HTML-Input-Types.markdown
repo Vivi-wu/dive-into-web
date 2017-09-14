@@ -90,7 +90,7 @@ category: HTML
 
 用于日期的输入区域，根据浏览器支持情况，一个 date picker 会出现在输入框下方。此外，可以对日期的取值加一些限制，添加 _min_，_max_，_step_ 特性等。
 
-输入框展示的 date 字符串格式因用户系统选择的 locale 设置而异，但 `HTMLInputElement.value` 得到的总是 yyyy-mm-dd 格式的日期字符串。
+输入框展示的 date 字符串格式因用户系统选择的 locale 设置而异，但 `HTMLInputElement.value` 得到的总是 **yyyy-mm-dd** 格式的日期字符串。
 
 注意：目前 IE、FF、Safari 不支持日期有关（month，week，date）的输入类型。
 
@@ -105,6 +105,8 @@ category: HTML
     <input type="datetime-local">
 
 允许用户选择一个日期和时间（不是时区）。根据浏览器支持情况，一个日期选择器会出现在输入区域上。
+
+输入框展示的 datetime 字符串格式因用户系统选择的 locale 设置而异，但 `HTMLInputElement.value` 得到的总是 **yyyy-MM-ddThh:mm** 格式的日期时间字符串。
 
 注意：目前 IE、FF、Safari 不支持时间相关的（包括 time）输入类型。
 

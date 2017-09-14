@@ -151,7 +151,7 @@ document.getElementById("demo").innerHTML = days[d.getDay()];
 <tbody>
 <tr>
   <td>setDate()</td>
-  <td>Set the day as a number (1-31)</td>
+  <td>Set the day as a number (1-31)。输入值为整数，返回值是<b>指定日期</b>与1970年1月1日0时0分0秒之间的<b>毫秒数</b>.</td>
 </tr>
 <tr>
   <td>setFullYear(year,month,day)</td>
@@ -183,7 +183,7 @@ document.getElementById("demo").innerHTML = days[d.getDay()];
 </tr>
 </tbody></table>
 
-`setDate()` method can also be used to add days to a date. If adding days, **shifts the month or year**, the **changes are handled automatically by the Date object**. 比如计算距离今天多少天以后是几月几号星期几。JS会自动帮你跨月份甚至跨年份。
+`setDate(n)` method can also be used to add days to a date. If adding days, **shifts the month or year**, the **changes are handled automatically by the Date object**. 比如计算距离今天多少天以后是几月几号星期几，JS会自动帮你跨月份甚至跨年份。
 
 ### Parsing Date
 

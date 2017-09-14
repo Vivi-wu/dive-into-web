@@ -93,7 +93,12 @@ fruits.join("");    // 结果是：BananaOrangeAppleMango
 fruits.join();      // 结果是：Banana,Orange,Apple,Mango
 ```
 
-可以看到不指定分隔符，和分隔符为空字符串是有区别的。
+### Convert ArrayLike list to Arrays
+
+```js
+var tmpArry = Array.prototype.slice.call(document.querySelectorAll('[type="checkbox"]:checked'))
+// 获取页面上所有选中的多选框HTMLElement
+```
 
 ### Remove elements
 
