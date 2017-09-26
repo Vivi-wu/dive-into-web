@@ -211,3 +211,15 @@ _start_ 表示切片开始位置（包含这个位置上的元素），负值表
 + `arr.reduce(function(previousValue, currentValue, currentIndex, array), initialValue)`，**从左到右**对数组中每个值进行操作，最终得到一个值。
 
     initialValue 是可选的。可作为第一次调用时的第一个参数值。
+
+#### 通过“索引”批量删除数组中多个元素
+
+不经过任何处理直接删除是不行的，因为每删一个元素，数组长度就变了。解决办法如下：
+
+```js
+// 对 arryA 待删除 item 的索引组成的 arry B 进行“降序排列”，结果如：[6,5,0]
+arryB.sort((a, b) => {return b > a})
+arryB.forEach(index => {
+  arryA.splice(index, 1)
+})
+```

@@ -185,7 +185,8 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
 
 ### Best Practise
 
-1. 当表单中只有唯一的input输入区域，当侦听到键盘事件keycode为13时，则自动提交表单
+1. 当表单中只有唯一的input输入区域，Enter 键盘事件(keycode为13)将**自动提交表单**
 2. 提交方法为 post、patch 等，设置禁止连续点击按钮效果
-3. 对于用户的输入做 trim 处理，去掉首位的空格
+3. 用户手动输入的值要做 trim 处理，去掉首尾的空格
 4. 指定表单里某个输入域获取光标焦点 `form['myName'].focus()`，采用的是指定元素获得焦点的方法 `HTMLElement.focus()`
+5. 输入框的 input 事件**实时**反应输入值，而 change 事件只有在**光标再次失去焦点时**才反应输入值

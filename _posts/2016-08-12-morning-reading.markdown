@@ -265,3 +265,10 @@ tip：
 <img src="{{ "/assets/images/cdn工作原理.png" | prepend: site.baseurl }}" alt="cdn 工作原理流程图">
 
 总结一下CDN的工作原理：通过权威DNS服务器来实现最优节点的选择，通过缓存来减少源站的压力。
+
+## 测试工具、UI 组件、可视化库
+
+- mocha、krama
+- notie.js（顶部和底部显示通知，类似手机应用）
+- animate.css
+- 阿里开源的g2（图标类），g6（关系图可视化）

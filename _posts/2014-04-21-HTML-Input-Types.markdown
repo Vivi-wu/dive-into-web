@@ -8,7 +8,7 @@ category: HTML
 
     <input type="text">
 
-定义了一个 one-line 单行输入区域，注意：**输入区域的默认宽度是 20 characters**。
+定义了一个单行输入区域，注意：**输入区域的默认宽度是 20 characters**。
 
 ### password
 
@@ -46,7 +46,7 @@ category: HTML
 
     <input type="file">
 
-通过绑定 onclick（清空输入域的value） 和 onchange（提交表单）事件，可以实现"点击"按钮——>打开文件系统对话框——>选择一个文件——>"确定"——>关闭对话框后上传文件的功能。
+通过绑定 onclick（清空输入域的value） 和 onchange（自定义ajax提交表单）事件，可以实现"点击"按钮——>打开文件系统对话框——>选择一个文件——>"确定"——>关闭对话框后上传文件的功能。
 
 ## HTML5 Input Types
 

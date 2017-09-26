@@ -111,7 +111,7 @@ var res = str.split("");
 
 ### Match 匹配
 
-使用 `match(`regexp`)` 方法查找指定字符。如果 regexp 包含 `g` 标识，则方法返回 **all matched**子字符串组成的数组；没有匹配项，返回 `null`。
+使用 `match(`regexp`)` 方法查找指定字符。如果 regexp 包含 `g` 标识，则方法返回 **all matched** 子字符串组成的数组；没有匹配项，返回 `null`。
 
 如果 regexp **不含** g 标识，则返回由第一个匹配项、它在字符串里的索引、原始字符串，组成的数组。
 

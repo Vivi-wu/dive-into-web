@@ -11,7 +11,7 @@ JS只有一种 Number 类型的数，可以带小数写，也可以不用。特�
 
 Integers (numbers without a period or exponent notation) are considered accurate up to 15 digits，**整数可以保证是精确的最多位数是15位**，超出则不精确了。
 
-The maximum number of decimals is 17。**小数最多位数是 17**，因此<span class="t-blue">浮点数相加也不一定准确</span>。
+The maximum number of decimals is 17。**小数最多位数是 17**，<span class="t-blue">浮点数相加也不一定准确</span>。
 
     var x = 0.2 + 0.1;         // x will be 0.30000000000000004
     var x = (0.2 * 10 + 0.1 * 10) / 10;       // x will be 0.3
@@ -137,10 +137,10 @@ parseFloat("10 20 30");  // returns 10
 
 ### Number 的方法
 
-+ `toString()`， Returns a number as a string，可以把 literals, variables, or expressions 转为字符串输出
-+ `toExponential(x)`， Returns a string, with a number rounded and written **using exponential notation**. 参数 x 表示精确到小数的后几位数，取值从 0 到 20，原数小数点后位数不够补0，多则四舍五入. **缺省则保留所有小数点后的数字**。
-+ `toFixed(x)`， Returns a string, with a number rounded and written with a specified number of decimals. x **指定小数点后保留几位数**。默认值是 **0** (no digits after the decimal point 四舍五入，表示没有小数部分)
-+ `toPrecision(x)`， Returns a string, with a number written with a specified length，按**指定数字长度**，小数部分包括在内，**缺省则原样输出**。位数不够补0，多则四舍五入。注意对小数的处理，看下面的例子。
++ `toString()`，可以把 literals, variables, or expressions 转为字符串输出
++ `toExponential(x)`，Returns a string, with a number rounded and written **using exponential notation**. 参数 x 表示精确到小数的后几位数，取值从 0 到 20，原数小数点后位数不够补0，多则四舍五入. **缺省则保留所有小数点后的数字**。
++ `toFixed(x)`，Returns a string, with a number rounded and written with a specified number of decimals. x **指定小数点后保留几位数**。默认值是 **0** (no digits after the decimal point 表示没有小数部分，多则四舍五入)
++ `toPrecision(x)`，Returns a string, with a number written with a specified length，按**指定数字长度**，小数部分包括在内，**缺省则原样输出**。位数不够补0，多则四舍五入。注意对小数的处理，看下面的例子。
 + `valueOf()`， Returns a number as a number
 
 示例：
@@ -157,4 +157,4 @@ var num = 0.001658853;
 var b = num.toPrecision(2); // returns 0.0017
 ```
 
-所有 number 的方法均不改变原来的变量，返回一个新的值。
+所有 number 的方法均**不改变 original 变量的值**，返回一个新的值。

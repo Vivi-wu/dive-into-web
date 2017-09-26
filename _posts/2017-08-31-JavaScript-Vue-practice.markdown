@@ -2,18 +2,19 @@
 title:  "Vue开发tips"
 category: JavaScript
 ---
-## VueJS 2.0
+## Vue.js 2.2+
 
 + Windows系统文件名字母大小写不敏感，当发生“can't find module xxx”错误时，检查下module引用的文件路径、文件名拼写、文件名大小写是否正确。
 + 通过Ajax请求新数据前，reset结果数据。
 + 如果使用vue绑定按钮的 _disabled_ 属性，则不要同时使用 HTMLElement.disabled，否则两者冲突，导致禁止失效。
 + 子组件的数据由 props 设定（或依赖props传递的值），数值在子组件内部变更后，通过 `emit()` 事件把新的值向上传给父组件，由父组件更新相应的值。
-+ 两个数字相乘时，根据需求对结果进行处理（取整数？保留小数点后两位？等等）
 + Vue 不能检测以下变动的数组：
 
     vm.items[indexOfItem] = newValue
     // 解决办法：使用 Array.prototype.splice
     example1.items.splice(indexOfItem, 1, newValue)
+
+<!--more-->
 
 + 项目主要元素的css样式放在 app.vue 文件的 `<style>` 标签里维护。让webpack处理样式的提取、打包和加时间戳。
 + HTML 元素的 _autofocus_ 特性在页面reload后执行一次，对于single page app不同tab页面里的输入域，如果希望切换tab时自动focus，则需要自定义指令：
@@ -57,3 +58,7 @@ category: JavaScript
 ## Vuex
 
 + 默认情况下，vuex模块内部的 action、mutation 和 getter 是注册在全局命名空间的
+
+## Webpack
+
++ 在 'config/index' 中配置prod环境静态资源公共路径 assetsPublicPath 时记得在末尾加 `/`，否则页面上使用 import 管理的静态资源路径会变成 '/productStatic/...', 而不是 '/product/Static/...'
