@@ -150,4 +150,4 @@ Function expressions will execute automatically if the expression is followed by
 
 ## Function Return 函数返回
 
-当函数遇到 **return** 语句，即停止执行。通常计算一个返回值，给调用者。
+当函数遇到 **return** 语句，立刻停止执行。通常计算一个返回值，给调用者。
