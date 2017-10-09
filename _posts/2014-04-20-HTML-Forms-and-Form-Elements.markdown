@@ -24,16 +24,25 @@ The **default method** is **GET**.
 
 ### 什么时候使用 GET 方法呢？
 
-If the form submission is passive (like a search engine query), and without sensitive information.  When you use GET, the form data will be visible in the page address.
-如果表单提交是被动的（如搜索引擎查询），且没有敏感信息时，使用 GET，因为这种方法表单的数据将会在URL上可见。
+If the form submission is passive (like a search engine query 搜索引擎查询), 且 without sensitive information.
+
+使用 GET 方法，表单的数据将会在URL上可见。
 
      action_page.php?firstname=Mickey&lastname=Mouse
 
-这种方法特别适合小量数据。 Size limitation is set in your browser。
+这种方适合小量数据提交。
+
+Size limitation is set in your browser(不同浏览器max length不同，2KB-8KB)
 
 ### 什么时候用 POST 方法呢？
 
-如果表格在更新数据，或者包含敏感信息（如：password），POST 方法较为安全。提交的数据在地址栏里不可见。
+如果需要更新 database 数据，或者包含敏感信息（如：password），POST 方法较为安全。提交的数据在地址栏里不可见。
+
+### 再看 GET、POST 区别
+
+GET **只接受 ASCII 字符**（参看 HTML-Entities-Charset-URL-Encode 章节），为什么呢？因为 GET 从 URL 的 query string 里获取参数，而 URL 是 HTTP 的一个首部，一定是 ASCII 字符的。如果 GET 请求中包含非 ASCII 字符，在发送请求前使用 URL 编码方法对其转码。
+
+POST 不限制，因为数据是 HTTP 的实体，且使用 MIME（Multipurpose Internet Mail Extensions 多用途互联网邮件扩展）可传输非 ASCII 字符
 
 ## The _name_ Attribute
 

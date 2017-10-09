@@ -113,7 +113,7 @@ i=0
 
 + postfix 后缀式操作符 `++` `--`
 + `continue`
-+ `break`，其中 return 和 break 语句可以使用可行的标识符，用来对 labeled loop 操作。如果是这种情况，标识符 **must** 写在同一行。
++ `break`，其中 return 和 break 语句可以使用标识符，用来对 labeled loop 操作。如果是这种情况，标识符 **must** 写在同一行。
 + `return`，因为返回语句是受限输出，方便程序员写一个空的 return statement，而不会不小心返回了下一行语句的值。
 + `throw`
 

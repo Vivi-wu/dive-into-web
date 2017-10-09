@@ -18,11 +18,9 @@ HTML 元素总是<span class="t-blue">根据正常的页面流，从上到下，
 
 元素位置属性值为 `relative` 时，是 <span class="t-blue">relative to its normal position</span> 相对于正常情况下它应该在的位置放置。
 
-**其他元素并不会自动调整**，去填充由这个元素移动所产生的空隙。
+<span class="t-blue">The reserved space for the element is still preserved in the normal flow</span>.
 
-<span class="t-blue">The reserved space for the element is still preserved in the normal flow</span>. 
-
-相对放置的元素在正常页面流里本来占据的空间仍然有效，（**没有**被从页面流里**剔除**，也不影响布局）。
+相对放置的元素在正常页面流里**本来占据的空间仍然有效**，即**没有**被从页面流里**剔除**，也不影响布局。
 
 <div style="background-color:#FFF1F1;width:20rem;">Box 1 Normal positioning</div>
 <div style="background-color:#bca590;width:20rem;">Box 2 Normal positioning</div>
