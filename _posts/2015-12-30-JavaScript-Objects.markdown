@@ -182,3 +182,18 @@ Prototype properties can have prototype values (default values) 原型的属性�
 
 1. `Object.getOwnPropertyNames(obj)` 和 `Object.keys(obj)`，两者返回 obj 对象中由所有属性的名称（string）所组成的数组。注意：两者 IE9 以下都不支持。
 2. `obj.hasOwnProperty(prop)`，该方法返回 boolean 值，表示 obj 对象中是否含有指定的属性。
+
+## 对象的复制
+
+1.使用 `Object.assign(target, ...sources)` 方法返回 target 对象，只复制源对象 property 的值。
+
++ 如果 source 属性值是指向某对象（内嵌子对象）的 reference，将只复制 reference 的值（即，此方法**不能做到深度复制**，源对象中的子对象属性值变化，会同时改变复制对象中同名子对象的同名属性值）
++ 按**从左到右**的顺序依次复制和重写属性值（最右边的有最高权限）
++ 不复制 non-enumerable、在原型链上的属性
++ 遇到 exception 时中断 copying 任务（如遇到 read-only 的属性时，throw exception）
+
+2.使用 `JSON.parse(JSON.stringify(sourceObj))` 可以做到**深度复制**。缺点是任何不符合 JSON 规范的值都将丢失：
+
++ 不能复制属性值为 function 的 属性（JSON 的值不支持函数）
++ 不能复制属性值为 _undefined_ 的属性（值为 _null_ 可以）
++ 属性值为 JS Date 对象的复制结果变为 ISO 标准日期格式（YYYY-MM-DDTHH:mm:ss.sssZ）的字符串

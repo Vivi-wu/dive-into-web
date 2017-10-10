@@ -18,7 +18,7 @@ JSON 文件的后缀名为 _.json_
 
 ### JSON Value
 
-可以是 number（整数或浮点型的）、string（**双引号**括起来）、Boolean（true 或 false）、array、object、`null`
+可以是 number（整数或浮点型的）、string（**双引号**括起来）、Boolean（true 或 false）、Array、Object、`null`
 
 ### Convert JSON string to JS Object
 
