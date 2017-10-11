@@ -54,4 +54,4 @@ HTML5 Forms 规范的核心是功能性动作和语义，而非外观和显示�
 5. 只要发生表单验证（不管是在提交表单时，还是直接调用 checkValidity 函数），所有未通过验证的表单都会接收到一
 个 invalid 事件。如果不希望使用浏览器提供的默认的验证反馈，在 invalid 事件处理函数中写明 `event.preventDefault()`。同时为阻止其他程序处理 invalid 事件，调用 `stopPropagation()` 函数。
 
-6. 默认的 from.submit 表现为：将表单数据提交到 action 属性所指向的地址，并刷新页面。
+6. 默认的 form.submit 表现为：将表单数据提交到 action 属性所指向的地址，并刷新页面。

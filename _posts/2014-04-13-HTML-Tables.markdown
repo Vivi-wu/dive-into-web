@@ -19,19 +19,23 @@ The `<tr>` element defines a **table row** 表格行, the `<th>` element defines
 ```html
 <table>
   <colgroup>
-    <col span="2" style="background-color:red">
+    <col span="2" style="background-color:lightblue">
     <col style="background-color:yellow">
   </colgroup>
+  <thead>
   <tr>
     <th>ISBN</th>
     <th>Title</th>
     <th>Price</th>
   </tr>
+  </thead>
+  <tbody>
   <tr>
     <td>3476896</td>
     <td>My first HTML</td>
     <td>$53</td>
   </tr>
+  </tbody>
 </table>
 ```
 
@@ -39,19 +43,23 @@ The `<tr>` element defines a **table row** 表格行, the `<th>` element defines
 
 <table>
   <colgroup>
-    <col span="2" style="background-color:red">
+    <col span="2" style="background-color:lightblue">
     <col style="background-color:yellow">
   </colgroup>
-  <tr>
-    <th>ISBN</th>
-    <th>Title</th>
-    <th>Price</th>
-  </tr>
-  <tr>
-    <td>3476896</td>
-    <td>My first HTML</td>
-    <td>$53</td>
-  </tr>
+  <thead>
+    <tr>
+      <th>ISBN</th>
+      <th>Title</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3476896</td>
+      <td>My first HTML</td>
+      <td>$53</td>
+    </tr>
+  </tbody>
 </table>
 
 **Tips**: The width of a table can be defined using CSS. 可以**通过CSS _width_ 设定表格宽度**
