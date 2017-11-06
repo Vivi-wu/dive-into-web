@@ -41,6 +41,8 @@ category: JavaScript
 + 在 data 初始化绑定时，对 object 型数组中 item 进行深层对象声明，避免加载时 console 报错
 + 列表过渡时，使用 `<transition-group>` 元素作为 `v-for` 列表的父元素
 + 使用 v-move 或定义对应的 css 样式，使得过渡平滑
++ 通用组件设计思路：入参配置初始值，输出值交由外部组件做业务逻辑
++ pug 模板中自定义 vue 指令不能单独写，需指定空值：`v-table-has-sticky-thead=''`。如果不指定，则会被 pug 编译成 `v-table-has-sticky-thead='v-table-has-sticky-thead'`，导致 console 报错
 
 ## vue-router
 

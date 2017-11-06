@@ -83,7 +83,7 @@ switch(expression) {
 
 区别：
 
-+ **break** statement "**jumps out**" of a loop or a switch. 直接跳出循环体，执行后面的代码
++ **break** statement "**jumps out**" of a loop or a switch. 直接跳出一个循环体或 `switch` 体，执行后面的代码。
 + **continue** statement "**jumps over**"/ "**skip**" one iteration in the loop. 在一个 for 循环里，遇到 continue 直接跳到 update expression 处（如 `i++`），不会完全终止循环的执行。
 
 ### JavaScript Labels

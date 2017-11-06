@@ -90,7 +90,11 @@ category: HTML
 Last name: <input type="text" name="lname" form="form1">
 ```
 
-该特性指定一个 input 输入元素属于一个或多个表单。这样<span class="t-blue">即使 input 元素没有嵌套写在 `<form>`元素里，仍然可以作为这个 form 的表单数据被提交</span>。如果想让一个 input 同时指向多个 form，用 _space-separated 列出表单的 id_。
+该特性指定一个 input 输入元素属于一个或多个表单。这样<span class="t-blue">即使 input 元素没有嵌套写在 `<form>`元素里，仍然可以作为这个 form 的表单数据被提交</span>。
+
+如果想让一个 input 同时指向多个 form，用 _space-separated 列出表单的 id_。
+
+button 元素同样支持H5 _form_ 属性
 
 注意：IE 不支持该特性。
 

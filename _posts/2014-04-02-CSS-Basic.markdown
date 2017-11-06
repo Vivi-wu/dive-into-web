@@ -84,7 +84,7 @@ p {margin-left: 20px;}
 
 当**一个元素**需要使用唯一的样式时，使用 _style_ 特性。小心使用，不然失去了样式表的优势（把内容与表现混合在一起了）
 
-    <p style="color:sienna;margin-left:20px;">This is a paragraph.</p>  
+    <p style="color:sienna;margin-left:20px;">This is a paragraph.</p>
 
 ### @import
 
@@ -108,7 +108,7 @@ _url_ 可以是**字符串**，也可以是 **url()**。
 
 一个重要的概念，关于 CSS 样式表层叠优先级。
 
-Generally speaking we can say that all the styles will "cascade" into a new "virtual" style sheet by the following rules, where number four has the highest priority: 
+Generally speaking we can say that all the styles will "cascade" into a new "virtual" style sheet by the following rules, where number four has the highest priority:
 
 <span class="t-blue">当我们对同一个 HTML 元素进行多次 CSS 样式定义时，这些样式将层叠起来就像形成了一个新的虚拟的样式表。层叠规则如下，**数字越大**优先级**越高**。
 
@@ -116,7 +116,7 @@ Generally speaking we can say that all the styles will "cascade" into a new "vir
 2. _External style_ sheet and _Internal style_ sheet (in the head section) 注意：外部样式表和内部样式表在头部**书写的顺序也会影响优先级**，写在后面的优先级高。
 3. _Inline style_ (inside an HTML element)
 
-对同一个HTML元素同时使用多个 CSS class 时，class 选择器写在**越靠右边**层叠优**先级越高**。
+同一个 HTML 元素应用多个 CSS class 时，重复定义相同属性，写在最后的覆盖前面所有，**与 class 书写顺序无关**
 
 ```html
 <style>
@@ -124,6 +124,6 @@ Generally speaking we can say that all the styles will "cascade" into a new "vir
 .a2{color:green;}
 .a3{color:blue;}
 </style>
-<p class="a1 a2 a3">test</p>
+<p class="a3 a1 a2">Hello world</p>
 <!--文字颜色最终为blue-->
 ```

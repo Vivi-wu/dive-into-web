@@ -9,7 +9,7 @@ categories: HTML
 + 减少请求数量
     - 将js，css分别合并成单个资源，Stylesheets放在页面头部（let the browser display whatever content it has as soon as possible，这样使页面看起来loading faster），Scripts放在页面下部（因为脚步加载can block parallel downloads 并行下载）。
     - 使用css，svg，iconfont替换UI图片（在手机端iconfont可以只加载ttf格式的字体文件，如果像PC端照顾到各种浏览器，加载各种format的字体文件，会造成极大的网络带宽消耗）
-+ 避免重定向：页面和静态资源端重定向会造成巨大的性能消耗。Redirects are accomplished using the 301 and 302 status codes。最常见的wasteful redirect而web developers通常没有意识到的就是，在URL末尾少了"/"。
++ 避免重定向：页面和静态资源端重定向会造成巨大的性能消耗。Redirects are accomplished using the **301** and **302** status codes。最常见的wasteful redirect而web developers通常没有意识到的就是，在URL末尾少了"/"。
 + 图片优化
     - 使用WebP格式图片（目前只有Google Chrome和Opera系下的浏览器原生支持该格式），参考文章<a href="http://isux.tencent.com/introduction-of-webp.html/">WebP探寻之路</a>
     - 在CDN服务上生成各个尺寸和质量的图片，合理使用CDN图片尺寸提升下载图片的性能，减少不必要的内存消耗（不要因为可以设置图片尺寸，就用一个特别大的图，然后实际显示用小的尺寸，每浪费10pixel点宽高都可以造成很大的内存资源浪费）。
