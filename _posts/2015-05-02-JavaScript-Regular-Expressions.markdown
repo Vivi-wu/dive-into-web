@@ -58,6 +58,9 @@ category: JavaScript
 创建正则表达式对象：**字面量**和**构造函数**。
 
 ```js
+var re = /pattern/flags;
+var re = new RegExp('pattern', 'flags');
+
 /ab+c/i;
 new RegExp('ab+c', 'i');
 new RegExp(/ab+c/, 'i');

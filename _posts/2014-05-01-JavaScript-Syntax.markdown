@@ -55,25 +55,23 @@ i=0
 
 ## 分号
 
-这里 [JavaScript Semicolon Insertion Everything you need to know](http://inimino.org/~inimino/blog/javascript_semicolons) 详细全面地解释了 JavaScript automatic semicolon insertion。
+这里 [JavaScript Semicolon Insertion Everything you need to know](http://inimino.org/~inimino/blog/javascript_semicolons) 详细全面地解释了 JavaScript automatic semicolon insertion（ASI）。
 
 ### 在哪里可以写分号？
 
 在 ECMAScript 规范中给出的正式语言的语法中，分号可以出现在任何一种 statement 结尾。
 
-可以在 `var` 变量声明语句，表达式语句 (such as "4+4;" or "f();"), `continue`, `return`, `break`, `throw` 和 `debugger` 语句的结尾处。
+可以在 `var`(`let`, `const`)变量声明语句，(`import`, `export`)模块声明，表达式语句 (such as "4+4;" or "f();"), `continue`, `return`, `break`, `throw` 和 `debugger` 语句的结尾处。
 
 一个分号本身就是一个**空语句**，在 JS 中是合法的语句。比如 `;;;` 是一个合法的 JS 程序，它解析了三个空语句，运行了三次 doing nothing.
-
-分号出现在 for ( Expression ; Expression ; Expression ) 循环语句中。
 
 ### 哪里可以缺省分号？
 
 以下给出了三种语句截止不需分号的基本规则和两种例外：
 
-1. 在 closing brace 闭括号之前。
-2. 在一个 program 结尾处。
-3. 当下一个 token 符号不能通过其他方式被解析，且在语法中的某些地方，如果出现一个 line break，它无条件地终止该语句。
+1. 在 closing brace 闭括号`}`之前
+2. 在一个 program 结尾处
+3. 当检测到输入的token结束时，且解析器无法将这个输入流单独解析为完整的程序
 4. 例外1，分号 never inserted 在 for loop 头部 for ( Expression ; Expression ; Expression )
 5. 例外2，分号 never inserted if it would be parsed as an empty statement.
 

@@ -37,13 +37,15 @@ ASCII was the first **character encoding standard** (also called character set).
 
 ASCII supported numbers (0-9), English letters (A-Z), and some special characters like ! $ + - ( ) @ < > .
 
-ANSI (Windows-1252) was the default character set for Windows (up to Windows 95). It supported 256 different codes.
+### Unicode
 
-ISO-8859-1, was the default character set for HTML 4. It also supported 256 different codes.
+Unicode（中文：万国码、国际码、统一码、单一码）是计算机科学领域里的一项业界标准，它对世界上大部分的文字系统进行了整理、编码，并广泛地应用于电脑软件的国际化与本地化过程，如可扩展置标语言(Extensible Markup Language，简称：XML)、Java编程语言以及现代的操作系统。
 
-Because ANSI and ISO was too limited, the default character encoding was changed to UTF-8 in HTML5（All HTML 4 processors also support UTF-8).
+一个字符的 Unicode 编码是确定的。但是在实际传输过程中，由于不同系统平台的设计不一定一致，以及出于节省空间的目的，对 Unicode 编码的实现方式有所不同。
 
-**UTF-8 Unicode covers (almost) all the characters and symbols in the world**.
+Unicode 的实现方式称为Unicode转换格式（Unicode Transformation Format，简称为UTF），目前通用的实现方式是UTF-16小端序（LE）、UTF-16大端序（BE）和UTF-8。
+
+The default character encoding was changed to UTF-8 in HTML5（All HTML 4 processors also support UTF-8).
 
 HTML5
 
@@ -52,6 +54,10 @@ HTML5
 HTML4
 
     <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+
+中文Unicode字符集
+
+<img src="{{ "/assets/images/CJK_Chinese_Unicode.png" | prepend: site.baseurl }}" alt="CJK Chinese Unicode">
 
 ## HTML URL(Uniform Resource Locators)
 
