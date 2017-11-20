@@ -181,7 +181,11 @@ people.sort(function(a, b){return a.localeCompare(b, 'zh-CN')});
 
 使用 `slice(`start, end`)` 返回数组中指定位置的元素所组成的新数组。
 
-_start_ 表示切片开始位置（包含这个位置上的元素），负值表示从数组末端开始（末端第一个元素为 `-1`，依次类推）。_end_ 是可选的，表示切片结束的位置（**不包括**该位置上的元素）。缺省表示 to the end of the array。
+_start_ 表示切片开始位置（包含这个位置上的元素），负值表示从数组末端开始（末端第一个元素为 `-1`，依次类推）。
+
+_end_ 是可选的，表示切片结束的位置（**不包括**该位置上的元素）。缺省，或大于array length则表示 extracts through the end of the array。
+
+_start_ 未定义，则从 0 开始；大于 array length 返回 `[]`。
 
 此方法**不改变**原有数组。
 

@@ -8,13 +8,13 @@ Date 对象用来与年月日时分秒毫秒打交道的。
 
 有**4种**初始化日期对象的方式：
 
-`new Date()`，创建一个新的日期对象 with **current date and time**，当前的日期和时间
+`new Date()`，根据系统设定以 **current date and time**创建一个新的日期对象。（本地时区）
 
 `new Date(milliseconds)`，按照 <span class="t-blue">zero time</span>（01 January 1970 00:00:00 UTC）加上参数创建新的日期对象。JS一天包含 86,400,000 millisecond
 
 `new Date(dateString)`，按指定的日期字符串创建一个新的日期对象，dateString 格式参考下面讲的 Date formats
 
-`new Date(year, month, day, hours, minutes, seconds, milliseconds)`，按7个参数的顺序创建指定日期和时间的日期对象。
+`new Date(year, month, date, hours, minutes, seconds, milliseconds)`，至少指定 year 和 month。如果其他参数都省略，则 date 为 1，剩下都为 0。
 
 <!--more-->
 
@@ -22,11 +22,13 @@ Date 对象用来与年月日时分秒毫秒打交道的。
 
 通常JS有**4种**日期格式：
 
-1.**ISO Dates**，ISO 8601 是用于表示日期和时间的国际标准，syntax (YYYY-MM-DD)。JS prefer 这种格式，当然缺省 month 和 day 比如 (YYYY-MM)，(YYYY) 也是允许的。
+1.**ISO Dates**，ISO 8601 是用于表示日期和时间的国际标准，syntax (YYYY-MM-DD)。
 
-上面说了完整的日期对象有7个参数，这里**缺省的参数**将**按照最小值算**。没有指定 day，就算 1号，没有指定 month，就是 1月1日。
+缺省 month 和 date 比如 (YYYY-MM)，(YYYY) 也是允许的。
 
-设定完整的日期时间 (YYYY-MM-DDTHH:MM:SS)
+上面说了完整的日期对象有7个参数，这里**缺省的参数**将**按照最小值算**，date 为 1，剩下都为 0。
+
+设定**完整**的日期时间 (YYYY-MM-DDTHH:MM:SS)
 
     var d = new Date("2015-03-25T12:00:00");    //Wed Mar 25 2015 20:00:00 GMT+0800 (CST)
 
@@ -64,7 +66,7 @@ var d = new Date("Wed Mar 25 2015 09:56:24 GMT+0100 (W. Europe Standard Time)");
 + `toLocaleString()`，使用本地转换法，把日期对象转为字符串（_2016/10/18 下午7:46:01_）
 + `toLocaleTimeString()`，使用本地转换法，把日期对象的时间部分转为字符串（_下午7:46:01_）
 + `toLocaleDateString()`，使用本地转换法，把日期对象的日期部分转为字符串（_2016/10/18_）
-+ `toISOString()`，使用 ISO 标准将日期对象转为字符串。格式为（_YYYY-MM-DDTHH:mm:ss.sssZ_）
++ `toISOString()`，使用 ISO 标准将日期对象转为字符串。格式为（_YYYY-MM-DDTHH:mm:ss.sssZ_），其时区 **always zero** UTC offset, 末尾的"Z"表示UTC时间.
 + `toJSON()`，将日期对象转为 <strong>JSON 日期格式</strong>的字符串（_2016-10-18T11:46:01.970Z_），格式同 toISOString()（ISO-8601 standard）.
 + `toUTCString()`，`toGMLString()`，根据世界时间将日期对象转为字符串（_Tue, 18 Oct 2016 11:46:01 GMT_）
 + `toDateString()`，converts the date (not the time **不含时间**) of a Date object into a readable string (结果为 _Tue Oct 18 2016_)
@@ -120,7 +122,7 @@ var d = new Date("Wed Mar 25 2015 09:56:24 GMT+0100 (W. Europe Standard Time)");
   <td>返回自从 January 1, 1970 00:00:00 UTC 到现在的毫秒数</td>
 </tr>
 <tr>
-  <td>Date.UTC(year,month,day,hours,minutes,seconds,milliseconds)</td>
+  <td>Date.UTC(year,month,date,hours,minutes,seconds,milliseconds)</td>
   <td>前三个参数是 required 的，该方法根据世界时间，返回自从1970年1月1日午夜开始到指定日期的毫秒数</td>
 </tr>
 </tbody></table>
@@ -154,8 +156,8 @@ document.getElementById("demo").innerHTML = days[d.getDay()];
   <td>Set the day as a number (1-31)。输入值为整数，return <b>指定日期</b>与1970年1月1日0时0分0秒之间的<b>毫秒数</b>.</td>
 </tr>
 <tr>
-  <td>setFullYear(year,month,day)</td>
-  <td>Set the year (<b>optionally month and day</b>) 参数均为数字</td>
+  <td>setFullYear(year,month,date)</td>
+  <td>Set the year (<b>optionally month and date</b>) 参数均为数字</td>
 </tr>
 <tr>
   <td>setHours()</td>
@@ -188,6 +190,8 @@ document.getElementById("demo").innerHTML = days[d.getDay()];
 ### Parsing Date
 
 如果你有一个有效格式的日期字符串，使用 `Date.parse(dateString)` 方法可以得到距离 zero time 的毫秒数，然后使用 `new Date(milliseconds)` 就可以得到想要的日期对象了。
+
+但是这种方法是 strongly **discouraged** due to browser differences and inconsistencies。
 
 ### Compare Dates
 
