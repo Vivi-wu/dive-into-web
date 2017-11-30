@@ -18,7 +18,7 @@ React 保证所有事件在各种浏览器中表现一致，与 W3C spec 的冒�
 class SayHello extends React.Component {
   constructor(props) {
     super(props);
-    // This line is important! 需要手动绑定 this 到实例
+    // 需要手动绑定 this 到当前实例对象
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -39,7 +39,7 @@ class SayHello extends React.Component {
 
 ## 状态
 
-当数据变化时，通过调用 `this.setState(data, callback)` 把数据合并到组件私有属性 `this.state` 中。组件会重新 render 自己。其中 callback 是可选的。
+当数据变化时，通过调用 `this.setState(data, callback)` 把数据合并到组件私有属性 `this.state` 中，驱动组件重新 render 自己。其中 callback 是可选的。
 
 ### 什么样的组件应该拥有 State
 
@@ -66,13 +66,12 @@ ReactDOM.render(
 
 ## 用法
 
-+ `React.createClass()` 用来创建新的 React component. 其中最重要的一个方法叫 `render()` —— 返回一个最终将渲染成 HTML 的 React 组件树。
 + `ReactDOM.render()` 该方法初始化 root 组件，把组件的 markup 注入到 raw DOM 元素（由第二个参数提供的）中。该方法需要放在脚本的最下面，只有 composite 组件被定义了才可以调用。
 + Data passed in from a parent component is available as a 'property' on the child component. 数据通过成为子组件属性的方式，从父组件传递到子组件
 + We access **named attributes** passed to the component as keys on `this.props`, 通过 props 对象的属性读取写在父组件上有命名的 attribute 传递给子组件的值。
 + 任何内嵌在父组件里的内容通过 `this.props.children` 获取.
 + `.props` 对象是 immutable 不可变的，"owned" by the parent。
-+ `getInitialState()` 该函数在组件的生命周期内只执行一次，用来设置组件的初始 state。ES6 classes 中，初始状态写在 `constructor()` 中
++ `getInitialState()` 该函数【已废弃】在组件的生命周期内只执行一次，用来设置组件的初始 state。ES6 classes 中，初始状态写在 `constructor()` 中
 
   ```js
   class Counter extends React.Component {
@@ -94,7 +93,6 @@ ReactDOM.render(
 + `componentDidMount` 函数在组件**第一次**被渲染时由 React 自动调用。
 + 无状态的函数仍然可以设置 `propTypes` 和 `defaultProps`。
 + 官方建议使用 ES6 语法。
-
 
 One **limitation**: React 组件只能渲染一个 **single root node** 单独的一个根节点. 如果你想要返回过个节点，它们必须要 be wrapped 在一个唯一的根节点元素里。
 
@@ -138,7 +136,9 @@ class MyComponent extends React.Component {
 
 ### Prop Validation
 
-出于性能考虑，仅在开发阶段通过 `propTypes` 属性检查组件接受到的数据类型是否正确。若是 invalid value，在浏览器 JS console 中报错。
+prop 是组件的对外接口，那么应该可以规范：支持哪些 prop，每个prop 应该是什么格式。
+
+出于性能考虑，仅在开发阶段进行 `propTypes` 检查。若有 invalid value，会在浏览器 JS console 中报错。
 
 ```js
 class Greeting extends React.Component {

@@ -26,15 +26,15 @@ React 提供 **will**（在事件发生前）和 **did**（在事件发生后）
 
 ### Mounting
 
-一个组件的实例被创建和插入 DOM 的过程
+一个组件的实例被创建和插入 DOM 的过程：
 
-`constructor()`（`getInitialState()`），用来初始化 state 数据。
+`constructor()`，初始化 state 数据，绑定成员函数的 this 环境。无状态的 React 组件不需要定义构造函数。
 
-`componentWillMount()`，mounting 发生之前调用
+`componentWillMount()`，所有可以在这个函数中做的事都可以提前到 constructor 中做。
 
-`render()`
+`render()`，返回 JSX 表示对象。
 
-`componentDidMount()`，mounting 发生之后调用，需要 DOM 节点的初始化写在这里
+`componentDidMount()`，调用所有组件的 render 函数之后，完成 mounting 才依次调用此函数。只在**浏览器端**调用因为服务器端渲染不会产生 DOM 树。需要 DOM 节点的初始化写在这里。
 
 ### Updating
 
@@ -42,19 +42,19 @@ React 提供 **will**（在事件发生前）和 **did**（在事件发生后）
 
 `componentWillReceiveProps()`
 
-`shouldComponentUpdate()`
+`shouldComponentUpdate(nextProp, nextState)`，返回一个布尔值，告知 React 该组件在这次更新中是否需要继续。默认返回 true，即每次更新都要重新渲染。通过定制该函数 可提高性能。
 
 `componentWillUpdate()`
 
-`render()`
+`render()`，同 mounting 过程
 
-`componentDidUpdate()`
+`componentDidUpdate()`，无论更新过程发生在 server 端还是 browser 端，都会被调用。正常情况下 server 端只产出 HTML 字符串，不会调用此函数。
 
 ### Unmounting
 
-当一个组件被从 DOM 中移除时调用以下方法
+当一个组件被从 DOM 中移除时调用以下方法：
 
-`componentWillUnmount()`，组件被移除之前调用，Cleanup 写在这里
+`componentWillUnmount()`，在此函数里写一些清理工作。
 
 ### `ref` 属性赋予 Callback 函数
 

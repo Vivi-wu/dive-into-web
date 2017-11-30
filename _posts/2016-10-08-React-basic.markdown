@@ -8,7 +8,7 @@ category: JavaScript
 
 当底层数据改变 React 将自动管理所有 UI 更新，且只更新改变的部分。React 本质就是写一些可重用的组件，React 组件是一些操作 `props` 和 `state` 的函数。
 
-有事没事先写一个组件。
+    UI = render(data)
 
 此外按官网说法，React 直接从 JS 代码生成 HTML 和组件树，在网络环境差的情况下，从加载 JS 到生成页面这段时间的白屏问题不可避免。
 
