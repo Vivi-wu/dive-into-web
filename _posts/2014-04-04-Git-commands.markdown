@@ -97,6 +97,10 @@ Stash 属于本地 Git 仓库，不会通过 push 推到远端。
 
 重新应用 changes 到工作分支，并**保留**在 stash 中，这样可以把 stashed 的 changes 应用于多个分支。
 
+    git stash branch <branch_name>
+
+为避免当前分支的 changes 与 stash 的改变在 pop 或 apply 时有冲突，通过上述把 stashed 改变应用到新分支。
+
     git stash show -p
 
 对比 stash 和当前提交的不同。

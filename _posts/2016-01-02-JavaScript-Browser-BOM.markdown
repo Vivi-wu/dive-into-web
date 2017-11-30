@@ -93,10 +93,44 @@ JS 有三种弹出框：Alert box，Confirm box，Prompt box
 
 窗口对象允许在特定的时间间隔里执行代码。主要的方法是：
 
-+ `window.setTimeout(function, milliseconds)`，在等待一个指定秒数的时间后执行一个函数
++ `window.setTimeout(function[, delay, param1, param2, ...])`，在等待指定**毫秒数**的时间后执行一个函数，返回值是一个**正整数**的 timeoutID。额外的 parameters 将被传给前面指定的 function。
 + `window.setInterval(function, milliseconds)`，在给定的时间间隔里，重复执行指定的函数。比如每个 1000 毫秒执行一次日期显示时间函数，看起来就像是一个数字时钟。
-+ `window.clearTimeout(timeoutVariable)`，该方法用来停止使用 `setTimeout()` 在执行的函数。使用的变量是从 `setTimeout()` 返回的变量。
++ `window.clearTimeout(timeoutID)`，该方法用来停止使用 `setTimeout()` 要执行的函数。
 + `window.clearInterval(timerVariable)`，该方法用来停止使用 `setInterval()` 在执行的函数。使用从 `setInterval()` 函数返回的变量。
+
+### 事件节流 Throttling
+
+一些事件如 mousemove、resize、scroll 是连续的更新，浏览器会尽快触发更新。有时只想要在用户停止连续操作时才更新页面，当你有大量code要响应事件时尤其重要。
+
+事件节流即对于一系列更新事件只响应一次。使用 generator function 形成闭包可以实现：
+
+```js
+// throttle-then-act
+function throttleEvents(listener, delay) {
+    var timeout;
+    return function() {
+        // 2.如果已经有timer则清除并停止执行
+        if (timeout) clearTimeout(timeout);
+        // 3.设置新的timer，且在倒计时结束时执行真正的事件处理函数
+        timeout = setTimeout(listener, delay);
+    }
+}
+// 1.事件发生时设置一个timer，创建延迟
+element.addEventListener(eventType, throttleEvents(realListenerFunction, 500))
+
+// 另一种方式：act-then-throttle
+function actThenThrottleEvents(listener, delay) {
+  var timeout;
+  return function() {
+    if (!timeout) { // no timer running
+      listener(); // run the function
+      timeout = setTimeout( function() { timeout = null },
+        delay); // start a timer that turns itself off when it's done
+    }
+    //else, do nothing (we're in a throttling stage)
+  }
+}
+```
 
 ## JS Cookies
 

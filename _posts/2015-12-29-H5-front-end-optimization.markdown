@@ -19,3 +19,4 @@ categories: HTML
 + 渲染优化
     - 禁止使用GIF图片实现Loading效果（降低CPU消耗）
 + 域名收敛，控制页面中使用的域名数量，降低DNS域名解析成本。对于小项目，目前都放在同一个域名下。HTTP/1.1 specification suggests that browsers download no more than two components in parallel per hostname.
++ 减少DOM操作。DOM操作会引起浏览器对网页进行重新布局和绘制，这是比JS语句执行慢得多的过程。
