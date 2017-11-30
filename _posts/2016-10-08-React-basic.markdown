@@ -2,11 +2,9 @@
 title:  "React.js 入门（一）"
 category: JavaScript
 ---
-本系列日志主要记录自学过程中总结的知识点。
-
 官网自述 React 是为了解决一个问题而生：创建数据随时更新的大型应用。
 
-当底层数据改变 React 将自动管理所有 UI 更新，且只更新改变的部分。React 本质就是写一些可重用的组件，React 组件是一些操作 `props` 和 `state` 的函数。
+React 本质就是写一些可重用的组件，React 组件是一些操作 `props` 和 `state` 的函数。
 
     UI = render(data)
 

@@ -10,7 +10,9 @@ React 保证所有事件在各种浏览器中表现一致，与 W3C spec 的冒�
 
 使用 **camelCase** 的特性名绑定事件处理函数（区别于 HTML 元素的全小写 `onclick`）.
 
-每个事件处理函数自动绑定它所属的组件实例，除了使用 ES6 class 语法时。
+每个事件处理函数自动绑定它所属的组件实例。
+
+注意：使用 ES6 class 语法时需手动绑定。
 
 <!--more-->
 
@@ -45,7 +47,9 @@ class SayHello extends React.Component {
 
 有时你需要响应**用户输入**、**服务器请求**或者时间的流逝，这时就要用到 State。
 
-但是尽可能使你的大部分组件 stateless 无状态，减少冗余。一个常见的模式就是创建一些没有状态的组件，仅用来渲染数据，称为 Stateless Function。然后把它们内嵌在一个 stateful 的父组件里。父组件把 state 通过 props 传递给子组件。
+但是尽可能使你的大部分组件 stateless 无状态，减少冗余。
+
+一个常见的模式就是创建一些没有状态的组件，仅用来渲染数据，然后把它们内嵌在一个 stateful 的父组件里。父组件通过 props 把 state 传递给子组件。
 
 ```js
 // Stateless Function
@@ -60,14 +64,13 @@ ReactDOM.render(
 
 ### 什么不应该放在 State 中
 
-+ Computed data，计算的数据。把计算都放在 `render()` 中，比如状态中存放了一个数组，要输出数组长度可放在渲染函数中，而不是把长度值保存在状态里。
++ Computed data，把计算都放在 `render()` 中，比如状态中存放了一个数组，要输出数组长度可放在渲染函数中，而不是把长度值保存在状态里。
 + React 组件。基于 props 和 state 在渲染函数里创建。
 + 从 Props 中复制的数据。凡是有例外：当需要指定 previous 的值时，可以把 props 中取得的值存在私有状态中。因为父组件重新渲染时，props 值也会变。
 
 ## 用法
 
 + `ReactDOM.render()` 该方法初始化 root 组件，把组件的 markup 注入到 raw DOM 元素（由第二个参数提供的）中。该方法需要放在脚本的最下面，只有 composite 组件被定义了才可以调用。
-+ Data passed in from a parent component is available as a 'property' on the child component. 数据通过成为子组件属性的方式，从父组件传递到子组件
 + We access **named attributes** passed to the component as keys on `this.props`, 通过 props 对象的属性读取写在父组件上有命名的 attribute 传递给子组件的值。
 + 任何内嵌在父组件里的内容通过 `this.props.children` 获取.
 + `.props` 对象是 immutable 不可变的，"owned" by the parent。
@@ -90,6 +93,7 @@ ReactDOM.render(
   });
   ```
 
++ prop 绑定父组件的函数传递给子组件，子组件调用该函数，即可实现数据传递。
 + `componentDidMount` 函数在组件**第一次**被渲染时由 React 自动调用。
 + 无状态的函数仍然可以设置 `propTypes` 和 `defaultProps`。
 + 官方建议使用 ES6 语法。
