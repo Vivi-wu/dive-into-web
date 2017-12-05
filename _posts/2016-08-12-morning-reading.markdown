@@ -242,3 +242,26 @@ tip：
 - notie.js（顶部和底部显示通知，类似手机应用）
 - animate.css
 - 阿里开源的g2（图标类），g6（关系图可视化）
+
+### npm package-locks
+
+如果 package.json 是 npm-install 的输入，那么一个完整格式的 node_moudles 数则为其输出。
+
+有时 npm 不能生成完全一样的 node_modules 树：
+
++ 不同版本的npm使用稍有不同的安装算法
++ 指定范围的包发布了新版本since上次安装
++ 依赖之中的某个dependency发布了新版本
++ 安装的注册表不再可用，或者允许版本变异导致在相同版本号下存在不同版本的软件包
++ 任何缺少的依赖关系都会以通常的方式安装
+
+[package-lock.json](https://docs.npmjs.com/files/package-lock.json) 在任何更新node_modules和/或package.json的依赖关系时，都会自动同步现有的锁定程序。这样即使中间dependency更新，之后的install也能生成相同的tree。
+
+强烈建议commit这个文件到source仓库里：
+
++ 描述唯一的依赖树，保证其他人按照完全相同的依赖
++ 方便用户追溯 node_modules 的修改记录，而无需git追踪这个文件夹
++ 提高依赖树变更的可读性
++ 优化安装进程，通过让npm跳过重复的（已安装的包）metadata解析，任何未来的安装都将基于这个文件，而不是重新计算package.json的依赖版本
+
+如果该文件没有放在项目root目录下将被忽略。

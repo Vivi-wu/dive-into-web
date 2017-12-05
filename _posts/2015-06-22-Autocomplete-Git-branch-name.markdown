@@ -37,14 +37,9 @@ Mac 上用 `Tab` 键不能自动补全 Git 分支名称，每次都要手动输�
 
     alias gs='git status'
     alias gb='git branch'
-    alias gck='git checkout'
-    alias gpso='git push origin'
-    alias gp='git push'
-    alias gl='git pull'
     alias gc='git commit'
     alias ga='git add'
     alias gd='git diff'
-    alias gm='git merge'
     alias glogp='git log --pretty=format:"%C(yellow)%H %C(green)%ad%C(red)%d %Creset%s %C(blue)[%cn]" --date=short --graph'
 
 3. 保存并退出文件。在当前 terminal 中重新加载该文件
