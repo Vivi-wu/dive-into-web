@@ -31,15 +31,15 @@ Mac 上用 `Tab` 键不能自动补全 Git 分支名称，每次都要手动输�
 
 1. 打开 Shell 配置文件
 
-    vi ~/.bashrc
+        vi ~/.bashrc
 
 2. 进入 insert 模式，把下面内容复制到文件中
 
-    alias gs='git status'
-    alias gb='git branch'
-    alias gc='git commit'
-    alias ga='git add'
-    alias gd='git diff'
-    alias glogp='git log --pretty=format:"%C(yellow)%H %C(green)%ad%C(red)%d %Creset%s %C(blue)[%cn]" --date=short --graph'
+        alias gs='git status'
+        alias gb='git branch'
+        alias gc='git commit'
+        alias ga='git add'
+        alias gd='git diff'
+        alias glogp='git log --pretty=format:"%C(yellow)%H %C(green)%ad%C(red)%d %Creset%s %C(blue)[%cn]" --date=short --graph'
 
 3. 保存并退出文件。在当前 terminal 中重新加载该文件

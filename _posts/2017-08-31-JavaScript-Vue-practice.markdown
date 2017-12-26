@@ -30,6 +30,11 @@ category: JavaScript
       }
     }
 
++ Vue 指令的预期值是**单个JS表达式**。当表达式的值改变时，响应式地**作用于DOM**。
++ 自定义指令通过 `binding.arg` 获取传给**指令的参数**（`v-my-directive:*` 冒号后面等号前面的内容）。
+
+    div(v-translate:检查结果：需求数|个，|个符合条件，|个不符合条件='lang')
+
 + Vue devtool inspection 在生产环境默认 disabled，所以在线上开发者工具里看不到 Vue devtool
 + 在 HTML 中侦听 Vue 事件，event name 必须是 camel-case，如 `@set-data`
 + 获取当前组件绑定的 HTMLElement 的方法： `this.$el`

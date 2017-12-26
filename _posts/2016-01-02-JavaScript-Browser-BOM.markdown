@@ -102,7 +102,7 @@ JS 有三种弹出框：Alert box，Confirm box，Prompt box
 
 一些事件如 mousemove、resize、scroll 是连续的更新，浏览器会尽快触发更新。有时只想要在用户停止连续操作时才更新页面，当你有大量code要响应事件时尤其重要。
 
-事件节流即对于一系列更新事件只响应一次。使用 generator function 形成闭包可以实现：
+事件节流（函数防抖）即对于一系列更新事件只响应一次。使用 generator function 形成闭包可以实现：
 
 ```js
 // throttle-then-act

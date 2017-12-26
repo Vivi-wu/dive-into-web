@@ -109,6 +109,12 @@ Stash 属于本地 Git 仓库，不会通过 push 推到远端。
 
 清空 stash 暂存记录。或者删除指定隐藏记录 `git stash drop stash@{1}`。
 
+### Apply已存在的commit到其他分支
+
+先创建一个干净的 开发分支，切换到此分支，运行如下命令，可把其他分支上已存在的 commit 应用到此分支上。
+
+    git cherry-pick <commit>
+
 ## Rewriting history
 
     git commit --amend
@@ -236,6 +242,15 @@ Move the current branch tip backward to commit and reset both the staging area a
 与 git reset 的区别是，产生新的commit，把 HEAD 向前移动。
 
 在回滚这一操作上看，效果差不多。但是在日后继续merge以前的老版本时有区别。因为git revert是用一次逆向的commit“中和”之前的提交，因此日后合并老的branch时，导致这部分改变不会再次出现，减少冲突。但是git reset是之间把某些commit在某个branch上删除，因而和老的branch再次merge时，这些被回滚的commit应该还会被引入，产生很多冲突。
+
+### 恢复删除的本地分支
+
+用 `-d`  或 `-D` 删除的本地开发分支，可通过以下指令找到已删除分支最后一个 commit 的 hash 标记然后恢复。
+
+    git reflog
+    git checkout -b <branch> <SHA-1>
+
+Reference logs, or "reflogs", 记录了分支和其他参考信息在本地仓库更新的时间。
 
 ## Git 文件状态
 
