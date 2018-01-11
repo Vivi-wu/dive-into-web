@@ -61,7 +61,7 @@ var d = new Date("Wed Mar 25 2015 09:56:24 GMT+0100 (W. Europe Standard Time)");
 
 <span class="t-blue">Date objects are **static**, not dynamic. The computer time is ticking, but date objects, once created, are not.</span> 日期对象是静态的，一旦创建，就是一个常量，不会自己更新。
 
-+ `toString()`，输出日期会自动转为一个字符串，不写也行。(_Tue Oct 18 2016 19:46:01 GMT+0800 (中国标准时间)_)
++ `toString()`，把日期对象以美式英语形式输出，格式为**当前time zone**的字符串。(_Tue Oct 18 2016 19:46:01 GMT+0800 (中国标准时间)_)
 + `toTimeString()`，把日期对象的时间部分转为字符串（_19:46:01 GMT+0800 (中国标准时间)_）
 + `toLocaleString()`，使用本地转换法，把日期对象转为字符串（_2016/10/18 下午7:46:01_）
 + `toLocaleTimeString()`，使用本地转换法，把日期对象的时间部分转为字符串（_下午7:46:01_）

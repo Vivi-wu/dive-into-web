@@ -49,6 +49,7 @@ JS 中有两个 0 ：`+0` 和 `-0`。两者输出皆为 0. 他们事实上也相
 
 ```js
 +0 === -0  // true
+
 +0 > -0  // false
 +0 < -0  //false
 ```
@@ -62,31 +63,56 @@ JS 中有两个 0 ：`+0` 和 `-0`。两者输出皆为 0. 他们事实上也相
 
 ### NaN - Not a Number
 
-当JS评估一个值不是一个number时，结果用 NaN 表示。注意数字除以一个 _non-numeric string_ 非数字式字符串和一个 numeric 字符串的区别。
+产生 NaN 的方式：
+
+1.数学运算结果是 `undefined`或不可表示的值
+2.把非数字型的值转为numeric value时，没有等价的primitive numeric值表示
+
+注意：数字除以一个 _non-numeric string_ 非数字式字符串和一个 numeric 字符串的区别。
 
     var x = 100 / "Apple";  // x will be NaN (Not a Number)
     var x = 100 / "10";     // x will be 10
 
 + `NaN` 的 type 是 number。
-+ NaN 不等于 NaN，不论是 `===` 还是 `==`，结果都是 false。因此如果你想从一个 array 中用原生的 `indexOf()` 找到 NaN**是不行的**。<span class="t-blue">可以通过判断 `x!==x`</span>，该方法比用 isNaN(x) 效率高。
++ `isNaN(value)` 可以理解为：当 value 被强制转为一个numeric value时，是一个IEEE-754'非数字'的值。
++ 如果 `isNaN(x)` 返回 true, 则 x 会是所有 arithmetic 表达式返回 `NaN`。
++ 判断一个 variable 是否为 `NaN` 更可靠的方式:
+
+    var isNaN = function(value) {
+        var n = Number(value);
+        return n !== n;
+    }
++ 等号操作符无法判断一个值是否为 `NaN`。因此如果你想从一个 array 中用原生的 `indexOf()` 找到 NaN **是不行的**。
+
+    NaN == NaN  // return false
+    NaN === NaN // return false
+    [NaN, 'test'].indexOf(NaN)  // return -1
 + 数字和 `NaN` 相加，结果也是 `NaN`。但是字符串和 `NaN` 相加，结果是字符串的 concatenation。
-+ `isNaN()` 该全局函数可以用来判断一个值，是否是一个 number（**是否可以转为一个数字**）。
 
 注意一些特殊值：
 
 ```js
-isNaN('')         // false，Converted to Number is 0
-isNaN('0')        // false，Converted to Number is 0
-isNaN([])         // false，Converted to Number is 0
-isNaN([20])       // false，Converted to Number is 20
-isNaN(true)       // false，Converted to Number is 1
 isNaN(undefined)  // true
-isNaN('NaN')      // true
 isNaN(NaN)        // true
-isNaN(0 / 0)      // true
-isNaN([20,10])    // true
 isNaN({})         // true
 isNaN(function(){})  // true
+
+isNaN(true)       // false，Converted to Number is 1
+isNaN(null)       // false, Converted to Number is 0
+isNaN(0)          // false
+isNaN(0 / 0)      // false
+
+isNaN('0')        // false，Converted to Number is 0
+isNaN('')         // false，Converted to Number is 0
+isNaN(' ')        // false，Converted to Number is 0
+isNaN('NaN')      // true
+
+isNaN([])         // false，Converted to Number is 0
+isNaN([20])       // false，Converted to Number is 20
+isNaN([20,10])    // true
+
+isNaN(new Date())                // false，Converted to current date/time in milliseconds
+isNaN(new Date().toString())     // true
 ```
 
 ### Numbers Can be Objects

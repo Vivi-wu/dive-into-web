@@ -222,8 +222,8 @@ _start_ 未定义，则从 0 开始；大于 array length 返回 `[]`。
 不经过任何处理直接删除是不行的，因为每删一个元素，数组长度就变了。解决办法如下：
 
 ```js
-// 对 arryA 待删除 item 的索引组成的 arry B 进行“降序排列”，结果如：[6,5,0]
-arryB.sort((a, b) => {return b > a})
+// 对 arryA 待删除 item 的索引组成的 arryB = [5,0,6] 进行“降序排列”，结果如：[6,5,0]
+arryB.sort((a, b) => b > a)
 arryB.forEach(index => {
   arryA.splice(index, 1)
 })
