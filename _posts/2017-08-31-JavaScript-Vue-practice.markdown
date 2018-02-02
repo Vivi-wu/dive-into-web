@@ -4,7 +4,7 @@ category: JavaScript
 ---
 ## Vue.js 2.2+
 
-+ Windows系统文件名字母大小写不敏感，当发生“can't find module xxx”错误时，检查下module引用的文件路径、文件名拼写、文件名大小写是否正确。
++ Windows系统文件名**不区分大小写**，当发生“can't find module xxx”错误时，检查下module引用的文件路径、文件名拼写、文件名大小写是否正确。
 + 通过Ajax请求新数据前，reset结果数据。
 + 如果使用vue绑定按钮的 _disabled_ 属性，则不要同时使用 HTMLElement.disabled，否则两者冲突，导致禁止失效。
 + 子组件的数据由 props 设定（或依赖props传递的值），数值在子组件内部变更后，通过 `emit()` 事件把新的值向上传给父组件，由父组件更新相应的值。
@@ -48,6 +48,14 @@ category: JavaScript
 + 使用 v-move 或定义对应的 css 样式，使得过渡平滑
 + 通用组件设计思路：入参配置初始值，输出值交由外部组件做业务逻辑
 + pug 模板中自定义 vue 指令不能单独写，需指定空值：`v-table-has-sticky-thead=''`。如果不指定，则会被 pug 编译成 `v-table-has-sticky-thead='v-table-has-sticky-thead'`，导致 console 报错
++ emit事件传递多个参数：[链接](https://jsfiddle.net/50wL7mdz/30115/)
+
+    // 子组件
+    this.$emit('emission', 1, 2, 3);
+    // 父组件
+    <component @emission="hearEmission">
+    // 父组件如果希望新增额外参数，在 .vue 文件里支持spread syntax实现
+    <component @emission="hearEmission('extra', ...arguments)">
 
 ## vue-router
 
@@ -62,6 +70,7 @@ category: JavaScript
 + 点击“面包屑”返回前，从 vuex 中取出当前列表查询参数对象，赋值给路由对象的 `query` 属性。这样返回列表查询页后，根据 URL 的 query string 可以回填历史查询、排序参数，reload 页面页不会因为 vuex 状态丢失这些参数。
 + 使用 `router.go(-1)` 实现返回上一页的功能
 + 问题：使用 v-if 控制显示的 input 框输入值没有重置，好像直接被复用。解决： Vue 会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。在元素上使用 `key`，它会基于 key 的变化重新排列元素顺序，并且会移除 key 不存在的元素。
++ 路由信息对象 `this.$route` 对每个路由视图子组件都是可见的
 
 ## Vuex
 

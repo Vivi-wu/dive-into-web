@@ -159,12 +159,15 @@ points.sort(function(a, b){return b-a});
 points.sort(function(a, b){return b>a});    // 两种方法结果一样
 ```
 
-按中文**拼音首字母** A-Z 排列数组：
+按中文**拼音首字母** A-Z 排列简单数组：
 
 ```js
 var people = ['童亚丽', '张子新', '谢丹丹', '陈梦如', '魏秀秀', '陈建'];
 people.sort(function(a, b){return a.localeCompare(b, 'zh-CN')});
 // 输出结果： ["陈建", "陈梦如", "童亚丽", "魏秀秀", "谢丹丹", "张子新"]
+
+// 对数组项是object的数组排序
+arry.sort((a, b) => a.last_name.localeCompare(b.last_name, 'zh-CN'));
 ```
 
 <span class="t-blue">如果要找出数组中的最大或最小值，可以先对数组进行排序</span>。
@@ -217,14 +220,12 @@ _start_ 未定义，则从 0 开始；大于 array length 返回 `[]`。
 
     initialValue 是可选的。可作为第一次调用时的第一个参数值。
 
-#### 通过“索引”批量删除数组中多个元素
+#### 通过“索引”批量删除数组中的元素
 
 不经过任何处理直接删除是不行的，因为每删一个元素，数组长度就变了。解决办法如下：
 
 ```js
 // 对 arryA 待删除 item 的索引组成的 arryB = [5,0,6] 进行“降序排列”，结果如：[6,5,0]
 arryB.sort((a, b) => b > a)
-arryB.forEach(index => {
-  arryA.splice(index, 1)
-})
+arryB.forEach(index => arryA.splice(index, 1))
 ```

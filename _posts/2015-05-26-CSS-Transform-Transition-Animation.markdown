@@ -28,7 +28,7 @@ _transform_ 属性通过以下的方法让元素实现：移动、旋转、放�
 
 ### transform-origin
 
-_transform-origin_ 用来修改元素变形的原点位置。可取的值从左到右分别表示 x、y、z。
+_transform-origin_ 用来修改元素变形的原点位置。可取的值从左到右分别表示 x、y、z轴，默认值为 (50% 50% 0)。
 
 + x-offset，值为 length 或 `%`，表示设定变形的原点距离盒子的**左边**有多远。
 + y-offset，值为 length 或 `%`，表示设定变形的原点距离盒子的**上边**有多远。
@@ -36,8 +36,8 @@ _transform-origin_ 用来修改元素变形的原点位置。可取的值从左�
 
 也可以使用关键字来描述变形的偏移量：
 
-+ x-offset-keyword，取值为 `left`（0%）, `right`（100%）或者 `center`（50%）描述设定变形的原点距离盒子的**左边**有多远。
-+ y-offset-keyword，取值为 `top`（0%）, `bottom`（100%）或者 `center`（50%）描述设定变形的原点距离盒子的**上边**有多远。
++ x-offset-keyword，取值为 `left`（0%）, `right`（100%）或者 `center`（50%）。
++ y-offset-keyword，取值为 `top`（0%）, `bottom`（100%）或者 `center`（50%）。
 
 ## CSS Transitions
 
