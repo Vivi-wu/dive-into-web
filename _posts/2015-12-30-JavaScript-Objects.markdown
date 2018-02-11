@@ -192,7 +192,9 @@ Prototype properties can have prototype values (default values) 原型的属性�
 + 不复制 non-enumerable、在原型链上的属性
 + 遇到 exception 时中断 copying 任务（如遇到 read-only 的属性时，throw exception）
 
-2.使用 `JSON.parse(JSON.stringify(sourceObj))` 可以做到**深度复制**。缺点是任何不符合 JSON 规范的值都将丢失：
+2.使用 `JSON.parse(JSON.stringify(sourceObj))` 可以做到**深度复制**。跨浏览器，且性能最优。
+
+缺点是任何不符合 JSON 规范的值都将丢失：
 
 + 不能复制属性值为 function 的 属性
 + 不能复制属性值为 _undefined_ 的属性（值为 _null_ 可以）

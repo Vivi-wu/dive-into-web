@@ -192,3 +192,11 @@ _nodeType_ 也是只读的：Element, Attribute, Text, Comment, Document.
 1. 添加操作可以使用 `createElement(`tagname`)`, `createTextNode(`string`)`, `appendChild(`node`)`, `parentNode.insertBefore(`newNode, existingNode`)`
 2. 删除操作使用 `parent.removeChild(`child`)`。虽然删除元素如果不需要 referring 父元素的话会更好，但是 DOM 操作需要知道你想删掉的元素和它的父元素。常用的方法是 `child.parentNode.removeChild(`child`)`
 3. 替换操作使用 `parent.replaceChild(`newchild, oldchild`)`
+
+### DocumentFragments
+
+`DocumentFragment` 是DOM节点，但**不属于**主DOM树，而存在于memory中。
+
+用法：创建document fragment（简称DF），在DF后append子DOM元素，然后把DFappend到DOM树，最终DF被其所有的子元素替换（即不会渲染出单独的html节点）。
+
+因为append子元素到DF不会引起页面reflow，所以使用DF会有更好的performance。
