@@ -4,6 +4,10 @@ category: [CSS, HTML]
 ---
 本文主要是关于 H5 页面开发，还原设计稿 web 前端技术实现的一些经验和思考。
 
+如何组织代码的逻辑顺序？ Your code should give you a good structure for your smallest screen devices。
+
+即当用户在手机上滚动一个长的文档时，优先希望用户看到的东西，应该与代码中元素的书写顺序一致。
+
 参考 [一篇真正教会你开发移动端页面的文章-二](http://hcysun.me/2015/10/19/%E4%B8%80%E7%AF%87%E7%9C%9F%E6%AD%A3%E6%95%99%E4%BC%9A%E4%BD%A0%E5%BC%80%E5%8F%91%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%A1%B5%E9%9D%A2%E7%9A%84%E6%96%87%E7%AB%A0-%E4%BA%8C/)
 
 95%会使用的基本设定：
@@ -151,6 +155,10 @@ rem 简单粗暴的实现，使得“屏幕越大按钮越大”。设计师认�
 弹性盒子作为布局神器可以完成很多富有创造力的布局，常用的属性 references 看 <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank">这里</a>，网站打不开的时候在搜索结果里选缓存页。
 
 关于**兼容性**：测试系统 IOS 8、IOS 9、android 4.2、android 4.4、android 6.0 都 ok。在华为的部分手机上发现flex不支持行内元素，必须改成块级元素才能被支持。
+
+## Grid 布局
+
+具体参考 CSS Grid 章节
 
 ## box-sizing
 

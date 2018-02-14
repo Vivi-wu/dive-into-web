@@ -2,86 +2,168 @@
 title:  "CSS Grid布局"
 category: CSS
 ---
-给栅格容器设定 `display: grid` 或 inline-grid 后，其**直接**子元素就变为栅格item。
+给栅格容器设定 `display: grid` 或 inline-grid 后，其**直接**子元素就变为栅格 item。
 
-栅格 item 通过设定 display 属性也可以成为栅格容器（实现 nesting grids）。
+栅格 item 通过设定 _display_ 属性也可以成为栅格容器（实现 nesting grids）。
+
+_float_ 、 _clear_ 和 _vertical-align_  属性对于栅格 item 不起作用，因为**栅格布局优先**。
+
+目前除 IE 浏览器，栅格布局在其他浏览器中都不需要 prefix，可以安全地使用。
 
 与 flex 布局的区别：
 
-+ 后者用来实现一维空间布局，in a row or a column。
-+ 当 wrap flex 元素时，每一个新行就变成一个新的 flex 容器，沿 row 所在的轴分配空间。
++ 后者用来实现一维空间布局，in a row / column
++ 当 wrap flex 元素时，新的每一个行都变成一个新的 flex 容器，沿行所在的轴分配空间
++ 当需要既沿 row 轴又沿 column 轴对齐元素时，就应该使用 grid 布局
 + 弹性盒子布局：让内容的尺寸决定每个元素所占的单独空间
 + 栅格系统布局：创建布局，然后把元素放上去
-+ 当需要既沿 row 轴又沿 column 轴对齐元素时，就应该使用 grid 布局。
+
+通过布局实现元素的 reordering 都是 visual 的，不会改变 text-to-speech、文档的 tab order 的逻辑顺序。
 
 <!--more-->
 
-## 父元素上设置的属性
+## 父元素上的属性
 
 ### Gird track
 
-栅格轨道为栅格上任意两条线之间的space。
+**栅格轨道**是栅格上任意两条线之间的space。
 
-通过 `grid-template-columns` 和 `grid-template-rows` 定义**列**和**行**的宽度。
+通过 _grid-template-columns_ 和 _grid-template-rows_ 定义**列**和**行**的宽度。
 
 这样定义的栅格组成了explicit grid。
 
-1.轨道尺寸可以设为 fixed 固定的，如以 `px` 为单位；可以是 flexible 弹性的，以 `fr` 为单位。
+1.轨道尺寸可以设为 fixed 的，如以 `px` 为单位；可以是 flexible 弹性的，以 `fr` 为单位。
 
-新单位 `fr` 表示栅格容器里可用空间的一个 fraction 片段。
+新引入的单位 `fr` 表示栅格容器里可用空间的一个 fraction（片段）。
 
     grid-template-columns: 500px 1fr 2fr;
 
-同时使用固定单位和flexible单位时，**先从可用空间里减去固定宽度**，剩余空间再根据所占比例划分。
+2.同时使用固定单位和flexible单位时，**先从可用空间里减去固定宽度**，再根据所占比例划分剩余空间。
 
-定义大型栅格多条轨道时，可使用 `repeat(重复次数, 重复pattern)` 函数重复全部或部分track列表。
+定义大型栅格多条轨道时，可使用 `repeat(重复次数, 重复pattern)` 实现重复全部或部分track列表。
+
+#### auto-fill vs. auto-fit
+
+看视频：
+
+<video controls="" src="https://cdn.css-tricks.com/wp-content/uploads/2017/12/auto-fill-devtools.mov"></video>
+
+### Auto placement
+
+栅格系统自动摆放规则：
+
+每个子元素**沿 row 轴**根据在 document source 中的**书写顺序**（同时也是 DOM order）填入到一个栅格 cell 中。
+
++ 如果 explicit 栅格没有足够的行放置，则自动创建 implicit 行来放。
++ 先把明确定位的 item 放好，再按照书写顺序依次摆放剩下的元素。
++ 当一行所剩空间放不下 item 时，移到下一行找地方放。
++ 没有写在任何标签里的内容将成为 anonymous 栅格 item，**匿名栅格元素总是自动放置**。
+
+通过 `grid-auto-flow: column;` 改变放置方向沿 column 轴。该属性也支持多值。
+
+只给部分元素明确定位会导致栅格上有许多 holes，如果希望尽可能填满，则 `grid-auto-flow: dense;`，遇到合适的就补上去。
 
 #### implicit grid
 
-如果内容被放置在 defined grid 之外，则会创建隐含 implicit gird。这些轨道默认是 auto-sized，其尺寸基于所含内容。
+如果内容被放置在 defined grid 之外，则会创建隐含的 gird。这些轨**道默认是 auto-sized**，其尺寸基于所含内容。
 
-通过 `grid-auto-rows` 和 `grid-auto-columns` 可以指定隐含grid的尺寸。
++ 通过 _grid-auto-rows_ 和 _grid-auto-columns_ 可以控制尺寸。
++ 使用 `minmax(minVal, maxVal)` 作为属性值可指定长度范围。
++ 该属性也支持多值，如：`grid-auto-rows: 100px 200px;`, 表示 repeat 模式，一行100px高，下一行200px高，交叉重复。（FF不支持）
++ 通过 `grid-column-end: span 2;` 扩展关键字，及时使用明确定位属性，仍然可以利用自动摆放
 
-使用 `minmax()` 作为属性值可指定implicit栅格的长度范围。
+### Gutters
 
-### Guttes
+栅格单元格之间的空隙通过 _grid-column-gap_ 和 _grid-row-gap_ 属性创建（缩写属性为 _grid-gap_）。
 
-栅格单元格之间的空隙通过 `grid-column-gap` 和 `grid-row-gap` 属性创建（缩写 `grid-gap`）。
++ gap 所占据的空间在计算弹性长度 fr 时，**先从可用空间里减去**。
++ 空隙里不能放任何东西。
++ 只出现在栅格 tracks 之间，不会出现在栅格上下左右边界。
 
-gap 所占据的空间在计算弹性长度 fr 时会**先从可用空间里减去**。
+### Grid areas
 
-空隙里不能放任何东西。
+通过使用 _grid-template-areas_ 属性，就不需要在子元素上设置具体的定位数据。
+
+```css
+grid-template-areas:
+  "hd hd hd hd   hd   hd   hd   hd   hd"
+  "sd sd sd main main main main main main"
+  ".  .  .  ft   ft   ft   ft   ft   ft";
+```
+
++ 其中 `.` 表示一个空的栅格cell
++ 栅格 area 名称前后可以有任意个 white space，便于代码对齐
++ 该属性的值**必须是完整的栅格**，即每行的cell个数必须相同
 
 ### alignment
 
-`align-items`
+通过 _align-items_ 设置 grid area 中的元素在 block/column 轴上对齐的方式。
 
-## 子元素上设置的属性
+通过 _justify-items_ 设置 grid area 中的元素在 inline/row 轴上对齐的方式。
+
+当栅格 track 占据的区域比栅格容器小时，可以通过 _align-content_ 和 _justify-content_ 设置整体内容在 column/row 轴的对齐方式。
+
+ 这两个属性值默认都是 start，即把有内容栅格区域放置在左上角。
+
+## 子元素上的属性
 
 ### Grid lines
 
 默认地，当我们定义栅格时，只是定义了grid track。栅格系统会自动产生**以数字为编号**的栅格线。
 
-栅格线编号顺序根据文档的书写模式（从左到右或从右到左）。
+栅格线编号**从1开始**，自增顺序根据文档的书写模式（从左到右或从右到左）。
 
-通过 `grid-column-start`, `grid-column-end`, `grid-row-start` 和 `grid-row-end` 属性来放置元素。
+通过 _grid-column-start_, _grid-column-end_, _grid-row-start_ 和 _grid-row-end_ 属性来放置元素。
 
 + 这些属性的值为具体的 line 编号/名称。
-+ 当不指定 `gird-*-end` 时，默认扩展占一列/行。
-+ 没有明确定位的栅格 item 将根据算法自行摆放在栅格系统空余的地方。
++ 当不指定终点 _gird-*-end_ 时， **默认扩展一列/行**。
++ 没有明确定位的栅格 item 将根据 auto-placement 算法，摆放进栅格系统的空余地方。
++ 缩写形式为 `grid-column: <line> / <line>;`，_grid-row_ 取值同。
++ 使用 span 关键字，指定轨道要扩展的行/列个数。
+
+#### named lines
+
+```css
+grid-template-columns: [main-start] 1fr [content-start] 1fr [content-end] 1fr [main-end];
+```
+
+使用 named lines 来定位栅格item：
+
++ 不需要给所有的栅格线命名（没命名的还是默认数字编号）
++ 同一条线可以有多个名称，即 line name 方括号支持**以空格分隔**多个值
++ 以 `-start` 和 `-end` 结尾的名称，会创建同名 implicit grid area
++ 反之亦然，named template area 也默认创建命名式的 line
+
+好处：在 responsive design 中，当重新定义栅格时，不需要在 media query 里改变子元素定位用的 line number。
+
+不建议使用 `repeat()` 创建多个同名 line，用起来不直观，还增加代码量。
 
 ### Grid cells
 
-栅格系统最小单位。就如表格的单元格。
+是栅格系统最小单位，就如表格的单元格。
 
-栅格 item 可以占据相同的 cell，因此可以 overlap；通过定义 `z-index` 控制层叠顺序；默认代码书写顺序在后面的显示在上层。
+栅格 item 可以占据相同的 cell，因此可以 overlap；通过定义 _z-index_ 控制层叠顺序；默认代码书写顺序在后面的显示在上层。
 
 ### Grid areas
 
 栅格元素可以在行或列上扩展占据一个或多个cell，如此产生了 grid area。
 
-栅格区域必须是矩形的。
++ 栅格区域必须是矩形的。
++ 行列定位进一步可缩写为 `grid-area: <row-start-line> / <column-start-line> / <row-end-line> / <column-end-line>;`
++ _grid-area_ 属性值也可以是 string 表示的名称，该用法需要在父元素（grid container）中配合使用 _grid-template-areas_ 属性。
 
 ### alignment
 
-`align-self`
+通过 _align-self_ 设置 grid area 中的单个元素在 block/column 轴上对齐的方式。通过 _justify-self_ 设置水平轴上的对齐。
+
+默认表现为 stretch，即不明确设置就占满栅格区域。
+
+还可以使用 auto margin 来消耗掉所有可用空间来实现对齐，如 `margin:auto；` 可实现子元素在栅格 area 内中心居中。
+
+### absolutely positioned
+
+当 grid 容器元素为 relatively positioned 时，在子元素上设置 `position: absolute`，实现效果为：
+
+子元素先根据指定的行和列（定位、扩展宽高）放置，然后使用 _top_、_left_ 等属性进行位移。由于该元素脱离了文档流，**其宽高仍然限制在栅格线之间**，但不会产生额外的行和列。
+
+当 grid 容器元素没有创造一个 positioning context 时，相对放置的子元素就不再被栅格布局所限制了。

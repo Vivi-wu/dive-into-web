@@ -57,7 +57,9 @@ Elements can be positioned using the top, bottom, left, and right properties. Ho
 方向属性根据 _position_ 的值，又有不同的工作方式：
 
 + 对于 relatiely-positioned 的元素，是根据它正常的位置，来上下左右调整元素。
-+ 对于 <span class="t-red">absolutely positioned elements</span> (_position_ 取值为 `absolute` 或 `fixed`), CSS _top_ sets the top edge of an element to a unit above/below the top edge of its nearest positioned ancestor. 对于绝对放置的元素， top 性质表示该元素的上边界，与其最近的非静态放置的祖先元素的上边界之间的距离。这里仅举个例子，bottom、left、right 属性同理。
++ 对于 <span class="t-red">absolutely positioned elements</span> (_position_ 取值为 `absolute` 或 `fixed`), top 属性表示该元素的上边界高于（取负值）或低于（取正值）其最近的**非静态放置**的祖先元素的上边界。
+
+bottom、left、right 属性同理。
 
 ### Overlapping Element
 

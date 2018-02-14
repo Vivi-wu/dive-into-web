@@ -30,6 +30,10 @@ function () {}.constructor   // Returns function Function(){ [native code] }
 function isArray(myArray) {
   return myArray.constructor.toString().indexOf("Array") > -1;
 }
+// 用 prototype 类似
+function isArray(myArray) {
+  return Object.prototype.toString.call(myArray) === '[object Array]'
+}
 ```
 
 ### Undefined
@@ -106,7 +110,7 @@ Booleans to Strings，Dates to Strings 方法同上。Date 转为字符串有更
 
 ```js
 Number("3.14")    // returns 3.14
-Number(" ")       // returns 0 
+Number(" ")       // returns 0
 Number("")        // returns 0
 Number("99 88")   // returns NaN
 ```
