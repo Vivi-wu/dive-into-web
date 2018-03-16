@@ -2,9 +2,7 @@
 title:  "JavaScript Objects"
 category: JavaScript
 ---
-在JS中，除了 **primitive values**（string "John Doe"，numbers 3.14，true，false，null and undefined），所有值都是 objects。
-
-因此 <span class="t-blue">all data types have a `valueOf()` 和 `toString()` 方法</span>.
+在JS中，<span class="t-blue">all data types have a `valueOf()` 和 `toString()` 方法</span>.
 
 JS对象是可以包含多个值的变量。这些值以 `name:value` 对的形式、**逗号**为分隔符（最后一个值后面没有逗号）。
 

@@ -85,7 +85,7 @@ var res = str.replace(/blue|house|car/gi, function myFunction(x){return x.toUppe
 
 ### Concate 拼接
 
-使用 `concat()` 连接两个或多个字符串，效果同使用连接操作符 `+`
+使用 `concat()` 连接两个或多个字符串，效果同使用连接操作符 `+`。
 
     var text = "Hello" + " " + "World!";
     var text = "Hello".concat(" ","World!");
