@@ -112,6 +112,7 @@ HTML DOM Document 对象是页面中所有其他元素的主人。如果你想�
 
     只返回第一个匹配的元素使用 `document.querySelector(`CSS selectors`)`
 
++ Element.closest(selectors)，返回符合条件的当前元素最近的祖先元素，没找到返回 _null_
 + 以 HTML Object Collections 查找元素，比如查找 id 为 frm1 的表单，`document.form['frm1']`, 其他可以获取的文档对象集合可参考上面的表格。
 
 ### 改变 HTML

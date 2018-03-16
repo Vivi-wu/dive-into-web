@@ -32,6 +32,10 @@ JS 程序可以容易将 JSON 数据转为原生的 JS 对象。
 
 使用 JS 内置的 `JSON.stringify(`value[, replacer[, space]]`)` 函数将 JS 值转换成 JSON string。
 
+replacer 可以是过滤 function 或 array（指定输出的属性名组成的数组）
+
+space 取值为 string（分隔符）或 number（指定输出时几个 space characters 作为一个空白符，超出10则取10，小于1则认为没有空格）
+
 ```js
 JSON.stringify([1, 'false', false]); // '[1,"false",false]'
 JSON.stringify({ x: 5 });            // '{"x":5}'

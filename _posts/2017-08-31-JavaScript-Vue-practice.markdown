@@ -57,6 +57,8 @@ category: JavaScript
     // 父组件如果希望新增额外参数，在 .vue 文件里支持spread syntax实现
     <component @emission="hearEmission('extra', ...arguments)">
 
++ vue 项目里使用 debounce 的方法 [官方用法](https://cn.vuejs.org/v2/guide/migration.html#%E5%B8%A6%E6%9C%89-debounce-%E7%9A%84-v-model%E7%A7%BB%E9%99%A4)
+
 ## vue-router
 
 + 在路由改变后获取数据的方法：
@@ -71,6 +73,9 @@ category: JavaScript
 + 使用 `router.go(-1)` 实现返回上一页的功能
 + 问题：使用 v-if 控制显示的 input 框输入值没有重置，好像直接被复用。解决： Vue 会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。在元素上使用 `key`，它会基于 key 的变化重新排列元素顺序，并且会移除 key 不存在的元素。
 + 路由信息对象 `this.$route` 对每个路由视图子组件都是可见的
++ router-link 绑定原生 click 事件处理函数：
+
+    router-link(:to='{ name: "to-request-bill" }' @click.native='gtagTest') 请款
 
 ## Vuex
 

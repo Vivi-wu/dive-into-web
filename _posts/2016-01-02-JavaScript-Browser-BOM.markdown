@@ -102,12 +102,12 @@ JS 有三种弹出框：Alert box，Confirm box，Prompt box
 
 一些事件如 mousemove、resize、scroll 是连续的更新，浏览器会尽快触发更新。有时只想要在用户停止连续操作时才更新页面，当你有大量code要响应事件时尤其重要。
 
-事件节流（函数防抖）即对于一系列更新事件只响应一次。使用 generator function 形成闭包可以实现：
+事件节流/函数防抖，即对于一系列更新事件只响应一次。使用 generator function 形成闭包可以实现：
 
 ```js
-// throttle-then-act
+// Debounce：throttle-then-act
 function throttleEvents(listener, delay) {
-    var timeout;
+    let timeout = null;
     return function() {
         // 2.如果已经有timer则清除并停止执行
         if (timeout) clearTimeout(timeout);
@@ -118,12 +118,12 @@ function throttleEvents(listener, delay) {
 // 1.事件发生时设置一个timer，创建延迟
 element.addEventListener(eventType, throttleEvents(realListenerFunction, 500))
 
-// 另一种方式：act-then-throttle
+// Throttling：act-then-throttle
 function actThenThrottleEvents(listener, delay) {
-  var timeout;
+  let timeout = null;
   return function() {
     if (!timeout) { // no timer running
-      listener(); // run the function
+      listener.apply(this, arguments) // run the function，传递上下文和参数
       timeout = setTimeout( function() { timeout = null },
         delay); // start a timer that turns itself off when it's done
     }

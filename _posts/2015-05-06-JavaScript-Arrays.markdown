@@ -55,7 +55,7 @@ var y = person[0];             // person[0] will return undefined
 
 ### 识别一个变量是 array
 
-1. `Array.isArray(x)`，x为要测试的变量。注意：旧的浏览器可能不支持
+1. `Array.isArray(x)`，如果 x 是由 `[]` 或者 `new Array()` 定义的变量，则返回 true。
 2. 变量的 `constructor` 属性，在 Data type 章节有提到。
 3. 使用 `instanceof` 操作符判断，Syntax 章节有提到。
 
@@ -219,6 +219,14 @@ _start_ 未定义，则从 0 开始；大于 array length 返回 `[]`。
 + `arr.reduce(function(previousValue, currentValue, currentIndex, array), initialValue)`，**从左到右**对数组中每个值进行操作，最终得到一个值。
 
     initialValue 是可选的。可作为第一次调用时的第一个参数值。
+
+```js
+const array1 = [1, 2, 3, 4];
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+// 1 + 2 + 3 + 4
+console.log(array1.reduce(reducer));
+```
 
 #### 通过“索引”批量删除数组中的元素
 

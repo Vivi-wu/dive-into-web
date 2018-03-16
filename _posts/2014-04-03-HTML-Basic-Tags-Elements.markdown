@@ -38,6 +38,18 @@ Strictly speaking, an HTML **element** is everything between the start tag and t
 
 **Tip**: In XHTML, all elements must be closed. **Adding a slash inside the start tag**, like `<br />`, is the proper way of closing empty elements in XHTML (and XML).
 
+### Element.classList
+
+该属性是**只读**的，返回 DOMTokenList（以空格分隔的 token）类型的元素的 class 属性名称。
+
+常用的方法：
+
++ add()，添加一个或多个css类名。添加已存在的类名直接忽略。
++ remove()，移除一个或多个css类名。删除不存在的类名不会报错。
++ contains()，检查一个类目是否已存在。
++ replace(old, new)，替换已存在的类名。
++ toggle(),
+
 文件后缀
 
 HTML files should have a .html extension (not .htm).

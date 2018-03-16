@@ -140,7 +140,7 @@ JS中**只能被 Number 对象调用**的属性有：`MAX_VALUE`，`MIN_VALUE`�
 
 将变量转为数字的全局方法有：
 
-+ `Number()`， Returns a number, converted from its argument. 注意字符串转数字，看下面的例子。
++ `Number()`， Returns a number, converted from its argument. 当参数无法转为数字时，返回 `NaN`
 + `parseFloat()`， Parses its argument and returns a floating point number
 + `parseInt(string, radix)`， Parses its argument and returns an integer. **Spaces are allowed. Only the first number is returned**，空格是允许的，但是只返回第一个数字。
 

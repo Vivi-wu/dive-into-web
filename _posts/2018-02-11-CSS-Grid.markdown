@@ -46,7 +46,7 @@ _float_ 、 _clear_ 和 _vertical-align_  属性对于栅格 item 不起作用�
 
 看视频：
 
-<video controls="" src="https://cdn.css-tricks.com/wp-content/uploads/2017/12/auto-fill-devtools.mov"></video>
+<video controls="" width="800" src="https://cdn.css-tricks.com/wp-content/uploads/2017/12/auto-fill-devtools.mov"></video>
 
 ### Auto placement
 
