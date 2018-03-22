@@ -8,7 +8,7 @@ W3C DOM 标注分为3种不同的部分：Core DOM，XML DOM 和 HTML DOM。
 
 ## HTML DOM
 
-HTML DOM 是针对 HTML 的一个标准对象模型和编程接口。规定了如何获取、改变、添加或删除 HTML 元素。
+HTML DOM 规定了如何获取、改变、添加或删除 HTML 元素。
 
 在 DOM 中，所有 HTML 元素被定义为**对象**。编程接口就是每个对象的属性（你可以获取和设定的**值**，比如 _innnerHTML_，该属性可以用来获取、改变**任何HTML元素**）和方法（可执行的操作，如 `getElementById()`）。
 

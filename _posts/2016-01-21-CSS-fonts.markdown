@@ -118,6 +118,8 @@ font-style font-variant font-weight font-size/line-height font-family
 
 ## CSS3 Web Fonts
 
+“typography is communication” but currently the web is “all system, no soul.”
+
 网络字体使得 web 设计者可以使用那些用户设备上没有安装的字体。只需要将字体文件添加到 web 服务器上，在用户需要时自动加载字体。
 
 自有字体使用 CSS3 的 `@font-face` 规则定义，使用方法如下：
@@ -135,3 +137,9 @@ div {
 **TTF/OTF**，**WOFF** 格式的字体文件被所有浏览器支持。
 
 注意：最好使用**小写**字体来写 URL，避免 IE 中出现意外结果。
+
+## Variable fonts
+
+通过使用 _font-variation-settings_ 属性，使用一个字体集实现“seemingly different typefaces”看似不同的字体。
+
+适用于 OpenType font format。目前支持性不太好，看不出效果

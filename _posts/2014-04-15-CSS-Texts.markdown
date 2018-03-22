@@ -16,7 +16,7 @@ category: CSS
 
     + `uppercase`, 全部转为大写。<span style="text-transform:uppercase">This is some text</span>.
     + `lowercase`, 全部转为小写。<span style="text-transform:lowercase">This is some text</span>.
-    + `capitalize`, 每个单词的**首字母转为大写**。<span style="text-transform:capitalize">This is some text</span>.
+    + `capitalize`, **每个**单词的**首字母**转为**大写**。<span style="text-transform:capitalize">This is some text</span>.
 
 + _text-indent_，**首行缩进**，指定一段文字中段落开始处与左边线的距离。可取的值为：
 

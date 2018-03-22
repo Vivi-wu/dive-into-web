@@ -58,6 +58,24 @@ category: JavaScript
     <component @emission="hearEmission('extra', ...arguments)">
 
 + vue 项目里使用 debounce 的方法 [官方用法](https://cn.vuejs.org/v2/guide/migration.html#%E5%B8%A6%E6%9C%89-debounce-%E7%9A%84-v-model%E7%A7%BB%E9%99%A4)
++ props 作为子组件 data 的初始值，当 props 状态更新时，需要通过 watch 方法来个更新 data，否则 data 不能自动更新。
++ filter 注册写在 vue 实例初始化之后，刷新页面总数报 “can't resolve filter” 错，需要写在前面
++ `.sync` 修饰符减少父组件更新代码，但不要滥用
+
+    // 子组件
+    this.$emit('update:isShown', false)
+    // 父组件
+    <popover :isShown.sync='isShown'></poopover>
+
++ Vue 不能检查到已创建的对象实例动态增加/减少 root-level 属性，即在 data 中初始值为 `{}` 的属性，空对象里加减属性，都不会触发视图更新。解决办法：
+
+    // 针对单个属性的添加
+    Vue.set( target, key, value )
+    // 针对单个属性的删除
+    Vue.delete( target, key )
+    // 批量新增属性
+    this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })
+    // 子组件内使用 vm.$set，vm.$delete方法, 它们是 global Vue.set, Vue.delete 的 alias
 
 ## vue-router
 
@@ -82,6 +100,7 @@ category: JavaScript
 + 默认情况下，vuex模块内部的 action、mutation 和 getter 是注册在全局命名空间的
 + 逻辑上应该相同的状态存放在不同组件里，将很难保证数据一致。如果由于某种 bug 导致某个组件中某状态与其他组件里该状态不一致，就会出现问题。于是 Flux、Redux之类提出 store 的概念，依靠全局状态作为唯一可靠数据源。
 + 利用 prop 在组件之间传递数据的问题：组件结构在三级或以上，底层组件想传数据给最底层组件，需通过多个中间组件。而这些中间组件可能根本不需要这个 prop，这样违反了低耦合的设计要求。
++ 子组件访问全局 getters 时使用 `rootGetters`
 
 ## Webpack
 

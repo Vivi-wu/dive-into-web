@@ -32,9 +32,10 @@ W3C建议在HTML4和XHTML中标签使用小写。因此，尽管 HTML5 标准没
 
 Strictly speaking, an HTML **element** is everything between the start tag and the end tag, including the tags. HTML元素指的是在开标签和闭合标签之间所有的东西，包括这两个标签。
 
-+ HTML elements can be nested (也就是说一个元素的内容可以是其他元素).
++ HTML elements can be nested (也就是说一个元素的内容可以是其他元素)
 + 没有内容的元素被称为 empty elements **空元素**
-+ HTML5 没有要求空元素要闭合，为了让你的文档对于XML解析器是可读的，记得闭合所有HTML元素。
++ HTML5 没有要求空元素要闭合，为了让你的文档对于XML解析器是可读的，记得闭合所有HTML元素
++ 设置了 _id_ 属性的 HTML 元素，可以通过 id 值直接进行dom操作
 
 **Tip**: In XHTML, all elements must be closed. **Adding a slash inside the start tag**, like `<br />`, is the proper way of closing empty elements in XHTML (and XML).
 

@@ -225,7 +225,7 @@ Push the specified branch to remote, along with all of the necessary commits and
 
     <img src="{{ "/assets/images/feature_to_master.png" | prepend: site.baseurl }}" alt="Rebase feature onto master">
 
-+ **缺点**是如果没有遵从一定的规则（<span class="t-blue">never use git rebase on public branch</span>），重写项目历史会给 collaboration 工作流带来灾难性的问题。
++ **缺点**是如果没有遵从一定的规则（<span class="t-blue">never use git rebase on public branch</span>），重写项目历史会给 collaboration 工作流带来**灾难性**的问题。
 
     <img src="{{ "/assets/images/master_to_feature.png" | prepend: site.baseurl }}" alt="Rebase master onto feature">
 

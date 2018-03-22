@@ -79,7 +79,7 @@ JS 类型转换分为 implicit 和 explicit。开发者通过一些函数进行�
 
 JS 中类型转换一共有**3种**规则：to string，to number，to Boolean。
 
-注意查看 [Type Conversion Table](http://www.w3schools.com/js/js_type_conversion.asp)
+推荐查看：[JavaScript type coercion explained](https://medium.freecodecamp.org/js-type-coercion-explained-27ba3d9a2839)
 
 ### String conversion
 
@@ -135,6 +135,8 @@ Number(" 12 ")      // 12
 Number("-12.34")    // -12.34
 Number("\n")        // 0
 Number(" ")         // 0
+Number([])          // 0
+Number({})          // NaN
 Number("")          // 0
 Number(" 12s ")     // NaN
 Number("99 88")     // NaN

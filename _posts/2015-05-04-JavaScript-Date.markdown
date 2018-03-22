@@ -204,12 +204,11 @@ function validDate (date) { // 判断输入的日期是否晚于今天
 }
 ```
 
-但是**不能**使用 `==` 操作符判断日期是否相等，因为 JS Object 的比较要check reference，不同日期对象的 reference 一定不相等。
+但是**不能**使用 `==` 操作符判断日期是否相等，因为 JS Object 的比较要检查 reference，不同日期对象的 reference 一定不相等。
 
 解决办法：
 
 ```js
-tmp <= today && tmp >= today // 相交的闭区间
-tmp.getTime() === today.getTime() // 转成距离0时的毫秒数
-
+tmp <= today && tmp >= today      // 方法一：取相交的闭区间
+tmp.getTime() === today.getTime() // 方法二：转成距离0时的毫秒数
 ```
