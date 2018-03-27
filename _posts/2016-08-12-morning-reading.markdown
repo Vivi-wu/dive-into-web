@@ -265,3 +265,10 @@ tip：
 + 优化安装进程，通过让npm跳过重复的（已安装的包）metadata解析，任何未来的安装都将基于这个文件，而不是重新计算package.json的依赖版本
 
 如果该文件没有放在项目root目录下将被忽略。
+
+### Draw dashed lines
+
+怎么实现画一条dashed的线，可以控制线size和space？下面的答案介绍了三种方法并比较了利弊：
+svg、css linear gradient、css box-shadow
+[Control the dashed border stroke length and distance between strokes
+](https://stackoverflow.com/a/31315911)

@@ -77,6 +77,8 @@ category: JavaScript
     this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })
     // 子组件内使用 vm.$set，vm.$delete方法, 它们是 global Vue.set, Vue.delete 的 alias
 
++ 通过 _ref_ 调用子组件的方法，当子组件还没有 created 时，会提示 `this.$refs.componentChild is undefined`
+
 ## vue-router
 
 + 在路由改变后获取数据的方法：

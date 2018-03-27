@@ -31,11 +31,11 @@ category: CSS
 + _line-height_，指定**每行文本之间的距离**。
 
     + `normal`: **默认值**，值取决于 user-agent 和字体集，由浏览器分别计算得到。桌面浏览器一般为 1.2
-    + number，行高为**当前元素的 _font-size_ 乘以这个数字**计算而得
+    + number，实际行高由**当前元素**的 _font-size_ 乘以这个数字得到
     + length，使用 CSS 单位表示大小(如：px，em 等)
-    + `%`，**元素本身 _font-size_ 的百分比**
+    + `%`，由**元素** _font-size_ 的百分比计算得到
 
-    注意：如果不明确设置子元素行高，当其父元素的 _line-height_ 值为 length 和 % ，子元素会**直接继承父元素行高**。
+    如果不明确设置子元素行高，当其父元素的 _line-height_ 值为 length 和 % 时，子元素会**直接继承父元素行高**。
 
     <span class="t-blue">为避免意外，尽量使用 **number** 设置行高</span>。
 

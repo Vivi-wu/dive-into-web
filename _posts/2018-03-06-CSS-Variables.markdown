@@ -1,13 +1,7 @@
 ---
-title:  "晨读：draw dashed lines, CSS Variables"
+title:  "CSS Variables"
 category: CSS
 ---
-
-怎么实现画一条dashed的线，可以控制线size和space？下面的答案介绍了三种方法并比较了利弊：
-svg、css linear gradient、css box-shadow
-[Control the dashed border stroke length and distance between strokes
-](https://stackoverflow.com/a/31315911)
-
 ## CSS variables
 
 ```css
