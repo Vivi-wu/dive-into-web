@@ -272,3 +272,7 @@ tip：
 svg、css linear gradient、css box-shadow
 [Control the dashed border stroke length and distance between strokes
 ](https://stackoverflow.com/a/31315911)
+
+### CSS 关键词 unset
+
+关键词 _unset_ 适用于任何 CSS 属性，效果是将属性值设为 **inherited** value from 祖先元素；如果祖先元素中没有对该属性进行设值，则将属性值设为 initial value。

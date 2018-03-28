@@ -61,7 +61,7 @@ _margin_ 属性实际上是 _margin-top_, _margin-right_, _margin-bottom_, _marg
 
 + `auto`，浏览器来计算外边距。
 + length，以 px，pt，cm 等为单位来指定，默认值是**0**
-+ %，以所包含元素的宽度的百分比来指定
++ %，基于所包含**元素的宽度**的百分比
 + inherit
 
 外边距可以取<span class="t-red">负值</span>，因为两个元素可以重叠 overlap。
@@ -77,7 +77,7 @@ _padding_ 属性实际上是 _padding-top_, _padding-right_, _padding-bottom_, _
 可以取值类型：
 
 + length，以 px，pt，cm 等为单位来指定，默认值是**0**
-+ %，以所包含元素的宽度的百分比来指定
++ %，基于所包含**元素的宽度**的百分比
 + inherit
 
 ## CSS3 Box Sizing
