@@ -171,14 +171,12 @@ CSS 书写动效：**命令式**（如 jQuery.animate，显示调用动画函数
 
 + 慎重选择高消耗的样式（绘制前需要浏览器进行大量计算的 expensive styles）：`box-shadows`,`border-radius`,`transparency`,`transforms`,`CSS filters`
 + 避免过分 reflow（浏览器重新计算元素的**位置**和**大小**）。常见引起重排的属性：width/height，padding，margin，display，border，border-width，position，top/bottom/left/right，font-size，font-weight，font-family，float，text-align，vertical-align，line-height，min-height，overflow，clear，white-space
-+ 避免过分 repaints，常见引起重绘的属性：color，border-style，visibility，text-decoratoiin，background，background-image，background-position，background-repeat，background-size，outline，outline-color，outline-style，outline-width，border-radius，box-shadow
++ 避免过分 repaint（重新绘制显示的内容，而元素的几何尺寸没有变），常见引起重绘的属性：color，border-style，visibility，text-decoratoiin，background，background-image，background-position，background-repeat，background-size，outline，outline-color，outline-style，outline-width，border-radius，box-shadow
 + `requestAnimationFrame`，一种提供更高效运行基于脚本动效的 API（让视觉更新按照浏览器的最优时间来安排计划），相比于传统的 timeouts 方法。
 
-Hardware Acceleration means that the Graphics Processing Unit (GPU) will assist your browser in rendering a page by doing some of the heavy lifting, instead of throwing it all onto the Central Processing Unit (CPU) to do. 硬件加速是指GPU帮助浏览器在渲染一个页面时做一些繁重的工作，代替传统地把全部工作扔给CPU来做。
+硬件加速是指GPU帮助浏览器在渲染一个页面时做一些繁重的工作，代替传统地把全部工作扔给CPU来做。
 
-a GPU is designed specifically for performing the complex mathematical and geometric calculations that are necessary for graphics rendering. GPU专门用来执行那些对于图像渲染必要的复杂数学、几何运算。
-
-Hardware acceleration (a.k.a. GPU acceleration) relies on a layering model used by the browser as it renders a page. When certain operations (such as 3D transforms) are performed on an element on a page, that element is moved to its own “layer”, where it can render independently from the rest of the page and be composited in (drawn onto the screen) later. This isolates the rendering of the content so that the rest of the page doesn’t have to be rerendered if the element’s transform is the only thing that changes between frames, and often provides significant speed benefits. It is worth mentioning here that only 3D transforms qualify for their own layer; 2D transforms don’t.
+GPU专门用来执行那些对于图像渲染必要的复杂数学、几何运算。
 
 硬件加速依赖于浏览器渲染页面时使用的 layering 模型。当页面中某个元素上执行特定操作时，元素被移到它自己的 layer，在那里它将被独立渲染然后画到屏幕上。
 

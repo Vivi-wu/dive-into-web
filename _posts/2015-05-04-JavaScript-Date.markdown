@@ -8,7 +8,7 @@ Date 对象用来与年月日时分秒毫秒打交道的。
 
 有**4种**初始化日期对象的方式：
 
-`new Date()`，根据系统设定以 **current date and time**创建一个新的日期对象。（本地时区）
+`new Date()`，根据系统设定以**current date and time**创建一个新的日期对象，输出为**本地时间**。
 
 `new Date(milliseconds)`，按照 <span class="t-blue">zero time</span>（01 January 1970 00:00:00 UTC）加上参数创建新的日期对象。JS一天包含 86,400,000 millisecond
 
@@ -66,7 +66,7 @@ var d = new Date("Wed Mar 25 2015 09:56:24 GMT+0100 (W. Europe Standard Time)");
 + `toLocaleString()`，使用本地转换法，把日期对象转为字符串（_2016/10/18 下午7:46:01_）
 + `toLocaleTimeString()`，使用本地转换法，把日期对象的时间部分转为字符串（_下午7:46:01_）
 + `toLocaleDateString()`，使用本地转换法，把日期对象的日期部分转为字符串（_2016/10/18_）
-+ `toISOString()`，使用 ISO 标准将日期对象转为字符串。格式为（_YYYY-MM-DDTHH:mm:ss.sssZ_），其时区 **always zero** UTC offset, 末尾的"Z"表示UTC时间.
++ `toISOString()`，使用 ISO 标准将日期对象转为字符串。格式为（_YYYY-MM-DDTHH:mm:ss.sssZ_），其时区总是 **zero** UTC offset，即 UTC 时间（末尾的"Z"表示UTC时间）
 + `toJSON()`，将日期对象转为 <strong>JSON 日期格式</strong>的字符串（_2016-10-18T11:46:01.970Z_），格式同 toISOString()（ISO-8601 standard）.
 + `toUTCString()`，`toGMLString()`，根据世界时间将日期对象转为字符串（_Tue, 18 Oct 2016 11:46:01 GMT_）
 + `toDateString()`，converts the date (not the time **不含时间**) of a Date object into a readable string (结果为 _Tue Oct 18 2016_)

@@ -101,7 +101,7 @@ HTML DOM Document 对象是页面中所有其他元素的主人。如果你想�
   </tbody>
 </table>
 
-## Finding HTML Element
+## 获取 HTML Element
 
 常见的查找 HTML 元素的方法:
 
@@ -131,10 +131,6 @@ HTML DOM Document 对象是页面中所有其他元素的主人。如果你想�
     element.style.property = new style
 
 上面的 property 就是 CSS 属性名，对于使用 `-` 连字符的属性名，用法为 _paddingTop_
-
-### DOM animation
-
-使用 `setInterval` 和 `clearInterval` 函数作为 timer 实现 JS 动画。
 
 ## DOM EventListener
 
@@ -201,3 +197,27 @@ _nodeType_ 也是只读的：Element, Attribute, Text, Comment, Document.
 用法：创建document fragment（简称DF），在DF后append子DOM元素，然后把DFappend到DOM树，最终DF被其所有的子元素替换（即不会渲染出单独的html节点）。
 
 因为append子元素到DF不会引起页面reflow，所以使用DF会有更好的performance。
+
+## 性能优化
+
+1. 不要逐条地修改 DOM 的样式。使用预先定义好css class 名称，然后修改 DOM 的 className。
+
+```js
+// bad
+var left = 10,
+top = 10;
+el.style.left = left + "px";
+el.style.top  = top  + "px";
+
+// Good
+el.className += " theclassname";
+
+// Good
+el.style.cssText += "; left: " + left + "px; top: " + top + "px;";
+```
+
+2. 离线修改DOM
+  + 使用 documentFragment 对象在内存里操作DOM
+  + 把需要频繁改动的 DOM 给 display:none，(涉及一次 reflow)，进行 DOM 操作，最后再显示出来
+3. 不要把 DOM 结点的属性值作为一个循环里的变量。否则导致大量地读写这个结点的属性
+4. 对含有动效的 HTML 元素的 position 设为 fixed 或 absoult，这样修改他们的 CSS 不会引起 reflow

@@ -139,16 +139,21 @@ _start_ 是一个整数，表示第一个新元素要放的位置。_deleteCount
 
 ### Sorting 排序
 
-使用 `sort()` 方法将数组元素按照字符升序 alphabetically 排序。使用 `reverse()` 将升序排列的数组反相（降序）输出。
+使用 `sort([compareFunction])` 方法将数组元素按照字符升序 alphabetically 排序。
 
-这**两种方法用在数组值是 String 的情况下**。不适用于数字排序，因为 “25” 大于 “100”，“2” 大于 “1”。
+使用 `reverse()` 将升序排列的数组反相（降序）输出。
+
+如不指定 compare function，则把数组项转为字符串，按照 unicode 顺序比较；如指定，入参为（a,b），则根据函数返回值比较：
+
++ 小于0，把a放到**索引小于**b的位置上
++ 等于0，保持a和b的位置
++ 大于0，把b放到**索引小于**a的位置上
 
 **升序**排列数字数组：
 
 ```js
 var points = [40, 100, 1, 5, 25, 10];
 points.sort(function(a, b){return a-b});
-points.sort(function(a, b){return a>b});    // 两种方法结果一样
 ```
 
 **降序**排列数字数组：
@@ -156,7 +161,6 @@ points.sort(function(a, b){return a>b});    // 两种方法结果一样
 ```js
 var points = [40, 100, 1, 5, 25, 10];
 points.sort(function(a, b){return b-a});
-points.sort(function(a, b){return b>a});    // 两种方法结果一样
 ```
 
 按中文**拼音首字母** A-Z 排列简单数组：
@@ -168,6 +172,21 @@ people.sort(function(a, b){return a.localeCompare(b, 'zh-CN')});
 
 // 对数组项是object的数组排序
 arry.sort((a, b) => a.last_name.localeCompare(b.last_name, 'zh-CN'));
+```
+
+自定义比较函数：
+
+```js
+function compare(a, b) {
+  if (a is less than b by some ordering criterion) {
+    return -1;
+  }
+  if (a is greater than b by the ordering criterion) {
+    return 1;
+  }
+  // a must be equal to b
+  return 0;
+}
 ```
 
 <span class="t-blue">如果要找出数组中的最大或最小值，可以先对数组进行排序</span>。

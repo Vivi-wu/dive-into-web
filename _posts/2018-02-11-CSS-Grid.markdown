@@ -116,7 +116,7 @@ grid-template-areas:
 通过 _grid-column-start_, _grid-column-end_, _grid-row-start_ 和 _grid-row-end_ 属性来放置元素。
 
 + 这些属性的值为具体的 line 编号/名称。
-+ 当不指定终点 _gird-*-end_ 时， **默认扩展一列/行**。
++ 当不指定终点 _gird-*-end_ 时，**默认扩展一列/行**。
 + 没有明确定位的栅格 item 将根据 auto-placement 算法，摆放进栅格系统的空余地方。
 + 缩写形式为 `grid-column: <line> / <line>;`，_grid-row_ 取值同。
 + 使用 span 关键字，指定轨道要扩展的行/列个数。
@@ -133,8 +133,9 @@ grid-template-columns: [main-start] 1fr [content-start] 1fr [content-end] 1fr [m
 
 + 不需要给所有的栅格线命名（没命名的还是默认数字编号）
 + 同一条线可以有多个名称，即 line name 方括号支持**以空格分隔**多个值
-+ 以 `-start` 和 `-end` 结尾的名称，会创建同名 implicit grid area
++ line 名称以 `-start` 和 `-end` 结尾，会创建同名的 implicit grid area
 + 反之亦然，named template area 也默认创建命名式的 line
++ `grid-column: test`，将使用 named grid area 的起始/截止边作为栅格线
 
 好处：在 responsive design 中，当重新定义栅格时，不需要在 media query 里改变子元素定位用的 line number。
 
