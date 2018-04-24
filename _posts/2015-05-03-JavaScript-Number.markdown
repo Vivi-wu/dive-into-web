@@ -166,6 +166,7 @@ parseFloat("10 20 30");  // returns 10
 ### Number 的方法
 
 + `toString()`，可以把 literals, variables, or expressions 转为字符串输出
++ `toLocaleString()`，转成本地数字显示格式。如 35000 -> "35,000"
 + `toExponential(x)`，Returns a string, with a number rounded and written **using exponential notation**. 参数 x 表示精确到小数的后几位数，取值从 0 到 20，原数小数点后位数不够补0，多则四舍五入. **缺省则保留所有小数点后的数字**。
 + `toFixed(x)`，Returns a string, with a number rounded and written with a specified number of decimals. x **指定小数点后保留几位数**。默认值是 **0** (no digits after the decimal point 表示没有小数部分，多则四舍五入)
 + `toPrecision(x)`，Returns a string, with a number written with a specified length，按**指定数字长度**，小数部分包括在内，**缺省则原样输出**。位数不够补0，多则四舍五入。注意对小数的处理，看下面的例子。

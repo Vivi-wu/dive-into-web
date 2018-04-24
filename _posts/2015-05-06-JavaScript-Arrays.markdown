@@ -77,7 +77,11 @@ fruits instanceof Object;    // returns true
 
 ## Array Methods
 
+### 查找
+
 JS数组也有 `indexOf()`，`lastIndexOf()` 方法，返回数组中指定 item 的位置，没找到返回 `-1`。
+
++ `includes(searchElement[, fromIndex])`，该方法检查数组中是否含有某元素，有则返回 true，无则返回 false。
 
 ### Convert Arrays to Strings
 
@@ -220,7 +224,7 @@ _start_ 未定义，则从 0 开始；大于 array length 返回 `[]`。
 + `filter()`，返回由所有**通过某种测试的数组元素**所组成的**新数组**。如果数组项都不满足条件，则返回 `[]`。
 + `findIndex()`，返回数组中第一个通过test函数的item的**索引**，否则返回 `-1`。
 
-以上三种方法都是类似的结构：
+以上方法都是类似的结构：
 
 `array.every(`function(currentValue, index, arr), thisValue`)`，其中 index，arr，thisValue 都是可选的。
 

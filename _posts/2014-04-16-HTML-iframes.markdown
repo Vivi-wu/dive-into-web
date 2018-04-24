@@ -18,7 +18,7 @@ _src_ 特性指定了要显示的网页地址。
 
     <iframe src="demo_iframe.htm" width="200" height="200"></iframe>
 
-默认情况下 iframe 元素**有一个黑色的边框**，通过设定元素 CSS特性 _border:none;_ 来去除边框。当然，你也可以修改成你喜欢的边框样式。
+默认情况下 iframe 元素**有一个黑色的边框**，通过设定元素 CSS特性 _border:none;_ ，或者在 iframe 元素上添加 `frameborder='0'` 来去除边框。当然，你也可以修改成你喜欢的边框样式。
 
 ### Use iframe as a Target for a link
 

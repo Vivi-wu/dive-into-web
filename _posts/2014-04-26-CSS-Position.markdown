@@ -77,7 +77,7 @@ _z-index_ 属性指定了 stack order of an element 元素的叠放顺序. 可�
 
 ## Clip
 
-_clip_ 使我们可以用一个矩形框来剪切一个 absolutely positioned 的元素。
+_clip_ 使我们可以用一个**矩形框**来剪切一个 absolutely positioned 的元素。
 
 1. 被矩形框框住的区域被保留（visible）。
 2. 从元素的左上角开始剪切。

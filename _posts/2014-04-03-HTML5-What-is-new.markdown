@@ -33,7 +33,7 @@ A semantic element clearly describes its meaning to both the browser and the dev
 + `<main>` 定义文档的主要内容区域
 + `<article>` 定义独立完整的内容，与网站中其他内容分离出来也可以被阅读：Forum post、Blog post、Newspaper article
 + `<aside>` 定义与它所处位置的内容以外的一些内容（有点像花絮、补白之类的），要与周围的内容相关
-+ `<figure>` 定义含有标题的图片内容，可以是 illustrations 插图实例， diagrams, photos, code listings, etc, 
++ `<figure>` 定义含有标题的图片内容，可以是 illustrations 插图实例， diagrams, photos, code listings, etc,
 + `<figcaption>` 定义 `<figure>` 元素的标题，可以作为 `<figure>` 元素的第一个或最后一个子元素
 + `<details>` 定义用户可以看到或隐藏的额外细节，块级元素，默认内容是不可见的（close），通过设定它的 _open_ 特性，重写默认状态 be visible to user (open)
 + `<summary>` 定义 `<details>` 元素的 visible heading，点击可以显示`<details>` 元素的完整内容，注意：IE和FF不支持这两个元素
@@ -84,7 +84,7 @@ A semantic element clearly describes its meaning to both the browser and the dev
 
 8.New API
 
-Geolocation，Drag and Drop，Local Storage，Application Cache，Web Workers，SSE
+Geolocation，Drag and Drop，Local Storage，Web Workers，SSE
 
 ## HTML5 Browser Support
 

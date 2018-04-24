@@ -199,3 +199,4 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
 3. 用户手动输入的值要做 trim 处理，去掉首尾的空格
 4. 指定表单里某个输入域获取光标焦点 `form['myName'].focus()`，采用的是指定元素获得焦点的方法 `HTMLElement.focus()`
 5. 输入框的 input 事件**实时**反应输入值，而 change 事件只有在**光标再次失去焦点时**才反应输入值
+6. 非 input 元素如果想触发 focus 事件，必须指定 _tabindex_ 属性，即该元素支持使用 keyboard 进行切换

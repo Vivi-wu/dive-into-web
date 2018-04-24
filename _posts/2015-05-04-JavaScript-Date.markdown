@@ -185,7 +185,7 @@ document.getElementById("demo").innerHTML = days[d.getDay()];
 </tr>
 </tbody></table>
 
-`setDate(n)` method can also be used to add days to a date. If adding days, **shifts the month or year**, the **changes are handled automatically by the Date object**. 计算距离指定日期**多少天以后**是几月几号星期几，JS会自动帮你跨月份甚至跨年份。
+`setDate(n)` can also be used to add days to a date object. If adding days, **shifts the month or year**, the **changes are handled automatically by the Date object**. 计算距离指定日期**多少天以后**是几月几号星期几，JS会自动帮你跨月份甚至跨年份。
 
 ### Parsing Date
 

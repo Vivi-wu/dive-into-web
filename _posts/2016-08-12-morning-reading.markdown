@@ -274,3 +274,23 @@ svg、css linear gradient、css box-shadow
 ### CSS 关键词 unset
 
 关键词 _unset_ 适用于任何 CSS 属性，效果是将属性值设为 **inherited** value from 祖先元素；如果祖先元素中没有对该属性进行设值，则将属性值设为 initial value。
+
+
+## 小的UI tips
+
+1.在引起严重后果的action按钮上使用红色高亮，提醒用户这个操作有危险
+2.在非主要操作的按钮上不要使用深色，而是浅灰色或其他浅色
+3.背景图使用 `blend-mode: multiply` 并结合背景色，生成叠加效果，让hero banner白色字体有一个漂亮的contrast
+4.相似的内容排在一行，使用上下边线来group，便于用户理解
+5.英文全大写文案增加 letter spacing
+6.英文页面的body text采用 `font-size: 16px;` 和 `line-height: 1.5`
+7.让图标和段落首行或小标题在同一行对齐
+8.图标的颜色采用比旁边label文案更light的颜色，让更重要的文字信息pop out
+
+### object-fit
+
+该 css 属性设定 img、video 插入的内容如何进行缩放以填充容器。可选的值：contain（保持长宽比）、cover、fill、none、scale-down（效果有时同none和contain）
+
+### attr()
+
+该 css 函数提取选定的 html 元素上的属性值，并用于样式表。也可用于伪元素，在这种情况下，返回伪元素的 originating element 上的属性值。
