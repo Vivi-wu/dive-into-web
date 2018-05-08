@@ -13,3 +13,10 @@ category: CSS
 + 如果所有子元素 _flex-grow_ 的值都相等，则 flex 容器中的**剩余空间将平均分配给所有子元素**。
 
 通过在子元素上设置 `flex: 1 1 0;` 可实现 flex 容器被平均分配的效果。
+
+## flex-flow
+
+该属性是 _flex-direction_ 和 _flex-wrap_ 两个属性的缩写形式。
+
++ _flex-direction_，设定 flex item 在容器里的主轴和方向
++ _flex-wrap_，设定是否强制 flex item 摆放在一行
