@@ -78,6 +78,7 @@ category: JavaScript
     // 子组件内使用 vm.$set，vm.$delete方法, 它们是 global Vue.set, Vue.delete 的 alias
 
 + 通过 _ref_ 调用子组件的方法，当子组件还没有 created 时，会提示 `this.$refs.componentChild is undefined`
++ Vue.js 异步执行 DOM 更新；当观察到数据变化时，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据改变。如果同一个 watcher 被多次触发，**只有一次**会推入到队列中。然后，在下一个的事件循环“tick”中，Vue 刷新队列并执行实际（已去重的）工作。Vue 在内部尝试对异步队列使用原生的 Promise.then 和 MutationObserver，如果执行环境不支持，会采用 setTimeout(fn, 0) 代替。
 
 ## vue-router
 
