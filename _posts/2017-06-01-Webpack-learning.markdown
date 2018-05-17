@@ -41,4 +41,7 @@ plugins: [
 ```
 
 4. style-loader 把 CSS 通过 `<style>` 标签引入 DOM，production环境不要使用
-5. html-webpack-plugin 可以根据提供的模板生成 HTM5L 文件，把所有 webpack bundle 通过 `<script>` 标签嵌入 body。
+5. html-webpack-plugin 可以根据提供的模板生成 HTML 文件，把所有 webpack bundle 通过 `<script>` 标签嵌入 body。
+  + 通过设置 _chunks_ 属性可以在 html 中**只引入**某些 chunks
+6. 对于那些「按需加载 chunk」的输出文件，使用 _output.chunkFilename_ 选项来控制输出。此选项决定了非入口(non-entry) chunk 文件的名称。
+7. 通过 _optimization.splitChunks.cacheGroups_ 指定用于按需加载而 split 的 chunk。

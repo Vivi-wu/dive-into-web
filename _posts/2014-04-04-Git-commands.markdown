@@ -237,7 +237,7 @@ Move the current branch tip backward to commit and reset both the staging area a
 
     git revert <commit>
 
-用一个新提交来消除一个历史提交所做的任何修改。通常用于修正最近的一个commit。
+用一个新提交来消除一个历史提交所做的**任何修改**。通常用于修正最近的一个commit。
 
 与 git reset 的区别是，产生新的commit，把 HEAD 向前移动。
 
