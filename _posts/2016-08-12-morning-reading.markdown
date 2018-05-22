@@ -275,7 +275,6 @@ svg、css linear gradient、css box-shadow
 
 关键词 _unset_ 适用于任何 CSS 属性，效果是将属性值设为 **inherited** value from 祖先元素；如果祖先元素中没有对该属性进行设值，则将属性值设为 initial value。
 
-
 ## 小的UI tips
 
 1.在引起严重后果的action按钮上使用红色高亮，提醒用户这个操作有危险
@@ -294,3 +293,7 @@ svg、css linear gradient、css box-shadow
 ### attr()
 
 该 css 函数提取选定的 html 元素上的属性值，并用于样式表。也可用于伪元素，在这种情况下，返回伪元素的 originating element 上的属性值。
+
+## Windows vs. Unix
+
+换行符：Windows 为 `\r\n`（CRLF），Unix 为 `\n`（LF）

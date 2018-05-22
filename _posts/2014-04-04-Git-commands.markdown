@@ -297,7 +297,7 @@ tracked 又分为三种状态：
 
     git config --get core.ignoreCase
 
-设置“不忽略大小写”：尽管默认是 false 的，但为兼容不同操作系统，可能被改为了 true
+设置“不忽略大小写”：尽管默认是 false 的，但为兼容不同操作系统，安装时可能被默默改为了 true
 
     git config core.ignoreCase false
 

@@ -138,6 +138,8 @@ Cookies 是一些数据，在你的电脑里用文本文件里存储网页用户
 
 Cookies 以 name-value 形式存储。（如 username = Viivenne）当浏览器向服务器请求一个网页时，属于那个页面的 cookies 被添加到请求里。
 
+Cookie 会自动追加在每一个 HTTP request header中。
+
 ### Create
 
 使用 _document.cookie_ 属性创建、读取、更新、删除（CRUD） cookies

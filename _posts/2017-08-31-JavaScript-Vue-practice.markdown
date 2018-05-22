@@ -42,8 +42,21 @@ category: JavaScript
 
     JSON.parse(JSON.strigify(myArray))
 
-+ select 元素值为 primitive values, 而 option 的值是 object 时，通过绑定 select 的值回填数据的方法不起作用。解决办法：在 option 元素上给 _selected_ 特性绑定 method，通过判断对象某属性的值是否与默认值一致，设置该 `<option>` 的 _selected_ 特性值为 `true`
-+ 在 data 初始化绑定时，对 object 型数组中 item 进行深层对象声明，避免加载时 console 报错
++ select 元素值为 primitive values, 而 option 的值是 object 时，通过绑定 select 的值回填数据的方法不起作用。解决办法：在 option 元素上给 _selected_ 特性绑定 method，通过判断对象某属性的值
+是否与默认值一致，设置该 `<option>` 的 _selected_ 特性值为 `true`
+
++ 在 data 初始化时，对 object 型数组中 item 进行深层对象声明，避免加载时 console 报错【难道不能尝试换一种数据类型？？
++ 子组件 data 初始值依赖 props 传入的值：当 props 状态更新时，需要通过 watch 方法来更新 data，否则 data 不能自动更新。
++ Vue 不能检查到已创建的对象实例动态增加/减少 root-level 属性，即在 data 中初始值为 `{}` 的属性，空对象加减属性，都不会触发视图更新。解决办法：
+
+    // 针对单个属性的添加
+    Vue.set( target, key, value )
+    // 针对单个属性的删除
+    Vue.delete( target, key )
+    // 批量新增属性
+    this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })
+    // 子组件内使用 vm.$set，vm.$delete方法, 它们是 global Vue.set, Vue.delete 的 alias
+
 + 列表过渡时，使用 `<transition-group>` 元素作为 `v-for` 列表的父元素
 + 使用 v-move 或定义对应的 css 样式，使得过渡平滑
 + 通用组件设计思路：入参配置初始值，输出值交由外部组件做业务逻辑
@@ -58,7 +71,6 @@ category: JavaScript
     <component @emission="hearEmission('extra', ...arguments)">
 
 + vue 项目里使用 debounce 的方法 [官方用法](https://cn.vuejs.org/v2/guide/migration.html#%E5%B8%A6%E6%9C%89-debounce-%E7%9A%84-v-model%E7%A7%BB%E9%99%A4)
-+ props 作为子组件 data 的初始值，当 props 状态更新时，需要通过 watch 方法来个更新 data，否则 data 不能自动更新。
 + filter 注册写在 vue 实例初始化之后，刷新页面总数报 “can't resolve filter” 错，需要写在前面
 + `.sync` 修饰符减少父组件更新代码，但不要滥用
 
@@ -67,18 +79,11 @@ category: JavaScript
     // 父组件
     <popover :isShown.sync='isShown'></poopover>
 
-+ Vue 不能检查到已创建的对象实例动态增加/减少 root-level 属性，即在 data 中初始值为 `{}` 的属性，空对象里加减属性，都不会触发视图更新。解决办法：
-
-    // 针对单个属性的添加
-    Vue.set( target, key, value )
-    // 针对单个属性的删除
-    Vue.delete( target, key )
-    // 批量新增属性
-    this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })
-    // 子组件内使用 vm.$set，vm.$delete方法, 它们是 global Vue.set, Vue.delete 的 alias
-
 + 通过 _ref_ 调用子组件的方法，当子组件还没有 created 时，会提示 `this.$refs.componentChild is undefined`
 + Vue.js 异步执行 DOM 更新；当观察到数据变化时，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据改变。如果同一个 watcher 被多次触发，**只有一次**会推入到队列中。然后，在下一个的事件循环“tick”中，Vue 刷新队列并执行实际（已去重的）工作。Vue 在内部尝试对异步队列使用原生的 Promise.then 和 MutationObserver，如果执行环境不支持，会采用 setTimeout(fn, 0) 代替。
++ 让 Vue 忽略（console 不报 warning）自定义 HTML tag 的方法：
+
+    Vue.config.ignoredElements = ['content-placeholder'] // 数组里是自定义tag名称
 
 ## vue-router
 
@@ -99,7 +104,7 @@ category: JavaScript
     router-link(:to='{ name: "to-request-bill" }' @click.native='gtagTest') 请款
 
 + Never 在一个元素上同时使用 v-for 和 v-if，前者比后者有 higher priority，[详细解释](https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential)
-
++ `afterEach()` 全局后置钩子函数执行时 _location.href_ 还没有更新。
 
 ## Vuex
 

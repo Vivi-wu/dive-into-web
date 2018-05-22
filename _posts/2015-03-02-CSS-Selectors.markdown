@@ -70,7 +70,7 @@ category: CSS
     + `:only-of-type`，选择有父元素，且它是其父元素的子元素中，唯一是这种类型的元素，等同于 `:first-of-type:last-of-type`
     + `:empty`，代表没有子节点的元素，比如 `<p></p>`
 
-7. Negation pseudo-class `:not(X)`，X 表示除 `:not()` 选择器外的其他简单选择器
+7. Negation pseudo-class `:not(X)`，X 可以是除 `:not()` 选择器外的其他简单选择器。选中所有非 X 选择器的元素。
 
 ## Pseudo-elements
 
