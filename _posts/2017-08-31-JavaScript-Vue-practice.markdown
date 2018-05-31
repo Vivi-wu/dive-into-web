@@ -85,6 +85,9 @@ category: JavaScript
 
     Vue.config.ignoredElements = ['content-placeholder'] // 数组里是自定义tag名称
 
++ Never 在一个元素上同时使用 v-for 和 v-if，前者比后者有 higher priority，[详细解释](https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential)
++ 使用 v-if 控制显示的 input 框输入值没有 reset。解决： Vue 会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。在元素上使用 `key`，它会基于 key 的变化重新排列元素顺序，并且会移除 key 不存在的元素。
+
 ## vue-router
 
 + 在路由改变后获取数据的方法：
@@ -95,15 +98,14 @@ category: JavaScript
     }
 + vue-router 中路由的 name 必须唯一，不区分父路由、子路由。
 + 只有 router-view 直接对应的组件内支持 `beforeRouteEnter()` 方法读取路由信息对象
++ 符合动态路由匹配（路由路径如 `/user/:username`）的 router-view 的子组件里，可以 watch route 变化执行一些操作。普通路由对应的 router-view 的子组件不行。采用动态路由的页面切换，两个路由都渲染同个组件，是直接复用。而普通路由的页面切换，是销毁再创建，因此注册在子组件的watch函数，永远不会执行。
 + 点击“面包屑”返回前，从 vuex 中取出当前列表查询参数对象，赋值给路由对象的 `query` 属性。这样返回列表查询页后，根据 URL 的 query string 可以回填历史查询、排序参数，reload 页面页不会因为 vuex 状态丢失这些参数。
 + 使用 `router.go(-1)` 实现返回上一页的功能
-+ 使用 v-if 控制显示的 input 框输入值没有 reset。解决： Vue 会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。在元素上使用 `key`，它会基于 key 的变化重新排列元素顺序，并且会移除 key 不存在的元素。
 + 路由信息对象 `this.$route` 对每个路由视图子组件都是可见的
 + router-link 绑定原生 click 事件处理函数：
 
     router-link(:to='{ name: "to-request-bill" }' @click.native='gtagTest') 请款
 
-+ Never 在一个元素上同时使用 v-for 和 v-if，前者比后者有 higher priority，[详细解释](https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential)
 + `afterEach()` 全局后置钩子函数执行时 _location.href_ 还没有更新。
 
 ## Vuex

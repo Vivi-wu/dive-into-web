@@ -50,3 +50,21 @@ Telerik Fiddler 主要用在 Windows 系统下，官方也有 mac os 版，但�
 
 1. 在 Fiddler 窗口左侧请求列表中找到对应的记录，“左键”双击
 2. 在右边出现的 tab 中，选择“Transformer”，可以看到 `Response Body: XXX bytes`。 XXX 即为实际响应内容的长度
+
+## 抓取 iOS app 请求
+
+1. 打开 Fiddler，Tools ——> Options ——> HTTPS，如图勾选：
+
+<img src="{{ "/assets/images/fiddler_https_setting" | prepend: site.baseurl }}" alt="Configure Fiddler to decrypt HTTPS traffic">
+
+在 Connections 一栏中可查看 Fiddler 端口号。
+
+配置完后重启 Fiddler。
+
+可在 PC 上打开浏览器输入谷歌地址，验证是否能抓取 HTTPS 请求。
+
+2. 打开 iPhone，设置——>无线网（与PC必须链接相同的wifi），往下滑找到 HTTP 代理，选“手动”，填入PC的ip地址以及Fiddler的端口号。
+3. 打开 Safari 浏览器，输入 HTTP 代理地址（PC的ip地址+Fiddler端口号），点"FiddlerRoot certificate"安装证书。
+4. 使用完毕，记得关闭手机端的 HTTP 代理，以免 iPhone 上不了网。
+
+https://blog.csdn.net/weixin_39465984/article/details/77186122

@@ -292,7 +292,7 @@ svg、css linear gradient、css box-shadow
 
 ### attr()
 
-该 css 函数提取选定的 html 元素上的属性值，并用于样式表。也可用于伪元素，在这种情况下，返回伪元素的 originating element 上的属性值。
+css 函数，用于提取选定的 html 元素上某属性的值，并用于样式表。也可用于伪元素，在这种情况下，返回伪元素的 originating element 上的属性值。
 
 ## Windows vs. Unix
 
