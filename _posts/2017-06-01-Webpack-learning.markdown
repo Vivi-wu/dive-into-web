@@ -45,3 +45,7 @@ plugins: [
   + 通过设置 _chunks_ 属性可以在 html 中**只引入**某些 chunks
 6. 对于那些「按需加载 chunk」的输出文件，使用 _output.chunkFilename_ 选项来控制输出。此选项决定了非入口(non-entry) chunk 文件的名称。
 7. 通过 _optimization.splitChunks.cacheGroups_ 指定用于按需加载而 split 的 chunk。
+8. Webpack v2以上 内置支持类似与 ES6 `import` 用法加载 JSON 文件的数据。
+
+    // 不需额外安装 loader 即可引入解析好的 JSON 数据作为模块变量
+    import Data from './data.json'

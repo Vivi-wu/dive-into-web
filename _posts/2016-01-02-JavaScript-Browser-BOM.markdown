@@ -25,6 +25,12 @@ _window.innerHeight_ 和 _window.innerWidth_ 这两个属性可用来测量浏�
 + `window.moveTo()`，移动当前窗口
 + `window.resizeTo()`，重新缩放当前窗口
 
+### 在新 tab 中打开 URL
+
+```js
+let windowObjectReference = window.open("https://www.baidu.com/", "_blank");
+```
+
 ## Window Screen
 
 _window.screen_ 对象包含了用户**设备屏幕**的信息。该对象可以缺省 window 前缀。

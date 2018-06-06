@@ -152,7 +152,7 @@ rem 简单粗暴的实现，使得“屏幕越大按钮越大”。设计师认�
 
 ## Flex 布局
 
-弹性盒子作为布局神器可以完成很多富有创造力的布局，常用的属性 references 看 <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank">这里</a>，网站打不开的时候在搜索结果里选缓存页。
+弹性盒子作为布局神器可以完成很多富有创造力的布局，常用的属性 references 看 [这里](https://css-tricks.com/snippets/css/a-guide-to-flexbox/){:target="_blank"}，网站打不开的时候在搜索结果里选缓存页。
 
 关于**兼容性**：测试系统 IOS 8、IOS 9、android 4.2、android 4.4、android 6.0 都 ok。在华为的部分手机上发现flex不支持行内元素，必须改成块级元素才能被支持。
 
