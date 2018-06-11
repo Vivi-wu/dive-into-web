@@ -43,6 +43,14 @@ plugins: [
 4. style-loader 把 CSS 通过 `<style>` 标签引入 DOM，production环境不要使用
 5. html-webpack-plugin 可以根据提供的模板生成 HTML 文件，把所有 webpack bundle 通过 `<script>` 标签嵌入 body。
   + 通过设置 _chunks_ 属性可以在 html 中**只引入**某些 chunks
+  + 通过自定义变量，如引入配置里entry文件名，可实现在指定页面手动引入css
+
+    //- 手动插入样式文件
+    if enableManualInject
+      each css in htmlWebpackPlugin.files.css
+        if css.indexOf(htmlWebpackPlugin.options.fnPrefix) > 0
+          link(href=css, rel='stylesheet')
+
 6. 对于那些「按需加载 chunk」的输出文件，使用 _output.chunkFilename_ 选项来控制输出。此选项决定了非入口(non-entry) chunk 文件的名称。
 7. 通过 _optimization.splitChunks.cacheGroups_ 指定用于按需加载而 split 的 chunk。
 8. Webpack v2以上 内置支持类似与 ES6 `import` 用法加载 JSON 文件的数据。
