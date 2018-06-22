@@ -39,6 +39,7 @@ Mac 上用 `Tab` 键不能自动补全 Git 分支名称，每次都要手动输�
         alias gb='git branch'
         alias gc='git commit'
         alias ga='git add'
+        alias gd='git diff'
         alias gplm='git pull origin master'
         alias gpom='git push origin master'
         alias gpld='git pull origin develop'

@@ -146,7 +146,7 @@ div {
 
 这3个 descriptor 定义了 font-face 的特征，用于匹配样式到指定 face 的过程，缺省值都是 `normal`。
 
-对于使用 several @font-face 规则定义的 a font family，user agents 可以下载该字体集的全部 face，或者使用这些 descriptors 有选择性的下载匹配文档中实际使用的样式。
+对于使用 several @font-face 规则定义的同一个 font family，user agents 可以下载该字体集的全部 face，或者使用这些 descriptors 有选择性的下载匹配文档中实际使用的样式。
 
 此处涉及**浏览器兼容性**。比如对于 `<h2>` 字体应用以下字体：
 

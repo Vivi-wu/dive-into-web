@@ -2,26 +2,29 @@
 title:  "Vue开发tips"
 category: JavaScript
 ---
+Vue.js 可以把数据绑定到 DOM 文本或特性，还可以绑定到 DOM 结构。通过添加事件监听器，处理用户输入。
+
+通过所有的 DOM 操作都由 Vue 来处理，开发者只需编写处理逻辑层的代码。
+
+Vue 组件类似于自定义元素——它是 Web 组件规范的一部分，因为 Vue 的组件语法部分参考了该规范。
+
+<!--more-->
+
 ## Vue.js 2.2+
 
 + Windows系统文件名**不区分大小写**，当发生“can't find module xxx”错误时，检查下module引用的文件路径、文件名拼写、文件名大小写是否正确。
 + 通过Ajax请求新数据前，reset结果数据。
 + 如果使用vue绑定按钮的 _disabled_ 属性，则不要同时使用 HTMLElement.disabled，否则两者冲突，导致禁止失效。
-+ 子组件的数据由 props 设定（或依赖props传递的值），数值在子组件内部变更后，通过 `emit()` 事件把新的值向上传给父组件，由父组件更新相应的值。
 + Vue 不能检测以下变动的数组：
 
     vm.items[indexOfItem] = newValue
     // 解决办法：使用 Array.prototype.splice
     example1.items.splice(indexOfItem, 1, newValue)
 
-<!--more-->
-
-+ 项目主要元素的css样式放在 app.vue 文件的 `<style>` 标签里维护。让webpack处理样式的提取、打包和加时间戳。
 + HTML 元素的 _autofocus_ 特性在页面reload后执行一次，对于single page app不同tab页面里的输入域，如果希望切换tab时自动focus，则需要自定义指令：
 
     directives: {
       focus: {
-        // 指令的定义---
         // 当绑定元素插入到 DOM 中。
         inserted: function (el) {
           // 聚焦元素
@@ -36,15 +39,9 @@ category: JavaScript
     div(v-translate:检查结果：需求数|个，|个符合条件，|个不符合条件='lang')
 
 + Vue devtool inspection 在生产环境默认 disabled，所以在线上开发者工具里看不到 Vue devtool
-+ 在 HTML 中侦听 Vue 事件，event name 必须是 camel-case，如 `@set-data`
-+ 获取当前组件绑定的 HTMLElement 的方法： `this.$el`
-+ Vue 实现深度 copy 对象型数组的方法：
-
-    JSON.parse(JSON.strigify(myArray))
-
-+ select 元素值为 primitive values, 而 option 的值是 object 时，通过绑定 select 的值回填数据的方法不起作用。解决办法：在 option 元素上给 _selected_ 特性绑定 method，通过判断对象某属性的值
-是否与默认值一致，设置该 `<option>` 的 _selected_ 特性值为 `true`
-
++ 在 HTML 中侦听 Vue 事件，事件名称必须是 camel-case，如 `@set-data`
++ 通过 `this.$el` 获取当前组件绑定的 HTMLElement
++ select 元素值为 primitive values, 而 option 的值是 object 时，通过绑定 select 的值，回填数据的方法不起作用。解决办法：在 option 元素上给 _selected_ 特性绑定 method，通过判断对象某属性的值是否与默认值一致，设置该 `<option>` 的 _selected_ 特性值为 `true`
 + 在 data 初始化时，对 object 型数组中 item 进行深层对象声明，避免加载时 console 报错【难道不能尝试换一种数据类型？？
 + 子组件 data 初始值依赖 props 传入的值：当 props 状态更新时，需要通过 watch 方法来更新 data，否则 data 不能自动更新。
 + Vue 不能检查到已创建的对象实例动态增加/减少 root-level 属性，即在 data 中初始值为 `{}` 的属性，空对象加减属性，都不会触发视图更新。解决办法：
@@ -71,8 +68,8 @@ category: JavaScript
     <component @emission="hearEmission('extra', ...arguments)">
 
 + vue 项目里使用 debounce 的方法 [官方用法](https://cn.vuejs.org/v2/guide/migration.html#%E5%B8%A6%E6%9C%89-debounce-%E7%9A%84-v-model%E7%A7%BB%E9%99%A4)
-+ filter 注册写在 vue 实例初始化之后，刷新页面总数报 “can't resolve filter” 错，需要写在前面
-+ `.sync` 修饰符减少父组件更新代码，但不要滥用
++ filter 注册写在 vue 实例初始化之后，刷新页面总数报 “can't resolve filter” 错，改为写在前面解决
++ 使用 `.sync` 修饰符减少父组件更新代码，但不要滥用
 
     // 子组件
     this.$emit('update:isShown', false)
@@ -86,7 +83,7 @@ category: JavaScript
     Vue.config.ignoredElements = ['content-placeholder'] // 数组里是自定义tag名称
 
 + Never 在一个元素上同时使用 v-for 和 v-if，前者比后者有 higher priority，[详细解释](https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential)
-+ 使用 v-if 控制显示的 input 框输入值没有 reset。解决： Vue 会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。在元素上使用 `key`，它会基于 key 的变化重新排列元素顺序，并且会移除 key 不存在的元素。
++ 使用 v-if 控制显示的 input 框输入值没有 reset。原因： Vue 会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。解决：在元素上加属性 `key`，它会基于 key 的变化重新排列元素顺序，并且会移除 key 不存在的元素。
 
 ## vue-router
 
@@ -115,6 +112,10 @@ category: JavaScript
 + 利用 prop 在组件之间传递数据的问题：组件结构在三级或以上，底层组件想传数据给最底层组件，需通过多个中间组件。而这些中间组件可能根本不需要这个 prop，这样违反了低耦合的设计要求。
 + 子组件访问全局 getters 时使用 `rootGetters`
 
-## Webpack
+## 构建
 
-+ 在 'config/index' 中配置prod环境静态资源公共路径 assetsPublicPath 时记得在末尾加 `/`，否则页面上使用 import 管理的静态资源路径会变成 '/productStatic/...', 而不是 '/product/Static/...'
+vue 有两种构建方式：独立构建和运行时构建。区别是“独立构建”包含模板编译器，而“运行时构建”不包含。模板编译器的职责是将模板字符串编译为纯 JavaScript 的渲染函数。
+
++ 独立构建支持 template 选项。 它也依赖于浏览器的接口的存在，所以不能用来做服务器端渲染
++ 运行时构建不支持 template 选项，只能用 render 选项。但即使使用运行时构建，在 .vue 单文件组件中依然可以写模板。因为单文件组件的模板会在构建时预编译为 render 函数
++ 运行时构建比独立构建要轻量

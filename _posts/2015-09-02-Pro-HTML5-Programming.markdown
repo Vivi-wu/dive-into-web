@@ -138,3 +138,9 @@ WebSockets是全双工实时浏览器通信，减少不必要的网络流量并�
 application cache 已经从 Web standards中移除了。一些浏览器还支持，但已经在抛弃的日程中。使用 Service Workers 作为替代。
 
 借助缓存，不仅可以缓存访问过的页面，还可以缓存不曾访问过的页面。
+
+## GlobalEventHandlers.onerror
+
+error 事件的处理函数。
+
++ 当一个资源（如图片、脚本）加载失败时，Event 接口在 initiate 加载资源的元素上触发 error 事件，然后绑定在该元素上的 onerror 函数就被调用。这些错误事件不会冒泡到window。可用来处理，当一个 img 资源加载失败，加载其他图片资源。

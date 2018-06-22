@@ -31,6 +31,7 @@ _length_ 是 String 自带属性。除此之外还有 _constructor_ 和 _prototy
 
 ### Find 查找
 
++ `includes(searchString[, fromIndex])`，用来判断一个字符串里是否含有另一个字符串，有则返回 true，无则返回 false。
 + `indexOf(`searchvalue, start`)`，返回 **index** of (the position of) the **first** occurrence（第一次出现的位置） of a specified text in a string。
 + `lastIndexOf(`searchvalue, start`)`，返回一个字符串中指定文本 **last** occurrence (最后一次出现的位置)，以 start 位置开始，从字符串的后面向前查找。
 + `search(`searchvalue`)`，效果同 `indexOf()`。
