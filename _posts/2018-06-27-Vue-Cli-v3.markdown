@@ -1,0 +1,25 @@
+---
+title:  "Vue CLI v3开发tips"
+category: JavaScript
+---
+1. NODE_ENV 和 BASE_URL 2个特殊的环境变量，可以在app code中直接访问到
+2. 在所有 `<template lang="pug">` 的区域支持 pug 模板
+
+	npm install -D pug-plain-loader pug
+3. 按需引入 element-ui 组件
+
+	// 安装 babel 插件实现按需引入
+	npm install babel-plugin-component -D
+	// 在根目录下 babel.config.js 中添加配置
+	"plugins": [
+	  [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      }
+    ]
+  ]
+4. 支持 sass 语法，手动安装
+
+	npm install -D sass-loader node-sass

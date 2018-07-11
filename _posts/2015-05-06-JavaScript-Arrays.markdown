@@ -131,9 +131,13 @@ var tmpArry = Array.prototype.slice.call(document.querySelectorAll('[type="check
 
 ### Splicing 剔除
 
-使用 `splice(start, deleteCount[, item1[, item2[, ...]]])`，方法可以在数组中指定位置添加新元素。
+使用 `splice(start[, deleteCount[, item1[, item2[, ...]]]])`，方法可以在数组中指定位置添加新元素。
 
-_start_ 是一个整数，表示第一个新元素要放的位置。_deleteCount_ 从指定位置上（包含指定位置）开始，要删掉的元素个数，如果设为 0，则表示不删除现有元素。后面的 item 表示要添加的新元素，缺省表示不添加新元素。
+_start_ 是一个整数，表示第一个新加元素摆放的索引。
+
+_deleteCount_ 从指定位置上（包含指定位置）开始，要删掉的元素个数，如果设为 0 或负值，则表示不删除现有元素；如果**缺省**，或者值大于 (array.length - start)，则删除所有从 start 位置开始（包含 start）剩余的数组项。
+
+item* 表示要添加的新元素，缺省表示不添加新元素。
 
     fruits.splice(0, 1);    // 效果同 shift()
 

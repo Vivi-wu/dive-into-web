@@ -13,8 +13,11 @@ category: [CSS, HTML]
 95%会使用的基本设定：
 
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
 ```
+
+如果希望 web app 在 zooming 方面表现得像 native app 一样时（比如，在光标focus时页面不要自动放大），才设置 `user-scalable=no`，否则缩放对大多数人来说是一个重要的可用性功能。
+
 <!--more-->
 
 ## 图片

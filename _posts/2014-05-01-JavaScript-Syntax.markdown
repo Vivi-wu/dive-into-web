@@ -318,6 +318,17 @@ var person = {firstName:"John", lastName:"Doe", age:50};
 "length" in String      // Returns true
 ```
 
+### Comma 操作符
+
+从左到右evaluates（执行）每一个操作数（operand 可以是任意表达式），返回**最后**一个操作数的**值**。
+
+```js
+function myFunc() {
+  var x = 0;
+  return (x += 1, x); // the same as return ++x;
+}
+```
+
 ## 表达式
 
 由 value，variable 和 operator 结合组成了JS的 expression 表达式。
