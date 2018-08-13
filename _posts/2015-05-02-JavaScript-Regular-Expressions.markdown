@@ -76,7 +76,20 @@ new RegExp(/ab+c/, 'i');
 
 不需要把正则表达式对象放在一个变量里，就可以使用 test() 方法。如果搜索字符串中**有匹配**，返回 `true`， 否则返回 false。
 
-`exec()` 方法在字符串中查找匹配，**返回找到的文本**，如果没有找到，返回 `null`。
+`exec()` 方法在字符串中查找匹配并**返回找到的文本**；如果没有找到，返回 `null`。
+
+返回结果：
++ [0] The full string of characters matched
++ [1],...[0] The parenthesized substring matches, if any如果有捕获表示组号
++ index 表示 0-based 匹配字符串的索引
++ input 为原始输入字符串
+
+```js
+var reg = /\/\/([.a-zA-Z0-9]+)(.1688.com|.taobao.com|.tmall.com)/
+var a = reg.exec('http://test.1688.com')
+// a = ['//test.1688.com', 'test', '.1688.com', index: 5, input: 'http://test.1688.com']
+
+```
 
 ## 实践
 

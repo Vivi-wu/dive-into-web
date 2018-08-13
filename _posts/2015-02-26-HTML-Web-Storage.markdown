@@ -46,6 +46,7 @@ localStorage.setItem('user', JSON.stringify(user));
 
 // Read (Single)
 JSON.parse(localStorage.getItem('user'))
+// 如果 key 不存在，返回 null 
 
 // 也可以使用以下方法 create／read
 localStorage.lastname = "Smith";  

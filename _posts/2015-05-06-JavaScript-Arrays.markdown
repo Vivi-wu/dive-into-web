@@ -109,7 +109,7 @@ var tmpArry = Array.prototype.slice.call(document.querySelectorAll('[type="check
 返回**被移除的元素**
 
 + `pop()`，remove the **last element** from an array。
-+ `shift()`，remove the **first element** of an array，然后剩下的所有元素自动向前移动一位。。
++ `shift()`，remove the **first element** of an array，返回被 removed 的元素，剩下的所有元素自动向前移动一位。。
 
 ### Delete elements
 
@@ -248,11 +248,19 @@ _start_ 未定义，则从 0 开始；大于 array length 返回 `[]`。
     initialValue 是可选的。可作为第一次调用时的第一个参数值。
 
 ```js
+例子1：
 const array1 = [1, 2, 3, 4];
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
 // 1 + 2 + 3 + 4
 console.log(array1.reduce(reducer));
+
+例子2：
+// 将数组项为object的数组，转为以指定属性为key、数组项为value的字典/对象，便于查找操作
+let array2 = [{sku_no:'0001',box_name:'xxx'}]
+let data = array2.reduce((obj, element) => {
+  obj[element.sku_no] = element
+  return obj
+}, {})
 ```
 
 #### 通过“索引”批量删除数组中的元素
@@ -261,6 +269,6 @@ console.log(array1.reduce(reducer));
 
 ```js
 // 对 arryA 待删除 item 的索引组成的 arryB = [5,0,6] 进行“降序排列”，结果如：[6,5,0]
-arryB.sort((a, b) => b > a)
+arryB.sort((a, b) => b - a)
 arryB.forEach(index => arryA.splice(index, 1))
 ```
