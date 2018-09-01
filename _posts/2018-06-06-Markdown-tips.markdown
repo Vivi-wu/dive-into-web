@@ -26,3 +26,7 @@ category: Other
 ### 跳转至函数定义处
 
 Windows 系统按 `Fn + F12`
+
+### Terminal里在当前目录打开 VS code
+
+	code .

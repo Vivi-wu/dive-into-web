@@ -121,6 +121,18 @@ ES6的继承机制，实质是先创造父类的实例对象 this（所以必须
 
 再不必使用一堆加号来连接大段的字符串、HTML标签和变量了，只需要使用<code>\`</code>把字符串框起来, 用 `${}` 引用变量。
 
-## 函数默认值
+## 函数默认值（Default function parameters）
 
-在定义函数时，形参里直接赋值
+定义函数时，在形参里直接赋值。
+
+```js
+function multiply(a, b = 1) {
+  return a * b;
+}
+
+// Safari 10以下不支持，可以这样写
+function multiply(a, b) {
+  b = (typeof b !== 'undefined') ?  b : 1;
+  return a * b;
+}
+```

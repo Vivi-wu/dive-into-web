@@ -57,6 +57,13 @@ Note: JSON text SHALL be encoded in Unicode. The default encoding is UTF-8.
 
      XHR.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
 
+```js
+var a = { test: '' }
+var val = JSON.stringify(a.test)
+
+// 判断对象某属性的值是否为：空字符串、空对象、空数组、null 或 undefined
+if (a.test === "" || val === '{}' || val === '[]' ||  val === 'null' || !val) {}
+```
 ### JSON vs. XML
 
 不了解的人会经常比较这两者，我比较赞同的一个观点是，JSON 只是一种**数据格式**，而 XML 是一种**语言**，比前者拥有更广泛的用途和强大的功能。

@@ -243,6 +243,10 @@ Move the current branch tip backward to commit and reset both the staging area a
 
 在回滚这一操作上看，效果差不多。但是在日后继续merge以前的老版本时有区别。因为git revert是用一次逆向的commit“中和”之前的提交，因此日后合并老的branch时，导致这部分改变不会再次出现，减少冲突。但是git reset是之间把某些commit在某个branch上删除，因而和老的branch再次merge时，这些被回滚的commit应该还会被引入，产生很多冲突。
 
+**代码回滚**，先在本地 reset 到指定 commit，然后强制覆盖远端分支代码:
+
+    git push <remote> <branch> -f
+
 ### 恢复删除的本地分支
 
 用 `-d`  或 `-D` 删除的本地开发分支，可通过以下指令找到已删除分支最后一个 commit 的 hash 标记然后恢复。

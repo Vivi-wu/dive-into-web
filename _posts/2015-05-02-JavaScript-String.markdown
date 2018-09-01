@@ -30,8 +30,6 @@ _length_ 是 String 自带属性。除此之外还有 _constructor_ 和 _prototy
 ## String functions
 
 ### Find 查找
-
-+ `includes(searchString[, fromIndex])`，用来判断一个字符串里是否含有另一个字符串，有则返回 true，无则返回 false。
 + `indexOf(`searchvalue, start`)`，返回 **index** of (the position of) the **first** occurrence（第一次出现的位置） of a specified text in a string。
 + `lastIndexOf(`searchvalue, start`)`，返回一个字符串中指定文本 **last** occurrence (最后一次出现的位置)，以 start 位置开始，从字符串的后面向前查找。
 + `search(`searchvalue`)`，效果同 `indexOf()`。
@@ -40,11 +38,11 @@ _length_ 是 String 自带属性。除此之外还有 _constructor_ 和 _prototy
 
     `search()` 的 searchvalue 是一个正则表达式，所以它比 `indexOf()` 有更强大的搜索能力。
 
-1.**0** is the **first** position in a string.
-
+1.字符串开始位置的索引为 0.
 2.如果没有找到指定文本，则返回 `－1`。
-
 3.前两者 _searchvalue_ 是一个**字符串**，_start_ 默认是 0，表示开始查找的位置，该参数是可选的。
+
++ `includes(searchString[, fromIndex])`，用来判断一个字符串里是否含有**另一个字符串**，有则返回 true，无则返回 false。默认从 0 索引开始查。
 
 ### Extract 抽取
 
