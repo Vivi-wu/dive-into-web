@@ -146,13 +146,15 @@ Create and check out new-branch. 创建一个新分支，并切换到该分支�
 
     git branch -d <branch_name>
 
-Delete the specified branch. This is a "safe" operation in that Git prevents you from deleting the branch if it has unmerged changes. 删除指定分支。如果该分支还没有 merge 到当前分支，则提示 error。
+删除指定 local 分支。如果该分支还没有 merge 到当前分支，则 Git 会阻止操作并提示 error。此时若要强制删除分支，使用 `-D` 作为参数。
 
-此时若要强制删除分支，使用 `-D` 作为参数。
+    git branch -d -r <branch_name>
+
+删除 fetch 到本地的 remote 分支，即删除 remote-tracking branch。或执行以下操作：
 
     git push origin --delete <branch_name>
 
-自动删除远端仓库工作分支（代替在 bitbucket 上手动删除）。**注意**：确保该分支代码已上线再删除。
+删除远端仓库工作分支（代替在 bitbucket 上手动删除）。**注意**：确保该分支代码已上线再删除。
 
     git checkout <existing-branch>
 

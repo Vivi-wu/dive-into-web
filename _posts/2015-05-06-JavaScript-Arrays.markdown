@@ -82,6 +82,7 @@ fruits instanceof Object;    // returns true
 JS数组也有 `indexOf()`，`lastIndexOf()` 方法，返回数组中指定 item 的位置，没找到返回 `-1`。
 
 + `includes(searchElement[, fromIndex])`，该方法检查数组中是否含有某元素，有则返回 true，无则返回 false。
++ `find(`callback`)`，接收函数同 every() 方法，返回数组中第一个满足test函数的 item，没找到返回 `undefined`.
 
 ### Convert Arrays to Strings
 

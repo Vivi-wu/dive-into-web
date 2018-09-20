@@ -76,7 +76,7 @@ Vue 组件类似于自定义元素——它是 Web 组件规范的一部分，�
     // 父组件
     <popover :isShown.sync='isShown'></poopover>
 
-+ 通过 _ref_ 调用子组件的方法，当子组件还没有 created 时，会提示 `this.$refs.componentChild is undefined`
++ 通过 _ref_ 注册子组件信息，可以在父组件里通过 _$refs_ 调用子组件的方法。1.必须在子组件渲染后才有效；2. ref 用在单独的 DOM 元素或子组件上时，指向 DOM 元素或子组件实例；3.用作 v-for 上，则是包含 DOM 节点或子组件实例的数组。
 + Vue.js 异步执行 DOM 更新；当观察到数据变化时，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据改变。如果同一个 watcher 被多次触发，**只有一次**会推入到队列中。然后，在下一个的事件循环“tick”中，Vue 刷新队列并执行实际（已去重的）工作。Vue 在内部尝试对异步队列使用原生的 Promise.then 和 MutationObserver，如果执行环境不支持，会采用 setTimeout(fn, 0) 代替。
 + 让 Vue 忽略（console 不报 warning）自定义 HTML tag 的方法：
 
@@ -106,6 +106,27 @@ submit (data, fn) {
     if (res.status !== 200) return
     fn()
   })
+}
+```
++ 涉及DOM操作，使用 vm.$nextTick() 
++ 打开弹窗时获取数据
+
+```js
+watch: {
+  'isShown': 'initModal'
+},
+methods: {
+  /**
+   * 初始化弹窗
+   * @param {boolean} val - 是否显示弹窗
+   */
+  initModal (val) {
+    if (val) {
+      this.fetchData()
+    } else {
+      // 重置状态
+    }
+  },
 }
 ```
 

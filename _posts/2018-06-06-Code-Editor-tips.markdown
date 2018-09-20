@@ -45,7 +45,6 @@ category: Other
         Ctrl + \            编辑器分组
         Ctrl + B            侧边栏 toggle 显示
         Ctrl + Shift + E    打开vscode资源管理器
-        Ctrl + Shift + V    打开 markdown 文件预览
         Ctrl + K V          在旁边编辑组，打开 markdown 文件预览
         Ctrl + Shift + [    折叠代码块
         Ctrl + Shift + ]    打开代码块
@@ -62,7 +61,7 @@ category: Other
         Ctrl + H                    当前文件中替换
         Ctrl + Shift + H            全局替换
         Ctrl + /                    单行注释
-        Ctrl + [ + ]                多行注释（自定义的快捷键）
+        Ctrl + Shift + /            多行注释（自定义的快捷键）
         Ctrl + Enter                在下方插入一行
         Ctrl + Shift + Enter        在上方插入一行
         Ctrl + X                    剪切行（删除并将内容保留在剪贴板）
@@ -80,6 +79,10 @@ category: Other
 
 Windows 系统按 `Fn + F12`
 
-### Terminal里在当前目录打开 VS code
+### Terminal里在当前目录打开 VS Code
 
     code .
+
+### 切换分支
+
+编辑器左下角显示当前所在的 Git 分支，点击分支名称，窗口上方出现下拉自动补全输入框，实现切换分支。

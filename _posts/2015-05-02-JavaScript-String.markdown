@@ -54,7 +54,7 @@ _length_ 是 String 自带属性。除此之外还有 _constructor_ 和 _prototy
   "hello world".substr(-4, 4); // 表示从倒数第四位开始，向后取四位字符，返回"orld"
   ```
 
-    以上三个方法的共同点是缺省第二个参数， the method will slice out the rest of the string。
+    以上三个方法的共同点是缺省第二个参数，the method will slice out the rest of the string。
 
 + `charAt(`position`)`，返回指定位置上的字符
 + `charCodeAt(`position`)`，返回指定位置上字符的 unicode
