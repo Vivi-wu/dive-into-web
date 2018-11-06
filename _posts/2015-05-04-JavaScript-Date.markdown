@@ -28,13 +28,24 @@ Date 对象用来与年月日时分秒毫秒打交道的。
 
 上面说了完整的日期对象有7个参数，这里**缺省的参数**将**按照最小值算**，date 为 1，剩下都为 0。
 
+注意：非0时区，hour 的值不为0.
+
+    new Date('2018-01-10') // Wed Jan 10 2018 08:00:00 GMT+0800 (中国标准时间)
+    new Date('2018-01-10T00:00:00') // Wed Jan 10 2018 00:00:00 GMT+0800 (中国标准时间)
+
 设定**完整**的日期时间 (YYYY-MM-DDTHH:MM:SS)
 
-    var d = new Date("2015-03-25T12:00:00");    //Wed Mar 25 2015 20:00:00 GMT+0800 (CST)
+    var d = new Date("2015-03-25T12:00:00");    // Wed Mar 25 2015 20:00:00 GMT+0800 (CST)
 
 日期和时间字符串中间的 _T_ 表示 **UTC time**. 北京时间（UTC+8）需要在这个时间上加8小时。
 
 **Note**: _UTC_ (Universal Time Coordinated)  is the **same** as _GMT_ (Greenwich Mean Time).
+
+修改相对UTC的时时间，需要在 dateString +HH:MM 或 -HH:MM
+
+    var d = new Date("2015-03-25T12:00:00-06:30"); // Thu Mar 26 2015 02:30:00 GMT+0800 (中国标准时间)
+
+括号里的时间为当地时间 2015-03-25中午12点，输出时先转为 UTC 时间，加上（负数表示落后UTC）6个半小时，再加上我的本地的时区。
 
 2.**Long Dates**，通常写为 "MMM DD YYYY" 或者 "DD MMM YYYY"，月份可以是完整的英文单词，也可以是缩写。（January 和 Jan 都可以）。
 
@@ -55,6 +66,13 @@ var d = new Date("Wed Mar 25 2015 09:56:24 GMT+0100 (W. Europe Standard Time)");
 
 设定日期时，如果不指定 time zone，JS会使用浏览器的时区。同理，获取日期时，如果不指定时区，结果会被转换成浏览器的时区。
 
+    dateObj.getTimezoneOffset()
+
+以 minutes 返回当前系统距离 UTC 的时区差值（UTC - 当前系统），结果为**正值**说明**落后** UTC 时间；反之超前。 
+
+    var x = new Date();
+    var currentTimeZoneOffsetInHours = x.getTimezoneOffset() / 60; // 北京时间为 -8
+
 ## 显示日期
 
 无论以何种日期格式输入，默认输出格式都是 full text string 格式：Sun May 04 2014 08:00:00 GMT+0800 (CST)
@@ -65,6 +83,9 @@ var d = new Date("Wed Mar 25 2015 09:56:24 GMT+0100 (W. Europe Standard Time)");
 + `toTimeString()`，把日期对象的时间部分转为字符串（_19:46:01 GMT+0800 (中国标准时间)_）
 + `toLocaleString()`，使用本地转换法，把日期对象转为字符串（_2016/10/18 下午7:46:01_）
 + `toLocaleTimeString()`，使用本地转换法，把日期对象的时间部分转为字符串（_下午7:46:01_）
+  
+    new Date().toLocaleTimeString('en-US'); // "5:42:58 PM"
+
 + `toLocaleDateString()`，使用本地转换法，把日期对象的日期部分转为字符串（_2016/10/18_）
 + `toISOString()`，使用 ISO format 将日期对象转为字符串。格式为（_YYYY-MM-DDTHH:mm:ss.sssZ_），其时区总是 **zero** UTC offset，即 UTC 时间（末尾的"Z"表示UTC时间）
 + `toJSON()`，将日期对象转为 <strong>JSON 日期格式</strong>的字符串（_2016-10-18T11:46:01.970Z_），格式同 toISOString()（ISO-8601 standard）.
@@ -115,11 +136,13 @@ var d = new Date("Wed Mar 25 2015 09:56:24 GMT+0100 (W. Europe Standard Time)");
 </tr>
 <tr>
   <td>getTime()</td>
-  <td>Get the time (milliseconds since January 1, 1970)</td>
+  <td>返回指定日期距离 0 时的 milliseconds。无论在哪个 timezone 得到的值都相同，结果同 valueOf()</td>
 </tr>
 <tr>
   <td>Date.now()</td>
-  <td>返回自从 January 1, 1970 00:00:00 UTC 到现在的毫秒数</td>
+  <td>返回自从 January 1, 1970 00:00:00 UTC 到现在的毫秒数。
+    <code>Date.now() === new Date().getTime()</code>
+  </td>
 </tr>
 <tr>
   <td>Date.UTC(year,month,date,hours,minutes,seconds,milliseconds)</td>

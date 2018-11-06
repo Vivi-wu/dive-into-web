@@ -158,10 +158,10 @@ Cookie 会自动追加在每一个 HTTP request header中。
 
 + 可以添加一个 path 参数，告诉浏览器 cookie 属于哪一个路径。<span class="t-blue">默认地，cookie 属于当前页面</span>
 
-    document.cookie = "username=John Doe; expires=Thu," +
-                      " 18 Dec 2013 12:00:00 UTC; path=/";
+    document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
 
-使用 _document.cookie_ 多次赋值，旧的 cookie **不会**被覆盖，而是追加到 cookies 里。
++ 使用 _document.cookie_ 多次赋值，旧的 cookie **不会**被覆盖，而是追加到 cookies 里。
++ 还可以设置 domain `;domain=domain`。默认是当前文档的host部分。如设置了domain，则subdomain也包括。
 
 ### Read
 

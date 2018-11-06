@@ -20,6 +20,23 @@ category: CSS
 1. `a:hover` MUST come **after** `a:link` and `a:visited`
 2. `a:active` MUST come **after** `a:hover`
 
+### disable 链接
+
+[禁止点击一个link](https://css-tricks.com/how-to-disable-links/){:target="_blank"}
+
+1. `<a>测试</a>` H5中，缺省 _href_ 特性时会创建一个 link 的 placeholder，看起来与正常的超链接一样，仍然会**响应点击事件处理函数**（如果有自定义的），但页面**不会跳转**。
+2. 注意： 如果写了 href 特性，即使值为空，点击仍会 reload 当前页。
+3. 设置标签样式 `pointer-events: none;` 能禁止标签的鼠标点击动作。但 IE<11 不支持，keyboard 用户仍然可以 ENTER 触发链接。想都禁止，只能借助JS了。
+4. _disabled_ 特性在 link 标签上无效，可以使用 `aria-disabled="true"` 告诉屏幕阅读器该标签是 disabled。
+
+```css
+.is-disabled {
+  cursor: not-allowed; /*鼠标显示disabled样式*/
+  pointer-events: none; /*写了这个，上面显示禁点击的鼠标icon会失效*/
+}
+```
+总结：想要一个a标签看起来、功能上、语义上都disabled，需要加额外的css、js和html。不建议这么做。
+
 ## CSS Lists
 
 CSS list 属性可以用来给有序 ordered 列表 和无序 unordered 列表设置不同的列表元素标记 markers，使用图片作为列表元素标记，给列表和列表元素添加背景色。

@@ -183,7 +183,17 @@ if (isNaN(age)) {
 如果 preferred type 为数字类型，则执行顺序为（3）——> (2)。
 
 + 例外：单目 `+` 操作符、loose equality `==` 操作符触发 default conversion mode，这种情况下大部分内置类型**默认**采用 numeric 转换
-+ 例外： Date 类型采用 string 转换
++ 例外： Date 类型默认采用 string 转换。但遇到 `-` 号，则使用 numeric 转换。
 + 例外： _null_ 只能非严格等于 _null_ 或 _undefined_
 + 内置类型没有 `valueOf()` 方法或者调用此方法**返回对象本身**的，则继续进行 string 转换
 + 单目 `+` 操作符优先级**高于**加符运算符
+
+```js
+var a = new Date ()
+var str = a.toString() // str: Thu Sep 20 2018 17:04:30 GMT+0800 (中国标准时间)
+var num = a.valueOf()  // num: 1537434270206
+a == str // true
+a == num // false
+a - str  // NaN
+a - num  // 0，since '-' operator explicitly triggers numeric conversion, not a default one
+```

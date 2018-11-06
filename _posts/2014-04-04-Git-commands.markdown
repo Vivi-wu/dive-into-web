@@ -115,6 +115,10 @@ Stash 属于本地 Git 仓库，不会通过 push 推到远端。
 
     git cherry-pick <commit>
 
+挑选**多个连续** commit 到其他分支，注意：commit A should be older than commit B.
+
+    git cherry-pick A..B
+
 ## Rewriting history
 
     git commit --amend

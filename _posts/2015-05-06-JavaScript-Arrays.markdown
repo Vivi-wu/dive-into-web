@@ -231,19 +231,26 @@ _start_ 未定义，则从 0 开始；大于 array length 返回 `[]`。
 
 以上方法都是类似的结构：
 
-`array.every(`function(currentValue, index, arr), thisValue`)`，其中 index，arr，thisValue 都是可选的。
+`array.every(`function(currentValue, index, array), thisValue`)`，其中 index，arr，thisValue 都是可选的。
+
+callback 的3个参数是固定的。比如：
+
+```js
+["1", "2"].map(parseInt); // 结果为 [1, NaN]
+// parseInt(str, radix)，上面的函数可翻译为以下：
+parseInt("1", 0, ["1", "2"]) // 十进制输出 '1'
+parseInt("2", 1, ["1", "2"]) // 无法转为number，radix值必须从2到36
+```
 
 ### 补充
 
 对数组中每一项执行一个操作：
 
-+ `arr.forEach(callback[, thisArg])`，让数组中每一项都执行一次给定的函数操作。
++ `arr.forEach(callback[, thisArg])`，让数组中每一项都执行一次给定的函数操作。特别要注意的是：**没有办法中止或者跳出 forEach 循环，除非抛出一个异常**。如有要中断的必要，不如使用一个简单的 for 循环实现。
++ `arr.map(callback[, thisArg])` ，该方法返回一个由原数组中的**每个元素调用指定方法的返回值**组成的新数组。
 
     此处 callback 参数同上面的 every() 等函数，多了一个可选的 thisArg 参数，用来指定 callback 函数内 this 的值的对象。
 
-    特别要注意的是：**没有办法中止或者跳出 forEach 循环，除非抛出一个异常**。如有要中断的必要，不如使用一个简单的 for 循环实现。
-
-+ `arr.map(callback[, thisArg])` ，该方法返回一个由原数组中的**每个元素调用指定方法的返回值**组成的新数组。
 + `arr.reduce(function(previousValue, currentValue, currentIndex, array), initialValue)`，**从左到右**对数组中每个值进行操作，最终得到一个值。
 
     initialValue 是可选的。可作为第一次调用时的第一个参数值。

@@ -148,7 +148,7 @@ Promise.then 是异步执行的，而创建 Promise 实例 （executor）是同�
   new Promise(function executor(resolve) {
     console.log(1);
     for( var i=0 ; i<1000 ; i++ ) {
-        i == 999 && resolve();
+        i == 999 && console.log(i);
     }
     console.log(2);
   }).then(function() {

@@ -142,12 +142,12 @@ JS中**只能被 Number 对象调用**的属性有：`MAX_VALUE`，`MIN_VALUE`�
 
 + `Number()`， Returns a number, converted from its argument. 当参数无法转为数字时，返回 `NaN`
 + `parseFloat()`， Parses its argument and returns a floating point number
-+ `parseInt(string, radix)`， Parses its argument and returns an integer. **Spaces are allowed. Only the first number is returned**，空格是允许的，但是只返回第一个数字。
++ `parseInt(string, radix)`， Parses its argument and returns an integer. 空格是允许的，但是只返回第一个数字。
 
     + This function determines if the first character in the specified string is a number. If it is, it parses the string until it reaches the end of the number, and returns the number **as a number**, not as a string.
     + Leading and trailing spaces are allowed。第一个数字前和后允许有空格。
-    + _radix_, 是一个 (from 2 to 36) 的数字 that represents the numeral system to be used，表示 string 用的是哪一种进制。比如：`parseInt("20",16)`，表示第一个参数是十六进制的，**运算结果**以**十进制**显示，即 `32`。
-    + 缺省 _radix_ 参数，看第一个参数。若以 `0x` 开始，则为十六进制，若以 `0` 开始，则为八进制。任何其他 value，都认为是十进制的。
+    + _radix_ 指的是 string 的数学进制，是一个 **(from 2 to 36) 的数字**，。比如：`parseInt("20",16)`，表示第一个参数是十六进制的，**运算结果**以**十进制**显示，即 `32`。
+    + 如果 _radix_ 是 `undefined`、 `0` 或缺省，则看第一个参数：若以 `0x` 开始，则为十六进制；以 `0` 开始，则为八进制。任何其他 value，都认为是十进制的。
 
     **注意**：该函数在不同浏览器中表现有差异。比如 `parseInt('09')`，谷歌，IE9+ 等高级浏览器，返回结果为 `9`。09开头，如果按八进制，则无效（八进制一位上取值为0-7）。IE8-的游览器则返回 `0`。屏蔽浏览器差异的解决办法是，指定 radix，即 `parseInt('09',10)`。这样都返回 9
 
