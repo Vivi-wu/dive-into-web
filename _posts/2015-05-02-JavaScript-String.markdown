@@ -64,7 +64,7 @@ _length_ 是 String 自带属性。除此之外还有 _constructor_ 和 _prototy
 ### Replace 替换
 
 `replace(`regexp|substr, newSubstr|function`)`
-，返回值是**一个新字符串**，其中第一个匹配项（或全部匹配项）被替换为 newvalue。
+，返回**一个新字符串**，其中第一个匹配项（或全部匹配项）被替换为 newvalue，不改变原 string。
 
 ```js
 var str = "Mr Blue has a blue house and a blue car";
@@ -74,6 +74,8 @@ var res = str.replace(/blue|house|car/gi, function myFunction(x){return x.toUppe
 结果为 Mr BLUE has a BLUE HOUSE and a BLUE CAR.
 
 <span class="t-blue">默认只替换找到的**第一个匹配**</span>。希望全部替换，使用 regular expression 作为搜索项。
+
+没找到 match 则返回原 string。
 
 ### 字符大小写转换
 
@@ -124,4 +126,14 @@ var res = str.split("");
 
 ### trim 去空格
 
-使用方法 `trim()`，删除字符串首尾的空格. Whitespace in this context is all the whitespace characters (space, tab, no-break space, etc.) and all the line terminator characters (LF, CR, etc.
+使用方法 `trim()`，删除字符串首尾的空格. 返回一个新的字符串。
+Whitespace in this context is all the whitespace characters (space, tab, no-break space, etc.) and all the line terminator characters (LF, CR, etc.
+
+### localeCompare 排序
+
+判断两个字符串在 sort 顺序中的先后位置。
+
+```js
+referenceStr.localeCompare(compareString[, locales[, options]])
+```
+返回**负数**表示，reference string 在 compare string 前面；**正数**表示reference string排在后面；**0**表示相等。

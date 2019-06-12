@@ -2,7 +2,16 @@
 title:  "Vue CLI v3开发tips"
 category: JavaScript
 ---
-1. NODE_ENV 和 BASE_URL 2个特殊的环境变量，可以在app code中直接访问到
+Vue CLI的架构是基于插件的。官方提供了一些Vue CLI插件（包含文件generator，webpack runtime plugin）。
+
+使用 `vue ui` 创建的vue项目可以通过GUI执行 npm scripts 的 serve 和 build 指令，呈现 webpack Analyzer 的图形化结果。
+
+1. 只有以 `VUE_APP_` 开头的变量会被 webpack.DefinePlugin 静态嵌入到客户端侧的包中。在应用的代码中访问
+
+
+	console.log(process.env.VUE_APP_SECRET)
+
+	此外，在应用中始终可用的还有： `NODE_ENV` 和 `BASE_URL` （应用会部署到的基础路径）2个特殊的变量.
 2. 在所有 `<template lang="pug">` 的区域支持 pug 模板
 
 	npm install -D pug-plain-loader pug
@@ -23,3 +32,14 @@ category: JavaScript
 4. 支持 sass 语法，手动安装
 
 	npm install -D sass-loader node-sass
+5. 文件引用路径
+
+	+ 以 `.` 开头，相对模块，基于文件系统中的目录结构进行解析
+	+ 以 `~` 开头，任何内容作为模块被解析，可以引用 Node 模块里的资源、使用 webpack alias
+	+ 以 `@` 开头，指向项目根目录下的 src 目录
+6. 模式不同于 NODE_ENV，一个模式可以包含多个环境变量。也就是说，**每个模式都会将 NODE_ENV 的值设置为模式的名称**——比如在 development 模式下 NODE_ENV 的值会被设置为 "development"。通过传递 --mode 选项参数，为命令行覆盖默认的模式。
+
+	.env.[mode]         # 只在指定的模式中被载入
+
+7. 如果你需要基于环境有条件地配置行为，或者想要直接修改配置，那就换成一个函数 (该函数会在环境变量被设置之后懒执行)。该方法的第一个参数会收到已经解析好的配置。在函数内，你可以直接修改配置，或者返回一个将会被合并的对象.
+8. 前端应用独立于后端部署——即后端暴露一个前端可访问的 API，前端实际上是纯静态应用。那么可以将 dist 目录里构建的内容**部署到任何静态文件服务器**中，但要确保正确的 baseUrl。

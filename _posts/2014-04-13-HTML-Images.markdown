@@ -34,6 +34,14 @@ Tip:
 
 + 如果一个HTML文件包含10张图，为了正确显示这个页面则需要11个文件。加载图片花时间，请小心地使用图片。
 
+## 破解防盗链
+
+有些网站对图片做了防盗链，在 Request Headers 里通过 Referer 字段，拦截外站访问，返回403 forbidden。
+
+解法： 设置 `<img>` 的 _referrerpolicy_ 属性值为 `no-referrer`，这样fetch资源文件时，不发送 Referer header。
+
+参考[img标签](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)
+
 ## Image Floating
 
 使用css _float_ 属性，让图片浮动，文字自动环绕。

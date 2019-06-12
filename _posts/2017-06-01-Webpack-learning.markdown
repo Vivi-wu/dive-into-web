@@ -6,7 +6,7 @@ Webpack 是目前流行的前端资源模块化管理和构建工具。
 
 + 可以将模块按照依赖和规则打包成符合不同环境部署的前端资源
 + 可以对按需加载的模块进行代码分割，实现异步加载
-+ 通过指定的 loader 对模块的源代码进行转换，即引用/加载时预处理文件
++ 通过指定的 loader 对模块的源代码进行转换，即引用/加载时预处理 pre-compile 文件
 + 由于 loader 仅对单个文件进行操作，使用 plugins 可在编译、chunk 生命周期执行自定义操作
  
 1. 管理项目本地图片的版本（构建后的图片名称加hash）和引用路径：
@@ -66,3 +66,22 @@ plugins: [
 
 11. 使用 new 创建实例来调用 plugin，可以在一个配置文件中因为不同目的而多次使用同一个插件
 12. 通过 ProvidePlugin 自动加载模块，代替在各个文件里 import/require 它们。
+
+### html webpack plugin
+
+通过插件引入 favicon，并处理 favicon 的引用路径。
+
+看懂webpack工作原理：[这篇文章讲webpack中各种路径](https://medium.com/@tang.apollo/setup-webpack2-03-00-html-webpack-plugin-70c12aa3560d)
+
+```js
+plugins: [
+  new HtmlWebpackPlugin({
+    template: 'index.html',
+    favicon: './favicon.ico'
+  }),
+]
+```
+```html
+<link rel="shortcut icon" href="{output.publicPath}favicon.ico">
+```
+13. 在 'app.*.js.map'  中可以查看当前环境打包的 NODE_ENV

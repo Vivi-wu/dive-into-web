@@ -137,7 +137,7 @@ List all of the branches in your repository. 列出本地仓库中所有分支�
 
     git branch -r
 
-To view your remote branches, remote branches are prefixed by the remote they belong to. 列出所有远端仓库的分支，分支名由他们所属的 remote 名开始，以区别于本地分支。
+列出所有远端仓库的分支，分支名由他们所属的 remote 名开始，以区别于本地分支。
 The current branch will be highlighted with an asterisk 星号(*). 当前所在分支前以星号标记。
 
     git branch <branch_name>
@@ -184,19 +184,24 @@ List the remote connections you have to other repositories. 列出所有与其�
 
 **修改**名为 origin 的与远端仓库的链接的 url 值。
 
-    git fetch <remote>
+    git fetch <remote_name>
 
 Fetch all of the branches from the repository. This also downloads all of the required commits and files from the other repository. Since fetched content is represented as a remote branch, it has absolutely no effect on your local development work. This makes fetching a safe way to review commits before integrating them with your local repository.  把远端仓库的分支都取下来，取下来的内容也被视为远端分支，所以不会影响你本地开发工作。
-
 与人合作同一个任务时，先运行 `git fetch`命令，把他的分支取下来，然后 `git checkout <分支名>`，在本地创建同名新分支，并跳转过去。
 
-    git pull <remote>
+    git fetch --prune origin
+    git fetch -p origin
 
-Fetch the specified remote's copy of the **current** branch and immediately merge it into the local copy. This is the same as `git fetch <remote>` followed by `git merge origin/<current-branch>`.
+Before fetching, remove any remote-tracking references that no longer exist on the remote.
+删除本地所有 `remotes/<remote_name>/<branch_name>`在远程库中已经不存在的分支。
+
+    git pull <remote_name>
+
+Fetch the specified remote's copy of the **current** branch and immediately merge it into the local copy. This is the same as `git fetch <remote_name>` followed by `git merge origin/<current-branch>`.
 
 取得指定的在远端的当前分支的副本，然后立刻把它合并到当前工作分支。
 
-    git push <remote> <branch>
+    git push <remote_name> <branch_name>
 
 Push the specified branch to remote, along with all of the necessary commits and internal objects. This creates a local branch in the destination repository. To prevent you from overwriting commits, Git won't let you push when it results in a non-fast-forward merge in the destination repository. 把指定分支推到远端，通过该指令把本地仓库的提交传到远端仓库。该指令在目的仓库创建一个本地分支，以阻止你重写提交，在远端仓库造成冲突。
 
@@ -251,14 +256,14 @@ Move the current branch tip backward to commit and reset both the staging area a
 
 **代码回滚**，先在本地 reset 到指定 commit，然后强制覆盖远端分支代码:
 
-    git push <remote> <branch> -f
+    git push <remote_name> <branch_name> -f
 
 ### 恢复删除的本地分支
 
 用 `-d`  或 `-D` 删除的本地开发分支，可通过以下指令找到已删除分支最后一个 commit 的 hash 标记然后恢复。
 
     git reflog
-    git checkout -b <branch> <SHA-1>
+    git checkout -b <branch_name> <SHA-1>
 
 Reference logs, or "reflogs", 记录了分支和其他参考信息在本地仓库更新的时间。
 

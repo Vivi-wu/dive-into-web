@@ -180,6 +180,7 @@ Prototype properties can have prototype values (default values) 原型的属性�
 
 1. `Object.getOwnPropertyNames(obj)` 和 `Object.keys(obj)`，两者返回 obj 对象中由所有属性的名称（string）所组成的数组。`{}` 空对象返回 `[]` 空数组。注意：两者 IE9 以下都不支持。
 2. `obj.hasOwnProperty(prop)`，该方法返回 boolean 值，表示 obj 对象中是否含有指定的属性。
+3. `Object.values()` 返回指定对象自身可枚举的属性值组成的列表。
 
 ## 对象的复制
 

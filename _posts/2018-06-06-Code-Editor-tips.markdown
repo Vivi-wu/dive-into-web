@@ -51,6 +51,7 @@ category: Other
 
 4. 编辑
     
+        Ctrl + Shift + L            选中所有“当前选择”的匹配项
         Ctrl + F                    当前文件搜索
         Ctrl + Shift + F            全局搜索
         Fn + F3 / Fn + Shift + F3   查找前/后一个匹配项

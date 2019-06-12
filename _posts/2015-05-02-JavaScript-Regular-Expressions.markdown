@@ -58,10 +58,11 @@ category: JavaScript
 创建正则表达式对象：**字面量**和**构造函数**。
 
 ```js
+// 支持动态创建 regular expression
 var re = /pattern/flags;
 var re = new RegExp('pattern', 'flags');
 
-/ab+c/i;
+// /ab+c/i; 以下方法等价
 new RegExp('ab+c', 'i');
 new RegExp(/ab+c/, 'i');
 ```
@@ -107,6 +108,15 @@ var a = reg.exec('http://test.1688.com')
 4. `\d`，匹配一个数字。
 5. `\w`，匹配一个单字字符（字母、数字或下划线）
 6. `\s`，匹配任意空白符，包括空格，制表符(Tab)，换行符和换页符
+
+```js
+// 单词结尾
+'00012300 012'.replace(/0+\b/gi,""); // "000123 012"
+// 单词开头
+'00012300 012'.replace(/\b0+/gi,""); // "12300 12"
+// 起始位置
+'00012300 012'.replace(/^0+/gi,"");  // "12300 012"
+```
 
 ### 反义
 

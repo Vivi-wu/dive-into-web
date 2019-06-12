@@ -108,7 +108,8 @@ submit (data, fn) {
   })
 }
 ```
-+ 涉及DOM操作，使用 vm.$nextTick() 
++ 涉及DOM操作，且组件内有模板更新，使用 vm.$nextTick() 
++ axios.catch().then()，跟在catch后面的then相当于 Promise 的 always
 + 打开弹窗时获取数据
 
 ```js
@@ -129,6 +130,17 @@ methods: {
   },
 }
 ```
++ 支持 /deep/ 选择器，在父组件里设置子组件样式 [vue-loader](https://github.com/vuejs/vue-loader/issues/661)
++ 列表检索页loading和结果区域显示呈互斥关系，但不要用 v-if/v-else，会重复渲染组件。
++ 翻页、切换tab时要重置表格列 checkbox 的状态
++ 父组件里对 $emit 事件处理函数追加变量，通过 `$event` 访问到被子组件抛出的值
+
+    // 子组件
+    this.$emit('my-event', 'test')
+    // 父组件：index为父组件变量，$event = 'test'
+    @my-event='handler(index, $event)'
+
++ vm.$on(event, callback) 用来监听当前实例上的自定义事件。事件可以由vm.$emit触发。
 
 ## vue-router
 
@@ -144,11 +156,12 @@ methods: {
 + 点击“面包屑”返回前，从 vuex 中取出当前列表查询参数对象，赋值给路由对象的 `query` 属性。这样返回列表查询页后，根据 URL 的 query string 可以回填历史查询、排序参数，reload 页面页不会因为 vuex 状态丢失这些参数。
 + 使用 `router.go(-1)` 实现返回上一页的功能
 + 路由信息对象 `this.$route` 对每个路由视图子组件都是可见的
-+ router-link 绑定原生 click 事件处理函数：
++ router-link 绑定原生 click 事件处理函数：**通过.native**绑定原生事件
 
     router-link(:to='{ name: "to-request-bill" }' @click.native='gtagTest') 请款
 
 + `afterEach()` 全局后置钩子函数执行时 _location.href_ 还没有更新。
++ 使用路由名称进行跳转。
 
 ## Vuex
 

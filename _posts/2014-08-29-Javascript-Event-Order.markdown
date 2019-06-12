@@ -164,3 +164,7 @@ Promise.then 是异步执行的，而创建 Promise 实例 （executor）是同�
 // 5
 // 4
 ```
+
+### relatedTarget
+
+只读属性。比如光标失焦事件，此时 ` relatedTarget` 指的是接收到 focus（光标聚焦的） `EventTarget`。对于无法聚焦的元素，该属性返回 null
