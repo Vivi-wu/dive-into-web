@@ -85,3 +85,17 @@ Since URLs often contain characters outside the ASCII set （因为URL 中经常
 URL encoding replaces non ASCII characters with a "_%_" followed by 2 hexadecimal digits. URL编码用一个 _%_ 紧跟着两个十六进制数字来替换URL中非ASCII字符。（比如 &euro; 欧元符号，编码为：_％E2％82％AC_）
 
 URLs cannot contain spaces, **normally replaces a space with a plus (_+_) sign** or _%20_. URL中不能含有空格，通常用一个加号替换空格。
+
+URL编码/转义尽量使用 `encodeURI()`、 `encodeURIComponent()`。解码使用想对应的 `decodeURI()`、`decodeURIComponent()`。
+
+区别：encodeURI 应当用于整个 URI 的编码，encodeURIComponent 则用于 URI 中某个部分的编码。
+
+```js
+encodeURI('https://www.baidu.com/ a b c')           // "https://www.baidu.com/%20a%20b%20c"
+encodeURIComponent('https://www.baidu.com/ a b c')  // "https%3A%2F%2Fwww.baidu.com%2F%20a%20b%20c"
+encodeURIComponent(' a b c')                        // "%20a%20b%20c"
+```
+
+注意：不要使用几乎废弃的 `escape()`，`unescape()`，否则会引入 `%` 开头的非法字符串。其他人使用上面的函数进行解析时会报错。
+
+如： `unescape('%u0107')`，使用上面的函数解析会报错

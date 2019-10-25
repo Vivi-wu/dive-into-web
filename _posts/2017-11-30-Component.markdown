@@ -10,7 +10,7 @@ category: JavaScript
 
 ## 面向设计的半封装web组件
 
-[原文地址](https://isux.tencent.com/half-package-web-components-for-design.html)
+[原文地址](https://cloud.tencent.com/developer/article/1154278)
 
 我们平常提到组件，就会想到重用，各个项目都能使用。而本文要探讨的是面向设计、面向项目的web组件开发。
 

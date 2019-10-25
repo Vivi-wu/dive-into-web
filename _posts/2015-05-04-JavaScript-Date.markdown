@@ -35,7 +35,7 @@ Date 对象用来与年月日时分秒毫秒打交道的。
 
 设定**完整**的日期时间 (YYYY-MM-DDTHH:MM:SS)
 
-    var d = new Date("2015-03-25T12:00:00");    // Wed Mar 25 2015 20:00:00 GMT+0800 (CST)
+    var d = new Date("2015-03-25T12:00:00");    // Wed Mar 25 2015 12:00:00 GMT+0800 (中国标准时间)
 
 日期和时间字符串中间的 _T_ 表示 **UTC time**. 北京时间（UTC+8）需要在这个时间上加8小时。
 
@@ -238,7 +238,7 @@ tmp.getTime() === today.getTime() // 方法二：转成距离0时的毫秒数
 
 ### Tips
 
-1. 以 UTC 时间提交日期字符串
+1. 以当前用户系统时区的时间字符串转为 ISO 格式的字符串
 
 ```js
 new Date(dateString).toISOString()

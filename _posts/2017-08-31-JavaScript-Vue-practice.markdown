@@ -38,7 +38,6 @@ Vue 组件类似于自定义元素——它是 Web 组件规范的一部分，�
 
     div(v-translate:检查结果：需求数|个，|个符合条件，|个不符合条件='lang')
 
-+ Vue devtool inspection 在生产环境默认 disabled，所以在线上开发者工具里看不到 Vue devtool
 + 在 HTML 中侦听 Vue 事件，事件名称必须是 camel-case，如 `@set-data`
 + 通过 `this.$el` 获取当前组件绑定的 HTMLElement
 + select 元素值为 primitive values, 而 option 的值是 object 时，通过绑定 select 的值，回填数据的方法不起作用。解决办法：在 option 元素上给 _selected_ 特性绑定 method，通过判断对象某属性的值是否与默认值一致，设置该 `<option>` 的 _selected_ 特性值为 `true`
@@ -77,6 +76,8 @@ Vue 组件类似于自定义元素——它是 Web 组件规范的一部分，�
     <popover :isShown.sync='isShown'></poopover>
 
 + 通过 _ref_ 注册子组件信息，可以在父组件里通过 _$refs_ 调用子组件的方法。1.必须在子组件渲染后才有效；2. ref 用在单独的 DOM 元素或子组件上时，指向 DOM 元素或子组件实例；3.用作 v-for 上，则是包含 DOM 节点或子组件实例的数组。
++ `this.$refs[name]` 返回值为 Vue.component 或 [Vue.component] 组成的数组
++ this.$refs[name].data 可以获取子组件状态的实时值
 + Vue.js 异步执行 DOM 更新；当观察到数据变化时，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据改变。如果同一个 watcher 被多次触发，**只有一次**会推入到队列中。然后，在下一个的事件循环“tick”中，Vue 刷新队列并执行实际（已去重的）工作。Vue 在内部尝试对异步队列使用原生的 Promise.then 和 MutationObserver，如果执行环境不支持，会采用 setTimeout(fn, 0) 代替。
 + 让 Vue 忽略（console 不报 warning）自定义 HTML tag 的方法：
 
@@ -141,6 +142,7 @@ methods: {
     @my-event='handler(index, $event)'
 
 + vm.$on(event, callback) 用来监听当前实例上的自定义事件。事件可以由vm.$emit触发。
++ 在 destroy() 勾子函数里执行 `window.removeEventListener`，对于侦听页面 onresize、onscroll事件
 
 ## vue-router
 

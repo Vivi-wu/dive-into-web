@@ -258,6 +258,10 @@ Move the current branch tip backward to commit and reset both the staging area a
 
     git push <remote_name> <branch_name> -f
 
+执行merge代码时遇到代码冲突，不想解决时，可运行以下指令：
+
+    git merge --abort
+
 ### 恢复删除的本地分支
 
 用 `-d`  或 `-D` 删除的本地开发分支，可通过以下指令找到已删除分支最后一个 commit 的 hash 标记然后恢复。

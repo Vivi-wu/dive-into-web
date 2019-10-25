@@ -99,6 +99,8 @@ _padding_ 属性实际上是 _padding-top_, _padding-right_, _padding-bottom_, _
 
 因为 _box-sizing_ 属性使得设置元素尺寸更加 intuitive 直觉性，许多浏览器已经使用 `box-sizing: border-box;` 在许多表单元素上。（除了 `<input>`, `<textarea>`）
 
+element.offsetHeight 为只读属性，返回一个元素的cssheight，包括边框、padding和横向滚动条（如果有）
+
 ## CSS Outline
 
 _outline_ 用来设定元素的轮廓——围绕元素所画的线，**outside the border**。
@@ -124,6 +126,11 @@ _outline_ 用来设定元素的轮廓——围绕元素所画的线，**outside 
  在 Mac Safari 和 Chrome 中测试，目前均不支持 **invert** 关键字)。
 + _outline-width_ 设定四条边的轮廓的宽度。宽度可以用指定的尺寸（以 px，pt，cm，em 等为单位），或者使用三个预定义的值（`thin`, `medium`, 或 `thick`）
 + _outline-offset_ 指定轮廓和边框之间的距离，默认值为 **0**.
++ 实现外边线圆角效果，可以结合 _box-shadow_ 实现
+
+```css
+input:focus {box-shadow: 0 0 0 2px rgba($cf-primary, 0.1);}
+```
 
 **注意**: <span class="t-blue">同边框一样，除非先设定 **outline-style** 这个属性，否则任何 outline 性质（如：outline width、outline color...）都不会产生效果</span>。
 

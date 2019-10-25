@@ -202,3 +202,4 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
 6. 非 input 元素如果想触发 focus 事件，必须指定 _tabindex_ 属性，即该元素支持使用 keyboard 进行切换
 7. 横向表单：采用label、input为一个form-group（通过 col-* 指定 width）。单行表单：label宽不固定；多行表单：label和输入框分行显示。
 8. 表单提交时，判断输入项是否有error并拦截（通过标识或状态，避免重复判断），用户可能不改错直接提交。
+9. 键盘事件只能由 input、textarea，等任何拥有 _contentEditable_ 属性，或者 tabindex='-1' 的元素

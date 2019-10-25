@@ -273,6 +273,8 @@ After the declaration, the variable has no value. (Technically it has the value 
 
 <span class="t-blue">在逻辑运算中虽然内部进行 Boolean 转换，实际返回 original 操作数的值</span>。
 
+在 JavaScript 中，true && expression 总是会返回 expression, 而 false && expression 总是会返回 false
+
 巧用逻辑操作符，可以缩短代码。如下：
 
 ```js

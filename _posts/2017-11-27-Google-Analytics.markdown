@@ -62,9 +62,9 @@ gtag('event', 'event_name', {
 
 参数：
 
-- category，理解为 web object，
 - action，必选，默认为 event_name，即 type of event。要与 report 数据相关；集合或区分 interface
-- label，可选，建议设置，提供 event 的 additional 信息
+- event_category，事件类别，理解为 web object，
+- event_label，事件标签，可选，建议设置，提供 event 的 additional 信息
 - value，为非负整数（上面都为string）
 
 注意：Many browsers stop executing JavaScript as soon as the page starts unloading, which means your gtag.js commands to send events may never run.

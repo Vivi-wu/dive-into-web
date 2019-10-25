@@ -20,3 +20,7 @@ category: CSS
 
 + _flex-direction_，设定 flex item 在容器里的主轴和方向
 + _flex-wrap_，设定是否强制 flex item 摆放在一行
+
+### 兼容性问题
+
+与默认定位的footer相邻的元素，如果同时设置了 _flex-grow-1_、 _d-flex_、_flex-column_，在 Safari 中，由于该相邻元素的内容尺寸计算，没有撑起实际容器高度导致 footer 会浮动到页面中间。 去掉 flex-column 即可。

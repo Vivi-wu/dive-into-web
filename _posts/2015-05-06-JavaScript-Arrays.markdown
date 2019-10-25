@@ -24,6 +24,7 @@ JS数组用于在一个变量名下存储多个具有共性的数值。
 
         var points = new Array(40, 100);  // Creates an array with two elements (40 and 100)
         var points = new Array(40);       // Creates an array with 40 undefined elements !
+        var steps = [ ...Array(4).keys() ].map(ele => ele + 1) // 创建 [1, 2, 3, 4]
 
 2. 获取数组项：`var item = array-name[index];`
 3. 改变数组项：`array-name[index] = value;`

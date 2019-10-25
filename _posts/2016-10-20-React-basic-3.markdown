@@ -12,17 +12,19 @@ category: JavaScript
 
 `<option>` _selected_ 状态的改变
 
-输入组件包含 `value` 属性的称为 controlled component 受控组件。它的值完全反应其属性的值，而不受用户输入影响。因此要实现交互，给 onChange 属性绑定处理函数。
+输入组件包含 `value` 属性的称为 controlled component 受控组件。它的值不受用户输入影响。因此要实现交互，给 onChange 属性绑定处理函数。
 
 <!--more-->
 
 如果输入组件不含 `value` 属性的称为 uncontrolled component 不受控组件。任何用户输入都直接反应在渲染的元素上。可以像受控组件一样给 onChange 属性绑定处理函数。
 
-可通过 `defautChecked` 给多选框、单选框，`defaultValue` 下拉选项、文本输入框等设置初始值。
+当需要处理多个 input 元素时，我们可以给每个元素添加 name 属性，并让处理函数根据 event.target.name 的值选择要执行的操作。
 
 ## 组件生命周期
 
 React 提供 **will**（在事件发生前）和 **did**（在事件发生后）方法。
+
+当组件第一次被渲染到 DOM 中的时候，被称为“挂载（mount）”。当 DOM 中 组件被删除的时候，在 React 中被称为“卸载（unmount）”。
 
 ### Mounting
 
@@ -88,3 +90,9 @@ By default, use the Reactive data flow and save refs for use cases that are inhe
 
 + You must provide the key attribute for all children of ReactCSSTransitionGroup, even when only rendering a single item. This is how React will determine which children have entered, left, or stayed.
 + You'll notice that animation durations need to be specified in both the CSS and the render method; this tells React when to remove the animation classes from the element and -- if it's leaving -- when to remove the element from the DOM. 自定义 animation 样式时不仅在 css 中要指定时间，在组件的属性上也要指定。
+
+### 官方文档错误
+Using Global Variables，Alternatively, you can force the linter to ignore any line by adding  `// eslint-disable-line` after it.
+不起作用。应该使用 `// eslint-disable-next-line`
+或者在文件最开始处，`/*global fbq, gtag*/` 告诉eslint全局变量名
+`

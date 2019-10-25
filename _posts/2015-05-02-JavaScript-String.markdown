@@ -57,7 +57,7 @@ _length_ 是 String 自带属性。除此之外还有 _constructor_ 和 _prototy
     以上三个方法的共同点是缺省第二个参数，the method will slice out the rest of the string。
 
 + `charAt(`position`)`，返回指定位置上的字符
-+ `charCodeAt(`position`)`，返回指定位置上字符的 unicode
++ `charCodeAt(`position`)`，返回指定位置上字符的 UTF-16 代码单元值的数字；如果索引超出范围，则返回 NaN
 
 **注意**：Accessing a String as an Array is Unsafe！<span class="t-blue">不要使用数组形式接近一个字符串</span>。
 

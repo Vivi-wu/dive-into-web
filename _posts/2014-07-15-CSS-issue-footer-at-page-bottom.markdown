@@ -30,7 +30,7 @@ category: CSS
 
 然而理想和现实是有差距滴。这样写，可以解决 short page 页脚的问题。
 
-对于 long page 乍一看 footer 放置在了浏览器的底部，**遮住了页面靠近浏览器底部的内容**（如果你还没有给 body 内容区域设置 _padding-bottom_）。当你向下滚动页面时，会看到 footer 一直被定在那个“初始”位置。
+对于 long page 乍一看 footer 放置在了浏览器的底部，**遮住了页面靠近浏览器底部的内容**（所以记得给 body 内容区域设置 _padding-bottom_）。当你向下滚动页面时，会看到 footer 一直被定在那个“初始”位置。
 
 本来没问题的 long page 现在出现问题了😔
 
@@ -82,6 +82,8 @@ category: CSS
     }
 
 这个添加改动对于 long page 是没有明显影响的。
+
+记得**给长页面可视区域父元素设置底部内边距**
 
 ### Other
 
