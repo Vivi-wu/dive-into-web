@@ -142,12 +142,13 @@ JS中**只能被 Number 对象调用**的属性有：`MAX_VALUE`，`MIN_VALUE`�
 
 + `Number()`， Returns a number, converted from its argument. 当参数无法转为数字时，返回 `NaN`
 + `parseFloat()`， Parses its argument and returns a floating point number
-+ `parseInt(string, radix)`， Parses its argument and returns an integer. 空格是允许的，但是只返回第一个数字。
++ `parseInt(string, radix)`，解析一个字符串参数，返回一个指定进制的整数 integer. 空格是允许的，但是只返回第一个数字。
 
     + This function determines if the first character in the specified string is a number. If it is, it parses the string until it reaches the end of the number, and returns the number **as a number**, not as a string.
     + Leading and trailing spaces are allowed。第一个数字前和后允许有空格。
     + _radix_ 指的是 string 的数学进制，是一个 **(from 2 to 36) 的数字**，。比如：`parseInt("20",16)`，表示第一个参数是十六进制的，**运算结果**以**十进制**显示，即 `32`。
     + 如果 _radix_ 是 `undefined`、 `0` 或缺省，则看第一个参数：若以 `0x` 开始，则为十六进制；以 `0` 开始，则为八进制。任何其他 value，都认为是十进制的。
+    + parseInt should not be used as a substitute for Math.floor()
 
     **注意**：该函数在不同浏览器中表现有差异。比如 `parseInt('09')`，谷歌，IE9+ 等高级浏览器，返回结果为 `9`。09开头，如果按八进制，则无效（八进制一位上取值为0-7）。IE8-的游览器则返回 `0`。屏蔽浏览器差异的解决办法是，指定 radix，即 `parseInt('09',10)`。这样都返回 9
 
@@ -156,6 +157,10 @@ JS中**只能被 Number 对象调用**的属性有：`MAX_VALUE`，`MIN_VALUE`�
 ```js
 Number("10");            // returns 10
 Number("10 20");         // returns NaN
+Number('12.00');         // 12
+Number('0x11');          // 17
+Number('0b11');          // 3
+Number('0o11');          // 9
 parseInt("10 20 30");    // returns 10
 parseInt("10 years");    // returns 10
 parseInt("years 10");    // returns NaN
@@ -169,6 +174,7 @@ parseFloat("10 20 30");  // returns 10
 + `toLocaleString()`，转成本地数字显示格式。如 35000 -> "35,000"
 + `toExponential(x)`，Returns a string, with a number rounded and written **using exponential notation**. 参数 x 表示精确到小数的后几位数，取值从 0 到 20，原数小数点后位数不够补0，多则四舍五入. **缺省则保留所有小数点后的数字**。
 + `toFixed(x)`，Returns a string, with a number rounded and written with a specified number of decimals. x **指定小数点后保留几位数**。默认值是 **0** (no digits after the decimal point 表示没有小数部分，多则四舍五入)
++ 注意：对浮点数使用 toFixed 方法结果不可知。Floating point numbers cannot represent all decimals precisely in binary
 + `toPrecision(x)`，Returns a string, with a number written with a specified length，按**指定数字长度**，小数部分包括在内，**缺省则原样输出**。位数不够补0，多则四舍五入。注意对小数的处理，看下面的例子。
 + `valueOf()`， Returns a number as a number
 
@@ -180,6 +186,9 @@ x.toExponential(2);     // returns 9.66e+0
 x.toExponential(4);     // returns 9.6560e+0
 x.toFixed(2);           // returns 9.66
 x.toFixed();            // returns 10
+2.34.toFixed(1);        // Returns '2.3'
+2.35.toFixed(1);        // Returns '2.4'. Note it rounds up
+2.55.toFixed(1);        // Returns '2.5'. Note it rounds down
 x.toPrecision();        // returns 9.656
 x.toPrecision(2);       // returns 9.7
 var num = 0.001658853;

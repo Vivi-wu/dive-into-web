@@ -140,6 +140,7 @@ Number({})          // NaN
 Number("")          // 0
 Number(" 12s ")     // NaN
 Number("99 88")     // NaN
+Number('-Infinity') //-Infinity
 ```
 
 #### 栗子
