@@ -79,7 +79,13 @@ gtag('event', 'event_name', {
 - event_label，**事件标签**，可选，建议设置，提供 event 的 additional 信息
 - value，为非负整数（上面都为string）
 
-注意：Many browsers stop executing JavaScript as soon as the page starts unloading, which means your gtag.js commands to send events may never run.
+注意：
+
++ Many browsers stop executing JavaScript as soon as the page starts unloading, which means your gtag.js commands to send events may never run.
++ 事件衡量会将两个不同类别中具有**相同操作名称**的指标**合并**在一起。如果您将操作名称“Click”同时用于“Downloads”类别和“Videos”类别，那么“热门操作”报告中有关“Click”的指标会同时包含使用该名称标记的所有互动。
++ 为了汇总或区分用户互动，在使用操作名称时注意全局性。例如：使用操作名称来区分不同的播放器界面，而无需创建单独的视频类别。这样报告就可以区分两个播放器，同时仍然保留了显示网站上所有视频汇总数据这一优势。
++ 维度，类似特质、属性、分类，通常会出现在表格最左边的纵轴栏位，用来区隔数据。
++ 指标，则类似数值、数字，通常会是表格最上方的横轴栏位，就是行为数据本身。
 
 ```js
 // Adds a listener for the "submit" event.

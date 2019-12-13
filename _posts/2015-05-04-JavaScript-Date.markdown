@@ -2,42 +2,69 @@
 title:  "JavaScript Dates"
 category: JavaScript
 ---
-Date 对象用来与年月日时分秒毫秒打交道的。
+Date 对象是用来与年月日时分秒毫秒打交道的。
 
 ## 创建 Date 对象
 
 有**4种**初始化日期对象的方式：
 
-`new Date()`，根据系统设定以**current date and time**创建一个新的日期对象，输出为**本地时间**。
+`new Date()`，以**current date and time**创建一个新的日期对象，输出为**本地时间**，取决于系统设定。
 
-`new Date(milliseconds)`，按照 <span class="t-blue">zero time</span>（01 January 1970 00:00:00 UTC）加上参数创建新的日期对象。JS一天包含 86,400,000 millisecond
+`new Date(milliseconds)`，按照 <span class="t-blue">zero time</span>（01 January 1970 00:00:00 UTC）加上参数值，创建新的日期对象。
 
 `new Date(dateString)`，按指定的日期字符串创建一个新的日期对象，dateString 格式参考下面讲的 Date formats
 
-`new Date(year, month, date, hours, minutes, seconds, milliseconds)`，至少指定 year 和 month。如果其他参数都省略，则 date 为 1，剩下都为 0。
+`new Date(year, month, date, hours, minutes, seconds, milliseconds)`，至少指定 year 和 month。其他参数缺省时 date 置 1，剩下都置 0。
 
 <!--more-->
 
 ## Date formats
 
-通常JS有**4种**日期格式：
+JS有**4种**日期格式：
 
-1.**ISO Dates**，ISO 8601 是用于表示日期和时间的国际标准，syntax (YYYY-MM-DD)。
+1.**ISO Dates**，基于 ISO 8601 国际标准，格式为 YYYY-MM-DDTHH:mm:ss.sssZ，或 YYYY-MM-DDTHH:mm:ss.sss+HH:mm，YYYY-MM-DDTHH:mm:ss.sss-HH:mm  
 
-缺省 month 和 date 比如 (YYYY-MM)，(YYYY) 也是允许的。
+date-only forms： 
 
-上面说了完整的日期对象有7个参数，这里**缺省的参数**将**按照最小值算**，date 为 1，剩下都为 0。
+- YYYY
+- YYYY-MM
+- YYYY-MM-DD
 
-注意：非0时区，hour 的值不为0.
+“date-time” forms：（以上仅含日期字符串立即跟随）
+
+- THH:mm
+- THH:mm:ss
+- THH:mm:ss.sss
+
+ES5 规定date string不指定时区时：仅日期格式字符串，将应用 UTC 时区翻译为 utc 时间；日期时间格式字符串，以系统本地时区设置时间。
+
+原文：[When the UTC offset representation is absent, date-only forms are interpreted as a UTC time and date-time forms are interpreted as a local time.](https://tc39.es/ecma262/#sec-date.parse)
+
+UTC时间的2018-1-10的0时，相当于北京时区同一时间加8小时；第二个就是北京时间。
 
     new Date('2018-01-10') // Wed Jan 10 2018 08:00:00 GMT+0800 (中国标准时间)
     new Date('2018-01-10T00:00:00') // Wed Jan 10 2018 00:00:00 GMT+0800 (中国标准时间)
 
-设定**完整**的日期时间 (YYYY-MM-DDTHH:MM:SS)
+注意：浏览器差异性！！！
+Chrome、Firefox、Edge表现一致：
 
-    var d = new Date("2015-03-25T12:00:00");    // Wed Mar 25 2015 12:00:00 GMT+0800 (中国标准时间)
+    Date.parse("2019-01-01T00:00:00")
+    Date.parse("2019-01-01T00:00:00.000")
+    new Date(2019, 0, 1).getTime()
+    // 1546272000000 北京时间，比下面的时间，少8小时
 
-日期和时间字符串中间的 _T_ 表示 **UTC time**. 北京时间（UTC+8）需要在这个时间上加8小时。
+    Date.parse("2019-01-01")
+    Date.parse("2019-01-01T00:00:00.000Z")
+    Date.parse("2019-01-01T00:00:00.000+00:00")
+    // 1546300800000 UTC时间
+
+Safari 没有按规范来：
+
+    Date.parse("2019-01-01T00:00:00")
+    Date.parse("2019-01-01T00:00:00.000Z")
+    // 1546300800000
+
+日期和时间字符串中间的 _T_ 表示 **UTC time**. 
 
 **Note**: _UTC_ (Universal Time Coordinated)  is the **same** as _GMT_ (Greenwich Mean Time).
 
@@ -214,7 +241,7 @@ document.getElementById("demo").innerHTML = days[d.getDay()];
 
 如果你有一个有效格式的日期字符串，使用 `Date.parse(dateString)` 方法可以得到距离 zero time 的毫秒数，然后使用 `new Date(milliseconds)` 就可以得到想要的日期对象了。
 
-但是这种方法是 strongly **discouraged** due to browser differences and inconsistencies。
+直到目前，仍然 strongly **discouraged**，不建议使用该方法解析日期字符串，due to browser differences and inconsistencies
 
 ### Compare Dates
 

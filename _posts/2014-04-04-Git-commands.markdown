@@ -244,7 +244,7 @@ Push the specified branch to remote, along with all of the necessary commits and
 
     git reset --hard <commit>
 
-Move the current branch tip backward to commit and reset both the staging area and the working directory to match. 把当前分支返回到指定 hashID 的提交，暂存区、工作区的内容都会被修改到与提交点完全一致的状态。
+Move the current branch tip backward to commit and reset both the staging area and the working directory to match. 移除当前分支指定 hashID 的提交所带来的变更（暂存区、工作区的内容都会被修改到与提交点完全一致的状态。）
 
     git revert <commit>
 
