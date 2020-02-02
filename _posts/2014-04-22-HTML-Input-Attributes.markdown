@@ -90,7 +90,11 @@ category: HTML
 Last name: <input type="text" name="lname" form="form1">
 ```
 
-该特性指定一个 input 输入元素属于一个或多个表单。这样<span class="t-blue">即使 input 元素没有嵌套写在 `<form>`元素里，仍然可以作为这个 form 的表单数据被提交</span>。如果想让一个 input 同时指向多个 form，用 _space-separated 列出表单的 id_。
+该特性指定一个 input 输入元素属于一个或多个表单。这样<span class="t-blue">即使 input 元素没有嵌套写在 `<form>`元素里，仍然可以作为这个 form 的表单数据被提交</span>。
+
+如果想让一个 input 同时指向多个 form，用 _space-separated 列出表单的 id_。
+
+button 元素同样支持H5 _form_ 属性
 
 注意：IE 不支持该特性。
 
@@ -162,6 +166,8 @@ Quantity (between 1 and 5):
     Country code: <input type="text" name="country_code" pattern="[A-Za-z]{3}" title="Three letter country code">
 
 该特性指定一个输入元素的值需要遵循的 regular expression 常规表达式。支持这个特性的输入类型有：**text**，**search**，**url**，**tel**，**email** 和 **password**。
+
+要求输入的值是完全符合 pattern 要求的规则（换句话说，pattern 特性的值 has to match the entire string）
 
 注意：IE9 及之前版本和 Sarari 不支持该特性。
 

@@ -46,6 +46,7 @@ localStorage.setItem('user', JSON.stringify(user));
 
 // Read (Single)
 JSON.parse(localStorage.getItem('user'))
+// 如果 key 不存在，返回 null 
 
 // 也可以使用以下方法 create／read
 localStorage.lastname = "Smith";  
@@ -78,6 +79,7 @@ _window.sessionStorage_ 是 H5 Web Storage API 第二种类型，用法、优劣
 + clear() 函数删除存储列表中所有的数据，空的 Storage 对象调用此函数也是安全的，只是不执行任何操作。 
 + 如果用户已关闭了网站的存储，或存储达到其最大的容量，此时设置数据将抛出 QUOTA_EXCEEDED_ERR 错误。
 + 只要有同源的 Storage 事件发生（包括 SessionStorage 和 LocalStorage 触发的事件），已注册的所有事件侦听器作为事件处理程序就会接到相应的 Storage 事件。该事件中包含与存储变化有关的信息。如果是新添加的数据，则 oldValue 属性值为 null；如果是被删除的数据，则 newValue 属性值为 null。
++ 关闭当前tab可以自动清除sessionStorage，但登出操作在同一个tab页进行，故需要手动清除.
 
 ## IndexedDB
 

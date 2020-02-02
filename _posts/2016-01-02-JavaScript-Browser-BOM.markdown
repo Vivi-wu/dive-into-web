@@ -25,6 +25,12 @@ _window.innerHeight_ 和 _window.innerWidth_ 这两个属性可用来测量浏�
 + `window.moveTo()`，移动当前窗口
 + `window.resizeTo()`，重新缩放当前窗口
 
+### 在新 tab 中打开 URL
+
+```js
+let windowObjectReference = window.open("https://www.baidu.com/", "_blank");
+```
+
 ## Window Screen
 
 _window.screen_ 对象包含了用户**设备屏幕**的信息。该对象可以缺省 window 前缀。
@@ -93,16 +99,52 @@ JS 有三种弹出框：Alert box，Confirm box，Prompt box
 
 窗口对象允许在特定的时间间隔里执行代码。主要的方法是：
 
-+ `window.setTimeout(function, milliseconds)`，在等待一个指定秒数的时间后执行一个函数
++ `window.setTimeout(function[, delay, param1, param2, ...])`，在等待指定**毫秒数**的时间后执行一个函数，返回值是一个**正整数**的 timeoutID。额外的 parameters 将被传给前面指定的 function。
 + `window.setInterval(function, milliseconds)`，在给定的时间间隔里，重复执行指定的函数。比如每个 1000 毫秒执行一次日期显示时间函数，看起来就像是一个数字时钟。
-+ `window.clearTimeout(timeoutVariable)`，该方法用来停止使用 `setTimeout()` 在执行的函数。使用的变量是从 `setTimeout()` 返回的变量。
++ `window.clearTimeout(timeoutID)`，该方法用来停止使用 `setTimeout()` 要执行的函数。
 + `window.clearInterval(timerVariable)`，该方法用来停止使用 `setInterval()` 在执行的函数。使用从 `setInterval()` 函数返回的变量。
+
+### 事件节流 Throttling
+
+一些事件如 mousemove、resize、scroll 是连续的更新，浏览器会尽快触发更新。有时只想要在用户停止连续操作时才更新页面，当你有大量code要响应事件时尤其重要。
+
+事件节流/函数防抖，即对于一系列更新事件只响应一次。使用 generator function 形成闭包可以实现：
+
+```js
+// Debounce：throttle-then-act
+function throttleEvents(listener, delay) {
+    let timeout = null;
+    return function() {
+        // 2.如果已经有timer则清除并停止执行
+        if (timeout) clearTimeout(timeout);
+        // 3.设置新的timer，且在倒计时结束时执行真正的事件处理函数
+        timeout = setTimeout(listener, delay);
+    }
+}
+// 1.事件发生时设置一个timer，创建延迟
+element.addEventListener(eventType, throttleEvents(realListenerFunction, 500))
+
+// Throttling：act-then-throttle
+function actThenThrottleEvents(listener, delay) {
+  let timeout = null;
+  return function() {
+    if (!timeout) { // no timer running
+      listener.apply(this, arguments) // run the function，传递上下文和参数
+      timeout = setTimeout( function() { timeout = null },
+        delay); // start a timer that turns itself off when it's done
+    }
+    //else, do nothing (we're in a throttling stage)
+  }
+}
+```
 
 ## JS Cookies
 
 Cookies 是一些数据，在你的电脑里用文本文件里存储网页用户信息。Cookies 的发明是用来解决“如何记住用户信息”的问题。
 
 Cookies 以 name-value 形式存储。（如 username = Viivenne）当浏览器向服务器请求一个网页时，属于那个页面的 cookies 被添加到请求里。
+
+Cookie 会自动追加在每一个 HTTP request header中。
 
 ### Create
 
@@ -116,13 +158,12 @@ Cookies 以 name-value 形式存储。（如 username = Viivenne）当浏览器�
 
 + 可以添加一个 path 参数，告诉浏览器 cookie 属于哪一个路径。<span class="t-blue">默认地，cookie 属于当前页面</span>
 
-    document.cookie = "username=John Doe; expires=Thu," +
-                      " 18 Dec 2013 12:00:00 UTC; path=/";
+    document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
 
 + 可以添加一个 max-age 参数（max-age-in-seconds），最大有效期是多少。IE 不支持
 + 可以添加一个 domain 参数，值为 'example.com' 或者 'subdomain.example.com'. If not specified, defaults to the host portion of the current document location (不设定则不包括 subdomains).
-
-使用 _document.cookie_ 多次赋值，旧的 cookie **不会**被覆盖，而是追加到 cookies 里。
++ 使用 _document.cookie_ 多次赋值，旧的 cookie **不会**被覆盖，而是追加到 cookies 里。
++ 还可以设置 domain `;domain=domain`。默认是当前文档的host部分。如设置了domain，则subdomain也包括。
 
 ### Read
 

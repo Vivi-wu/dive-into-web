@@ -2,9 +2,7 @@
 title:  "JavaScript Objects"
 category: JavaScript
 ---
-在JS中，除了 **primitive values**（string "John Doe"，numbers 3.14，true，false，null and undefined），所有值都是 objects。
-
-因此 <span class="t-blue">all data types have a `valueOf()` 和 `toString()` 方法</span>.
+在JS中，<span class="t-blue">all data types have a `valueOf()` 和 `toString()` 方法</span>.
 
 JS对象是可以包含多个值的变量。这些值以 `name:value` 对的形式、**逗号**为分隔符（最后一个值后面没有逗号）。
 
@@ -170,7 +168,7 @@ Prototype properties can have prototype values (default values) 原型的属性�
 
 ### for...in 语句
 
-以 arbitrary order （任意顺序）遍历对象的属性。对于每一个 distinct 不同的属性，该语句都可以被执行。
+以 arbitrary order （任意顺序）遍历一个对象的除Symbol以外的可枚举属性。对于每一个 distinct 不同的属性，该语句都可以被执行。
 
 用法：
 
@@ -180,5 +178,34 @@ Prototype properties can have prototype values (default values) 原型的属性�
 
 ### 操作‘对象属性’可用的方法
 
-1. `Object.getOwnPropertyNames(obj)` 和 `Object.keys(obj)`，两者返回 obj 对象中由所有属性的名称（string）所组成的数组。注意：两者 IE9 以下都不支持。
+1. `Object.getOwnPropertyNames(obj)` 和 `Object.keys(obj)`，两者返回 obj 对象中由所有属性的名称（string）所组成的数组。`{}` 空对象返回 `[]` 空数组。注意：两者 IE9 以下都不支持。
 2. `obj.hasOwnProperty(prop)`，该方法返回 boolean 值，表示 obj 对象中是否含有指定的属性。
+3. `Object.values()` 返回指定对象自身可枚举的属性值组成的列表。
+
+```js
+var otherStoreUrl = { // 其他在线平台店铺链接，最多填3个
+  one: '',
+  two: '',
+  three: '',
+}
+let tmpArry = []
+// 提取值非空的url组成的数组
+tmpArry = Object.values(this.otherStoreUrl).filter(ele => ele.length > 1)
+```
+
+## 对象的复制
+
+1.使用 `Object.assign(target, ...sources)` 方法返回 target 对象，只复制源对象 property 的值。
+
++ 如果 source 属性值是指向某对象（内嵌子对象）的 reference，将只复制 reference 的值（即，此方法**不能做到深度复制**，源对象中的子对象属性值变化，会同时改变复制对象中同名子对象的同名属性值）
++ 按**从左到右**的顺序依次复制和重写属性值（最右边的 override 前面所有）
++ 不复制 non-enumerable、在原型链上的属性
++ 遇到 exception 时中断 copying 任务（如遇到 read-only 的属性时，throw exception）
+
+2.使用 `JSON.parse(JSON.stringify(sourceObj))` 可以做到**深度复制**。跨浏览器，且性能最优。
+
+缺点是任何不符合 JSON 规范的值都将丢失：
+
++ 不能复制属性值为 function 的 属性
++ 不能复制属性值为 _undefined_ 的属性（值为 _null_ 可以）
++ 属性值为 JS Date 对象的复制结果变为 ISO 标准日期格式（YYYY-MM-DDTHH:mm:ss.sssZ）的字符串

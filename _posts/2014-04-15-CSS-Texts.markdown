@@ -16,7 +16,7 @@ category: CSS
 
     + `uppercase`, 全部转为大写。<span style="text-transform:uppercase">This is some text</span>.
     + `lowercase`, 全部转为小写。<span style="text-transform:lowercase">This is some text</span>.
-    + `capitalize`, 每个单词的**首字母转为大写**。<span style="text-transform:capitalize">This is some text</span>.
+    + `capitalize`, **每个**单词的**首字母**转为**大写**。<span style="text-transform:capitalize">This is some text</span>.
 
 + _text-indent_，**首行缩进**，指定一段文字中段落开始处与左边线的距离。可取的值为：
 
@@ -30,12 +30,14 @@ category: CSS
 
 + _line-height_，指定**每行文本之间的距离**。
 
-    + `normal`: **默认值**，值取决于 user-agent 和字体集，桌面浏览器一般为 1.2
-    + number，行高为**当前元素的 _font-size_ 乘以这个数字**计算而得
+    + `normal`: **默认值**，值取决于 user-agent 和字体集，由浏览器分别计算得到。桌面浏览器一般为 1.2
+    + number，实际行高由**当前元素**的 _font-size_ 乘以这个数字得到
     + length，使用 CSS 单位表示大小(如：px，em 等)
-    + `%`，**元素本身 _font-size_ 的百分比**
+    + `%`，由**元素** _font-size_ 的百分比计算得到
 
-    注意：如果不明确设置子元素行高，当其父元素的行高值为 length 和 % ，子元素会直接继承。<span class="t-blue">为避免意外，尽量使用 **number** 设置行高</span>。
+    如果不明确设置子元素行高，当其父元素的 _line-height_ 值为 length 和 % 时，子元素会**直接继承父元素行高**。
+
+    <span class="t-blue">为避免意外，尽量使用 **number** 设置行高</span>。
 
     看演示：
 
@@ -97,7 +99,7 @@ category: CSS
 + _text-overflow_，用来设定那些**溢出**而**不被显示**的内容应该如何提示给用户（需父元素设定了固定的 width，且 _overflow_ 属性值为 `hidden`）。可取值：
 
    + `clip`，**默认值**，直接剪切掉文本，好像被橡皮擦掉超出部分一样。
-   + `ellipsis`，将在临界处文本末尾添加 `...` 来代表有文本被隐藏。
+   + `ellipsis`，将在临界处文本末尾添加 `...` 来代表有文本被隐藏。只能通过限宽实现，如要求限制值的长度，则需js实现。
    + string，显示给定的字符串，来代表被隐藏的文本。(很遗憾，目前只有 Firefox 支持)
 
 + _word-wrap_，允许长的单词能够被分隔开，绕到下一行。取值为：

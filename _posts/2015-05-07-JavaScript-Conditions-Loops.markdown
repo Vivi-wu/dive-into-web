@@ -56,9 +56,10 @@ switch(expression) {
 
 + 语句1在 loop 开始前执行，通常用来**初始化**控制 loop 的变量值。语句2指定循环条件，每次循环前都要判断一下是否满足条件。语句3在每一次循环体内代码执行完之后执行，通常作为变量
 + You can initiate many values in statement 1 (separated by comma)，可以在语句1里初始化多个变量。
-+ 语句1可以缺省，把初始化变量放在 for 体上面。
++ 语句1可以缺省，把**初始化变量**放在 for 体上面。
 + 语句2也可以缺省，但是必须在循环体内提供一个 break
 + 语句3也可以缺省，把 increment 放在循环体内
++ 当遍历大量数据records时，在loop外提前定义好变量、函数
 
 ## While Loops 循环
 
@@ -83,8 +84,8 @@ switch(expression) {
 
 区别：
 
-+ **break** statement "**jumps out**" of a loop or a switch. 直接跳出循环体，执行后面的代码
-+ **continue** statement "**jumps over**"/ "**skip**" one iteration in the loop. 跳过本次循环要执行的代码，进入下一次循环。
++ **break** statement "**jumps out**" of a loop or a switch. 直接跳出一个循环体或 `switch` 体，执行后面的代码。
++ **continue** statement "**jumps over**"/ "**skip**" one iteration in the loop. 在一个 for 循环里，遇到 continue 直接跳到 update expression 处（如 `i++`），不会完全终止循环的执行。
 
 ### JavaScript Labels
 
@@ -92,5 +93,5 @@ JS标签语法
 
     labelname:
     statements
-    break labelname; 
+    break labelname;
     continue labelname;

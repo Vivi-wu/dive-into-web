@@ -18,11 +18,9 @@ HTML 元素总是<span class="t-blue">根据正常的页面流，从上到下，
 
 元素位置属性值为 `relative` 时，是 <span class="t-blue">relative to its normal position</span> 相对于正常情况下它应该在的位置放置。
 
-**其他元素并不会自动调整**，去填充由这个元素移动所产生的空隙。
+<span class="t-blue">The reserved space for the element is still preserved in the normal flow</span>.
 
-<span class="t-blue">The reserved space for the element is still preserved in the normal flow</span>. 
-
-相对放置的元素在正常页面流里本来占据的空间仍然有效，（**没有**被从页面流里**剔除**，也不影响布局）。
+相对放置的元素在正常页面流里**本来占据的空间仍然有效**，即**没有**被从页面流里**剔除**，也不影响布局。
 
 <div style="background-color:#FFF1F1;width:20rem;">Box 1 Normal positioning</div>
 <div style="background-color:#bca590;width:20rem;">Box 2 Normal positioning</div>
@@ -59,7 +57,9 @@ Elements can be positioned using the top, bottom, left, and right properties. Ho
 方向属性根据 _position_ 的值，又有不同的工作方式：
 
 + 对于 relatiely-positioned 的元素，是根据它正常的位置，来上下左右调整元素。
-+ 对于 <span class="t-red">absolutely positioned elements</span> (_position_ 取值为 `absolute` 或 `fixed`), CSS _top_ sets the top edge of an element to a unit above/below the top edge of its nearest positioned ancestor. 对于绝对放置的元素， top 性质表示该元素的上边界，与其最近的非静态放置的祖先元素的上边界之间的距离。这里仅举个例子，bottom、left、right 属性同理。
++ 对于 <span class="t-red">absolutely positioned elements</span> (_position_ 取值为 `absolute` 或 `fixed`), top 属性表示该元素的上边界高于（取负值）或低于（取正值）其最近的**非静态放置**的祖先元素的上边界。
+
+bottom、left、right 属性同理。
 
 ### Overlapping Element
 
@@ -77,7 +77,7 @@ _z-index_ 属性指定了 stack order of an element 元素的叠放顺序. 可�
 
 ## Clip
 
-_clip_ 使我们可以用一个矩形框来剪切一个 absolutely positioned 的元素。
+_clip_ 使我们可以用一个**矩形框**来剪切一个 absolutely positioned 的元素。
 
 1. 被矩形框框住的区域被保留（visible）。
 2. 从元素的左上角开始剪切。

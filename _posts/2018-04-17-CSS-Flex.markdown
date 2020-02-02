@@ -1,0 +1,26 @@
+---
+title:  "CSS Flex布局"
+category: CSS
+---
+
+## flex
+
+该属性是 _flex-grow_、 _flex-basis_ 和 _flex-shrink_ 三个属性的缩写形式。
+
++ _flex-grow_，设定 flex item 的**拉伸因子**，当 flex item 默认 size 小于 flex 容器时，将根据此系数拉伸以填充容器。该元素在 flex 容器的 available space 里相对于其他 children 应该占据的空间。值为 nubmer 型，负数无效。初始值为 **0**。
++ _flex-shrink_，设定 flex item 的**收缩因子**，当 flex item 默认 size 大于 flex 容器时，将根据此系数收缩以填充容器。值为 nubmer 型，负数无效。初始值为 **1**。
++ _flex-basis_，设定 flex item 的初始 **main size**（即 content-box 的尺寸，如果没有改变 box-sizing）。值为 length 或表宽度的关键词。初始值为 **auto**。
++ 如果所有子元素 _flex-grow_ 的值都相等，则 flex 容器中的**剩余空间将平均分配给所有子元素**。
+
+通过在子元素上设置 `flex: 1 1 0;` 可实现 flex 容器被平均分配的效果。
+
+## flex-flow
+
+该属性是 _flex-direction_ 和 _flex-wrap_ 两个属性的缩写形式。
+
++ _flex-direction_，设定 flex item 在容器里的主轴和方向
++ _flex-wrap_，设定是否强制 flex item 摆放在一行
+
+### 兼容性问题
+
+与默认定位的footer相邻的元素，如果同时设置了 _flex-grow-1_、 _d-flex_、_flex-column_，在 Safari 中，由于该相邻元素的内容尺寸计算，没有撑起实际容器高度导致 footer 会浮动到页面中间。 去掉 flex-column 即可。

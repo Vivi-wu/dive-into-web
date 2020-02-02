@@ -55,25 +55,23 @@ i=0
 
 ## 分号
 
-这里 [JavaScript Semicolon Insertion Everything you need to know](http://inimino.org/~inimino/blog/javascript_semicolons) 详细全面地解释了 JavaScript automatic semicolon insertion。
+这里 [JavaScript Semicolon Insertion Everything you need to know](http://inimino.org/~inimino/blog/javascript_semicolons) 详细全面地解释了 JavaScript automatic semicolon insertion（ASI）。
 
 ### 在哪里可以写分号？
 
 在 ECMAScript 规范中给出的正式语言的语法中，分号可以出现在任何一种 statement 结尾。
 
-可以在 `var` 变量声明语句，表达式语句 (such as "4+4;" or "f();"), `continue`, `return`, `break`, `throw` 和 `debugger` 语句的结尾处。
+可以在 `var`(`let`, `const`)变量声明语句，(`import`, `export`)模块声明，表达式语句 (such as "4+4;" or "f();"), `continue`, `return`, `break`, `throw` 和 `debugger` 语句的结尾处。
 
 一个分号本身就是一个**空语句**，在 JS 中是合法的语句。比如 `;;;` 是一个合法的 JS 程序，它解析了三个空语句，运行了三次 doing nothing.
-
-分号出现在 for ( Expression ; Expression ; Expression ) 循环语句中。
 
 ### 哪里可以缺省分号？
 
 以下给出了三种语句截止不需分号的基本规则和两种例外：
 
-1. 在 closing brace 闭括号之前。
-2. 在一个 program 结尾处。
-3. 当下一个 token 符号不能通过其他方式被解析，且在语法中的某些地方，如果出现一个 line break，它无条件地终止该语句。
+1. 在 closing brace 闭括号`}`之前
+2. 在一个 program 结尾处
+3. 当检测到输入的token结束时，且解析器无法将这个输入流单独解析为完整的程序
 4. 例外1，分号 never inserted 在 for loop 头部 for ( Expression ; Expression ; Expression )
 5. 例外2，分号 never inserted if it would be parsed as an empty statement.
 
@@ -113,7 +111,7 @@ i=0
 
 + postfix 后缀式操作符 `++` `--`
 + `continue`
-+ `break`，其中 return 和 break 语句可以使用可行的标识符，用来对 labeled loop 操作。如果是这种情况，标识符 **must** 写在同一行。
++ `break`，其中 return 和 break 语句可以使用标识符，用来对 labeled loop 操作。如果是这种情况，标识符 **must** 写在同一行。
 + `return`，因为返回语句是受限输出，方便程序员写一个空的 return statement，而不会不小心返回了下一行语句的值。
 + `throw`
 
@@ -273,7 +271,9 @@ After the declaration, the variable has no value. (Technically it has the value 
 + 条件（三元）操作符：variablename = (condition) `?` value1:value2 满足条件取 value1，否则取 value2.
 + 位操作符：`&` 逻辑与，`|` 逻辑或，`~` 逻辑非，`^` 逻辑异或，`<<` 左移几位，`>>` 右移几位. 作用于 32-bit numbers，result is converted back to a JavaScript number
 
-在逻辑运算中，如果第一个操作数满足结果条件，第二个操作数就不会被评估。
+<span class="t-blue">在逻辑运算中虽然内部进行 Boolean 转换，实际返回 original 操作数的值</span>。
+
+在 JavaScript 中，true && expression 总是会返回 expression, 而 false && expression 总是会返回 false
 
 巧用逻辑操作符，可以缩短代码。如下：
 
@@ -318,6 +318,17 @@ var person = {firstName:"John", lastName:"Doe", age:50};
 "PI" in Math            // Returns true
 "NaN" in Number         // Returns true
 "length" in String      // Returns true
+```
+
+### Comma 操作符
+
+从左到右evaluates（执行）每一个操作数（operand 可以是任意表达式），返回**最后**一个操作数的**值**。
+
+```js
+function myFunc() {
+  var x = 0;
+  return (x += 1, x); // the same as return ++x;
+}
 ```
 
 ## 表达式

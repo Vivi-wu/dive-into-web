@@ -68,7 +68,7 @@ W3C 在这个纷争里选择了中立态度，在 W3C 事件模型里，任何�
 
 ## 使用
 
-Setting **document–wide** event handlers is **necessary** in **drag–and–drop** scripts. 
+Setting **document–wide** event handlers is **necessary** in **drag–and–drop** scripts.
 
 因为任何事件 bubbling 最终会传到 document，把事件 handlers 注册在 document 级别，使得 _onmousemove_, _onmouseup_ 等事件处理函数总是能被执行，不管用户怎样移动鼠标。
 
@@ -122,3 +122,49 @@ function doSomething(e) {
   if (e.stopPropagation) e.stopPropagation();
 }
 ```
+
+## Event Loop
+
+事件循环非 JS 独有。所谓的 Event Loop 是负责执行队列中的回调，并且将其压入到函数调用栈中的机制。
+
+其中的调用栈（Call Stack，后入先出）会记录所有的函数调用信息。当我们调用某个函数时，会将其参数与局部变量等压入栈中；在执行完毕后，会弹出栈首的元素。而堆（Heap）则存放了大量的非结构化数据，譬如程序分配的变量与对象。队列（Callback Queue，先入先出）则包含了一系列待处理的信息与相关联的回调函数。
+
+每个 JavaScript 运行时都必须包含一个任务队列。
+
+譬如按钮点击或者 HTTP 请求响应都会作为消息存放在任务队列中；需要注意的是，仅当这些事件的回调函数存在时才会被放入任务队列，否则会被直接忽略。
+
+JavaScript 中的任务分为 MacroTask 与 MicroTask 两种。
+
++ MacroTask 包含了 setTimeout, setInterval, setImmediate, requestAnimationFrame, I/O, UI rendering 等
++ MicroTask 包含了 process.nextTick, Promises, Object.observe, MutationObserver 等
+
+## Promise
+
+Promise.then 是异步执行的，而创建 Promise 实例 （executor）是同步执行的。
+
+```js
+(function test() {
+  setTimeout(function() {console.log(4)}, 0);
+  new Promise(function executor(resolve) {
+    console.log(1);
+    for( var i=0 ; i<1000 ; i++ ) {
+        i == 999 && console.log(i);
+    }
+    console.log(2);
+  }).then(function() {
+    console.log(5);
+  });
+  console.log(3);
+})();
+
+// 执行结果：
+// 1
+// 2
+// 3
+// 5
+// 4
+```
+
+### relatedTarget
+
+只读属性。比如光标失焦事件，此时 ` relatedTarget` 指的是接收到 focus（光标聚焦的） `EventTarget`。对于无法聚焦的元素，该属性返回 null

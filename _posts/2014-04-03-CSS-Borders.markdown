@@ -58,7 +58,7 @@ _border-style_ 可以同时拥有**1**到**4**个值，按照 <span class="t-blu
 + border-width: medium（默认值）
 + border-style (**required**): none（默认值）
 + border-color: 元素的 color 即字体颜色（默认值）
- 
+
 Tip: 同样的，可以只针对一条边来一次性设定边框样式。规则同上。
 
 _border-top_, _border-right_, _border-bottom_, _border-left_
@@ -102,7 +102,7 @@ div { /* 向上的三角形 */
 
 1. _border-radius_ 该属性实际上是 border-**top**-**left**-radius, border-**top**-**right**-radius, border-**bottom**-**right**-radius 和 border-**bottom**-**left**-radius 这四个属性的 all in one 缩写形式。
 
-    通过给 _border-radius_ 属性赋予不同个数的值，来指定每一个圆角。当取值为：
+    通过给 _border-radius_ 属性赋予不同个数的值，来指定盒模型每一个顶点的**圆**角。当取值为：
 
     + 四个值：左上角、右上角、右下角、左下角
 
@@ -119,6 +119,8 @@ div { /* 向上的三角形 */
     + 一个值：四个角
 
         <div style="width: 15rem;height: 4rem;border-radius: 5px;background-color: #bca590;padding: 0.5rem 0 0 0.5rem;;">border-radius: 5px;</div>
+
+    该属性还有可选的第二个值，如：`border-radius: 100px/40px`，可得到**椭圆**角。
 
 2. _box-shadow_ 给元素添加水平和（或）竖直方向上的阴影，设定阴影的颜色、模糊效果。Tip: 通过给 _::before_ and _::after_ 伪类添加 shadow，可以实现有趣的效果。
 

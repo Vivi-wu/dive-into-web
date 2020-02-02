@@ -8,7 +8,7 @@ W3C DOM 标注分为3种不同的部分：Core DOM，XML DOM 和 HTML DOM。
 
 ## HTML DOM
 
-HTML DOM 是针对 HTML 的一个标准对象模型和编程接口。规定了如何获取、改变、添加或删除 HTML 元素。
+HTML DOM 规定了如何获取、改变、添加或删除 HTML 元素。
 
 在 DOM 中，所有 HTML 元素被定义为**对象**。编程接口就是每个对象的属性（你可以获取和设定的**值**，比如 _innnerHTML_，该属性可以用来获取、改变**任何HTML元素**）和方法（可执行的操作，如 `getElementById()`）。
 
@@ -101,7 +101,7 @@ HTML DOM Document 对象是页面中所有其他元素的主人。如果你想�
   </tbody>
 </table>
 
-## Finding HTML Element
+## 获取 HTML Element
 
 常见的查找 HTML 元素的方法:
 
@@ -110,8 +110,9 @@ HTML DOM Document 对象是页面中所有其他元素的主人。如果你想�
 + `getElementsByClassName(`'test'`)`, 以 CSS 样式名查找。
 + `document.querySelectorAll( CSS selectors)`, 查找所有匹配一个特定 CSS 选择器的 HTML 元素。其中 CSS 选择器<span class="t-blue">可以是由逗号分隔的 string</span>。
 
-    只返回第一个匹配的元素使用 `document.querySelector(`CSS selectors`)`
+    只返回第一个匹配的元素使用 `document.querySelector(`CSS selectors`)`，没找到返回 _null_
 
++ Element.closest(selectors)，返回符合条件的当前元素最近的祖先元素，没找到返回 _null_
 + 以 HTML Object Collections 查找元素，比如查找 id 为 frm1 的表单，`document.form['frm1']`, 其他可以获取的文档对象集合可参考上面的表格。
 
 ### 改变 HTML
@@ -130,10 +131,6 @@ HTML DOM Document 对象是页面中所有其他元素的主人。如果你想�
     element.style.property = new style
 
 上面的 property 就是 CSS 属性名，对于使用 `-` 连字符的属性名，用法为 _paddingTop_
-
-### DOM animation
-
-使用 `setInterval` 和 `clearInterval` 函数作为 timer 实现 JS 动画。
 
 ## DOM EventListener
 
@@ -192,3 +189,35 @@ _nodeType_ 也是只读的：Element, Attribute, Text, Comment, Document.
 1. 添加操作可以使用 `createElement(`tagname`)`, `createTextNode(`string`)`, `appendChild(`node`)`, `parentNode.insertBefore(`newNode, existingNode`)`
 2. 删除操作使用 `parent.removeChild(`child`)`。虽然删除元素如果不需要 referring 父元素的话会更好，但是 DOM 操作需要知道你想删掉的元素和它的父元素。常用的方法是 `child.parentNode.removeChild(`child`)`
 3. 替换操作使用 `parent.replaceChild(`newchild, oldchild`)`
+
+### DocumentFragments
+
+`DocumentFragment` 是DOM节点，但**不属于**主DOM树，而存在于memory中。
+
+用法：创建document fragment（简称DF），在DF后append子DOM元素，然后把DFappend到DOM树，最终DF被其所有的子元素替换（即不会渲染出单独的html节点）。
+
+因为append子元素到DF不会引起页面reflow，所以使用DF会有更好的performance。
+
+## 性能优化
+
+1. 不要逐条地修改 DOM 的样式。使用预先定义好css class 名称，然后修改 DOM 的 className。
+
+```js
+// bad
+var left = 10,
+top = 10;
+el.style.left = left + "px";
+el.style.top  = top  + "px";
+
+// Good
+el.className += " theclassname";
+
+// Good
+el.style.cssText += "; left: " + left + "px; top: " + top + "px;";
+```
+
+2. 离线修改DOM
+  + 使用 documentFragment 对象在内存里操作DOM
+  + 把需要频繁改动的 DOM 给 display:none，(涉及一次 reflow)，进行 DOM 操作，最后再显示出来
+3. 不要把 DOM 结点的属性值作为一个循环里的变量。否则导致大量地读写这个结点的属性
+4. 对含有动效的 HTML 元素的 position 设为 fixed 或 absoult，这样修改他们的 CSS 不会引起 reflow

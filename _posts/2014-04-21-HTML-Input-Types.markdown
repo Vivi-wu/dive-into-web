@@ -8,7 +8,7 @@ category: HTML
 
     <input type="text">
 
-定义了一个 one-line 单行输入区域，注意：**输入区域的默认宽度是 20 characters**。
+定义了一个单行输入区域，注意：**输入区域的默认宽度是 20 characters**。
 
 ### password
 
@@ -20,7 +20,7 @@ category: HTML
 
     <input type="submit" value="Submit">
 
-定义了一个用于提交表格的按钮。如果缺省提交按钮的 value 属性的值，则按钮将会显示一个默认的文本（Submit）。
+定义了一个用于提交表单的按钮。如果缺省提交按钮的 value 属性的值，则按钮将会显示一个默认的文本（Submit）。
 
 <!--more-->
 
@@ -42,9 +42,15 @@ category: HTML
 
 定义了一个可以点击的按钮，按钮上显示的文字由 _value_ 特性决定。
 
+### file
+
+    <input type="file">
+
+通过绑定 onclick（清空输入域的value） 和 onchange（自定义ajax提交表单）事件，可以实现"点击"按钮——>打开文件系统对话框——>选择一个文件——>"确定"——>关闭对话框后上传文件的功能。
+
 ## HTML5 Input Types
 
-不用担心，不被旧浏览器支持的输入类型，将以 type="text" 的形式显示。
+不被旧浏览器支持的输入类型，将以 `<input type="text">` 显示。
 
 ### number
 
@@ -82,9 +88,11 @@ category: HTML
 
     <input type="date">
 
-用于日期的输入区域，根据浏览器支持情况，一个 date picker 日期选择器会出现在输入区域上。同样，可以对日期的取值加一些限制，min，max等。
+用于日期的输入区域，根据浏览器支持情况，一个 date picker 会出现在输入框下方。此外，可以对日期的取值加一些限制，添加 _min_，_max_，_step_ 特性等。
 
-注意：目前 IE 和 FF 不支持该跟日期有关（month，week，date）的输入类型。
+输入框展示的 date 字符串格式因用户系统选择的 locale 设置而异，但 `HTMLInputElement.value` 得到的总是 **yyyy-mm-dd** 格式的日期字符串。
+
+注意：目前 IE、FF、Safari 不支持日期有关（month，week，date）的输入类型。
 
 ### time
 
@@ -98,7 +106,9 @@ category: HTML
 
 允许用户选择一个日期和时间（不是时区）。根据浏览器支持情况，一个日期选择器会出现在输入区域上。
 
-注意：目前 IE 和 FF 不支持时间相关的（包括 time）输入类型。
+输入框展示的 datetime 字符串格式因用户系统选择的 locale 设置而异，但 `HTMLInputElement.value` 得到的总是 **yyyy-MM-ddThh:mm** 格式的日期时间字符串。
+
+注意：目前 IE、FF、Safari 不支持时间相关的（包括 time）输入类型。
 
 ### email
 

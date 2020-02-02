@@ -58,7 +58,11 @@ category: JavaScript
 创建正则表达式对象：**字面量**和**构造函数**。
 
 ```js
-/ab+c/i;
+// 支持动态创建 regular expression
+var re = /pattern/flags;
+var re = new RegExp('pattern', 'flags');
+
+// /ab+c/i; 以下方法等价
 new RegExp('ab+c', 'i');
 new RegExp(/ab+c/, 'i');
 ```
@@ -73,7 +77,20 @@ new RegExp(/ab+c/, 'i');
 
 不需要把正则表达式对象放在一个变量里，就可以使用 test() 方法。如果搜索字符串中**有匹配**，返回 `true`， 否则返回 false。
 
-`exec()` 方法在字符串中查找匹配，**返回找到的文本**，如果没有找到，返回 `null`。
+`exec()` 方法在字符串中查找匹配并**返回找到的文本**；如果没有找到，返回 `null`。
+
+返回结果：
++ [0] The full string of characters matched
++ [1],...[0] The parenthesized substring matches, if any如果有捕获表示组号
++ index 表示 0-based 匹配字符串的索引
++ input 为原始输入字符串
+
+```js
+var reg = /\/\/([.a-zA-Z0-9]+)(.1688.com|.taobao.com|.tmall.com)/
+var a = reg.exec('http://test.1688.com')
+// a = ['//test.1688.com', 'test', '.1688.com', index: 5, input: 'http://test.1688.com']
+
+```
 
 ## 实践
 
@@ -90,7 +107,20 @@ new RegExp(/ab+c/, 'i');
 3. `*`，表示数量。前边的内容可以连续重复使用任意次以使整个表达式得到匹配。
 4. `\d`，匹配一个数字。
 5. `\w`，匹配一个单字字符（字母、数字或下划线）
-6. `\s`，匹配任意空白符，包括空格，制表符(Tab)，换行符和换页符
+6. `\s`，匹配任意空白符，包括空格，制表符(Tab)，换行符和换页符，等同于 `[ \f\n\r\t\v\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]`
+
+```js
+// 单词结尾
+'00012300 012'.replace(/0+\b/gi,""); // "000123 012"
+// 单词开头
+'00012300 012'.replace(/\b0+/gi,""); // "12300 12"
+// 起始位置
+'00012300 012'.replace(/^0+/gi,"");  // "12300 012"
+```
+
+#### 一个坑
+
+用户从wps复制文本到input框，提交时无论代码编辑器、浏览器response查看，数据都显示正常的空格，但渲染到页面上时，html的文本节点中空格都变成了html实体字符串 `&nbsp;`。解决：提交时通过 \s 替换所有空格为空白字符串。
 
 ### 反义
 

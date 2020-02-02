@@ -13,7 +13,7 @@ category: CSS
 `[att]` Selector，匹配那些拥有 att 特性的元素，不管 att 值是什么。
 
 `[att=val]` Selector，匹配那些拥有 att 特性，且 att 值等于 val 的元素。
- 
+
 `[att~=val]` Selector，匹配那些拥有 att 特性，且 att 值是一个由空格分隔的单词 list，其中一个单词为 val 的元素。<q title="Represents an element with the att attribute whose value is a whitespace-separated list of words, one of which is exactly &quot;val&quot;。">原文</q>
 
 <!--more-->
@@ -26,13 +26,13 @@ category: CSS
 
 `[att|=val]` Selector，匹配那些拥有 att 特性，且 att 值要么就是 val，要么以 val 开始后跟 `-` 小横线。 <q title="Represents an element with the att attribute, its value either being exactly &quot;val&quot; or beginning with &quot;val&quot; immediately followed by &quot;-&quot;">原文</q>
 
-    [class|="top"]  
+    [class|="top"]
 
 上面代码匹配 class="top", 或 class="top-text"
 
-### Substring matching attribute selectors 
+### Substring matching attribute selectors
 
-特性值子字符串匹配，does not have to be a whole word! 
+特性值子字符串匹配，does not have to be a whole word!
 
 `[att*=val]` Selector，匹配那些拥有 att 特性，且 att 值**包含 val** 的元素。
 
@@ -42,17 +42,18 @@ category: CSS
 
 ## Pseudo-classes
 
-伪类选择器能够使用基于文档树之外的信息进行选择。Pseudo-class 名称是 **case-insensitive**
+伪类选择器能够对**基于文档树之外的信息**进行选择。Pseudo-class 名称是 **case-insensitive**
 
-1. link pseudo-classes `:link` 和 `:visited`。
-2. user action pseudo-classes `:hover`, `:active`, 和 `:focus`
+1. 链接 pseudo-classes `:link` 和 `:visited`。
+2. 用户操作 pseudo-classes `:hover`, `:active`, 和 `:focus`
 3. `:target`，作为 URI 的目标元素，CSS 3 新增，<q title="Some URIs refer to a location within a resource. This kind of URI ends with a &quot;number sign&quot; (#) followed by an anchor identifier (called the fragment identifier)">原文</q>
 4. `:lang(C)`，C 代表语言。实现针对不同语言元素设定不同样式
-5. UI element states pseudo-classes
+5. UI 元素状态 pseudo-classes
 
     + `:enabled` 和 `:disabled`
     + `:checked`
     + `:indeterminate`，单选框和复选框的中间状态
+    + `:invalid` 和 `:valid`，当前 input 的值是否有效
 
 6. Structural pseudo-classes
 
@@ -69,7 +70,7 @@ category: CSS
     + `:only-of-type`，选择有父元素，且它是其父元素的子元素中，唯一是这种类型的元素，等同于 `:first-of-type:last-of-type`
     + `:empty`，代表没有子节点的元素，比如 `<p></p>`
 
-7. Negation pseudo-class `:not(X)`，X 表示除 `:not()` 选择器外的其他简单选择器
+7. Negation pseudo-class `:not(X)`，X 可以是除 `:not()` 选择器外的其他简单选择器。选中所有非 X 选择器的元素。
 
 ## Pseudo-elements
 
@@ -105,11 +106,11 @@ E &gt; F，匹配 E 元素下符合条件的所有（直接）孩子元素。<sp
 
 1. Next-sibling combinator，在两个简单选择器之间加一个 `+` 组成。
 
-    E + F，匹配拥有相同父元素，**立即跟随** E 元素的兄弟 F 元素。比如 大哥+二哥，意思是选二哥。三哥、四哥，等等则不算在内。
+    E + F，匹配拥有相同父元素，**立即跟随** E 元素的 F 元素。比如 大哥+二哥，意思是选二哥。三哥、四哥，等等不算在内。
 
 2. Following-sibling combinator，在两个简单选择器之间加一个 `~` 组成。也称 general sibling combinator。
 
-    E ~ F，匹配拥有相同父元素，不一定立即跟随 E 元素的兄弟 F 元素。**选择所有与指定元素同级的元素**。
+    E ~ F，匹配拥有相同父元素，不一定立即跟随 E 元素的 F 元素。选定与前者**同级且跟随其后**的**所有**后者元素。
 
 以上两种情况在考虑元素 adjacency 关系时，non-element nodes (e.g. text between elements) 都忽略不计。
 

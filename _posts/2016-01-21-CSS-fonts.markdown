@@ -118,20 +118,48 @@ font-style font-variant font-weight font-size/line-height font-family
 
 ## CSS3 Web Fonts
 
+“typography is communication” but currently the web is “all system, no soul.”
+
 网络字体使得 web 设计者可以使用那些用户设备上没有安装的字体。只需要将字体文件添加到 web 服务器上，在用户需要时自动加载字体。
+
++ 受制于同源策略
++ 需定义在 CSS 选择器外
++ **TTF/OTF**(94.6%)，**WOFF** (94.29%) 格式的字体文件被大多数浏览器支持
 
 自有字体使用 CSS3 的 `@font-face` 规则定义，使用方法如下：
 
 ```css
 @font-face {
   font-family: myFont; /* 定义字体名称 */
-  src: url(font_file.otf); /* 指向字体文件 */
+  src: url(font_file.otf) format("opentype"); /* 指向字体文件 */
 }
 div {
   font-family: myFont;
 }
 ```
 
-**TTF/OTF**，**WOFF** 格式的字体文件被所有浏览器支持。
-
 注意：最好使用**小写**字体来写 URL，避免 IE 中出现意外结果。
+
+使用web font，可能在页面渲染中形成性能瓶颈并延迟文本渲染，参考[谷歌开发者文档](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/webfont-optimization?hl=zh-cn)进行优化。
+
+### font-style, font-weight, font-stretch
+
+这3个 descriptor 定义了 font-face 的特征，用于匹配样式到指定 face 的过程，缺省值都是 `normal`。
+
+对于使用 several @font-face 规则定义的同一个 font family，user agents 可以下载该字体集的全部 face，或者使用这些 descriptors 有选择性的下载匹配文档中实际使用的样式。
+
+此处涉及**浏览器兼容性**。比如对于 `<h2>` 字体应用以下字体：
+
+```css
+@font-face {
+  font-family: "Source Han Sans CN Bold";
+  src: url(data:application/x-font-ttf;charset=utf-8;base64,YOUR BASE64 STRING) format("truetype");
+  font-weight: bold; /*缺省该属性，在Window+Chrome中没有影响，而MAC OS+Chrome中，标题字体看起来更粗*/
+}
+```
+
+## Variable fonts
+
+通过使用 _font-variation-settings_ 属性，使用一个字体集实现“seemingly different typefaces”看似不同的字体。
+
+适用于 OpenType font format。目前支持性不太好，看不出效果

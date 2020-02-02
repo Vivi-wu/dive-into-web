@@ -2,13 +2,11 @@
 title:  "React.js 入门（一）"
 category: JavaScript
 ---
-本系列日志主要记录自学过程中总结的知识点。
-
 官网自述 React 是为了解决一个问题而生：创建数据随时更新的大型应用。
 
-当底层数据改变 React 将自动管理所有 UI 更新，且只更新改变的部分。React 本质就是写一些可重用的组件，React 组件是一些操作 `props` 和 `state` 的函数。
+React 本质就是写一些可重用的组件，React 组件是一些操作 `props` 和 `state` 的函数。
 
-有事没事先写一个组件。
+    UI = render(data)
 
 此外按官网说法，React 直接从 JS 代码生成 HTML 和组件树，在网络环境差的情况下，从加载 JS 到生成页面这段时间的白屏问题不可避免。
 
@@ -38,7 +36,7 @@ React JSX code 可以写在单独的文件里，通过
 ### 用法
 
 + HTML 标签使用 lower case 书写
-+ React component 使用**首字母大写的驼峰**书写标记
++ React component 使用**首字母大写的驼峰**书写标记，We capitalize custom components to differentiate them from regular HTML elements.
 
     那些看起来像（上面也称之为）HTML tag 的标记**并非真正的** DOM 节点; 它们是 React 组件的实例，You can think of these as markers or pieces of data that React knows how to handle. 你可以把它们想象成是 React 知道如何处理的一些标记或数据。
 
@@ -171,3 +169,117 @@ Improper use of the innerHTML can open you up to a cross-site scripting (XSS) at
 <div>{'First \u00b7 Second'}</div>
 <div>{'First ' + String.fromCharCode(183) + ' Second'}</div>
 ```
+
+## 2019.9.18
+[Getting Started with React - An Overview and Walkthrough Tutorial](https://www.taniarascia.com/getting-started-with-react/)
+
+The other type of component in React is the simple component, which is a function. This component doesn't use the class keyword
+
+simple and class components can be mixed.
+
+return is contained to one line, it does not need parentheses.
+
+```js
+// Simple Component
+const SimpleComponent = () => {
+  return <div>Example</div>
+}
+// Class Component
+class ClassComponent extends Component {
+  render() {
+    return <div>Example</div>
+  }
+}
+```
+
+You must use this.setState() to modify an array，操作state中的数组
+
+[用react开发一个井字游戏教程](https://zh-hans.reactjs.org/tutorial/tutorial.html)
+每个组件都是封装好的，并且可以单独运行。
+
+使用react可以将组件（一些简短、独立的代码片段）合成（构建）复杂的UI界面。
+
+使用JSX通过render函数返回一种对渲染内容的轻量级描述（react元素）。
+
+每一个 React 元素都是一个 JavaScript 对象，你可以在你的程序中把保存在变量中或者作为参数传递。
+
+在 React 应用中，数据通过 props 的传递，从父组件流向子组件。
+
+在 JavaScript class 中，每次定义其子类的构造函数时，都需要调用 super 方法。因此，在所有含有构造函数的的 React 组件中，构造函数必须以 super(props) 开头。
+
+如果你想写的组件只包含一个 render 方法，并且不包含 state，那么使用**函数组件**。
+
+使用 CodePen 在线编辑器如何正确使用React DevTools？
+
+1. 登录或注册。
+2. 点击 “Fork” 按钮。
+3. 在“Open this Pen in:”选择 “Debug mode”。
+4. 上一步会打开一个新的标签页，此时打开开发者工具就会有一个 React 选项卡，并且在“⚛️ Components”里可以看到干净的组件树。
+
+当你遇到需要同时获取多个子组件数据，或者两个组件之间需要相互通讯的情况时，需要把子组件的 state 数据提升至其共同的父组件当中保存。
+之后父组件可以通过 props 将状态数据传递到子组件当中。这样应用当中所有组件的状态数据就能够更方便地同步共享了。
+
+React 元素被视为 JavaScript 一等公民中的对象（first-class JavaScript objects），因此我们可以把 React 元素在应用程序中当作参数来传递。在 React 中，我们还可以使用 React 元素的数组来渲染多个元素
+
+每次只要你构建动态列表的时候，都要指定一个合适的 key.
+
+如果你没有指定任何 key，React 会发出警告，并且会把数组的索引当作默认的 key。但是如果想要对列表进行重新排序、新增、删除操作时，把数组索引作为 key 是有问题的。
+
+组件的 key 值并不需要在全局都保证唯一，只需要在当前的同一级元素（兄弟节点）之间保证唯一即可。
+
+key 应该在数组的上下文中被指定。
+
+### 代码规范
+
+属性命名规范：
+- 建议从组件自身的角度命名 props，而不是依赖于调用组件的上下文命名。
+
+React 认为渲染逻辑本质上与其他 UI 逻辑内在耦合，比如，在 UI 中需要绑定处理事件、在某些时刻状态发生变化时需要通知到 UI，以及需要在 UI 中展示准备好的数据。
+
+React 并没有采用将标记与逻辑进行分离到不同文件这种人为地分离方式。
+
+在 JavaScript 代码中将 JSX 和 UI 放在一起时，会在视觉上有辅助作用。它还可以使 React 显示更多有用的错误和警告消息。
+
+JSX 语法上更接近 JavaScript 而不是 HTML，所以 React DOM 使用 camelCase（小驼峰命名）来定义属性的名称
+
+在 JSX 语法中，你可以在**大括号**内放置任何有效的 JavaScript 表达式
+为了便于阅读，我们会将 JSX 拆分为多行。同时，我们建议将内容包裹在**括号**中
+
+引号，字符串字面量。
+大括号，js表达式。
+
+React 元素是创建开销极小的普通对象，是构成 React 应用的最小砖块。
+
+React DOM 会将元素和它的子元素与它们之前的状态进行比较，并只会进行必要的更新来使 DOM 达到预期的状态。
+
+当 React 元素为用户自定义组件时，它会将 JSX 所接收的属性（attributes）转换为单个对象传递给组件，这个对象被称之为 “props”。
+
+React 会将以小写字母开头的组件视为原生 DOM 标签。
+
+### tips
+
+尽管 this.props 和 this.state 是 React 本身设置的，且都拥有特殊的含义，但是其实你可以向 class 中随意添加不参与数据流（比如计时器 ID）的额外字段。
+
+阻止组件渲染，让 render 方法直接返回 null
+
+在实践中，因为你经常是在向用户展示 JSON 数据模型，所以如果你的模型设计得恰当，UI（或者说组件结构）便会与数据模型一一对应，这是因为 UI 和数据模型都会倾向于遵守相同的信息结构。
+
+第一步：将设计好的 UI 划分为组件层级
+第二步：用 React 创建一个静态版本（先用已有的数据模型渲染一个不包含交互功能的 UI）
+当你的应用比较简单时，使用自上而下的方式更方便；对于较为大型的项目来说，自下而上地构建，并同时为低层组件编写测试是更加简单的方式。
+第三步：确定 UI state 的最小（且完整）表示。其中的关键正是 DRY: Don’t Repeat Yourself
+
+比起写，代码更多地是给人看的。当你开始构建更大的组件库时，你会意识到这种代码模块化和清晰度的重要性。并且随着代码重用程度的加深，你的代码行数也会显著地减少。
+
+props：
+1.devTool中对应的component默认全部打开
+2.因为是js报错可显示对应的Line *
+3.没有v-model的trim等修饰符
+
+
+对于受控组件来说，每个 state 突变都有一个相关的处理函数。这使得修改或验证用户输入变得简单。
+`<input type="text">`, `<textarea>` 和 `<select>` 之类的标签都非常相似—它们都接受一个 value 属性，你可以使用它来实现受控组件
+
+`<input type=“file”>` 的 value 只读，所以它是 React 中的一个非受控组件。
+
+要编写一个非受控组件，而不是为每个状态更新都编写数据处理函数，你可以 使用 ref 来从 DOM 节点中获取表单数据。

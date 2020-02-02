@@ -28,16 +28,16 @@ _transform_ 属性通过以下的方法让元素实现：移动、旋转、放�
 
 ### transform-origin
 
-_transform-origin_ 用了修改元素变形的原点位置。可取的值从左到右分别表示 x、y、z。
+_transform-origin_ 用来修改元素变形的原点位置。可取的值从左到右分别表示 x、y、z轴，默认值为 (50% 50% 0)。
 
 + x-offset，值为 length 或 `%`，表示设定变形的原点距离盒子的**左边**有多远。
 + y-offset，值为 length 或 `%`，表示设定变形的原点距离盒子的**上边**有多远。
 + z-offset，值为 length（**不能**用百分比表示，否则状态无效），表示设定变形的原点距离用户垂直视线有多远。
-+ offset-keyword，Is one of the left, right, top, bottom or center keyword describing the corresponding offset.
-+ x-offset-keyword，取值为 `left`, `right` 或者 `center` 描述设定变形的原点距离盒子的**左边**有多远。
-+ y-offset-keyword，取值为 `top`, `bottom` 或者 `center` 描述设定变形的原点距离盒子的**上边**有多远。
 
-其中关键字与百分比的对应关系是：left 0%，center 50%，right 100%，top 0%，bottom 100% 。
+也可以使用关键字来描述变形的偏移量：
+
++ x-offset-keyword，取值为 `left`（0%）, `right`（100%）或者 `center`（50%）。
++ y-offset-keyword，取值为 `top`（0%）, `bottom`（100%）或者 `center`（50%）。
 
 ## CSS Transitions
 
@@ -55,7 +55,7 @@ _transition_ 属性使我们能够在给定的时间段里平滑地改变属性�
 + _transition-timing-function_，**默认**是 `ease`（slow start， then fast then slowly end）。
 + _transition-delay_，设置特效实际开始前需要等待的时间。
 
-以上四个属性的 all in one 简写形式为 
+以上四个属性的 all in one 简写形式为
 
     transition: <property> <duration> <timing-function> <delay>;
 
@@ -81,20 +81,20 @@ _transition_ 属性使我们能够在给定的时间段里平滑地改变属性�
 例如：
 
 ```css
-@keyframes example {  
-    0%   {background-color: red; left:0px; top:0px;}  
-    25%  {background-color: yellow; left:200px; top:0px;}  
-    50%  {background-color: blue; left:200px; top:200px;}  
-    75%  {background-color: green; left:0px; top:200px;}  
-    100% {background-color: red; left:0px; top:0px;}  
-}  
-div {  
-    width: 100px;  
-    height: 100px;  
-    position: relative;  
-    background-color: red;  
-    animation-name: example;  
-    animation-duration: 4s;  
+@keyframes example {
+    0%   {background-color: red; left:0px; top:0px;}
+    25%  {background-color: yellow; left:200px; top:0px;}
+    50%  {background-color: blue; left:200px; top:200px;}
+    75%  {background-color: green; left:0px; top:200px;}
+    100% {background-color: red; left:0px; top:0px;}
+}
+div {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    background-color: red;
+    animation-name: example;
+    animation-duration: 4s;
 }
 ```
 

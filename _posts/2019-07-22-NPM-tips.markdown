@@ -1,0 +1,10 @@
+---
+title:  "NPM实践"
+category: JavaScript
+---
+npm源问题：
+
+package-lock.json文件中因他人本地npm source设置不同，导致官方源 `https://registry.npmjs.org`，混入了taobao源。我们Jenkins发布有时不稳定，采用taobao源会导致npm构建失败。统一包来源的方法：
+- 删除 package-lock.json
+- 删除 node_modules 目录（即已安装的文件）
+- 运行 npm install

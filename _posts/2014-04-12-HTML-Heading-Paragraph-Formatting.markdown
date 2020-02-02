@@ -46,7 +46,7 @@ The `<b>` element defines bold text, `<strong>` element with added semantic "str
 
 The `<i>` element defines italic text, `<em>` element defines emphasized text with added semantic importance.
 
-Often `<strong>` renders as `<b>`, and `<em>` renders as `<i>`. However, there is a difference in the meaning of these tags. 
+Often `<strong>` renders as `<b>`, and `<em>` renders as `<i>`. However, there is a difference in the meaning of these tags.
 前两者表示希望指定的文本被用户理解为是重要的，而不仅仅是粗/斜体字，尽管目前浏览器让这些元素以粗体或斜体字显示。
 
 If a browser one day wants to make a text highlighted with the strong feature, it might be cursive 草书体 for example and not bold!
@@ -60,6 +60,7 @@ If a browser one day wants to make a text highlighted with the strong feature, i
 + `<small>` <small>smaller</small> text
 + `<mark>` new in H5 <mark>marked/highlighted</mark> text, 高亮或标注文本，IE8及之前不支持
 + `<del>` defines <del>deleted</del> (removed) text, 效果同给文本加删除线
++ `<u>` defines <u>underline</u> (added)text, 文本被渲染with下划线
 + `<ins>` defines <ins>inserted</ins> (added)text, 效果同给文本加下划线
 + `<sub>` appears half a character <sub>below</sub> the baseline 低于基准线半个字符高度，用于化学式
 + `<sup>` superscripted text 高于基准线半个字符, 用于脚注：WWW<sup>[1]</sup>

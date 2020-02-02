@@ -34,20 +34,15 @@ category: Other
 
 后者可以把链接转成二维码
 
-## 面向设计的半封装web组件
+## 查看Chrome自带组件的样式
 
-为了满足UI需求，讲求封装的设计理念，必然会导致web组件越来越大，越来越臃肿
+自定义 date 输入框时，发现浏览器自带的 datepicker 样式是由类似 `::-webkit-inner-spin-button` 等 CSS 伪元素样式定义的。
 
-没有使用场景才是最能适用于各种场景
+如何在 devtool 里定位和修改这些元素呢？
 
-考虑到未来发展，可以从这两方面寻求改变：分离和半封装。
+打开开发这工具，点击 Element、Network,...工具栏上最后边的图标 “Customize and control DevTools” ——> Settings ——> Elements 部分选中 “Show user agent shadow DOM”
 
-1. 分离：
-
-    + 样式控制从JS分离：UI需求不是你可控的，CSS才是最好的UI样式API。
-    + 参数来源从JS分离：优先使用HTML元素上对应的属性值
-
-2. 半封装：此“半封装”是针对不同设计风格的项目而言，只封装语言层面以及功能层面的东西。对于某一个具体的项目，其web组件还是完全封装的，还是有成熟的API接口的，小白开发也是可以直接使用的
+注：当前Chrome版本 61.0.3163.79
 
 ## 看不到的设计
 
@@ -76,28 +71,6 @@ Good design is often invisible. Much of design is about "feeling right." Users w
 对于 “错过重要事情” 的担忧，只会产生在断开电源、退订或关机之前，而不是之后。
 
 终极自由是思想的自由，我们需要科技帮助我们自由地生活、感受、思考以及行动。
-
-## web缓存
-
-对于前端开发者来说，我们主要跟浏览器中的缓存打交道。关于缓存资源的问题，都仅仅针对GET请求。而对于POST, DELETE, PUT这类行为性操作通常不做任何缓存。
-
-HTTP通过缓存将服务器资源的副本保留一段时间，这段时间称为**新鲜度限值**。这在一段时间内请求相同资源不会再通过服务器。
-
-HTTP协议中 `Cache-Control` 和 `Expires`可以用来设置新鲜度的限值，前者是 **HTTP1.1** 中新增的响应头，后者是 **HTTP1.0** 中的响应头。二者所做的事时都是相同的，但由于Cache-Control使用的是**相对时间**，而Expires可能存在客户端与服务器端时间不一样的问题，所以我们更倾向于选择 Cache-Control。
-
-Cache-Control 不仅仅可以在响应头中设置，还可以在请求头中设置。
-
-可能设置的属性值有：
-
-+ max-age（单位为s）指定设置缓存最大的有效时间，定义的是时间长短。当浏览器向服务器发送请求后，在max-age这段时间里浏览器就不会再向服务器发送请求了
-+ public 指定响应可以在代理缓存中被缓存，于是可以被多用户共享。如果没有明确指定private，则默认为public。
-+ private 响应只能在私有缓存中被缓存，不能放在代理缓存上。对一些用户信息敏感的资源，通常需要设置为private。
-+ no-cache 表示必须先与服务器确认资源是否被更改过（依靠If-None-Match和Etag），然后再决定是否使用本地缓存。
-+ no-store 绝对禁止缓存任何资源，也就是说每次用户请求资源时，都会向服务器发送一个请求，每次都会下载完整的资源。通常用于机密性资源。
-
-浏览器或代理缓存中缓存的资源过期了，并不意味着它和原始服务器上的资源有实际的差异，仅仅意味着到了要进行核对的时间了。这种情况被称为服务器再验证。
-
-如果资源发生变化，则需要取得新的资源，并在缓存中替换旧资源。如果资源没有发生变化，缓存只需要获取新的响应头，和一个新的过期时间，对缓存中的资源过期时间进行更新即可。 HTTP1.1 推荐使用的验证方式是 `If-None-Match` / `Etag` 对应 Request Headers 和 Response Headers，在 HTTP1.0 中则使用 If-Modified-Since/Last-Modified
 
 ## Chrome DevTool 实用技巧
 
@@ -197,15 +170,13 @@ CSS 书写动效：**命令式**（如 jQuery.animate，显示调用动画函数
 ### CSS 性能
 
 + 慎重选择高消耗的样式（绘制前需要浏览器进行大量计算的 expensive styles）：`box-shadows`,`border-radius`,`transparency`,`transforms`,`CSS filters`
-+ 避免过分 reflow（浏览器重新计算布局**位置**和**大小**）。常见引起重排的属性：width/height，padding，margin，display，border，border-width，position，top/bottom/left/right，font-size，font-weight，font-family，float，text-align，vertical-align，line-height，min-height，overflow，clear，white-space
-+ 避免过分 repaints，常见引起重绘的属性：color，border-style，visibility，text-decoratoiin，background，background-image，background-position，background-repeat，background-size，outline，outline-color，outline-style，outline-width，border-radius，box-shadow
++ 避免过分 reflow（浏览器重新计算元素的**位置**和**大小**）。常见引起重排的属性：width/height，padding，margin，display，border，border-width，position，top/bottom/left/right，font-size，font-weight，font-family，float，text-align，vertical-align，line-height，min-height，overflow，clear，white-space
++ 避免过分 repaint（重新绘制显示的内容，而元素的几何尺寸没有变），常见引起重绘的属性：color，border-style，visibility，text-decoratoiin，background，background-image，background-position，background-repeat，background-size，outline，outline-color，outline-style，outline-width，border-radius，box-shadow
 + `requestAnimationFrame`，一种提供更高效运行基于脚本动效的 API（让视觉更新按照浏览器的最优时间来安排计划），相比于传统的 timeouts 方法。
 
-Hardware Acceleration means that the Graphics Processing Unit (GPU) will assist your browser in rendering a page by doing some of the heavy lifting, instead of throwing it all onto the Central Processing Unit (CPU) to do. 硬件加速是指GPU帮助浏览器在渲染一个页面时做一些繁重的工作，代替传统地把全部工作扔给CPU来做。
+硬件加速是指GPU帮助浏览器在渲染一个页面时做一些繁重的工作，代替传统地把全部工作扔给CPU来做。
 
-a GPU is designed specifically for performing the complex mathematical and geometric calculations that are necessary for graphics rendering. GPU专门用来执行那些对于图像渲染必要的复杂数学、几何运算。
-
-Hardware acceleration (a.k.a. GPU acceleration) relies on a layering model used by the browser as it renders a page. When certain operations (such as 3D transforms) are performed on an element on a page, that element is moved to its own “layer”, where it can render independently from the rest of the page and be composited in (drawn onto the screen) later. This isolates the rendering of the content so that the rest of the page doesn’t have to be rerendered if the element’s transform is the only thing that changes between frames, and often provides significant speed benefits. It is worth mentioning here that only 3D transforms qualify for their own layer; 2D transforms don’t.
+GPU专门用来执行那些对于图像渲染必要的复杂数学、几何运算。
 
 硬件加速依赖于浏览器渲染页面时使用的 layering 模型。当页面中某个元素上执行特定操作时，元素被移到它自己的 layer，在那里它将被独立渲染然后画到屏幕上。
 
@@ -240,7 +211,7 @@ Layer creation 技术催生了页面速度，但也有相应的代价——占�
 }
 ```
 
-如果 hover 元素时就要有动效，_will-change_ 写在这里就没什么作用（hover 已经发生了）。可以把 _will-change_ 写在该元素的祖先元素的 hover 状态里。 
+如果 hover 元素时就要有动效，_will-change_ 写在这里就没什么作用（hover 已经发生了）。可以把 _will-change_ 写在该元素的祖先元素的 hover 状态里。
 
 建议使用 JS 来 set 和 unset will-change 属性，这样浏览器在动效结束时可以回收用于优化的资源。
 
@@ -262,3 +233,67 @@ tip：
 <img src="{{ "/assets/images/cdn工作原理.png" | prepend: site.baseurl }}" alt="cdn 工作原理流程图">
 
 总结一下CDN的工作原理：通过权威DNS服务器来实现最优节点的选择，通过缓存来减少源站的压力。
+
+## 测试工具、UI 组件、可视化库
+
+- mocha、krama
+- notie.js（顶部和底部显示通知，类似手机应用）
+- animate.css
+- 阿里开源的g2（图标类），g6（关系图可视化）
+
+### npm package-locks
+
+如果 package.json 是 npm-install 的输入，那么一个完整格式的 node_moudles 数则为其输出。
+
+有时 npm 不能生成完全一样的 node_modules 树：
+
++ 不同版本的npm使用稍有不同的安装算法
++ 指定范围的包发布了新版本since上次安装
++ 依赖之中的某个dependency发布了新版本
++ 安装的注册表不再可用，或者允许版本变异导致在相同版本号下存在不同版本的软件包
++ 任何缺少的依赖关系都会以通常的方式安装
+
+[package-lock.json](https://docs.npmjs.com/files/package-lock.json) 在任何更新node_modules和/或package.json的依赖关系时，都会自动同步现有的锁定程序。这样即使中间dependency更新，之后的install也能生成相同的tree。
+
+强烈建议commit这个文件到source仓库里：
+
++ 描述唯一的依赖树，保证其他人按照完全相同的依赖
++ 方便用户追溯 node_modules 的修改记录，而无需git追踪这个文件夹
++ 提高依赖树变更的可读性
++ 优化安装进程，通过让npm跳过重复的（已安装的包）metadata解析，任何未来的安装都将基于这个文件，而不是重新计算package.json的依赖版本
+
+如果该文件没有放在项目root目录下将被忽略。
+
+### Draw dashed lines
+
+怎么实现画一条dashed的线，可以控制线size和space？下面的答案介绍了三种方法并比较了利弊：
+svg、css linear gradient、css box-shadow
+[Control the dashed border stroke length and distance between strokes
+](https://stackoverflow.com/a/31315911)
+
+### CSS 关键词 unset
+
+关键词 _unset_ 适用于任何 CSS 属性，效果是将属性值设为 **inherited** value from 祖先元素；如果祖先元素中没有对该属性进行设值，则将属性值设为 initial value。
+
+## 小的UI tips
+
+1.在引起严重后果的action按钮上使用红色高亮，提醒用户这个操作有危险
+2.在非主要操作的按钮上不要使用深色，而是浅灰色或其他浅色
+3.背景图使用 `blend-mode: multiply` 并结合背景色，生成叠加效果，让hero banner白色字体有一个漂亮的contrast
+4.相似的内容排在一行，使用上下边线来group，便于用户理解
+5.英文全大写文案增加 letter spacing
+6.英文页面的body text采用 `font-size: 16px;` 和 `line-height: 1.5`
+7.让图标和段落首行或小标题在同一行对齐
+8.图标的颜色采用比旁边label文案更light的颜色，让更重要的文字信息pop out
+
+### object-fit
+
+该 css 属性设定 img、video 插入的内容如何进行缩放以填充容器。可选的值：contain（保持长宽比）、cover、fill、none、scale-down（效果有时同none和contain）
+
+### attr()
+
+css 函数，用于提取选定的 html 元素上某属性的值，并用于样式表。也可用于伪元素，在这种情况下，返回伪元素的 originating element 上的属性值。
+
+## Windows vs. Unix
+
+换行符：Windows 为 `\r\n`（CRLF），Unix 为 `\n`（LF）

@@ -24,16 +24,25 @@ The **default method** is **GET**.
 
 ### 什么时候使用 GET 方法呢？
 
-If the form submission is passive (like a search engine query), and without sensitive information.  When you use GET, the form data will be visible in the page address.
-如果表单提交是被动的（如搜索引擎查询），且没有敏感信息时，使用 GET，因为这种方法表单的数据将会在URL上可见。
+If the form submission is passive (like a search engine query 搜索引擎查询), 且 without sensitive information.
 
-     action_page.php?firstname=Mickey&lastname=Mouse  
+使用 GET 方法，表单的数据将会在URL上可见。
 
-这种方法特别适合小量数据。 Size limitation is set in your browser。
+     action_page.php?firstname=Mickey&lastname=Mouse
+
+这种方适合小量数据提交。
+
+Size limitation is set in your browser(不同浏览器max length不同，2KB-8KB)
 
 ### 什么时候用 POST 方法呢？
 
-如果表格在更新数据，或者包含敏感信息（如：password），POST 方法较为安全。提交的数据在地址栏里不可见。
+如果需要更新 database 数据，或者包含敏感信息（如：password），POST 方法较为安全。提交的数据在地址栏里不可见。
+
+### 再看 GET、POST 区别
+
+GET **只接受 ASCII 字符**（参看 HTML-Entities-Charset-URL-Encode 章节），为什么呢？因为 GET 从 URL 的 query string 里获取参数，而 URL 是 HTTP 的一个首部，一定是 ASCII 字符的。如果 GET 请求中包含非 ASCII 字符，在发送请求前使用 URL 编码方法对其转码。
+
+POST 不限制，因为数据是 HTTP 的实体，且使用 MIME（Multipurpose Internet Mail Extensions 多用途互联网邮件扩展）可传输非 ASCII 字符
 
 ## The _name_ Attribute
 
@@ -122,7 +131,7 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
 
 该元素的内容可以是文字或图片，**有别与使用 `<input>` 元素创建的按钮**
 
-**Tips**: 记住指定该元素的 _type_ 特性（**button**，**reset**，**submit**），因为不同的浏览器针对 `<button>` 元素使用不同的默认类型。如果你想点击按钮执行特定脚本，而又没有指定它的类型是 button，谷歌浏览器会当作 submit 处理。
+**Tips**: 记住指定该元素的 _type_ 特性（**button**，**reset**，**submit**），因为不同的浏览器针对 `<button>` 元素使用不同的默认类型。如果你想点击按钮执行特定脚本，而又没有指定它的类型是 button，谷歌浏览器会当作表单 submit 处理。
 
 ## HTML5 `<datalist>` Element
 
@@ -182,3 +191,15 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
   <input type="reset" value="Reset">
 </form>
 ```
+
+### Best Practise
+
+1. 当表单中只有唯一的input输入区域，Enter 键盘事件(keycode为13)将**自动提交表单**
+2. 提交方法为 post、patch 等，设置禁止连续点击按钮效果
+3. 用户手动输入的值要做 trim 处理，去掉首尾的空格
+4. 指定表单里某个输入域获取光标焦点 `form['myName'].focus()`，采用的是指定元素获得焦点的方法 `HTMLElement.focus()`
+5. 输入框的 input 事件**实时**反应输入值，而 change 事件只有在**光标再次失去焦点时**才反应输入值
+6. 非 input 元素如果想触发 focus 事件，必须指定 _tabindex_ 属性，即该元素支持使用 keyboard 进行切换
+7. 横向表单：采用label、input为一个form-group（通过 col-* 指定 width）。单行表单：label宽不固定；多行表单：label和输入框分行显示。
+8. 表单提交时，判断输入项是否有error并拦截（通过标识或状态，避免重复判断），用户可能不改错直接提交。
+9. 键盘事件只能由 input、textarea，等任何拥有 _contentEditable_ 属性，或者 tabindex='-1' 的元素

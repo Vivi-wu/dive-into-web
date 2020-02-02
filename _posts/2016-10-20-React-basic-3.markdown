@@ -12,29 +12,31 @@ category: JavaScript
 
 `<option>` _selected_ 状态的改变
 
-输入组件包含 `value` 属性的称为 controlled component 受控组件。它的值完全反应其属性的值，而不受用户输入影响。因此要实现交互，给 onChange 属性绑定处理函数。
+输入组件包含 `value` 属性的称为 controlled component 受控组件。它的值不受用户输入影响。因此要实现交互，给 onChange 属性绑定处理函数。
 
 <!--more-->
 
 如果输入组件不含 `value` 属性的称为 uncontrolled component 不受控组件。任何用户输入都直接反应在渲染的元素上。可以像受控组件一样给 onChange 属性绑定处理函数。
 
-可通过 `defautChecked` 给多选框、单选框，`defaultValue` 下拉选项、文本输入框等设置初始值。
+当需要处理多个 input 元素时，我们可以给每个元素添加 name 属性，并让处理函数根据 event.target.name 的值选择要执行的操作。
 
 ## 组件生命周期
 
 React 提供 **will**（在事件发生前）和 **did**（在事件发生后）方法。
 
+当组件第一次被渲染到 DOM 中的时候，被称为“挂载（mount）”。当 DOM 中 组件被删除的时候，在 React 中被称为“卸载（unmount）”。
+
 ### Mounting
 
-一个组件的实例被创建和插入 DOM 的过程
+一个组件的实例被创建和插入 DOM 的过程：
 
-`constructor()`（`getInitialState()`），用来初始化 state 数据。
+`constructor()`，初始化 state 数据，绑定成员函数的 this 环境。无状态的 React 组件不需要定义构造函数。
 
-`componentWillMount()`，mounting 发生之前调用
+`componentWillMount()`，所有可以在这个函数中做的事都可以提前到 constructor 中做。
 
-`render()`
+`render()`，返回 JSX 表示对象。
 
-`componentDidMount()`，mounting 发生之后调用，需要 DOM 节点的初始化写在这里
+`componentDidMount()`，调用所有组件的 render 函数之后，完成 mounting 才依次调用此函数。只在**浏览器端**调用因为服务器端渲染不会产生 DOM 树。需要 DOM 节点的初始化写在这里。
 
 ### Updating
 
@@ -42,19 +44,19 @@ React 提供 **will**（在事件发生前）和 **did**（在事件发生后）
 
 `componentWillReceiveProps()`
 
-`shouldComponentUpdate()`
+`shouldComponentUpdate(nextProp, nextState)`，返回一个布尔值，告知 React 该组件在这次更新中是否需要继续。默认返回 true，即每次更新都要重新渲染。通过定制该函数 可提高性能。
 
 `componentWillUpdate()`
 
-`render()`
+`render()`，同 mounting 过程
 
-`componentDidUpdate()`
+`componentDidUpdate()`，无论更新过程发生在 server 端还是 browser 端，都会被调用。正常情况下 server 端只产出 HTML 字符串，不会调用此函数。
 
 ### Unmounting
 
-当一个组件被从 DOM 中移除时调用以下方法
+当一个组件被从 DOM 中移除时调用以下方法：
 
-`componentWillUnmount()`，组件被移除之前调用，Cleanup 写在这里
+`componentWillUnmount()`，在此函数里写一些清理工作。
 
 ### `ref` 属性赋予 Callback 函数
 
@@ -88,3 +90,9 @@ By default, use the Reactive data flow and save refs for use cases that are inhe
 
 + You must provide the key attribute for all children of ReactCSSTransitionGroup, even when only rendering a single item. This is how React will determine which children have entered, left, or stayed.
 + You'll notice that animation durations need to be specified in both the CSS and the render method; this tells React when to remove the animation classes from the element and -- if it's leaving -- when to remove the element from the DOM. 自定义 animation 样式时不仅在 css 中要指定时间，在组件的属性上也要指定。
+
+### 官方文档错误
+Using Global Variables，Alternatively, you can force the linter to ignore any line by adding  `// eslint-disable-line` after it.
+不起作用。应该使用 `// eslint-disable-next-line`
+或者在文件最开始处，`/*global fbq, gtag*/` 告诉eslint全局变量名
+`

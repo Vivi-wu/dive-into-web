@@ -9,7 +9,7 @@ Every HTML element has a default _display_ value depending on what type of eleme
 Block level elements always start on a new line and takes up the full width available.
 **块级元素**通常**以新的一行开始，左右伸展，占满一整行宽度**。
 
-常见的块级元素有: `<div>`, `<h1>`-`<h6>`, `<p>`, `<form>`, `<ul>`, `<ol>`
+常见的块级元素有: `<div>`, `<h1>`-`<h6>`, `<p>`, `<form>`, `<ul>`, `<ol>`, `<hr>`
 
 <!--more-->
 
@@ -18,7 +18,7 @@ Block level elements always start on a new line and takes up the full width avai
 Inline elements don't start on a new line and only take up as much width as necessary.
 **行内级元素**通常**不会以新的一行开始来显示，且只占据必要的宽度**。
 
-常见的行内级元素有: `<span>`, `<a>`, `<img>`, `<strong>`
+常见的行内级元素有: `<span>`, `<a>`, `<img>`, `<strong>`, `<label>`
 
 ### `<div>` Element
 

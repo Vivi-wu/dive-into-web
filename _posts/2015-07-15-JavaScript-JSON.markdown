@@ -18,7 +18,12 @@ JSON 文件的后缀名为 _.json_
 
 ### JSON Value
 
-可以是 number（整数或浮点型的）、string（**双引号**括起来）、Boolean（true 或 false）、array、object、`null`
+可以是 number（整数或浮点型的）、string（**双引号**括起来）、Boolean（true 或 false）、Array、Object、`null`。
+
+JSONNumber 是十进制数字，含两位小数，可以为正或负值。默认去掉末尾的0
+
+    5.00 -> 5
+    5.30 -> 5.3
 
 ### Convert JSON string to JS Object
 
@@ -31,6 +36,10 @@ JS 程序可以容易将 JSON 数据转为原生的 JS 对象。
 ### Convert JS value to JSON string
 
 使用 JS 内置的 `JSON.stringify(`value[, replacer[, space]]`)` 函数将 <span class="t-blue">JS 值转换成 JSON string</span>。
+
+replacer 可以是过滤 function 或 array（指定输出的属性名组成的数组）
+
+space 取值为 string（分隔符）或 number（指定输出时几个 space characters 作为一个空白符，超出10则取10，小于1则认为没有空格）
 
 ```js
 JSON.stringify([1, 'false', false]); // '[1,"false",false]'
@@ -48,6 +57,13 @@ Note: JSON text SHALL be encoded in Unicode. The default encoding is UTF-8.
 
      XHR.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
 
+```js
+var a = { test: '' }
+var val = JSON.stringify(a.test)
+
+// 判断对象某属性的值是否为：空字符串、空对象、空数组、null 或 undefined
+if (a.test === "" || val === '{}' || val === '[]' ||  val === 'null' || !val) {}
+```
 ### JSON vs. XML
 
 不了解的人会经常比较这两者，我比较赞同的一个观点是，JSON 只是一种**数据格式**，而 XML 是一种**语言**，比前者拥有更广泛的用途和强大的功能。

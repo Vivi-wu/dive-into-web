@@ -26,13 +26,13 @@ pixels (1px = 1/96th of 1in)
 
 ### em
 
-length 取值相对于当前字体的 font-size，注意：字体是可继承的，当前字体大小可能有变。
+length 取值相对于当前元素的 font-size，注意：字体是可继承的，当前字体大小可能有变。
 
 ### rem
 
 length 取值相对于根元素 `<html>` 的字体大小而言。因为根元素字体通常定义一次不再改变，使用 rem 作为长度单位的 CSS 属性因而稳定且 consistent。
 
-em 和 rem 长度单位常用于创建可放大的布局。
+em 和 rem 长度单位常用于创建可缩放的布局。
 
 ### vm／vh 
 
