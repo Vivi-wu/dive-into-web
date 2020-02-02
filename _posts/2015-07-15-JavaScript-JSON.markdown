@@ -24,13 +24,13 @@ JSON 文件的后缀名为 _.json_
 
 JS 程序可以容易将 JSON 数据转为原生的 JS 对象。
 
-假设得到一个包含 JSON 语法的 JS 字符串，使用 JS 内置的 `JSON.parse()` 函数将这个字符串转为 JS 对象。
+假设得到一个包含 JSON 语法的 JS 字符串，使用 JS 内置的 `JSON.parse()` 函数将这个<span class="t-blue">字符串转为 JS 对象</span>。
 
     var obj = JSON.parse(text);
 
 ### Convert JS value to JSON string
 
-使用 JS 内置的 `JSON.stringify(`value[, replacer[, space]]`)` 函数将 JS 值转换成 JSON string。
+使用 JS 内置的 `JSON.stringify(`value[, replacer[, space]]`)` 函数将 <span class="t-blue">JS 值转换成 JSON string</span>。
 
 ```js
 JSON.stringify([1, 'false', false]); // '[1,"false",false]'

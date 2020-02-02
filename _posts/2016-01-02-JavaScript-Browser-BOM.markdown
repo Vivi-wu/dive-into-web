@@ -119,6 +119,9 @@ Cookies 以 name-value 形式存储。（如 username = Viivenne）当浏览器�
     document.cookie = "username=John Doe; expires=Thu," +
                       " 18 Dec 2013 12:00:00 UTC; path=/";
 
++ 可以添加一个 max-age 参数（max-age-in-seconds），最大有效期是多少。IE 不支持
++ 可以添加一个 domain 参数，值为 'example.com' 或者 'subdomain.example.com'. If not specified, defaults to the host portion of the current document location (不设定则不包括 subdomains).
+
 使用 _document.cookie_ 多次赋值，旧的 cookie **不会**被覆盖，而是追加到 cookies 里。
 
 ### Read
