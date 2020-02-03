@@ -8,3 +8,13 @@ package-lock.json文件中因他人本地npm source设置不同，导致官方�
 - 删除 package-lock.json
 - 删除 node_modules 目录（即已安装的文件）
 - 运行 npm install
+
+### macOS升级npm
+从[Node.js官方](https://nodejs.org/zh-cn/)下载pkg文件安装的 Node.js 如何升级？
+
+直接下载最新稳定版 pkg 文件根据指令安装即可。
+
+重新打开 terminal，运行以下命令检查是否更新成功。
+
+    node -v // v12.14.1
+    npm -v  // 6.13.4

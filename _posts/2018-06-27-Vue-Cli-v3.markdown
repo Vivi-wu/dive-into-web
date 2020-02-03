@@ -43,3 +43,67 @@ Vue CLI的架构是基于插件的。官方提供了一些Vue CLI插件（包含
 
 7. 如果你需要基于环境有条件地配置行为，或者想要直接修改配置，那就换成一个函数 (该函数会在环境变量被设置之后懒执行)。该方法的第一个参数会收到已经解析好的配置。在函数内，你可以直接修改配置，或者返回一个将会被合并的对象.
 8. 前端应用独立于后端部署——即后端暴露一个前端可访问的 API，前端实际上是纯静态应用。那么可以将 dist 目录里构建的内容**部署到任何静态文件服务器**中，但要确保正确的 baseUrl。
+
+### macOS首次安装 vue cli
+
+根据官方文档直接运行 `npm install -g @vue/cli` ，报错：
+
+```shell
+npm WARN checkPermissions Missing write access to /usr/local/lib/node_modules
+npm ERR! code EACCES
+npm ERR! syscall access
+npm ERR! path /usr/local/lib/node_modules
+npm ERR! errno -13
+npm ERR! Error: EACCES: permission denied, access '/usr/local/lib/node_modules'
+npm ERR!  [Error: EACCES: permission denied, access '/usr/local/lib/node_modules'] {
+npm ERR!   stack: "Error: EACCES: permission denied, access '/usr/local/lib/node_modules'",
+npm ERR!   errno: -13,
+npm ERR!   code: 'EACCES',
+npm ERR!   syscall: 'access',
+npm ERR!   path: '/usr/local/lib/node_modules'
+npm ERR! }
+npm ERR! 
+npm ERR! The operation was rejected by your operating system.
+npm ERR! It is likely you do not have the permissions to access this file as the current user
+npm ERR! 
+npm ERR! If you believe this might be a permissions issue, please double-check the
+npm ERR! permissions of the file and its containing directories, or try running
+npm ERR! the command again as root/Administrator.
+```
+命令行前加 `sudo` 重新执行，安装结束。
+
+检查版本：
+
+	vue --version // @vue/cli 4.1.2
+
+虽然安装成功，但是过程中有报错日志
+
+```shell
+> fsevents@1.2.11 install /usr/local/lib/node_modules/@vue/cli/node_modules/fsevents
+> node-gyp rebuild
+
+gyp WARN EACCES current user ("nobody") does not have permission to access the dev dir "/Users/wuxue/Library/Caches/node-gyp/12.14.1"
+gyp WARN EACCES attempting to reinstall using temporary dev dir "/usr/local/lib/node_modules/@vue/cli/node_modules/fsevents/.node-gyp"
+gyp WARN install got an error, rolling back install
+gyp WARN install got an error, rolling back install
+gyp ERR! configure error 
+gyp ERR! stack Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/@vue/cli/node_modules/fsevents/.node-gyp'
+gyp ERR! System Darwin 19.2.0
+gyp ERR! command "/usr/local/bin/node" "/usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js" "rebuild"
+gyp ERR! cwd /usr/local/lib/node_modules/@vue/cli/node_modules/fsevents
+gyp ERR! node -v v12.14.1
+gyp ERR! node-gyp -v v5.0.5
+gyp ERR! not ok 
+```
+
+### 快速原型开发
+
+使用 `vue serve` 和 `vue build` 命令对单个 *.vue 文件进行快速原型开发，需要先额外安装一个全局的扩展：
+
+	npm install -g @vue/cli-service-global
+
+同样报错，命令行前加 sudo。仍然有上面 node-gyp 的报错。
+
+node-sass 安装容易失败，如果报错或中断，先 uninstall 再重新安装。
+
+在重新安装 node-sass 后，看到 gyp info ok。虽然上面有报错，项目跑起来了。
