@@ -1,10 +1,16 @@
 ---
-title:  "Vue CLI v3开发tips"
+title:  "Vue CLI 使用tips"
 category: JavaScript
 ---
-Vue CLI的架构是基于插件的。官方提供了一些Vue CLI插件（包含文件generator，webpack runtime plugin）。
+@vue/cli是全局安装的 npm 包，未终端命令行工具提供 vue 指令。
 
-使用 `vue ui` 创建的vue项目可以通过GUI执行 npm scripts 的 serve 和 build 指令，呈现 webpack Analyzer 的图形化结果。
+@vue/cli-service 是局部安装的 npm 包，作为（由 @vue/cli 创建的）项目开发的 devDependencies。
+
+CLI Service主要基于 `webpack` 和 `webpack-dev-server` 两个工具。
+
+使用 `vue ui` 创建的vue项目可以通过 GUI 执行 npm scripts 的 serve 和 build 指令，呈现 webpack Analyzer 的图形化结果。
+
+<!--more-->
 
 1. 只有以 `VUE_APP_` 开头的变量会被 webpack.DefinePlugin 静态嵌入到客户端侧的包中。在应用的代码中访问
 
@@ -44,8 +50,6 @@ Vue CLI的架构是基于插件的。官方提供了一些Vue CLI插件（包含
 
 7. 如果你需要基于环境有条件地配置行为，或者想要直接修改配置，那就换成一个函数 (该函数会在环境变量被设置之后懒执行)。该方法的第一个参数会收到已经解析好的配置。在函数内，你可以直接修改配置，或者返回一个将会被合并的对象.
 8. 前端应用独立于后端部署——即后端暴露一个前端可访问的 API，前端实际上是纯静态应用。那么可以将 dist 目录里构建的内容**部署到任何静态文件服务器**中，但要确保正确的 baseUrl。
-
-<!--more-->
 
 ### macOS首次安装 vue cli
 
@@ -101,7 +105,15 @@ gyp ERR! not ok
 
 ### 快速原型开发
 
-使用 `vue serve` 和 `vue build` 命令对单个 *.vue 文件进行快速原型开发，需要先额外安装一个全局的扩展：
+使用 `vue serve` 和 `vue build` 命令对单个 *.vue 文件进行快速原型开发。
+
+	vue serve [options] [entry]
+
++ 常用 options 为 -o, --open
++ 不指定 entry 文件，则默认在当前目录查找 main.js, index.js, App.vue 或 app.vue
++ 使用cli创建的项目默认 setup (webpack, babel, postcss & eslint)
+
+使用前需要额外安装一个全局的扩展：
 
 	npm install -g @vue/cli-service-global
 
