@@ -29,13 +29,13 @@ JSONNumber 是十进制数字，含两位小数，可以为正或负值。默认
 
 JS 程序可以容易将 JSON 数据转为原生的 JS 对象。
 
-假设得到一个包含 JSON 语法的 JS 字符串，使用 JS 内置的 `JSON.parse()` 函数将这个字符串转为 JS 对象。
+假设得到一个包含 JSON 语法的 JS 字符串，使用 JS 内置的 `JSON.parse()` 函数将这个<span class="t-blue">字符串转为 JS 对象</span>。
 
     var obj = JSON.parse(text);
 
 ### Convert JS value to JSON string
 
-使用 JS 内置的 `JSON.stringify(`value[, replacer[, space]]`)` 函数将 JS 值转换成 JSON string。
+使用 JS 内置的 `JSON.stringify(`value[, replacer[, space]]`)` 函数将 <span class="t-blue">JS 值转换成 JSON string</span>。
 
 replacer 可以是过滤 function 或 array（指定输出的属性名组成的数组）
 

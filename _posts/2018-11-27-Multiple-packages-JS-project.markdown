@@ -22,6 +22,8 @@ category: JavaScript
 + 发布public的作用域包，只需在初始发布时指定 `--access public`
 + scope 和 registry 是 many-to-one 多对一的关系。
 
+<!--more-->
+
 ## Lerna
 
 目标：Splitting up large codebases into separate independently versioned packages for code sharing。

@@ -73,7 +73,7 @@ _z-index_ 属性指定了 stack order of an element 元素的叠放顺序. 可�
 注意：
 
 + 只有设置在非 static 放置 (position as absolute, relative, or fixed, **anything except `static`**) 的元素上才起作用
-+ 如果两个 positioned elements 重叠了，**都没有明确指定 _z-index_ **的值, the element **positioned last** in the HTML code will be **shown on top**. <span class="t-blue">代码位于 HTML 文件后面的元素将显示在上面</span>。
++ 如果两个 positioned elements 重叠了，**都没有明确指定 _z-index_** 的值, the element **positioned last** in the HTML code will be **shown on top**. <span class="t-blue">代码位于 HTML 文件后面的元素将显示在上面</span>。
 
 ## Clip
 

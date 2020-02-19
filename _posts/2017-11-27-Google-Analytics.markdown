@@ -16,6 +16,8 @@ category: Other
 官方文档[gtag.js](
 https://developers.google.com/analytics/devguides/collection/gtagjs/)
 
+<!--more-->
+
 ### 如何识别用户
 
 gtag.js uses cookies to identify unique users across browsing sessions.

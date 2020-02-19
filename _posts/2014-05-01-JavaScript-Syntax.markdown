@@ -271,6 +271,8 @@ After the declaration, the variable has no value. (Technically it has the value 
 + 条件（三元）操作符：variablename = (condition) `?` value1:value2 满足条件取 value1，否则取 value2.
 + 位操作符：`&` 逻辑与，`|` 逻辑或，`~` 逻辑非，`^` 逻辑异或，`<<` 左移几位，`>>` 右移几位. 作用于 32-bit numbers，result is converted back to a JavaScript number
 
+补充：位运算符在操作数为浮点数的情况下，向下去整，只保留整数部分。`~~` 实现按位取反再取反，当操作数是整数的情况返回自己，是浮点的则相当于 `Math.floor` 的效果。
+
 <span class="t-blue">在逻辑运算中虽然内部进行 Boolean 转换，实际返回 original 操作数的值</span>。
 
 在 JavaScript 中，true && expression 总是会返回 expression, 而 false && expression 总是会返回 false

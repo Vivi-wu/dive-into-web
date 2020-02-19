@@ -19,6 +19,8 @@ category: Other
 [这个插件](https://github.com/bfred-it/iphone-inline-video){:target="_blank"}
 ```
 
+<!--more-->
+
 ## Visual Studio Code
 
 ### 快捷键

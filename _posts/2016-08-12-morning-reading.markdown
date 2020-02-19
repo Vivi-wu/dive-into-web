@@ -24,7 +24,7 @@ category: Other
 
 ## 获取滚动条的滚动值
 
-在Android中通过 `document.scrollTop` ， `document.scrollLeft` 两个属性正常获取到滚动条的值（就像在PC上一样）。但是iOS中这两个属性是未定义的。需要使用 `window.scrollY`， `window.scrollX`属性。
+在Android中通过 `document.scrollTop` ， `document.scrollLeft` 两个属性获取到滚动条的值（就像在PC上一样）。但是iOS中这两个属性是未定义的。需要使用 `window.scrollY`， `window.scrollX`属性。
 
 但是事实证明 android 也支持这属性，所以索性都用 woindow.scroll
 

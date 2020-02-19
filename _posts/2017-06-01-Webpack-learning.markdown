@@ -67,6 +67,8 @@ plugins: [
 11. 使用 new 创建实例来调用 plugin，可以在一个配置文件中因为不同目的而多次使用同一个插件
 12. 通过 ProvidePlugin 自动加载模块，代替在各个文件里 import/require 它们。
 
+<!--more-->
+
 ### html webpack plugin
 
 通过插件引入 favicon，并处理 favicon 的引用路径。

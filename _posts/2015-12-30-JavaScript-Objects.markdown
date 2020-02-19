@@ -65,7 +65,7 @@ A.prototype = {
 
 构造函数 A 可以简写成：
 
-    function A (arg) {this.arg = arg} // this 指向临时对象，与下面解释关键字this用法的观点一致
+    function A (arg) {this.arg = arg} // this 指向临时对象，与下面解释关键字 this 用法的观点一致
 
 `new A('参数')` 中的 new 所做的事情就是上面数字标记注释的三个步骤。
 
