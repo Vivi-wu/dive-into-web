@@ -33,9 +33,17 @@ OR
 
 为正确显示网页，浏览器必须知道使用哪种 character set （character encoding）字符集/编码。
 
-ASCII was the first **character encoding standard** (also called character set). It define 127 different alphanumeric 含有字母数字的 characters that could be used on the internet.
+ASCII was the first **character encoding standard** (also called character set). ASCII supported numbers (0-9), English letters (A-Z), and some special characters like ! $ + - ( ) @ < > .
 
-ASCII supported numbers (0-9), English letters (A-Z), and some special characters like ! $ + - ( ) @ < > .
+ASCII，代表美国信息交换标准码。它是一个7位字符代码，每个位代表一个唯一的字符。
+
+#### 一些符号正则表达式检测不出来
+
+[网络上找到的ascii字符表](http://doc.chacuo.net/ascii)，测试发现编码在 \x80-\x9f 范围内的符号用 /^[\x00-\xff]+$/ 这个正则表达式检测不出来。
+
+以8位，256个字符，根据 [Windows-1252（代码页1252）编码的 ASCII 表](https://www.ascii-code.com/)，它是 ISO 8859-1 在可打印字符方面的超集。其中在128到159（十六进制80到9F）范围内，ISO / IEC 8859-1具有不可见的控制字符，而 Windows-1252 替换为额外的一些常用，但未包含在 [ISO-8859-1](https://zh.wikipedia.org/wiki/ISO/IEC_8859-1) 中的字符。
+
+扩展表里显示的128-159的字符是Windows-1252 (CP-1252)可打印字符，实际对应的 ascii 编码不在\x00-\xff范围内，所以正则校验不通过。
 
 ### Unicode
 

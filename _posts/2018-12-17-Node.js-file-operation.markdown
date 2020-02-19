@@ -1,8 +1,15 @@
 ---
-title:  "Node.js文件操作"
+title:  "Node.js相关"
 category: JavaScript
 ---
-异步写入文件
+检查 node 版本
+
+```bash
+node -v
+```
+偶数版本号的为稳定版
+
+### 异步写入文件
 
 1. 覆盖式
 

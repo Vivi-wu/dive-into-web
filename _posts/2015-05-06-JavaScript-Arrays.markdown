@@ -281,3 +281,13 @@ let data = array2.reduce((obj, element) => {
 arryB.sort((a, b) => b - a)
 arryB.forEach(index => arryA.splice(index, 1))
 ```
+
+#### 数组去重
+
+`Set` 对象允许我们存储任何数据类型的唯一值，whether primitive values or object references.
+注意数组项为object时，不要使用此方法。
+
+```js
+const a = [...new Set([1, 6].concat([1, 2, 3, 3, 2, 4, 5]))]
+// [1, 6, 2, 3, 4, 5]
+```

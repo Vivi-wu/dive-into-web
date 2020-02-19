@@ -4,6 +4,10 @@ category: Other
 ---
 整理 .markdown 常用语法。
 
+## Git bash
+
+1. 每次在终端里执行与远端交互的 git 命令都提示输入passphrase？解决：把 remote url 从ssh改为https
+2. `cat *.txt` Linux 命令：连接文件并将内容打印到标准输出设备上
 
 ## Markdown
 

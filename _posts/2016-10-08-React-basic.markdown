@@ -276,6 +276,7 @@ props：
 2.因为是js报错可显示对应的Line *
 3.没有v-model的trim等修饰符
 
+子组件 state 没更新是不会触发 render 渲染的。
 
 对于受控组件来说，每个 state 突变都有一个相关的处理函数。这使得修改或验证用户输入变得简单。
 `<input type="text">`, `<textarea>` 和 `<select>` 之类的标签都非常相似—它们都接受一个 value 属性，你可以使用它来实现受控组件

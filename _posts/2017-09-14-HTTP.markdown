@@ -75,3 +75,9 @@ Conditional requests are HTTP requests [RFC7231] that include one or more header
 
 条件的请求是指包含一个或多个头字段，它们指示在应用到目标资源之前有需要测试的先决条件的 HTTP 请求。
 
+
+### 常见状态码
+400 - Bad Request，客户端传入参数的错误，如必选参数没有传入等
+404 - Not Found，接口要访问的资源不存在，一般是URL或URL的参数错误
+405 - Method Not Allowed，接口访问的Method不正确，比如应该使用GET的接口使用了POST访问等
+500 - Internal Server Error，其它类型的错误默认都会返回500

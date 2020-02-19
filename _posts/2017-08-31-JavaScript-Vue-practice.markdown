@@ -85,6 +85,7 @@ Vue 组件类似于自定义元素——它是 Web 组件规范的一部分，�
 
 + 在一个元素上同时使用 v-for 和 v-if，前者比后者有 higher priority，[详细解释](https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential)。如果希望有条件地**跳过**循环的执行，那么将 v-if 置于外层元素 (或 `<template>`)上
 + 使用 v-if 控制显示的 input 框输入值没有 reset。原因： Vue 会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。解决：在元素上加属性 `key`，它会基于 key 的变化重新排列元素顺序，并且会移除 key 不存在的元素。
++ 表格中一行的 button 按钮 disabled 属性值为 true，它上一行为 false，如果删除上一行，本行的按钮 disabled 也会变成 false，尽管 vue 状态没变。解决：在本行按钮元素上加 key
 + 在 .vue 文件的模板中书写图片等资源路径使用 webpack 配置的 alias 的[方法](https://github.com/vuejs/vue-loader/issues/193):
 
     <img src="~images/logo.png">
@@ -171,6 +172,7 @@ methods: {
 + 逻辑上应该相同的状态存放在不同组件里，将很难保证数据一致。如果由于某种 bug 导致某个组件中某状态与其他组件里该状态不一致，就会出现问题。于是 Flux、Redux之类提出 store 的概念，依靠全局状态作为唯一可靠数据源。
 + 利用 prop 在组件之间传递数据的问题：组件结构在三级或以上，底层组件想传数据给最底层组件，需通过多个中间组件。而这些中间组件可能根本不需要这个 prop，这样违反了低耦合的设计要求。
 + 子组件访问全局 getters 时使用 `rootGetters`
++ action只能接收最多2个参数，第二个参数 payload 可选，用户自定义传入数据。
 
 ## 构建
 

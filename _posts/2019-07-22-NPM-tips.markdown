@@ -8,3 +8,21 @@ package-lock.json文件中因他人本地npm source设置不同，导致官方�
 - 删除 package-lock.json
 - 删除 node_modules 目录（即已安装的文件）
 - 运行 npm install
+
+### 查看当前npm源
+
+```bash
+npm config get registry
+```
+
+## npm脚本指令
+
+[npm-scripts](https://docs.npmjs.com/misc/scripts)
+
+Additionally, arbitrary scripts can be executed by running `npm run-script <stage>`. **Pre** and **post** commands with matching names will be run for those as well (e.g. premyscript, myscript, postmyscript). 
+
+也就是说，如果你有一个 build 指令，当执行完 `npm run build` 后，可以自动执行 `npm run postbuild`
+
+想要在构建完成之后，删除source map文件，可以通过在package.json中添加：
+
+	"postbuild": "rimraf ./build/**/*.js.map"
