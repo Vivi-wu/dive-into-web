@@ -58,6 +58,9 @@ localStorage.setItem('user', JSON.stringify(updatedUser));
 
 // Delete
 localStorage.removeItem('user');
+
+// 获取所有key名
+Object.keys(localStorage)
 ```
 
 优势：与 Cookies 对比

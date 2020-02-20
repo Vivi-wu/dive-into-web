@@ -12,17 +12,25 @@ CLI Service主要基于 `webpack` 和 `webpack-dev-server` 两个工具。
 
 <!--more-->
 
+## html和css
+
+1. 在所有 `<template lang="pug">` 的区域支持 pug 模板
+
+	npm install -D pug-plain-loader pug
+2. 支持 sass 语法，手动安装
+
+	npm install -D sass-loader node-sass
+
+## js
+
 1. 只有以 `VUE_APP_` 开头的变量会被 webpack.DefinePlugin 静态嵌入到客户端侧的包中。在应用的代码中访问
 
 
 	console.log(process.env.VUE_APP_SECRET)
 
 	此外，在应用中始终可用的还有： `NODE_ENV` 和 `BASE_URL` （应用会部署到的基础路径）2个特殊的变量.
-2. 在所有 `<template lang="pug">` 的区域支持 pug 模板
 
-	npm install -D pug-plain-loader pug
-
-3. 按需引入 element-ui 组件
+2. 按需引入 element-ui 组件
 
 	// 安装 babel 插件实现按需引入
 	npm install babel-plugin-component -D
@@ -36,20 +44,29 @@ CLI Service主要基于 `webpack` 和 `webpack-dev-server` 两个工具。
       }
     ]
   ]
-4. 支持 sass 语法，手动安装
 
-	npm install -D sass-loader node-sass
-5. 文件引用路径
+3. Vue CLI app会为所有**异步 js 文件 chunks**自动生成 prefetch hints（使用 webpack code splitting 的 dynamic import()).因此，关闭模块入口时，最好把异步引入的代码也注释掉。如果你的应用很大，有很多异步加载模块，且用户主要为mobile用户，建议 disable prefetch links，手动选择需要 prefetch 的模块。
 
-	+ 以 `.` 开头，相对模块，基于文件系统中的目录结构进行解析
-	+ 以 `~` 开头，任何内容作为模块被解析，可以引用 Node 模块里的资源、使用 webpack alias
-	+ 以 `@` 开头，指向项目根目录下的 src 目录
-6. 模式不同于 NODE_ENV，一个模式可以包含多个环境变量。也就是说，**每个模式都会将 NODE_ENV 的值设置为模式的名称**——比如在 development 模式下 NODE_ENV 的值会被设置为 "development"。通过传递 --mode 选项参数，为命令行覆盖默认的模式。
+## 其他
+
+1. 文件引用
+
+	+ 以 `.` 开头，相对路径，基于文件系统中的目录结构进行解析，适用于 JavaScript, CSS or *.vue files
+	+ 以 `~` 开头，以 module request 解析，可以引用 node_modules里的资源、或者使用 webpack alias
+	+ 以 `@` 开头，指向 Vue CLI 项目根目录下的 src 目录
+
+2. .env文件
+
+	+ 如果环境配置文件不含 NODE_ENV 变量，则该变量蒋被 set to "production" in production mode, "test" in test mode, 其余默认设为 "development"。
+	+ 无论你要往哪一个环境部署应用，使用 `vue-cli-service build` 命令都需要将 NODE_ENV 置为 production，以使用对应的 webpack 配置获得 ready for deployment 的应用。
+	+ .env文件在 vue-cli-service 命令启动时加载，如修改文件，则需要重启服务。
+3. 通过传递 --mode 选项参数，为 vue-cli-service 命令行覆盖默认的模式。
 
 	.env.[mode]         # 只在指定的模式中被载入
 
-7. 如果你需要基于环境有条件地配置行为，或者想要直接修改配置，那就换成一个函数 (该函数会在环境变量被设置之后懒执行)。该方法的第一个参数会收到已经解析好的配置。在函数内，你可以直接修改配置，或者返回一个将会被合并的对象.
-8. 前端应用独立于后端部署——即后端暴露一个前端可访问的 API，前端实际上是纯静态应用。那么可以将 dist 目录里构建的内容**部署到任何静态文件服务器**中，但要确保正确的 baseUrl。
+4. 前端应用独立于后端部署——即后端暴露一个前端可访问的 API，前端实际上是纯静态应用。那么可以将 dist 目录里构建的内容**部署到任何静态文件服务器**中，但要确保正确的 baseUrl。
+5. Vue CLI app会为应用初始渲染所需的全部文件，生成 preload hints
+6. 默认 _productionSourceMap_ 为 true，我们对 test、pre 关闭以 speed up production builds。线上因为 sentry 监控需定位报错而开启。
 
 ### macOS首次安装 vue cli
 
