@@ -155,6 +155,8 @@ CSP(Content Security Policy), 并不是用来防止 XSS 攻击的，而是最小
 
 遗憾的是HTML并没有针止XSS和XSRF带来系统性解决方案。在这个前提下，CSP变得非常重要，可以大大降低XSS后的危害。
 
+出于性能考虑，前端应用通常会把一些静态资源存放到CDN（Content Delivery Networks）上面。如果攻击者劫持了CDN，或者对CDN中的资源进行了污染，那么我们的前端应用拿到的就是有问题的JS脚本或者Stylesheet文件，使得攻击者可以肆意篡改我们的前端页面，对用户实施攻击。这种攻击方式造成的效果和XSS跨站脚本攻击有些相似，不过不同点在于攻击者是从CDN开始实施的攻击，而传统的XSS攻击则是从有用户输入的地方开始下手的。
+
 ## CSS 开发者大会相关
 
 OOCSS，object oriented CSS，把结构和样式分离，把容器和内容分离。避免使用 IDs 作为样式块。
