@@ -8,11 +8,11 @@ categories: [HTML, JavaScript]
 
 ## Cookies
 
-Cookies 是一种经典地存储简单 string 数据的方式。由 server 发给 client，然后 client 保存在本地，下次请求再传回 server。这样 server 可以管理帐户 session，追踪用户信息。
+Cookies 是一种经典地存储简单 string 数据的方式。可以由 server 发给 client，然后 client 保存在本地，下次请求再传回 server。这样 server 可以管理帐户 session，追踪用户信息。它可以由 client 本地设置，传给 server。
 
 <!--more-->
 
-它也可以用来存储纯客户端的数据，比如用户偏好。具体操作见 JS BOM 章节 Cookies 部分。
+以前也用它来存储纯客户端的数据，比如用户偏好。具体操作见 JS BOM 章节 Cookies 部分。
 
 优势：
 

@@ -46,6 +46,6 @@ my-lerna-repo/
 + 所有包使用指定依赖的同一个版本
 + 可以保障根目录下的依赖 up-to-date，比如借助自动化工具 GreenKeeper
 + 减少了每个包的依赖安装时间
-+ 减少需要的 storage 空间
++ 减少需要的存储空间
 
 Note that devDependencies providing "binary" executables that are used by npm scripts still need to be installed directly in each package where they're used.
