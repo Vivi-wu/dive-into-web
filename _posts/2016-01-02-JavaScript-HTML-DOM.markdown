@@ -189,6 +189,17 @@ _nodeType_ 也是只读的：Element, Attribute, Text, Comment, Document.
 1. 添加操作可以使用 `createElement(`tagname`)`, `createTextNode(`string`)`, `appendChild(`node`)`, `parentNode.insertBefore(`newNode, existingNode`)`
 2. 删除操作使用 `parent.removeChild(`child`)`。虽然删除元素如果不需要 referring 父元素的话会更好，但是 DOM 操作需要知道你想删掉的元素和它的父元素。常用的方法是 `child.parentNode.removeChild(`child`)`
 3. 替换操作使用 `parent.replaceChild(`newchild, oldchild`)`
+4. `ChildNode.remove()` 刪除元素所在的树结构
+
+```
+// html
+<div id="div-01">Here is div-01</div>
+<div id="div-02">Here is div-02</div>
+
+// js
+var el = document.getElementById('div-02');
+el.remove(); // Removes the div with the 'div-02' id
+```
 
 ### DocumentFragments
 

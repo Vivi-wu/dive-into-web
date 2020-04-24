@@ -17,6 +17,12 @@ var tpl = `<img src="${Logo}">`
 // js
 import Logo from 'PATH_TO_FILE/logo.jpg'
 ```
+或者
+```vue
+// pug模板
+img(src='~image/rules.png')
+// image是配置的webpack alias
+```
 
 2. vue单文件中style模块使用 sass 等语言编写时引用全局的 variable 配置文件的方法：
 

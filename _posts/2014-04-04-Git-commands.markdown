@@ -275,6 +275,12 @@ Move the current branch tip backward to commit and reset both the staging area a
 
 Reference logs, or "reflogs", 记录了分支和其他参考信息在本地仓库更新的时间。
 
+### 查看某一个版本的master分支代码
+
+Checking out Revision commitId (master)
+
+    git checkout -f commitId
+
 ## Git 文件状态
 
 Git 文件状态分为 untracked 和 tracked.

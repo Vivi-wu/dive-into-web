@@ -72,3 +72,5 @@ Currencies are represented both numerically and alphabetically, using either thr
     (1234.56).toLocaleString('en-US', { style: 'currency', currency: 'USD'}) // "$1,234.56" 负数 "-$1,234.56"
     (1234.56).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR'}) // "1 234,56 €" 负数 "-1 234,56 €"
     (1234.56).toLocaleString('en-IN', { style: 'currency', currency: 'INR'}) // "₹1,234.56" 负数 "-₹1,234.56"
+
+[维基百科可视化一览表](https://en.wikipedia.org/wiki/ISO_4217)，延伸阅读数字系统的小数点、分隔符[Digit grouping](https://en.wikipedia.org/wiki/Decimal_separator)。

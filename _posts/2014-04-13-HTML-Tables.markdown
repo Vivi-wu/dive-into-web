@@ -169,6 +169,8 @@ Use the CSS _border-spacing_ property to set the space between the cells. 设置
 
 3.单元格 列扩展 _colspan_ ：make a cell span more than one column
 
+其值为非负整数，默认为1.超过1000则认为无效，重置为1
+
 ```html
 <table>
   <tr>
@@ -196,6 +198,8 @@ Use the CSS _border-spacing_ property to set the space between the cells. 设置
 </table>
 
 4.单元格 行扩展 _rowspan_ ：make a cell span more than one row
+
+其值为非负整数。默认等于1。如果设为0，则将扩展至表格末尾区域。值超过65534将固定为65534
 
 ```html
 <table style="width:100%">
