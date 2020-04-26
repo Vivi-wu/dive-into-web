@@ -9,9 +9,104 @@ node -v
 ```
 偶数版本号的为稳定版
 
-### 异步写入文件
+命令行工具输入 `node`，进入 Node.js 环境。连续2次 Ctrl+C 退出 Node.js 环境。
 
-1. 覆盖式
+在命令行模式下运行 .js 文件和在 Node.js 环境下直接运行 JavaScript 代码展示效果不同。
+
+Node.js 环境每输入一行代码就执行一行（每行 JavaScript 代码的结果会自动打印出来），直接运行 JavaScript 文件，相当于一次性执行所有源代码，除非使用console打印，否则输出没有显示。
+
+<!--more-->
+
+### 在VS Code运行调试JS代码
+
+左侧边栏点击小虫子图标（调试并运行），在出现的侧边栏上方点击小齿轮图标（打开launch.json），修改 `"program": "${workspaceRoot}/hello.js"` 该属性值，表示运行当前目录下某文件。点击绿色小播放键图标（开始调试）。在“调试控制台”里可以看到输出结果。
+
+点击侧边栏上方最右小图标，可以调出“调试控制台”界面。
+
+在运行的 JS 文件左侧行号处，点击小红圆点，可设置断点。
+
+### 单线程执行
+
+Node.js不断执行响应事件的JavaScript函数，直到没有任何响应事件的函数可以执行时退出。
+
+通过调用 `process.nextTick()` 可以在下一次事件响应中执行相应代码。
+
+```bash
+> process.platform
+'win32'
+> process.arch
+'x64'
+> process.version
+'v12.14.0'
+
+```
+
+## 模块
+
+在Node环境中，一个.js文件就称之为一个模块（module）。使用模块的好处：提高了代码的可维护性，避免函数名和变量名冲突。
+
+Node.js 利用 JavaScript 的函数式编程的特性，使用闭包实现模块的隔离。
+
+模块输出： `module.exports = 变量名`
+
+Node 在加载js文件前先准备一个对象 `module`，并将其作为函数参数传入加载函数，
+
+模块引用： `var 变量名 = require('./文件A');`
+
+Node 保存了所有导入的 module，当我们用 `require()`获取module时，Node找到对应的module，把这个module的 exports 变量返回
+
+上面表示模块的相对路径，即在当前目录下的A文件。如果去掉 `./`，则依次在内置模块、全局模块和当前模块下查找A文件。
+
+Node.js内置的常用模块就是为了实现服务器程序的基本功能：接收网络请求，读写文件，处理二进制内容。
+
+## 内置对象
+
+JavaScript有且仅有一个全局对象，在Node.js环境中，这个对象叫 `global`.
+
+`process` 表示当前Node.js进程：可以用来查看当前系统信息，node版本
+
+### fs
+
+该模块为文件系统模块，同时通过了异步和同步的方法。
+
+因为JavaScript的单线程模型，执行IO操作时，使用异步方法的JavaScript代码无需等待，而是传入回调函数后，继续执行后续JavaScript代码.
+
+通过 `fs.stat(filepath, callback)` 可以获取文件的信息(大小、创建时间、修改时间等)。
+
+#### 同步读文件
+
+```js
+var fs = require('fs');
+var data = fs.readFileSync('sample.txt', 'utf-8');
+console.log(data);
+```
+
+因为函数直接返回结果，需要用 try...catch 捕获文件读取发生的错误.
+
+#### 异步读文件
+
+```js
+var fs = require('fs');
+
+fs.readFile('sample.txt', 'utf-8', function (err, data) {
+  if (err) {
+      console.log(err);
+  } else {
+      console.log(data);
+  }
+});
+```
+
+Node.js标准的回调函数：第一个参数代表错误信息，第二个参数代表结果。
+
+当正常读取时，err 参数为 `null`，data 参数为读取到的String。当读取发生错误时，err 参数代表一个错误对象，data 为 `undefined`.
+
+
+当读取二进制文件时，不传入文件编码（第二个参数）时，回调函数的 data 参数将返回一个 Buffer 对象。 Node.js 提供了Buffer对象和String互相转换的方法。
+
+Buffer对象可以和String作转换，
+
+#### 异步写入文件
 
 ```js
 var fs = require('fs');
@@ -29,3 +124,78 @@ fs.writeFile('./result.json', JSON.stringify(result), (err) => {
   }
 });
 ```
+
+第二个参数表示传入的数据, 如果其类型为 String，默认按 UTF-8 编码写入文本文件;如果传入的参数是 Buffer，则写入的是二进制文件.
+
+### stream
+
+该模块用来支持“流”这种数据结构。
+
+流的特点是数据是有序的，而且必须依次读取，或者依次写入，不能像Array那样随机定位。
+
+在 Node.js中，流是一个对象，通常是文件流。
+
+以流的形式读取文件，通过响应流的事件：data 事件表示流的数据已经可以读取了（该事件可以用有多次，每次传入的chunk是流的一部分），end 事件表示没有数据可以读取了，error 事件表示出错了。
+
+```js
+// 打开一个流:
+var rs = fs.createReadStream('sample.txt', 'utf-8');
+```
+以流的方式写入文件，通过调用 write() 方法，最后以 end() 结束。
+
+```js
+// 写入一个流
+var ws1 = fs.createWriteStream('output1.txt', 'utf-8');
+ws1.write('使用Stream写入文本数据...\n');
+ws1.write('END.');
+ws1.end();
+```
+
+通过 `pipe()` 方法把一个 Readable 文件流和另一个 Writable 文件流串起来，可实现复制文件内容（后者内容完全被覆盖）。
+
+### http
+
+该模块提供的 `request` 和 `response` 对象。前者的属性和方法可以拿到 HTTP 请求的信息，后者的方法可以把 HTTP 响应返回浏览器。
+
+#### path
+
+该模块可以用来方便地构建操作系统的文件路径。
+
+```js
+var path = require('path');
+// 解析当前目录:
+var workDir = path.resolve('.');
+// 拼接本地文件路径
+var filepath = path.join(workDir, 'index.html');
+// d:\xue_w\Documents\dive-into-web\index.html
+```
+
+### crypto
+
+Nodejs用C/C++实现通用的加密和哈希算法，通过 cypto 这个模块暴露为JavaScript接口提供，使用方便，运行速度快。
+
+crypto模块也可以处理数字证书，通常用在SSL连接。一般情况下，https连接只需要处理服务器端的单向认证，如无特殊需求（例如自己作为Root给客户发认证证书），建议用反向代理服务器如Nginx等Web服务器去处理证书。
+
+```js
+const crypto = require('crypto');
+// 如果要使用SHA1，把md5换成 SHA1 即可
+const hash = crypto.createHash('md5');
+
+// 可任意多次调用update()，默认输入字符串编码为UTF-8，也可以传入Buffer
+hash.update('Hello, world!');
+hash.update('Hello, nodejs!');
+
+console.log(hash.digest('hex')); // 7e1977739c748beac0c0fd14fd26a544
+```
+
+还可以使用更安全的 sha256、sha512。
+
+
+#### 对称加密算法 AES
+
+加解密使用同一个密钥，需要自己封装函数。加密结果通常有两种表示方法：hex 和 base64。当通信双方使用不同语言时，要确认双方是否遵循同样的AES算法，字符串密钥、IV是否相同，加密后的数据格式是否统一。
+
+
+#### 非对称加密算法 RSA
+
+由一个私钥和一个公钥构成的密钥对，通过私钥加密，公钥解密，或者通过公钥加密，私钥解密。
