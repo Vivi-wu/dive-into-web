@@ -19,7 +19,7 @@ Node.js 环境每输入一行代码就执行一行（每行 JavaScript 代码的
 
 ### 在VS Code运行调试JS代码
 
-左侧边栏点击小虫子图标（调试并运行），在出现的侧边栏上方点击小齿轮图标（打开launch.json），修改 `"program": "${workspaceRoot}/hello.js"` 该属性值，表示运行当前目录下某文件。点击绿色小播放键图标（开始调试）。在“调试控制台”里可以看到输出结果。
+左侧边栏点击小虫子图标（调试并运行），（当前目录不存在的情况下）点击“创建lanch.json文件”。在出现的侧边栏上方点击小齿轮图标（打开launch.json），修改 `"program": "${workspaceRoot}/hello.js"` 该属性值，表示运行当前目录下某文件。点击绿色小播放键图标（开始调试）。在“调试控制台”里可以看到输出结果。
 
 点击侧边栏上方最右小图标，可以调出“调试控制台”界面。
 
@@ -190,12 +190,62 @@ console.log(hash.digest('hex')); // 7e1977739c748beac0c0fd14fd26a544
 
 还可以使用更安全的 sha256、sha512。
 
-
 #### 对称加密算法 AES
 
 加解密使用同一个密钥，需要自己封装函数。加密结果通常有两种表示方法：hex 和 base64。当通信双方使用不同语言时，要确认双方是否遵循同样的AES算法，字符串密钥、IV是否相同，加密后的数据格式是否统一。
 
-
 #### 非对称加密算法 RSA
 
 由一个私钥和一个公钥构成的密钥对，通过私钥加密，公钥解密，或者通过公钥加密，私钥解密。
+
+## web开发框架
+
+Express 是第一代Node.js web框架，基于ES5的语法，通过回调实现异步代码。Express团队基于ES6重新编写了下一代框架，即koa1.目前，该团队已基于ES7编写了koa2，完全使用 Promise 配合 async 来实现异步。
+
+### koa2
+
+每收到一个http请求，koa就会调用通过 `app.use()` 注册的 async 函数，然后用await next()来调用下一个async函数。每个async函数称为 middleware，这些 middleware 可以组成处理链，依次完成相应的任务。
+
+注意：调用 app.use() 的顺序决定了 middleware 
+
+如果一个 middleware 没有调用 await next()，那么后续的middleware将不再执行。
+
+```js
+app.use(async (ctx, next) => {
+  if (await checkUserPermission(ctx)) {
+    await next();
+  } else {
+    // 用户权限校验不通过，则直接返回
+    ctx.response.status = 403;
+  }
+});
+```
+常用的middleware：
+
++ koa-router，负责处理URL映射的middleware
++ koa-bodyparser，解析原始request请求，然后，把解析后的参数，绑定到ctx.request.body中（不论Node.js提供的原始request对象，还是koa提供的request对象，都没提供解析request的body的功能）
+
+### 模板引擎
+
+基于模板，根据输入的数据，输出文本的一个组件。通常是输出HTML文本，也可以是Text，XML，Markdown等。
+
+通常需要具备的功能：
+
++ 对特殊字符进行转义，如 `<scrit>` 标签
++ 格式化，如货币、日期时间值展示
++ 支持简单的逻辑，如：条件判断、循环输出等
++ 模板继承
+
+### MVC
+
+最初接触web编程时学习的概念：Model-View-Controller，中文“模型-视图-控制器”。Controller负责业务逻辑，如：数据库操作，校验。View负责显示逻辑，替换变量输出用户最终看到的页面。Model是传给View的JS数据对象。
+
+### Sequelize数据库
+
+常见的付费数据库有Oracle、SQL Server；免费的有 MySQL、PostgreSQL、sqlite。其中MySQL普及率最高。
+
+访问MySQL是通过网络发送SQL命令给MySQL服务器。这个访问MySQL服务器的软件包通常称为 MySQL 驱动程序。MySQL官方提供了Java、.Net、Python、Node.js、C++和C的驱动程序，官方的 Node.js 驱动目前仅支持5.7以上版本。
+
+数据库每一行数据都可以用一个JavaScript对象表示，这就是传说中的ORM技术：Object-Relational Mapping，把关系数据库的表结构映射到对象上。
+
+Sequelize是Node.js的ORM框架

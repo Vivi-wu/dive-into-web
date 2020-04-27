@@ -1,0 +1,9 @@
+---
+title:  "ES新特性合集"
+category: JavaScript
+---
+
+## 异步函数
+
+由 async 标记的函数称为异步函数，在异步函数中，可以用 await 调用另一个异步函数。
+
