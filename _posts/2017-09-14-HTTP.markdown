@@ -48,23 +48,33 @@ HTTP/2 对消息头采用 HPACK算法（专为http2头部设计的压缩格式�
 
 HTTP/2设计本身允许非加密的 http 协议，但多数客户端开发者声明只支持通过 TLS 加密的h2协议，使得**经TLS加密的HTTP/2(即h2)**成为了**事实上的强制标准**。
 
-## web 缓存
+## Web 缓存
 
-对于前端开发者来说，我们主要跟浏览器中的缓存打交道。关于缓存资源的问题，都仅仅**针对GET请求**。而对于POST, DELETE, PUT这类行为性操作通常不做任何缓存。
+HTTP 的缓存行为由 request header 和 response header 组合起来控制的。理想情况下，web app 控制请求头，web server 控制响应头。
+
+### Request headers
+
+影响检测新鲜度的请求头，如 `If-None-Match`、 `If-Modified-Since` ，基于对缓存里当前值的理解，会自动添加到请求头里。因此保持 default 行为即可，浏览器会帮我们管理 http caching
+
+### Response headers
+
+
+
+对于前端开发者来说，关于缓存资源的问题，都仅仅**针对GET请求**。而对于POST, DELETE, PUT这类行为性操作通常不做任何缓存。
 
 HTTP通过缓存将服务器资源的副本保留一段时间，这段时间称为**新鲜度限值**。这在一段时间内请求相同资源不会再通过服务器。
 
-HTTP协议中 `Cache-Control` 和 `Expires`可以用来设置新鲜度的限值，前者是 **HTTP1.1** 中新增的响应头，后者是 **HTTP1.0** 中的响应头。二者所做的事时都是相同的，但由于Cache-Control使用的是**相对时间**，而Expires可能存在客户端与服务器端时间不一样的问题，所以 **Cache-Control更为准确**。
+HTTP协议中 `Cache-Control` 和 `Expires` 可以用来设置新鲜度的限值，前者是 **HTTP1.1** 中新增的响应头，后者是 **HTTP1.0** 中的响应头。二者所做的事时都是相同的，但由于 Cache-Control 使用的是**相对时间**，而 Expires 可能存在客户端与服务器端时间不一样的问题，所以 **Cache-Control更为准确**。
 
-Cache-Control 不仅仅可以在**响应头**中设置，还可以在**请求头**中设置。
+Cache-Control 不仅仅可以在**响应头**中设置，还可以在**请求头**中设置。可能设置的属性值有：
 
-可能设置的属性值有：
++ max-age（单位为s）指定设置缓存最大的有效时间，定义的是时间长短。当浏览器向服务器发送请求后，在 max-age 这段时间里浏览器就不会再向服务器发送请求了。最大值 31536000，即1年。针对含有版本信息的 URL
++ public 指定响应可以在代理缓存中被缓存，于是可以被多用户共享。如果没有明确指定 private，则默认为 public。
++ private 浏览器可以缓存文件，但是中间缓存不行。对一些用户信息敏感的资源，通常需要设置为 private。
++ no-cache 表示必须先与服务器确认资源是否被更改过（依靠 If-None-Match 和 Etag），然后再决定是否使用本地缓存。针对 unversioned URLs
++ no-store 告诉浏览器和其他中间缓存（如CDN）不存储任何版本的文件。也就是说每次用户请求资源时，都会向服务器发送一个请求，每次都会下载完整的资源。通常用于机密性资源。
 
-+ max-age（单位为s）指定设置缓存最大的有效时间，定义的是时间长短。当浏览器向服务器发送请求后，在max-age这段时间里浏览器就不会再向服务器发送请求了。
-+ public 指定响应可以在代理缓存中被缓存，于是可以被多用户共享。如果没有明确指定private，则默认为public。
-+ private 响应只能在私有缓存中被缓存，不能放在代理缓存上。对一些用户信息敏感的资源，通常需要设置为private。
-+ no-cache 表示必须先与服务器确认资源是否被更改过（依靠 If-None-Match 和 Etag），然后再决定是否使用本地缓存。
-+ no-store 绝对禁止缓存任何资源，也就是说每次用户请求资源时，都会向服务器发送一个请求，每次都会下载完整的资源。通常用于机密性资源。
+支持通过逗号分隔的多个值。
 
 ### 如何更新缓存
 
@@ -74,6 +84,10 @@ Cache-Control 不仅仅可以在**响应头**中设置，还可以在**请求头
 
 如果资源没有发生变化，缓存只需要获取新的响应头，和一个新的过期时间，对缓存中的资源过期时间进行更新即可。 HTTP1.1 推荐使用的验证方式是 `If-None-Match` / `Etag` 对应 Request Headers 和 Response Headers，在 HTTP1.0 中则使用 `If-Modified-Since` / `Last-Modified`.
 
+Etag：当浏览器找到一个已过期的缓存响应时，它可以向服务器发送一个token（通常是文件内容的hash）以检测文件是否已更改。如果服务器返回相同的token，则说明文件相同，则无需下载。
+
+Last-Modified：作用同 Etag，只不过是 time-based 策略决定资源是否改变，而后者是 content-base 策略。推荐使用后者，Etag 更为准确。
+
 当用于更新缓存时，cache 使用已缓存message的 `Last-Modified` 字段的值生成 `If-Modified-Since` 字段的值。
 
 以下情况**必须忽略** `If-Modified-Since`：
@@ -81,6 +95,13 @@ Cache-Control 不仅仅可以在**响应头**中设置，还可以在**请求头
 + 如果请求中包含一个 `If-None-Match`
 + 如果 If-Modified-Since = HTTP-date 中，值不是一个有效的 HTTP-date
 + 如果请求既不是 GET 也不是 HEAD
+
+资源一旦被浏览器缓存，浏览器就会一直使用 cached 版本的资源，除非过期，或者用户主动清除了浏览器缓存。因此想要强制用户下载最新资源，通过给文件名加hash或版本号，改变资源 URL，实现通知浏览器更新已缓存的文件。
+
+#### 举例
+
+浏览器向服务器请求文件A，请求头包含 `If-None-Match`，告诉 server，只有在文件的 ETag 与浏览器的 If-None-Match 值不匹配时才返回完整文件。
+当两个值相同时，浏览器接到 304 Not Modified 响应。
 
 ### Conditional request
 

@@ -141,9 +141,7 @@ Comet连接必须定期发一些ping数据表示连接“正常工作”。
 
 ## 离线 Web 应用
 
-application cache 已经从 Web standards中移除了。一些浏览器还支持，但已经在抛弃的日程中。使用 Service Workers 作为替代。
-
-借助缓存，不仅可以缓存访问过的页面，还可以缓存不曾访问过的页面。
+使用 Service Workers 不仅可以缓存访问过的页面，还可以缓存不曾访问过的页面。具体参考 PWA 章节。
 
 ## GlobalEventHandlers.onerror
 

@@ -15,7 +15,7 @@ Web 应用是运行在浏览器里的代码。其优势是可以使用一套代�
 
 [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) 规范和接口一览。
 
-![224dbf000cd541d7ba21df09d367566f__20200514171839.png](http://tech.yuceyi.com/upload/224dbf000cd541d7ba21df09d367566f__20200514171839.png) 
+![224dbf000cd541d7ba21df09d367566f__20200514171839.png](http://tech.yuceyi.com/upload/224dbf000cd541d7ba21df09d367566f__20200514171839.png)
 
 可以看到尽管目前一些功能仍然在 Web 应用的能力范围之外，但是新的即将到来的 APIs 将改变和扩展 Web 应用的能力。
 
@@ -40,7 +40,7 @@ Web 应用是运行在浏览器里的代码。其优势是可以使用一套代�
 
 当 PWA 满足某些条件时，浏览器会提示用户可以安装。准确的说是 Add to Home Screen(添加到主屏)。
 
-![f0aa5e4b11184840a5a63d5d98589dd0__15895132293291.png](http://tech.yuceyi.com/upload/f0aa5e4b11184840a5a63d5d98589dd0__15895132293291.png) 
+![f0aa5e4b11184840a5a63d5d98589dd0__15895132293291.png](http://tech.yuceyi.com/upload/f0aa5e4b11184840a5a63d5d98589dd0__15895132293291.png)
 
 如：浏览器地址栏里出现一个 Install 按钮。
 
@@ -59,16 +59,21 @@ Web 应用是运行在浏览器里的代码。其优势是可以使用一套代�
 + `prefer_related_applications` 要么不写，要么置为 false
 
 5.注册一个包含 `fetch` 处理函数的 service worker
-	
+
 其他浏览器的安装标准可能有细微的不同，点击 [查看完整细节](https://web.dev/install-criteria/)
 
 接下来，让我们动手实践一下。
 
 ### 添加 manifest 文件
 
-web app manifest 是一个 JSON 文件，放在网站代码根目录下。它告诉浏览器当 PWA 安装到用户桌面或移动设备时应该如何表现。 
+web app manifest 是一个 JSON 文件，放在网站代码根目录下。它告诉浏览器当 PWA 安装到用户桌面或移动设备时应该如何表现。
 
 具体操作见这篇 [Add a web app manifest](https://web.dev/add-manifest/) 文章。
+
+`theme_color`，在 `display:minimal-ui` 模式下，该颜色显示在Android手机头部地址栏及系统顶部信息栏；在 standalone 模式下，该颜色显示在Android手机系统顶部信息栏。iOS不生效
+`background_color`，该颜色在Android手机 PWA启动画面上生效。iOS不生效
+
+Chrome 会以 manifest 文件里的 `name`，`background_color`，`icons` 自动创建一个启动画面，Android 上可以看到。iOS启动是白屏。
 
 检测文件配置正确，打开浏览器开发者工具-》Application-》Manifest
 
@@ -184,8 +189,8 @@ seller H5应用是使用 Create React App 创建的。根据 [create react app](
 
 ```bash
 The build folder is ready to be deployed.
-You may serve it with a static server: 
-  npm install -g serve 
+You may serve it with a static server:
+  npm install -g serve
   serve -s build
 ```
 因为前端统一的线上自动化构建对于的目录是 dist，所以在项目根目录下运行： `serve -s dist`
@@ -194,9 +199,9 @@ You may serve it with a static server:
 
 上文也提到触发 beforeinstallprompt 事件的第一条件是，你还没有安装过相应的 pwa。安装过一次后，就不再触发 beforeinstallprompt 事件。想要重新开启，先卸载对应的应用。
 
-![bd7f3602a6f4466286e6561f78d997bf__15893703058802.png](http://tech.yuceyi.com/upload/bd7f3602a6f4466286e6561f78d997bf__15893703058802.png) 
+![bd7f3602a6f4466286e6561f78d997bf__15893703058802.png](http://tech.yuceyi.com/upload/bd7f3602a6f4466286e6561f78d997bf__15893703058802.png)
 
-![c21a12fc260e4dcc933bb588ba4652f2__15893704447605.png](http://tech.yuceyi.com/upload/c21a12fc260e4dcc933bb588ba4652f2__15893704447605.png) 
+![c21a12fc260e4dcc933bb588ba4652f2__15893704447605.png](http://tech.yuceyi.com/upload/c21a12fc260e4dcc933bb588ba4652f2__15893704447605.png)
 
 
 
