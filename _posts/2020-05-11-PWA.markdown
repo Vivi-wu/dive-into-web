@@ -1,0 +1,203 @@
+---
+title:  "PWA"
+category: Other
+---
+
+互联网是一个不可思议的平台。它横跨不同设备和操作系统。其与生俱来的可链接性，使得它可以被搜索，从任何地方分享给任何人。
+
+# What are PWA(Progressive Web Apps)?
+
+Web 应用是运行在浏览器里的代码。其优势是可以使用一套代码在任何设备、任何地方，触达任何人。无论何时访问网站，它的内容都可以是最新的。
+
+原生应用以独立的体验在用户设备上启动，可以从本地文件系统读写文件，通过USB、蓝牙等访问与设备连接的硬件，甚至同设备上存储的数据交互，如：联系人、日历事件。原生应用就像是其所运行的设备的一部分。
+
+如果从功能和覆盖范围两个维度看，原生应用代表了最佳功能，而 Web 应用代表了最好的覆盖范围。
+
+[Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) 规范和接口一览。
+
+![224dbf000cd541d7ba21df09d367566f__20200514171839.png](http://tech.yuceyi.com/upload/224dbf000cd541d7ba21df09d367566f__20200514171839.png) 
+
+可以看到尽管目前一些功能仍然在 Web 应用的能力范围之外，但是新的即将到来的 APIs 将改变和扩展 Web 应用的能力。
+
+渐进式 Web 应用程序（PWA）是使用了现代 APIs 构建和增强，提供类似原生应用的功能性、可靠性和可安装性，同时保留了Web应用的最佳覆盖范围。PWA本质上就是Web应用。通过使用 service workers和一个web app manifest 使得一个Web应用变得可靠、可安装。即使新功能不可用，用户仍然获得核心体验。
+
+## PWA最佳实现核心清单
+
+1. [fast load time](https://web.dev/fast/)
+2. [跨浏览器](https://resilientwebdesign.com/)
+首先分析出核心功能，以尽可能简单的技术使这些功能可用。
+通过[跨浏览器功能检测](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing/Feature_detection)，可以为最广泛的潜在用户提供可用的体验
+3. 自适应各种屏幕尺寸
+移动端设备需要开发团队集中在应用里最重要的数据和行为上。关于响应式设计有 [content-first design](https://uxdesign.cc/why-you-should-design-the-content-first-for-better-experiences-374f4ba1fe3c) 和 [content-out responsive layouts](https://alistapart.com/article/content-out-layout/)
+4. [Custom Offline Page](https://googlechrome.github.io/samples/service-worker/custom-offline-page/)
+无论是用户导航至一个没有缓存的url，还是尝试使用一个需要网络连接的功能，不要仅仅扔一个浏览器的默认离线页，提供一个类似原生的体验。
+5. [Installable](https://web.dev/customize-install/)
+安装 PWA 使它看起来、感觉上、表现上像其他安装的app。我们为什么想要用户安装我们的Web应用程序？与我们希望用户从任何应用商店中安装原生应用的原因是一样的。提供这样的体验带来更好的参与体验，从而获得更频繁的访问、更长的留存时间、更高频的互动。
+
+前三点同样适用于H5最佳实践，因此让我们重点来看后两点。
+
+## 怎样让一个PWA可安装？
+
+当 PWA 满足某些条件时，浏览器会提示用户可以安装。准确的说是 Add to Home Screen(添加到主屏)。
+
+![f0aa5e4b11184840a5a63d5d98589dd0__15895132293291.png](http://tech.yuceyi.com/upload/f0aa5e4b11184840a5a63d5d98589dd0__15895132293291.png) 
+
+如：浏览器地址栏里出现一个 Install 按钮。
+
+当满足标准，浏览器会触发一个 `beforeinstallprompt` 事件，通过绑定事件处理函数可以直接从 PWA 开启 install flow。
+
+以Chrome为例，需满足条件：
+1. web app 还未安装
+2.满足用户参与的启发式的方法
+3.通过 https 访问（即满足 secure context。本地开发 localhost 也认为是安全的context）
+4.有一个 web app manifest 文件，包含以下核心属性：
+
++ `name` or `short_name`
++ 必须有一个192px 和一个 512px的 icon
++ `start_url`
++ `display` 值必须是 fullscreen, standalone, 或 minimal-ui 其中之一
++ `prefer_related_applications` 要么不写，要么置为 false
+
+5.注册一个包含 `fetch` 处理函数的 service worker
+	
+其他浏览器的安装标准可能有细微的不同，点击 [查看完整细节](https://web.dev/install-criteria/)
+
+接下来，让我们动手实践一下。
+
+### 添加 manifest 文件
+
+web app manifest 是一个 JSON 文件，放在网站代码根目录下。它告诉浏览器当 PWA 安装到用户桌面或移动设备时应该如何表现。 
+
+具体操作见这篇 [Add a web app manifest](https://web.dev/add-manifest/) 文章。
+
+检测文件配置正确，打开浏览器开发者工具-》Application-》Manifest
+
+桌面 Chrome 的 manifest 文件不会自动更新。Android Chrome 在 PWA 启动时，会根据实时获取的 manifest 比对当前安装的 manifest。如有更新，则当设备连接wifi，会排队和更新。
+
+### 提供定制化的 install 体验
+
+为了推广安装 PWA，可以在用户 UI 里提示这个 Web app 是可安装的，然后提供快捷方式（如，一个按钮）直接在 UI 里开启/弹出 PWA 安装，方便用户操作。
+
+更多推广安装 PWA 的模式作为延伸阅读，可参看这篇 [Patterns for promoting PWA installation](https://web.dev/promote-install/) 文章。
+
+#### 如何开启安装？
+
+:x: iOS（Safari、Chrome）
+:white_check_mark: Android Chome，PC Chrome
+
+原理是当 PWA 满足可安装条件时，浏览器触发 `beforeinstallprompt` 事件，保留该事件的 reference，更新 UI 告知用户可安装。当用户点击 UI 提供的触发安装流程的按钮时，调用该事件的 `prompt()` 方法，显示安装对话框，让用户确认安装或取消。
+
+代码可参考这篇文章 [Provide a custom install experience](https://web.dev/customize-install/) 。
+
+比较遗憾的是 `beforeinstallprompt` 这个 event API 目前浏览器支撑率只有约**66%**，基本只有谷歌浏览器在支持。
+
+![22760fd4f2154535b60cbdafaf7b8bf6__20200511153838.png](http://tech.yuceyi.com/upload/22760fd4f2154535b60cbdafaf7b8bf6__20200511153838.png) 
+
+目前 m 站的做法是检测 UA 是否为 Android Chrome，是的话在头部导航栏显示一个手机图标，用户点击后页面刷新为引导图片，提示用户使用浏览器菜单栏里的“添加到主屏幕”功能。
+
+```js
+const show_phone_icon = /android/.test(ua) && /chrome\/([\d.]+)/.test(ua) && !/huaweibrowser\/([\d.]+)/.test(ua)
+```
+
+[这里](https://web.dev/codelab-make-installable/) 有一个在线示例，大家可用编辑代码感受下谷歌所提倡的“个性化的安装体验”具体是怎样的。
+
+#### 如何检测安装成功？
+
+:x: iOS Safari
+:white_check_mark: Android Chrome，PC Chrome
+
+根据上文，通过 beforeinstallprompt 事件的 `userChoice` 属性我们可以知道用户是否通过 UI 安装了 PWA。但是如果用户是从地址栏或者其他浏览器组件安装的，这个属性就无济于事了。因此谷歌建议侦听 `appinstalled` 事件。
+
+不论你通过什么机制安装的PWA，当 PWA 安装成功后，都会触发这个事件。
+
+![7b16e7084c1e4616aa3f1395dd870a9b__15891839396254.png](http://tech.yuceyi.com/upload/7b16e7084c1e4616aa3f1395dd870a9b__15891839396254.png) 
+
+但是很遗憾，`appinstalled` API 的支持率也只有 **65%**，而且 MDN 提醒该功能随时可能被移除。
+
+#### 如何检测PWA通过什么方式启动？
+
+:white_check_mark: iOS Safari，Android Chrome
+
+通过 CSS 媒体查询检测 `display-mode`的值，可以根据 app 启动的方式做个性化显示。
+
+```css
+@media all and (display-mode: standalone) {
+  body {
+    background-color: yellow;
+  }
+}
+```
+
+js 里通过 `matchMedia` 检测 `display-mode` 媒体，其结果 matches 返回一个Boolean，可用来记录用户是如何启动你的 PWA。
+
+```js
+window.addEventListener('load', () => {
+  if (matchMedia('(display-mode: standalone)').matches) {
+    alert('Launched: Installed');
+  } else {
+    alert('Launched: Browser Tab');
+  }
+});
+```
+
+题外话：iOS PWA 页面不支持下拉刷新，每次都要关掉 app 再打开。
+
+## 如何提供一个离线页面？
+
+
+
+## 卖家pwa方案
+
+1. 原h5登录、注册页直接复用
+2. 需要调整url：2级域名才支持https: seller.clubfactory.com/pwa/login.html
+3. 保持登录状态？原来是1天失效，c端设置很长的过期时间
+4. 一个巨大的spa？是的
+5. 开发框架（提效）？直接配置的webpack，create-react-app本身开启pwa，最新版本再学习！
+
+### 可安装
+
+发现c端pwa icon显示不出来，他们切cdn的锅。他们配置也有问题，flipkart一样的问题。twitter是pwa模范生。
+-》我们基于create-react-app开发的h5没有这个问题
+让用户直接使用Safari浏览器安装
+
+iOS
++ Safari里面，选中“添加到主屏幕”即可
++ Chrome 没有此选项，Flipkart提示：click ： then“Add to Home screen” from browser menu to add Flipkart shortcut for easy access
+
+Android
++ Chrome 浏览器右上角点击三个小圆点，出现的菜单里有“添加到主屏幕”
++ 可以利用 `appinstalled` 事件做一些效果
+
+### 本地调试安装体验流程
+
+:white_check_mark: PC Chrome
+
+几点说明：
+1.应用需要注册 serviceWorker
+2.只有直接访问 localhost 才支持 serviceWorker
+
+seller H5应用是使用 Create React App 创建的。根据 [create react app](https://create-react-app.dev/docs/making-a-progressive-web-app/) 官方文档：
+1.只有production环境开启serviceWorker
+2.如果需要本地测试离线服务，先用 `npm run build` 本地构建，然后从构建好的目录下使用标准的http server启动页面
+
+实际上构建后之后，终端里可以看到下文
+
+```bash
+The build folder is ready to be deployed.
+You may serve it with a static server: 
+  npm install -g serve 
+  serve -s build
+```
+因为前端统一的线上自动化构建对于的目录是 dist，所以在项目根目录下运行： `serve -s dist`
+
+#### PC端卸载PWA
+
+上文也提到触发 beforeinstallprompt 事件的第一条件是，你还没有安装过相应的 pwa。安装过一次后，就不再触发 beforeinstallprompt 事件。想要重新开启，先卸载对应的应用。
+
+![bd7f3602a6f4466286e6561f78d997bf__15893703058802.png](http://tech.yuceyi.com/upload/bd7f3602a6f4466286e6561f78d997bf__15893703058802.png) 
+
+![c21a12fc260e4dcc933bb588ba4652f2__15893704447605.png](http://tech.yuceyi.com/upload/c21a12fc260e4dcc933bb588ba4652f2__15893704447605.png) 
+
+
+
+### react router的问题

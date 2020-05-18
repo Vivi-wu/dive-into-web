@@ -39,3 +39,6 @@ Additionally, arbitrary scripts can be executed by running `npm run-script <stag
     node -v // v12.14.1
     npm -v  // 6.13.4
 
+## npx
+
+从npm 5.2.0 开始，自动安装了npx。npx 主要用于命令行的寻址等辅助功能上，比如好处就是避免安装全局命令
