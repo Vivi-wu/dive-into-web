@@ -48,7 +48,7 @@ HTTP/2 对消息头采用 HPACK算法（专为http2头部设计的压缩格式�
 
 HTTP/2设计本身允许非加密的 http 协议，但多数客户端开发者声明只支持通过 TLS 加密的h2协议，使得**经TLS加密的HTTP/2(即h2)**成为了**事实上的强制标准**。
 
-## Web 缓存
+## HTTP Cache
 
 HTTP 的缓存行为由 request header 和 response header 组合起来控制的。理想情况下，web app 控制请求头，web server 控制响应头。
 
@@ -57,8 +57,6 @@ HTTP 的缓存行为由 request header 和 response header 组合起来控制的
 影响检测新鲜度的请求头，如 `If-None-Match`、 `If-Modified-Since` ，基于对缓存里当前值的理解，会自动添加到请求头里。因此保持 default 行为即可，浏览器会帮我们管理 http caching
 
 ### Response headers
-
-
 
 对于前端开发者来说，关于缓存资源的问题，都仅仅**针对GET请求**。而对于POST, DELETE, PUT这类行为性操作通常不做任何缓存。
 

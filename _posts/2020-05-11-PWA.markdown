@@ -154,7 +154,7 @@ window.addEventListener('load', () => {
 ## 卖家pwa方案
 
 1. 原h5登录、注册页直接复用
-2. 需要调整url：2级域名才支持https: seller.clubfactory.com/pwa/login.html
+2. 需要调整url：2级域名才支持 https: m-seller.clubfactory.com/login.html
 3. 保持登录状态？原来是1天失效，c端设置很长的过期时间
 4. 一个巨大的spa？是的
 5. 开发框架（提效）？直接配置的webpack，create-react-app本身开启pwa，最新版本再学习！
@@ -202,7 +202,5 @@ You may serve it with a static server:
 ![bd7f3602a6f4466286e6561f78d997bf__15893703058802.png](http://tech.yuceyi.com/upload/bd7f3602a6f4466286e6561f78d997bf__15893703058802.png)
 
 ![c21a12fc260e4dcc933bb588ba4652f2__15893704447605.png](http://tech.yuceyi.com/upload/c21a12fc260e4dcc933bb588ba4652f2__15893704447605.png)
-
-
 
 ### react router的问题
