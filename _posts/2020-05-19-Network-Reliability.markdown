@@ -92,7 +92,7 @@ category: Other
 2. freshness 优于 reliability 时，用 Network-first 策略。比如一个频繁更新的文章的内容。这种策略的好处是即使离线，仍然能够 fall back 一些东西。
 3. 仅在你知道资源不太会改变的情况下使用 cache-first 策略，因为一个entry一旦被缓存，永远不更新。URL 最好包含版本信息。
 
-## create react app
+## Workbox
 
 [Workbox webpack Plugins](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) 提供了2种插件： `GenerateSW` 和 `InjectManifest`，create-react-app 用的是前者（构建是帮你创建一个service worker文件，并添加到 webpack 的资源管道种），m 站用的是后者（生成要预缓存的 URL 列表，并将该预缓存清单添加到已有的 service-worke.js 文件中）。
 

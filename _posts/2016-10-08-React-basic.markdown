@@ -2,44 +2,43 @@
 title:  "React.js 入门（一）"
 category: JavaScript
 ---
-官网自述 React 是为了解决一个问题而生：创建数据随时更新的大型应用。
+对已有网站添加 React 以实现动态组件最简单的方式是，以 `<script>` 标签引入，加上可选的 JSX。
+
+随着你的应用不断增长变复杂，为了处理一些如：大量的文件、组件，使用npm上第三方库，提前检测语法/代码错误，热更新CSS/JS，优化打包文件等，可以引入官方建议的 [toolchain](https://reactjs.org/docs/create-a-new-react-app.html#recommended-toolchains)。
 
 React 本质就是写一些可重用的组件，React 组件是一些操作 `props` 和 `state` 的函数。
 
     UI = render(data)
 
-此外按官网说法，React 直接从 JS 代码生成 HTML 和组件树，在网络环境差的情况下，从加载 JS 到生成页面这段时间的白屏问题不可避免。
+React 是 one-way data flow（单选数据流）。
 
 <!--more-->
 
-既然是以数据为重，首先介绍 React 中如何展示数据。
+任何前端框架最终都要输出页面，首先介绍 React 中用于渲染的重要概念。
 
 ## JSX
 
-React 中使用 JSX 创建树节点，当然 JSX is optional and **not required** to use React。
+它是 JavaScript 语法的扩展。
+
+一个事实：渲染逻辑天然地与UI逻辑耦合。（比如：在 UI 中绑定事件、在某些时刻状态发生变化时需要通知到 UI，以及需要在 UI 中展示准备好的数据。）
+
+官方建议在 React 中使用 JSX 创建树节点（描述 UI），在写 JS 代码时提供视觉上的辅助，易于阅读，同时允许 React 显示更多有用的报错和warning信息。
+
+当然 JSX is optional。
+
+任何东西在渲染前都会转为 string，阻止 XSS，所以在 JSX 中插入用户输入是安全的。
 
 ```js
 <HelloMessage name="John" />
 <div>Hello {this.props.name}</div>
 ```
 
-JSX 作为 JS 语法的扩展让我们能使用 HTML 的语法创建 JavaScript objects。
-
-其他优点如：比起 function calls 和 object literals，JSX 类似 XML 的开闭标签，使得大型的树结构易于阅读。
-
-React JSX code 可以写在单独的文件里，通过
-
-    <script type="text/babel" src="xx.js"></script>
-
-方式引用。注意这里 _type_ 特性的值。
+经过 Babel 编译后，JSX 表达式变成了常规的 JS 函数调用（`React.createElement()`），创建了一个 JS 对象，用于描述渲染内容的 React elements。
 
 ### 用法
 
-+ HTML 标签使用 lower case 书写
-+ React component 使用**首字母大写的驼峰**书写标记，We capitalize custom components to differentiate them from regular HTML elements.
-
-    那些看起来像（上面也称之为）HTML tag 的标记**并非真正的** DOM 节点; 它们是 React 组件的实例，You can think of these as markers or pieces of data that React knows how to handle. 你可以把它们想象成是 React 知道如何处理的一些标记或数据。
-
++ 为了便于阅读，将 JSX 拆分为多行书写。同时建议将内容包裹在**括号** `()` 中，避免代码末尾自动插入分号。
++ React DOM 使用 camelCase（小驼峰命名）来定义属性的名称，class 变为 className
 + 组件名必须以变量形式声明，如下：
 
     var Nav;
@@ -64,9 +63,10 @@ React JSX code 可以写在单独的文件里，通过
   MyFormComponent.Input = React.createClass({ ... });
   ```
 
-+ 使用 JS 表达式作为 attribute 值的时候，需要使用大括号 `{ expression }` 包裹，代替一般情况下使用的双引号 `"value"`。
++ 大括号 `{ expression }` 指定任何有效的 JavaScript 表达式作为属性值
++ 双引号 `"value"`，指定 string literal 字符串字面量作为属性值
 + 缺省特性值时，JSX 认为它就是 `true`。因此，为了明确指定某个 attribute 是 `false`，要么不写这个特性，要么使用大括号赋值，如： `disabled={false}`
-+ 注释标记跟 JS 的 comment 一样，有单行和多行注释。需要注意的是，当你为一个 tag 的子区域写注释时，需要使用大括号将这条注释括起来。
++ 注释标记跟 JS 的 comment 一样，有单行和多行注释。当你为一个 tag 的子区域写注释时，使用大括号将这条注释括起来。
 
   ```js
   var content = (
@@ -83,11 +83,22 @@ React JSX code 可以写在单独的文件里，通过
   ```
 
 + React 会在生成的 raw HTML 中自动插入类似 `<!-- react-text: 4 --><!-- /react-text -->` 的注释，据说是它用来识别如何在 DOM 添加和替换节点。
-+ React **不会渲染原生 HTML 元素中不存在的特性**，除非以 `data-` 作为其前缀。而以 `aria-` 为前缀的 Web 可用性特性则可以被正确地渲染。
++ React **不会渲染原生 HTML 元素中不存在的特性**，除非以 `data-` 作为其前缀。
++ 支持以 `aria-` 为前缀的 Web 可用性特性，保持 kebab-case 的书写
 
 更多用法参考这里：[JSX 语法](https://facebook.github.io/react/docs/jsx-in-depth.html)
 
+### 条件渲染
+
+通过 `expression && element` 在 JSX 中实现 inline 的 if 渲染组件。因为 false && expression 结果是 false，React 会忽略。
+
+通过 `condition ? elementA : elementA` 在 JSX 中实现 inline 的 if-else 渲染组件。
+
+阻止组件渲染，從組件的 render 方法 return null。这不影响组件的生命周期方法执行。
+
 ### JSX Spread Attributes 属性的传递
+
+当 React 元素为用户自定义组件时，它会将 JSX 所接收的属性（attributes）转换为单个对象传递给组件，这个对象被称之为 “props”。
 
 当组件的所有属性 props 可预知时，可以把它们一一写在组件上传递给子组件。但有时不能预知全部属性，而 props 作为 immutable 的对象，不要给对象写属性如：`component.props.foo = x;`
 
@@ -147,6 +158,51 @@ function FancyCheckbox(props) {
 }
 ```
 
+## React Elements
+
+```js
+const element = <h1>Hello, world</h1>;
+```
+
+React 元素可以：
+
+1. 在 `if` 声明 `for` 循环里使用
+2. 赋值给变量
+3. 作为函数入参
+4. 作为函数返回
+
+以 React 构建的应用只有一个 root DOM 节点。对已有的项目接入 React，则可有多个 isolated 的 root DOM 节点。
+
+React 原生是 immutable，一旦创建，不能改变它的子元素或属性。唯一的方式是创建一个新的元素，并传给 `ReactDOM.render()`
+
+React DOM 会将元素和它的子元素与它们之前的状态进行比较，只应用与之前相比DOM上必要的变化。
+
+## Components
+
+从概念上讲，组件类似 JS 函数，接受任意输入（props），返回 React elements（将出现在屏幕上的东西）
+
+以函数形式、class 定义组件：
+
+```js
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+
+const element = <Welcome name="Sara" />;
+```
+
++ React component **首字母大写的驼峰**标记，React 会将以小写字母开头的组件视为原生 DOM 标签。
+
+    那些看起来像（上面也称之为）HTML tag 的标记**并非真正的** DOM 节点; 它们是 React 组件的实例，你可以把它们想象成是 React 知道如何处理的一些标记或数据。
++ 建议从组件自身的角度命名 props，而不是依赖于调用组件的上下文命名。
++ 所有 React 组件必须像 pure 函数，不直接改变它的输入（props）
+
 ## 实践中遇到的问题
 
 ### 输出 HTML tag 而不是 string
@@ -191,17 +247,9 @@ class ClassComponent extends Component {
   }
 }
 ```
-
-You must use this.setState() to modify an array，操作state中的数组
-
 [用react开发一个井字游戏教程](https://zh-hans.reactjs.org/tutorial/tutorial.html)
+
 每个组件都是封装好的，并且可以单独运行。
-
-使用react可以将组件（一些简短、独立的代码片段）合成（构建）复杂的UI界面。
-
-使用JSX通过render函数返回一种对渲染内容的轻量级描述（react元素）。
-
-每一个 React 元素都是一个 JavaScript 对象，你可以在你的程序中把保存在变量中或者作为参数传递。
 
 在 React 应用中，数据通过 props 的传递，从父组件流向子组件。
 
@@ -219,57 +267,9 @@ You must use this.setState() to modify an array，操作state中的数组
 当你遇到需要同时获取多个子组件数据，或者两个组件之间需要相互通讯的情况时，需要把子组件的 state 数据提升至其共同的父组件当中保存。
 之后父组件可以通过 props 将状态数据传递到子组件当中。这样应用当中所有组件的状态数据就能够更方便地同步共享了。
 
-React 元素被视为 JavaScript 一等公民中的对象（first-class JavaScript objects），因此我们可以把 React 元素在应用程序中当作参数来传递。在 React 中，我们还可以使用 React 元素的数组来渲染多个元素
-
-每次只要你构建动态列表的时候，都要指定一个合适的 key.
-
-如果你没有指定任何 key，React 会发出警告，并且会把数组的索引当作默认的 key。但是如果想要对列表进行重新排序、新增、删除操作时，把数组索引作为 key 是有问题的。
-
-组件的 key 值并不需要在全局都保证唯一，只需要在当前的同一级元素（兄弟节点）之间保证唯一即可。
-
-key 应该在数组的上下文中被指定。
-
-### 代码规范
-
-属性命名规范：
-- 建议从组件自身的角度命名 props，而不是依赖于调用组件的上下文命名。
-
-React 认为渲染逻辑本质上与其他 UI 逻辑内在耦合，比如，在 UI 中需要绑定处理事件、在某些时刻状态发生变化时需要通知到 UI，以及需要在 UI 中展示准备好的数据。
-
-React 并没有采用将标记与逻辑进行分离到不同文件这种人为地分离方式。
-
-在 JavaScript 代码中将 JSX 和 UI 放在一起时，会在视觉上有辅助作用。它还可以使 React 显示更多有用的错误和警告消息。
-
-JSX 语法上更接近 JavaScript 而不是 HTML，所以 React DOM 使用 camelCase（小驼峰命名）来定义属性的名称
-
-在 JSX 语法中，你可以在**大括号**内放置任何有效的 JavaScript 表达式
-为了便于阅读，我们会将 JSX 拆分为多行。同时，我们建议将内容包裹在**括号**中
-
-引号，字符串字面量。
-大括号，js表达式。
-
-React 元素是创建开销极小的普通对象，是构成 React 应用的最小砖块。
-
-React DOM 会将元素和它的子元素与它们之前的状态进行比较，并只会进行必要的更新来使 DOM 达到预期的状态。
-
-当 React 元素为用户自定义组件时，它会将 JSX 所接收的属性（attributes）转换为单个对象传递给组件，这个对象被称之为 “props”。
-
-React 会将以小写字母开头的组件视为原生 DOM 标签。
-
 ### tips
 
-尽管 this.props 和 this.state 是 React 本身设置的，且都拥有特殊的含义，但是其实你可以向 class 中随意添加不参与数据流（比如计时器 ID）的额外字段。
-
-阻止组件渲染，让 render 方法直接返回 null
-
-在实践中，因为你经常是在向用户展示 JSON 数据模型，所以如果你的模型设计得恰当，UI（或者说组件结构）便会与数据模型一一对应，这是因为 UI 和数据模型都会倾向于遵守相同的信息结构。
-
-第一步：将设计好的 UI 划分为组件层级
-第二步：用 React 创建一个静态版本（先用已有的数据模型渲染一个不包含交互功能的 UI）
-当你的应用比较简单时，使用自上而下的方式更方便；对于较为大型的项目来说，自下而上地构建，并同时为低层组件编写测试是更加简单的方式。
-第三步：确定 UI state 的最小（且完整）表示。其中的关键正是 DRY: Don’t Repeat Yourself
-
-比起写，代码更多地是给人看的。当你开始构建更大的组件库时，你会意识到这种代码模块化和清晰度的重要性。并且随着代码重用程度的加深，你的代码行数也会显著地减少。
+尽管 this.props 由 React 本身设置的，this.state 有特殊的含义，我们可以向 class 中随意添加**不参与数据流**的额外字段（如，this.timerID）。
 
 props：
 1.devTool中对应的component默认全部打开
@@ -278,9 +278,41 @@ props：
 
 子组件 state 没更新是不会触发 render 渲染的。
 
-对于受控组件来说，每个 state 突变都有一个相关的处理函数。这使得修改或验证用户输入变得简单。
-`<input type="text">`, `<textarea>` 和 `<select>` 之类的标签都非常相似—它们都接受一个 value 属性，你可以使用它来实现受控组件
+在 `componentDidMount()` 钩子函数里执行 ajax call，这样可以使用 setState 更新组件状态
 
-`<input type=“file”>` 的 value 只读，所以它是 React 中的一个非受控组件。
+什么时候需要用Redux：
 
-要编写一个非受控组件，而不是为每个状态更新都编写数据处理函数，你可以 使用 ref 来从 DOM 节点中获取表单数据。
++ 跨多层组件共享状态/数据，不好追踪，还会引起性能问题，每一个数据变动引起所有子组件重新渲染。
++ 通过 hot reload 提升开发效率。
+
+**不建议**使用inline style，除非需要在render time动态添加计算的样式。
+
+file structure：一个项目中文件层级嵌套不要超过3-4层。
+
+Virtual DOM：更多的是一种模式，而不是一种特定的技术。在 React 的话术里，经常与 React elements 相关，它们是代表UI的对象。
+
+[Redux vs. MobX](https://blog.logrocket.com/redux-vs-mobx/)
+
+Redux:
++ 单一 store（一个巨大的 JSON 对象）
++ store中的state不可变
++ 通过action触发改变
++ 通过reducers更新状态
+
+MobX：
++ 可以有多个 store（许多应用设计有至少2个sote，一个为当前应用设计的UI store，一个可复用的领域状态）
++ 无需进一步交互的任何可从state推导出的东西，都是推导
++ action是可以改变state的一段代码
++ state改变时，所有推导自动更新
+
+popularity: Redux
+learning curve：Mobx（Redux - Flux architecture and functional programming concepts；MobX - object-oriented programming，writing less code）
+data structure：MobX（Redux：纯JS对象存储state，需手动跟踪变化，更难维护大型状态；MobX使用可观察数据，通过隐式订阅自动跟踪更改）
+代码量：MobX（Redux 本质上是显式的，必须对许多功能进行显式编码。MobX相比代码量少，易于学习和设置）
+Developer community：Redux（从github start数、npm周下载量）
+scalability： Redux（纯函数易扩展、测试）
+
+如果您希望快速起步并以更少的代码构建简单的应用程序，那么选 MobX。
+
+Redux 是 pure 的，function(state, action) => newState
+MobX 中状态是可变的，是 impure 的。难以测试和维护，不总是返回可预测的输出。

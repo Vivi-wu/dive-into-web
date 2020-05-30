@@ -181,20 +181,6 @@ Android
 1.应用需要注册 serviceWorker
 2.只有直接访问 localhost 才支持 serviceWorker
 
-seller H5应用是使用 Create React App 创建的。根据 [create react app](https://create-react-app.dev/docs/making-a-progressive-web-app/) 官方文档：
-1.只有production环境开启serviceWorker
-2.如果需要本地测试离线服务，先用 `npm run build` 本地构建，然后从构建好的目录下使用标准的http server启动页面
-
-实际上构建后之后，终端里可以看到下文
-
-```bash
-The build folder is ready to be deployed.
-You may serve it with a static server:
-  npm install -g serve
-  serve -s build
-```
-因为前端统一的线上自动化构建对于的目录是 dist，所以在项目根目录下运行： `serve -s dist`
-
 #### PC端卸载PWA
 
 上文也提到触发 beforeinstallprompt 事件的第一条件是，你还没有安装过相应的 pwa。安装过一次后，就不再触发 beforeinstallprompt 事件。想要重新开启，先卸载对应的应用。
