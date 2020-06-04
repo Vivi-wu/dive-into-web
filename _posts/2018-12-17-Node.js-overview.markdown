@@ -59,6 +59,16 @@ Node 保存了所有导入的 module，当我们用 `require()`获取module时�
 
 Node.js内置的常用模块就是为了实现服务器程序的基本功能：接收网络请求，读写文件，处理二进制内容。
 
+### import Router from 'vue-router'
+
+能够正确引用 mode_modules 目录下的文件的原理是什么？以及具体引用哪个文件？
+
+首先看[知乎](https://www.zhihu.com/question/65031300/answer/226856731) 答案，然后看 Node.js 官方文档
+
+如何寻找 mode_modules 目录下的文件[Loading from node_modules Folders](https://nodejs.org/api/modules.html#modules_loading_from_node_modules_folders)，加载哪一个文件[Folders as Modules](https://nodejs.org/api/modules.html#modules_folders_as_modules)
+
+知道了模块引用原理，可以对第三方包进行 debugger
+
 ## 内置对象
 
 JavaScript有且仅有一个全局对象，在Node.js环境中，这个对象叫 `global`.
