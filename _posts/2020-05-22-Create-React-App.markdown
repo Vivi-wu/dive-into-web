@@ -49,3 +49,7 @@ package.json 文件里的 `browserslist` 配置，使得开发时适于现代浏
 + compiler 编译器，如 Babel，让你能够写现代JS代码，而代码也能在旧浏览器里运行
 
 一篇简单讲解如何让 React app 运行起来的文章 [Creating a React App… From Scratch.](https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658) ，会有启发。
+
+### eject
+
+H5项目里引入mobX使用decorator，需要配置eslint，要么eject，要么官方推荐fork react-scripts。这次先eject

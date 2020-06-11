@@ -81,8 +81,8 @@ styles
 + img-className，全局图片类
 + animate-className，全局动态效果类
 + ComponentName，标准组件
-+ ComponentName-elementName，组建的元素
-+ ComponentName--modifierName，组建的修饰
++ ComponentName-elementName，组件的元素
++ ComponentName--modifierName，组件的修饰
 
 使用 UpperCamelCase 命名组件，来表明它是 master 元素。
 

@@ -1,0 +1,27 @@
+---
+title:  "MobX Learning"
+category: JavaScript
+---
+## State 状态
+
+驱动应用的数据。
+
+Observable state：可观察的状态，为现有的数据结构(如对象，数组和类实例)添加了可观察的功能。
+
+## Derivations 衍生
+
+源自状态，并且不会再有任何进一步的相互作用。
+
+Computed values：计算值，可以使用纯函数(pure function)从当前可观察状态中衍生出的值。 通过@computed 装饰器，调用 的getter / setter 函数来进行使用。
+
+Reactions：反应，不产生新的值，当状态改变时需要自动发生的副作用，最终都需要实现I/O操作，如：打印到控制台、网络请求、递增地更新 React 组件树以修补DOM等。
+
+MobX 会对在执行跟踪函数（`autorun`、`reaction`、`when`）期间读取的任何现有的**可观察属性**做出反应。
+
+## Actions
+
+任何一段可以改变state的代码。
+
+Actions：动作，是可选的内置概念。类似用户在excel单元格输入一个值，所有用户事件、后端数据推送、预定事件等
+
+严格模式下，MobX 会强制只有在动作之中才可以修改状态。
