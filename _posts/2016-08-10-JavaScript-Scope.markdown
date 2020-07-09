@@ -4,7 +4,7 @@ category: JavaScript
 ---
 Scope is the set of variables, objects, and functions you have access to. 你可以获取的变量、对象和函数的集合称为 scope **作用域**。
 
-当一个函数在 JS 中创建时，该函数可以对其生成环境中任何语法空间的变量进行访问。
+JS 的 block 没有作用域，只有 functions 有作用域。
 
 ## Global Scope
 

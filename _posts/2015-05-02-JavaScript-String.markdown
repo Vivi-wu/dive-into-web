@@ -2,7 +2,9 @@
 title:  "JavaScript Strings"
 category: JavaScript
 ---
-JS String 用来存储一系列字符，用**单**引号或**双**引号限制起来。
+JS String 是一系列 Unicode 字符，用**单**引号或**双**引号限制起来。
+
+准确的说是一系列 UTF-16 code units，每一个代码单元由一个 16-bit 数字表示。每一个 Unicode 字符由1到2个代码单元表示。
 
 ### 反斜杠
 
@@ -15,21 +17,20 @@ JS String 用来存储一系列字符，用**单**引号或**双**引号限制�
     var x = "John";
     var y = new String("John");
 
-最好不要用后者，减缓执行速度。且 `x === y` 是 false 的，因为后者的 type 是 object。
-
-最糟的情况是两个变量都用 **new** 创建，因为 <span class="t-blue">JavaScript objects cannot be compared</span>。两者无法比较。
+最好不要用后者，减缓执行速度。且 `x === y` 是 false 的，因为后者的 type 是 object。 <span class="t-blue">JavaScript objects cannot be compared</span>。两者无法比较。
 
 前者创建的是 primitive values，但是 in JavaScript, methods and properties are **also available** to primitive values.
 
 <!--more-->
 
-## String properties
+## 属性
 
 _length_ 是 String 自带属性。除此之外还有 _constructor_ 和 _prototype_ 两个属性。
 
-## String functions
+## 方法
 
 ### Find 查找
+
 + `indexOf(`searchvalue, start`)`，返回 **index** of (the position of) the **first** occurrence（第一次出现的位置） of a specified text in a string。
 + `lastIndexOf(`searchvalue, start`)`，返回一个字符串中指定文本 **last** occurrence (最后一次出现的位置)，以 start 位置开始，从字符串的后面向前查找。
 + `search(`searchvalue`)`，效果同 `indexOf()`。

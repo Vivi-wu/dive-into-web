@@ -40,7 +40,7 @@ function isArray(myArray) {
 
     var person;
 
-此时，变量 person 的值是 undefined，typeof 结果也是 undefined。
+未初始化的变量 person 其值是 undefined，typeof 结果也是 undefined。
 
     person = undefined;
 
@@ -106,17 +106,19 @@ String(undefined)       // "undefined"
 1. explicit： `Boolean(x)`
 2. implicit： 条件判断语句、逻辑运算符表达式(`||` `&&` `!`)
 
+以下均返回 false：
+
 ```js
-Boolean('')           // false
-Boolean(0)            // false
-Boolean(-0)           // false
-Boolean(NaN)          // false
-Boolean(null)         // false
-Boolean(undefined)    // false
-Boolean(false)        // false
+Boolean(false)    
+Boolean(0)        
+Boolean(-0)       
+Boolean('')       
+Boolean(NaN)      
+Boolean(null)     
+Boolean(undefined)
 ```
 
-不在上面名单里的value都返回 true：`"0"` ，`"false"` ，`[]` ，`{}` ，`function(){}` ，`Symbol()`。
+不在上面名单的 value 都返回 true，比如 `"0"` ，`"false"` ，`[]` ，`{}` ，`function(){}` ，`Symbol()`。
 
 ### Numeric conversion
 

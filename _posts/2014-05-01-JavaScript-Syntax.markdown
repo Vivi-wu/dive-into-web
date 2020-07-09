@@ -193,7 +193,7 @@ w3schools 使用首字母小写的驼峰式: firstName
 
 ### 变量的声明和赋值
 
-在JS中创建一个变量又称为“声明”一个变量。JS中使用 **var** keyword to **declare** variables 声明变量, 使用 **equal sign `=`**（此时等号是赋值符）, **assign values** to variables 给变量赋值.
+在 JS 中创建一个变量又称为“声明”一个变量。最传统的方式是使用 **var** 声明变量, 使用 **equal sign `=`**（此时等号是赋值符）, **assign values** to variables 给变量赋值.
 
 After the declaration, the variable has no value. (Technically it has the value of **undefined**) 。
 
@@ -273,9 +273,12 @@ After the declaration, the variable has no value. (Technically it has the value 
 
 补充：位运算符在操作数为浮点数的情况下，向下去整，只保留整数部分。`~~` 实现按位取反再取反，当操作数是整数的情况返回自己，是浮点的则相当于 `Math.floor` 的效果。
 
-<span class="t-blue">在逻辑运算中虽然内部进行 Boolean 转换，实际返回 original 操作数的值</span>。
+注意：true && expression 总是会返回 expression, 而 false && expression 总是会返回 false。是否执行第二个语句，取决于第一个的值。
 
-在 JavaScript 中，true && expression 总是会返回 expression, 而 false && expression 总是会返回 false
+```js
+// 在获取对象属性前检测是否为空对象
+var name = o && o.getName();
+```
 
 巧用逻辑操作符，可以缩短代码。如下：
 

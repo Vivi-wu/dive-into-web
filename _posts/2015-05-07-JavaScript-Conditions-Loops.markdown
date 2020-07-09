@@ -2,7 +2,7 @@
 title:  "JavaScript Conditions and Loop"
 category: JavaScript
 ---
-JS 条件语句，根据不同决定执行不同操作。
+JS conditional statements 条件语句，根据不同决定执行不同操作。
 
 ## if ... else 语句
 
@@ -39,11 +39,11 @@ switch(expression) {
 
 注意：
 
-+ expression evaluated once 表达式评估一次
-+ 将表达式的值与每一个 case 的值相比较（使用 **strict comparison**，值和类型都要相等），如果找到匹配的 case，就执行相对应的代码
-+ 遇到 **break** 关键字，跳出 switch 体，避免执行更多的代码或 case testing
++ expression 评估一次
++ 表达式的值与每一个 case 的值严格比较（使用 **strict comparison**，即 `===`），如果找到匹配的 case，就执行相对应的代码
++ 遇到 **break** 关键字，跳出 switch 体
 + **default** 关键字指明，当没有找到匹配的 case 时，要执行的操作
-+ 不同 case 可以使用相同的执行 code
++ 不同 case 可以使用相同的执行 code，加一个代码注释 `// fallthrough` 帮助理解和debug
 + 如果 default **不是最后一个** case，记得在它的代码后加 **break**
 
 ## For Loops 循环
@@ -73,7 +73,7 @@ switch(expression) {
 
 ### Do/While Loop
 
-先执行一遍循环体，在 check 循环条件。
+先执行一遍循环体，在 check 循环条件。确保循环体至少执行一次。
 
     do {
         code block to be executed
