@@ -18,6 +18,8 @@ JS 的 block 没有作用域，只有 functions 有作用域。
 
 每个定义的函数都有自己的局部作用域，local scope 可以层层嵌套。
 
+Whenever JavaScript executes a function, a 'scope' object is created to hold the local variables created within that function.无论何时执行一个函数，一个scope对象被创建，用于保存那个函数内部创建的局部变量。
+
 <!--more-->
 
 Any locally scoped items are not visible in the global scope - **unless exposed**，局部作用域里的东西对全局作用域不可见，除非对外暴露。
@@ -32,9 +34,11 @@ All scopes in JavaScript are created with Function Scope **only**，JS中所有�
 
 ## Lexical Scope / Closures
 
-嵌套在一个函数中的 inner 函数，能够使用 outer 函数的作用域，这称为**词法作用域**或**闭包**，也叫 Static Scope **静态作用域**。
+在一个函数内声明的函数称为 Inner functions，能够使用 outer 父函数的作用域，这称为**词法作用域**或**闭包**，也叫 Static Scope **静态作用域**。
 
-Any variables/objects/functions defined in its parent scope, are available in the scope chain. 任何定义在**父作用域**的变量、对象、函数，在作用域链上都是可用的。反之，则不然。
+任何定义在**父作用域**的变量、对象、函数，在作用域链上都是可用的。反之，则不然。
+
+如果一个调用函数所依赖的少数函数对于其他代码没用，建议写在函数内，减少全局函数个数总是好的。
 
 ### Scope Chain
 
@@ -42,7 +46,7 @@ Any variables/objects/functions defined in its parent scope, are available in th
 
 当我们访问一个变量的时候，JavaScript 从最里面的作用域沿着作用域链向外部开始查找，直到找到我们想要的那个变量/对象/函数。
 
-### 闭包实例
+### Closure 闭包
 
 下面的例子中要实现计数加1的功能，但因为局部变量的生命周期只维持在函数调用期间，所以无论调用多少次 add 函数，结果都是 1.
 
@@ -57,11 +61,7 @@ add();
 // the counter should now be 3, but it does not work !
 ```
 
-A better example of how the closure side of things works, can be seen when returning a function reference。能展现**闭包**是如何起作用的例子，就**是返回一个函数索引**。
-
-Inside our scope, we can return things so that they’re available in the parent scope。
-
-Simply accessing variables outside of the immediate lexical scope creates a closure. 获取词法作用域外最近的变量形成了闭包。
+一个能展现**闭包**是如何起作用的例子，就**是返回一个函数索引**。
 
 下面的例子使用闭包，解决了自增计数的问题。
 
@@ -117,7 +117,7 @@ for (var i = 0; i < links.length; i++) {
 }
 ```
 
-两者的区别在 JS Functions 章节已经讲过 .call(scope, arg1, arg2, arg3) takes individual arguments, comma separated, whereas .apply(scope, [arg1, arg2]) takes an Array of arguments。
+两者的区别在 JS Functions 章节已经讲过.
 
 以下两种方法等价。
 

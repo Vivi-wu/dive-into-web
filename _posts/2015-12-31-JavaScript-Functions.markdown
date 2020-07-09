@@ -2,7 +2,7 @@
 title:  "JavaScript Functions"
 category: JavaScript
 ---
-The `typeof` operator in JavaScript returns "**function**" for functions. But, JavaScript functions can best be described as objects. <span class="t-blue">JS函数最好被描述为对象</span>。
+The `typeof` operator in JavaScript returns "**function**" for functions. But, <span class="t-blue">JS函数最好被描述为对象</span>。
 
 使用 `arguments.length` property 可以返回函数调用时，**接收到的实际参数个数**。
 
@@ -74,18 +74,19 @@ var y = 7; // Initialize y
 
 ## Function Parameters and Arguments
 
+函数可以有 0 或多个参数。
+
 关于函数的行参（函数定义里列出的参数名称），实参（函数调用是传递进来的 real 值）一些知识。
 
 + 函数定义不指定参数的 data type
 + 传递参数时不检查参数 type
 + 不检查传递的参数个数
-+ 如果函数接收到的参数个数小于函数声明参数列表里的，the missing values are set to: **undefined**，最好给参数设置一个默认值。(参看 JavaScript Strict Mode 章节)
-+ 如果接收到的参数个数多于声明参数列表里的，这些参数 can be reached using the `arguments` object（JS函数内置对象，包含一个 array 放置函数调用时传递进来的参数）
++ 如果接收到的参数个数**少于**函数声明参数列表，the missing values are set to: **undefined**，最好给参数设置一个默认值。(参看 JavaScript Strict Mode 章节)
++ 如果接收到的参数个数**多于**声明参数列表里，这些参数 can be reached using the `arguments` object（JS函数内置对象，包含一个 array 放置函数调用时传递进来的参数）
 
 使用函数**内置参数对象** `arguments`，可以轻松实现输入值相加等操作。
 
 ```js
-x = sumAll(1, 123, 500, 115, 44, 88);
 function sumAll() {
   var i, sum = 0;
   for (i = 0; i < arguments.length; i++) {
@@ -93,7 +94,23 @@ function sumAll() {
   }
   return sum;
 }
+x = sumAll(1, 123, 500, 115, 44, 88); // 871
 ```
+
+可以使用 `...variable` 剩余参数运算符简化代码。
+
+```js
+function avg(...args) {
+  var sum = 0;
+  for (let value of args) {
+    sum += value;
+  }
+  return sum / args.length;
+}
+avg(2, 3, 4, 5); // 3.5
+```
+
+rest parameter operator 更常作为 `avg(firstValue, ...args)`，该变量中包含调用函数的所有未捕获参数的列表。
 
 ### 参数传递
 
@@ -128,7 +145,7 @@ function sumAll() {
     var myResult2 = myFunction.apply(null, myArray);  // myResult2 return 20
     ```
 
-    上面的例子中可以看到，`apply()` 方法从数组中获取函数实参，而前者则一一获取实参。
+ .call(scope, arg1, arg2, arg3) takes individual arguments（一一获取实参）, whereas .apply(scope, [arg1, arg2]) takes an Array of arguments 从数组中获取函数实参。
 
 ### Self-Invoking Functions
 
@@ -136,7 +153,7 @@ function sumAll() {
 
 Function expressions will execute automatically if the expression is followed by `()`. 在函数表达式后面加 `()`，可以使函数自动执行。
 
-函数声明不能被自调用，必须先用括号括起来，如下，又称为 **anonymous self-invoking function**。好像普遍称为 Immediately-invoked function expression。
+函数声明不能被自调用，必须先用括号括起来，如下，又称为 **anonymous self-invoking function**。好像普遍称为 Immediately Invoked Function Expressions。
 
 ```js
 (function () {
@@ -148,6 +165,22 @@ Function expressions will execute automatically if the expression is followed by
 })('hello', 'world');
 ```
 
+通过函数表达式给无名函数加 name，让内部可以循环调用。通过闭包，让name只在函数作用域内可用，这样代码更可读，对debugger友好。
+```js
+var charsInBody = (function counter(elm) {
+  if (elm.nodeType == 3) { // TEXT_NODE
+    return elm.nodeValue.length;
+  }
+  var count = 0;
+  for (var i = 0, child; child = elm.childNodes[i]; i++) {
+    count += counter(child);
+  }
+  return count;
+})(document.body);
+```
+
 ## Function Return 函数返回
 
-当函数遇到 **return** 语句，立刻停止执行。通常计算一个返回值，给调用者。
+函数遇到 **return** 语句，立刻停止执行。通常计算一个返回值，给调用者。
+
+如果函数内没有 return 语句，或写为空返回（不指定 return 值），则函数返回 undefined

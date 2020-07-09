@@ -31,7 +31,7 @@ category: JavaScript
 
 ### 避免 Global 变量
 
-+ 最少程度地使用全局变量，因为全局变量可以被其他 scripts 重写，相对地，使用局部变量和使用闭包（参考 JS function closure 内容）
++ 最少程度地使用全局变量，因为全局变量可以被其他 scripts 重写，相对地，使用局部变量和使用闭包（参考 JS Scope closure 内容）
 + 函数中所有的局部变量，必须使用 `var` 提前声明
 + 尽管 JS 默认会把所有 declarations 移到顶端 （JS Hoisting），自己在写的时候，在最上面书写所有声明
 + <span class="t-blue">最好在声明变量的时候，就初始化赋值</span>，这样可以提供一目了然的 intended use（intended data type），避免 undefined 值

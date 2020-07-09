@@ -71,10 +71,10 @@ fruits instanceof Object;    // returns true
 数组的 _length_ 属性返回数组中元素的个数。该属性值总是比 highest array index 的值多**1**。
 
     var fruits = ["Banana", "Orange", "Apple", "Mango"];
-    fruits[fruits.length] = "Lemon";    // add "Lemon" at the end of fruits
-    fruits[10] = "Pear";
+    fruits[fruits.length] = "Lemon";  // add "Lemon" at the end of fruits
+    fruits[10] = "Pear";              // 使用了**大于数组长度**的 index，给数组添加了5个 `undefined` 的空洞。
 
-注意上面第二个添加语句，因为使用了**大于数组长度**的 index，所以给数组添加了5个 `undefined` 空洞。
+如果访问不存在的数组 index，则返回 undefined。
 
 ## Array Methods
 
@@ -247,14 +247,16 @@ parseInt("2", 1, ["1", "2"]) // 无法转为number，radix值必须从2到36
 
 对数组中每一项执行一个操作：
 
-+ `arr.forEach(callback[, thisArg])`，让数组中每一项都执行一次给定的函数操作。特别要注意的是：**没有办法中止或者跳出 forEach 循环，除非抛出一个异常**。如有要中断的必要，不如使用一个简单的 for 循环实现。
-+ `arr.map(callback[, thisArg])` ，该方法返回一个由原数组中的**每个元素调用指定方法的返回值**组成的新数组。
++ `forEach(callback[, thisArg])`，让数组中每一项都执行一次给定的函数操作。特别要注意的是：**没有办法中止或者跳出 forEach 循环，除非抛出一个异常**。如有要中断的必要，不如使用一个简单的 for 循环实现。
++ `map(callback[, thisArg])` ，该方法返回一个由原数组中的**每个元素调用指定方法的返回值**组成的新数组。
 
     此处 callback 参数同上面的 every() 等函数，多了一个可选的 thisArg 参数，用来指定 callback 函数内 this 的值的对象。
 
-+ `arr.reduce(function(previousValue, currentValue, currentIndex, array), initialValue)`，**从左到右**对数组中每个值进行操作，最终得到一个值。
++ `reduce(function(previousValue, currentValue, currentIndex, array), initialValue)`，**从左到右**对数组中每个值进行操作，最终得到一个值。
 
     initialValue 是可选的。可作为第一次调用时的第一个参数值。
+
++ `for...of`，数组循环： for (const currentValue of a) { // Do something with currentValue }
 
 ```js
 例子1：

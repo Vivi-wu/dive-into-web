@@ -2,9 +2,9 @@
 title:  "JavaScript Objects"
 category: JavaScript
 ---
-在JS中，<span class="t-blue">all data types have a `valueOf()` 和 `toString()` 方法</span>.
+JS 对象是可以包含多个值的变量。这些值以 `name: value` 对的形式、**逗号**为分隔符。
 
-JS对象是可以包含多个值的变量。这些值以 `name:value` 对的形式、**逗号**为分隔符（最后一个值后面没有逗号）。
+在JS中，<span class="t-blue">all data types have a `valueOf()` 和 `toString()` 方法</span>.
 
 ## 创建对象
 
@@ -34,16 +34,16 @@ var person = {
 
 3.Using an **Object Constructor**
 
-有时我们希望使用 **an object type**，创建多个对象。这时可以使用一个构造函数来创建相同类型的对象。
+有时我们希望使用 **an object type**，创建多个对象。这时可以使用一个**构造函数**来创建相同类型的对象。通常将函数名首字母大写，作为使用 new 去调用的提醒。
 
 ```js
-function person(first, last, age) {
+function Person(first, last, age) {
     this.firstName = first;
     this.lastName = last;
     this.age = age;
 }
-var myFather = new person("John", "Doe", 50);
-var myMother = new person("Sally", "Rally", 48);
+var myFather = new Person("John", "Doe", 50);
+var myMother = new Person("Sally", "Rally", 48);
 ```
 
 ### new 关键字
@@ -75,9 +75,9 @@ JS中被称为 this 的东西就是<span class="t-blue explain" title="the objec
 
 默认情况下，this 指的是全局对象 `window`。
 
-+ when used in a **function**, 指的是拥有这个函数的对象。
-+ when used in an **object**, 就是对象本身。
-+ when used in an **object constructor**, is only a substitute 替代 for the new object. 构造函数里的 this 本没有值，<span class="explain" title="The value of this will become the new object when the constructor is used to create an object.">当函数被用来创建新的对象时，this 的值变为新对象</span>。
++ 当用在 **function**, 指的是拥有这个函数的对象。
++ 当用在 **object**, 就是对象本身。
++ 当用在 **object constructor**, is only a substitute 替代 for the new object. 构造函数里的 this 本没有值，<span class="explain" title="The value of this will become the new object when the constructor is used to create an object.">当函数被用来创建新的对象时，this 的值变为新对象</span>。
 + 还可以在 HTML 元素事件绑定里使用 _this_，指的是触发事件的 HTML DOM element。（JS Event Order 章节有提到）
 
 ### JavaScript Objects are Mutable
@@ -92,9 +92,7 @@ x is **not a copy** of person. It **is** person. Both x and person points to the
 
 ## JavaScript Object properties
 
-JS对象是一系列无序属性的集合。
-
-这些 name:value 称为 **properties** 属性。
+name:value 称为JS对象的 **properties** 属性。
 
 **获取**对象的**属性**有两种方法：`objectName.propertyName` 或者 `objectName["propertyName"]`。
 
@@ -147,9 +145,11 @@ All JavaScript objects inherit the properties and methods from their prototype. 
 
 用 new 关键字创建的对象，继承该类对象的原型，如 new Date()，继承 `Date.prototype`。
 
-The `Object.prototype` is on the top of the prototype chain. 所有对象都继承 Object.prototype
+原型链 prototype chain 的根节点是 `Object.prototype`（其包含方法 toString()，这也是为什么所有 js 变量都可使用 toString 方法）
 
 Prototype properties can have prototype values (default values) 原型的属性可以有默认值。
+
+当我们尝试获取一个对象的属性发现不存在时，JS 会检测该对象的原型上是否存在那个属性。
 
 ### 给对象添加属性或方法
 
