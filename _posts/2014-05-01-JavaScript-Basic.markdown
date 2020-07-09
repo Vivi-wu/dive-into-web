@@ -2,6 +2,8 @@
 title:  "JavaScript Basic"
 category: JavaScript
 ---
+JavaScript旨在作为脚本语言运行在主机环境（除了广为人知的浏览器，JavaScript interpreters 解释器还存在于 Adobe Photoshop、SVG image、服务端环境Node.js、NoSQL数据库、GNOME等）。
+
 JavaScript 是web开发人员必学的三大基本语言之一。It makes HTML pages more dynamic and interactive.
 
 ## Where To

@@ -4,9 +4,9 @@ category: JavaScript
 ---
 ## Math Object
 
-`Math` is a global object. The **new** keyword **cannot** be used on Math. 数学对象不是一个 constructor，不可以/不需要使用 new 关键字来创建。
+`Math` 是JS内置对象，提供高级数学函数和常量。 Math对象不是一个 constructor，不可以/不需要使用 new 关键字来创建。
 
-Math 对象可以让你做一些数学的任务。
+### Math functions
 
 + `Math.random()`，返回一个［0，1）之间的随机数，always lower than 1
 + `Math.min(n1, n2, n3, ..., nX)`，返回参数中的**最小值**。缺省参数返回 `Infinity`。如果有一个或多个参数不是 number，则返回 _NaN_

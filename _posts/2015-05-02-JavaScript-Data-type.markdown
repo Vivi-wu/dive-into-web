@@ -4,7 +4,8 @@ category: JavaScript
 ---
 JS 是一种 weakly-typed 语言。
 
-+ 除了 **primitive values**： string（"John Doe"），numbers（3.14），Boolean（true/false），null，undefined 和 Symbol，所有值都是 objects。
++ 基本类型： String（"John Doe"），Numbers（3.14），Boolean（true/false），Symbol 和 Object。
++ Function、Array、Date、RegExp 都是 objects
 + 有**2**种不含 value 的类型：undefined，null
 
 <!--more-->

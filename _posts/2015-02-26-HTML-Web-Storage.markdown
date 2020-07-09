@@ -36,6 +36,7 @@ _window.localStorage_ 是 H5 Web Storage API 之一，区别于 Cookies，存储
 
 例外：如果用户使用“私有/隐私保护”模式的进行浏览，那么在浏览器关闭后，_localStorage_ 中的值将不会保存。因为**使用了这种模式的用户已经明确选择不留痕迹**。
 
+
 操作方法：
 
 ```javascript
@@ -72,6 +73,9 @@ Object.keys(localStorage)
 劣势：
 
 <span class="t-red">只允许存储 String</span>，但我们可以存储 stringified JSON，实现存储复杂数据。
+
+区别：
+http 和 https 相同域名下的local storage数据不共享，而cookie是共享的。
 
 ## Session Storage
 
