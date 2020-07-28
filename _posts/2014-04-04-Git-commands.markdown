@@ -266,6 +266,12 @@ Move the current branch tip backward to commit and reset both the staging area a
 
     git merge --abort
 
+### 单个文件回退指定版本
+
+    git reset <commit> file
+
+运行完指令，需要生成新的 commit。
+
 ### 恢复删除的本地分支
 
 用 `-d`  或 `-D` 删除的本地开发分支，可通过以下指令找到已删除分支最后一个 commit 的 hash 标记然后恢复。
