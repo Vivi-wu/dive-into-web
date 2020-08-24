@@ -55,7 +55,7 @@ React 提供 **will**（在事件发生前）和 **did**（在事件发生后）
 
 `render()`，返回 JSX 表示对象。
 
-`componentDidMount()`，调用所有组件的 render 函数之后，组件输出呈现到 DOM 之后调用此函数。只在**浏览器端**调用，因为服务器端渲染不会产生 DOM 树。需要 DOM 节点的初始化写在这里。
+`componentDidMount()`，调用所有组件的 render 函数之后，组件输出呈现到 DOM 之后调用此函数。只在**浏览器端**调用，因为服务器端渲染不会产生 DOM 树。在这个钩子函数里做 DOM 节点的初始化、执行 ajax call，这样可以使用 setState 更新组件状态
 
 ### Updating
 
@@ -161,3 +161,94 @@ Using Global Variables，Alternatively, you can force the linter to ignore any l
 用以上方式写 React 会比我们习惯的方式多一些typing。但是请 remember that code is read far more than it’s written, and it’s less difficult to read this modular, explicit code.比起写，代码更多地是给人看的。当你开始构建更大的组件库时，你会意识到这种代码模块化和清晰度的重要性。并且随着代码重用程度的加深，你的代码行数也会显著地减少。
 
 React 是 one-way data flow（单选数据流）。
+
+## 实践中遇到的问题
+
+### 输出 HTML tag 而不是 string
+
+Improper use of the innerHTML can open you up to a cross-site scripting (XSS) attack. 而 React 的设计哲学是让制作东西容易且安全。开发人员需要明确指出他们要进行 unsafe 的操作。因此想要输出 HTML tag 时，需要做到两点：
+
+1. 在要改变 innerHTML 属性的元素上添加 `dangerouslySetInnerHTML` 特性，通常给它绑定一个自定义函数，把需要 render 的值传进去.
+2. 自定义函数只需要返回一个只包含 `__html` 属性的对象。属性值为传进去的 DOM string. 确保 HTML provided must be well-formed (ie., pass XML validation).
+
+### 动态内容中输出 HTML Entity
+
+通常通过 literal 文本可在 JSX 中直接插入 HTML 实体。
+
+但当使用动态内容展示时，如 `<div>{'First &middot; Second'}</div>`，结果 HTML 实体并不能按预期展示出来。解决方法：
+
+1. 最简单的办法是在 JS 中直接写 Unicode 字符。需要**保证文件按 UTF-8 格式保存**，浏览器也按照 UTF-8 格式显示。
+2. 一种更安全的方法是找到**实体对应的 unicode number**，如下：
+
+```js
+<div>{'First \u00b7 Second'}</div>
+<div>{'First ' + String.fromCharCode(183) + ' Second'}</div>
+```
+
+## 2019.9.18
+[Getting Started with React - An Overview and Walkthrough Tutorial](https://www.taniarascia.com/getting-started-with-react/)
+
+[用react开发一个井字游戏教程](https://zh-hans.reactjs.org/tutorial/tutorial.html)
+
+在 React 应用中，数据通过 props 的传递，从父组件流向子组件。
+
+在 JavaScript class 中，每次定义其子类的构造函数时，都需要调用 super 方法。因此，在所有含有构造函数的的 React 组件中，构造函数必须以 super(props) 开头。
+
+使用 CodePen 在线编辑器如何正确使用React DevTools？
+
+1. 登录或注册。
+2. 点击 “Fork” 按钮。
+3. 在“Open this Pen in:”选择 “Debug mode”。
+4. 上一步会打开一个新的标签页，此时打开开发者工具就会有一个 React 选项卡，并且在“⚛️ Components”里可以看到干净的组件树。
+
+当需要同时获取多个子组件的数据，或者两个组件之间需要相互通信，需要把子组件的 state 数据提升至其共同的父组件当中保存。
+
+父组件通过 props 将状态数据传递到子组件当中。这样应用当中所有组件的状态数据就能够更方便地同步共享了。
+
+### tips
+
+尽管 this.props 由 React 本身设置的，this.state 有特殊的含义，我们可以向 class 中随意添加**不参与数据流**的额外字段（如，this.timerID）。
+
+props：
+1.devTool中对应的 component 默认全部打开
+2.因为是js报错可显示对应的Line *
+3.没有 v-model 的 trim 等修饰符
+
+子组件 state 没更新是不会触发 render 渲染的。
+
+什么时候需要用Redux：
+
++ 跨多层组件共享状态/数据，不好追踪，还会引起性能问题，每一个数据变动引起所有子组件重新渲染。
++ 通过 hot reload 提升开发效率。
+
+**不建议**使用inline style，除非需要在render time动态添加计算的样式。
+
+file structure：一个项目中文件层级嵌套不要超过3-4层。
+
+Virtual DOM：更多的是一种模式，而不是一种特定的技术。在 React 的话术里，经常与 React elements 相关，它们是代表UI的对象。
+
+[Redux vs. MobX](https://blog.logrocket.com/redux-vs-mobx/)
+
+Redux:
++ 单一 store（一个巨大的 JSON 对象）
++ store中的state不可变
++ 通过action触发改变
++ 通过reducers更新状态
+
+MobX：
++ 可以有多个 store（许多应用设计有至少2个sote，一个为当前应用设计的UI store，一个可复用的领域状态）
++ 无需进一步交互的任何可从state推导出的东西，都是推导
++ action是可以改变state的一段代码
++ state改变时，所有推导自动更新
+
+popularity: Redux
+learning curve：Mobx（Redux - Flux architecture and functional programming concepts；MobX - object-oriented programming，writing less code）
+data structure：MobX（Redux：纯JS对象存储state，需手动跟踪变化，更难维护大型状态；MobX使用可观察数据，通过隐式订阅自动跟踪更改）
+代码量：MobX（Redux 本质上是显式的，必须对许多功能进行显式编码。MobX相比代码量少，易于学习和设置）
+Developer community：Redux（从github start数、npm周下载量）
+scalability： Redux（纯函数易扩展、测试）
+
+如果您希望快速起步并以更少的代码构建简单的应用程序，那么选 MobX。
+
+Redux 是 pure 的，function(state, action) => newState
+MobX 中状态是可变的，是 impure 的。难以测试和维护，不总是返回可预测的输出。
