@@ -42,11 +42,11 @@ category: HTML
 
 ### autocomplete
 
-    <input type="text" name="firstname" value="John" size="40">
+默认地，浏览器会记住用户通过 `<input>` 输入域提交表单的信息。这使得浏览器可以给用户提供输入建议，或者自动填充值。
 
-该特性设定一个表单 form 或者 input 输入区域是否开启自动填充功能。若开启，浏览器会根据用户之前填充的值来填满表单。
+这一默认开启的特性，可能给用户带来隐私困扰。因此浏览器支持通过设置 autocomplete 为"off"，关闭自动完成功能。
 
-你可以给一个 `<form>` 表单开启自动填充功能，然后针对某个 input 输入区域关闭自动填充。如下：
+可以给一个 `<form>` 表单开启自动填充功能，然后针对某个 input 输入区域关闭自动填充。如下：
 
 ```html
 <form action="action_page.php" autocomplete="on">

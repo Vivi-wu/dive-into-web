@@ -2,43 +2,35 @@
 title:  "React.js 入门（一）"
 category: JavaScript
 ---
-对已有网站添加 React 以实现动态组件最简单的方式是，以 `<script>` 标签引入，加上可选的 JSX。
+React 是一个声明式的灵活高效的用于构建 UI 的 js 库。由 Facebook 创建的开源项目。
 
-随着你的应用不断增长变复杂，为了处理一些如：大量的文件、组件，使用npm上第三方库，提前检测语法/代码错误，热更新CSS/JS，优化打包文件等，可以引入官方建议的 [toolchain](https://reactjs.org/docs/create-a-new-react-app.html#recommended-toolchains)。
+借助 React 通过小的、相互独立的代码片段（component，即组件）可以构建复杂的用户界面。
 
-React 本质就是写一些可重用的组件，React 组件是一些操作 `props` 和 `state` 的函数。
+对已有网页添加 React 最简单的方式是，以 `<script>` 标签引入 React（顶层API）、React DOM（DOM相关方法）、Babel（在旧浏览器里使用ES6+）外部js文件。
 
-    UI = render(data)
-
-React 是 one-way data flow（单选数据流）。
+但随着应用不断增长变复杂，为了处理一些如：大量的文件、组件，使用 npm 上的第三方库，提前检测语法/代码错误，热更新CSS/JS，优化打包文件等，我们引入官方建议的 [toolchain](https://reactjs.org/docs/create-a-new-react-app.html#recommended-toolchains)。
 
 <!--more-->
 
-任何前端框架最终都要输出页面，首先介绍 React 中用于渲染的重要概念。
-
 ## JSX
 
-它是 JavaScript 语法的扩展。
+即 JavaScript XML，它是 JavaScript 语法的扩展，在 build time 转换成 `React.createElement(标签名称，属性对象，子组件)` 。
+
+大部分开发者选择使用 JSX。
 
 一个事实：渲染逻辑天然地与UI逻辑耦合。（比如：在 UI 中绑定事件、在某些时刻状态发生变化时需要通知到 UI，以及需要在 UI 中展示准备好的数据。）
 
-官方建议在 React 中使用 JSX 创建树节点（描述 UI），在写 JS 代码时提供视觉上的辅助，易于阅读，同时允许 React 显示更多有用的报错和warning信息。
-
-当然 JSX is optional。
+官方建议在 React 中使用 JSX 创建树节点（描述 UI），在写 JS 代码时提供视觉上的辅助，易于阅读，同时允许 React 显示更多有用的报错和 warning 信息。
 
 任何东西在渲染前都会转为 string，阻止 XSS，所以在 JSX 中插入用户输入是安全的。
 
-```js
-<HelloMessage name="John" />
-<div>Hello {this.props.name}</div>
-```
-
-经过 Babel 编译后，JSX 表达式变成了常规的 JS 函数调用（`React.createElement()`），创建了一个 JS 对象，用于描述渲染内容的 React elements。
-
 ### 用法
 
-+ 为了便于阅读，将 JSX 拆分为多行书写。同时建议将内容包裹在**括号** `()` 中，避免代码末尾自动插入分号。
-+ React DOM 使用 camelCase（小驼峰命名）来定义属性的名称，class 变为 className
++ 用 camelCase（小驼峰命名）来写属性和方法名
++ 可以在 JSX 内的大括号 `{ expression }` 里书写任何有效的 JavaScript 表达式
++ 添加 css 样式时使用 className 代替 class
++ 每个组件必须自闭合，如 `<img />`
++ 为了便于阅读，可将 JSX 拆分为多行书写。同时将内容包裹在**括号** `()` 中，避免 `return` 末尾自动插入分号。
 + 组件名必须以变量形式声明，如下：
 
     var Nav;
@@ -63,7 +55,6 @@ React 是 one-way data flow（单选数据流）。
   MyFormComponent.Input = React.createClass({ ... });
   ```
 
-+ 大括号 `{ expression }` 指定任何有效的 JavaScript 表达式作为属性值
 + 双引号 `"value"`，指定 string literal 字符串字面量作为属性值
 + 缺省特性值时，JSX 认为它就是 `true`。因此，为了明确指定某个 attribute 是 `false`，要么不写这个特性，要么使用大括号赋值，如： `disabled={false}`
 + 注释标记跟 JS 的 comment 一样，有单行和多行注释。当你为一个 tag 的子区域写注释时，使用大括号将这条注释括起来。
@@ -163,13 +154,12 @@ function FancyCheckbox(props) {
 ```js
 const element = <h1>Hello, world</h1>;
 ```
+React 元素本质是 JS Object 可以：
 
-React 元素可以：
-
-1. 在 `if` 声明 `for` 循环里使用
-2. 赋值给变量
-3. 作为函数入参
-4. 作为函数返回
+1. 赋值给变量
+2. 作为函数入参
+3. 作为函数返回
+4. 在 `if` 声明 `for` 循环里使用
 
 以 React 构建的应用只有一个 root DOM 节点。对已有的项目接入 React，则可有多个 isolated 的 root DOM 节点。
 
@@ -177,9 +167,9 @@ React 原生是 immutable，一旦创建，不能改变它的子元素或属性�
 
 React DOM 会将元素和它的子元素与它们之前的状态进行比较，只应用与之前相比DOM上必要的变化。
 
-## Components
+## React Components
 
-从概念上讲，组件类似 JS 函数，接受任意输入（props），返回 React elements（将出现在屏幕上的东西）
+从概念上讲，React 组件类似 js 函数接受任意输入 `props` (properties 的缩写)，组件通过 `render()` 返回 React element（一种对待展示的视图层次结构的轻量级描述）。
 
 以函数形式、class 定义组件：
 
@@ -196,12 +186,12 @@ class Welcome extends React.Component {
 
 const element = <Welcome name="Sara" />;
 ```
-
-+ React component **首字母大写的驼峰**标记，React 会将以小写字母开头的组件视为原生 DOM 标签。
++ 在 *.js 文件里，函数组件可以与 class 组件混用
++ 函数组件没有自己的 state
++ 自定义 component 采用**首字母大写的驼峰**标记，与常规 HTML 元素区分开。
 
     那些看起来像（上面也称之为）HTML tag 的标记**并非真正的** DOM 节点; 它们是 React 组件的实例，你可以把它们想象成是 React 知道如何处理的一些标记或数据。
-+ 建议从组件自身的角度命名 props，而不是依赖于调用组件的上下文命名。
-+ 所有 React 组件必须像 pure 函数，不直接改变它的输入（props）
++ 之前 React class 组件需要包含 `constructor()`，现在不必了
 
 ## 实践中遇到的问题
 
@@ -229,33 +219,11 @@ Improper use of the innerHTML can open you up to a cross-site scripting (XSS) at
 ## 2019.9.18
 [Getting Started with React - An Overview and Walkthrough Tutorial](https://www.taniarascia.com/getting-started-with-react/)
 
-The other type of component in React is the simple component, which is a function. This component doesn't use the class keyword
-
-simple and class components can be mixed.
-
-return is contained to one line, it does not need parentheses.
-
-```js
-// Simple Component
-const SimpleComponent = () => {
-  return <div>Example</div>
-}
-// Class Component
-class ClassComponent extends Component {
-  render() {
-    return <div>Example</div>
-  }
-}
-```
 [用react开发一个井字游戏教程](https://zh-hans.reactjs.org/tutorial/tutorial.html)
-
-每个组件都是封装好的，并且可以单独运行。
 
 在 React 应用中，数据通过 props 的传递，从父组件流向子组件。
 
 在 JavaScript class 中，每次定义其子类的构造函数时，都需要调用 super 方法。因此，在所有含有构造函数的的 React 组件中，构造函数必须以 super(props) 开头。
-
-如果你想写的组件只包含一个 render 方法，并且不包含 state，那么使用**函数组件**。
 
 使用 CodePen 在线编辑器如何正确使用React DevTools？
 
@@ -264,17 +232,18 @@ class ClassComponent extends Component {
 3. 在“Open this Pen in:”选择 “Debug mode”。
 4. 上一步会打开一个新的标签页，此时打开开发者工具就会有一个 React 选项卡，并且在“⚛️ Components”里可以看到干净的组件树。
 
-当你遇到需要同时获取多个子组件数据，或者两个组件之间需要相互通讯的情况时，需要把子组件的 state 数据提升至其共同的父组件当中保存。
-之后父组件可以通过 props 将状态数据传递到子组件当中。这样应用当中所有组件的状态数据就能够更方便地同步共享了。
+当需要同时获取多个子组件的数据，或者两个组件之间需要相互通信，需要把子组件的 state 数据提升至其共同的父组件当中保存。
+
+父组件通过 props 将状态数据传递到子组件当中。这样应用当中所有组件的状态数据就能够更方便地同步共享了。
 
 ### tips
 
 尽管 this.props 由 React 本身设置的，this.state 有特殊的含义，我们可以向 class 中随意添加**不参与数据流**的额外字段（如，this.timerID）。
 
 props：
-1.devTool中对应的component默认全部打开
+1.devTool中对应的 component 默认全部打开
 2.因为是js报错可显示对应的Line *
-3.没有v-model的trim等修饰符
+3.没有 v-model 的 trim 等修饰符
 
 子组件 state 没更新是不会触发 render 渲染的。
 

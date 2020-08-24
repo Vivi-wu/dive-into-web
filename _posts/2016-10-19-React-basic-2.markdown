@@ -6,12 +6,15 @@ category: JavaScript
 
 ## Events 事件处理
 
+尽管事件处理器看似被内联地渲染（直接写在 React 组件上，看起来像 inline 绑定），但它们其实只会被事件委托进行收集和调用。
+
 React 保证所有事件在各种浏览器中表现一致，与 W3C spec 的冒泡和捕捉一致。本质是使用了事件委托的方式处理同一类事件。无论有多少个同类事件出现，最后只在顶层DOM节点上添加一个事件处理函数。
 
-事件命名规范：
+命名规范：
 
-- 将代表事件的监听**属性**命名为 on[Event]
-- 将处理事件的监听**方法**命名为 handle[Event] 这样的格式
+- 将代表事件监听**属性**命名为 on[Event]
+- 将处理事件监听**方法**命名为 handle[Event]
+- 对于内置组件，如 `<button>` 元素的点击事件使用 onClick 这对于 React 有特殊的含义
 
 事件名以小驼峰式 **camelCase** 绑定事件处理函数（区别于 HTML 元素的全小写 `onclick`）.
 
@@ -94,9 +97,9 @@ Create React App 默认支持该语法。
 
 ## state 状态
 
-当数据变化时，通过调用 `this.setState(data, callback)` 把数据合并到组件私有属性 `this.state` 中，驱动组件重新 render 自己。其中 callback 是可选的。
+state 对于定义它的 React 组件是 private 的，可以向下传递 state 及其派生的状态给子组件。
 
-数据流“自上而下”或是“单向”的。任何的 state 总是所属于 own 和 set 它的组件。可以向下传递 state 及其派生的状态给子组件。
+当数据变化时，通过调用 `this.setState(data, callback)` 把数据合并到组件私有属性 `this.state` 中，驱动组件重新 render 自己。其中 callback 是可选的。
 
 + 构造函数是唯一可以给 this.state 赋值的地方
 + 直接修改 state 的值**不会重新渲染**组件，必须使用 `setState()`
@@ -146,15 +149,15 @@ ReactDOM.render(
 
 ## Lists and Keys
 
-构建动态列表的时候，都要指定一个合适的 key.
+在构建动态列表的时候，强烈建议指定一个合适的 key.
 
-如果你没有指定任何 key，React 会发出警告，并且会把数组的索引当作默认的 key。但是如果想要对列表进行重新排序、新增、删除操作时，把数组索引作为 key 是有问题的。
+如果没有指定任何 key，React 会发出警告，并且会把数组的索引当作默认的 key。
 
-当子节点为动态插入（如搜索结果，或者流中加入新的组件）时，每个子节点的标识和状态在渲染过程必须保持，这时通过 _key_ 属性给每一个 child 分配一个标识符。
+如果不会对列表进行重新排序、插入、删除操作，以数组索引作为 key 是安全的，反之，则不然。
 
 组件的 key 值并不需要在全局都保证唯一，只需要在当前的同一级元素（兄弟节点）之间保证唯一即可。
 
-Keys serve as a hint to React，不会传递给子组件（`props.key` no!）。
+`Key` 是 React 特殊保留属性，不会传递给子组件（不能通过 `props.key` 获取）。
 
 ```js
 render() {
@@ -189,6 +192,10 @@ class MyComponent extends React.Component {
   }
 }
 ```
+
+原理：当列表重新渲染，React 将拿每个新列表项的 key 与旧列表项进行比对。如果当前列表中的 key 在旧列表不存在，则创建一个新组件；如果当前列表中缺少旧列表中的某个key，则销毁旧列表中对应的组件；如果两个列表中 key 匹配，则更新对应组件。
+
+Keys 告诉 React 每个组件的身份，以便 React 在重新渲染之间保持状态。如果组件的 key 改变，则组件被销毁，并以全新的 state 重新创建
 
 ### Prop Validation
 

@@ -37,11 +37,11 @@ category: JavaScript
 
 要编写一个非受控组件，而不是为每个状态更新都编写数据处理函数，你可以 使用 ref 来从 DOM 节点中获取表单数据。
 
-## 组件生命周期
+## 组件生命周期 Lifecycle
 
 React 提供 **will**（在事件发生前）和 **did**（在事件发生后）方法，即 Lifecycle Methods。
 
-当组件第一次被渲染到 DOM 中的时候，被称为“挂载（mount）”。当 DOM 中 组件被删除的时候，在 React 中被称为“卸载（unmount）”。
+当组件第一次被渲染进 DOM 的时候，被称为“挂载（mount）”。当 DOM 中 组件被删除的时候，在 React 中被称为“卸载（unmount）”。
 
 ### Mounting
 
@@ -55,7 +55,7 @@ React 提供 **will**（在事件发生前）和 **did**（在事件发生后）
 
 `render()`，返回 JSX 表示对象。
 
-`componentDidMount()`，调用所有组件的 render 函数之后，组件输出呈现到DOM之后调用此函数。只在**浏览器端**调用，因为服务器端渲染不会产生 DOM 树。需要 DOM 节点的初始化写在这里。
+`componentDidMount()`，调用所有组件的 render 函数之后，组件输出呈现到 DOM 之后调用此函数。只在**浏览器端**调用，因为服务器端渲染不会产生 DOM 树。需要 DOM 节点的初始化写在这里。
 
 ### Updating
 
@@ -159,3 +159,5 @@ Using Global Variables，Alternatively, you can force the linter to ignore any l
 5. Add Inverse Data Flow，支持反向的数据更新，通过 `setState()` 方法。
 
 用以上方式写 React 会比我们习惯的方式多一些typing。但是请 remember that code is read far more than it’s written, and it’s less difficult to read this modular, explicit code.比起写，代码更多地是给人看的。当你开始构建更大的组件库时，你会意识到这种代码模块化和清晰度的重要性。并且随着代码重用程度的加深，你的代码行数也会显著地减少。
+
+React 是 one-way data flow（单选数据流）。

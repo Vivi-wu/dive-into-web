@@ -92,3 +92,13 @@ Hook 是一种复用状态逻辑的方式，每次调用都有一个完全独立
 2. **不要**在循环、条件判断或者子函数中调用 Hook。想要有条件地执行一个 effect，可以将判断放到 Hook 的内部
 3. 按照代码的用途分离
 4. 如果新的 state 需要通过使用先前的 state 计算得出，将箭头函数传递给 setState。该函数接收先前的 state，并返回一个更新后的值。
+
+用class写，如果有使用timer，很容易忘记在unmounted函数里面clear计时器
+
+## 引入图片
+
+除了在文件顶部使用 import 方式作为变量引入，还可以直接在组件上通过 require 引入
+
+```js
+<img rc={require('image/product.png')} alt='prodcut' />
+```
