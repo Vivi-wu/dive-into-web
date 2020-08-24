@@ -2,7 +2,15 @@
 title:  "Node.js相关"
 category: JavaScript
 ---
-检查 node 版本
+JS 是客户端编程语言，通过 Node.js，JS也可以服务端语言被使用。
+
+使用 npm 初始化新项目，命令行工具运行： `npm init`
+
+根据提示输入 package name、version number、description。通过 enter 键跳过，最终生成 package.json 文件。
+
+<!--more-->
+
+## 检查 node 版本
 
 ```bash
 node -v
@@ -15,9 +23,7 @@ node -v
 
 Node.js 环境每输入一行代码就执行一行（每行 JavaScript 代码的结果会自动打印出来），直接运行 JavaScript 文件，相当于一次性执行所有源代码，除非使用console打印，否则输出没有显示。
 
-<!--more-->
-
-### 在VS Code运行调试JS代码
+### 在 VS Code 运行调试JS代码
 
 左侧边栏点击小虫子图标（调试并运行），（当前目录不存在的情况下）点击“创建lanch.json文件”。在出现的侧边栏上方点击小齿轮图标（打开launch.json），修改 `"program": "${workspaceRoot}/hello.js"` 该属性值，表示运行当前目录下某文件。点击绿色小播放键图标（开始调试）。在“调试控制台”里可以看到输出结果。
 

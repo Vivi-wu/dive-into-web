@@ -11,7 +11,7 @@ category: JavaScript
 
 对象的键名可以使用变量定义，在创建对象时使用 bracket notation 方括号圈起来，如 {[phoneType]: 12345} 
 
-## Spread syntax (...)
+## Spread syntax (...) 扩展
 
 **对象字面量**扩展属性，相当于 Object.assign() 的简写。https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
 
