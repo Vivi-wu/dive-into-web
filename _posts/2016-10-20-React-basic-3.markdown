@@ -4,19 +4,11 @@ category: JavaScript
 ---
 ## Forms 表单
 
-`<input>`, `<textarea>` 和 `<select>` 之类的标签，通常保持自己的状态，并根据用户输入更新状态。当一个表单输入元素的 value 由 React state 控制，称之为 controlled component 受控组件。
+HTML 表单元素（如 `<input>`、`<textarea>`、`<select>`）通常维护自己的状态并根据用户输入进行更新。表单提交默认行为的刷新页面，但大多数情况下我们希望通过JS处理数据提交。在 React 里通过受控组件实现。
 
-以下受控组件在各浏览器中表现一致：
+当一个表单输入元素的 value 由 React state 控制，称之为 controlled component。
 
-`<input type="text">` 或 `<textarea>` 值的改变，覆盖 DOM 内置的 `oninput` 事件处理函数
-
-`<input>` 多选框或单选框 _checked_ 状态的改变
-
-`<option>` _selected_ 状态的改变
-
-<!--more-->
-
-受控组件使用：
+以下受控组件的使用非常相似：
 
 ```js
 <input type="text" value={this.state.value} onChange={this.handleChange} />
@@ -29,15 +21,29 @@ category: JavaScript
 </select>
 ```
 
-如果输入组件不含 `value` 属性的称为 uncontrolled component 不受控组件。任何用户输入都直接反应在渲染的元素上。可以像受控组件一样给 onChange 属性绑定处理函数。
+<!--more-->
 
-因为 `<input type=“file”>` 的 value 只读，所以它是 React 中的一个非受控组件。
+以下受控组件在各浏览器中表现一致：
+
+`<input type="text">` 或 `<textarea>` 值的改变，覆盖 DOM 内置的 `oninput` 事件处理函数
+
+`<input>` 多选框或单选框 _checked_ 状态的改变
+
+`<option>` _selected_ 状态的改变
 
 当需要处理多个 input 元素时，我们可以给每个元素添加 name 属性，并让处理函数根据 `event.target.name` 的值来选择要更新的状态。
 
 要编写一个非受控组件，而不是为每个状态更新都编写数据处理函数，你可以 使用 ref 来从 DOM 节点中获取表单数据。
 
-## 组件生命周期 Lifecycle
+注意：如果设置了 `value` 值，input 框仍然可以编辑，很可能是你不小心把 value 设为了 undefined 或者 null
+
+### 非受控组件
+
+如果输入组件不含 `value` 属性的称为 uncontrolled component 不受控组件。可以像受控组件一样给 onChange 属性绑定处理函数。
+
+`<input type="file">` 的 value 是只读的，所以它是 React 中的一个非受控组件。
+
+## 组件生命周期 Lifecycle methods
 
 React 提供 **will**（在事件发生前）和 **did**（在事件发生后）方法，即 Lifecycle Methods。
 
@@ -55,7 +61,7 @@ React 提供 **will**（在事件发生前）和 **did**（在事件发生后）
 
 `render()`，返回 JSX 表示对象。
 
-`componentDidMount()`，调用所有组件的 render 函数之后，组件输出呈现到 DOM 之后调用此函数。只在**浏览器端**调用，因为服务器端渲染不会产生 DOM 树。在这个钩子函数里做 DOM 节点的初始化、执行 ajax call，这样可以使用 setState 更新组件状态
+`componentDidMount()`，组件的 render 函数执行完毕，组件第一次输出呈现到 DOM 之后调用此函数。只在**浏览器端**调用，因为服务器端渲染不会产生 DOM 树。在这个钩子函数里做 DOM 节点的初始化、执行 ajax call，这样可以使用 setState 更新组件状态
 
 ### Updating
 
@@ -77,7 +83,7 @@ React 提供 **will**（在事件发生前）和 **did**（在事件发生后）
 
 对应方法：
 
-`componentWillUnmount()`，在此函数里写一些清理工作。
+`componentWillUnmount()`，在此函数里做一些清理工作，如 clear timer
 
 ## `Refs` and the DOM
 
@@ -136,31 +142,55 @@ By default, use the Reactive data flow and save refs for use cases that are inhe
 
 随着app变大，考虑code spliting。比较好的实践是根据路由来拆分代码。
 
-### 官方文档错误
+## Fragments
 
-Using Global Variables，Alternatively, you can force the linter to ignore any line by adding  `// eslint-disable-line` after it.
-不起作用。应该使用 `// eslint-disable-next-line`
-或者在文件最开始处，`/*global fbq, gtag*/` 告诉eslint全局变量名
-`
+有时为了让 React 运行，我们在 JSX 里添加 `<div>` 作为根节点，破坏了 HTML 的语义。如： lists (`<ol>`, `<ul>` and `<dl>`) 还有 `<table>`。此时可以使用 `<Fragment></Fragment>` 作为根节点。缩写形式：`<></>`
 
-## Thinking in React
+### Prop Validation
 
-当你在创建app时， React是如何使你思考的。
+prop 是组件的对外接口，那么应该可以规范：支持哪些 prop，每个prop 应该是什么格式。
 
-1. Break The UI Into A Component Hierarchy，根据设计图，用方框画划分出组件层级。以“single responsibility principle”单一责任原则，划分组件。UI和数据模型倾向于遵循相同的信息体系结构。
-2. Build A Static Version in React，用 React 构建一个静态版。（用已有的数据模型渲染一个不包含交互功能的 UI）通过 _props_ 传递数据，完全不使用 _state_（state只在有交互时使用）。简单例子，自上而下写组件；大型项目，自下而上写，顺便写下test case。
-3. Identify The Minimal (but complete) Representation Of UI State，确定 UI 所需**最少**的可变状态。以“Don't Repeat Yourself”原则。以下情况都可以**排除**使用 _state_:
+出于性能考虑，仅在开发阶段进行 `propTypes` 检查。若有 invalid value，会在浏览器 JS console 中报错。
 
-  + 变量通过 props 从父组件传进来
-  + 不随时间改变
-  + 可以基于当前组件的 state、props 计算得到
+```js
+class Greeting extends React.Component {
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
+    );
+  }
+}
+Greeting.propTypes = {
+  name: React.PropTypes.string
+};
+```
 
-4. Identify Where Your State Should Live，鉴定哪个组件拥有这个状态，铭记 React 是单向数据流。对于应用中每一个state，看看哪些组件需要基于它来渲染，找到公共owner组件（在所有组件层级树之上的）
-5. Add Inverse Data Flow，支持反向的数据更新，通过 `setState()` 方法。
+更多用法参考[这里](https://facebook.github.io/react/docs/reusable-components.html).
 
-用以上方式写 React 会比我们习惯的方式多一些typing。但是请 remember that code is read far more than it’s written, and it’s less difficult to read this modular, explicit code.比起写，代码更多地是给人看的。当你开始构建更大的组件库时，你会意识到这种代码模块化和清晰度的重要性。并且随着代码重用程度的加深，你的代码行数也会显著地减少。
+### Default Prop values
 
-React 是 one-way data flow（单选数据流）。
+通过 `defaultProps` 给父组件的 _props_ 设置默认值。使我们可以安全地使用 props，不必担心没有值，也避免重复书写。
+
+```js
+class Greeting extends React.Component {
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
+    );
+  }
+}
+// Specifies the default values for props:
+Greeting.defaultProps = {
+  name: 'Stranger'
+};
+// Renders "Hello, Stranger":
+ReactDOM.render(
+  <Greeting />,
+  document.getElementById('example')
+);
+```
+
+无状态的函数仍然可以设置 `propTypes` 和 `defaultProps`。
 
 ## 实践中遇到的问题
 
@@ -215,40 +245,3 @@ props：
 3.没有 v-model 的 trim 等修饰符
 
 子组件 state 没更新是不会触发 render 渲染的。
-
-什么时候需要用Redux：
-
-+ 跨多层组件共享状态/数据，不好追踪，还会引起性能问题，每一个数据变动引起所有子组件重新渲染。
-+ 通过 hot reload 提升开发效率。
-
-**不建议**使用inline style，除非需要在render time动态添加计算的样式。
-
-file structure：一个项目中文件层级嵌套不要超过3-4层。
-
-Virtual DOM：更多的是一种模式，而不是一种特定的技术。在 React 的话术里，经常与 React elements 相关，它们是代表UI的对象。
-
-[Redux vs. MobX](https://blog.logrocket.com/redux-vs-mobx/)
-
-Redux:
-+ 单一 store（一个巨大的 JSON 对象）
-+ store中的state不可变
-+ 通过action触发改变
-+ 通过reducers更新状态
-
-MobX：
-+ 可以有多个 store（许多应用设计有至少2个sote，一个为当前应用设计的UI store，一个可复用的领域状态）
-+ 无需进一步交互的任何可从state推导出的东西，都是推导
-+ action是可以改变state的一段代码
-+ state改变时，所有推导自动更新
-
-popularity: Redux
-learning curve：Mobx（Redux - Flux architecture and functional programming concepts；MobX - object-oriented programming，writing less code）
-data structure：MobX（Redux：纯JS对象存储state，需手动跟踪变化，更难维护大型状态；MobX使用可观察数据，通过隐式订阅自动跟踪更改）
-代码量：MobX（Redux 本质上是显式的，必须对许多功能进行显式编码。MobX相比代码量少，易于学习和设置）
-Developer community：Redux（从github start数、npm周下载量）
-scalability： Redux（纯函数易扩展、测试）
-
-如果您希望快速起步并以更少的代码构建简单的应用程序，那么选 MobX。
-
-Redux 是 pure 的，function(state, action) => newState
-MobX 中状态是可变的，是 impure 的。难以测试和维护，不总是返回可预测的输出。

@@ -72,14 +72,6 @@ React 是一个声明式的灵活高效的用于构建 UI 的 js 库。由 Faceb
 
 更多用法参考这里：[JSX 语法](https://facebook.github.io/react/docs/jsx-in-depth.html)
 
-### 条件渲染
-
-通过 `expression && element` 在 JSX 中实现 inline 的 if 渲染组件。因为 false && expression 结果是 false，React 会忽略。
-
-通过 `condition ? elementA : elementA` 在 JSX 中实现 inline 的 if-else 渲染组件。
-
-阻止组件渲染，從組件的 render 方法 return null。这不影响组件的生命周期方法执行。
-
 ### JSX Spread Attributes 属性的传递
 
 当 React 元素为用户自定义组件时，它会将 JSX 所接收的属性（attributes）转换为单个对象传递给组件，这个对象被称之为 “props”。
