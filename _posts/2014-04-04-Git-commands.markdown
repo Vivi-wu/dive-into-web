@@ -10,7 +10,6 @@ category: Other
 
     git config --global user.name "Vivienne"
     git config --global user.email vivienne@example.com
-    git config --global alias.st status
 
 可在 `～/.gitconfig` 文件里查看 Git 全局配置。
 
