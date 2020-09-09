@@ -198,9 +198,10 @@ tmpArry = Object.values(this.otherStoreUrl).filter(ele => ele.length > 1)
 1.使用 `Object.assign(target, ...sources)` 方法返回 target 对象，只复制源对象 property 的值。
 
 + 如果 source 属性值是指向某对象（内嵌子对象）的 reference，将只复制 reference 的值（即，此方法**不能做到深度复制**，源对象中的子对象属性值变化，会同时改变复制对象中同名子对象的同名属性值）
-+ 按**从左到右**的顺序依次复制和重写属性值（最右边的 override 前面所有）
++ 按**从左到右**的顺序依次复制和 override 属性值（最右边的覆蓋前面所有）
 + 不复制 non-enumerable、在原型链上的属性
 + 遇到 exception 时中断 copying 任务（如遇到 read-only 的属性时，throw exception）
++ **忽略**值为 _null_、_undefined_ 的属性
 
 2.使用 `JSON.parse(JSON.stringify(sourceObj))` 可以做到**深度复制**。跨浏览器，且性能最优。
 
