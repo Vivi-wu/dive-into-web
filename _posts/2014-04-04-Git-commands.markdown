@@ -47,6 +47,7 @@ This command displays the state of the working directory and the staging area. L
     git log
     git log -p <file>
     git log --pretty=oneline
+    git log <commit> 以某个 commit 作为查看历史的起点
 
 显示当前分支的版本历史，含提交的 hash ID 和提交信息。
 
@@ -170,6 +171,60 @@ Check out the specified branch. This makes existing-branch the current branch, a
     git branch -m <branch_new_name>
 
 Rename the current branch to branch_new_name. 重命名当前分支。
+
+## Git 内部原理
+
+[Git 引用](https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%BC%95%E7%94%A8)
+
+Git使用文件来保存提交对应的 SHA-1 值，这些文件以简单的名字命名，名字的指针替代原始的 SHA-1 值。在 Git 中，这种简单的名字被称为“引用（references，或简写为 refs）”。
+
+查看项目引用
+
+    find .git/refs
+
+不直接编辑引用文件，如果想更新某个引用，则使用 update-ref，在指定提交上创建一个分支
+
+    git update-ref refs/heads/<branch_name> <commit>
+
+这基本就是 Git 分支的本质：一个指向某一系列提交之首的指针或引用。
+
+## 使用 tag
+
+Git 主要的对象类型除了数据对象、树对象 提交对象，还有标签对象（tag object）。标签非常类似于一个提交对象——它包含一个标签创建者信息、一个日期、一段注释信息，以及一个指针。主要的区别在于，标签对象通常指向一个提交对象，而不是一个树对象。
+
+它像是一个永不移动的分支引用——永远指向同一个提交对象。
+
+结合实例：公司通用组件库在不同项目里通过指定内部代码仓库特定分支名来锁定版本，某天运维在不知情的情况下把项目里所有merged分支全删了，导致项目构建时npm install找不到依赖报错。
+
+```json
+// package.json
+"dependencies": {
+  "front-components": "git+ssh://git@gitlab.xxx.com:front-components.git#v1.0.0",
+}
+// package-lock.json
+"front-components": {
+  "version": "git+ssh://git@gitlab.xxx.com:front-components.git#6d4fd50c5cbe88145e9b73d03ff8023da706f648",
+  "from": "git+ssh://git@gitlab.xxx.com:front-components.git#v1.0.0",
+},
+```
+解决：
+1.本地拉取组件库 master 分支最新代码
+2.确认指定的提交是否曾经合并到 master 分支：git log 6d4fd50c5cbe88145e9b73d03ff8023da706f648（我们约定分支推远端，线上发布后，都需要合并到 master 分支）
+3.基于提交id创建标签：git tag v1.0.0 6d4fd50c5cbe88145e9b73d03ff8023da706f648
+4.列出所有标签：git tag
+5.确认标签已关联指定提交：git show v1.0.0
+6.同步标签到远端仓库：git push origin v1.0.0
+
+补充：
+删除本地标签
+
+    git tag -d <tag_name>
+
+创建带有说明的标签，用-a指定标签名，-m指定说明文字
+
+    git tag -a <tag_name> -m "version 0.1 released" <commit>
+
+参考[Git标签和分支](https://www.jianshu.com/p/096ba51647e7)
 
 ## Syncing
 

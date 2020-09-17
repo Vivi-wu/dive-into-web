@@ -55,7 +55,7 @@ Telerik Fiddler 主要用在 Windows 系统下，官方也有 mac os 版，但�
 
 1. 打开 Fiddler，Tools ——> Options ——> HTTPS，如图勾选：
 
-<img src="{{ "/assets/images/fiddler_https_setting" | prepend: site.baseurl }}" alt="Configure Fiddler to decrypt HTTPS traffic">
+<img src="{{ "/assets/images/fiddler_https_setting.png" | prepend: site.baseurl }}" alt="Configure Fiddler to decrypt HTTPS traffic">
 
 在 Connections 一栏中可查看 Fiddler 端口号。
 

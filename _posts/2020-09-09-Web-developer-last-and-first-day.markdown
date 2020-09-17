@@ -34,6 +34,10 @@ category: Other
 
 下载并安装 Sublime Text、Visual Studio Code、Node.js
 
+### Sublime Text
+
+shift+command+p，唤起 Package Control，安装完毕后，选择 Package Control：Install Package，等待 loading 可安装包结束，在输入框里安装 Git、TrailingSpaces 插件。
+
 ### VS code
 
 在扩展里安装中文简体官方插件。其他常用扩展：
