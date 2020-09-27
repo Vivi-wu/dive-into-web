@@ -40,7 +40,9 @@ shift+command+p，唤起 Package Control，安装完毕后，选择 Package Cont
 
 ### VS code
 
-在扩展里安装中文简体官方插件。其他常用扩展：
+在扩展里安装常用扩展插件：ESLint、gitk、GitLens、Simple React Snippets
+
+编辑器设置：Code-》Preferences-〉Settings：Word Wrap，改为 On（自动换行显示），Tab Size 改为 2（以两个spaces缩进）
 
 ### SSH Key
 

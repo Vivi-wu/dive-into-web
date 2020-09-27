@@ -9,21 +9,21 @@ category: Other
     (123456).toLocaleString('en-IN', { style: 'currency', currency: 'INR'}) // "₹1,23,456.00"
     (-123456).toLocaleString('en-IN', { style: 'currency', currency: 'INR'}) // "-₹1,23,456.00"
 
-很神奇，很方便。但是UI的设计里，把表示复数的符号 '-' 放在了货币符号与数字之间。这样前端就需要对上述方法的输出结果进行处理。
+很神奇，很方便。但是UI的设计里，把表示负数的符号 '-' 放在了货币符号与数字之间。这样前端就需要对上述方法的输出结果进行处理。
 
-为了说法UI采用 JS 的默认形式，我开始找资料。下面就记录这个过程。
+为了说服 UI 采用 JS 方法输出的格式，我开始找资料。下面就记录这个过程。
 
 <!--more-->
 
 1. 首先从[MDN文档：Number.prototype.toLocaleString
 ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString) 入手
-2. 通过 Specifications 找到[ECMA-262文档](https://tc39.es/ecma262/#sec-number.prototype.tolocalestring) 然而只是说该函数是根据主机当前语言环境的约定，format 当前 Number 值，生成一个字符串值。
-3. 接上条，引出了 [ECMA-402](https://tc39.es/ecma402/#sup-number.prototype.tolocalestring) API，该规范在ES2020取代了262. 没啥有价值的信息，直接进入 [FormatNumeric 方法](https://tc39.es/ecma402/#sec-formatnumber)
-4. 直接进入方法[PartitionNumberPattern(numberFormat, x)](https://tc39.es/ecma402/#sec-partitionnumberpattern) 该方法将 x 解释为数字型的值，并根据有效的语言环境和 numberFormat 的格式设置创建相应的组成部分。依次判断 x 是否 NaN、 Infinity、百分数、指数。根据[ FormatNumericToString](https://tc39.es/ecma402/#sec-partitionnumberpattern) 方法根据 RoundingType、MinimumSignificantDigits、MaximumSignificantDigits、MinimumIntegerDigits、MinimumFractionDigits、MaximumFractionDigits 这些格式化参数，返回 x 的两个值：一个是字符串值，另一个是执行了四舍五入后 x 的最终 float 十进制值
-5. 通过[GetNumberFormatPattern方法](https://tc39.es/ecma402/#sec-getnumberformatpattern) 生成一个 patternParts 模式。针对结果的模式数组项依次进行判断，是否为 literal，number，加号，减号，百分号，前缀单位，后缀单位，货币code，前缀货币，后缀货币。
-6. 继续翻到[PartitionNotationSubPattern](https://tc39.es/ecma402/#sec-partitionnotationsubpattern) 看到匹配图4的 Numbering System，跳转图四，没怎么看明白，看到下面 Note 2 写到，建议 implementations 通用语言环境数据存储库 cldr [Common Locale Data Repository](http://cldr.unicode.org) 提供的语言环境.
-7. 方法看到了曙光。这个 CLDR 提供了软件支持世界语言的 key building blocks，具有最大和最广泛的区域设置数据标准存储库。包括：
-
+2. 通过 Specifications 找到[ECMA-262文档](https://tc39.es/ecma262/#sec-number.prototype.tolocalestring) 然而只是说该函数是根据主机当前语言环境的约定，把当前 Number 值格式化成一个字符串值。
+3. 接上条，引出了 [ECMA-402](https://tc39.es/ecma402/#sup-number.prototype.tolocalestring) API，该规范在 ES2020 取代了 ECMA-262. 没啥有价值的信息，直接进入 [FormatNumeric 方法](https://tc39.es/ecma402/#sec-formatnumber)
+4. 直接进入方法 [PartitionNumberPattern(numberFormat, x)](https://tc39.es/ecma402/#sec-partitionnumberpattern) 该方法将 x 解释为数字型的值，并根据有效的语言环境和 numberFormat 格式设置，创建相应的组成部分。依次判断 x 是否 NaN、Infinity、百分数、指数。
+[FormatNumericToString 方法](https://tc39.es/ecma402/#sec-partitionnumberpattern) 根据 RoundingType、MinimumSignificantDigits、MaximumSignificantDigits、MinimumIntegerDigits、MinimumFractionDigits、MaximumFractionDigits 这些格式化参数，返回 x 的两个值：一个是字符串值，另一个是执行了四舍五入后 x 的最终 float 十进制值。
+5. 通过 [GetNumberFormatPattern 方法](https://tc39.es/ecma402/#sec-getnumberformatpattern) 生成一个 patternParts 模式。针对结果的模式数组项依次进行判断，是否为 literal，number，加号，减号，百分号，前缀单位，后缀单位，货币 code，前缀货币，后缀货币。
+6. 继续翻到 [PartitionNotationSubPattern](https://tc39.es/ecma402/#sec-partitionnotationsubpattern) 看到匹配图4的 Numbering System，跳转图四，没怎么看明白，看到下面 Note 2 写到，建议 implementations 通用语言环境数据存储库 CLDR [Common Locale Data Repository](http://cldr.unicode.org) 提供的语言环境.
+7. 仿佛看到了曙光。这个 CLDR 提供了软件支持世界语言的 key building blocks，具有最大和最广泛的区域设置数据标准存储库。包括：
     
     用于格式化和解析的指定语言环境的模式: dates, times, timezones, numbers and currency values, measurement units,…
     名称翻译: languages, scripts, countries and regions, currencies, eras, months, weekdays, day periods, time zones, cities, and time units, emoji characters and sequences (and search keywords),…
@@ -31,25 +31,26 @@ category: Other
     国家信息: language usage, currency information, calendar preference, week conventions,…
     校验: Definitions, aliases, and validity information for Unicode locales, languages, scripts, regions, and extensions,…
 
-8. 接着进入[Unicode Technical Standard #35 UNICODE LOCALE DATA MARKUP LANGUAGE (LDML)](http://www.unicode.org/reports/tr35/) 直接跳转至第三部分[Numbers](https://www.unicode.org/reports/tr35/tr35-numbers.html#Contents) 看到了熟悉的 Numbering Systems，用于为最终用户定义数值的不同表示形式。
-9. 在[Number Elements](https://www.unicode.org/reports/tr35/tr35-numbers.html#Number_Elements) 部分，提到这个是提供格式化解析数字和货币的信息。引出[ISO 4217 CURRENCY CODES](https://www.iso.org/iso-4217-currency-codes.html){:target="_blank"}
-10. 在[Number Symbols](https://www.unicode.org/reports/tr35/tr35-numbers.html#Number_Symbols) 部分，我们看到了 group 的概念：将整数分组，使大值数字更清晰；通常用于数千（分组大小是3，例如“100,000,000”）。与货币有关的两个概念：currencyDecimal（小数点分隔符，可选的。如果指定，则替代常规的十进制小数点分隔符 `.`）、currencyGroup（分组分隔符，可选的。如果指定，则替代常规的分组分隔符 `,` ）
-11. 在[Currency Formats](https://www.unicode.org/reports/tr35/tr35-numbers.html#Currency_Formats) 部分，我们看到 “In addition to a standard currency format, in which negative currency amounts might typically be displayed as something like “-$3.27”, locales may provide an "accounting" form, in which for "en_US" the same example would appear as “($3.27)”. 也就是对于负值的货币金额，通常这样展示。参下面举例。
-12. 在[Number Format Patterns](https://www.unicode.org/reports/tr35/tr35-numbers.html#Number_Format_Patterns) 部分，指出 "¤" 符号指出 currency sign 的位置
-13. 在[Rounding](https://www.unicode.org/reports/tr35/tr35-numbers.html#Rounding) 部分指出：一些语言在它们的货币格式使用 rounding，以反应最小的货币面额，参下面举例。
-14. 从 CLDR Releases/Downloads [这里](http://cldr.unicode.org/index/downloads) 可以下载到完整的dtd文档
-15. 在[Currencies 部分](https://www.unicode.org/reports/tr35/tr35-numbers.html#Currencies) 看到了以下信息：
+8. 接着进入[Unicode Technical Standard #35 UNICODE LOCALE DATA MARKUP LANGUAGE (LDML)](http://www.unicode.org/reports/tr35/) 直接跳转至第三部分 [Numbers](https://www.unicode.org/reports/tr35/tr35-numbers.html#Contents) 看到了熟悉的 Numbering Systems，用于为最终用户定义数值的不同表示形式。
+9. 在 [Number Elements](https://www.unicode.org/reports/tr35/tr35-numbers.html#Number_Elements) 部分，提到这个是提供格式化解析数字和货币的信息。引出[ISO 4217 CURRENCY CODES](https://www.iso.org/iso-4217-currency-codes.html){:target="_blank"}
+10. 在 [Number Symbols](https://www.unicode.org/reports/tr35/tr35-numbers.html#Number_Symbols) 部分，我们看到了 group 的概念：将整数分组，使大值数字更清晰；通常用于数千（分组大小是3，例如“100,000,000”）。与货币有关的两个概念：currencyDecimal（小数点分隔符，可选的。如果指定，则替代常规的十进制小数点分隔符 `.`）、currencyGroup（分组分隔符，可选的。如果指定，则替代常规的分组分隔符 `,` ）
+11. 在 [Currency Formats](https://www.unicode.org/reports/tr35/tr35-numbers.html#Currency_Formats) 部分，我们看到 “In addition to a standard currency format, in which negative currency amounts might typically be displayed as something like “-$3.27”, locales may provide an "accounting" form, in which for "en_US" the same example would appear as “($3.27)”. 也就是对于负值的货币金额，通常这样展示。参下面举例。
+12. 在 [Number Format Patterns](https://www.unicode.org/reports/tr35/tr35-numbers.html#Number_Format_Patterns) 部分，使用 "¤" 符号指出 currency sign 的位置
+13. 在 [Rounding](https://www.unicode.org/reports/tr35/tr35-numbers.html#Rounding) 部分指出：一些语言在它们的货币格式使用 rounding，以反应最小的货币面额，参下面举例。
+14. 从 [CLDR Releases/Downloads](http://cldr.unicode.org/index/downloads) 可以下载到完整的 dtd 文档
+15. 在 [Currencies 部分](https://www.unicode.org/reports/tr35/tr35-numbers.html#Currencies) 看到了以下信息：
 
-    + 例如： `<unitPattern count="other">{0} {1}</unitPattern>` 匹配的 unitPattern element 指出了 the appropriate **positioning** of the numeric value and the currency display name（数值和货币展示名称的位置），Substitute the formatted numeric value for the {0} in the unitPattern, and the currency display name for the {1}.例如：货币是 ZWD，金额是 1234, The unit pattern for that is "{0} {1}", and the display name is "Zimbabwe dollars". The final formatted number is then "1,234 Zimbabwe dollars".
-    + 一旦一个货币金额输入进系统，在所有处理过程重，都应该伴随一个 currency code。货币代码是独立于用户本地语言环境的。 
+    + 例如：`<unitPattern count="other">{0} {1}</unitPattern>` 匹配的 unitPattern element 指出了 the appropriate **positioning** of the numeric value and the currency display name（数值和货币展示名称的位置），Substitute the formatted numeric value for the {0} in the unitPattern, and the currency display name for the {1}.例如：货币是 ZWD，金额是 1234, The unit pattern for that is "{0} {1}", and the display name is "Zimbabwe dollars". The final formatted number is then "1,234 Zimbabwe dollars".
+    + 一旦**一个货币金额输进系统，在所有处理过程中，都应该伴随一个 currency code**。
+    + 货币代码是独立于用户本地语言环境的。
 16. 注意：每一种货币的小数位数、是否四舍五入，不是 locale-specific 数据, **不包含** 在 the Locale Data Markup Language format.
 
 ### ISO 4217 
 
-由 International Organization for Standardization 国际标准化组织与1978年首次公布。
+该标准由 International Organization for Standardization 国际标准化组织于1978年首次公布。
 
 Currencies are represented both numerically and alphabetically, using either three digits or three letters.
-币种同时用数字或字符形式表示（以3位数字或3位字母）。
+币种以 3 位数字或 3 位字母，可以同时用数字或字符形式表示。
 
 [ISO 4217 CODES完整版](https://www.currency-iso.org/dam/downloads/lists/list_one.xml){:target="_blank"} 举个例子解读：
 
@@ -65,12 +66,21 @@ Currencies are represented both numerically and alphabetically, using either thr
 ```
 美元、人民币、欧元的 CcyMnrUnts 都是 2，即默认小数点后保留2位数（Currency formats should have two zeros in the fractional position [通常小数位应该有2个零](https://www.unicode.org/reports/tr35/tr35-numbers.html#Special_Pattern_Characters)），最小单位是分。而日元、韩元的 CcyMnrUnts 都是 0.
 
-有的货币符号在前，有的在后。日元、人名币、美元、卢比都在前，法国欧元在后。
+有的货币符号在前，有的在后。日元、人名币、美元、卢比、英镑都在前，法国欧元在后。
 
-    (1234.56).toLocaleString('ja-JP', { style: 'currency', currency: 'JPY'}) // "￥1,235" 负数 "-￥1,235"
-    (1234.56).toLocaleString('zh-CN', { style: 'currency', currency: 'CNY'}) // "¥1,234.56" 负数 "-¥1,234.56"
-    (1234.56).toLocaleString('en-US', { style: 'currency', currency: 'USD'}) // "$1,234.56" 负数 "-$1,234.56"
+    (1234.56).toLocaleString('ja-JP', { style: 'currency', currency: 'JPY'}) // "￥1,235"    负数 "-￥1,235"
+    (1234.56).toLocaleString('zh-CN', { style: 'currency', currency: 'CNY'}) // "¥1,234.56"  负数 "-¥1,234.56"
+    (1234.56).toLocaleString('en-US', { style: 'currency', currency: 'USD'}) // "$1,234.56"  负数 "-$1,234.56"
+    (1234.56).toLocaleString('en-IN', { style: 'currency', currency: 'INR'}) // "₹1,234.56"  负数 "-₹1,234.56"
+    (1234.56).toLocaleString('en-GB', { style: 'currency', currency: 'GBP'}) // "£1,234.56"  负数 "-£1,234.56"
     (1234.56).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR'}) // "1 234,56 €" 负数 "-1 234,56 €"
-    (1234.56).toLocaleString('en-IN', { style: 'currency', currency: 'INR'}) // "₹1,234.56" 负数 "-₹1,234.56"
 
 [维基百科可视化一览表](https://en.wikipedia.org/wiki/ISO_4217)，延伸阅读数字系统的小数点、分隔符[Digit grouping](https://en.wikipedia.org/wiki/Decimal_separator)。
+
+## Language tags
+
+语言标签，参考维基百科 [Examples of language tags](https://en.wikipedia.org/wiki/Language_localisation)，这个表格简单明了。
+
+语言标签可见于 HTML 元素的 lang 标签属性值，由 [BCP 47](https://tools.ietf.org/html/bcp47) 规定。
+
+举例：`en-GB`，该标签由 2个 sub-code 组成，中间由 `-` 连接，有时用 `_` 连接。第一个的 sub-code 为主要代码，表示语言是英语。第二个 sub-code 是可选的，用大写字母表示国家是英国（两位国家代码，根据 [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)）.
