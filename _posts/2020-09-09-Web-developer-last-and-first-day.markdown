@@ -44,6 +44,8 @@ shift+command+p，唤起 Package Control，安装完毕后，选择 Package Cont
 
 编辑器设置：Code-》Preferences-〉Settings：Word Wrap，改为 On（自动换行显示），Tab Size 改为 2（以两个spaces缩进）
 
+格式化相关：勾选 Format On Save、Format On Type、Trim Trailing Whitespace
+
 ### SSH Key
 
 公司代码库设置里找到添加 SSH Key 的地方，根据提示在本地生成新的 public SSH Key。命名规则：电脑+公司邮箱

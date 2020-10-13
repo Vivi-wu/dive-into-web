@@ -40,7 +40,7 @@ Mac 上用 `Tab` 键不能自动补全 Git 分支名称，每次都要手动输�
         alias gc='git commit'
         alias ga='git add'
         alias gd='git diff'
-        alias gck='git checkout'
+        alias gm='git merge'
         alias gplm='git pull origin master'
         alias gpsm='git push origin master'
         alias gplt='git pull origin test'

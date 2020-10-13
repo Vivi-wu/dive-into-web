@@ -10,7 +10,19 @@ start .
 
 [一个比较全的windows用户命令行汇总](http://johnatten.com/2012/09/08/basic-git-command-line-reference-for-windows-users/)
 
+## 执行 shell 文件
+
 使用 *.sh 文件，在命令行终端里运行 ./*.sh
+
+Mac 下提示“permission denied”，解决：
+
+[在 Mac 上的“终端”中使文件可执行](https://support.apple.com/zh-cn/guide/terminal/apdd100908f-06b3-4e63-8a87-32e71241bab4/mac)
+
+```sh
+chmod 755 文件名.sh
+```
+
+<!--more-->
 
 ## 输出日期时间
 

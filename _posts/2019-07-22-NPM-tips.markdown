@@ -17,6 +17,18 @@ npm config get registry
 
 <!--more-->
 
+## Semantic Versioning 语义化版本
+
+版本格式：MAJOR.MINOR.PATCH（主版本号.次版本号.修订号）如：1.0.0
+
+版本号递增规则如下：
+
++ 主版本号：当你做了不兼容的 API 修改
++ 次版本号：当你做了向下兼容的功能性新增
++ 修订号：当你做了向下兼容的问题修正
+
+先行版本号及版本编译元数据可以加到“主版本号.次版本号.修订号”的后面，作为延伸。如：1.0.0-beta
+
 ## npm脚本指令
 
 [npm-scripts](https://docs.npmjs.com/misc/scripts)
@@ -30,6 +42,7 @@ Additionally, arbitrary scripts can be executed by running `npm run-script <stag
     "postbuild": "rimraf ./build/**/*.js.map"
 
 ### macOS升级npm
+
 从[Node.js官方](https://nodejs.org/zh-cn/)下载pkg文件安装的 Node.js 如何升级？
 
 直接下载最新稳定版 pkg 文件根据指令安装即可。
