@@ -38,6 +38,8 @@ category: Other
 
 shift+command+p，唤起 Package Control，安装完毕后，选择 Package Control：Install Package，等待 loading 可安装包结束，在输入框里安装 Git、TrailingSpaces 插件。
 
+常用扩展插件：Git、MarkdownPreview、TrailingSpaces
+
 ### VS code
 
 在扩展里安装常用扩展插件：ESLint、gitk、GitLens、Simple React Snippets

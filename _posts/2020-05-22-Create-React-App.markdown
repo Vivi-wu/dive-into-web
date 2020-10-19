@@ -52,7 +52,7 @@ package.json 文件里的 `browserslist` 配置，使得开发时适于现代浏
 
 ### eject
 
-H5项目里引入mobX使用decorator，需要配置eslint，要么eject，要么官方推荐fork react-scripts。这次先eject
+H5项目里引入mobX使用decorator，需要配置eslint，要么eject，要么官方推荐fork react-scripts。这次先 eject
 
 ## Pre-rendering HTML
 
@@ -121,3 +121,32 @@ require('postcss-px-to-viewport')({
 社区没有统一解决方案，不稳定。
 
 好吗那就不用装饰器的写法，安那个customize-cra，结果报路径找不到，其他的问题。
+
+## antd
+
+2020.7.8
+国外主流都用 sass，且CRA默认支持 sass-loader，antd 官方只支持less，不提供好的适配方法，让自己 google。
+
+针对不同情况的解决办法：
+
++ 静态单页面（含少量js交互，使用已封装好的第三方组件），选用 sass，bootstrap 按需引入，抽出颜色、字体变量文件，在组件里 override 样式。使用 react-app-rewired、customize-cra。【Easyboost landing】
++ 复杂单页应用（需要 auth，单独 login 页，含路由），eject【Easyboost】
+
+最新版create react app创建项目后，官方加了一个 `<React.StrictMode>` 于是 antD 的 button 组件报错
+https://github.com/ant-design/ant-design/issues/22493
+Using <Button> results in "findDOMNode is deprecated in StrictMode" warning
+
+想抽出 Sider 组件，单独侦听数量变化，结果不行，必现放在 layout 组件里，且影响布局
+
+Input 组件没有校验，必现内嵌在Form组件里。校验规则设置在 Form.Item 组件上，且必须提供 name（相当于提交字段名，默认会设置为组件 id 的属性值），同时在 Form 组件 initialValues 里提供同名属性及输入框初始值
+
+清空输入框后显示 placeholder，必须设置 value 为 null
+
+在 Form 组件上设置唯一name，移除console warning（列表循环内有form，会导致输入组件id重名）。[表单名称](https://ant.design/components/form-cn/) 会作为表单字段 id 前缀使用
+
+Modal组件 mask 的 z-index 默认是1000，当页面上同时有多个modal，最好按层级关系手动设置的 z-index，否则可能因为 modal 渲染的顺序，导致互相遮挡
+
+todo：
+1.社区精选组件https://ant.design/docs/react/recommendation-cn
+2.antd 目前的默认文案是英文，antd 提供了一个 React 组件 ConfigProvider 用于全局配置国际化文案
+
