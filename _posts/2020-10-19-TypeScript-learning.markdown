@@ -13,7 +13,7 @@ Detecting errors in code without running it is referred to as static checking. D
 + TS是JS的超集，因此的任何可执行的JS语句都是合法的TS。
 + TS不会改变JS代码的runtime行为/表现，这个是TS的一个foundational promise
 
-有两种语法构建TS的类型：_interface_ 和 _type_。建议使用前者，只在特殊功能使用后者（如：由简单类型组合创建复杂的类型）
+有两种语法构建TS的类型：_interface_ 和 _type_。建议使用前者，只在特殊类型使用后者（如：由简单类型组合创建复杂的类型）
 
 ## 用法
 
@@ -38,14 +38,14 @@ function deleteUser(user: User) {
 
 使用 _typeof_ 检查变量的类型。
 
-	typeof s === "string"
-	typeof undefined === "undefined"
-	typeof f === "function"
-	Array.isArray(a) // 特例
+    typeof s === "string" // 其余基本类型返回 "number"、"bigint"、"boolean"、"symbol"、"object"
+    typeof undefined === "undefined"
+    typeof f === "function"
+    Array.isArray(a) // 特例
 
 ### Unions
 
-使用 unions 类型的常用例子，由枚举的string或number常量描述允许的值。
+js 没有内置的枚举类型，通过使用 unions 符号，枚举基本类型 string 或 number 常量描述允许的值，生成自定义类型。
 
 ```ts
 type LockStates = "locked" | "unlocked";
@@ -98,3 +98,46 @@ class VirtualPoint {
 const newVPoint = new VirtualPoint(13, 56);
 printPoint(newVPoint); // prints "13, 56"
 ```
+
+### 只读
+
+在 JS 中变量值是可变的。TS 通过 _readonly_ 标志符可以指定对象某个或全部属性为只读。
+
+```ts
+interface Rx {
+  readonly x: number;
+}
+let rx: Rx = { x: 1 };
+rx.x = 12; // Cannot assign to 'x' because it is a read-only property.
+
+interface X {
+  x: number;
+  y: string;
+}
+let rx: Readonly<X> = { x: 2, y: 'hello' };
+rx.x = 13;      // Cannot assign to 'x' because it is a read-only property
+rx.y = 'world'; // Cannot assign to 'y' because it is a read-only property
+```
+
+## Basic Type
+
+### Enum
+
+这个类型很有意思，可以给数字型值提供友好的名称。
+
+枚举类型值默认从 0 开始，可以手动设置其成员所代表的数值
+
+```ts
+enum Color {
+  Red = 1,
+  Green,
+  Blue = 4,
+}
+let c: Color = Color.Green;       // 2
+let colorName: string = Color[c]; // "Green"
+console.log(Color[4]);            // "Blue"
+```
+
+### Unknown
+
+当我们不确定变量的类型或者希望接受 API 里的任何类型的值，可以设其类型为 _unknown_

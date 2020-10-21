@@ -2,9 +2,9 @@
 title:  "JavaScript Strings"
 category: JavaScript
 ---
-JS String 是一系列 Unicode 字符，用**单**引号或**双**引号限制起来。
+JS String 是一系列 Unicode 字符，用**单**引号或**双**引号限制起来的 immutable UTF-16 code units。
 
-准确的说是一系列 UTF-16 code units，每一个代码单元由一个 16-bit 数字表示。每一个 Unicode 字符由1到2个代码单元表示。
+每一个代码单元由一个 16-bit 数字表示。每一个 Unicode 字符由1到2个代码单元表示。
 
 ### 反斜杠
 
