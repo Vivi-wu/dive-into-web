@@ -201,7 +201,7 @@ tmpArry = Object.values(this.otherStoreUrl).filter(ele => ele.length > 1)
 + 按**从左到右**的顺序依次复制和 override 属性值（最右边的覆蓋前面所有）
 + 不复制 non-enumerable、在原型链上的属性
 + 遇到 exception 时中断 copying 任务（如遇到 read-only 的属性时，throw exception）
-+ **忽略**值为 _null_、_undefined_ 的属性
++ sources 值为 _null_、_undefined_ 的属性将被**忽略**（从结果里剔除）
 
 2.使用 `JSON.parse(JSON.stringify(sourceObj))` 可以做到**深度复制**。跨浏览器，且性能最优。
 
