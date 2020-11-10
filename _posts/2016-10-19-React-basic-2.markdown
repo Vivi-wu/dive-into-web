@@ -6,6 +6,8 @@ category: JavaScript
 
 ## state 状态
 
+状态就像是组件自己的数据存储，用于处理随时间改变的数据和用户互动产生的数据。
+
 state 对于拥有和设置它的 React 组件是 private 的（任何其他组件都不接近）。组件可以向下传递 state 及其派生的状态给子组件。
 
 当数据变化时，通过调用 `this.setState(data, callback)` 把数据合并到组件私有属性 `this.state` 中，驱动组件重新 render 自己。其中 callback 是可选的。
