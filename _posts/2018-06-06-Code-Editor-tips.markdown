@@ -101,3 +101,11 @@ Windows 系统按 `Fn + F12`
 ### 格式化HTML
 
 全选代码片段，鼠标右键“格式化选定的内容”
+
+### 文件比较
+
+在 vscode 里打开需要对比的两个文件。
+
+1. 左侧工具栏 Explorer -》Open Editors
+2. 右键点击文件 A，弹出菜单里选择 Select for Compare
+3. 右键点击另一文件 B，弹出菜单里选择 Compare with Selected
