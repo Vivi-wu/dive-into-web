@@ -29,7 +29,7 @@ Mac 上用 `Tab` 键不能自动补全 Git 分支名称，每次都要手动输�
 
 ## 配置 Shell git 命令行 alias
 
-1. 打开 Shell 配置文件
+1. 打开 Shell 配置文件(写到 .bash_profile 文件也行)
 
         vi ~/.bashrc
 
@@ -41,9 +41,10 @@ Mac 上用 `Tab` 键不能自动补全 Git 分支名称，每次都要手动输�
         alias ga='git add'
         alias gd='git diff'
         alias gplm='git pull origin master'
-        alias gpom='git push origin master'
+        alias gplt='git pull origin test'
+        alias gpst='git push origin test'
         alias gpld='git pull origin develop'
-        alias gpod='git push origin develop'
+        alias gpsd='git push origin develop'
         alias glogp='git log --pretty=format:"%C(yellow)%H %C(green)%ad%C(red)%d %Creset%s %C(blue)[%cn]" --date=short --graph'
 
 3. 保存并退出文件。在当前 terminal 中重新加载该文件
