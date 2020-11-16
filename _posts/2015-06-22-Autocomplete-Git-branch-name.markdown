@@ -42,16 +42,11 @@ Mac 上用 `Tab` 键不能自动补全 Git 分支名称，每次都要手动输�
         alias gd='git diff'
         alias gm='git merge'
         alias gplm='git pull origin master'
-<<<<<<< HEAD
+        alias gpsm='git push origin master'
         alias gplt='git pull origin test'
         alias gpst='git push origin test'
         alias gpld='git pull origin develop'
         alias gpsd='git push origin develop'
-=======
-        alias gpsm='git push origin master'
-        alias gplt='git pull origin test'
-        alias gpst='git push origin test'
->>>>>>> 4858bce7727132f6082474c6d866ab9905bbe67a
         alias glogp='git log --pretty=format:"%C(yellow)%H %C(green)%ad%C(red)%d %Creset%s %C(blue)[%cn]" --date=short --graph'
 
 3. 保存并退出文件。在当前 terminal 中重新加载该文件
