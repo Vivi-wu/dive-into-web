@@ -139,3 +139,13 @@ gyp ERR! not ok
 node-sass 安装容易失败，如果报错或中断，先 uninstall 再重新安装。
 
 在重新安装 node-sass 后，看到 gyp info ok。虽然上面有报错，项目跑起来了。
+
+## 终极解决 npm 全局安装 permission 报错
+
+改变 node_modules 目录的 permission to all users：
+
+```shell
+cd /usr/local/lib/
+sudo chmod 777 node_modules
+npm install -g react-devtools
+```

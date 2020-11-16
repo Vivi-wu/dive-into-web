@@ -13,6 +13,8 @@ Web 应用是运行在浏览器里的代码。其优势是可以使用一套代�
 
 如果从功能和覆盖范围两个维度看，原生应用代表了最佳功能，而 Web 应用代表了最好的覆盖范围。
 
+<!--more-->
+
 [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) 规范和接口一览。
 
 ![224dbf000cd541d7ba21df09d367566f__20200514171839.png](http://tech.yuceyi.com/upload/224dbf000cd541d7ba21df09d367566f__20200514171839.png)
@@ -149,7 +151,7 @@ window.addEventListener('load', () => {
 
 ## 如何提供一个离线页面？
 
-
+todo
 
 ## 卖家pwa方案
 
@@ -188,5 +190,3 @@ Android
 ![bd7f3602a6f4466286e6561f78d997bf__15893703058802.png](http://tech.yuceyi.com/upload/bd7f3602a6f4466286e6561f78d997bf__15893703058802.png)
 
 ![c21a12fc260e4dcc933bb588ba4652f2__15893704447605.png](http://tech.yuceyi.com/upload/c21a12fc260e4dcc933bb588ba4652f2__15893704447605.png)
-
-### react router的问题

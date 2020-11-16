@@ -2,9 +2,9 @@
 title:  "JavaScript Strings"
 category: JavaScript
 ---
-JS String 是一系列 Unicode 字符，用**单**引号或**双**引号限制起来。
+JS String 是一系列 Unicode 字符，用**单**引号或**双**引号限制起来的 immutable UTF-16 code units。
 
-准确的说是一系列 UTF-16 code units，每一个代码单元由一个 16-bit 数字表示。每一个 Unicode 字符由1到2个代码单元表示。
+每一个代码单元由一个 16-bit 数字表示。每一个 Unicode 字符由1到2个代码单元表示。
 
 ### 反斜杠
 
@@ -112,9 +112,11 @@ var res = str.split("");
 
 ### Match 匹配
 
-使用 `match(`regexp`)` 方法查找指定字符。如果 regexp 包含 `g` 标识，则方法返回 **all matched** 子字符串组成的数组；没有匹配项，返回 `null`。
+使用 `match(`regexp`)` 方法查找指定字符。
 
-如果 regexp **不含** g 标识，则返回由第一个匹配项、它在字符串里的索引、原始字符串，组成的数组。
+如果 regexp 包含 `g` 标识，则方法返回 **all matched** 子字符串组成的数组；没有匹配项，返回 `null`。
+
+如果 regexp **不含** `g` 标识，则返回由第一个匹配项及它相关的 capturing groups、匹配项在字符串的索引、原始字符串，组成的数组。
 
 下例将银行卡号以4个数字为一组展示：
 
@@ -123,6 +125,32 @@ var res = str.split("");
 // ["1005", index: 0, input: "1005100510051005227"]
 "1005100510051005227".match(/.{1,4}/g)
 // ["1005", "1005", "1005", "1005", "227"]
+```
+
+下面举例从 url 读取指定名称的查询参数值：
+
+```js
+function getQueryValue(queryName) {
+  var reg = new RegExp("(^|&)" + queryName + "=([^&]*)(&|$)", "i");
+  var r = window.location.search.substr(1).match(reg);
+  if (r != null) {
+    console.log(r)
+    return decodeURI(r[2]);
+  } else {
+    return null;
+  }
+}
+
+// console输出，数组2、3、4分别对应正则表达式（）捕捉的未命名分组捕获的值
+[
+  "&test=u8uouo&", // 完整匹配
+  "&",             // 第1分组
+  "u8uouo",        // 第2分组
+  "&",             // 第3分组
+  index: 10,
+  input: "domain=123&test=u8uouo&today=1",
+  groups: undefined
+]
 ```
 
 ### trim 去空格

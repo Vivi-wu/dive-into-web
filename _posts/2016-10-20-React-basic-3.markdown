@@ -4,19 +4,11 @@ category: JavaScript
 ---
 ## Forms 表单
 
-`<input>`, `<textarea>` 和 `<select>` 之类的标签，通常保持自己的状态，并根据用户输入更新状态。当一个表单输入元素的 value 由 React state 控制，称之为 controlled component 受控组件。
+HTML 表单元素（如 `<input>`、`<textarea>`、`<select>`）通常维护自己的状态并根据用户输入进行更新。表单提交默认行为的刷新页面，但大多数情况下我们希望通过JS处理数据提交。在 React 里通过受控组件实现。
 
-以下受控组件在各浏览器中表现一致：
+当一个表单输入元素的 value 由 React state 控制，称之为 controlled component。
 
-`<input type="text">` 或 `<textarea>` 值的改变，覆盖 DOM 内置的 `oninput` 事件处理函数
-
-`<input>` 多选框或单选框 _checked_ 状态的改变
-
-`<option>` _selected_ 状态的改变
-
-<!--more-->
-
-受控组件使用：
+以下受控组件的使用非常相似：
 
 ```js
 <input type="text" value={this.state.value} onChange={this.handleChange} />
@@ -29,19 +21,33 @@ category: JavaScript
 </select>
 ```
 
-如果输入组件不含 `value` 属性的称为 uncontrolled component 不受控组件。任何用户输入都直接反应在渲染的元素上。可以像受控组件一样给 onChange 属性绑定处理函数。
+<!--more-->
 
-因为 `<input type=“file”>` 的 value 只读，所以它是 React 中的一个非受控组件。
+以下受控组件在各浏览器中表现一致：
+
+`<input type="text">` 或 `<textarea>` 值的改变，覆盖 DOM 内置的 `oninput` 事件处理函数
+
+`<input>` 多选框或单选框 _checked_ 状态的改变
+
+`<option>` _selected_ 状态的改变
 
 当需要处理多个 input 元素时，我们可以给每个元素添加 name 属性，并让处理函数根据 `event.target.name` 的值来选择要更新的状态。
 
 要编写一个非受控组件，而不是为每个状态更新都编写数据处理函数，你可以 使用 ref 来从 DOM 节点中获取表单数据。
 
-## 组件生命周期
+注意：如果设置了 `value` 值，input 框仍然可以编辑，很可能是你不小心把 value 设为了 undefined 或者 null
+
+### 非受控组件
+
+如果输入组件不含 `value` 属性的称为 uncontrolled component 不受控组件。可以像受控组件一样给 onChange 属性绑定处理函数。
+
+`<input type="file">` 的 value 是只读的，所以它是 React 中的一个非受控组件。
+
+## 组件生命周期 Lifecycle methods
 
 React 提供 **will**（在事件发生前）和 **did**（在事件发生后）方法，即 Lifecycle Methods。
 
-当组件第一次被渲染到 DOM 中的时候，被称为“挂载（mount）”。当 DOM 中 组件被删除的时候，在 React 中被称为“卸载（unmount）”。
+当组件第一次被渲染进 DOM 的时候，被称为“挂载（mount）”。当 DOM 中 组件被删除的时候，在 React 中被称为“卸载（unmount）”。
 
 ### Mounting
 
@@ -55,7 +61,7 @@ React 提供 **will**（在事件发生前）和 **did**（在事件发生后）
 
 `render()`，返回 JSX 表示对象。
 
-`componentDidMount()`，调用所有组件的 render 函数之后，组件输出呈现到DOM之后调用此函数。只在**浏览器端**调用，因为服务器端渲染不会产生 DOM 树。需要 DOM 节点的初始化写在这里。
+`componentDidMount()`，组件的 render 函数执行完毕，组件第一次输出呈现到 DOM 之后调用此函数。只在**浏览器端**调用，因为服务器端渲染不会产生 DOM 树。在这个钩子函数里做 DOM 节点的初始化、执行 ajax call，这样可以使用 setState 更新组件状态
 
 ### Updating
 
@@ -77,7 +83,7 @@ React 提供 **will**（在事件发生前）和 **did**（在事件发生后）
 
 对应方法：
 
-`componentWillUnmount()`，在此函数里写一些清理工作。
+`componentWillUnmount()`，在此函数里做一些清理工作，如 clear timer
 
 ## `Refs` and the DOM
 
@@ -136,26 +142,106 @@ By default, use the Reactive data flow and save refs for use cases that are inhe
 
 随着app变大，考虑code spliting。比较好的实践是根据路由来拆分代码。
 
-### 官方文档错误
+## Fragments
 
-Using Global Variables，Alternatively, you can force the linter to ignore any line by adding  `// eslint-disable-line` after it.
-不起作用。应该使用 `// eslint-disable-next-line`
-或者在文件最开始处，`/*global fbq, gtag*/` 告诉eslint全局变量名
-`
+有时为了让 React 运行，我们在 JSX 里添加 `<div>` 作为根节点，破坏了 HTML 的语义。如： lists (`<ol>`, `<ul>` and `<dl>`) 还有 `<table>`。此时可以使用 `<Fragment></Fragment>` 作为根节点。缩写形式：`<></>`
 
-## Thinking in React
+### Prop Validation
 
-当你在创建app时， React是如何使你思考的。
+prop 是组件的对外接口，那么应该可以规范：支持哪些 prop，每个prop 应该是什么格式。
 
-1. Break The UI Into A Component Hierarchy，根据设计图，用方框画划分出组件层级。以“single responsibility principle”单一责任原则，划分组件。UI和数据模型倾向于遵循相同的信息体系结构。
-2. Build A Static Version in React，用 React 构建一个静态版。（用已有的数据模型渲染一个不包含交互功能的 UI）通过 _props_ 传递数据，完全不使用 _state_（state只在有交互时使用）。简单例子，自上而下写组件；大型项目，自下而上写，顺便写下test case。
-3. Identify The Minimal (but complete) Representation Of UI State，确定 UI 所需**最少**的可变状态。以“Don't Repeat Yourself”原则。以下情况都可以**排除**使用 _state_:
+出于性能考虑，仅在开发阶段进行 `propTypes` 检查。若有 invalid value，会在浏览器 JS console 中报错。
 
-  + 变量通过 props 从父组件传进来
-  + 不随时间改变
-  + 可以基于当前组件的 state、props 计算得到
+```js
+class Greeting extends React.Component {
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
+    );
+  }
+}
+Greeting.propTypes = {
+  name: React.PropTypes.string
+};
+```
 
-4. Identify Where Your State Should Live，鉴定哪个组件拥有这个状态，铭记 React 是单向数据流。对于应用中每一个state，看看哪些组件需要基于它来渲染，找到公共owner组件（在所有组件层级树之上的）
-5. Add Inverse Data Flow，支持反向的数据更新，通过 `setState()` 方法。
+更多用法参考[这里](https://facebook.github.io/react/docs/reusable-components.html).
 
-用以上方式写 React 会比我们习惯的方式多一些typing。但是请 remember that code is read far more than it’s written, and it’s less difficult to read this modular, explicit code.比起写，代码更多地是给人看的。当你开始构建更大的组件库时，你会意识到这种代码模块化和清晰度的重要性。并且随着代码重用程度的加深，你的代码行数也会显著地减少。
+### Default Prop values
+
+通过 `defaultProps` 给父组件的 _props_ 设置默认值。使我们可以安全地使用 props，不必担心没有值，也避免重复书写。
+
+```js
+class Greeting extends React.Component {
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
+    );
+  }
+}
+// Specifies the default values for props:
+Greeting.defaultProps = {
+  name: 'Stranger'
+};
+// Renders "Hello, Stranger":
+ReactDOM.render(
+  <Greeting />,
+  document.getElementById('example')
+);
+```
+
+无状态的函数仍然可以设置 `propTypes` 和 `defaultProps`。
+
+## 实践中遇到的问题
+
+### 输出 HTML tag 而不是 string
+
+Improper use of the innerHTML can open you up to a cross-site scripting (XSS) attack. 而 React 的设计哲学是让制作东西容易且安全。开发人员需要明确指出他们要进行 unsafe 的操作。因此想要输出 HTML tag 时，需要做到两点：
+
+1. 在要改变 innerHTML 属性的元素上添加 `dangerouslySetInnerHTML` 特性，通常给它绑定一个自定义函数，把需要 render 的值传进去.
+2. 自定义函数只需要返回一个只包含 `__html` 属性的对象。属性值为传进去的 DOM string. 确保 HTML provided must be well-formed (ie., pass XML validation).
+
+### 动态内容中输出 HTML Entity
+
+通常通过 literal 文本可在 JSX 中直接插入 HTML 实体。
+
+但当使用动态内容展示时，如 `<div>{'First &middot; Second'}</div>`，结果 HTML 实体并不能按预期展示出来。解决方法：
+
+1. 最简单的办法是在 JS 中直接写 Unicode 字符。需要**保证文件按 UTF-8 格式保存**，浏览器也按照 UTF-8 格式显示。
+2. 一种更安全的方法是找到**实体对应的 unicode number**，如下：
+
+```js
+<div>{'First \u00b7 Second'}</div>
+<div>{'First ' + String.fromCharCode(183) + ' Second'}</div>
+```
+
+## 2019.9.18
+[Getting Started with React - An Overview and Walkthrough Tutorial](https://www.taniarascia.com/getting-started-with-react/)
+
+[用react开发一个井字游戏教程](https://zh-hans.reactjs.org/tutorial/tutorial.html)
+
+在 React 应用中，数据通过 props 的传递，从父组件流向子组件。
+
+在 JavaScript class 中，每次定义其子类的构造函数时，都需要调用 super 方法。因此，在所有含有构造函数的的 React 组件中，构造函数必须以 super(props) 开头。
+
+使用 CodePen 在线编辑器如何正确使用React DevTools？
+
+1. 登录或注册。
+2. 点击 “Fork” 按钮。
+3. 在“Open this Pen in:”选择 “Debug mode”。
+4. 上一步会打开一个新的标签页，此时打开开发者工具就会有一个 React 选项卡，并且在“⚛️ Components”里可以看到干净的组件树。
+
+当需要同时获取多个子组件的数据，或者两个组件之间需要相互通信，需要把子组件的 state 数据提升至其共同的父组件当中保存。
+
+父组件通过 props 将状态数据传递到子组件当中。这样应用当中所有组件的状态数据就能够更方便地同步共享了。
+
+### tips
+
+尽管 this.props 由 React 本身设置的，this.state 有特殊的含义，我们可以向 class 中随意添加**不参与数据流**的额外字段（如，this.timerID）。
+
+props：
+1.devTool中对应的 component 默认全部打开
+2.因为是js报错可显示对应的Line *
+3.没有 v-model 的 trim 等修饰符
+
+子组件 state 没更新是不会触发 render 渲染的。

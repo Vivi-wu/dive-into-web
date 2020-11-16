@@ -55,7 +55,7 @@ Telerik Fiddler 主要用在 Windows 系统下，官方也有 mac os 版，但�
 
 1. 打开 Fiddler，Tools ——> Options ——> HTTPS，如图勾选：
 
-<img src="{{ "/assets/images/fiddler_https_setting" | prepend: site.baseurl }}" alt="Configure Fiddler to decrypt HTTPS traffic">
+<img src="{{ "/assets/images/fiddler_https_setting.png" | prepend: site.baseurl }}" alt="Configure Fiddler to decrypt HTTPS traffic">
 
 在 Connections 一栏中可查看 Fiddler 端口号。
 
@@ -68,3 +68,33 @@ Telerik Fiddler 主要用在 Windows 系统下，官方也有 mac os 版，但�
 4. 使用完毕，记得关闭手机端的 HTTP 代理，以免 iPhone 上不了网。
 
 https://blog.csdn.net/weixin_39465984/article/details/77186122
+
+## Charles
+
+Mac 上常用的抓包工具。
+
+安装tips：
+
+1. 官网下载最新版本
+2. 本地安装-》打开软件-》窗口工具条 Help -》显示 Register Charles
+3. 通过[在线破解工具](https://zzzmode.com/mytools/charles/)下载对应版本的 charles.jar 文件
+4. 访达-》应用程序-》Charles右键-》显示包内容-》Contents-》Java，替换此目录下的 charles.jar 文件
+5. 关闭 Charles，重新打开，窗口工具条 Help -》显示 Registered to <填写的注册人名>
+
+### 代理 Simulator 中的 https 请求
+
+开发RN项目像代理请求到本地mock文件，Tools-》Map Local-》Enable Map Local-》Add，添加 Location（稍微有点烦，一般填写协议、host、path即可）。
+
+配置完发现http请求可以正常代理，https 的请求就是不行。有人提示移动端测试时针对 https 请求，需要在手机端安装证书。谷歌找到一篇文章，跟着操作成功了。
+
+[How to Set Up Charles Proxy for an iOS Simulator](https://www.detroitlabs.com/blog/2018/05/01/how-to-set-up-charles-proxy-for-an-ios-simulator/)
+
+记录下：
+
+1. 【Charles】菜单栏：Help-》SSL Proxying-》Install Charles Root
+Certificate in iOS Simulators.
+2. 【Simulator】菜单栏：Device-》Restart
+3. 【Charles】菜单栏：Proxy-》macOS Proxy
+4. 【Charles】菜单栏：Proxy-》SSL Proxying Settings-》SSL Proxying 栏里勾选 Enable SSL Proxying-》Include 表格点 Add，在 Host 输入泛域名如 *.example.com
+5. 重启 Charles
+6. 确保 Charles 里点了 Start Recording，如果还是有问题，排查下 simulator 的证书是否最新

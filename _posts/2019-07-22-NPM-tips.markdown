@@ -4,7 +4,7 @@ category: JavaScript
 ---
 npm源问题：
 
-package-lock.json文件中因他人本地npm source设置不同，导致官方源 `https://registry.npmjs.org`，混入了taobao源。我们Jenkins发布有时不稳定，采用taobao源会导致npm构建失败。统一包来源的方法：
+package-lock.json文件中因他人本地 npm source 设置不同，导致官方源 `https://registry.npmjs.org`，混入了 taobao 源。Jenkins 发布不稳定、个别依赖包最新版本没有被 taobao 源支持，等等，都会导致导致 npm 构建失败。统一包来源的方法：
 - 删除 package-lock.json
 - 删除 node_modules 目录（即已安装的文件）
 - 运行 npm install
@@ -17,6 +17,18 @@ npm config get registry
 
 <!--more-->
 
+## Semantic Versioning 语义化版本
+
+版本格式：MAJOR.MINOR.PATCH（主版本号.次版本号.修订号）如：1.0.0
+
+版本号递增规则如下：
+
++ 主版本号：当你做了不兼容的 API 修改
++ 次版本号：当你做了向下兼容的功能性新增
++ 修订号：当你做了向下兼容的问题修正
+
+先行版本号及版本编译元数据可以加到“主版本号.次版本号.修订号”的后面，作为延伸。如：1.0.0-beta
+
 ## npm脚本指令
 
 [npm-scripts](https://docs.npmjs.com/misc/scripts)
@@ -27,9 +39,10 @@ Additionally, arbitrary scripts can be executed by running `npm run-script <stag
 
 想要在构建完成之后，删除source map文件，可以通过在package.json中添加：
 
-	"postbuild": "rimraf ./build/**/*.js.map"
+    "postbuild": "rimraf ./build/**/*.js.map"
 
 ### macOS升级npm
+
 从[Node.js官方](https://nodejs.org/zh-cn/)下载pkg文件安装的 Node.js 如何升级？
 
 直接下载最新稳定版 pkg 文件根据指令安装即可。
@@ -42,3 +55,16 @@ Additionally, arbitrary scripts can be executed by running `npm run-script <stag
 ## npx
 
 从npm 5.2.0 开始，自动安装了npx。npx 主要用于命令行的寻址等辅助功能上，比如好处就是避免安装全局命令
+
+## 安装私有代码库指定版本依赖
+
+[使用git url作为dependencies官方文档](https://docs.npmjs.com/files/package.json#git-urls-as-dependencies)
+
+url格式参看文档：
+
+    git+ssh://git@github.com:npm/cli.git#v1.0.27
+    git+ssh://git@github.com:npm/cli#semver:^5.0
+    git+https://isaacs@github.com/npm/cli.git
+    git://github.com/npm/cli.git#v1.0.27
+
+结合 Git commands文章里使用tag的内容，npm 将在远端仓库查找任何与指定的commit id关联的 tags 或 refs。如果url后面既没有 `#<commit-ish>` 也没有 `#semver:<semver>` 则使用 master 分支的代码。

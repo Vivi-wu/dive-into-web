@@ -2,7 +2,7 @@
 title:  "JavaScript Numbers"
 category: JavaScript
 ---
-JS的数字是**双精度 64-bit**形式，JS只有一种 Number 类型的数，可以带小数写，也可以不用。
+JS的数字是**双精度 64-bit** IEEE 754 浮点数。JS只有一种 Number 类型的数，可以带小数写，也可以不用。
 
 特别大或特别小大数可以用 scientific (exponent) notation 写。
 
