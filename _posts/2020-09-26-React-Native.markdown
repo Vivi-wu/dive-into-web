@@ -35,3 +35,40 @@ brew install cocoapods
 RN 在 0.58 版本以后已经支持 React HOOK，因此建议新的组件都写成 function components
 
 在原生应用开发中，_view_ 是基本的 UI 构建模块。RN 的 [core components](https://reactnative.dev/docs/components-and-apis) 包含了一些重要的开箱即用的原生组件。
+
+### ScrollView vs. List Views
+
+前者是一个可包含多个组件和 views 的通用的滚动容器。所含 items 不一定是同类型的。既可以横向，也可以纵向滚动。支持横向 swiping 手势进行翻页。
+
+ScrollView 最好用于展示具有 limited 尺寸的 small 数量的东西。因为**即使当前没有显示到屏幕上，其所含全部元素都被渲染**。
+
+因此如果是组很长的 list 包含需要元素，建议使用 FlatList，仅渲染当前屏幕上显示的元素。
+
+- 具有相似结构、数量随时间改变、可滚动的列表数据元素，使用 FlatList 组件
+- 按照逻辑将一组数据划分成 section，可能有区块标题，那么使用 SectionList 组件
+
+### Fast Refresh
+
+默认是开启的。可以在 RN developer menu 里 Enable/Disable。类似热替换。
+
+- 在 function 组件（HOOKs）里保持 RN local state
+- 只要不改变参数或者 HOOK 的调用顺序，_useState_ 和 _useRef_ 将保留它们之前的值；而有依赖的 HOOKs，如：_useEffect_、_useMemo_ 和 _useCallback_ 在 fast refresh 时总是会 re-run。
+
+### Debugging
+
+iOS simulator 工具栏，Device-》Shake，或者快捷键 cmd+D，可以弹出 developer menu。
+
+使用 standalone 版本的 RN 开发者工具，全局安装
+
+```shell
+npm install -g react-devtools
+// 运行
+react-devtools
+```
+
+注意：此时需要关闭 simulator 自带的 JS Debug，否则互相干扰导致app crash。
+
+使用 in-app 的 Inspector，可以看到一个半透明浮层，显示 UI 元素。
+
+如果已启动 react-devtools，这个 Inspector 将进入折叠模式，当在 simulator 里点击元素，将直接定位到 DevTools 中组件树的相关组件。
+
