@@ -72,3 +72,48 @@ react-devtools
 
 如果已启动 react-devtools，这个 Inspector 将进入折叠模式，当在 simulator 里点击元素，将直接定位到 DevTools 中组件树的相关组件。
 
+## 图片
+
++ 可以使用名称后跟 @2x、@3x 的图片，bundler将根据屏幕密度选择图片显示
++ 将图片与组件 js 代码放在同一个目录下，避免全局 namespace 冲突，而组件是自封装的
++ 只有实际使用到的图片才会被打包进app
++ 添加或改变图片，只需 refresh simulator
++ bundler 知道图片的尺寸，通常无需在代码里再设置，如需动态缩放图片，`{ width: undefined, height: undefined }`
++ RN里可以直接使用已打包进 app 的图片，需要手动设置图片尺寸（通过网络加载的图片也是）
+
+```js
+<Image
+  source={{ uri: 'app_icon' }}
+  style={{ width: 40, height: 40 }}
+/>
+```
+
+## 性能优化
+
+List items：
+
++ 避免大段逻辑和深层嵌套
++ 避免大图（使用缩略图）
++ 少用特效和交互（在详情页里做）
++ 使用缓存的优化过的图片
++ 如果 list items 高/宽度相同，设置 _getItemLayout_ 以消除 FlatList 异步布局计算
++ 设置 FlatList 组件的 _keyExtractor_ 属性，或者在 items 组件上设置 _key_，可用于缓存
++ 避免在 render 函数里使用匿名函数（否则每次调用 render 时都会recreate这些函数）
+
+在用户交互和动效之间避免好贵的操作，使得app feel smooth
+
+## 网络请求
+
+原生应用没有CORS的概念。
+
+RN 提供 Fetch API（有一些已知的问题），也内置 XMLHttpRequest API，因此可以使用 axios 等依赖于此的第三方库。
+
+RN 支持 WebSocket。
+
+iOS 默认会 block 没有通过 SSL 加密的请求，如果要请求 http 的链接，需要添加一个 App Transport Security exception
+
+## 安全
+
+Deep links 不安全，永远不要用它发送任何敏感信息。
+
+在 iOS 上使用 universal links 可以安全地链接 app 的内容
