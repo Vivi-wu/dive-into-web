@@ -68,3 +68,27 @@ url格式参看文档：
     git://github.com/npm/cli.git#v1.0.27
 
 结合 Git commands文章里使用tag的内容，npm 将在远端仓库查找任何与指定的commit id关联的 tags 或 refs。如果url后面既没有 `#<commit-ish>` 也没有 `#semver:<semver>` 则使用 master 分支的代码。
+
+## Yarn
+
+比起 npm，同样作为包管理工具的 Yarn 旨在提升性能和安全。Yarn 作为 npm 包，可以通过 npm install，但是其核心开发团队不建议这样做，按官方推荐安装。
+
+使用：运行 `yarn` 命令，基于 package.json 的版本范围，自动生成或更新 yarn.lock 文件。其中包含：已安装的每一个单独依赖的确切 version、代码的checksums（用来判断代码是否一致的 integrity）、下载地址 resolved。
+
+package.json 指定了依赖的版本范围，而依赖包随时都有可能更新，因此需要锁定单一版本。
+
+yarn.lock 作为 lockfile 保证在任何系统（机器）上在 node_modules 里的依赖文件结构相同，能够阻止自动安装新的有 breaking change 的依赖。锁文件在 Yarn 第一版面世，npm5 随后（2017年5月）推出了 package-lock.json 来确保项目安装的依赖版本。
+
+2020年1月推出的 Yarn2 评价不太好。
+
+Yarn 的安装速度比 npm 块（npm6 稍微追赶上了一些）。生成确定的构建结果，使用 yarn.lock 结合指定版本的 Yarn 足够了。
+
+[每一个项目都应该提交lock文件](https://classic.yarnpkg.com/blog/2016/11/24/lockfiles-for-all/)，这篇文章从几个方面阐述了原因，现在已经是共识。
+
+### npm7
+
+npm7采用了yarn.lock，同时也保留了package-lock.json[官方](https://blog.npmjs.org/post/621733939456933888/npm-v7-series-why-keep-package-lockjson) 解释了为什么这样做。
+
+package-lock.json 锁定结果 tree shape，提供确定可复制重现的 builds，还有一些额外的 metadata。而 yarn.lock 文件仅锁定 resolution，树构建合约被拆分到（取决于） Yarn.lock 文件和 Yarn 本身的实现（不同版本 Yarn 的算法不一致，其依靠算法保证结果 resolution 一致）
+
+尽管 npm 使用 yarn.lock 文件作为可靠的信息源，但它并不将其视为权威的约束集。
