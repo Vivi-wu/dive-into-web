@@ -92,3 +92,16 @@ npm7采用了yarn.lock，同时也保留了package-lock.json[官方](https://blo
 package-lock.json 锁定结果 tree shape，提供确定可复制重现的 builds，还有一些额外的 metadata。而 yarn.lock 文件仅锁定 resolution，树构建合约被拆分到（取决于） Yarn.lock 文件和 Yarn 本身的实现（不同版本 Yarn 的算法不一致，其依靠算法保证结果 resolution 一致）
 
 尽管 npm 使用 yarn.lock 文件作为可靠的信息源，但它并不将其视为权威的约束集。
+
+## npm link
+
+开发 npm 模块本地调试和测试方法：
+
+1. 在开发的 npm 模块项目里，运行 `npm link`，mac 如果报 permission denied 在命令前加 sudo
+2. 进入运行/引用 npm 模块的项目，运行 `npm link <npm模块项目名称>`
+
+耐心等待运行结束，可以看到 console 输出
+
+	/Users/CF/Documents/projects/wholee-msite/node_modules/cf-front-utils -> /usr/local/lib/node_modules/cf-front-utils -> /Users/CF/Documents/projects/cf-front-utils
+
+3. 调试完毕后，运行 `npm unlink <npm模块项目名称>` 解除链接

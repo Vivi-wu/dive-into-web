@@ -1,5 +1,5 @@
 ---
-title:  "Google Analytics埋点"
+title:  "Google Analytics 埋点"
 category: Other
 ---
 几个术语：
