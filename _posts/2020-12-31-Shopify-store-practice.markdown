@@ -3,9 +3,29 @@ title:  "Shopify独立站实践"
 category: Other
 ---
 
-文档 https://shopify.dev/docs/themes/liquid/reference/objects
+### Shopify 主题
+
+Shopify 的主题是由模板文件创建的目录。这些文件是 Shopify 基于 Ruby 的开源模板语言 Liquid 编写的。不同于 app 是运行在开发者的 infrastructure 上，主题运行在 Shopify 的 servers 上。
+
+主题目录被打包成 zip 文件进行分发。商家可以通过 Shopify admin 上传。
+
+无论是 free 还是 paid 的主题，由于与主题或 Shopify admin 相关的限制，某些自定义设置是不支持的。
+
+尽管 Shopify Support 能够支持各种基本自定义，但是官方给出 Design Policy，列出了一些列他们不会提供支持的 [task](https://help.shopify.com/en/manual/online-store/os/using-themes/theme-support#shopify-design-policy)
+
+[主题开发者文档](https://shopify.dev/docs/themes)
+
+在 Shopify 主题里引入 JS 的[“黄金法则”](https://shopify.dev/tutorials/include-javascript-in-shopify-themes)
 
 <!--more-->
+
+### Shopify API
+
+Shopify 开发预判需要使用哪些 api，可以先看下[这里](https://shopify.dev/docs)
+
+除了官方支持的苦（Ruby、Ruby on Rails和 Python），官方也列里第三方库（目前仅 Node），可以用来进行身份验证并与Shopify API进行交互
+
+地址：https://shopify.dev/tools/supported-libraries
 
 ### 转化跟踪
 
@@ -94,9 +114,88 @@ Build a Shopify App with Node and
 
 需要开通一个 Shopify partners 账号
 
-React教程：Node.js、React、Next.js（客户端路由、SSR）、GraphQL（用于与Shopify平台对话的查询语言）、Apollo（js库便于处理Shopify api，是行业标准的GraphQL实现）、Polaris（Shopify 的 React 组件库）
+React教程：Node.js、React、Next.js（客户端路由、SSR）、GraphQL（连接 Shopify API，用于查询和改变shop data）、Apollo（
+快速构建一个可通过GraphQL获取数据的React UI，是行业标准的GraphQL实现）、Polaris（Shopify 的 React 组件库，当开发 embedded app 时，因其直接出现在Shopify admin里，官方建议使用这个组件库）
 
 商户在授权安装 app 时，需要提供 HTTPS 地址（安装完毕重定向到此页面），使用 ngrok 可以将本地 localhost 映射成一个地址
 
 授权和测试app需要一个 Shopify Development stores。
 
+使用 Webhooks 监听和响应店铺发生的指定事件，Webhooks是“用户定义的HTTP回调”。它们通常是由某些事件触发的，例如将代码推送到存储库或将评论发布到博客。发生该事件时，源站点向为 Webhook 配置的URL发出HTTP请求。
+
+又看到两个新概念：Standalone apps、embedded apps。独立应用可以完全在您的网站上运行，而嵌入式应用可以更深入地集成到Shopify admin中。
+
+当Shopify商家在Shopify管理员中打开独立应用程序时，它将在新的浏览器标签中打开。嵌入式应用使用 Shopify App Bridge，这是一个JavaScript库，使应用程序可以与Shopify的UI连接，此外，还可以使用 app extensions。
+
+App extensions，通过为您的应用程序使用应用程序扩展，可以为用户现有的 Shopify 工作流程中的提供价值。对于商家需要快速、频繁操作的 app 很有用。
+
+官方提供在线的[Shopify Admin API GraphiQL explorer](https://shopify.dev/tools/graphiql-admin-api)，这是个只读的 demo，可以大概看下 api 结构。实际使用需要在店铺安装 Shopify GraphiQL app
+
+
+推荐对象仅在通过HTTP请求呈现给<base_url>？section_id = <section_id>＆product_id = <product_id>的主题部分中使用时才返回产品。 section_id是正在使用推荐对象的部分的ID，product_id是要为其显示推荐产品的产品的ID。要确定base_url，请使用routes.product_recommendations_url属性。使用路由对象而不是硬编码URL可确保产品推荐在正确的语言环境中加载。
+
+shopify 的 recommendation 仅在商品和collection页显示？
+
+## Shopify partners
+
+作为 Shopify 合作伙伴，可以创建不限数量的开发商店。开发商店是附有少量限制的免费 Shopify 账户。可以使用开发商店测试创建的任何模板或应用，或用于为客户创建 Shopify 账户。
+
+以上很重要，一般Shopify账户“在 Shopify 上创建商店，前 14 天免费试用。”
+
+具体功能和限制看[官方文档](https://help.shopify.com/zh-CN/partners/dashboard/managing-stores/development-stores?itcat=partner_dashboard&itterm=recommendation#part-9a6d18dea8526614)
+
+But!无法使用该商店安装付费应用（一系列的合作伙伴友好型应用除外）
+
+所幸的是 LimeSpot Personalizer 这款需要调研的app是 Partner-friendly apps。在开发商店里不会向您收取测试费用。Regular charges will apply once the store is switched over to a paid plan.
+
+添加商品，Shopify上传商品图片比较方便，提供了通过 URL 添加媒体（图片、YouTube视频）。可使用富文本编辑器写商品description。
+
+在右上角点头像-》Your Profile里可以更改 admin 后台语言。
+
+第三方插件说：The products in the recommendation boxes within the Box Designer are random sample products from your store. On your live store, the actual calculated recommended items will show in the Intelligent Recommendation Boxes.
+
+商品详情页：
+
+1. "PUT https://storefront.personalizer.io/v1/userAuthentication?t=*"，是 LimeSpot 这个插件提供的开发API平台。根据[文档说明-sample flow](https://personalizer.io/help)，用户开启一个新session时，第一步是获取auth（响应里有用户id、contextId、token和过期时间），请求头会带上[X-Personalizer-Context-ID]
+2. "GET https://storefront.personalizer.io/v1/youmaylike?fallbackToRelatedItemIdentifiers=6429681385621&fallbackToPopular=true&excludedItemIdentifiers=6429681385621&host=Product&limit=20&fields=Identifier,Title,Vendor,DisplayUrl,Price,OriginalPrice,ImageUrl&t=1611727479897" 第二步返回“You May Like”的商品
+3. "POST https://storefront.personalizer.io/v1/activityLogs?batch=true&t=1611727479926" 第三步埋点，他们有加一个request payload（event名称、来源、商品id）
+
+## 实践
+
+以 section 方式引入页面的模块，在主题编辑器 sidebar 里会自动生成一个卡片，标题为 section 的文件名称
+
+### Shopify Scripts
+
+Scripts 为商店提供了一种编写可在 Shopify 服务器上运行的自定义 Ruby 的方法，并从根本上影响购物车。
+
++ 工作方式是接收一个 input 购物车，对订单项执行转换，然后返回 output 购物车。
++ Scripts 是独立的，无法进行任何外部 API 或数据库调用，来获取其他信息。
++ 只有 Shopify Plus 商家可以在生产环境中使用
++ Shopify partners可以您创建的任何开发商店中对其进行测试
+
+[官方博客](https://www.shopify.com/partners/blog/109804486-getting-started-with-shopify-scripts-a-practical-walkthrough)
+
+在 theme.liquid 文件里加一个 `{{ template }}` 全局变量，可以在页面上输出渲染所采用的 template 名称（不含文件后缀 .liquid）
+
+Shopify liquid 中许多 objects 有 handle，默认情况下，handle 是对象的标题，以小写形式表示，所有空格和特殊字符均用连字符（-）代替。
+
+liquid 模板中可用的 Shopify 标签，变量和属性的完整列表，看这里[Shopify Cheat Sheet](https://www.shopify.com/partners/shopify-cheat-sheet)
+
+using a Shopify app to dynamically add content to your store https://www.littlestreamsoftware.com/labs/add-content-to-a-shopify-template-through-the-api/
+
+sync content between your stores
+
+### Shopify App CLI
+
+-》安装 shopify 命令行工具
+-〉创建新项目
+
+	shopify create node
+
+-》开启本地开发服务器
+
+	shopify serve
+
+-〉终端里另打开一个tab页，自动完成浏览器打开app，并安装进开发店铺
+
+	shopify open
