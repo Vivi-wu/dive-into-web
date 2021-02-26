@@ -185,6 +185,14 @@ using a Shopify app to dynamically add content to your store https://www.littles
 
 sync content between your stores
 
+### 获取未取消订单数据
+
+	https://*.myshopify.com/admin/orders.json
+
+发现一个有意思的点，即使用这种方式拿到别人订单的 token，访问 `https://<店铺前台域名>/<storeId>/orders/<token>`，页面上也读不到订单的 id 等信息。
+
+访问自己的订单状态页，如果在 Settings-》Checkout-〉Order processing-》Additional scripts 里使用了 Shopify liquid 变量取数，渲染的页面上 Shopify.Checkout 才会有值（如果：订单 id）。
+
 ### Shopify App CLI
 
 -》安装 shopify 命令行工具
@@ -199,3 +207,5 @@ sync content between your stores
 -〉终端里另打开一个tab页，自动完成浏览器打开app，并安装进开发店铺
 
 	shopify open
+
+谷歌搜索 Shopify GraphiQL App，安装给指定店铺，方便进行调试。

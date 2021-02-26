@@ -1,0 +1,329 @@
+---
+title:  "GraphQL"
+category: Other
+---
+一种API语言。只请求需要的，并确切获得所需的。
+
+一个请求中执行多个查询。
+
+使用 types 确保应用仅获取可能数据，并提供清晰有用的错误，同时避免编写手动解析代码。
+
++ 虽然不是必须，但建议给 query 和 mutation 命名，类似匿名函数和命名函数的区别，便于在批量请求失败时，debug和定位问题
++ 命名遵守规则：描述要返回的内容
+
+语法学习[官方文档](https://graphql.org/learn/)
+
+<!--more-->
+
+## 以Shopify API为例
+
+示例: 获取店铺前2个商品的id和标题
+
+```
+query FirstTwoProducts {
+  products(first: 2) {
+    edges {
+      node {
+        id
+        title
+      }
+    }
+  }
+}
+```
+
+其中 `first` 是 products 的argument参数。`edges` 是 Shopify 实现的 connection，这里是商品list.
+
+此外 Shopify 还提供了 `query` 这个filter，可以对结果集进一步过滤。
+
+响应如下：
+```
+{
+  "data": {
+    "products": {
+      "edges": [
+        {
+          "node": {
+            "id": "gid://shopify/Product/6429646454933",
+            "title": "The Round Neck Sweater Female Cashmere Loose No Cap Hedging Student Wild"
+          }
+        },
+        {
+          "node": {
+            "id": "gid://shopify/Product/6429658120341",
+            "title": "Long Sleeves Hooded Solid Sweater Fleece Loose Version"
+          }
+        }
+      ]
+    }
+  },
+  "extensions": {
+    "cost": {
+      "requestedQueryCost": 4,
+      "actualQueryCost": 4,
+      "throttleStatus": {
+        "maximumAvailable": 1000,
+        "currentlyAvailable": 996,
+        "restoreRate": 50
+      }
+    }
+  }
+}
+```
+
+### 示例1：pagination分页
+
+在上面的示例中，还可以获取商品variants变体（也是一个edges list），同理，可以在 edges 同级加上 pageInfo，可以知道是否有前一页/后一页。
+
+我们可以在每一层的list中，使用分页，实现nest pagination嵌套分页的效果.
+
+```
+query FirstTwoProducts {
+  products(first: 2) {
+    edges {
+      node {
+        id
+        title
+        variants(first: 1) {
+          edges {
+            node {
+              id
+              title
+            }
+          }
+          pageInfo {
+            hasNextPage
+            hasPreviousPage
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+响应如下：
+```
+{
+  "data": {
+    "products": {
+      "edges": [
+        {
+          "node": {
+            "id": "gid://shopify/Product/6429646454933",
+            "title": "The Round Neck Sweater Female Cashmere Loose No Cap Hedging Student Wild",
+            "variants": {
+              "edges": [
+                {
+                  "node": {
+                    "id": "gid://shopify/ProductVariant/38008678973589",
+                    "title": "S / Yellow"
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": true,
+                "hasPreviousPage": false
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "gid://shopify/Product/6429658120341",
+            "title": "Long Sleeves Hooded Solid Sweater Fleece Loose Version",
+            "variants": {
+              "edges": [
+                {
+                  "node": {
+                    "id": "gid://shopify/ProductVariant/38008701681813",
+                    "title": "L / Brown"
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": true,
+                "hasPreviousPage": false
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "extensions": {
+    "cost": {
+      "requestedQueryCost": 10,
+      "actualQueryCost": 10,
+      "throttleStatus": {
+        "maximumAvailable": 1000,
+        "currentlyAvailable": 990,
+        "restoreRate": 50
+      }
+    }
+  }
+}
+```
+
+### 示例2: 命名查询、变量
+
+根据id获取指定商品的标题和描述
+```
+query ProductTitleAndDescription($id: ID!) {
+  product(id: $id) {
+    title
+    description
+  }
+}
+```
+
+查询参数
+```js
+{
+	"id": "gid://shopify/Product/6429646454933"
+}
+```
+
+响应如下：
+```
+{
+  "data": {
+    "product": {
+      "title": "The Round Neck Sweater Female Cashmere Loose No Cap Hedging Student Wild",
+      "description": "Thickness:Thicken Fitness:Loose Clothing Length:LongBelt:NoStyle:SweetPattern:PatternPopular Elements:Printing Sleeve Length:Long Sleeve Material:Polyester Seller:Credibility Solutions Private Limited"
+    }
+  },
+  "extensions": {
+    "cost": {
+      "requestedQueryCost": 1,
+      "actualQueryCost": 1,
+      "throttleStatus": {
+        "maximumAvailable": 1000,
+        "currentlyAvailable": 999,
+        "restoreRate": 50
+      }
+    }
+  }
+}
+```
+
+### 示例3：别名
+
+即重命名返回字段。默认地，返回有效数据部分的json结构与查询graphQL语句是一样的
+
+在示例2代码上稍作修改：
+
+```
+query ProductTitleAndDescription($id: ID!) {
+  product(id: $id) {
+    myTitle: title
+    description
+  }
+}
+```
+
+可以看到，仍然返回 title 的值，但是字段名变为“myTitle”。
+
+但别名真正的优势在于：在一个请求中，多次查询同一个字段。用于批量操作，高效
+
+示例4：通过别名，使用不同的arguments，在一个请求里使用两次product fields
+```
+query {
+  product1: product(id: "gid://shopify/Product/6429646454933") {
+    title
+    description
+  }
+  product2: product(id: "gid://shopify/Product/6429658120341") {
+    title
+    description
+  }
+}
+```
+
+响应如下：
+```
+{
+  "data": {
+    "product1": {
+      "title": "The Round Neck Sweater Female Cashmere Loose No Cap Hedging Student Wild",
+      "description": "Thickness:Thicken Fitness:Loose Clothing Length:LongBelt:NoStyle:SweetPattern:PatternPopular Elements:Printing Sleeve Length:Long Sleeve Material:Polyester Seller:Credibility Solutions Private Limited"
+    },
+    "product2": {
+      "title": "Long Sleeves Hooded Solid Sweater Fleece Loose Version",
+      "description": "Material:Cotton Fitness:Regular Thickness:Regular Seller:Credibility Solutions Private Limited"
+    }
+  },
+  "extensions": {
+    "cost": {
+      "requestedQueryCost": 2,
+      "actualQueryCost": 2,
+      "throttleStatus": {
+        "maximumAvailable": 1000,
+        "currentlyAvailable": 998,
+        "restoreRate": 50
+      }
+    }
+  }
+}
+```
+
+### 示例5：fragment片段
+
+参考示例4，在批量操作时，定义返回字段的代码稍显重复，用 fragment 定义返回字段，就可以只维护一份代码.
+
+```
+query {
+  product1: product(id: "gid://shopify/Product/6429646454933") {
+    ...TitleAndDescription
+  }
+  product2: product(id: "gid://shopify/Product/6429658120341") {
+    ...TitleAndDescription
+  }
+}
+
+fragment TitleAndDescription on Product {
+  title
+  description
+}
+```
+返回结果同示例4。
+
+### 示例6：Inline Fragments内联片段
+
+许多不同类型 implement实现了相同的 interface接口。
+
+如：Shopify中的common object-》[Node](https://shopify.dev/docs/admin-api/graphql/reference/common-objects/node)
+
+下面是Shopify api中的添加tag接口，默认返回 node 对象的 id。
+
+因为Product类型实现了Node，通过在返回字段定义内联fragment，就可以额外获取到这个商品的信息（如：标题）。
+
+```
+mutation tagsAdd($id: ID!, $tags: [String!]!) {
+  tagsAdd(id: $id, tags: $tags) {
+    node {
+      id
+      ...on Product {
+        title
+      }
+      ...on Customer { // 因为 tagsAdd 适用于任何 Node，这样写可以基于返回内容（id的类型），获得不同字段
+        email
+        addresses
+      }
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+```
+参数：
+```
+{
+  "id": "gid://shopify/Product/6429646454933",
+  "tags": [
+    "on-sale"
+  ]
+}
+```

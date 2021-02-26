@@ -114,6 +114,8 @@ Conditional requests are HTTP requests [RFC7231] that include one or more header
 405 - Method Not Allowed，接口访问的Method不正确，比如应该使用GET的接口使用了POST访问等
 500 - Internal Server Error，其它类型的错误默认都会返回500
 
+更全的解释看[这里](https://www.haorooms.com/post/long_lianjie_websocket)
+
 ## HTTPS
 
 HTTPS并非是应用层的一种新协议，而是 HTTP 通信接口部分用 SSL/TLS 协议代替而已。
