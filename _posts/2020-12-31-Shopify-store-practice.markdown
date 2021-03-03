@@ -177,13 +177,57 @@ Scripts 为商店提供了一种编写可在 Shopify 服务器上运行的自定
 
 在 theme.liquid 文件里加一个 `{{ template }}` 全局变量，可以在页面上输出渲染所采用的 template 名称（不含文件后缀 .liquid）
 
-Shopify liquid 中许多 objects 有 handle，默认情况下，handle 是对象的标题，以小写形式表示，所有空格和特殊字符均用连字符（-）代替。
-
 liquid 模板中可用的 Shopify 标签，变量和属性的完整列表，看这里[Shopify Cheat Sheet](https://www.shopify.com/partners/shopify-cheat-sheet)
 
 using a Shopify app to dynamically add content to your store https://www.littlestreamsoftware.com/labs/add-content-to-a-shopify-template-through-the-api/
 
 sync content between your stores
+
+### snippet
+
++ 用于代码复用的 chunk
++ 以 `.liquid` 为文件后缀名
++ 使用 `{% render "snippet-filename" %}` 引入 template，不含文件后缀名
++ 可用于条件加载
++ 命名规范：所有snippets文件都放在“snippets”目录下，因此以它们的功能作为前缀。如：collections-coffee-cups.liquid
+
+#### handle
+
+Shopify liquid 中每个 object 都有唯一的 _handle_。默认情况下，handle 是对象的标题，URL-safe的表现形式。全小写，空格和特殊字符均用连字符（-）代替。
+
+因为唯一，可以方便地在模版里用于比较。
+
+`product` 的 handle 以商品标题自动创建。
+
+#### 变量作用域
+
+渲染进模版里的 snippet 代码并不自动 access 父模版中使用变量 tags assign赋值的 variables。同理，snippet 内部的变量，不能被外部的代码读取。
+
+读取父模版变量的方法：
+
+```
+{% assign all_products = collections.all.products %}
+{% render 'snippet', products: all_products %}
+```
+
+可以以逗号分隔，传递多个变量。
+
+此外，通过 `with` 参数，将父模版中定义的变量值传递给与 snippet 文件同名的内部变量。
+
+父模版:
+```
+{% assign c = collections.all.products %}
+{% render 'collection-product-list' with c %}
+```
+
+snippet:
+```
+<ul>
+{% for product in collection-product-list %}
+<li><a href="{{ product.url}}">{{ product.title}}</a>
+{% endfor %}
+<ul>
+```
 
 ### 获取未取消订单数据
 

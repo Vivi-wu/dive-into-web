@@ -23,4 +23,6 @@ DAU（日活跃用户），WAU（周活跃用户），MAU（月活跃用户)，�
 + CPA（Cost Per Action）指每注册一个用户的费用。
 + CPP（Cost Per Purchase）主要为规避广告费用风险，只有在网络用户点击广告并进行交易后，按销售笔数付给广告站点费用。
 + CPS（Cot Per Sales）是按销售产品进行提成的广告模式。
++ DPA（Dynamic Product Ads）基于结构化的商品、服务和用户数据，根据潜在客户的行为记录为每个客户建立个性化的广告。
 
+ROAS（Return on Ad Spend）广告支出回报率
