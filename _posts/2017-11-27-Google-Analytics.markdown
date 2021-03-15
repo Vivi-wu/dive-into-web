@@ -37,6 +37,10 @@ Setting an incorrect cookie domain will result in no hits being sent to Google A
 
 一般无需单独设置，用户访问被ga追踪的网站时，会被自动种入cookie，来标识唯一身份。
 
+用于标示用户唯一身份的 cookie 值 _ga、 _gid。区别：前者有效期2年，后者为24小时。https://developers.google.com/analytics/devguides/collection/gtagjs/cookie-usage
+
+关于 `_ga=GA1.2.769523605.1615186022` [值构成的解释](https://stackoverflow.com/a/16107194)
+
 ### Page tracking
 
 衡量某个页面被浏览的次数。默认全局设置的 tacking snippet会自动 sends a pageview to the Google Analytics。
