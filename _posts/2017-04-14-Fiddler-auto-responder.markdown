@@ -80,6 +80,9 @@ Mac 上常用的抓包工具。
 3. 通过[在线破解工具](https://zzzmode.com/mytools/charles/)下载对应版本的 charles.jar 文件
 4. 访达-》应用程序-》Charles右键-》显示包内容-》Contents-》Java，替换此目录下的 charles.jar 文件
 5. 关闭 Charles，重新打开，窗口工具条 Help -》显示 Registered to <填写的注册人名>
+6. 窗口工具条 Proxy-》macOS Proxy，开启权限
+
+注意要严格按上面的顺序执行操作。
 
 ### 代理 Simulator 中的 https 请求
 
@@ -98,3 +101,14 @@ Certificate in iOS Simulators.
 4. 【Charles】菜单栏：Proxy-》SSL Proxying Settings-》SSL Proxying 栏里勾选 Enable SSL Proxying-》Include 表格点 Add，在 Host 输入泛域名如 *.example.com
 5. 重启 Charles
 6. 确保 Charles 里点了 Start Recording，如果还是有问题，排查下 simulator 的证书是否最新
+
+### localhost 抓包
+
+Charles 会默认忽略掉 localhost 下的请求，macOS上的解决方法如下：
+
+```shell
+sudo vi /etc/hosts
+```
+在 hosts 文件加上: 127.0.0.1 localhost.charlesproxy.com
+
+本地项目浏览地址 localhost:3000 改成 localhost.charlesproxy.com:3000 即可
