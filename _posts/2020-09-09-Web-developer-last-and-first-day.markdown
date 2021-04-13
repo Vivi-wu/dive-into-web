@@ -42,11 +42,13 @@ shift+command+p，唤起 Package Control，安装完毕后，选择 Package Cont
 
 ### VS code
 
-在扩展里安装常用扩展插件：ESLint、gitk、GitLens、Simple React Snippets
+在扩展里安装常用扩展插件：ESLint、gitk、GitLens、Simple React Snippets、vscode-fileheader
 
 编辑器设置：Code-》Preferences-〉Settings：Word Wrap，改为 On（自动换行显示），Tab Size 改为 2（以两个spaces缩进）
 
 格式化相关：勾选 Format On Save、Format On Type、Trim Trailing Whitespace
+
+给文件头部自动添加注释：Code-》Preferences-〉Settings-》Extensions-〉File header Configuration，将Author和Last modified by改成自己的邮箱。默认快捷键：control+alt+i
 
 ### SSH Key
 

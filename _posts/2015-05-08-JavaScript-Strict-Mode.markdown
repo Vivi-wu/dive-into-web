@@ -134,4 +134,7 @@ function downScripts() {
 </script>
 ```
 
-也可以在 script 标签里添加 `defer="true"`，该特性 specifies that the script should be executed after the page has finished parsing, but it **only works for external scripts**.
+也可以在 script 标签里添加 `defer="true"`，该特性 specifies that the script should be executed after the page has finished parsing, but it **只作用于**外链脚本.
+
++ 不 block the page
++ 当DOM is ready时执行(但是 before `DOMContentLoaded` 事件)

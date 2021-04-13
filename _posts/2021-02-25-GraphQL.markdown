@@ -2,18 +2,27 @@
 title:  "GraphQL"
 category: Other
 ---
-一种API语言。只请求需要的，并确切获得所需的。
+GraphQL是一种API语言。用一句话描述它：只请求需要的，并确切获得所需的。
 
-一个请求中执行多个查询。
+语法学习[官方文档](https://graphql.org/learn/)
 
-使用 types 确保应用仅获取可能数据，并提供清晰有用的错误，同时避免编写手动解析代码。
+## Overview
+
+API调用最常见的情况：查询和修改。在RESTful风格的API中我们常用get方法查询数据，用post、put、delete方法修改数据。而在GraphQL里，对应的方法是query和mutation。
+
+使用GraphQL API的好处：前端可以在一个请求中执行多个查询。它使用 types 确保应用仅获取可能数据，并提供清晰有用的错误，同时避免编写手动解析代码。
+
+Shopify同时支持RESTful API和GraphQL API。在为Shopify开发app时，官方鼓励使用GraphQL API。此外，通过独立站店铺内安装的GraphQL app，前端可以方便地排查线上数据问题。
+
+### 简单的使用技巧
 
 + 虽然不是必须，但建议给 query 和 mutation 命名，类似匿名函数和命名函数的区别，便于在批量请求失败时，debug和定位问题
 + 命名遵守规则：描述要返回的内容
 
-语法学习[官方文档](https://graphql.org/learn/)
-
-<!--more-->
+### 运行示例代码
+ 
+你需要注册Shopify开发者账号，开通development store，导入一些商品数据，安装 Shopify GraphiQL App https://shopify-graphiql-app.shopifycloud.com/
+这些都是免费的。
 
 ## 以Shopify API为例
 
@@ -32,9 +41,7 @@ query FirstTwoProducts {
 }
 ```
 
-其中 `first` 是 products 的argument参数。`edges` 是 Shopify 实现的 connection，这里是商品list.
-
-此外 Shopify 还提供了 `query` 这个filter，可以对结果集进一步过滤。
+其中 `first` 是 products 的argument参数。`edges` 是 Shopify 实现的 connection，这里是商品list。
 
 响应如下：
 ```
@@ -70,12 +77,73 @@ query FirstTwoProducts {
   }
 }
 ```
+_extensions_ 的内容是Shopify GraphQL API用来反馈当前api调用的开销情况。Shopify限制了API调用的频率，感兴趣的可以搜一下。后面的响应代码省略extensions信息。
+
+### 示例0：过滤查询结果
+
+Shopify 提供了 `query` 这个filter，可以对的结果集connection近一步过滤。
+
+以下代码执行 Prefix query，获取店铺前10个 collections 中，标题包含'Best'字符串的collection。
+
+注意：执行Field search时，field和value之间不能有空格。否则 `title: Best*`，查询的是 `title` 和 `Best*`。
+
+```
+query CollectionHandler {
+  collections(first: 10, query: "title:Best*") {
+    edges {
+      node {
+        title
+        handle
+      }
+    }
+  }
+}
+```
+响应如下：
+
+```
+{
+  "data": {
+    "collections": {
+      "edges": [
+        {
+          "node": {
+            "title": "Women's Bags :heart: Best Seller",
+            "handle": "womens-bags-best-seller"
+          }
+        },
+        {
+          "node": {
+            "title": "Best Seller- Home",
+            "handle": "best-seller-home"
+          }
+        },
+        {
+          "node": {
+            "title": "Best Sellers :boom::fire:",
+            "handle": "best-sellers-:boom::fire:"
+          }
+        },
+        {
+          "node": {
+            "title": "Best Seller",
+            "handle": "best-seller"
+          }
+        }
+      ]
+    }
+  },
+  "extensions": ...
+}
+```
+其中 search 语法看这里：https://shopify.dev/concepts/about-apis/search-syntax
+可以查询的resources，定义在文档的references里。
 
 ### 示例1：pagination分页
 
 在上面的示例中，还可以获取商品variants变体（也是一个edges list），同理，可以在 edges 同级加上 pageInfo，可以知道是否有前一页/后一页。
 
-我们可以在每一层的list中，使用分页，实现nest pagination嵌套分页的效果.
+我们可以在每一层的list中，使用分页，实现nest pagination嵌套分页的效果。
 
 ```
 query FirstTwoProducts {
@@ -151,17 +219,7 @@ query FirstTwoProducts {
       ]
     }
   },
-  "extensions": {
-    "cost": {
-      "requestedQueryCost": 10,
-      "actualQueryCost": 10,
-      "throttleStatus": {
-        "maximumAvailable": 1000,
-        "currentlyAvailable": 990,
-        "restoreRate": 50
-      }
-    }
-  }
+  "extensions": ...
 }
 ```
 
@@ -180,7 +238,7 @@ query ProductTitleAndDescription($id: ID!) {
 查询参数
 ```js
 {
-	"id": "gid://shopify/Product/6429646454933"
+  "id": "gid://shopify/Product/6429646454933"
 }
 ```
 
@@ -193,23 +251,13 @@ query ProductTitleAndDescription($id: ID!) {
       "description": "Thickness:Thicken Fitness:Loose Clothing Length:LongBelt:NoStyle:SweetPattern:PatternPopular Elements:Printing Sleeve Length:Long Sleeve Material:Polyester Seller:Credibility Solutions Private Limited"
     }
   },
-  "extensions": {
-    "cost": {
-      "requestedQueryCost": 1,
-      "actualQueryCost": 1,
-      "throttleStatus": {
-        "maximumAvailable": 1000,
-        "currentlyAvailable": 999,
-        "restoreRate": 50
-      }
-    }
-  }
+  "extensions": ...
 }
 ```
 
 ### 示例3：别名
 
-即重命名返回字段。默认地，返回有效数据部分的json结构与查询graphQL语句是一样的
+即重命名返回字段。默认地，返回有效数据部分的json结构与查询graphQL语句是一样的。
 
 在示例2代码上稍作修改：
 
@@ -224,9 +272,12 @@ query ProductTitleAndDescription($id: ID!) {
 
 可以看到，仍然返回 title 的值，但是字段名变为“myTitle”。
 
-但别名真正的优势在于：在一个请求中，多次查询同一个字段。用于批量操作，高效
+### 示例4 别名 - 批量操作
 
-示例4：通过别名，使用不同的arguments，在一个请求里使用两次product fields
+别名真正的优势在于：在一个请求中，多次查询同一个字段。
+
+下面的代码通过别名，使用不同的arguments，在一个请求里使用两次product fields
+
 ```
 query {
   product1: product(id: "gid://shopify/Product/6429646454933") {
@@ -253,17 +304,7 @@ query {
       "description": "Material:Cotton Fitness:Regular Thickness:Regular Seller:Credibility Solutions Private Limited"
     }
   },
-  "extensions": {
-    "cost": {
-      "requestedQueryCost": 2,
-      "actualQueryCost": 2,
-      "throttleStatus": {
-        "maximumAvailable": 1000,
-        "currentlyAvailable": 998,
-        "restoreRate": 50
-      }
-    }
-  }
+  "extensions": ...
 }
 ```
 
@@ -294,7 +335,7 @@ fragment TitleAndDescription on Product {
 
 如：Shopify中的common object-》[Node](https://shopify.dev/docs/admin-api/graphql/reference/common-objects/node)
 
-下面是Shopify api中的添加tag接口，默认返回 node 对象的 id。
+下面是Shopify api中的添加tag的接口，默认返回 node 对象的 id。
 
 因为Product类型实现了Node，通过在返回字段定义内联fragment，就可以额外获取到这个商品的信息（如：标题）。
 

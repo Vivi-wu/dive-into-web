@@ -253,3 +253,23 @@ snippet:
 	shopify open
 
 谷歌搜索 Shopify GraphiQL App，安装给指定店铺，方便进行调试。
+
+## 多店铺使用统一主题
+
+只维护一个中心主题，保持brand uniformity品牌统一，同时节省时间。
+
+有工具（如 PageFly）可以在多个Shopify店铺之间导出/导入模版。
+
+## 安装 Shopify GraphiQL App
+
+安装地址：https://shopify-graphiql-app.shopifycloud.com/
+
+如果Shopify account绑定多家店铺，建议使用无痕浏览模式打开此链接。
+
+在安装页输入需要绑定的店铺url，为避免后续 access denied，勾选所有 access scoped 的 read 权限
+
+## 多语言
+
+普通plan店铺最多可以published 5 个 locales，plus店铺最多可支持20种语言。官方文档：https://help.shopify.com/en/manual/cross-border/multilingual-online-store
+
+划重点：If your Shopify store is on the Shopify plan, the Advanced Shopify plan, or the Shopify Plus plan, then you need to assign newly published languages to a domain in your online store for them to appear on your storefront. 我们plus的店铺需要把新增的语言assign给店铺的domain，才能出现在店面。You must complete this task even if you're only using a single domain. 即便只使用一个domain，也必须要完成这个操作。
