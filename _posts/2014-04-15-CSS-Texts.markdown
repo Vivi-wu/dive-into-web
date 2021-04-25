@@ -120,6 +120,18 @@ category: CSS
    + `justify`，拉伸最后一行文本，以满足和其他行相同的宽度
    + `start`，`end`，在文本行开始／结尾处对齐（根据 _direction_ 属性的值确定是左对齐，还是右对齐）
 
+### 示例
+
+列表页商品标题仅显示一行，超出模块宽度隐藏，并显示 `...`
+
+```css
+.truncate-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+```
+
 ## CSS3 Multiple Columns
 
 新增为文本布局创建 multiple columns，就像报纸上的多列显示.

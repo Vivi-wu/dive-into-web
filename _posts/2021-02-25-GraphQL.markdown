@@ -368,3 +368,84 @@ mutation tagsAdd($id: ID!, $tags: [String!]!) {
   ]
 }
 ```
+
+### 示例7：根据ID查询在线Page的法语翻译
+
+店铺默认语言为意大利语，Page原内容是英文。
+
+```
+query TranslationFR ($id: ID!) {
+  translatableResource(resourceId: $id) {
+    translations(locale: "fr") {
+      key
+      value
+    }
+    translatableContent {
+      key
+      value
+      locale
+    }
+  }
+}
+```
+
+查询参数
+```js
+{
+  "id": "gid://shopify/OnlineStorePage/80469131458"
+}
+```
+
+响应如下：
+```
+{
+  "data": {
+    "translatableResource": {
+      "translations": [
+        {
+          "key": "body_html",
+          "value": ...
+        },
+        {
+          "key": "meta_description",
+          "value": ...
+        },
+        {
+          "key": "meta_title",
+          "value": "Contactez-nous"
+        },
+        {
+          "key": "title",
+          "value": "Contactez-nous"
+        }
+      ],
+      "translatableContent": [
+        {
+          "key": "title",
+          "value": "Contact Us",
+          "locale": "it"
+        },
+        {
+          "key": "body_html",
+          "value": ...,
+          "locale": "it"
+        },
+        {
+          "key": "meta_title",
+          "value": null,
+          "locale": "it"
+        },
+        {
+          "key": "meta_description",
+          "value": null,
+          "locale": "it"
+        }
+      ]
+    }
+  },
+  "extensions": ...
+}
+```
+
+某些字段的响应value省略了，示例中的页面比较特殊，除了title，主体内容都是图片。可以看到，meta_title、meta_description由于没有意大利语翻译，value是null。
+

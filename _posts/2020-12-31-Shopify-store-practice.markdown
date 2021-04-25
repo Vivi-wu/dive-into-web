@@ -273,3 +273,13 @@ snippet:
 普通plan店铺最多可以published 5 个 locales，plus店铺最多可支持20种语言。官方文档：https://help.shopify.com/en/manual/cross-border/multilingual-online-store
 
 划重点：If your Shopify store is on the Shopify plan, the Advanced Shopify plan, or the Shopify Plus plan, then you need to assign newly published languages to a domain in your online store for them to appear on your storefront. 我们plus的店铺需要把新增的语言assign给店铺的domain，才能出现在店面。You must complete this task even if you're only using a single domain. 即便只使用一个domain，也必须要完成这个操作。
+
+[可以翻译的资源类型](https://shopify.dev/docs/admin-api/graphql/reference/translations/translatableresourcetype)，如：商品信息、email通知
+
+### url
+
+当通过 Shopify admin API 发布一个locale，Shopify自动为这个locale创建一个path。如："店铺域名/fr/pages/contact-us"。Liquid生成的route包含了locale，官方建议避免在主题里hardcoding url。
+
+### SEO
+
+当发布一个local，Shopify通过 `{{ content_for_header }}` 自动插入 hreflang tags。搜索引擎使用 hreflang 标记，根据搜索者的语言偏好，在搜索结果中提供正确语言的URL。如果搜索者的语言偏好没有匹配上任何一个 hreflang 标记，则使用店铺的primary locale
