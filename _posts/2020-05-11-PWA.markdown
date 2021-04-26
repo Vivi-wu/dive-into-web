@@ -135,7 +135,7 @@ const show_phone_icon = /android/.test(ua) && /chrome\/([\d.]+)/.test(ua) 
 }
 ```
 
-js 里通过 `matchMedia` 检测 `display-mode` 媒体，其结果 matches 返回一个Boolean，可用来记录用户是如何启动你的 PWA。
+js 里通过 `matchMedia` 检测 `display-mode` 媒体，其结果 _matches_ 返回一个Boolean，可用来记录用户是如何启动你的 PWA。
 
 ```js
 window.addEventListener('load', () => {
