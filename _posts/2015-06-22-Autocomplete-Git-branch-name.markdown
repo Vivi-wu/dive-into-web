@@ -10,7 +10,7 @@ Mac 上用 `Tab` 键不能自动补全 Git 分支名称，每次都要手动输�
 
 1. 在 Git [源代码包](https://github.com/git/git/blob/master/contrib/completion/git-completion.bash)里有个 git-completion.bash 文件，Terminal 里运行以下代码，实现下载并在本地 home 目录创建同名文件：
 
-        curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+        curl https://github.com/git/git/blob/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
 
 2. 在 ~/.bash_profile 文件里复制粘贴以下代码：
 
@@ -41,12 +41,19 @@ Mac 上用 `Tab` 键不能自动补全 Git 分支名称，每次都要手动输�
         alias ga='git add'
         alias gd='git diff'
         alias gm='git merge'
+        alias gck='git checkout'
         alias gplm='git pull origin master'
         alias gpsm='git push origin master'
-        alias gplt='git pull origin test'
-        alias gpst='git push origin test'
-        alias gpld='git pull origin develop'
-        alias gpsd='git push origin develop'
         alias glogp='git log --pretty=format:"%C(yellow)%H %C(green)%ad%C(red)%d %Creset%s %C(blue)[%cn]" --date=short --graph'
 
 3. 保存并退出文件。在当前 terminal 中重新加载该文件
+
+## 新版Mac OS (10.15+ incl. Big Sur 11.0)
+
+默认终端为 zsh，需要重新配置。参考[这里](https://stackoverflow.com/a/58517668)
+
+在终端里运行以下代码：
+
+```shell
+echo 'autoload -Uz compinit && compinit' >> ~/.zsh_profile && . ~/.zsh_profile
+```

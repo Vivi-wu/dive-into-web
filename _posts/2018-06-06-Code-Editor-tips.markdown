@@ -9,7 +9,7 @@ category: Other
 1. 每次在终端里执行与远端交互的 git 命令都提示输入passphrase？
 
     + 解法一：把 remote url 从ssh改为https
-    + 解法二：在generate SSH key 的时候，当终端提示设置 password 跳过就行（因为密码不是必须的）
+    + 解法二：在生成 SSH key 的时候，当终端提示设置 password 跳过就行（因为密码不是必须的）
 
 2. `cat *.txt` Linux 命令：连接文件并将内容打印到标准输出设备上
 

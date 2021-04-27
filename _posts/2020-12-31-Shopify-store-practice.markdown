@@ -37,7 +37,7 @@ GA分析、Google Ads及Facebook分析的配置，参看这篇文章[Complete Gu
 
 官方文档[Showing product recommendations on product pages](https://shopify.dev/tutorials/develop-theme-recommended-products)
 
-使用 `recommendations.products` Liquid object 展示商品推荐，由 Shopify algorithm 来生成 recommended products. 
+使用 `recommendations.products` Liquid object 展示商品推荐，由 Shopify algorithm 来生成 recommended products.
 
 默认商品推荐的算法使用销售数据和商品描述，选出相似或经常一起购买的商品。当这些数据不存在时，显示来自相关 collection 的商品。
 
@@ -110,7 +110,7 @@ Shopify app 分为：
 
 阅读了 Shopify API License and Terms of Use，
 
-Build a Shopify App with Node and 
+Build a Shopify App with Node and
 
 需要开通一个 Shopify partners 账号
 
@@ -231,7 +231,7 @@ snippet:
 
 ### 获取未取消订单数据
 
-	https://*.myshopify.com/admin/orders.json
+  https://*.myshopify.com/admin/orders.json
 
 发现一个有意思的点，即使用这种方式拿到别人订单的 token，访问 `https://<店铺前台域名>/<storeId>/orders/<token>`，页面上也读不到订单的 id 等信息。
 
@@ -242,15 +242,15 @@ snippet:
 -》安装 shopify 命令行工具
 -〉创建新项目
 
-	shopify create node
+  shopify create node
 
 -》开启本地开发服务器
 
-	shopify serve
+  shopify serve
 
 -〉终端里另打开一个tab页，自动完成浏览器打开app，并安装进开发店铺
 
-	shopify open
+  shopify open
 
 谷歌搜索 Shopify GraphiQL App，安装给指定店铺，方便进行调试。
 
@@ -283,3 +283,24 @@ snippet:
 ### SEO
 
 当发布一个local，Shopify通过 `{{ content_for_header }}` 自动插入 hreflang tags。搜索引擎使用 hreflang 标记，根据搜索者的语言偏好，在搜索结果中提供正确语言的URL。如果搜索者的语言偏好没有匹配上任何一个 hreflang 标记，则使用店铺的primary locale
+
+## VS Code配置
+
+建议安装的 Extensions：[sissel.shopify-liquid 代码高亮、formatting](https://marketplace.visualstudio.com/items?itemName=sissel.shopify-liquid&ssr=false#overview)
+
+Mac快捷键：Shift + command + L
+
+默认对整个文件进行格式化。
+
+如果格式化不生效，看下settings.json中的这些配置：
+
+```json
+{
+  "[html]": {
+    "editor.defaultFormatter": "sissel.shopify-liquid"
+  },
+  "files.associations": {
+    "*.liquid": "html"
+  },
+}
+```
