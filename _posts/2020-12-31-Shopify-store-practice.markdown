@@ -201,7 +201,7 @@ Shopify liquid 中每个 object 都有唯一的 _handle_。默认情况下，han
 
 #### 变量作用域
 
-渲染进模版里的 snippet 代码并不自动 access 父模版中使用变量 tags assign赋值的 variables。同理，snippet 内部的变量，不能被外部的代码读取。
+渲染进模版里的 snippet 代码并不自动 access 父模版中使用变量 tags assign 赋值的 variables。同理，snippet 内部的变量，不能被外部的代码读取。
 
 读取父模版变量的方法：
 

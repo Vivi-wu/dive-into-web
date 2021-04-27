@@ -60,7 +60,7 @@ category: Other
         Ctrl + Shift + ]    打开代码块
 
 4. 编辑
-    
+
         Ctrl + Shift + L            选中所有“当前选择”的匹配项
         Ctrl + F                    当前文件搜索
         Ctrl + Shift + F            全局搜索
@@ -79,7 +79,7 @@ category: Other
         Ctrl + Shift + K            删除行
         Ctrl + C                    复制行
         Alt + ↑/↓                   移动行
- 
+
 ### 在指定目录下的文件中查找
 
 在订单列表目录下的 .vue 文件里查找
@@ -109,3 +109,7 @@ Windows 系统按 `Fn + F12`
 1. 左侧工具栏 Explorer -》Open Editors
 2. 右键点击文件 A，弹出菜单里选择 Select for Compare
 3. 右键点击另一文件 B，弹出菜单里选择 Compare with Selected
+
+### 打开终端
+
+Mac OS `Shift + command + C`

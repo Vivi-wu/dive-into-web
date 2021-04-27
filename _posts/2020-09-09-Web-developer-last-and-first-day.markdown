@@ -32,11 +32,13 @@ category: Other
 
 ## 软件
 
-下载并安装 Chrome、Visual Studio Code、Node.js、Sublime Text
+下载并安装 Chrome、Visual Studio Code、Node.js
+
+Mac新电脑安装 brew
 
 ### VS code
 
-在扩展里安装常用扩展插件：ESLint、gitk、GitLens、Simple React Snippets、vscode-fileheader
+在扩展里安装常用扩展插件：ESLint、Git Graph、GitLens、Simple React Snippets、vscode-fileheader
 
 编辑器显示：
 
@@ -51,7 +53,7 @@ category: Other
 
 使设置生效，重启编辑器：Code-》Quit Visual Studio Code
 
-给文件头部自动添加注释：Code-》Preferences-〉Settings-》Extensions-〉File header Configuration，将Author和Last modified by改成自己的邮箱。默认快捷键：control+alt+i
+给文件头部自动添加注释：Code-》Preferences-〉Settings-》Extensions-〉File header Configuration，将 Author 和 Last modified by 改成自己的邮箱。默认快捷键：control+alt+i
 
 ### SSH Key
 
