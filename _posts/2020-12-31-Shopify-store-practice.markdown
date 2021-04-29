@@ -229,6 +229,19 @@ snippet:
 <ul>
 ```
 
+#### capture
+
+捕获开闭标签之间的字符串，赋值给变量。通过 capture 创建的变量也是 string.
+
+理论上，只要 snippet 的输出结果是字符串，就可以通过这个方法实现代码复用。
+
+```
+{%- capture t_title -%}
+  {%- render 'translation_text_node', original_text : settings.title, prefix: 'layout.header_menu.' -%}
+{%- endcapture -%}
+{%- render 'my_title',title:t_title -%}
+```
+
 ### 获取未取消订单数据
 
   https://*.myshopify.com/admin/orders.json
@@ -275,6 +288,28 @@ snippet:
 划重点：If your Shopify store is on the Shopify plan, the Advanced Shopify plan, or the Shopify Plus plan, then you need to assign newly published languages to a domain in your online store for them to appear on your storefront. 我们plus的店铺需要把新增的语言assign给店铺的domain，才能出现在店面。You must complete this task even if you're only using a single domain. 即便只使用一个domain，也必须要完成这个操作。
 
 [可以翻译的资源类型](https://shopify.dev/docs/admin-api/graphql/reference/translations/translatableresourcetype)，如：商品信息、email通知
+
+### 关于locale
+
+属性name和endonym_name的区别：`locale.name` 会随当前语言改变（以当地语言显示）。
+
+```
+{% for locale in shop.published_locales %}
+  {{ locale.name }} - {{ locale.endonym_name }} ({{ locale.iso_code }})
+{% endfor %}
+```
+
+当前语言选英语时，输出：
+
+```
+English - English (en) French - français (fr)
+```
+
+当前语言选法语时，输出：
+
+```
+anglais - English (en) français - français (fr)
+```
 
 ### url
 
