@@ -38,7 +38,7 @@ Mac新电脑安装 brew
 
 ### VS code
 
-在扩展里安装常用扩展插件：ESLint、Git Graph、GitLens、Simple React Snippets、vscode-fileheader
+在扩展里安装常用扩展插件：ESLint、Git Graph、GitLens、vscode-fileheader、JavaScript and TypeScript Nightly
 
 编辑器显示：
 

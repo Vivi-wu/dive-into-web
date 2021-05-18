@@ -199,49 +199,6 @@ Shopify liquid 中每个 object 都有唯一的 _handle_。默认情况下，han
 
 `product` 的 handle 以商品标题自动创建。
 
-#### 变量作用域
-
-渲染进模版里的 snippet 代码并不自动 access 父模版中使用变量 tags assign 赋值的 variables。同理，snippet 内部的变量，不能被外部的代码读取。
-
-读取父模版变量的方法：
-
-```
-{% assign all_products = collections.all.products %}
-{% render 'snippet', products: all_products %}
-```
-
-可以以逗号分隔，传递多个变量。
-
-此外，通过 `with` 参数，将父模版中定义的变量值传递给与 snippet 文件同名的内部变量。
-
-父模版:
-```
-{% assign c = collections.all.products %}
-{% render 'collection-product-list' with c %}
-```
-
-snippet:
-```
-<ul>
-{% for product in collection-product-list %}
-<li><a href="{{ product.url}}">{{ product.title}}</a>
-{% endfor %}
-<ul>
-```
-
-#### capture
-
-捕获开闭标签之间的字符串，赋值给变量。通过 capture 创建的变量也是 string.
-
-理论上，只要 snippet 的输出结果是字符串，就可以通过这个方法实现代码复用。
-
-```
-{%- capture t_title -%}
-  {%- render 'translation_text_node', original_text : settings.title, prefix: 'layout.header_menu.' -%}
-{%- endcapture -%}
-{%- render 'my_title',title:t_title -%}
-```
-
 ### 获取未取消订单数据
 
   https://*.myshopify.com/admin/orders.json
