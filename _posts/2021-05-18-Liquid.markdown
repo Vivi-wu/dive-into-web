@@ -32,6 +32,14 @@ Liquid 语言里使用 snippet 封装代码，同 js 的模块概念。
 + 当 Tags 或输出返回 `Nil`，不会有任何东西打印到页面上
 + 不能直接创建/initialize array，可以通过 `split` filter 把一个 string 打断成一个 substring 的数组
 + 某个条件发生的概率小时，使用 `{% unless condition %}`logic`{% endunless%}`，即仅当 condition 不满足时，才执行logic
++ 可以给变量 `assgin` 布尔值，但不能把 condition 判断的结果直接赋值给变量。解法：
+
+```
+{%- assign hasAdProducts = false -%}
+{%- if ad_products.size > 0 -%}
+  {%- assign hasAdProducts = true -%}
+{%- endif -%}
+```
 
 ### 变量作用域
 
@@ -115,3 +123,7 @@ snippet:
 {% assign str = 2021 -%}
 {{ str | append: '' }}
 ```
+
+### Array 操作
+
+是否可以使用 filter 排除数组中的某些 items？目前好像不行。

@@ -82,7 +82,7 @@ Mac 上常用的抓包工具。
 5. 关闭 Charles，重新打开，窗口工具条 Help -》显示 Registered to <填写的注册人名>
 6. 窗口工具条 Proxy-》macOS Proxy，开启权限
 
-注意要严格按上面的顺序执行操作。
+注意要严格按上面的顺序执行操作。（2021.5.25，作者更新了，只需要输入在线生成的register码即可。）
 
 ### 代理 Simulator 中的 https 请求
 
@@ -94,11 +94,10 @@ Mac 上常用的抓包工具。
 
 记录下：
 
-1. 【Charles】菜单栏：Help-》SSL Proxying-》Install Charles Root
-Certificate in iOS Simulators.
-2. 【Simulator】菜单栏：Device-》Restart
-3. 【Charles】菜单栏：Proxy-》macOS Proxy
-4. 【Charles】菜单栏：Proxy-》SSL Proxying Settings-》SSL Proxying 栏里勾选 Enable SSL Proxying-》Include 表格点 Add，在 Host 输入泛域名如 *.example.com
+1. 【Charles】菜单栏：Help -》SSL Proxying -》Install Charles Root Certificate in iOS Simulators.
+2. 【Simulator】菜单栏：Device -》Restart
+3. 【Charles】菜单栏：Proxy -》macOS Proxy
+4. 【Charles】菜单栏：Proxy -》SSL Proxying Settings -》SSL Proxying 栏里勾选 Enable SSL Proxying -》Include 表格点 Add，在 Host 输入泛域名如 *.example.com
 5. 重启 Charles
 6. 确保 Charles 里点了 Start Recording，如果还是有问题，排查下 simulator 的证书是否最新
 
@@ -112,3 +111,12 @@ sudo vi /etc/hosts
 在 hosts 文件加上: 127.0.0.1 localhost.charlesproxy.com
 
 本地项目浏览地址 localhost:3000 改成 localhost.charlesproxy.com:3000 即可
+
+### 抓取 https 请求
+
+Charles 抓取 https 请求时默认显示 unknown。解决：
+
+1. 【Charles】菜单栏：Help -》SSL Proxying-》Install Charles Root Certificate
+2. 双击“Charles Proxy CA...” -》信任 -》使用此证书时：始终信任
+3. 【Charles】菜单栏：Proxy -》macOS Proxy（确保勾选），Proxy Settings弹窗里采用默认设置
+4. 【Charles】菜单栏：Proxy -》SSL Proxying Settings -》SSL Proxying 栏里勾选 Enable SSL Proxying -》Include 表格点 Add -》*.*（添加所有域名）-》点 OK

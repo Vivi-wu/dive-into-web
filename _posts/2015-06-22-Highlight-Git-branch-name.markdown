@@ -50,7 +50,11 @@ COLOR_USR='%F{243}'
 COLOR_DIR='%F{3}'
 COLOR_GIT='%F{39}'
 setopt PROMPT_SUBST
-export PROMPT='${COLOR_USR}%n@%M ${COLOR_DIR}%d ${COLOR_GIT}$(parse_git_branch)${COLOR_DEF} $ '
+export PROMPT='${COLOR_USR}%n@%M ${COLOR_DIR}%1d ${COLOR_GIT}$(parse_git_branch)${COLOR_DEF} $ '
 ```
 
 颜色不喜欢可以看[这里的88/256 Colors-》Foreground（text）](https://misc.flogisoft.com/bash/tip_colors_and_formatting)
+
+关于一些特殊符号的解释，如: %d，看这里[Prompt Expansion](http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html)
+
+关于高亮当前目录`%d`，默认是the whole path。我觉得太长了，仅展示当前工作路径最后一个component（项目文件名）即可，通过在百分号和字母d之间加了一个数字1实现。
