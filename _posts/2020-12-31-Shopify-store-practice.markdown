@@ -207,6 +207,49 @@ Shopify liquid 中每个 object 都有唯一的 _handle_。默认情况下，han
 
 访问自己的订单状态页，如果在 Settings-》Checkout-〉Order processing-》Additional scripts 里使用了 Shopify liquid 变量取数，渲染的页面上 Shopify.Checkout 才会有值（如果：订单 id）。
 
+### 控制商品 color 显示个数
+
+当商品有很多 color 时，在商品列表里颜色 swatch 会换行，看起来不整齐。
+
+以下 snippet 提供了一个通用解决方案：支持在 theme editor 里开启/关闭 swatch limit 功能；可设置最多显示多少种颜色；see more 显示剩余的 color 数量，点击 see more 跳转至商品详情页面。
+
+```liquid
+{%- liquid
+  assign get_color = 'color,colors,couleur,colour'
+  assign pr_options_name = product.options
+  for option_name in pr_options_name
+	  assign name = option_name | downcase
+	  if get_color contains name
+	    assign color_index = forloop.index
+	    break
+	  endif
+  endfor
+  assign n_option = 'option'| append: color_index
+  assign pr_variants = product.variants
+  assign color_variants = pr_variants | map: n_option | uniq
+  if settings.enable_swatch_limit
+    assign swatch_limit = settings.swatch_limit
+  else
+    assign swatch_limit = 1000
+  endif
+-%}
+
+{%- if product.options.size > 0 and product.variants.size > 1-%}
+  {%- for color in color_variants limit:swatch_limit -%}
+    {%- assign color_handle = color | handleize -%}
+    {%- assign img_arry = pr_variants | where: n_option, color -%}
+    {%- assign variant = img_arry[0]  -%}
+    <img src="{{ variant.image.src | product_img_url: grid_image_width }}" alt="{{color}} thumbnail" />
+  {%- endfor -%}
+  {%- assign color_size = color_variants | size -%}
+  {%- if settings.enable_swatch_limit and color_size > swatch_limit %}
+    <span title="See More">
+      <a href="{{ product.url | within: collection }}">+{{ color_size | minus: swatch_limit }}</a>
+    </span>
+  {% endif -%}
+{%- endif -%}
+```
+
 ### Shopify App CLI
 
 -》安装 shopify 命令行工具
