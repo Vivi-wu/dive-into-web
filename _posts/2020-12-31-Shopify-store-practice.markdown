@@ -207,7 +207,9 @@ Shopify liquid 中每个 object 都有唯一的 _handle_。默认情况下，han
 
 访问自己的订单状态页，如果在 Settings-》Checkout-〉Order processing-》Additional scripts 里使用了 Shopify liquid 变量取数，渲染的页面上 Shopify.Checkout 才会有值（如果：订单 id）。
 
-### 控制商品 color 显示个数
+### Liquid实现功能
+
+#### 控制商品 color 显示个数
 
 当商品有很多 color 时，在商品列表里颜色 swatch 会换行，看起来不整齐。
 
@@ -248,6 +250,18 @@ Shopify liquid 中每个 object 都有唯一的 _handle_。默认情况下，han
     </span>
   {% endif -%}
 {%- endif -%}
+```
+
+#### 翻译商品 option 名称
+
+在对应语言的 locale 文件里，按这个路径添加翻译词条。
+
+```liquid
+{%- for option in product.options_with_values -%}
+  {%- assign name = option.name | downcase -%}
+  {%- assign t_name = name | prepend: "products.product.option_name." | t -%}
+  <span style="text-transform:uppercase;">{{t_name}}</span>
+{%- endfor -%}
 ```
 
 ### Shopify App CLI
