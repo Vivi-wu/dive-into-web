@@ -57,3 +57,14 @@ Mac 上用 `Tab` 键不能自动补全 Git 分支名称，每次都要手动输�
 ```shell
 echo 'autoload -Uz compinit && compinit' >> ~/.zsh_profile && . ~/.zsh_profile
 ```
+
+每次打开终端会提示，而且输入y后，.zsh_profile 文件里的设置也不会自动生效：
+
+```shell
+zsh compinit: insecure directories, run compaudit for list.
+Ignore insecure directories and continue [y] or abort compinit [n]?
+```
+
+解决办法：
+1. https://stackoverflow.com/a/63447799/15774529
+2. 将 .zsh_profile 里的内容移动到 .zshrc

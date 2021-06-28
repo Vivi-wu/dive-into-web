@@ -24,7 +24,7 @@ npm config get registry
 版本号递增规则如下：
 
 + 主版本号：当你做了不兼容的 API 修改
-+ 次版本号：当你做了向下兼容的功能性新增 add 
++ 次版本号：当你做了向下兼容的功能性新增 add
 + 修订号：当你做了向下兼容的问题修正 fix
 
 先行版本号及版本编译元数据可以加到“主版本号.次版本号.修订号”的后面，作为延伸。如：1.0.0-beta
@@ -33,7 +33,7 @@ npm config get registry
 
 [npm-scripts](https://docs.npmjs.com/misc/scripts)
 
-Additionally, arbitrary scripts can be executed by running `npm run-script <stage>`. **Pre** and **post** commands with matching names will be run for those as well (e.g. premyscript, myscript, postmyscript). 
+Additionally, arbitrary scripts can be executed by running `npm run-script <stage>`. **Pre** and **post** commands with matching names will be run for those as well (e.g. premyscript, myscript, postmyscript).
 
 也就是说，如果你有一个 build 指令，当执行完 `npm run build` 后，可以自动执行 `npm run postbuild`
 
@@ -105,3 +105,16 @@ package-lock.json 锁定结果 tree shape，提供确定可复制重现的 build
 	/Users/CF/Documents/projects/wholee-msite/node_modules/cf-front-utils -> /usr/local/lib/node_modules/cf-front-utils -> /Users/CF/Documents/projects/cf-front-utils
 
 3. 调试完毕后，运行 `npm unlink <npm模块项目名称>` 解除链接
+
+## nvm
+
+官方[代码库](https://github.com/nvm-sh/nvm)
+
+macOS 10.15以上默认shell是 zsh，而 nvm 会查找 .zshrc 去更新，但是这个文件默认是没有的。因此:
+
+1. touch ~/.zshrc
+2. curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+3. 关闭终端，重新打开
+4. 检查是否已安装：command -v nvm
+
+终端输出 `nvm` 表示安装成功。

@@ -264,6 +264,16 @@ Shopify liquid 中每个 object 都有唯一的 _handle_。默认情况下，han
 {%- endfor -%}
 ```
 
+#### script标签 js 代码里读当前店铺货币符号
+
+直接用 currency.symbol 是不行的，因为店铺可以有多种currency。如果输出值类型为 string，则必须使用 json filter 进行 stringify.
+
+```liquid
+<script>
+const currency_symbol = {{cart.currency.symbol | json}}
+</script>
+```
+
 ### Shopify App CLI
 
 -》安装 shopify 命令行工具

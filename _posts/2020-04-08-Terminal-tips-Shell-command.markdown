@@ -67,3 +67,19 @@ curl -H 'custom-header:值' -b ‘_ga=cookie1;_gid=cookie2’ http://www.example
 ```
 
 设置请求头，并带上 cookie
+
+### 查找 Node 进程 pid
+
+虽然可以通过代码输出 `console.log(process.pid)`, 但是以下可以不侵入代码，通过端口号在终端里定位进程。
+
+```sh
+lsof -i:3011
+```
+
+### 监控进程内存使用情况
+
+Mac终端：
+
+```sh
+top -pid 7272
+```
