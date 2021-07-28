@@ -204,3 +204,45 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
 8. 表单提交时，判断输入项是否有error并拦截（通过标识或状态，避免重复判断），用户可能不改错直接提交。
 9. 键盘事件只能由 input、textarea，等任何拥有 _contentEditable_ 属性，或者 tabindex='-1' 的元素
 10. 针对编辑负责数据，建议一个 field 修改完失焦就提交server保存
+
+## submit Event
+
+最近被一个form提交的问题困扰了1、2个小时，希望的效果是拦截表单 type 为 submit 元素触发的默认form提交行为。
+
+经过验证，得出以下结论：
+1. 函数绑定写在form后面
+2. 以下4种方式都可以
+3. 执行顺序：3-》2-》4，且当这三个函数执行时，1不执行
+
+```html
+<html>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <body>
+    <form id="myform" action="" onsubmit="return myFunction()">
+      Enter name: <input type="text" name="fname">
+      <input type="submit" value="Submit">
+    </form>
+    <script>
+      function myFunction() {
+        alert("1 The form was submitted");
+        return false
+      }
+      function myFunction2() {
+        alert("2 The form was submitted");
+        return false
+      }
+      function myFunction3() {
+        alert("3 The form was submitted");
+        return false
+      }
+      function myFunction4() {
+        alert("4 The form was submitted");
+        return false
+      }
+      // $('#myform').on('submit', myFunction2);
+      // document.getElementById('myform').onsubmit = myFunction3
+      // document.getElementById('myform').addEventListener("submit", myFunction4);
+    </script>
+  </body>
+</html>
+```

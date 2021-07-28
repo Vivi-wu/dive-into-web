@@ -145,11 +145,15 @@ Alt+Shift+Ctrl+S（文件-导出-存储为web所用格式），剩下保存步�
 
 ## web 安全
 
-CSP(Content Security Policy), 并不是用来防止 XSS 攻击的，而是最小化 XSS 发生后所造成的伤害。事实上，除了开发者自己做好 XSS 转义，并没有别的方法可以防止 XSS 的发生。CSP 的作用是限制一个页面的行为，不论是否是 javacript 控制的。
+CSP 定义 Content-Security-Policy HTTP 标头，允许创建信任的内容的来源白名单，并指示浏览器仅执行或渲染来自这些来源的资源，而不要盲目地信任服务器提供的所有内容。
 
-目前使用的 X-Frame-Options，但以后可以被 CSP 的 frame-ancestors 取代。
+CSP并不能防止 XSS 攻击，但可以最小化 XSS 发生后所造成的伤害。通过完全禁止内联脚本（不仅包括在 script 标记中直接嵌入的脚本，也包括内联事件处理程序）来解决XSS攻击带来的脚本注入。禁止内联脚本是 CSP 提供的最大安全性优势，禁止内联样式同样可以提高应用的安全性。
 
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+CSP 机制允许为一个资源指定多个策略，包括通过 Content-Security-Policy 标头（response header）、Content-Security-Policy-Report-Only 标头和 `<meta>` 元素。
+
+可以多次使用 Content-Security-Policy 标头，添加额外的策略只能进一步限制受保护资源的能力。
+
+Content-Security-Policy 标头的指令也可以应用于 Content-Security-Policy-Report-Only 标头。
 
 ## CSS 开发者大会相关
 
