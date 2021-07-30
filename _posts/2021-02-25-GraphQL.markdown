@@ -20,7 +20,7 @@ Shopify同时支持RESTful API和GraphQL API。在为Shopify开发app时，官�
 + 命名遵守规则：描述要返回的内容
 
 ### 运行示例代码
- 
+
 你需要注册Shopify开发者账号，开通development store，导入一些商品数据，安装 Shopify GraphiQL App https://shopify-graphiql-app.shopifycloud.com/
 这些都是免费的。
 
@@ -449,3 +449,76 @@ query TranslationFR ($id: ID!) {
 
 某些字段的响应value省略了，示例中的页面比较特殊，除了title，主体内容都是图片。可以看到，meta_title、meta_description由于没有意大利语翻译，value是null。
 
+### 示例8：根据ID删除商品某个metafields
+
+调研Shopify Product Reviews功能时用csv给某商品倒入了一些评分评论数据，这些数据通过扩展 product.metafields 保存。
+
+先查询得到该 metafield 的唯一标识（id）：
+
+```
+query ProductMetafields($id: ID!) {
+  product(id: $id) {
+    title
+    handle
+    metafields(first:20) {
+      edges {
+        node {
+          id
+          key
+          value
+          namespace
+        }
+      }
+    }
+  }
+}
+```
+
+响应：
+```
+{
+  "data": {
+    "product": {
+      ...
+      "metafields": {
+        "edges": [
+          ...,
+          {
+            "node": {
+              "key": "reviews",
+              "value": "<style scoped>.spr-container {\n    padding: 24px;\n    border-color: #ECECEC;}\n  .spr-review, .spr-form {\n    border-color: #ECECEC;\n  }\n</style>\n\n<div class=\"spr-container\">\n  <div class=\"spr-header\">\n    <h2 class=\"spr-header-title\">Customer Reviews</h2><div class=\"spr-summary\">\n\n        <span class=\"spr-starrating spr-summary-starrating\">\n          <i class=\"spr-icon spr-icon-star\"></i><i class=\"spr-icon spr-icon-star\"></i><i class=\"spr-icon spr-icon-star\"></i><i class=\"spr-icon spr-icon-star\"></i><i class=\"spr-icon spr-icon-star\"></i>\n        </span>\n        <span class=\"spr-summary-caption\"><span class='spr-summary-actions-togglereviews'>Based on 6 reviews</span>\n        </span><span class=\"spr-summary-actions\">\n        <a href='#' class='spr-summary-actions-newreview' onclick='SPR.toggleForm(6824438104223);return false'>Write a review</a>\n      </span>\n    </div>\n  </div>\n\n  <div class=\"spr-content\">\n    <div class='spr-form' id='form_6824438104223' style='display: none'></div>\n    <div class='spr-reviews' id='reviews_6824438104223' ></div>\n  </div>\n\n</div>\n<script type=\"application/ld+json\">\n      {\n        \"@context\": \"http://schema.org/\",\n        \"@type\": \"AggregateRating\",\n        \"reviewCount\": \"6\",\n        \"ratingValue\": \"4.833333333333333\",\n        \"itemReviewed\": {\n          \"@type\" : \"Product\",\n          \"name\" : \"2021 Waterproof Sun UV Protection Man Quick Dry Hiking Jacket Coats Outdoor Windbreaker Sports Fishing Skin Jackets\",\n          \"offers\": {\n            \"@type\": \"AggregateOffer\",\n            \"lowPrice\": \"5.99\",\n            \"highPrice\": \"5.99\",\n            \"priceCurrency\": \"GBP\"\n          }\n        }\n      }\n</script>",
+              "namespace": "spr",
+              "createdAt": "2021-07-30T06:21:52Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "extensions": ...
+}
+```
+
+再参考官方文档[指令](https://shopify.dev/api/admin/graphql/reference/metafields/metafielddelete)进行删除:
+
+入参
+```
+{
+  "input": {
+    "id": "gid://shopify/Metafield/19993346244767"
+  }
+}
+```
+
+命令
+```
+mutation metafieldDelete($input: MetafieldDeleteInput!) {
+  metafieldDelete(input: $input) {
+    deletedId
+    userErrors {
+      field
+      message
+    }
+  }
+}
+```
