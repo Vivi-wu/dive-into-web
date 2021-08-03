@@ -138,3 +138,52 @@ Whenever you put critical site functionality inside the event callback function,
 该设置用作报告的每日起止时间的国家/地区和时区，与数据来源于何处无关。例如，如果选择了美国洛杉矶时间，则无论命中是来源于纽约、伦敦还是莫斯科，每天的开始时间和结束时间都会按照洛杉矶时间来计算。
 
 更改时区只会影响未来的数据，不会影响以前的数据。在更新完设置后，报告数据可能会在短期内继续采用旧时区，直到ga的服务器处理完更改。
+
+## analytics.js是如何工作的？
+
+最近需要给对接大数据的功能埋点，由于追踪脚本异步加载，会出现上报代码执行时脚本还没有加载完毕，导致部分事件漏上报。参考下ga实现来解决。官方[文档](https://developers.google.com/analytics/devguides/collection/analyticsjs/how-analyticsjs-works)
+
+### 原理
+
+define 一个全局的 `ga()` 函数，作为 command queue（指令队列），不会立即执行收到的命令，而是将它们添加到一个队列中，该队列会延迟执行，直到 analytics.js 库加载完毕。
+
+在 JavaScript 中，函数也是对象，可以包含属性。 Google Analytics tag 将 ga 函数对象上的 `q` 属性定义为空数组。在加载 analytics.js 库之前，调用 ga() 函数会**将传递给 ga() 函数的参数列表附加到 q 数组的末尾**。
+
+analytics.js 库加载完成后，检查 `ga.q` 数组的内容并按顺序执行每个命令。然后 redefine `ga()` 函数，后续调用会立即执行。
+
+这提供了一个简单的、看起来是同步的接口，开发者书写上报代码时，无需考虑脚步的加载。
+
+### 实现
+
+第一个参数是 command（标识特定 analytics.js 方法的字符串）
+
+特定命令所指的方法可以是全局方法，例如 `create`，ga 对象上的方法，也可以是跟踪器对象上的实例方法，例如 `send`。如果 ga() 命令队列接收到它无法识别的命令，直接忽略
+
+新建 tracker 对象的实例，在 constructor 里依次执行 `q` 队列里的命令（第一条必须是 `create`，即初始化 Trace 对象，包含通用底层逻辑），然后 redefine 全局打点函数。
+
+tracker 对象关键代码如下：
+
+```js
+init () {
+  this.traceInstance = new Trace()
+  window.wlt = this._bindThis(this.main, this)
+}
+_bindThis (fn: Function, obj: object) {
+  return function() {
+    fn.apply(obj, arguments)
+  }
+}
+main (command: string, param: any) {
+  switch(command) {
+    case 'track':
+      let p = { et: param, ...arguments[2] }
+      this.traceInstance.Track(p)
+      break
+    case 'create':
+      this.init(param)
+      break
+    default:
+      break
+  }
+}
+```
