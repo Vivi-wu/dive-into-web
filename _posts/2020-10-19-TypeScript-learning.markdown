@@ -153,3 +153,35 @@ console.log(Color[4]);            // "Blue"
 any 类型会穿透对象的属性。
 
 使用 any 会丢失掉使用TS的主要动机——类型安全，非必要时应尽量避免。
+
+### set new property on `window` object
+
+需要扩展现有的 `Window` interface，告诉它自定义的新属性。参考：https://stackoverflow.com/a/12709880/2474841
+
+```ts
+declare global {
+  interface Window {
+    ttq: any;
+  }
+}
+```
+
+### 强类型 function 作为函数parameter
+
+参考：https://stackoverflow.com/questions/14638990/are-strongly-typed-functions-as-parameters-possible-in-typescript
+
+```ts
+class Foo {
+  save(callback: (n: number) => any) : void {
+    callback(42);
+  }
+}
+
+// Equivalent
+type NumberCallback = (n: number) => any;
+class Foo {
+  save(callback: NumberCallback) : void {
+    callback(42);
+  }
+}
+```
