@@ -363,3 +363,58 @@ Mac快捷键：Shift + command + L
   },
 }
 ```
+
+## Online Store 2.0
+
+### 升级主题结构
+
+sections：
+
+每个页面的section新的工作方式：每一种类型的页面都可以使用一个JSON模版文件来渲染。这个文件列出页面的sections，商家添加或编辑的任何附加sections相关的设置数据。
+
+店铺可以拥有多个模版文件，以匹配不同的商品、collection、blog post和自定义的页面。
+
+theme app extensions
+
+解决当前apps很难构建在所有主题中都能一致运行并且在世界任何地方都可以快速运行的功能。
+
+1.app blocks标志着应用被添加进主题方式的根本性变化（app开发者现在可以通过theme editor直接添加、移除和配置UI组建），这意味着uninstall也是更加干净的。通过Shopify CLI轻松地创建、发布和更新（带版本号）
+2.app支持性的资源文件添加进theme app extensions（放在Shopify的CDN上），在app block中可以方便第引用。
+
+### 灵活的店铺内容
+
+metafields
+
+升级后的theme editor允许商家无需使用APIs或代码来添加metafields和属性。现在可以通过metafields（元字段）添加任何不太可能出现在核心商店编辑器中的内容，如一个尺码标、配料表
+
++ 更加灵活的类型系统，它会随着时间的推移而增长以更加适合商业数据
++ 引入标准元字段，这使得自定义主题在不同垂直市场的商店中开箱即用变得更加简单
++ 可以向元字段添加演示提示，允许 Storefront API 和 Liquid 以商家预期的方式呈现商家数据
+
+File picker
+
+元字段现在支持图片、pdf的资源，通过文件选择器可以在商品页面轻松地实现上传、选择资源文件（所有资源都保存在Settings/Files空间）
+
+File API
+
+新的文件API使得开发者也能获取Settings/Files中的内容访问权限。apps同理可以通过这个api，将与商品没有直接关系而在主题里使用到的图片存储到这个空间。
+
+### 主题编辑器的增强
+
+现在编辑器在侧边栏中以树视图显示页面上所有内容，使商家方便地更新页面的层级结构。
+
+新的Liquid输入设置将允许商家从编辑器里直接给也没添加custom liquid代码。开发者可以给section或block添加这个设置。（给运营赋能过多，对于由开发团队来维护和定制店铺主题，最终主题代码的权限还是收口在开发手里，所以这个新功能很鸡肋）
+
+### 新的开发者工具
+
+Shopify GitHub integration
+
+为了让主题的开发和维护更容易追踪和管理，通过连接GitHub用户账号或organization账号到在线店铺，GitHub repo的改变与所选主题当前的state同步。
+开发者现在可以实施工作流程：在代码发布到live主题之前，必须在 GitHub 上审查和合并更改。
+结合git subtrees可以执行theme check（linting）、编译scss等任务。
+
+Shopify CLI
+
+
+
+
