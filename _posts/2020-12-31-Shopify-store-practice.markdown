@@ -415,6 +415,32 @@ Shopify GitHub integration
 
 Shopify CLI
 
+之前这个工具主要用来快速开发app和app插件，现在也包括theme了。
+两个比较实用的点：
++ 可以使用官方的Dawn主题初始化新的主题项目
++ 向主题推送测试数据，如商品、客户和草稿订单
++ 在development themes里开发、预览和测试变更
 
+Development themes
 
+与Shopify store连接、暂时隐藏的主题，用来在本地开发实时查看changes，同时可以使用theme editor进行交互/配置。
 
+使用 `shopify theme serve` 在当前工作店铺里自动创建测试主题.
+
++ 在admin-》themes页面不可见，不用担心其他人修改
++ 不算入店铺主题limit里
++ 7天不活跃则被删除，也可以运行命令删掉
+
+Theme Check
+
+一个帮助debug主题问题，显示error提示的公交，与Shopify CLI捆绑在一起。可以与vscode集成，标示Liquid语法错误、templates缺失、性能问题等。
+
+### 新的初始主题Dawn
+
+Dawn 主题伴随 Online Store 2.0 一起发布，不再依赖polyfills和外部库，在所有浏览器里创造优良体验，比Debut主题快35%。
+
+### 主题和app更新到OS 2.0
+
+到今年年底，Shopify 主题商店中的所有主题和 Shopify 应用商店中的apps都将需要使用新的基础架构。
+
+商家现有的主题在今年之后可以继续使用，但要通过主题编辑器访问新的 Online Store 2.0 功能，需要确保这些的主题与 Online Store 2.0 兼容。

@@ -12,3 +12,10 @@ $.ajax({
   data: JSON.stringify({pageNo: 1, pageSize: 100})
 })
 ```
+
+取出与 jQuery 对象匹配的 DOM 元素
+
+```js
+$("li").get(0);
+$("li")[0]; // also
+```
