@@ -76,4 +76,3 @@ https://developers.google.com/web/fundamentals/performance/get-started/graphical
 ### 使用 performance API 测量关键路径渲染
 
 [评估关键渲染路径:](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp?hl=zh-cn)
-

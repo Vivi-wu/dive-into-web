@@ -444,3 +444,22 @@ Dawn 主题伴随 Online Store 2.0 一起发布，不再依赖polyfills和外部
 到今年年底，Shopify 主题商店中的所有主题和 Shopify 应用商店中的apps都将需要使用新的基础架构。
 
 商家现有的主题在今年之后可以继续使用，但要通过主题编辑器访问新的 Online Store 2.0 功能，需要确保这些的主题与 Online Store 2.0 兼容。
+
+## Shopify theme最佳实践
+
+1. 优化js
+  + 减少js的使用（用css代替js），压缩文件（少于16kb），当从storefront请求时，Shopify 自动压缩主题的 JavaScript 和 CSS 文件。
+  + 减少外部框架、库的依赖，尽可能使用浏览器原生的功能和现代DOM APIs。
+  + 在 script 标签上使用 `defer` 或 `async`（解析器阻塞式脚本会阻止 DOM 的构建和渲染，直到脚本被加载、解析和执行）
+2. 提前加载关键资源
+3. 延迟加载
+
+### lazy-loading图片
+
+浏览器级别的 lazy-loading：在 `<img>` 元素上使用 _loading_ 属性。值设为 lazy，元素出现在可是区域时浏览器立即加载图片，当用户滚动到其他图像附近时获取其他图像。
+
+当前支持率为74.7%，主要是Chrome和Firefox。对于不支持该属性的浏览器需要结合以下方法之一来实现图片懒加载。
+
+#### Intersection Observer
+
+当前支持率为94.9%
