@@ -522,3 +522,142 @@ mutation metafieldDelete($input: MetafieldDeleteInput!) {
   }
 }
 ```
+
+### 示例9：根据商品id添加商品标题的翻译
+
+找到商品 title 字段 translatableContent 的 digest
+
+入参：
+```
+{
+  "id": "gid://shopify/Product/6830238204096"
+}
+```
+
+命令：
+```
+query ProductTranslatableContentById($id: ID!) {
+  translatableResource(resourceId: $id) {
+    resourceId
+    translatableContent {
+      key
+      value
+      digest
+      locale
+    }
+  }
+}
+```
+
+返回：
+```
+{
+  "data": {
+    "translatableResource": {
+      "resourceId": "gid://shopify/Product/6830238204096",
+      "translatableContent": [
+        {
+          "key": "title",
+          "value": "Female Loose Yoga Clothes",
+          "digest": "df1b7e178043e843b0410af2bec05529f11e7afd1389890c305f7a537e4ec2ba",
+          "locale": "en"
+        },
+        {
+          "key": "body_html",
+          "value": "<div id=\"titleHeader\">Female Loose Yoga Clothes</div><br>",
+          "digest": "5c51f5a217d35e566c2e992c5309debab8954b146084c451ed47a10c2e8b8b4e",
+          "locale": "en"
+        },
+        ...
+      }
+    }
+  },
+  ...
+}
+```
+
+使用 Shopify spuId、digest、词条（另 key 和 locale 是固定值）在 Shopify 数据库里添加翻译。
+
+入参：
+```
+{
+  "id": "gid://shopify/Product/6830238204096",
+  "translations": [
+    {
+      "key": "title",
+      "value": "weiblich lose Yoga Kleider",
+      "locale": "de",
+      "translatableContentDigest": "df1b7e178043e843b0410af2bec05529f11e7afd1389890c305f7a537e4ec2ba"
+    }
+  ]
+}
+```
+
+命令：
+```
+mutation CreateTranslation($id: ID!, $translations: [TranslationInput!]!) {
+  translationsRegister(resourceId: $id, translations: $translations) {
+    userErrors {
+      message
+      field
+    }
+    translations {
+      locale
+      key
+      value
+    }
+  }
+}
+```
+
+### 示例10：根据商品id查看指定语言的翻译
+
+命令：
+```
+query ProductTranslationsById($id: ID!){
+  product(id: $id) {
+    title
+    translations(locale: "de") {
+      locale
+      key
+      value
+    }
+  }
+}
+```
+
+### 示例11：删除指定语言的某个翻译
+
+入参：
+```
+{
+  "id": "gid://shopify/Product/6830238204096",
+  "keys": [
+    "title"
+  ],
+  "locales": [
+    "de"
+  ]
+}
+```
+
+命令：
+```
+mutation RemoveTranslations($id: ID!, $keys: [String!]!, $locales: [String!]!) {
+  translationsRemove(
+    resourceId: $id,
+    translationKeys: $keys,
+    locales: $locales
+  ) {
+    userErrors {
+      message
+      field
+    }
+    translations {
+      locale
+      key
+      value
+    }
+  }
+}
+```

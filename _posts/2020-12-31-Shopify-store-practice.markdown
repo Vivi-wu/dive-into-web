@@ -207,6 +207,10 @@ Shopify liquid 中每个 object 都有唯一的 _handle_。默认情况下，han
 
 访问自己的订单状态页，如果在 Settings-》Checkout-〉Order processing-》Additional scripts 里使用了 Shopify liquid 变量取数，渲染的页面上 Shopify.Checkout 才会有值（如果：订单 id）。
 
+### 获取店铺商品总数
+
+  https://*.myshopify.com/admin/products/count.json
+
 ### Liquid实现功能
 
 #### 控制商品 color 显示个数
