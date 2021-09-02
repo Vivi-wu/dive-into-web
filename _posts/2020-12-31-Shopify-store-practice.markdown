@@ -439,6 +439,16 @@ Theme Check
 
 一个帮助debug主题问题，显示error提示的公交，与Shopify CLI捆绑在一起。可以与vscode集成，标示Liquid语法错误、templates缺失、性能问题等。
 
+Theme Deploy
+
+`shopify theme push -i <theme_id>`
+
+Theme Download
+
+`shopify theme pull -i <theme_id>`
+
+可以看到主题配置变更是直接保存在相关页面的json文件里，如：修改商品尺码表按钮文案，改动保存在 product.json，而不是之前的 setting_data.json
+
 ### 新的初始主题Dawn
 
 Dawn 主题伴随 Online Store 2.0 一起发布，不再依赖polyfills和外部库，在所有浏览器里创造优良体验，比Debut主题快35%。
