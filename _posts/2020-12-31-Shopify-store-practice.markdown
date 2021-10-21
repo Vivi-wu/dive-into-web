@@ -464,7 +464,7 @@ Dawn 主题伴随 Online Store 2.0 一起发布，不再依赖polyfills和外部
 1. 优化js
   + 减少js的使用（用css代替js），压缩文件（少于16kb），当从storefront请求时，Shopify 自动压缩主题的 JavaScript 和 CSS 文件。
   + 减少外部框架、库的依赖，尽可能使用浏览器原生的功能和现代DOM APIs。
-  + 在 script 标签上使用 `defer` 或 `async`（解析器阻塞式脚本会阻止 DOM 的构建和渲染，直到脚本被加载、解析和执行）
+  + 在 script 标签上使用 `defer` 或 `async`，在 HTML 文档解析时下载文件，区别：前者不阻塞HTML文档解析，后者下载完毕后立即执行，会中断HTML parse（https://stackoverflow.com/a/39711009/2474841）
 2. 提前加载关键资源
 3. 交互驱动的late loading，让首次加载时main thread更加free空闲
   + 仅当页面需要时加载图片，非首屏的图片延迟加载

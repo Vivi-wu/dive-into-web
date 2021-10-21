@@ -58,3 +58,18 @@ export PROMPT='${COLOR_USR}%n@%M ${COLOR_DIR}%1d ${COLOR_GIT}$(parse_git_branch)
 关于一些特殊符号的解释，如: %d，看这里[Prompt Expansion](http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html)
 
 关于高亮当前目录`%d`，默认是the whole path。我觉得太长了，仅展示当前工作路径最后一个component（项目文件名）即可，通过在百分号和字母d之间加了一个数字1实现。
+
+## Vim/Vi 编辑器指令
+
+删除一行：
+
+- 光标移到该行，双击 `dd`
+
+移动光标：
+
+【Insert模式】Shift + 方向键
+
+复制并黏贴一行：
+
+- 非【Insert模式】光标移到该行，输入大写 `V` 选择整行，输入 `y` 复制
+- 非【Insert模式】光标移到要粘贴的地方，输入大写 `P`，插入到光标之后

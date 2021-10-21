@@ -71,6 +71,12 @@ snippet:
 <ul>
 ```
 
+### javascript liquid 标签
+
+Each section can can contain JavaScript and Stylesheets, these two languages are used within liquid tags: `{% javascript %}``{% endjavascript %}` 和 `{% stylesheet %}``{% endstylesheet %}`.
+
+When placing code inside of these two tags, Shopify compiles each piece into shopify_compiled.js & shopify_compiled.css. This allows for greater readability within each section's code as you don't have to search through a long document to find each piece.
+
 ## 实例
 
 ### capture
@@ -90,7 +96,7 @@ snippet:
 
 一开始想用官方的 request liquid 对象，发现 `request.path` 输出值不含 query。在论坛里搜到了一个[答案](https://community.shopify.com/c/Shopify-Design/URL-Parameters-in-LIQUID/m-p/808960/highlight/true#M203580)。
 
-尝试了一下，是可以的。写成 snippet 如下：
+尝试了一下，是可以的。写成 snippet 如下，文件名 get_url_param.liquid
 
 ```liquid
 {%- assign page_url = content_for_header | split:'"pageurl":"' | last | split:'"' | first -%}
@@ -110,6 +116,12 @@ snippet:
 {{ query_param }}
 ```
 
+使用：
+
+```liquid
+{%- capture query -%}{%- render 'get_url_param', param_key: 'pid' -%}{%- endcapture -%}
+```
+
 ### Convert String to Number
 
 ```liquid
@@ -127,3 +139,11 @@ snippet:
 ### Array 操作
 
 是否可以使用 filter 排除数组中的某些 items？目前好像不行。
+
+### Find a special item in string array
+
+官方文档里对于 `where` 过滤器的使用只有 object array。需求是从字符串型数组中找到并返回含有指定 substring 的数组项。参考主题代码试了下，是可以的，但不确定这种方法的稳定性。
+
+```liquid
+{%- assign tag_str = product.tags | where: 'pno_' -%}
+```

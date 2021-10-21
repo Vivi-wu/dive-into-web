@@ -21,6 +21,7 @@ You may serve it with a static server:
 ```
 因为前端统一的线上自动化构建对于的目录是 dist，所以在项目根目录下运行： `serve -s dist`
 
+这只是一个服务器，不支持hot reload。
 
 ### todo
 
@@ -89,7 +90,7 @@ TROUBLESHOOTING: https://github.com/GoogleChrome/puppeteer/blob/master/docs/trou
 
 看[描述](https://github.com/geelen/react-snapshot#options)，可以指定额外的 path 作为 entry points 用于crawling（爬取）什么意思？可以生成多页？
 
-对于不简单的 case，作者推荐了 [Webpack Static Site Generator Plugin](https://github.com/markdalgleish/static-site-generator-webpack-plugin) 
+对于不简单的 case，作者推荐了 [Webpack Static Site Generator Plugin](https://github.com/markdalgleish/static-site-generator-webpack-plugin)
 
 此外，作者说如果你的应用有更加复杂的 stuff，比如需要 login 后预渲染，那就做 server-side react node server
 
