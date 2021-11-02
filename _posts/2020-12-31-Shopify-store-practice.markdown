@@ -459,6 +459,8 @@ Dawn 主题伴随 Online Store 2.0 一起发布，不再依赖polyfills和外部
 
 商家现有的主题在今年之后可以继续使用，但要通过主题编辑器访问新的 Online Store 2.0 功能，需要确保这些的主题与 Online Store 2.0 兼容。
 
+从2021年9月7日开始，所有提交的需要集成到主题里的新app都要使用theme app extension。
+
 ## Shopify theme最佳实践
 
 1. 优化js
@@ -489,3 +491,8 @@ Dawn 主题伴随 Online Store 2.0 一起发布，不再依赖polyfills和外部
 使用dynamic `import()`，懒加载模块，返回一个promise。
 
 使用基于promise的 `scriptLoader()`，动态插入 script。
+
+## A/B test
+
+- 可以从读Cookies吗？我们自己是在服务端通过cookie控制前端输出，实现A/Btest。但是 Shopify liquid 目前不支持读取cookies。
+- 可以扩展Liquid吗？Shopify Liquid不能通过theme code进行扩张。只能官方自己修改core代码。

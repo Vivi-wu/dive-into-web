@@ -103,7 +103,9 @@ Mac 上常用的抓包工具。
 
 ### localhost 抓包
 
-Charles 会默认忽略掉 localhost 下的请求，macOS上的解决方法如下：
+Some systems are hard coded to not use proxies for localhost traffic.官方文档说一些系统硬编码默认对localhost不使用proxy
+
+因此 localhost 下的请求不会出现在 Charles 里，macOS上的解决方法如下：
 
 ```shell
 sudo vi /etc/hosts
