@@ -17,7 +17,11 @@ Shopify 的主题是由模板文件创建的目录。这些文件是 Shopify 基
 
 在 Shopify 主题里引入 JS 的[“黄金法则”](https://shopify.dev/tutorials/include-javascript-in-shopify-themes)
 
+Online code editor只记录代码修改时当前文件的快照。
+
 <!--more-->
+
+可以通过 admin API 修改主题的名称：https://shopify.dev/api/admin-rest/2021-10/resources/theme#[put]/admin/api/#{api_version}/themes/{theme_id}.json_examples
 
 ### Shopify API
 
@@ -496,3 +500,48 @@ Dawn 主题伴随 Online Store 2.0 一起发布，不再依赖polyfills和外部
 
 - 可以从读Cookies吗？我们自己是在服务端通过cookie控制前端输出，实现A/Btest。但是 Shopify liquid 目前不支持读取cookies。
 - 可以扩展Liquid吗？Shopify Liquid不能通过theme code进行扩张。只能官方自己修改core代码。
+
+## Online store speed score
+
+不可控制的因素：用户的设备、网络和地理位置，Shopify infrastructure
+
++ Shopify host网店在全球服务器，经常会做代码和基础设施的升级，这些提升可能会反应到店铺speed评分上。
++ Shopify给商家提供世界级的 CDN，保证在线店铺在全球各地加载快速。
++ Shopify为店铺可缓存的资源（图片、PDFs、js文件、css文件）设置了浏览器本地缓存，每个文件1年过期时间。此外，Shopify在服务端缓存页面。
++ 通过 content_for_header liquid tag 加载的资源
+
+可控的因素：
+
++ app，不用的app就移除掉，残留app代码要及时清理掉。只run在admin的app，不影响online store speed
++ 主题或app功能，加载用户不用的额外数据会影响店铺speed。可以使用 heatmap（https://apps.shopify.com/search?q=heatmap）工具，看下用户是否使用某功能。
++ 复杂或低效的 Liquid 代码，重复执行复杂操作会增加Liquid渲染时间。可以使用 Shopify Theme Inspector for Chrome（https://shopify.dev/themes/tools/theme-inspector?shpxid=0dc37285-68ED-40C1-DDE7-1D1DF7612701）来检查导致页面变慢的代码行。
+
+图片和视频：
+超大图片和可视区域之外的图片可能会干扰页面中更重要的部分的加载。
++ Shopify限制store过度加载图片或视频：collection页不超过50个，首页不超过25个sections
++ 推迟加载还不在当前屏幕内的图片（https://www.shopify.com/partners/blog/lazy-loading）
++ 更加屏幕尺寸加载specific尺寸大图片
+
+图片优化 tips：https://www.shopify.ca/blog/7412852-10-must-know-image-optimization-tips?shpxid=0dd80ef9-F892-44C4-1F20-AF536A552156
+
+### 影响评分的因素
+
+apps、第三方库和服务、分析工具的库、主题代码、图片和视频的数量及尺寸
+
+speed score 根据 Google Lighthouse 性能指标，测量在线商店在 Shopify 测试环境中的性能表现。
+
+分数是基于以下页面的 Lighthouse 性能评分的加权平均值：home页、过去 7 天内流量最大的产品页面、过去 7 天内流量最大的产品系列页面。
+
+权重基于多个因素，包括各个类型页面与所有 Shopify 商店比较的相对流量。
+
+在线商店速度评分是 Lighthouse performance scores 多天的平均值。这是因为每次测试的性能分数可能略有不同，多天的平均值可更好地代表商店的日常性能。
+
+点 view insigths 是在 Google PageSpeed Insights 上运行 Lighthouse 报告，而不是 Shopify test 环境，两者测试条件不同。因此看到的分数会跟Shopify 这边显示的 online store scores 不一样。所有平台上的分数仅代表您商店在当前时间点的测量值。
+
+很高的Google Lighthouse 评分比较难实现，因为它是将在线店铺跟所有类型的网站做比较，其中有很多不提供相似的功能。
+
+所有用于 speed scores 的 Lighthouse 性能报告都是使用相同的 Shopify 环境运行的，因此 Shopify 将店铺的得分与 Shopify 平台上的其他在线商店的得分进行准确比较。也就是为什么 Shopify 的 ranking 更有参考价值。
+
+Shopify ranking标准：slower than、same speed as、faster than similar stores。每次 speed score 更新时会重新计算 ranking。speed score 在 UTC 时间上午 9:00 重新计算。
+
+similar stores拥有不限于这些共同属性：迄今为止的销售数量、销售总额、产品和变体的数量、产品类型、流量、安装的应用程序、使用的主题。

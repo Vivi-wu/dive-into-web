@@ -76,3 +76,18 @@ https://developers.google.com/web/fundamentals/performance/get-started/graphical
 ### 使用 performance API 测量关键路径渲染
 
 [评估关键渲染路径:](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp?hl=zh-cn)
+
+
+## 首屏时间
+
+加载是并行的，执行是串行的。html 开始加载的时候，浏览器会将页面外联的 css 文件和 js 文件并行加载，如果一个文件还没回来，它后面的代码是不会执行的。
+css 文件的阻塞会影响后面 js 代码的执行，自然也包括 html 代码的执行，即是说此时你的页面就是空白的。所以 css 文件尽量内联
+
+1. “无关紧要”的 js 不要放在负责渲染的 js 前面，这里的“ 无关紧要” 是指和首屏渲染无关，如：数据上报。把渲染相关的代码抽离出来并用原生 js 书写，放到最前面。【我性能优化一期就是这么做的】
+2. 动态加载的 js 的执行，跟 HTML 文档后面外联的 js 的执行顺序是不确定的，它不会受到后面 js 阻塞的影响。因此要小心处理好文件的依赖关系。最不容易出错的方法：负责动态加载 js 的文件作为 html 外联的最后一个文件
+
+## Google lighthouse
+
+First Input Delay is a field-only metric, lab data instead shows Total Blocking Time.
+
+Often multiple URLs are grouped together, so the metrics you see in PageSpeed Insights are not necessarily for that particular URL
