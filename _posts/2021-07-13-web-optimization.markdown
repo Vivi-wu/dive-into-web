@@ -91,3 +91,41 @@ css 文件的阻塞会影响后面 js 代码的执行，自然也包括 html 代
 First Input Delay is a field-only metric, lab data instead shows Total Blocking Time.
 
 Often multiple URLs are grouped together, so the metrics you see in PageSpeed Insights are not necessarily for that particular URL
+
+## 优化 LCP
+
+哪些因素导致LCP差？
+- 慢的服务器响应时间
+- 阻塞渲染的JS和CSS
+- 慢的资源加载时间
+- 客户端渲染
+
+### 服务器响应时间
+
+使用 Time to First Byte(TTFB) 测量server response time。可以提升 TTFB 的途径：
+
+- 优化 server。开销高的数据库查询、复杂的操作（生成markup的组件）。提升 server-side 代码效率。
+- 让用户路由到附近的 CDN。确保所有静态资源用CDN。有些服务端直出的内容，图片可能用的原图地址。
+- 缓存资源文件。配置反向代理 nginx 等，配置 cloud 服务提供商的 cache 行为，用 CDN
+- 使用 cache-first 提供 HTML。安装 [service worker](https://philipwalton.com/articles/smaller-html-payloads-with-service-workers/)
+- 尽早建立第三方连接
+
+### 外部 stylesheet 和同步 JS
+
+HTML parse 过程遇到任何 `<link rel="stylesheet">` 或 `<script src="main.js">` 都会暂停。这些会 delay FCP，最终影响 LCP。
+
+- 提取 critical css https://web.dev/extract-critical-css/
+- inline critical css，首屏关键路径渲染所需样式直接写到 HTML 页面 `<head>` 的 `<style>` 内
+- minify和压缩 JS 文件
+- defer加载FCP未使用的 JS
+- 减少未使用的 polyfills
+
+### 资源加载时间
+
+首屏有这些将直接影响 LCP：`<img>`、`<svg>` 里的 `<image>`、`<video>`（封面图用于测算 LCP）、使用url()加载背景图的元素、包含 text nodes 的block级、inline级元素。
+
+- 压缩图片，将图片转为新的格式如 .webp，使用响应式图片，使用图片 CDN。https://web.dev/fast/#optimize-your-images
+- preload 重要资源，如：fonts、首屏图片或视频、critical-path CSS或JS
+- 压缩 text 文件，在 server 构建流程里压缩文件，考虑使用 Brotli 替代 gzip（它提供更好的压缩 ratios）
+- 基于网络连接 deliver 不同的资源
+- 使用 service worker 缓存资源，借助 Workbox 可以简化预缓存资源的更新 process
