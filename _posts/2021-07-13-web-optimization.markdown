@@ -129,3 +129,15 @@ HTML parse 过程遇到任何 `<link rel="stylesheet">` 或 `<script src="main.j
 - 压缩 text 文件，在 server 构建流程里压缩文件，考虑使用 Brotli 替代 gzip（它提供更好的压缩 ratios）
 - 基于网络连接 deliver 不同的资源
 - 使用 service worker 缓存资源，借助 Workbox 可以简化预缓存资源的更新 process
+
+## 使用 Lighthouse 跑分
+
+在线 PageSpeed Insights：https://pagespeed.web.dev/ 或 https://web.dev/measure/。目前使用的是 Lighthouse v9.0.0
+本地 Chrome DevTools、浏览器插件 或 Lighthouse Node CLI。
+
+由于 lighthouse 文档中描述的相同的潜在方差因素，从不同环境（PSI和local、办公室机器和家用机器等）运行的 lighthouse 结果可能永远不会对齐。建议尝试在一致的环境中进行基准测试。https://github.com/GoogleChrome/lighthouse/issues/10657
+
+```shell
+npm install -g lighthouse
+lighthouse https://www.example.com --view
+```
