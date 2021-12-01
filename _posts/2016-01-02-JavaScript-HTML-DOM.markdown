@@ -121,6 +121,8 @@ HTML DOM Document 对象是页面中所有其他元素的主人。如果你想�
 
 改变 HTML 元素内容最简单的方法就是使用 _innerHTML_ 属性。
 
+注意：HTML5 specifies that a `<script>` tag inserted with innerHTML should not execute（通过此方法插入DOM的script标签不会执行！https://www.w3.org/TR/2008/WD-html5-20080610/dom.html#innerhtml0）
+
 改变一个 Attribute 特性值的方法有 2 种：
 
     element.attribute = new value

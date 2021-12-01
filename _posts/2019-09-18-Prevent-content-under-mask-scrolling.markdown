@@ -36,7 +36,7 @@ function stopBodyScroll (isFixed) {
 <!--more-->
 
 浏览器兼容性：
-safari滚动数字动效不生效：
+Safari 滚动数字动效不生效：
 ```js
 scrollTop = Math.max(document.body.scrollTop, document.documentElement.scrollTop)
 ```
@@ -45,4 +45,25 @@ scrollTop = Math.max(document.body.scrollTop, document.documentElement.scrollTop
 
 通过 css 属性 `scroll-behavior: smooth;`，默认值是 auto，即立即滚动到指定位置。
 
-window.getComputedStyle(document.body).scrollBehavior)，mac Chrome 得到值为 auto，Safari 则为 undefined
+window.getComputedStyle(document.body).scrollBehavior，mac Chrome 得到值为 auto，Safari 则为 undefined
+
+### iOS 15 fixed定位的元素被浏览器地址栏遮挡
+
+在手机端以侧边推出的形式打开隐藏内容。通常会设置这个元素为 fixed 定位，并置于顶层。
+
+```css
+.mobile-facets {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999 !important;
+}
+```
+
+当滚动页面在address bar消失后打开侧边栏，虽然设置侧边栏占满屏幕，但其底部被一块空白区域遮挡。空白高度恰好是地址栏高度。解决：
+
+```js
+if (navigator.platform === 'iPhone') document.documentElement.style.setProperty('height', `100vh`);
+```

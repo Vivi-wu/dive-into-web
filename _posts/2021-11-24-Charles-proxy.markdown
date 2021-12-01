@@ -67,4 +67,4 @@ Charles 抓取 https 请求时默认显示 unknown。解决：
 
 完成上述操作，无需重启Charles，已经可以抓取https请求了。
 
-
+抓包结束后，需要在这个 wifi 里关闭代理配置。

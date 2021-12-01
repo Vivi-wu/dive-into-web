@@ -545,3 +545,11 @@ speed score 根据 Google Lighthouse 性能指标，测量在线商店在 Shopif
 Shopify ranking标准：slower than、same speed as、faster than similar stores。每次 speed score 更新时会重新计算 ranking。speed score 在 UTC 时间上午 9:00 重新计算。
 
 similar stores拥有不限于这些共同属性：迄今为止的销售数量、销售总额、产品和变体的数量、产品类型、流量、安装的应用程序、使用的主题。
+
+## 新建webpage
+
+https://help.shopify.com/en/manual/online-store/pages
+
+1. Online Store -》Themes -》Edit Code -》Template里点 Add new template -》suffix写自定义的名称，如：help_center
+2. Online Store -》Pages -》新建page，标题不要随便写，会显示在浏览器标题栏以及seo里 -》修改template为自定义的那个suffix
+3. 如需修改访问链接的path，默认是 /pages/{handlize处理过的title}，点下方的 seo 模块修改
