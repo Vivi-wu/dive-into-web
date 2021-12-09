@@ -75,7 +75,7 @@ Shopify 商品推荐取决于 online store 配置和 Shopify plan：
 [How to Build a Customizable Related Products Section](https://www.shopify.com/partners/blog/related-products)
 
 1. 自定义 product-recommendations.liquid 模版
-2. 在 {% javascript %} 里执行 ajax 请求（调用 Shopify 内置的读取推荐商品接口）
+2. 在 `{% javascript %}` 里执行 ajax 请求（调用 Shopify 内置的读取推荐商品接口）
 3. 将接口返回的（拼装好的）html 片段通过 innerHTML 的方式插入页面
 4. 在 product.liquid 文件里通过 section 方式将自定义的模版 include 进来
 
@@ -136,7 +136,7 @@ App extensions，通过为您的应用程序使用应用程序扩展，可以为
 官方提供在线的[Shopify Admin API GraphiQL explorer](https://shopify.dev/tools/graphiql-admin-api)，这是个只读的 demo，可以大概看下 api 结构。实际使用需要在店铺安装 Shopify GraphiQL app
 
 
-推荐对象仅在通过HTTP请求呈现给<base_url>？section_id = <section_id>＆product_id = <product_id>的主题部分中使用时才返回产品。 section_id是正在使用推荐对象的部分的ID，product_id是要为其显示推荐产品的产品的ID。要确定base_url，请使用routes.product_recommendations_url属性。使用路由对象而不是硬编码URL可确保产品推荐在正确的语言环境中加载。
+推荐对象仅在通过HTTP请求呈现给 `<base_url>？section_id = <section_id>＆product_id = <product_id>` 的主题部分中使用时才返回产品。 section_id是正在使用推荐对象的部分的ID，product_id是要为其显示推荐产品的产品的ID。要确定base_url，请使用routes.product_recommendations_url属性。使用路由对象而不是硬编码URL可确保产品推荐在正确的语言环境中加载。
 
 shopify 的 recommendation 仅在商品和collection页显示？
 
