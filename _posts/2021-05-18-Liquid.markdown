@@ -2,6 +2,7 @@
 title:  "Liquid"
 category: Other
 ---
+{% raw %}
 最近一直在维护 Shopify 店铺，做一些 theme 功能定制的需求。接触了2个付费的 theme，里面的代码虽然不敢恭维，但是店铺的页面性能都非常好。再次重拾了 server 渲染能力。
 
 [Liquid](https://shopify.github.io/liquid/) 由 Shopify 创建的开源的模版语言，是 Shopify theme 的基石。[Shopify Liquid文档](https://shopify.dev/docs/themes/liquid/reference)，包含一些内置的对象，可用于读取店铺的数据。
@@ -147,3 +148,4 @@ When placing code inside of these two tags, Shopify compiles each piece into sho
 ```liquid
 {%- assign tag_str = product.tags | where: 'pno_' -%}
 ```
+{% endraw %}
