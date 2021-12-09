@@ -2,7 +2,7 @@
 title:  "Shopify独立站实践（1）"
 category: Other
 ---
-
+{% raw %}
 ### Shopify 主题
 
 Shopify 的主题是由模板文件创建的目录。这些文件是 Shopify 基于 Ruby 的开源模板语言 Liquid 编写的。不同于 app 是运行在开发者的 infrastructure 上，主题运行在 Shopify 的 servers 上。
@@ -161,3 +161,4 @@ But!无法使用该商店安装付费应用（一系列的合作伙伴友好型�
 1. "PUT https://storefront.personalizer.io/v1/userAuthentication?t=*"，是 LimeSpot 这个插件提供的开发API平台。根据[文档说明-sample flow](https://personalizer.io/help)，用户开启一个新session时，第一步是获取auth（响应里有用户id、contextId、token和过期时间），请求头会带上[X-Personalizer-Context-ID]
 2. "GET https://storefront.personalizer.io/v1/youmaylike?fallbackToRelatedItemIdentifiers=6429681385621&fallbackToPopular=true&excludedItemIdentifiers=6429681385621&host=Product&limit=20&fields=Identifier,Title,Vendor,DisplayUrl,Price,OriginalPrice,ImageUrl&t=1611727479897" 第二步返回“You May Like”的商品
 3. "POST https://storefront.personalizer.io/v1/activityLogs?batch=true&t=1611727479926" 第三步埋点，他们有加一个request payload（event名称、来源、商品id）
+{% endraw %}
