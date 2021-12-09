@@ -2,7 +2,7 @@
 title:  "Shopify独立站实践（2）"
 category: Other
 ---
-
+{% raw %}
 ## 实践
 
 以 section 方式引入页面的模块，在主题编辑器 sidebar 里会自动生成一个卡片，标题为 section 的文件名称
@@ -303,3 +303,4 @@ Dawn 主题伴随 Online Store 2.0 一起发布，不再依赖polyfills和外部
 商家现有的主题在今年之后可以继续使用，但要通过主题编辑器访问新的 Online Store 2.0 功能，需要确保这些的主题与 Online Store 2.0 兼容。
 
 从2021年9月7日开始，所有提交的需要集成到主题里的新app都要使用theme app extension。
+{% endraw %}
