@@ -16,7 +16,7 @@ category: Other
 
 现代浏览器原生支持模块功能。一个js文件即一个 module。
 
-在想要导出模块 item 前加 `export`，通过 `import` 语句在 `{}` 中以逗号分隔引入需要的功能。 
+在想要导出模块 item 前加 `export`，通过 `import` 语句在 `{}` 中以逗号分隔引入需要的功能。
 
 通过以下方式在 html 中引入模块文件。
 ```html
@@ -32,7 +32,7 @@ category: Other
 + 每个 module 只能有一个 default 导出
 
 ```js
-// square.js 
+// square.js
 export default randomSquare;
 // main.js
 import randomSquare from './square.js ';
