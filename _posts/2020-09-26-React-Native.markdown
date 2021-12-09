@@ -8,6 +8,8 @@ category: JavaScript
 3.使用 xcode 打开 ios 项目，等待扫描项目文件结束（时间长短与项目代码量有关）选择一个模拟器。在 RN 项目根目录下，新建 ios 文件夹，将 ios 项目代码移动到此文件夹中。启动 RN 项目，xcode 中点运行，将自动打开模拟器中的 app
 4.使用 simulator 打包编译过一次 app 后，下次可直接打开 simulator。注意：记住打包时所选的系统版本和机型，再次打开 simulator -》File -》Open Simulator-》iOS 14.2 -》iPhone 8
 
+<!--more-->
+
 ## 第一个 RN 应用
 
 [Mac上设置开发环境](https://reactnative.dev/docs/environment-setup)，选择 React Native CLI Quickstart。创建新应用 `npx react-native init 项目名称`。
@@ -81,12 +83,14 @@ react-devtools
 + bundler 知道图片的尺寸，通常无需在代码里再设置，如需动态缩放图片，`{ width: undefined, height: undefined }`
 + RN里可以直接使用已打包进 app 的图片，需要手动设置图片尺寸（通过网络加载的图片也是）
 
-```html
+{% raw %}
+```js
 <Image
   source={{ uri: 'app_icon' }}
   style={{ width: 40, height: 40 }}
 />
 ```
+{% endraw %}
 
 ## 性能优化
 
