@@ -81,7 +81,7 @@ react-devtools
 + bundler 知道图片的尺寸，通常无需在代码里再设置，如需动态缩放图片，`{ width: undefined, height: undefined }`
 + RN里可以直接使用已打包进 app 的图片，需要手动设置图片尺寸（通过网络加载的图片也是）
 
-```js
+```html
 <Image
   source={{ uri: 'app_icon' }}
   style={{ width: 40, height: 40 }}
