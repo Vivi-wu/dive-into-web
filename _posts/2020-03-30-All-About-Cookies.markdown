@@ -274,9 +274,13 @@ function setCookie(cname, cvalue, exdays, domain) {
 
 ```js
 function ClientIDGenerator () {
-  const ts = Math.round(+new Date() / 1000.0);
-  const rand = Math.round(Math.random() * 2147483647);
-  const val = [rand, ts].join('.');
+  const hd = function() { return Math.round(2147483647 * Math.random()) };
+  const La = function(a) { var b = 1, c; if (a) for (b = 0, c = a.length - 1; 0 <= c; c--) { var d = a.charCodeAt(c); b = (b << 6 & 268435455) + d + (d << 14); d = b & 266338304; b = 0 != d ? b ^ d >> 21 : b } return b };
+  const ra = function() {
+    for (var a = window.navigator.userAgent + (document.cookie ? document.cookie : "") + (document.referrer ? document.referrer : ""), b = a.length, c = window.history.length; 0 < c;)a += c-- ^ b++; return [hd() ^ La(a) & 2147483647, Math.round((new Date).getTime() / 1E3)].join(".")
+  };
+
+  const val = ra();
   const topLevelDomain = window.location.hostname.split('.').slice(-2).join('.');
   setCookie('_cid', val, 365*2, topLevelDomain);
   return val
