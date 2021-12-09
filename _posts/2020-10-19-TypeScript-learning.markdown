@@ -10,6 +10,8 @@ Detecting errors in code without running it is referred to as static checking. D
 
 总结：TypeScript是静态类型检查器。
 
+<!--more-->
+
 + TS是JS的超集，因此的任何可执行的JS语句都是合法的TS。
 + TS不会改变JS代码的runtime行为/表现，这个是TS的一个foundational promise
 
