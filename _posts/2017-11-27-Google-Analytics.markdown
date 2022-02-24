@@ -187,3 +187,9 @@ main (command: string, param: any) {
   }
 }
 ```
+
+一个 Google Analytics Setup 官方推荐实践
+https://philipwalton.com/articles/the-google-analytics-setup-i-use-on-every-site-i-build/
+
+If performance is your primary concern, you could wait until your page has reached a key user moment (such as after the critical content has loaded) before adding async scripts.
+如果性能是最关心的问题，可以等到页面到达一个关键用户时刻（例如加载关键内容之后），再添加异步脚本。

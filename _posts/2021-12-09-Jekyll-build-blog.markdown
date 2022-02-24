@@ -3,10 +3,13 @@ title:  "Jekyll build blog"
 category: Other
 ---
 
-gh-pages从今年开始推上去的博文都没有自动deploy，github 提示 Unable to build page. Please try again later。
+gh-pages 从今年开始推上去的博文都没有自动 deploy，github 提示 Unable to build page. Please try again later。
 
-排查：先本地安装 Jekyll 构建一下，看是否是代码问题引起的。
+排查思路：先本地安装 Jekyll 构建一下，看是否是代码问题引起的。
 
+最终是通过查看 GitHub 构建失败提示信息，在有 liquid tag 冲突的文章内容头尾分别添加 `{% raw %}` 和 `{% endraw %}` 解决。
+
+<!--more-->
 ## 升级 Ruby
 
 Mac OS现在内置 ruby，查版本：

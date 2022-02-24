@@ -67,3 +67,23 @@ window.getComputedStyle(document.body).scrollBehavior，mac Chrome 得到值为 
 ```js
 if (navigator.platform === 'iPhone') document.documentElement.style.setProperty('height', `100vh`);
 ```
+
+## iOS15 兼容性问题
+
+在iOS 15之前 Safari 滚动网页有2种情况：
+- 上方网址栏、下方工具栏同时显示
+- 上下方都收起来
+
+现在又多出2种情况，网址栏和工具栏合并
+- 在下方都显示
+- 在下方都收起来
+
+## iOS 14以下 fixed、absolute 定位bug
+
+当锚定元素滚动后，fixed 定位的元素位置定位出现不准确/随机位置，absolute 定位的元素仍然停留在原地。
+
+解决：
+```css
+// 在 fixed、absolute 定位元素上添加以下代码
+transform: translate3d(0,0,0);
+```
