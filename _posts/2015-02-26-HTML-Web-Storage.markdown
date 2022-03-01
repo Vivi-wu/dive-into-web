@@ -30,12 +30,11 @@ Cookies 是一种经典地存储简单 string 数据的方式。可以由 server
 
 _window.localStorage_ 是 H5 Web Storage API 之一，区别于 Cookies，存储的数据不会发给 server，可以被同源的每个窗口或标签页共享。
 
-可以省略 window 对象使用，因为 storage 对象可以从默认的页面上下文中获得。
+window interface 提供的只读属性，允许获取文档 origin 下的 Storage 对象。
 
 存储的数据不会因为浏览器关闭而删除，如没有干预，将一直有效。
 
 注意：如果用户使用 “无痕/私有/隐私保护” 模式的进行浏览，那么在浏览器关闭后，_localStorage_ 中的值将不会保存。因为**使用了这种模式的用户已经明确选择不留痕迹**。
-
 
 操作方法：
 
@@ -76,6 +75,8 @@ Object.keys(localStorage)
 
 区别：
 http 和 https 相同域名下的 localStorage 数据不共享，而 cookie 是共享的。
+
+注意！！！网站通过 http://example.com 加载返回的 local storage 对象与 通过 https://example.com 加载不同。
 
 ## Session Storage
 
