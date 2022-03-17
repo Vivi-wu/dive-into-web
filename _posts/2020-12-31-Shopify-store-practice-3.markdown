@@ -28,6 +28,38 @@ category: Other
 
 当前支持率为94.9%
 
+用于检测元素的可见性，或两个元素相对于彼此的相对可见性。Intersection Observer API 允许代码注册一个回调函数，只要希望监视的元素进入或退出另一个元素（或 viewport），或者当两者相交的量改变了达到 requested 的量时，就会执行该回调函数。这样，网站不再需要在主线程上做任何事情来监视这类元素相交，并且浏览器可以自由地、以它认为合适的方式来优化 intersection 的管理。
+
+Intersection Observer API 不能指出两元素相交的具体 pixel 数量，而是以目标元素的百分比的形式，显示目标元素与 root 元素相交的程度。
+
+创建：
+
+```js
+let options = {
+  root: document.querySelector('#scrollArea'), // 不指定，或 null 时，默认时浏览器的 viewport，必须为目标元素的 ancestor 元素
+  rootMargin: '0px', // 表示环绕 root 的外边距，用法类似 CSS margin（top, right, bottom,left），可以为百分数。
+  threshold: 1.0 // 表示当目标的 100% 部分在 root 选项指定的元素中可见时调用回调函数。.也可以传入 number[]。默认 0，表示只要一个像素可见，就会运行回调
+}
+let observer = new IntersectionObserver(callback, options);
+let target = document.querySelector('#listItem');
+observer.observe(target); // 我们可以选择通过为每个元素调用 observer.observe()，来监控多个元素相对于视口的可见交集变化
+
+let callback = (entries, observer) => { // 回调函数接收一个 IntersectionObserverEntry list 和观察者
+  entries.forEach(entry => {
+    // 每个条目描述了一个观察到的目标元素的交集变化
+    //   entry.boundingClientRect
+    //   entry.intersectionRatio
+    //   entry.intersectionRect
+    //   entry.isIntersecting，表示target当前是否与根元素相交
+    //   entry.rootBounds
+    //   entry.target
+    //   entry.time
+  });
+};
+```
+
+注意：回调是在主线程上执行的。应该尽快运行；如果需要做任何耗时的事情，请使用 `Window.requestIdleCallback()`
+
 ### import on interaction
 
 使用dynamic `import()`，懒加载模块，返回一个promise。
