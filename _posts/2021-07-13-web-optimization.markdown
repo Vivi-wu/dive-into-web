@@ -63,6 +63,10 @@ https://developers.google.com/web/fundamentals/performance/get-started/graphical
 
 基于图片使用的场景，加载合适size的图片。
 
+#### 实战
+
+减少首屏加载图片数量。
+
 ### HTTP Requests
 
 假设所有css、js都是external文件。2个相对直观的js位置因素需要考虑：
@@ -129,6 +133,19 @@ HTML parse 过程遇到任何 `<link rel="stylesheet">` 或 `<script src="main.j
 - 压缩 text 文件，在 server 构建流程里压缩文件，考虑使用 Brotli 替代 gzip（它提供更好的压缩 ratios）
 - 基于网络连接 deliver 不同的资源
 - 使用 service worker 缓存资源，借助 Workbox 可以简化预缓存资源的更新 process
+
+#### 实战
+
+1. preload 用来计算 LCP 的图片
+
+```html
+<link rel="preload" href="最通用的图片尺寸src_750x" as="image" imagesrcset="备选图片src_576x 576w, 备选图片src_750x 750w">
+```
+2. 商品sku小图使用 Intersection Observer 懒加载，元素与 root 相交时替换src的值。
+
+```html
+<img src='data:image/png;base64,兜底loading图片' data-src="缩略图src_20x" alt="sku thumbnail" loading="lazy" width="21" height="21" />
+```
 
 ## 使用 Lighthouse 跑分
 

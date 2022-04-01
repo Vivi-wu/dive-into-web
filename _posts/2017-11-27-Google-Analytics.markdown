@@ -193,3 +193,19 @@ https://philipwalton.com/articles/the-google-analytics-setup-i-use-on-every-site
 
 If performance is your primary concern, you could wait until your page has reached a key user moment (such as after the critical content has loaded) before adding async scripts.
 如果性能是最关心的问题，可以等到页面到达一个关键用户时刻（例如加载关键内容之后），再添加异步脚本。
+
+### 原生加密API
+
+https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest#converting_a_digest_to_a_hex_string
+
+```js
+export async function sha256(message: string) {
+  const msgUint8 = new TextEncoder().encode(message);                           // encode as (utf-8) Uint8Array
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);           // hash the message
+  const hashArray = Array.from(new Uint8Array(hashBuffer));                     // convert buffer to byte array
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
+  return hashHex;
+}
+```
+
+注意：crypto 需要在安全的 origin 下运行，如：https、localhost

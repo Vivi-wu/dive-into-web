@@ -2,6 +2,9 @@
 title:  "阻止蒙版浮层底部内容随页面滚动"
 category: JavaScript
 ---
+
+Safari fixed定位的滚动穿透问题：
+
 `Element.scrollTop` 属性可以**获取**或**设置**一个元素的内容垂直滚动的像素数。
 
 https://segmentfault.com/a/1190000012313337
@@ -39,6 +42,33 @@ function stopBodyScroll (isFixed) {
 Safari 滚动数字动效不生效：
 ```js
 scrollTop = Math.max(document.body.scrollTop, document.documentElement.scrollTop)
+```
+
+### 第三方库解决
+
+上面方法简单粗暴。问题：打开弹层未关闭，通过路由跳转至其他页面（针对SPA），页面内容无法滚动。
+
+解决：引入 "body-scroll-lock"。针对 React 组件用法如下：
+
+scrollTargetEle 表示在锁定 body 滚动时，希望保持 scroll 功能的 DOM 元素。
+
+```js
+const [scrollTargetEle, setScrollTargetEle] = useState(null)
+const eleRef = useCallback(node => {
+  if (node !== null) {
+    setScrollTargetEle(node)
+  }
+}, [])
+useEffect(() => {
+  if (visible) {
+    scrollTargetEle && disableBodyScroll((scrollTargetEle as unknown) as Element)
+  } else {
+    scrollTargetEle && enableBodyScroll((scrollTargetEle as unknown) as Element)
+  }
+  return () => {
+    clearAllBodyScrollLocks()
+  }
+}, [visible])
 ```
 
 ### 页面元素平滑滚动
