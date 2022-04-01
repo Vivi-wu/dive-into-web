@@ -3,28 +3,13 @@ title:  "Shopify独立站实践（2）"
 category: Other
 ---
 {% raw %}
-## 实践
+## Shopify Liquid
 
-以 section 方式引入页面的模块，在主题编辑器 sidebar 里会自动生成一个卡片，标题为 section 的文件名称
+先了解一些知识点，然后总结了一些使用 Shopify Liquid 实现的功能。
 
-### Shopify Scripts
-
-Scripts 为商店提供了一种编写可在 Shopify 服务器上运行的自定义 Ruby 的方法，并从根本上影响购物车。
-
-+ 工作方式是接收一个 input 购物车，对订单项执行转换，然后返回 output 购物车。
-+ Scripts 是独立的，无法进行任何外部 API 或数据库调用，来获取其他信息。
-+ 只有 Shopify Plus 商家可以在生产环境中使用
-+ Shopify partners可以您创建的任何开发商店中对其进行测试
-
-[官方博客](https://www.shopify.com/partners/blog/109804486-getting-started-with-shopify-scripts-a-practical-walkthrough)
+### liquid objects
 
 在 theme.liquid 文件里加一个 `{{ template }}` 全局变量，可以在页面上输出渲染所采用的 template 名称（不含文件后缀 .liquid）
-
-liquid 模板中可用的 Shopify 标签，变量和属性的完整列表，看这里[Shopify Cheat Sheet](https://www.shopify.com/partners/shopify-cheat-sheet)
-
-using a Shopify app to dynamically add content to your store https://www.littlestreamsoftware.com/labs/add-content-to-a-shopify-template-through-the-api/
-
-sync content between your stores
 
 ### snippet
 
@@ -32,31 +17,17 @@ sync content between your stores
 + 以 `.liquid` 为文件后缀名
 + 使用 `{% render "snippet-filename" %}` 引入 template，不含文件后缀名
 + 可用于条件加载
-+ 命名规范：所有snippets文件都放在“snippets”目录下，因此以它们的功能作为前缀。如：collections-coffee-cups.liquid
++ 命名规范：所有 snippets 文件都放在“snippets”目录下，因此以它们的功能作为前缀。如：collections-coffee-cups.liquid
 
-#### handle
+### handle
 
-Shopify liquid 中每个 object 都有唯一的 _handle_。默认情况下，handle 是对象的标题，URL-safe的表现形式。全小写，空格和特殊字符均用连字符（-）代替。
+Shopify liquid 中每个 object 都有唯一的 _handle_。默认情况下，handle 是对象的标题。以 URL-safe 的表现形式：全小写，空格和特殊字符均用连字符（-）代替。
 
-因为唯一，可以方便地在模版里用于比较。
+因为 handle 的唯一性，可以方便地在模版里用于比较。
 
-`product` 的 handle 以商品标题自动创建。
+商品 `product` 的 handle 是根据商品标题自动创建的。
 
-### 获取未取消订单数据
-
-  https://*.myshopify.com/admin/orders.json
-
-发现一个有意思的点，即使用这种方式拿到别人订单的 token，访问 `https://<店铺前台域名>/<storeId>/orders/<token>`，页面上也读不到订单的 id 等信息。
-
-访问自己的订单状态页，如果在 Settings-》Checkout-〉Order processing-》Additional scripts 里使用了 Shopify liquid 变量取数，渲染的页面上 Shopify.Checkout 才会有值（如果：订单 id）。
-
-### 获取店铺商品总数
-
-  https://*.myshopify.com/admin/products/count.json
-
-### Liquid实现功能
-
-#### 控制商品 color 显示个数
+### 控制商品 color 显示个数
 
 当商品有很多 color 时，在商品列表里颜色 swatch 会换行，看起来不整齐。
 
@@ -64,18 +35,21 @@ Shopify liquid 中每个 object 都有唯一的 _handle_。默认情况下，han
 
 ```liquid
 {%- liquid
-  assign get_color = 'color,colors,couleur,colour'
-  assign pr_options_name = product.options
-  for option_name in pr_options_name
-	  assign name = option_name | downcase
-	  if get_color contains name
-	    assign color_index = forloop.index
-	    break
-	  endif
+  assign color_count = 0
+  assign color_name = "color,couleur,colour,farbe"
+  for option in product.options_with_values
+    assign name = option.name | downcase
+    if color_name contains name
+      assign color_count = option.values.size
+      if settings.show_color_type == '2'
+        assign nt_option = 'option'| append: forloop.index
+        assign color_variants = product.variants | where: "available" | map: nt_option | uniq
+        assign color_count = color_variants.size
+      endif
+      break
+    endif
   endfor
-  assign n_option = 'option'| append: color_index
-  assign pr_variants = product.variants
-  assign color_variants = pr_variants | map: n_option | uniq
+  assign img_variants = product.variants | where: "featured_image"
   if settings.enable_swatch_limit
     assign swatch_limit = settings.swatch_limit
   else
@@ -83,86 +57,68 @@ Shopify liquid 中每个 object 都有唯一的 _handle_。默认情况下，han
   endif
 -%}
 
-{%- if product.options.size > 0 and product.variants.size > 1-%}
+{%- unless color_count > 0 -%}{% continue %}{%- endunless -%}
+<div>
+{%- if img_variants.size > 0 -%}
   {%- for color in color_variants limit:swatch_limit -%}
-    {%- assign color_handle = color | handleize -%}
-    {%- assign img_arry = pr_variants | where: n_option, color -%}
-    {%- assign variant = img_arry[0]  -%}
-    <img src="{{ variant.image.src | product_img_url: grid_image_width }}" alt="{{color}} thumbnail" />
+    {%- assign img_arr = img_variants | where: nt_option, color -%}
+    {%- assign cl_handle = color | handle -%}
+    {%- assign image = img_arr[0].featured_image -%}
+    <div>
+      <img src="{{ image | img_url: '100x' }}" alt="{{color}} thumbnail" />
+    </div>
   {%- endfor -%}
-  {%- assign color_size = color_variants | size -%}
-  {%- if settings.enable_swatch_limit and color_size > swatch_limit %}
-    <span title="See More">
+
+  {%- if settings.enable_swatch_limit and color_count > 6 %}
+    <div>
       <a href="{{ product.url | within: collection }}">+{{ color_size | minus: swatch_limit }}</a>
-    </span>
+    </div>
   {% endif -%}
 {%- endif -%}
 ```
 
-#### 翻译商品 option 名称
-
-在对应语言的 locale 文件里，按这个路径添加翻译词条。
+### 翻译商品 option 名称
 
 ```liquid
 {%- for option in product.options_with_values -%}
   {%- assign name = option.name | downcase -%}
   {%- assign t_name = name | prepend: "products.product.option_name." | t -%}
-  <span style="text-transform:uppercase;">{{t_name}}</span>
+  <span>{{t_name}}</span>
 {%- endfor -%}
 ```
+然后在对应语言的 locale 文件里，按这个路径添加翻译词条。
 
-#### script标签 js 代码里读当前店铺货币符号
+### 多国家
 
-直接用 currency.symbol 是不行的，因为店铺可以有多种currency。如果输出值类型为 string，则必须使用 json filter 进行 stringify.
+获取当前店铺货币符号、国家代码、语言标识：
 
 ```liquid
 <script>
-const currency_symbol = {{cart.currency.symbol | json}}
+var CURRENT_CURRENCY_SYMBOL = {{ cart.currency.symbol | json}}
+var CURRENT_COUNTRY_CODE = {{ localization.country.iso_code | json }};
+var CURRENT_LANGUAGE_CODE = {{ request.locale.iso_code | json }};
 </script>
 ```
 
-### Shopify App CLI
+直接用 currency.symbol 是不行的，因为店铺可以有多种currency。如果输出值类型为 string，则必须使用 json filter 进行 stringify.
 
--》安装 shopify 命令行工具
--〉创建新项目
+对于 Shopify Plus 用户，Shopify 使用 geolocation 检测用户地理位置，自动选择商家 enabled 的可选国家/地区里最接近的。如：通过英国IP访问支持多国的美国店铺，country select组件默认选中英国。
 
-  shopify create node
+通过 localization liquid 对象得到当前选择的国家代码，形如：'GB'。
 
--》开启本地开发服务器
+### 多语言
 
-  shopify serve
+普通 plan 店铺最多可以 published 5 个 locales，Shopify plus 店铺最多可支持**20**种语言。[官方文档](https://help.shopify.com/en/manual/cross-border/multilingual-online-store)
 
--〉终端里另打开一个tab页，自动完成浏览器打开app，并安装进开发店铺
+划重点：If your Shopify store is on the Shopify plan, the Advanced Shopify plan, or the Shopify Plus plan, then you need to assign newly published languages to a domain in your online store for them to appear on your storefront. plus 的店铺需要把新增的语言 assign 给店铺的 domain 才能出现在店面。
 
-  shopify open
+You must complete this task even if you're only using a single domain. 即便只使用一个domain，也必须要完成这个操作。
 
-谷歌搜索 Shopify GraphiQL App，安装给指定店铺，方便进行调试。
+[可以翻译的资源类型](https://shopify.dev/docs/admin-api/graphql/reference/translations/translatableresourcetype)，如：商品信息、email通知。
 
-## 多店铺使用统一主题
+#### 关于locale
 
-只维护一个中心主题，保持brand uniformity品牌统一，同时节省时间。
-
-有工具（如 PageFly）可以在多个Shopify店铺之间导出/导入模版。
-
-## 安装 Shopify GraphiQL App
-
-安装地址：https://shopify-graphiql-app.shopifycloud.com/
-
-如果Shopify account绑定多家店铺，建议使用无痕浏览模式打开此链接。
-
-在安装页输入需要绑定的店铺url，为避免后续 access denied，勾选所有 access scoped 的 read 权限
-
-## 多语言
-
-普通plan店铺最多可以published 5 个 locales，plus店铺最多可支持20种语言。官方文档：https://help.shopify.com/en/manual/cross-border/multilingual-online-store
-
-划重点：If your Shopify store is on the Shopify plan, the Advanced Shopify plan, or the Shopify Plus plan, then you need to assign newly published languages to a domain in your online store for them to appear on your storefront. 我们plus的店铺需要把新增的语言assign给店铺的domain，才能出现在店面。You must complete this task even if you're only using a single domain. 即便只使用一个domain，也必须要完成这个操作。
-
-[可以翻译的资源类型](https://shopify.dev/docs/admin-api/graphql/reference/translations/translatableresourcetype)，如：商品信息、email通知
-
-### 关于locale
-
-属性name和endonym_name的区别：`locale.name` 会随当前语言改变（以当地语言显示）。
+属性 name 和 endonym_name 的区别：`locale.name` 会随当前语言改变（以当地语言显示）。
 
 ```
 {% for locale in shop.published_locales %}
@@ -182,33 +138,29 @@ English - English (en) French - français (fr)
 anglais - English (en) français - français (fr)
 ```
 
-### url
+#### url
 
-当通过 Shopify admin API 发布一个locale，Shopify自动为这个locale创建一个path。如："店铺域名/fr/pages/contact-us"。Liquid生成的route包含了locale，官方建议避免在主题里hardcoding url。
+当通过 Shopify admin API 发布一个 locale，Shopify 自动为这个 locale 创建一个path。如："店铺域名/fr/pages/contact-us"。Liquid 生成的 route 包含了locale，官方建议避免在主题里 hardcoding url 的值。
 
-### SEO
+#### SEO
 
-当发布一个local，Shopify通过 `{{ content_for_header }}` 自动插入 hreflang tags。搜索引擎使用 hreflang 标记，根据搜索者的语言偏好，在搜索结果中提供正确语言的URL。如果搜索者的语言偏好没有匹配上任何一个 hreflang 标记，则使用店铺的primary locale
+当发布一个local，Shopify通过 `{{ content_for_header }}` 自动插入 hreflang tags。搜索引擎使用 hreflang 标记，根据搜索者的语言偏好，在搜索结果中提供正确语言的URL。如果搜索者的语言偏好没有匹配上任何一个 hreflang 标记，则使用店铺的 primary locale。
 
-## VS Code配置
+### 自定义section
 
-建议安装的 Extensions：[sissel.shopify-liquid 代码高亮、formatting](https://marketplace.visualstudio.com/items?itemName=sissel.shopify-liquid&ssr=false#overview)
+官方文档 https://www.shopify.com/partners/blog/how-to-create-your-first-shopify-theme-section
 
-Mac快捷键：Shift + command + L
+手动改template的json文件可以正常渲染，但是在online theme editor里点 "add section" 却找不到自定义好的section？
 
-默认对整个文件进行格式化。
-
-如果格式化不生效，看下settings.json中的这些配置：
+解决：在 section 文件的 schema tag 的 json 对象里添加：
 
 ```json
-{
-  "[html]": {
-    "editor.defaultFormatter": "sissel.shopify-liquid"
-  },
-  "files.associations": {
-    "*.liquid": "html"
-  },
-}
+"presets": [
+  {
+    "name": "自定义section的名称",
+    "category": "Custom"
+  }
+]
 ```
 
 ## Online Store 2.0
