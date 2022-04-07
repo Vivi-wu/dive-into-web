@@ -134,6 +134,15 @@ input:focus {box-shadow: 0 0 0 2px rgba($cf-primary, 0.1);}
 
 **注意**: <span class="t-blue">同边框一样，除非先设定 **outline-style** 这个属性，否则任何 outline 性质（如：outline width、outline color...）都不会产生效果</span>。
 
+清除 input 框聚焦时显示的边框
+
+```css
+:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+```
+
 ### All in one 简写形式
 
 使用 _outline_ 属性一次性设定四条边轮廓的样式，下面列出每项的默认值。如果有值没有设定，也是允许的。但应遵循的顺序如下：

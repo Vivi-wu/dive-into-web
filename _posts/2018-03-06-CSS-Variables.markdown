@@ -23,7 +23,7 @@ category: CSS
 
 <img src="{{ "/assets/images/css_variables.png" | prepend: site.baseurl }}" alt="CSS variables">
 
-2. 作用域：
+2. 作用域
 
 + 全局：定义在 _:root_ 选择器里的变量，属于 global scope
 + 局部：定义在其他选择器样式里的变量，属于 local scope
@@ -34,10 +34,12 @@ category: CSS
 
 ```css
 :root {
-  --font-size: 20px
+  --font-size: 20px;
+  --brand-color: #FA423E;
 }
 p {
-  font-size: var(--font-size)
+  font-size: var(--font-size);
+  color: var(--brand-color);
 }
 ```
 
@@ -45,7 +47,7 @@ p {
 
 ```css
 .btn {
-  border: 2px solid var(--color, black); /*当作用域内不存在此变量，将使用第二个参数所为默认值*/
+  border: 2px solid var(--color, black); /* 当作用域内不存在此变量，将使用第二个参数所为默认值 */
 }
 ```
 

@@ -93,9 +93,9 @@ When placing code inside of these two tags, Shopify compiles each piece into sho
 {%- render 'my_title',title:t_title -%}
 ```
 
-### Liquid中读取URL参数
+### 读取URL参数
 
-一开始想用官方的 request liquid 对象，发现 `request.path` 输出值不含 query。在论坛里搜到了一个[答案](https://community.shopify.com/c/Shopify-Design/URL-Parameters-in-LIQUID/m-p/808960/highlight/true#M203580)。
+一开始想用官方的 request 对象，发现 `request.path` 输出值不含 query。在论坛里搜到了一个[答案](https://community.shopify.com/c/Shopify-Design/URL-Parameters-in-LIQUID/m-p/808960/highlight/true#M203580)。
 
 尝试了一下，是可以的。写成 snippet 如下，文件名 get_url_param.liquid
 

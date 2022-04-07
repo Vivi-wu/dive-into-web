@@ -215,4 +215,5 @@ Mac快捷键：Shift + command + L
 - 官方提供在线的[Shopify Admin API GraphiQL explorer](https://shopify.dev/tools/graphiql-admin-api)，这是个只读的 demo，可以大概看下 api 结构。实际使用需要在店铺安装 Shopify GraphiQL app。
 - liquid 模板中可用的 Shopify 标签，变量和属性的完整列表，看这里[Shopify Cheat Sheet](https://www.shopify.com/partners/shopify-cheat-sheet)
 - 多店铺使用统一主题，只维护一个中心主题，保持 brand uniformity 品牌统一，同时节省时间。有工具（如 PageFly）可以在多个Shopify店铺之间导出/导入模版。
+- 在 liquid 里无法读取优惠券的详细信息
 {% endraw %}
