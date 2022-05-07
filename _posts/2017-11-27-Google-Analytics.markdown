@@ -43,7 +43,7 @@ Setting an incorrect cookie domain will result in no hits being sent to Google A
 
 ### Page tracking
 
-衡量某个页面被浏览的次数。默认全局设置的 tacking snippet会自动 sends a pageview to the Google Analytics。
+衡量某个页面被浏览的次数。默认全局设置的 tacking snippet 会自动 sends a pageview to the Google Analytics。
 
 可自定义的参数如下：
 
@@ -64,6 +64,11 @@ When your application loads content dynamically and updates the URL in the addre
 ```js
 gtag('config', 'GA_TRACKING_ID', {'page_path': '/new-page.html'});
 ```
+以上命令会默认发送 pageview。当需要手动发送时，可以在config里设置 `send_page_view: false`
+
+The send_page_view setting does not persist across pages. 但这个配置不会垮页面保持。
+
+This setting must be repeated on every page of your website where you want to disable automatic pageviews. 需要在每一个想要紧致自动发送pageview的页面重复地进行设置。
 
 ## Event tracking
 

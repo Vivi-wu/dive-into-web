@@ -253,6 +253,8 @@ Set-Cookie: name=Wu; HttpOnly
 
 ### 第三方 cookie
 
+有别于 First-party cookies，第一方 cookie 由所访问的网站（或域）直接存储。
+
 html 允许引入其他网络资源，如通过 link、script、iframe 标签。由于 cookie 的限制，a 网站通过上述标签拉取 b 网站的资源时，不会包含 a 网站的 cookie，但是 b 网站很可能在响应里返回它自己的 cookie。因为同源策略，a 网站不能 access b 网站发来的 cookie，反之亦然。然而双方的 cookies 都存在 client 那里。这种情况我们称 b 网站设置了第三方 cookie。
 
 当 b 网站接收到的 HTTP Referer 头部表明的请求来自 a 网站，b 网站可以发布特定的 cookieA 来标识 a 网站。如果随后相同的资源被 c 网站加载，而 cookieA 与请求一起发来，那么可以确定访问了 a 网站的人也访问了 c 网站。这就是常见的在线广告策略。这样的 cookie 也成为 **tracking cookie**。
@@ -286,3 +288,11 @@ function ClientIDGenerator () {
   return val
 }
 ```
+
+### iOS 14 cookie有效期
+
+https://www.cookiestatus.com/safari/#first-party-cookies
+
+For first-party cookies set with JavaScript’s document.cookie API, maximum expiration is set to 7 days. 对于使用 JavaScript 的 document.cookie API 设置的第一方 cookie，最长有效期设置为 7 天。
+
+First-party cookies set with the Set-Cookie HTTP response header are not impacted by ITP, and have no restrictions placed on their expiration. 使用 Set-Cookie HTTP 响应标头设置的第一方 cookie 不受 ITP 影响，并且对其到期没有限制
