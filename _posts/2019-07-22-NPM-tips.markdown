@@ -106,6 +106,8 @@ package-lock.json 锁定结果 tree shape，提供确定可复制重现的 build
 
 3. 调试完毕后，运行 `npm unlink <npm模块项目名称>` 解除链接
 
+注意：确保 npm 模块和引入模块的项目运行在相同版本的 node 环境里
+
 ## nvm
 
 官方[代码库](https://github.com/nvm-sh/nvm)
@@ -118,3 +120,7 @@ macOS 10.15以上默认shell是 zsh，而 nvm 会查找 .zshrc 去更新，但�
 4. 检查是否已安装：command -v nvm
 
 终端输出 `nvm` 表示安装成功。
+
+### 查看已安装的 node 版本
+
+    nvm ls
