@@ -106,7 +106,10 @@ package-lock.json 锁定结果 tree shape，提供确定可复制重现的 build
 
 3. 调试完毕后，运行 `npm unlink <npm模块项目名称>` 解除链接
 
-注意：确保 npm 模块和引入模块的项目运行在相同版本的 node 环境里
+注意：
+- 确保 npm 模块和引入模块的项目运行在相同版本的 node 环境里
+- 修改模块代码后要重新 build
+- 模块代码更新后，项目里仍然加载的是旧代码，先 unlink，再重新 link
 
 ## nvm
 
