@@ -9,7 +9,7 @@ category: JavaScript
 
 ## computed property name
 
-对象的键名可以使用变量定义，在创建对象时使用 bracket notation 方括号圈起来，如 {[phoneType]: 12345} 
+对象的键名可以使用变量定义，在创建对象时使用 bracket notation 方括号圈起来，如 {[phoneType]: 12345}
 
 ## Spread syntax (...) 扩展
 
@@ -23,10 +23,14 @@ const mergedObj = { ...obj1, ...obj2 };
 // Object { foo: "baz", x: 42, y: 13 }
 ```
 
+### 剔除空值
+
+对象字面量扩展简单应用：利用 `Object.assign()` 自动剔除源对象中值为 _null_、_undefined_ 的属性这一特性，实现表单提交时过滤空值
+
 **数组字面量**使用已存在的数组作为新创建数组的一部分或全部（即复制）。注意：多维数组扩展时，数组项是子数组的 reference（参 Object.assign），那么新数组项改变也将影响源数组项
 
 ```js
-const parts = ['shoulders', 'knees']; 
-const lyrics = ['head', ...parts, 'and', 'toes']; 
+const parts = ['shoulders', 'knees'];
+const lyrics = ['head', ...parts, 'and', 'toes'];
 //  ["head", "shoulders", "knees", "and", "toes"]
 ```
