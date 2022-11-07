@@ -246,3 +246,19 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
   </body>
 </html>
 ```
+
+### iOS Safari 搜索框唤起键盘确认按键显示为“搜索”
+
+```html
+<form action="/" method="get">
+  <input type="search"/>
+</form>
+```
+1. input 元素类型为 "search"
+2. 隐藏浏览器默认样式（如：输入框里显示搜索icon），设置 input 样式 `-webkit-appearance: none;`
+3. input 元素要包含在 form 元素内，且 form 要有 _action_ 和 _method_ 属性
+
+其他：
+
++ 页面首次渲染完时，通过 js focus 到输入框没有效果，这是 Safari 设计如此。切换应用重新回到浏览器页面自动 focus 可生效
++ 隐藏 Chrome 浏览器默认 cancel 按钮样式，设置 `input[type="search"]::-webkit-search-cancel-button{display: none;}`
