@@ -112,4 +112,4 @@ Windows 系统按 `Fn + F12`
 
 ### 打开终端
 
-Mac OS `Shift + command + C`
+Mac OS `Shift + Command + C`

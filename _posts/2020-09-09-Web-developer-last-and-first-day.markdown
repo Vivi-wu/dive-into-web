@@ -53,7 +53,7 @@ Mac新电脑安装 brew
 
 使设置生效，重启编辑器：Code-》Quit Visual Studio Code
 
-给文件头部自动添加注释：Code-》Preferences-〉Settings-》Extensions-〉File header Configuration，将 Author 和 Last modified by 改成自己的邮箱。默认快捷键：control+alt+i
+给文件头部自动添加注释：Code-》Preferences-〉Settings-》Extensions-〉File header Configuration，将 Author 和 Last modified by 改成自己的邮箱。默认快捷键：control + alt + i
 
 ### SSH Key
 

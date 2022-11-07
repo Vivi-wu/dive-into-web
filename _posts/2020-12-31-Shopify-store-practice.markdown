@@ -192,7 +192,7 @@ Scripts 为商店提供了一种编写可在 Shopify 服务器上运行的自定
 
 建议安装的 Extensions：[sissel.shopify-liquid 代码高亮、formatting](https://marketplace.visualstudio.com/items?itemName=sissel.shopify-liquid&ssr=false#overview)
 
-Mac快捷键：Shift + command + L
+Mac快捷键：Shift + Command + L
 
 默认对整个文件进行格式化。
 
