@@ -76,6 +76,15 @@ curl -H 'custom-header:值' -b ‘_ga=cookie1;_gid=cookie2’ http://www.example
 lsof -i:3011
 ```
 
+本地启动dev server，有时没有正常stop，再运行时终端报错“The address "http://127.0.0.1:9292" is already in use.”
+
+通过指令找到对应端口号进程的pid（ex：22133），关闭掉进程
+
+```sh
+lsof -i tcp:9292
+kill -9 22133
+```
+
 ### 监控进程内存使用情况
 
 Mac终端：
