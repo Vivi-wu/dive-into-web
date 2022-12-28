@@ -31,7 +31,7 @@ category: HTML
 定义页面和某个外部资源的关系，最**常用来链接外部样式表文件**。
 
     <link rel="stylesheet" href="mystyle.css">
-  
+
 **注意**：该元素是一个空元素，只包含一些attributes，只出现在 `<head>`区域，但可以出现多次。
 
 #### preload
@@ -67,8 +67,15 @@ Examples;
 
 2. 每隔30秒刷新页面
 
-        <meta http-equiv="refresh" content="30">
+    ```html
+    <meta http-equiv="refresh" content="30">
+    ```
 
+3. [认证网站的 ownership](https://support.google.com/webmasters/answer/9008080)，用于获取该网站在 Google Search 的敏感数据权限。实际上认证方法有多种，HTML tag最方便。
+
+    ```html
+    <meta name="google-site-verification" content="...verification token" />
+    ```
 ### HTML `<script>`
 
 该元素用来定义客户端的JavaScript，在该元素内所写的JS代码在页面加载时会被parser，当然 `<script>`也可以写在 `<body>` 里任何地方。

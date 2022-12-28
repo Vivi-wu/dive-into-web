@@ -10,6 +10,8 @@ Detecting errors in code without running it is referred to as static checking. D
 
 总结：TypeScript是静态类型检查器。
 
+<!--more-->
+
 + TS是JS的超集，因此的任何可执行的JS语句都是合法的TS。
 + TS不会改变JS代码的runtime行为/表现，这个是TS的一个foundational promise
 
@@ -153,3 +155,35 @@ console.log(Color[4]);            // "Blue"
 any 类型会穿透对象的属性。
 
 使用 any 会丢失掉使用TS的主要动机——类型安全，非必要时应尽量避免。
+
+### set new property on `window` object
+
+需要扩展现有的 `Window` interface，告诉它自定义的新属性。参考：https://stackoverflow.com/a/12709880/2474841
+
+```ts
+declare global {
+  interface Window {
+    ttq: any;
+  }
+}
+```
+
+### 强类型 function 作为函数parameter
+
+参考：https://stackoverflow.com/questions/14638990/are-strongly-typed-functions-as-parameters-possible-in-typescript
+
+```ts
+class Foo {
+  save(callback: (n: number) => any) : void {
+    callback(42);
+  }
+}
+
+// Equivalent
+type NumberCallback = (n: number) => any;
+class Foo {
+  save(callback: NumberCallback) : void {
+    callback(42);
+  }
+}
+```

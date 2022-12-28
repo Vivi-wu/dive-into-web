@@ -9,7 +9,7 @@ category: Other
 1. 每次在终端里执行与远端交互的 git 命令都提示输入passphrase？
 
     + 解法一：把 remote url 从ssh改为https
-    + 解法二：在generate SSH key 的时候，当终端提示设置 password 跳过就行（因为密码不是必须的）
+    + 解法二：在生成 SSH key 的时候，当终端提示设置 password 跳过就行（因为密码不是必须的）
 
 2. `cat *.txt` Linux 命令：连接文件并将内容打印到标准输出设备上
 
@@ -60,7 +60,7 @@ category: Other
         Ctrl + Shift + ]    打开代码块
 
 4. 编辑
-    
+
         Ctrl + Shift + L            选中所有“当前选择”的匹配项
         Ctrl + F                    当前文件搜索
         Ctrl + Shift + F            全局搜索
@@ -79,7 +79,7 @@ category: Other
         Ctrl + Shift + K            删除行
         Ctrl + C                    复制行
         Alt + ↑/↓                   移动行
- 
+
 ### 在指定目录下的文件中查找
 
 在订单列表目录下的 .vue 文件里查找
@@ -109,3 +109,7 @@ Windows 系统按 `Fn + F12`
 1. 左侧工具栏 Explorer -》Open Editors
 2. 右键点击文件 A，弹出菜单里选择 Select for Compare
 3. 右键点击另一文件 B，弹出菜单里选择 Compare with Selected
+
+### 打开终端
+
+Mac OS `Shift + Command + C`

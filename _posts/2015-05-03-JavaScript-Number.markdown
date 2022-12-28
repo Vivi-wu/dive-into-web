@@ -20,7 +20,16 @@ JS的数字是**双精度 64-bit** IEEE 754 浮点数。JS只有一种 Number �
 
 <!--more-->
 
-<span class="t-blue">浮点数相加不一定准确</span>，因为计算机中用二进制来存储小数，而大部分小数转成二进制之后都是无限循环的值，因此存在取舍问题，造成精度丢失。
+<span class="t-blue">浮点数进行数学运算不一定准确</span>，因为计算机中用二进制来存储小数，而大部分小数转成二进制之后都是无限循环的值，因此存在取舍问题，造成精度丢失。
+
+解决办法：https://stackoverflow.com/a/3644302/2474841
+
+```js
+0.6565 * 100 // 65.64999999999999
+(0.6565 * 100).toPrecision(4) // 65.65
+0.5217 * 100 // 52.17
+(0.5217 * 100).toPrecision(4) // 52.17
+```
 
 ## 进制
 
@@ -39,7 +48,7 @@ myNumber.toString(2);      // returns 10000000
 
 ## 特殊值
 
-可以使用 `isFinite()` 方法判断一个值是否为 Infinity, -Infinity 或者 NaN 
+可以使用 `isFinite()` 方法判断一个值是否为 Infinity, -Infinity 或者 NaN
 
 ### Infinity or (-Infinity)
 

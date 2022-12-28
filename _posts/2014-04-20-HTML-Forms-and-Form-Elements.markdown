@@ -204,3 +204,61 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
 8. 表单提交时，判断输入项是否有error并拦截（通过标识或状态，避免重复判断），用户可能不改错直接提交。
 9. 键盘事件只能由 input、textarea，等任何拥有 _contentEditable_ 属性，或者 tabindex='-1' 的元素
 10. 针对编辑负责数据，建议一个 field 修改完失焦就提交server保存
+
+## submit Event
+
+最近被一个form提交的问题困扰了1、2个小时，希望的效果是拦截表单 type 为 submit 元素触发的默认form提交行为。
+
+经过验证，得出以下结论：
+1. 函数绑定写在form后面
+2. 以下4种方式都可以
+3. 执行顺序：3-》2-》4，且当这三个函数执行时，1不执行
+
+```html
+<html>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <body>
+    <form id="myform" action="" onsubmit="return myFunction()">
+      Enter name: <input type="text" name="fname">
+      <input type="submit" value="Submit">
+    </form>
+    <script>
+      function myFunction() {
+        alert("1 The form was submitted");
+        return false
+      }
+      function myFunction2() {
+        alert("2 The form was submitted");
+        return false
+      }
+      function myFunction3() {
+        alert("3 The form was submitted");
+        return false
+      }
+      function myFunction4() {
+        alert("4 The form was submitted");
+        return false
+      }
+      // $('#myform').on('submit', myFunction2);
+      // document.getElementById('myform').onsubmit = myFunction3
+      // document.getElementById('myform').addEventListener("submit", myFunction4);
+    </script>
+  </body>
+</html>
+```
+
+### iOS Safari 搜索框唤起键盘确认按键显示为“搜索”
+
+```html
+<form action="/" method="get">
+  <input type="search"/>
+</form>
+```
+1. input 元素类型为 "search"
+2. 隐藏浏览器默认样式（如：输入框里显示搜索icon），设置 input 样式 `-webkit-appearance: none;`
+3. input 元素要包含在 form 元素内，且 form 要有 _action_ 和 _method_ 属性
+
+其他：
+
++ 页面首次渲染完时，通过 js focus 到输入框没有效果，这是 Safari 设计如此。切换应用重新回到浏览器页面自动 focus 可生效
++ 隐藏 Chrome 浏览器默认 cancel 按钮样式，设置 `input[type="search"]::-webkit-search-cancel-button{display: none;}`

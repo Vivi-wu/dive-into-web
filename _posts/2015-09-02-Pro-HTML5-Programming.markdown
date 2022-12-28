@@ -90,7 +90,7 @@ postMessage API为发送消息的标准方式。
 
 1. message 事件是一个拥有 data（数据）和 origin（源）属性的 DOM 事件。有了 origin 属性，接收方可以根据可信源列表判断来源是否可靠。
 
-2. 源由协议（scheme）、主机（host）、端口（port）组成。源的概念中不考虑路径。
+2. Origin（源）由 scheme（protocol协议）、hostname（domain域名）、port（端口号）组成。只有当这3项全匹配，才认为是 Same origin（同源）
 
 3. 判断浏览器是否支持 postMessage API，如下
 

@@ -1,0 +1,31 @@
+---
+title:  "SSR实践"
+category: JavaScript
+---
+与网络上一般的纯SSR方案不同，我们实现的是一套兼容现有项目代码，PC/H5项目均采用同构（即server、client端均采用同一套代码渲染组件）的模式来构建SSR应用。
+
+同构模式下，开发者仅需关注业务本身。
+
+一些注意事项：
+- 浏览器里才可用的常量：window、document等
+- http数据请求同时支持server、client端
+- React 组件生命周期
+- 通过注入环境变量区分当前运行时环境
+
+server：renderToString 一定程度上是 CPU 密集型操作，提高单机 QPS？服务的运维、扩容？
+client：利用PWA做离线缓存
+
+静态数据：不常变更的数据，如：商品标题、描述等
+动态数据：与用户登录状态有关的数据，如：是否收藏过
+
+使用 `concurrently` 同时启动多个命令。
+
+	concurrently "command1 arg" "command2 arg"
+
+使用 ctrl + c 停止所有进程
+
+## ReactDOM.hydrate
+
+有时在浏览器 console 可看到报错提示说某某组件的文本内容在 server 是什么，在 client 是什么，总之不一致。
+
+[原因](https://zh-hans.reactjs.org/docs/react-dom.html#hydrate)：React 希望服务端与客户端渲染的内容完全一致。React 可以弥补文本内容的差异，但是你需要将不匹配的地方作为 bug 进行修复。在开发者模式下，React 会对 hydration 操作过程中的不匹配进行警告。

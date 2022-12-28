@@ -64,6 +64,44 @@ var val = JSON.stringify(a.test)
 // 判断对象某属性的值是否为：空字符串、空对象、空数组、null 或 undefined
 if (a.test === "" || val === '{}' || val === '[]' ||  val === 'null' || !val) {}
 ```
+
+#### node.js console.log 输出 object
+
+直接 console.log 输出的是 `[object Object]`，将对象字符串化处理
+
+```js
+console.log(`Retrieve Theme: ${JSON.stringify(data)}`)
+```
+输出如下，内容多的时候查看不方便。
+
+```shell
+Retrieve Theme: [{"id":126813634767,"name":"【US：商详相似推荐列表优化】- wx","created_at":"2021-10-13T19:46:35+08:00","updated_at":"2022-05-31T15:22:31+08:00","role":"unpublished","theme_store_id":null,"previewable":true,"processing":false,"admin_graphql_api_id":"gid://shopify/Theme/126813634767"},...}]
+```
+
+改进：
+
+```js
+console.log(`Retrieve Theme: ${JSON.stringify(data, null, 2)}`)
+```
+使用 2 个空格缩进。
+
+```shell
+Retrieve Theme: [
+  {
+    "id": 126813634767,
+    "name": "【US：商详相似推荐列表优化】- wx",
+    "created_at": "2021-10-13T19:46:35+08:00",
+    "updated_at": "2022-05-31T15:22:31+08:00",
+    "role": "unpublished",
+    "theme_store_id": null,
+    "previewable": true,
+    "processing": false,
+    "admin_graphql_api_id": "gid://shopify/Theme/126813634767"
+  },
+  ...
+]
+```
+
 ### JSON vs. XML
 
 不了解的人会经常比较这两者，我比较赞同的一个观点是，JSON 只是一种**数据格式**，而 XML 是一种**语言**，比前者拥有更广泛的用途和强大的功能。

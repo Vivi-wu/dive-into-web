@@ -74,12 +74,20 @@ Currencies are represented both numerically and alphabetically, using either thr
     (1234.56).toLocaleString('en-IN', { style: 'currency', currency: 'INR'}) // "₹1,234.56"  负数 "-₹1,234.56"
     (1234.56).toLocaleString('en-GB', { style: 'currency', currency: 'GBP'}) // "£1,234.56"  负数 "-£1,234.56"
     (1234.56).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR'}) // "1 234,56 €" 负数 "-1 234,56 €"
+    (1234.56).toLocaleString('de-DE', { style: 'currency', currency: 'EUR'}) // "1.234,56 €" 负数 "-1.234,56 €"
+    (1234.56).toLocaleString('it-IT', { style: 'currency', currency: 'EUR'}) // "1.234,56 €" 负数 "-1.234,56 €"
+    (1234.56).toLocaleString('es-ES', { style: 'currency', currency: 'EUR'}) // "1.234,56 €" 负数 "-1.234,56 €"
+    (1234.56).toLocaleString('nl-NL', { style: 'currency', currency: 'EUR'}) // "€ 1.234,56" 负数 "€ -1.234,56" 荷兰
+    (1234.56).toLocaleString('nl-BE', { style: 'currency', currency: 'EUR'}) // "€ 1.234,56" 负数 "€ -1.234,56" 比利时
+    (1234.56).toLocaleString('de-AT', { style: 'currency', currency: 'EUR'}) // "€ 1.234,56" 负数 "-€ 1.234,56" 奥地利
 
 [维基百科可视化一览表](https://en.wikipedia.org/wiki/ISO_4217)，延伸阅读数字系统的小数点、分隔符[Digit grouping](https://en.wikipedia.org/wiki/Decimal_separator)。
 
 ## Language tags
 
 语言标签，参考维基百科 [Examples of language tags](https://en.wikipedia.org/wiki/Language_localisation)，这个表格简单明了。
+
+[这里](http://www.lingoes.net/en/translator/langcode.htm) 按国家查 language code，更方便一些。
 
 语言标签可见于 HTML 元素的 lang 标签属性值，由 [BCP 47](https://tools.ietf.org/html/bcp47) 规定。
 

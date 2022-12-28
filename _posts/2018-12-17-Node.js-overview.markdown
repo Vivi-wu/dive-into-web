@@ -222,7 +222,7 @@ Express 是第一代Node.js web框架，基于ES5的语法，通过回调实现�
 
 每收到一个http请求，koa就会调用通过 `app.use()` 注册的 async 函数，然后用await next()来调用下一个async函数。每个async函数称为 middleware，这些 middleware 可以组成处理链，依次完成相应的任务。
 
-注意：调用 app.use() 的顺序决定了 middleware 
+注意：调用 app.use() 的顺序决定了 middleware
 
 如果一个 middleware 没有调用 await next()，那么后续的middleware将不再执行。
 
@@ -265,3 +265,32 @@ app.use(async (ctx, next) => {
 数据库每一行数据都可以用一个JavaScript对象表示，这就是传说中的ORM技术：Object-Relational Mapping，把关系数据库的表结构映射到对象上。
 
 Sequelize是Node.js的ORM框架
+
+
+## 实战
+
+### 读取命令行参数
+
+http://nodejs.cn/learn/nodejs-accept-arguments-from-the-command-line
+
+循环打印所有的参数（包括 node 路径和文件路径）：
+
+```js
+process.argv.forEach((val, index) => {
+  console.log(`${index}: ${val}`)
+})
+```
+```shell
+node test.js m 20220609
+
+0: /Users/*/.nvm/versions/node/v16.14.0/bin/node
+1: /Users/*/path_to_file/update-theme-name.js
+2: m
+3: 20220609
+```
+
+仅获取所需参数，改进下：
+```js
+const args = process.argv.slice(2)
+console.log(args[0], args[1])
+```

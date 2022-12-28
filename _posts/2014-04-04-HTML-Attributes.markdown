@@ -25,6 +25,19 @@ The document language can be declared in the `<html>` tag with the _lang_ attrib
 
 _alt_ 特性设定了当该元素的内容无法展示时作为替代的文本。alt 的值还能被屏幕阅读器读取。
 
+
+### _data-*_
+
+在 HTML 元素上自定义 data-* 属性，其对应的 DOM _dataset.property_。属性名用法：
+
++ 在 html 中以 data- 开始，只可包含数字、字母（忽略大小写）、横线（-）、点（.）、冒号（:）、下划线（_）
++ 在 JS 中不含 data- 前缀，转为 camelCased 形式（移除连接横线）
+
+属性值总是为 string
+
+    element.dataset.example = null
+    <div data-example="null"></div>
+
 ### Quote 引号
 
 HTML5 并没有要求用引号将特性值限制起来，但是最好记得使用引号。比如：

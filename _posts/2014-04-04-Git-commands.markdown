@@ -10,8 +10,6 @@ category: Other
 
     git config --global user.name "Vivienne"
     git config --global user.email vivienne@example.com
-    git config --global alias.ck checkout
-    git config --global alias.m merge
     git config --global alias.pl pull
     git config --global alias.ps push
 

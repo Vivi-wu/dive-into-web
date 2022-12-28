@@ -1,0 +1,151 @@
+---
+title:  "Liquid"
+category: Other
+---
+{% raw %}
+最近一直在维护 Shopify 店铺，做一些 theme 功能定制的需求。接触了2个付费的 theme，里面的代码虽然不敢恭维，但是店铺的页面性能都非常好。再次重拾了 server 渲染能力。
+
+[Liquid](https://shopify.github.io/liquid/) 由 Shopify 创建的开源的模版语言，是 Shopify theme 的基石。[Shopify Liquid文档](https://shopify.dev/docs/themes/liquid/reference)，包含一些内置的对象，可用于读取店铺的数据。
+
+对了，这个博客用 Jekyll 生成页面，也使用 Liquid 作为其模版语言。
+
+<!--more-->
+
+## 语法
+
+使用 `{{` 和 `}}` 输出 Liquid Object 或变量的内容。
+
+使用 `{%` 和 `%}` 包裹称为 Tags，用来 assign 变量、创建 condition/loops，从而控制模版的 flow，实现动态输出。Tags不会渲染到页面上。
+
+在 `{{-` 和 `-}}`，`{%-` 和 `-%}` 加一个 `-`，来移除渲染 tag 左右边的 whitesapce。
+
+在 `{{}}` 和 变量赋值时，使用 `|` 管道符，结合 Filters，可以改变 Liquid 对象或变量的输出。
+
+基本数据类型 String、Number、Boolean、Array（跟js差不多）、Nil。
+
+只有变量值为 `Nil`, `false` 条件判断结果是 falsy，其余情况都是 truthy。
+
+Liquid 语言里使用 snippet 封装代码，同 js 的模块概念。
+
+### 实践tips
+
++ 移除变量赋值语句之后的whitespace，`{% assign variable = "value" -%}` 只需要在闭合标记处添加横线
++ 当 Tags 或输出返回 `Nil`，不会有任何东西打印到页面上
++ 不能直接创建/initialize array，可以通过 `split` filter 把一个 string 打断成一个 substring 的数组
++ 某个条件发生的概率小时，使用 `{% unless condition %}`logic`{% endunless%}`，即仅当 condition 不满足时，才执行logic
++ 可以给变量 `assgin` 布尔值，但不能把 condition 判断的结果直接赋值给变量。解法：
+
+```
+{%- assign hasAdProducts = false -%}
+{%- if ad_products.size > 0 -%}
+  {%- assign hasAdProducts = true -%}
+{%- endif -%}
+```
+
+### 变量作用域
+
+渲染进模版里的 snippet 代码并不自动 access 父模版中使用变量 tags assign 赋值的 variables。同理，snippet 内部的变量，不能被外部的代码读取。
+
+读取父模版变量的方法：
+
+```
+{% assign all_products = collections.all.products %}
+{% render 'snippet', products: all_products %}
+```
+
+可以以逗号分隔，传递多个变量。
+
+此外，通过 `with` 参数，将父模版中定义的变量值传递给与 snippet 文件同名的内部变量。
+
+父模版:
+```
+{% assign c = collections.all.products %}
+{% render 'collection-product-list' with c %}
+```
+
+snippet:
+```
+<ul>
+{% for product in collection-product-list %}
+<li><a href="{{ product.url}}">{{ product.title}}</a>
+{% endfor %}
+<ul>
+```
+
+### javascript liquid 标签
+
+Each section can can contain JavaScript and Stylesheets, these two languages are used within liquid tags: `{% javascript %}``{% endjavascript %}` 和 `{% stylesheet %}``{% endstylesheet %}`.
+
+When placing code inside of these two tags, Shopify compiles each piece into shopify_compiled.js & shopify_compiled.css. This allows for greater readability within each section's code as you don't have to search through a long document to find each piece.
+
+## 实例
+
+### capture
+
+捕获开闭标签之间的字符串，赋值给变量。使用 capture 创建的变量也是 string.
+
+理论上，只要 snippet 的输出结果是字符串，就可以通过这个方法实现代码复用。
+
+```
+{%- capture t_title -%}
+  {%- render 'translation_text_node', original_text : settings.title, prefix: 'layout.header_menu.' -%}
+{%- endcapture -%}
+{%- render 'my_title',title:t_title -%}
+```
+
+### 读取URL参数
+
+一开始想用官方的 request 对象，发现 `request.path` 输出值不含 query。在论坛里搜到了一个[答案](https://community.shopify.com/c/Shopify-Design/URL-Parameters-in-LIQUID/m-p/808960/highlight/true#M203580)。
+
+尝试了一下，是可以的。写成 snippet 如下，文件名 get_url_param.liquid
+
+```liquid
+{%- assign page_url = content_for_header | split:'"pageurl":"' | last | split:'"' | first -%}
+{%- assign query_param = '' -%}
+{%- if page_url contains "?" -%}
+  {%- assign query_string = page_url | split:'?' | last -%}
+  {%- assign qry_parts = query_string | split:'&' -%}
+  {%- for part in qry_parts -%}
+    {%- assign key_and_value = part | split:'=' -%}
+    {%- if key_and_value.size > 1 -%}
+      {% if key_and_value[0] == param_key %}
+        {%- assign query_param = key_and_value[1] -%}
+      {% endif%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{{ query_param }}
+```
+
+使用：
+
+```liquid
+{%- capture query -%}{%- render 'get_url_param', param_key: 'pid' -%}{%- endcapture -%}
+```
+
+### Convert String to Number
+
+```liquid
+{% assign num = "2021" -%}
+{{ num | abs }}
+```
+
+### Convert Number to String
+
+```liquid
+{% assign str = 2021 -%}
+{{ str | append: '' }}
+```
+
+### Array 操作
+
+是否可以使用 filter 排除数组中的某些 items？目前好像不行。
+
+### Find a special item in string array
+
+官方文档里对于 `where` 过滤器的使用只有 object array。需求是从字符串型数组中找到并返回含有指定 substring 的数组项。参考主题代码试了下，是可以的，但不确定这种方法的稳定性。
+
+```liquid
+{%- assign tag_str = product.tags | where: 'pno_' -%}
+```
+{% endraw %}

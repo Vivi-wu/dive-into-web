@@ -30,12 +30,11 @@ Cookies 是一种经典地存储简单 string 数据的方式。可以由 server
 
 _window.localStorage_ 是 H5 Web Storage API 之一，区别于 Cookies，存储的数据不会发给 server，可以被同源的每个窗口或标签页共享。
 
-可以省略 window 对象使用，因为 storage 对象可以从默认的页面上下文中获得。
+window interface 提供的只读属性，允许获取文档 origin 下的 Storage 对象。
 
 存储的数据不会因为浏览器关闭而删除，如没有干预，将一直有效。
 
-例外：如果用户使用“私有/隐私保护”模式的进行浏览，那么在浏览器关闭后，_localStorage_ 中的值将不会保存。因为**使用了这种模式的用户已经明确选择不留痕迹**。
-
+注意：如果用户使用 “无痕/私有/隐私保护” 模式的进行浏览，那么在浏览器关闭后，_localStorage_ 中的值将不会保存。因为**使用了这种模式的用户已经明确选择不留痕迹**。
 
 操作方法：
 
@@ -47,14 +46,14 @@ localStorage.setItem('user', JSON.stringify(user));
 
 // Read (Single)
 JSON.parse(localStorage.getItem('user'))
-// 如果 key 不存在，返回 null 
+// 如果 key 不存在，返回 null
 
 // 也可以使用以下方法 create／read
-localStorage.lastname = "Smith";  
-localStorage['lastname'] = "Smith"; 
+localStorage.lastname = "Smith";
+localStorage['lastname'] = "Smith";
 
 // Update
-const updatedUser = { name: 'Vivienne', age: 24 }  
+const updatedUser = { name: 'Vivienne', age: 24 }
 localStorage.setItem('user', JSON.stringify(updatedUser));
 
 // Delete
@@ -75,7 +74,9 @@ Object.keys(localStorage)
 <span class="t-red">只允许存储 String</span>，但我们可以存储 stringified JSON，实现存储复杂数据。
 
 区别：
-http 和 https 相同域名下的local storage数据不共享，而cookie是共享的。
+http 和 https 相同域名下的 localStorage 数据不共享，而 cookie 是共享的。
+
+注意！！！网站通过 http://example.com 加载返回的 local storage 对象与 通过 https://example.com 加载不同。
 
 ## Session Storage
 
@@ -83,10 +84,10 @@ _window.sessionStorage_ 是 H5 Web Storage API 第二种类型，用法、优劣
 
 补充：
 
-+ clear() 函数删除存储列表中所有的数据，空的 Storage 对象调用此函数也是安全的，只是不执行任何操作。 
++ clear() 函数删除存储列表中所有的数据，空的 Storage 对象调用此函数也是安全的，只是不执行任何操作。
 + 如果用户已关闭了网站的存储，或存储达到其最大的容量，此时设置数据将抛出 QUOTA_EXCEEDED_ERR 错误。
 + 只要有同源的 Storage 事件发生（包括 SessionStorage 和 LocalStorage 触发的事件），已注册的所有事件侦听器作为事件处理程序就会接到相应的 Storage 事件。该事件中包含与存储变化有关的信息。如果是新添加的数据，则 oldValue 属性值为 null；如果是被删除的数据，则 newValue 属性值为 null。
-+ 关闭当前tab可以自动清除sessionStorage，但登出操作在同一个tab页进行，故需要手动清除.
++ 关闭当前 tab 可以自动清除 sessionStorage，但登出操作在同一个tab页进行，故需要手动清除.
 
 ## IndexedDB
 

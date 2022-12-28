@@ -1,0 +1,663 @@
+---
+title:  "GraphQL"
+category: Other
+---
+GraphQL是一种API语言。用一句话描述它：只请求需要的，并确切获得所需的。
+
+语法学习[官方文档](https://graphql.org/learn/)
+
+## Overview
+
+API调用最常见的情况：查询和修改。在RESTful风格的API中我们常用get方法查询数据，用post、put、delete方法修改数据。而在GraphQL里，对应的方法是query和mutation。
+
+使用GraphQL API的好处：前端可以在一个请求中执行多个查询。它使用 types 确保应用仅获取可能数据，并提供清晰有用的错误，同时避免编写手动解析代码。
+
+Shopify同时支持RESTful API和GraphQL API。在为Shopify开发app时，官方鼓励使用GraphQL API。此外，通过独立站店铺内安装的GraphQL app，前端可以方便地排查线上数据问题。
+
+### 简单的使用技巧
+
++ 虽然不是必须，但建议给 query 和 mutation 命名，类似匿名函数和命名函数的区别，便于在批量请求失败时，debug和定位问题
++ 命名遵守规则：描述要返回的内容
+
+### 运行示例代码
+
+你需要注册Shopify开发者账号，开通development store，导入一些商品数据，安装 Shopify GraphiQL App https://shopify-graphiql-app.shopifycloud.com/
+这些都是免费的。
+
+## 以Shopify API为例
+
+示例: 获取店铺前2个商品的id和标题
+
+```
+query FirstTwoProducts {
+  products(first: 2) {
+    edges {
+      node {
+        id
+        title
+      }
+    }
+  }
+}
+```
+
+其中 `first` 是 products 的argument参数。`edges` 是 Shopify 实现的 connection，这里是商品list。
+
+响应如下：
+```
+{
+  "data": {
+    "products": {
+      "edges": [
+        {
+          "node": {
+            "id": "gid://shopify/Product/6429646454933",
+            "title": "The Round Neck Sweater Female Cashmere Loose No Cap Hedging Student Wild"
+          }
+        },
+        {
+          "node": {
+            "id": "gid://shopify/Product/6429658120341",
+            "title": "Long Sleeves Hooded Solid Sweater Fleece Loose Version"
+          }
+        }
+      ]
+    }
+  },
+  "extensions": {
+    "cost": {
+      "requestedQueryCost": 4,
+      "actualQueryCost": 4,
+      "throttleStatus": {
+        "maximumAvailable": 1000,
+        "currentlyAvailable": 996,
+        "restoreRate": 50
+      }
+    }
+  }
+}
+```
+_extensions_ 的内容是Shopify GraphQL API用来反馈当前api调用的开销情况。Shopify限制了API调用的频率，感兴趣的可以搜一下。后面的响应代码省略extensions信息。
+
+### 示例0：过滤查询结果
+
+Shopify 提供了 `query` 这个filter，可以对的结果集connection近一步过滤。
+
+以下代码执行 Prefix query，获取店铺前10个 collections 中，标题包含'Best'字符串的collection。
+
+注意：执行Field search时，field和value之间不能有空格。否则 `title: Best*`，查询的是 `title` 和 `Best*`。
+
+```
+query CollectionHandler {
+  collections(first: 10, query: "title:Best*") {
+    edges {
+      node {
+        title
+        handle
+      }
+    }
+  }
+}
+```
+响应如下：
+
+```
+{
+  "data": {
+    "collections": {
+      "edges": [
+        {
+          "node": {
+            "title": "Women's Bags :heart: Best Seller",
+            "handle": "womens-bags-best-seller"
+          }
+        },
+        {
+          "node": {
+            "title": "Best Seller- Home",
+            "handle": "best-seller-home"
+          }
+        },
+        {
+          "node": {
+            "title": "Best Sellers :boom::fire:",
+            "handle": "best-sellers-:boom::fire:"
+          }
+        },
+        {
+          "node": {
+            "title": "Best Seller",
+            "handle": "best-seller"
+          }
+        }
+      ]
+    }
+  },
+  "extensions": ...
+}
+```
+其中 search 语法看这里：https://shopify.dev/concepts/about-apis/search-syntax
+可以查询的resources，定义在文档的references里。
+
+### 示例1：pagination分页
+
+在上面的示例中，还可以获取商品variants变体（也是一个edges list），同理，可以在 edges 同级加上 pageInfo，可以知道是否有前一页/后一页。
+
+我们可以在每一层的list中，使用分页，实现nest pagination嵌套分页的效果。
+
+```
+query FirstTwoProducts {
+  products(first: 2) {
+    edges {
+      node {
+        id
+        title
+        variants(first: 1) {
+          edges {
+            node {
+              id
+              title
+            }
+          }
+          pageInfo {
+            hasNextPage
+            hasPreviousPage
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+响应如下：
+```
+{
+  "data": {
+    "products": {
+      "edges": [
+        {
+          "node": {
+            "id": "gid://shopify/Product/6429646454933",
+            "title": "The Round Neck Sweater Female Cashmere Loose No Cap Hedging Student Wild",
+            "variants": {
+              "edges": [
+                {
+                  "node": {
+                    "id": "gid://shopify/ProductVariant/38008678973589",
+                    "title": "S / Yellow"
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": true,
+                "hasPreviousPage": false
+              }
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "gid://shopify/Product/6429658120341",
+            "title": "Long Sleeves Hooded Solid Sweater Fleece Loose Version",
+            "variants": {
+              "edges": [
+                {
+                  "node": {
+                    "id": "gid://shopify/ProductVariant/38008701681813",
+                    "title": "L / Brown"
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": true,
+                "hasPreviousPage": false
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "extensions": ...
+}
+```
+
+### 示例2: 命名查询、变量
+
+根据id获取指定商品的标题和描述
+```
+query ProductTitleAndDescription($id: ID!) {
+  product(id: $id) {
+    title
+    description
+  }
+}
+```
+
+查询参数
+```js
+{
+  "id": "gid://shopify/Product/6429646454933"
+}
+```
+
+响应如下：
+```
+{
+  "data": {
+    "product": {
+      "title": "The Round Neck Sweater Female Cashmere Loose No Cap Hedging Student Wild",
+      "description": "Thickness:Thicken Fitness:Loose Clothing Length:LongBelt:NoStyle:SweetPattern:PatternPopular Elements:Printing Sleeve Length:Long Sleeve Material:Polyester Seller:Credibility Solutions Private Limited"
+    }
+  },
+  "extensions": ...
+}
+```
+
+### 示例3：别名
+
+即重命名返回字段。默认地，返回有效数据部分的json结构与查询graphQL语句是一样的。
+
+在示例2代码上稍作修改：
+
+```
+query ProductTitleAndDescription($id: ID!) {
+  product(id: $id) {
+    myTitle: title
+    description
+  }
+}
+```
+
+可以看到，仍然返回 title 的值，但是字段名变为“myTitle”。
+
+### 示例4 别名 - 批量操作
+
+别名真正的优势在于：在一个请求中，多次查询同一个字段。
+
+下面的代码通过别名，使用不同的arguments，在一个请求里使用两次product fields
+
+```
+query {
+  product1: product(id: "gid://shopify/Product/6429646454933") {
+    title
+    description
+  }
+  product2: product(id: "gid://shopify/Product/6429658120341") {
+    title
+    description
+  }
+}
+```
+
+响应如下：
+```
+{
+  "data": {
+    "product1": {
+      "title": "The Round Neck Sweater Female Cashmere Loose No Cap Hedging Student Wild",
+      "description": "Thickness:Thicken Fitness:Loose Clothing Length:LongBelt:NoStyle:SweetPattern:PatternPopular Elements:Printing Sleeve Length:Long Sleeve Material:Polyester Seller:Credibility Solutions Private Limited"
+    },
+    "product2": {
+      "title": "Long Sleeves Hooded Solid Sweater Fleece Loose Version",
+      "description": "Material:Cotton Fitness:Regular Thickness:Regular Seller:Credibility Solutions Private Limited"
+    }
+  },
+  "extensions": ...
+}
+```
+
+### 示例5：fragment片段
+
+参考示例4，在批量操作时，定义返回字段的代码稍显重复，用 fragment 定义返回字段，就可以只维护一份代码.
+
+```
+query {
+  product1: product(id: "gid://shopify/Product/6429646454933") {
+    ...TitleAndDescription
+  }
+  product2: product(id: "gid://shopify/Product/6429658120341") {
+    ...TitleAndDescription
+  }
+}
+
+fragment TitleAndDescription on Product {
+  title
+  description
+}
+```
+返回结果同示例4。
+
+### 示例6：Inline Fragments内联片段
+
+许多不同类型 implement实现了相同的 interface接口。
+
+如：Shopify中的common object-》[Node](https://shopify.dev/docs/admin-api/graphql/reference/common-objects/node)
+
+下面是Shopify api中的添加tag的接口，默认返回 node 对象的 id。
+
+因为Product类型实现了Node，通过在返回字段定义内联fragment，就可以额外获取到这个商品的信息（如：标题）。
+
+```
+mutation tagsAdd($id: ID!, $tags: [String!]!) {
+  tagsAdd(id: $id, tags: $tags) {
+    node {
+      id
+      ...on Product {
+        title
+      }
+      ...on Customer { // 因为 tagsAdd 适用于任何 Node，这样写可以基于返回内容（id的类型），获得不同字段
+        email
+        addresses
+      }
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+```
+参数：
+```
+{
+  "id": "gid://shopify/Product/6429646454933",
+  "tags": [
+    "on-sale"
+  ]
+}
+```
+
+### 示例7：根据ID查询在线Page的法语翻译
+
+店铺默认语言为意大利语，Page原内容是英文。
+
+```
+query TranslationFR ($id: ID!) {
+  translatableResource(resourceId: $id) {
+    translations(locale: "fr") {
+      key
+      value
+    }
+    translatableContent {
+      key
+      value
+      locale
+    }
+  }
+}
+```
+
+查询参数
+```js
+{
+  "id": "gid://shopify/OnlineStorePage/80469131458"
+}
+```
+
+响应如下：
+```
+{
+  "data": {
+    "translatableResource": {
+      "translations": [
+        {
+          "key": "body_html",
+          "value": ...
+        },
+        {
+          "key": "meta_description",
+          "value": ...
+        },
+        {
+          "key": "meta_title",
+          "value": "Contactez-nous"
+        },
+        {
+          "key": "title",
+          "value": "Contactez-nous"
+        }
+      ],
+      "translatableContent": [
+        {
+          "key": "title",
+          "value": "Contact Us",
+          "locale": "it"
+        },
+        {
+          "key": "body_html",
+          "value": ...,
+          "locale": "it"
+        },
+        {
+          "key": "meta_title",
+          "value": null,
+          "locale": "it"
+        },
+        {
+          "key": "meta_description",
+          "value": null,
+          "locale": "it"
+        }
+      ]
+    }
+  },
+  "extensions": ...
+}
+```
+
+某些字段的响应value省略了，示例中的页面比较特殊，除了title，主体内容都是图片。可以看到，meta_title、meta_description由于没有意大利语翻译，value是null。
+
+### 示例8：根据ID删除商品某个metafields
+
+调研Shopify Product Reviews功能时用csv给某商品倒入了一些评分评论数据，这些数据通过扩展 product.metafields 保存。
+
+先查询得到该 metafield 的唯一标识（id）：
+
+```
+query ProductMetafields($id: ID!) {
+  product(id: $id) {
+    title
+    handle
+    metafields(first:20) {
+      edges {
+        node {
+          id
+          key
+          value
+          namespace
+        }
+      }
+    }
+  }
+}
+```
+
+响应：
+```
+{
+  "data": {
+    "product": {
+      ...
+      "metafields": {
+        "edges": [
+          ...,
+          {
+            "node": {
+              "key": "reviews",
+              "value": "<style scoped>.spr-container {\n    padding: 24px;\n    border-color: #ECECEC;}\n  .spr-review, .spr-form {\n    border-color: #ECECEC;\n  }\n</style>\n\n<div class=\"spr-container\">\n  <div class=\"spr-header\">\n    <h2 class=\"spr-header-title\">Customer Reviews</h2><div class=\"spr-summary\">\n\n        <span class=\"spr-starrating spr-summary-starrating\">\n          <i class=\"spr-icon spr-icon-star\"></i><i class=\"spr-icon spr-icon-star\"></i><i class=\"spr-icon spr-icon-star\"></i><i class=\"spr-icon spr-icon-star\"></i><i class=\"spr-icon spr-icon-star\"></i>\n        </span>\n        <span class=\"spr-summary-caption\"><span class='spr-summary-actions-togglereviews'>Based on 6 reviews</span>\n        </span><span class=\"spr-summary-actions\">\n        <a href='#' class='spr-summary-actions-newreview' onclick='SPR.toggleForm(6824438104223);return false'>Write a review</a>\n      </span>\n    </div>\n  </div>\n\n  <div class=\"spr-content\">\n    <div class='spr-form' id='form_6824438104223' style='display: none'></div>\n    <div class='spr-reviews' id='reviews_6824438104223' ></div>\n  </div>\n\n</div>\n<script type=\"application/ld+json\">\n      {\n        \"@context\": \"http://schema.org/\",\n        \"@type\": \"AggregateRating\",\n        \"reviewCount\": \"6\",\n        \"ratingValue\": \"4.833333333333333\",\n        \"itemReviewed\": {\n          \"@type\" : \"Product\",\n          \"name\" : \"2021 Waterproof Sun UV Protection Man Quick Dry Hiking Jacket Coats Outdoor Windbreaker Sports Fishing Skin Jackets\",\n          \"offers\": {\n            \"@type\": \"AggregateOffer\",\n            \"lowPrice\": \"5.99\",\n            \"highPrice\": \"5.99\",\n            \"priceCurrency\": \"GBP\"\n          }\n        }\n      }\n</script>",
+              "namespace": "spr",
+              "createdAt": "2021-07-30T06:21:52Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "extensions": ...
+}
+```
+
+再参考官方文档[指令](https://shopify.dev/api/admin/graphql/reference/metafields/metafielddelete)进行删除:
+
+入参
+```
+{
+  "input": {
+    "id": "gid://shopify/Metafield/19993346244767"
+  }
+}
+```
+
+命令
+```
+mutation metafieldDelete($input: MetafieldDeleteInput!) {
+  metafieldDelete(input: $input) {
+    deletedId
+    userErrors {
+      field
+      message
+    }
+  }
+}
+```
+
+### 示例9：根据商品id添加商品标题的翻译
+
+找到商品 title 字段 translatableContent 的 digest
+
+入参：
+```
+{
+  "id": "gid://shopify/Product/6830238204096"
+}
+```
+
+命令：
+```
+query ProductTranslatableContentById($id: ID!) {
+  translatableResource(resourceId: $id) {
+    resourceId
+    translatableContent {
+      key
+      value
+      digest
+      locale
+    }
+  }
+}
+```
+
+返回：
+```
+{
+  "data": {
+    "translatableResource": {
+      "resourceId": "gid://shopify/Product/6830238204096",
+      "translatableContent": [
+        {
+          "key": "title",
+          "value": "Female Loose Yoga Clothes",
+          "digest": "df1b7e178043e843b0410af2bec05529f11e7afd1389890c305f7a537e4ec2ba",
+          "locale": "en"
+        },
+        {
+          "key": "body_html",
+          "value": "<div id=\"titleHeader\">Female Loose Yoga Clothes</div><br>",
+          "digest": "5c51f5a217d35e566c2e992c5309debab8954b146084c451ed47a10c2e8b8b4e",
+          "locale": "en"
+        },
+        ...
+      }
+    }
+  },
+  ...
+}
+```
+
+使用 Shopify spuId、digest、词条（另 key 和 locale 是固定值）在 Shopify 数据库里添加翻译。
+
+入参：
+```
+{
+  "id": "gid://shopify/Product/6830238204096",
+  "translations": [
+    {
+      "key": "title",
+      "value": "weiblich lose Yoga Kleider",
+      "locale": "de",
+      "translatableContentDigest": "df1b7e178043e843b0410af2bec05529f11e7afd1389890c305f7a537e4ec2ba"
+    }
+  ]
+}
+```
+
+命令：
+```
+mutation CreateTranslation($id: ID!, $translations: [TranslationInput!]!) {
+  translationsRegister(resourceId: $id, translations: $translations) {
+    userErrors {
+      message
+      field
+    }
+    translations {
+      locale
+      key
+      value
+    }
+  }
+}
+```
+
+### 示例10：根据商品id查看指定语言的翻译
+
+命令：
+```
+query ProductTranslationsById($id: ID!){
+  product(id: $id) {
+    title
+    translations(locale: "de") {
+      locale
+      key
+      value
+    }
+  }
+}
+```
+
+### 示例11：删除指定语言的某个翻译
+
+入参：
+```
+{
+  "id": "gid://shopify/Product/6830238204096",
+  "keys": [
+    "title"
+  ],
+  "locales": [
+    "de"
+  ]
+}
+```
+
+命令：
+```
+mutation RemoveTranslations($id: ID!, $keys: [String!]!, $locales: [String!]!) {
+  translationsRemove(
+    resourceId: $id,
+    translationKeys: $keys,
+    locales: $locales
+  ) {
+    userErrors {
+      message
+      field
+    }
+    translations {
+      locale
+      key
+      value
+    }
+  }
+}
+```
