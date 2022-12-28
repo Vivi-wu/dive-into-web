@@ -248,7 +248,7 @@ List the remote connections you have to other repositories. 列出所有与其�
 
     git fetch <remote_name>
 
-Fetch all of the branches from the repository. This also downloads all of the required commits and files from the other repository. Since fetched content is represented as a remote branch, it has absolutely no effect on your local development work. This makes fetching a safe way to review commits before integrating them with your local repository.  把远端仓库的分支都取下来，取下来的内容也被视为远端分支，所以不会影响你本地开发工作。
+把远端仓库的所有分支、标签拉取下来，取下来的内容也被视为远端分支，所以不会影响你本地开发工作。
 与人合作同一个任务时，先运行 `git fetch`命令，把他的分支取下来，然后 `git checkout <分支名>`，在本地创建同名新分支，并跳转过去。
 
     git fetch --prune origin
