@@ -22,11 +22,15 @@ category: Other
 
 ### 企业微信文件、图片
 
-找到企业微信本地缓存文件夹，如：WXWork，将整个目录 copy 到移动硬盘
+找到企业微信本地缓存文件夹，如：WXWork，将整个目录 copy 到移动硬盘。
 
 ### 邮件
 
 需要备份收藏的邮件转发至私人邮箱。
+
+### 账号
+
+退出各种应用已登陆的账号，删除浏览器cookie、密码、历史浏览记录，删除应用在本地硬盘里的文件。
 
 ## First day
 
@@ -38,7 +42,7 @@ Mac新电脑安装 brew
 
 ### VS code
 
-在扩展里安装常用扩展插件：ESLint、Git Graph、GitLens、vscode-fileheader、JavaScript and TypeScript Nightly
+在扩展里安装常用扩展插件：ESLint、Git Graph、GitLens、vscode-fileheader、JavaScript and TypeScript Nightly、iconfont-preview、Prettier - Code formatter
 
 编辑器显示：
 
