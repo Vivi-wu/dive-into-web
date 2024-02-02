@@ -182,6 +182,17 @@ people.sort(function(a, b){return a.localeCompare(b, 'zh-CN')});
 arry.sort((a, b) => a.last_name.localeCompare(b.last_name, 'zh-CN'));
 ```
 
+按**参照数组**顺序输出：
+
+```js
+let arrOrder = ['breakfast', 'lunch', 'dinner', 'snacks']
+let tmpArr = [{name: 'breakfast'}, {name: 'lunch'}, {name: 'snacks'}, {name: 'dinner'}]
+tmpArr = tmpArr.sort((a, b) => {
+  return arrOrder.indexOf(a.name) - arrOrder.indexOf(b.name)
+})
+// 输出结果：[{name: 'breakfast'}, {name: 'lunch'}, {name: 'dinner'}, {name: 'snacks'}]
+```
+
 自定义比较函数：
 
 ```js
@@ -287,9 +298,10 @@ arryB.forEach(index => arryA.splice(index, 1))
 #### 数组去重
 
 `Set` 对象允许我们存储任何数据类型的唯一值，whether primitive values or object references.
-注意数组项为object时，不要使用此方法。
 
 ```js
-const a = [...new Set([1, 6].concat([1, 2, 3, 3, 2, 4, 5]))]
-// [1, 6, 2, 3, 4, 5]
+// 在 Set 和 Array 之间转换
+const mySet = new Set([1, 2, 3, 4]);
+console.log(mySet.size); // 4
+console.log([...mySet]); // [1, 2, 3, 4]
 ```
