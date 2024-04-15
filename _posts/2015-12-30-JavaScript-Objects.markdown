@@ -77,8 +77,9 @@ JS中被称为 this 的东西就是<span class="t-blue explain" title="the objec
 
 + 当用在 **function**, 指的是拥有这个函数的对象。
 + 当用在 **object**, 就是对象本身。
-+ 当用在 **object constructor**, is only a substitute 替代 for the new object. 构造函数里的 this 本没有值，<span class="explain" title="The value of this will become the new object when the constructor is used to create an object.">当函数被用来创建新的对象时，this 的值变为新对象</span>。
++ 当用在 **object constructor**, is only a substitute(替代) for the new object. 构造函数里的 this 本没有值，<span class="explain" title="The value of this will become the new object when the constructor is used to create an object.">当函数被用来创建新的对象时，this 的值变为新对象</span>。
 + 还可以在 HTML 元素事件绑定里使用 _this_，指的是触发事件的 HTML DOM element。（JS Event Order 章节有提到）
++ 用在 **call**、**apply** 方法时，指向函数的直接调用者
 
 ### JavaScript Objects are Mutable
 

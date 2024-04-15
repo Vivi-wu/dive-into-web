@@ -154,7 +154,7 @@ function A() {
   },
   _switchThis: function (fn, obj) {
       return function () {
-          fn.apply(obj, arguments)
+          fn.apply(obj, arguments) // 将函数作为另外一个对象的方法运行
       }
   },
   ajaxSubmit: function () {}

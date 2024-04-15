@@ -187,3 +187,9 @@ class Foo {
   }
 }
 ```
+
+### value类型确定而key名不确定的 object
+
+```ts
+type ordinaryObject = {[key: string]: number};
+```
