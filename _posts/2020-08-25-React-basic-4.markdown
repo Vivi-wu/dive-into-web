@@ -17,6 +17,8 @@ category: JavaScript
 4. Identify Where Your State Should Live，鉴定哪个组件应该拥有这个状态，铭记 React 是单向数据流。对于应用中每一个 state，看看哪些组件需要基于它来渲染，找到公共 owner（在所有需要这个 state 的组件层级树之上）组件，如果没找到合适的组件，单独创建一个新的来 hold 这个状态
 5. Add Inverse Data Flow，最后通过 `setState()` 方法，支持反向的数据流动
 
+<!--more-->
+
 用以上方式写 React 会比我们习惯的方式多一些 typing。但是请 remember that code is read far more than it’s written, and it’s less difficult to read this modular, explicit code。
 
 比起写，代码更多地是给人看的。当你开始构建更大的组件库时，你会意识到这种代码模块化和清晰度的重要性。并且随着代码重用程度的加深，你的代码行数也会显著地减少。

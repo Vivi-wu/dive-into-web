@@ -20,6 +20,8 @@ Class的问题： 事件处理绑定 `this`，代码冗余繁琐。使用 class 
 
 建议：先在新的不复杂的组件中尝试使用 Hook，并确保团队中的每一位成员都能适应。
 
+<!--more-->
+
 ### State Hook
 
 `useState()` 是 React 内置的 Hook，使我们能在函数组件里保持 React 局部 state。

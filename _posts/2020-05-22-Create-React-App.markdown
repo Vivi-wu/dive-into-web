@@ -19,6 +19,8 @@ You may serve it with a static server:
   npm install -g serve
   serve -s build
 ```
+<!--more-->
+
 因为目前前端项目的线上自动化构建，对应的目录名是 dist，所以在项目根目录下运行： `serve -s dist`。
 
 这只是一个服务器，不支持hot reload。
