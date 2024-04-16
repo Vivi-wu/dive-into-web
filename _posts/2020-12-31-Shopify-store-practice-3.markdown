@@ -18,6 +18,8 @@ category: Other
 4. 使用system font
 5. 静态资源放到Shopify server上。使用相同的host，避免unnecessary http链接
   + 把资源放到主题的 assets 目录下
+
+<!--more-->
 ### lazy-loading图片
 
 浏览器级别的 lazy-loading：在 `<img>` 元素上使用 _loading_ 属性。值设为 lazy，元素出现在可是区域时浏览器立即加载图片，当用户滚动到其他图像附近时获取其他图像。

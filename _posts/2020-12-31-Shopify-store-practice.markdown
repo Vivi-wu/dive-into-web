@@ -9,7 +9,7 @@ Shopify 的主题是由模板文件创建的目录。这些文件是 Shopify 基
 
 主题目录被打包成 zip 文件进行分发。商家可以通过 Shopify admin 上传。
 
-无论是 free 还是 paid 的主题，由于与主题或 Shopify admin 相关的限制，某些自定义设置是不支持的。
+无论是 free 还是 paid 的主题，由于主题或 Shopify admin 相关的限制，某些自定义设置是不支持的。
 
 尽管 Shopify Support 能够支持各种基本自定义，但是官方给出 Design Policy，列出了一些列他们不会提供支持的 [task](https://help.shopify.com/en/manual/online-store/os/using-themes/theme-support#shopify-design-policy)
 

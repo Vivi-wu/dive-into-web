@@ -5,7 +5,7 @@ category: Other
 {% raw %}
 ## Shopify Liquid
 
-先了解一些知识点，然后总结了一些使用 Shopify Liquid 实现的功能。
+先了解一些知识点，本文后面列举了一些使用 Shopify Liquid 实现的功能。
 
 ### liquid objects
 
@@ -18,6 +18,8 @@ category: Other
 + 使用 `{% render "snippet-filename" %}` 引入 template，不含文件后缀名
 + 可用于条件加载
 + 命名规范：所有 snippets 文件都放在“snippets”目录下，因此以它们的功能作为前缀。如：collections-coffee-cups.liquid
+
+<!--more-->
 
 ### handle
 
