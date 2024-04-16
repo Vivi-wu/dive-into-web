@@ -9,7 +9,8 @@ GMV (Gross Merchandise Volume/Value)，用于 online retailing 的 item，指某
 
 公式：GMV=访客×转化率×客单价
 
-只要你下了订单，生成订单号，就算了GMV？
+<!--more-->
+
 
 ROI（Return On Investment），最高投资回报
 

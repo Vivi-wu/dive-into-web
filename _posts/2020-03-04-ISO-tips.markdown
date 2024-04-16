@@ -50,7 +50,7 @@ category: Other
 该标准由 International Organization for Standardization 国际标准化组织于1978年首次公布。
 
 Currencies are represented both numerically and alphabetically, using either three digits or three letters.
-币种以 3 位数字或 3 位字母，可以同时用数字或字符形式表示。
+币种以3位数字或3位字母，可以同时用数字或字符形式表示。
 
 [ISO 4217 CODES完整版](https://www.currency-iso.org/dam/downloads/lists/list_one.xml){:target="_blank"} 举个例子解读：
 

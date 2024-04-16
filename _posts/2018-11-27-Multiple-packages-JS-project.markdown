@@ -13,7 +13,7 @@ category: JavaScript
 
 命名：`@somescope/somepackagename`，不能以 `.` 或 `_` 开头。
 
-作用：奖相关的包集中管理。每一个npm的用户或organization都有自己的 scope。
+作用：将相关的包集中管理。每一个npm的用户或organization都有自己的 scope。
 
 安装：`npm install @myorg/mypackage`
 

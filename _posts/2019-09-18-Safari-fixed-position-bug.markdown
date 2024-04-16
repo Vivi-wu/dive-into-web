@@ -1,17 +1,15 @@
 ---
-title:  "阻止蒙版浮层底部内容随页面滚动"
+title:  "Safari 滚动及相关兼容性问题"
 category: JavaScript
 ---
 
-Safari fixed定位的滚动穿透问题：
+## fixed定位在 Safari 中滚动穿透问题
 
 `Element.scrollTop` 属性可以**获取**或**设置**一个元素的内容垂直滚动的像素数。
 
 https://segmentfault.com/a/1190000012313337
-pc端通常用方案一。
-在body元素上toggle _overflow:hidden_ 即可。
 
-手机端在iPhone Safari上无效。
+pc端通常用方案一：在body元素上toggle _overflow:hidden_ 即可。手机端在iPhone Safari上无效。
 
 亲测方法三有效。
 
@@ -77,6 +75,16 @@ useEffect(() => {
 
 window.getComputedStyle(document.body).scrollBehavior，mac Chrome 得到值为 auto，Safari 则为 undefined
 
+## iOS15 兼容性问题
+
+在iOS 15之前 Safari 滚动网页有2种情况：
+- 上方网址栏、下方工具栏同时显示
+- 上下方都收起来
+
+现在又多出2种情况，网址栏和工具栏合并
+- 在下方都显示
+- 在下方都收起来
+
 ### iOS 15 fixed定位的元素被浏览器地址栏遮挡
 
 在手机端以侧边推出的形式打开隐藏内容。通常会设置这个元素为 fixed 定位，并置于顶层。
@@ -98,22 +106,14 @@ window.getComputedStyle(document.body).scrollBehavior，mac Chrome 得到值为 
 if (navigator.platform === 'iPhone') document.documentElement.style.setProperty('height', `100vh`);
 ```
 
-## iOS15 兼容性问题
-
-在iOS 15之前 Safari 滚动网页有2种情况：
-- 上方网址栏、下方工具栏同时显示
-- 上下方都收起来
-
-现在又多出2种情况，网址栏和工具栏合并
-- 在下方都显示
-- 在下方都收起来
-
 ## iOS 14以下 fixed、absolute 定位bug
 
 当锚定元素滚动后，fixed 定位的元素位置定位出现不准确/随机位置，absolute 定位的元素仍然停留在原地。
 
 解决：
 ```css
-// 在 fixed、absolute 定位元素上添加以下代码
-transform: translate3d(0,0,0);
+/* 在 fixed、absolute 定位元素上添加以下代码*/
+.fixed-element {
+  transform: translate3d(0,0,0);
+}
 ```

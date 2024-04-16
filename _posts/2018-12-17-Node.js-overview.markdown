@@ -37,16 +37,6 @@ Node.js不断执行响应事件的JavaScript函数，直到没有任何响应事
 
 通过调用 `process.nextTick()` 可以在下一次事件响应中执行相应代码。
 
-```bash
-> process.platform
-'win32'
-> process.arch
-'x64'
-> process.version
-'v12.14.0'
-
-```
-
 ## 模块
 
 在Node环境中，一个.js文件就称之为一个模块（module）。使用模块的好处：提高了代码的可维护性，避免函数名和变量名冲突。
@@ -79,7 +69,17 @@ Node.js内置的常用模块就是为了实现服务器程序的基本功能：�
 
 JavaScript有且仅有一个全局对象，在Node.js环境中，这个对象叫 `global`.
 
-`process` 表示当前Node.js进程：可以用来查看当前系统信息，node版本
+`process` 表示当前Node.js进程：可以用来查看当前系统信息，node版本。
+
+```bash
+> process.platform
+'win32'
+> process.arch
+'x64'
+> process.version
+'v12.14.0'
+
+```
 
 ### fs
 
@@ -117,10 +117,9 @@ Node.js标准的回调函数：第一个参数代表错误信息，第二个参�
 
 当正常读取时，err 参数为 `null`，data 参数为读取到的String。当读取发生错误时，err 参数代表一个错误对象，data 为 `undefined`.
 
+当读取二进制文件时，不传入文件编码（第二个参数）时，回调函数的 data 参数将返回一个 Buffer 对象。
 
-当读取二进制文件时，不传入文件编码（第二个参数）时，回调函数的 data 参数将返回一个 Buffer 对象。 Node.js 提供了Buffer对象和String互相转换的方法。
-
-Buffer对象可以和String作转换，
+Node.js 提供了Buffer对象和String互相转换的方法。
 
 #### 异步写入文件
 
@@ -141,7 +140,7 @@ fs.writeFile('./result.json', JSON.stringify(result), (err) => {
 });
 ```
 
-第二个参数表示传入的数据, 如果其类型为 String，默认按 UTF-8 编码写入文本文件;如果传入的参数是 Buffer，则写入的是二进制文件.
+第二个参数表示传入的数据, 如果其类型为 String，默认按 UTF-8 编码写入文本文件；如果传入的参数是 Buffer，则写入的是二进制文件.
 
 ### stream
 
@@ -216,7 +215,7 @@ console.log(hash.digest('hex')); // 7e1977739c748beac0c0fd14fd26a544
 
 ## web开发框架
 
-Express 是第一代Node.js web框架，基于ES5的语法，通过回调实现异步代码。Express团队基于ES6重新编写了下一代框架，即koa1.目前，该团队已基于ES7编写了koa2，完全使用 Promise 配合 async 来实现异步。
+Express 是第一代Node.js web框架，基于ES5的语法，通过回调实现异步代码。Express团队基于ES6重新编写了下一代框架，即koa1。目前，该团队已基于ES7编写了koa2，完全使用 Promise 配合 async 来实现异步。
 
 ### koa2
 
@@ -265,7 +264,6 @@ app.use(async (ctx, next) => {
 数据库每一行数据都可以用一个JavaScript对象表示，这就是传说中的ORM技术：Object-Relational Mapping，把关系数据库的表结构映射到对象上。
 
 Sequelize是Node.js的ORM框架
-
 
 ## 实战
 
