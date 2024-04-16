@@ -1,22 +1,18 @@
 ---
-title:  "Front End Interview"
-category: Other
+title:  "JavaScript模块化"
+category: JavaScript
 ---
-面试知识点总结。
+将 JS 分成独立的模块，在需要时引入。
 
-## 模块化
+注意，模块的功能被引入单一脚本的作用域，它们非全局作用域可见。
 
-将 JS 分成独立的模块，在需要时引入。注意，模块的功能被引入单一脚本的作用域，它们非全局作用域可见
-
-### CommonJS（Node.js）
-
-### RequireJS（基于AMD模块系统）
-
-### ES的 Modules
+## ES Modules
 
 现代浏览器原生支持模块功能。一个js文件即一个 module。
 
 在想要导出模块 item 前加 `export`，通过 `import` 语句在 `{}` 中以逗号分隔引入需要的功能。
+
+<!--more-->
 
 通过以下方式在 html 中引入模块文件。
 ```html
@@ -26,9 +22,8 @@ category: Other
 + top-level作用域独立同样适用于 `<script type="module">`
 + modules 自动使用 strict mode
 + 无需在 `<script>` 上加 _defer_ 属性，modules 执行是自动 deferred 推迟的。（即不 block HTML processing，与其他资源同时加载，在整个 page is loaded 后，根据 script 标签书写顺序执行
-</script>
 + Module 代码只 executed 一次，Exports 也只创建一次 shared between importers.实践：在第一个 import 处 configure 模块（设置属性），在其他 imports 处共享此设置。
-+ top-level 模块代码常用于 初始化、创建内部数据结构
++ top-level 模块代码常用于初始化、创建内部数据结构
 + 每个 module 只能有一个 default 导出
 
 ```js
@@ -76,15 +71,7 @@ export default await colors;
 
 + 模块内部 `this` 是 undefined
 
-## 网络
 
-Http协议，h2，https，websocket
+## CommonJS（Node.js）
 
-### OSI网络分层
-
-https://www.huaweicloud.com/articles/7a131ec5aab5d8e9e178f9c03dc478d1.html
-
-## 算法
-
-https://leetcode-cn.com/problems/count-primes/solution/ji-shu-zhi-shu-by-leetcode-solution/
-
+## RequireJS（基于AMD模块系统）

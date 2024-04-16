@@ -4,14 +4,15 @@ category: Other
 ---
 GraphQL是一种API语言。用一句话描述它：只请求需要的，并确切获得所需的。
 
-语法学习[官方文档](https://graphql.org/learn/)
+语法学习：[官方文档](https://graphql.org/learn/)
 
 ## Overview
 
-API调用最常见的情况：查询和修改。在RESTful风格的API中我们常用get方法查询数据，用post、put、delete方法修改数据。而在GraphQL里，对应的方法是query和mutation。
+API调用最常见的情况：查询和修改。在RESTful风格的API中我们常用get方法查询数据，用post、put、delete方法修改数据。而在GraphQL里，对应的方法是 query 和 mutation。
 
 使用GraphQL API的好处：前端可以在一个请求中执行多个查询。它使用 types 确保应用仅获取可能数据，并提供清晰有用的错误，同时避免编写手动解析代码。
 
+<!--more-->
 Shopify同时支持RESTful API和GraphQL API。在为Shopify开发app时，官方鼓励使用GraphQL API。此外，通过独立站店铺内安装的GraphQL app，前端可以方便地排查线上数据问题。
 
 ### 简单的使用技巧
@@ -21,8 +22,7 @@ Shopify同时支持RESTful API和GraphQL API。在为Shopify开发app时，官�
 
 ### 运行示例代码
 
-你需要注册Shopify开发者账号，开通development store，导入一些商品数据，安装 Shopify GraphiQL App https://shopify-graphiql-app.shopifycloud.com/
-这些都是免费的。
+你需要注册Shopify开发者账号，开通development store，导入一些商品数据，安装 Shopify GraphiQL App https://shopify-graphiql-app.shopifycloud.com/。这些都是免费的。
 
 ## 以Shopify API为例
 

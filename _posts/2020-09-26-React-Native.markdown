@@ -2,7 +2,7 @@
 title:  "React Native开发"
 category: JavaScript
 ---
-
+一些开发经验：
 1.代码修改完，在simulator模拟器中 cmd + R 刷新，才能看到代码生效
 2.模拟器里开启 Remote JS Debugging，在默认浏览器里新开tab（React Native Debugger），在开发者工具里就可以看到 console 输出了
 3.使用 xcode 打开 ios 项目，等待扫描项目文件结束（时间长短与项目代码量有关）选择一个模拟器。在 RN 项目根目录下，新建 ios 文件夹，将 ios 项目代码移动到此文件夹中。启动 RN 项目，xcode 中点运行，将自动打开模拟器中的 app
@@ -24,7 +24,7 @@ brew install cocoapods
 
 进入项目目录：
 
-1. 启动 Metro，类似 webpack，先 resolution 解析模块引用依赖，与 transformation（将模块转换成 RN 可读的格式） 同时进行，当所有模块的转换结束，对 它们进行 serialization，生成一个或多个 js bundles。
+1. 启动 Metro，类似 webpack，先 resolution 解析模块引用依赖，与 transformation（将模块转换成 RN 可读的格式）同时进行，当所有模块的转换结束，对它们进行 serialization，生成一个或多个 js bundles。
 
     npx react-native start
 
@@ -34,7 +34,7 @@ brew install cocoapods
 
 ## 官方文档学习笔记
 
-RN 在 0.58 版本以后已经支持 React HOOK，因此建议新的组件都写成 function components
+RN 在 0.58 版本以后已经支持 React HOOK，因此建议新的组件都写成 function components。
 
 在原生应用开发中，_view_ 是基本的 UI 构建模块。RN 的 [core components](https://reactnative.dev/docs/components-and-apis) 包含了一些重要的开箱即用的原生组件。
 
@@ -114,10 +114,10 @@ RN 提供 Fetch API（有一些已知的问题），也内置 XMLHttpRequest API
 
 RN 支持 WebSocket。
 
-iOS 默认会 block 没有通过 SSL 加密的请求，如果要请求 http 的链接，需要添加一个 App Transport Security exception
+iOS 默认会 block 没有通过 SSL 加密的请求，如果要请求 http 的链接，需要添加一个 App Transport Security exception。
 
 ## 安全
 
 Deep links 不安全，永远不要用它发送任何敏感信息。
 
-在 iOS 上使用 universal links 可以安全地链接 app 的内容
+在 iOS 上使用 universal links 可以安全地链接 app 的内容。

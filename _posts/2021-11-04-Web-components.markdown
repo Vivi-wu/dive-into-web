@@ -24,7 +24,7 @@ class WordCount extends HTMLParagraphElement {
 customElements.define('word-count', WordCount, { extends: 'p' });
 ```
 
-web文档使用 `CustomElementRegistry` object 为页面注册自定义元素。其 `define()` 方法入参依次为元素的名称（必须为 kebab-case，不能是single word）、class object（使用标准 ES2015 class语法，定义元素的行为）、可选项（包含属性 extends，表示元素继承自哪个 built-in element）。
+web文档使用 `CustomElementRegistry` object 为页面注册自定义元素。其 `define()` 方法入参依次为元素的名称（必须为 kebab-case，不能是single word）、class object（使用标准ES2015 class语法，定义元素的行为）、可选项（包含属性 extends，表示元素继承自哪个 built-in element）。
 
 - class里可以定义特殊的lifecycle callback，在元素的生命周期特定时刻运行
 - 有两种类型的自定义元素：Autonomous 和 Customized built-in。前者不继承自任何标准的HTML元素，用法 `<popup-info>`。后者在基础元素上通过 _is_ 属性指定元素名称 `<p is="word-count">`

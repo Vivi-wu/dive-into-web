@@ -1,12 +1,10 @@
 ---
-title:  "TypeScript学习"
+title:  "TypeScript知识点"
 category: JavaScript
 ---
 官网[get started](https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html)
 
-Detecting errors in code without running it is referred to as static checking. Determining what’s an error and what’s not based on the kinds of values being operated on is known as static type checking.
-
-在不运行代码的情况下检测代码中的错误称为**静态检查**。根据要操作的值的类型来确定是什么错误和什么不是错误，称为**静态类型检查**。
+在不运行代码的情况下检测代码中的错误，称为**静态检查**。根据要操作的值的类型，来确定是什么错误和什么不是错误，称为**静态类型检查**。
 
 总结：TypeScript是静态类型检查器。
 
@@ -15,7 +13,9 @@ Detecting errors in code without running it is referred to as static checking. D
 + TS是JS的超集，因此的任何可执行的JS语句都是合法的TS。
 + TS不会改变JS代码的runtime行为/表现，这个是TS的一个foundational promise
 
-有两种语法构建TS的类型：_interface_ 和 _type_。建议使用前者，只在特殊类型使用后者（如：由简单类型组合创建复杂的类型）
+有两种语法构建TS的类型：_interface_ 和 _type_。建议使用前者，只在特殊类型使用后者（如：由简单类型组合创建复杂的类型）。
+
+同名的 interface 声明会合并，而 type 不允许重名。
 
 ## 用法
 
@@ -127,7 +127,7 @@ rx.y = 'world'; // Cannot assign to 'y' because it is a read-only property
 
 这个类型很有意思，可以给数字型值提供友好的名称。
 
-枚举类型值默认从 0 开始，可以手动设置其成员所代表的数值
+枚举类型值默认从 0 开始，可以手动设置其成员所代表的数值。
 
 ```ts
 enum Color {

@@ -12,7 +12,7 @@ gh-pages 从今年开始推上去的博文都没有自动 deploy，github 提示
 <!--more-->
 ## 升级 Ruby
 
-Mac OS现在内置 ruby，查版本：
+Mac OS 现在内置 ruby，查版本：
 ruby -v
 
 ```shell
@@ -43,7 +43,7 @@ For compilers to find ruby you may need to set:
   export CPPFLAGS="-I/usr/local/opt/ruby/include"
 ```
 
-大概意思是说因为Mac OS已经装了一个版本的 ruby，使用 brew 安装的 ruby 放到了别的目录。运行 ruby -v 可以看到显示还是刚才的版本。
+大概意思是说因为 Mac OS 已经装了一个版本的 ruby，使用 brew 安装的 ruby 放到了别的目录。运行 ruby -v 可以看到显示还是刚才的版本。
 
 按照提示在shell里运行
 

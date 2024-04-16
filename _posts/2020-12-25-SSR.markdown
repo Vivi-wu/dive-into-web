@@ -6,6 +6,8 @@ category: JavaScript
 
 同构模式下，开发者仅需关注业务本身。
 
+但这套方案最终由于原开发者离职，页面性能提升有限，项目维护和迁移困难，存在bug隐患等诸多因素被放弃。
+
 一些注意事项：
 - 浏览器里才可用的常量：window、document等
 - http数据请求同时支持server、client端

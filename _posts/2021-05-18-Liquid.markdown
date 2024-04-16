@@ -1,5 +1,5 @@
 ---
-title:  "Liquid"
+title:  "(Shopify) Liquid"
 category: Other
 ---
 {% raw %}
@@ -7,7 +7,7 @@ category: Other
 
 [Liquid](https://shopify.github.io/liquid/) 由 Shopify 创建的开源的模版语言，是 Shopify theme 的基石。[Shopify Liquid文档](https://shopify.dev/docs/themes/liquid/reference)，包含一些内置的对象，可用于读取店铺的数据。
 
-对了，这个博客用 Jekyll 生成页面，也使用 Liquid 作为其模版语言。
+对了，这个博客是用 Jekyll 生成页面，也使用 Liquid 作为其模版语言。
 
 <!--more-->
 
