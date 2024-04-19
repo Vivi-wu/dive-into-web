@@ -6,9 +6,7 @@ category: HTML
 
 Headings are defined with the `<h1>` (the most important heading) to `<h6>` (the least important) heading tags.
 
-**Note**：不要使用heading来实现文本字体的**加粗**或<span style="font-size:large;">加大</span>效果。
-
-因为<span class="t-blue">搜索引擎使用 heading 来索引网页的结构和内容</span>。
+**注意**：不要使用heading来实现文本字体的**加粗**或<span style="font-size:large;">加大</span>效果。因为搜索引擎使用 heading 来索引网页的结构和内容。
 
 <!--more-->
 

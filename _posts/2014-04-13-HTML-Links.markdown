@@ -12,15 +12,15 @@ The HTML `<a>` tag defines a hyperlink that you can click on to jump to another 
 
 + The "Link text" is the visible part and doesn't have to be text.
 标签 `<a>` 的内容也可以是**图片**或者**其他HTML元素**，只要用 `<a>` 标签将那个元素包围住。
-+ <span class="t-blue">记得在子文件索引后加一个 **trailing slash** 结尾斜杠</span>。否则可能会向服务器发送两个request。Many servers will automatically add a trailing slash to the address, and then create a new request.
++ 记得在子文件索引后加一个 **trailing slash** 结尾斜杠，否则可能会向服务器发送两个request。Many servers will automatically add a trailing slash to the address, and then create a new request.
 
 <!--more-->
 
 #### URL
 
-绝对 URL (full web address）, 如: `http://www.w3schools.com/scripts/example.js`。
+绝对 URL (full web address）, 如: `https://www.w3schools.com/scripts/example.js`。
 
-相对 URL（local link） (指向站点内的文件) (without http://www....)，如：`/scripts/example.js`。
+相对 URL（local link） (指向站点内的文件) (without https://www....)，如：`/scripts/example.js`。
 
 ### Links - Colors
 
@@ -35,13 +35,15 @@ The HTML `<a>` tag defines a hyperlink that you can click on to jump to another 
 The most important attribute of the `<a>` element is the href attribute which specifies the destination addresse. 
 属性 _href_ 指定了一个超级链接的目的地.
 
-常用对例子，创建一个 email 链接:
+创建一个 email 链接:
 
-    <a href="mailto:xxx@yyy">  
+```html
+<a href="mailto:xxx@yyy">  
+```
 
 ### The _target_ Attribute
 
-The target attribute specifies where to open the linked document. 属性 _target_ 指定在哪里打开所链接的文件。该特性不同取值的表现如下表所示：
+属性 _target_ 指定在哪里打开所链接的文件。该特性不同取值的表现如下表所示：
 
 <table>
   <tbody>
@@ -68,13 +70,16 @@ The target attribute specifies where to open the linked document. 属性 _target
 在HTML文件内创建书签 to allow readers jump to specific parts of a web page.
 
 首先在目标元素上添加 _id_ 特性，
-
-    <a id="tips">Useful Tips Section</a>
+```html
+<a id="tips">Useful Tips Section</a>
+```
 
 同页内超链接跳转:
-
-    <a href="#tips">Visit the Useful Tips Section</a>
+```html
+<a href="#tips">Visit the Useful Tips Section</a>
+```
 
 链接其他网页中的指定区域:
-
-    <a href="http://blog.csdn.net/html_links.htm#tips">Visit the Useful Tips Section</a>
+```html
+<a href="http://blog.csdn.net/html_links.htm#tips">Visit the Useful Tips Section</a>
+```

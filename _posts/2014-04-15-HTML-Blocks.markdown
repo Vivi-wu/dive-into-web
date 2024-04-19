@@ -2,7 +2,7 @@
 title:  "HTML Block and Inline Element"
 category: HTML
 ---
-Every HTML element has a default _display_ value depending on what type of element it is. 每个HTML元素都有一个默认展示的值，该值取决于它是什么类型的元素。对于大多数元素的默认 _display_ 值是 _block_ or _inline_
+每个HTML元素都有一个默认展示的值，该值取决于它是什么类型的元素。对于大多数元素的默认 _display_ 值是 _block_ or _inline_
 
 ## Block-level Elements
 
