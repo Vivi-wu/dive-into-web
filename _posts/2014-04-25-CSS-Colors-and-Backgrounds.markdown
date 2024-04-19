@@ -57,7 +57,7 @@ CSS 颜色有三种基本表示方法：
       <td>x% y%</td><td>前者是水平位置，后者是垂直位置。左上角取值 <b>0% 0%</b>，右下角 <b>100% 100%</b>。如果只设定了一个值，另一个值默认为 <b>50%</b></td>
     </tr>
     <tr>
-      <td>xpos ypos</td><td>左上角是 <b>0 0</b>，其他非零取值要使用 CSS 单位。<span class="t-blue">如果只设定一个值，另一个值默认为 <b>50%</b>。可以混合 ％ 和带有 CSS 单位的 position 取值</span></td>
+      <td>xpos ypos</td><td>左上角是 <b>0 0</b>，其他非零取值要使用 CSS 单位。如果只设定一个值，另一个值默认为 <b>50%</b>。可以混合 ％ 和带有 CSS 单位的 position 取值</td>
     </tr>
     <tr><td>initial</td><td>设为默认值</td></tr>
     <tr><td>inherit</td><td>继承父元素的取值</td></tr>
@@ -66,9 +66,9 @@ CSS 颜色有三种基本表示方法：
 
 + _background-attachment_，用来<span class="t-blue">指定背景图片是否位置固定，还是与页面剩余部分一起滚动</span>。
 
-    + `scroll`，**默认值**。即背景图默认跟着它的元素相对于 viewport 一起滚动，但是**相对于元素内容（local view）是不动的**。
-    + `fixed`，背景图相对于 viewport 和元素内容（local view）**都是固定的**。
-    + `local`，背景图相对于 viewport 和元素内容（local view）**随元素一起滚动**。
+    + `scroll`，**默认值**。即背景图默认跟着它的元素相对于 viewport 一起滚动，但是**元素内容（local view）滚动，背景图不动**。
+    + `fixed`，背景图相对于 viewport 和元素内容（local view）**都是固定不动的**。
+    + `local`，背景图跟着它的元素相对于 viewport 一起滚动，**元素内容滚动，背景图也一起动**。
 
 ### All in one 简写形式
 
@@ -116,7 +116,7 @@ CSS 颜色有三种基本表示方法：
         <td>x% y%</td><td>以<b>父元素的百分比</b>设定背景图的宽高。如果只设定一个值，另一个值默认为 <b>auto</b>。<br/>如果取值为<span class="t-red">100% 100%</span>图片的宽和高会拉伸以完全覆盖住内容区域，属于<span class="t-red">非等比放大</span>。</td>
       </tr>
       <tr>
-        <td>cover</td><td>尽可能缩放背景图，以<b>完全覆盖住内容区域</b>。背景图的 width 或 height 达到其所在元素宽度的 100%，属于<span class="t-red">等比放大/span>。保持宽高比，图片部分区域可能因此 invisible。</td>
+        <td>cover</td><td>尽可能缩放背景图，以<b>完全覆盖住内容区域</b>。背景图的 width 或 height 达到其所在元素宽度的 100%，属于<span class="t-red">等比放大</span>。保持宽高比，图片部分区域可能因此 invisible。</td>
       </tr>
       <tr>
         <td>contain</td><td>缩放背景图，<b>尽力去填满内容区域</b>。图片的宽和高分别顶住所在元素的边缘。属于<span class="t-red">等比放大</span>。保持宽高比，通常填不满。</td>
