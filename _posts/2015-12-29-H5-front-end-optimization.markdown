@@ -1,6 +1,6 @@
 ---
 title:  "H5手机端优化"
-categories: HTML
+category: Other
 ---
 参考文章<a href="https://github.com/amfe/article/issues/21/">H5性能最佳实践</a>
 
@@ -9,7 +9,8 @@ categories: HTML
 + 减少请求数量
     - 将js，css分别合并成单个资源，Stylesheets放在页面头部（let the browser display whatever content it has as soon as possible，这样使页面看起来loading faster），Scripts放在页面下部（因为脚步加载can block parallel downloads 并行下载）。
     - 使用css，svg，iconfont替换UI图片（在手机端iconfont可以只加载ttf格式的字体文件，如果像PC端照顾到各种浏览器，加载各种format的字体文件，会造成极大的网络带宽消耗）
-+ 避免重定向：页面和静态资源端重定向会造成巨大的性能消耗。Redirects are accomplished using the **301** and **302** status codes。最常见的wasteful redirect而web developers通常没有意识到的就是，在URL末尾少了"/"。
++ 避免重定向：
+    - 页面和静态资源端重定向会造成巨大的性能消耗。最常见的wasteful redirect而web developers通常没有意识到的就是，在URL末尾少了"/"。
 + 图片优化
     - 使用WebP格式图片（目前只有Google Chrome和Opera系下的浏览器原生支持该格式），参考文章<a href="http://isux.tencent.com/introduction-of-webp.html/">WebP探寻之路</a>
     - 在CDN服务上生成各个尺寸和质量的图片，合理使用CDN图片尺寸提升下载图片的性能，减少不必要的内存消耗（不要因为可以设置图片尺寸，就用一个特别大的图，然后实际显示用小的尺寸，每浪费10pixel点宽高都可以造成很大的内存资源浪费）。
@@ -17,9 +18,11 @@ categories: HTML
 + 使用Sprite图片，减少请求数量，方便图标管理。生成紧凑的Sprite图片，减少消耗。
 + 预加载和离线化
 + 渲染优化
-    - 禁止使用GIF图片实现Loading效果（降低CPU消耗）
-+ 域名收敛，控制页面中使用的域名数量，降低DNS域名解析成本。对于小项目，目前都放在同一个域名下。HTTP/1.1 specification suggests that browsers download no more than two components in parallel per hostname.
+    - 避免使用GIF图片实现Loading效果（降低CPU消耗）
++ 域名收敛，控制页面中使用的域名数量，降低DNS域名解析成本。对于小项目，目前都放在同一个域名下。
 + 减少DOM操作。DOM操作会引起浏览器对网页进行重新布局和绘制，这是比JS语句执行慢得多的过程。
+
+<!--more-->
 
 ### 网站性能优化因素
 
@@ -27,7 +30,7 @@ categories: HTML
 
 一个慢的 server 可以通过检查 TTFB（Time to First Byte） 时间，指客户端发送 HTTP GET 请求后，从服务器接收到所请求资源的第一个 byte 所需的时间。正常的 TTFB 在 0.1s 到 0.5s 范围内。
 
-网页延迟可能来自任何数量的来源。
+网页延迟可能来自：
 + DNS lookup time（域名解析查找 IP 地址的时间），在国际网站表现明显，采取缓存可极大地缩减
 + 连接时间（建立 tcp 连接的时间）
 + 等待时间（TTFB）
@@ -38,7 +41,7 @@ categories: HTML
 + memory leaks 内存泄露，加内存，修复代码问题
 + 太多进程/连接，修改代码，让程序在完成后释放连接
 + 外部资源延迟，远程加载不经常更改的资源（例如第三方库）会导致 DNS 和网络开销，我们并不确定无法控制的服务器的延迟。解决方案：定期在服务器本地缓存资源，并在本地提供服务。
-+ 低效的 SQL 查询，
++ 低效的 SQL 查询
 + 缓慢的数据库调用，每个插件都可能调用数据库，解决：禁用不必要的插件
 + 服务器资源不足，内存不足，带宽上限或磁盘空间有限，会导致分页和较差的服务器响应时间。解决方案：定位瓶颈，并减少资源使用或增加资源
 + 重载的共享服务器，一些托管公司在同一个共享服务器上放了太多的站点。一个负载过重的站点可能会降低托管在该站点上的所有其他站点的速度。解决：移至负载较轻的共享服务器或具有完全控制权的专用服务器。
