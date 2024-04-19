@@ -10,7 +10,7 @@ The `<form>` element defines an HTML form, 该元素定义了一个HTML表单，
 
 该特性定义了当表单被提交后要执行的动作。通常表单被提交到服务器端的一个带有处理脚本的网页上（称为form-handler）。要提交表单，通常使用一个 submit 按钮。
 
-如果该特性 omitted 缺省，则动作被指定为当前页面 is set to the current page。
+如果该特性 omitted 缺省，则动作 is set to the current page。
 
 ### The _method_ Attribute
 
@@ -18,13 +18,13 @@ The `<form>` element defines an HTML form, 该元素定义了一个HTML表单，
 
     <form action="action_page.php" method="GET">
 
-The **default method** is **GET**.
+默认是 **GET**.
 
 <!--more-->
 
 ### 什么时候使用 GET 方法呢？
 
-If the form submission is passive (like a search engine query 搜索引擎查询), 且 without sensitive information.
+If the form submission is passive (如：搜索引擎查询), 且 without sensitive information.
 
 使用 GET 方法，表单的数据将会在URL上可见。
 
@@ -32,7 +32,7 @@ If the form submission is passive (like a search engine query 搜索引擎查询
 
 这种方适合小量数据提交。
 
-Size limitation is set in your browser(不同浏览器max length不同，2KB-8KB)
+Size limitation is set in your browser(不同浏览器max length不同，2KB-8KB)。
 
 ### 什么时候用 POST 方法呢？
 
@@ -42,11 +42,11 @@ Size limitation is set in your browser(不同浏览器max length不同，2KB-8KB
 
 GET **只接受 ASCII 字符**（参看 HTML-Entities-Charset-URL-Encode 章节），为什么呢？因为 GET 从 URL 的 query string 里获取参数，而 URL 是 HTTP 的一个首部，一定是 ASCII 字符的。如果 GET 请求中包含非 ASCII 字符，在发送请求前使用 URL 编码方法对其转码。
 
-POST 不限制，因为数据是 HTTP 的实体，且使用 MIME（Multipurpose Internet Mail Extensions 多用途互联网邮件扩展）可传输非 ASCII 字符
+POST 不限制，因为数据是 HTTP 的实体，且使用 MIME（Multipurpose Internet Mail Extensions 多用途互联网邮件扩展）可传输非 ASCII 字符。
 
 ## The _name_ Attribute
 
-To be submitted correctly, each input field **must have** a name attribute. 为了正确地提交数据，表单里每一个 输入域都必须包含 _name_ 特性。
+为了正确地提交数据，表单里每一个 输入域都**必须包含** _name_ 特性。
 
 注意：<span class="t-red">没有设定 _name_ 特性的 input field 的值将不被提交</span>。
 
@@ -150,7 +150,7 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
 
 注意：
 
-+ Safari 和 IE9 之前版本目前不支持这个元素
++ IE9 之前版本目前不支持这个元素
 + `<input>` 的 _list_ 特性值必须指向 `<datalist>` 的 _id_ 特性（保持一致）。
 
 ## HTML5 `<output>` Element
@@ -200,10 +200,10 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
 4. 指定表单里某个输入域获取光标焦点 `form['myName'].focus()`，采用的是指定元素获得焦点的方法 `HTMLElement.focus()`
 5. 输入框的 input 事件**实时**反应输入值，而 change 事件只有在**光标再次失去焦点时**才反应输入值
 6. 非 input 元素如果想触发 focus 事件，必须指定 _tabindex_ 属性，即该元素支持使用 keyboard 进行切换
-7. 横向表单：采用label、input为一个form-group（通过 col-* 指定 width）。单行表单：label宽不固定；多行表单：label和输入框分行显示。
-8. 表单提交时，判断输入项是否有error并拦截（通过标识或状态，避免重复判断），用户可能不改错直接提交。
+7. 横向表单：采用label、input为一个form-group（通过 col-* 指定 width）。单行表单：label宽不固定；多行表单：label和输入框分行显示
+8. 表单提交时，判断输入项是否有error并拦截（通过标识或状态，避免重复判断），因为用户可能不改错直接提交
 9. 键盘事件只能由 input、textarea，等任何拥有 _contentEditable_ 属性，或者 tabindex='-1' 的元素
-10. 针对编辑负责数据，建议一个 field 修改完失焦就提交server保存
+10. 针对编辑复杂数据，建议一个 field 修改完，失焦即提交server保存
 
 ## submit Event
 
@@ -261,4 +261,8 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
 其他：
 
 + 页面首次渲染完时，通过 js focus 到输入框没有效果，这是 Safari 设计如此。切换应用重新回到浏览器页面自动 focus 可生效
-+ 隐藏 Chrome 浏览器默认 cancel 按钮样式，设置 `input[type="search"]::-webkit-search-cancel-button{display: none;}`
++ 隐藏 Chrome 浏览器默认 cancel 按钮样式，设置如下：
+
+    ```css
+    input[type="search"]::-webkit-search-cancel-button{display: none;}
+    ```
