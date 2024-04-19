@@ -26,7 +26,7 @@ category: CSS
 
 1. `<a>测试</a>` H5中，缺省 _href_ 特性时会创建一个 link 的 placeholder，看起来与正常的超链接一样，仍然会**响应点击事件处理函数**（如果有自定义的），但页面**不会跳转**。
 2. 注意： 如果写了 href 特性，即使值为空，点击仍会 reload 当前页。
-3. 设置标签样式 `pointer-events: none;` 能禁止标签的鼠标点击动作。但 IE<11 不支持，keyboard 用户仍然可以 ENTER 触发链接。想都禁止，只能借助JS了。
+3. 设置标签样式 `pointer-events: none;` 能禁止标签的鼠标点击动作。但 IE<11 不支持，keyboard 用户仍然可以 ENTER 触发链接。都禁止，只能借助JS了。
 4. _disabled_ 特性在 link 标签上无效，可以使用 `aria-disabled="true"` 告诉屏幕阅读器该标签是 disabled。
 
 ```css
@@ -39,7 +39,7 @@ category: CSS
 
 ## CSS Lists
 
-CSS list 属性可以用来给有序 ordered 列表 和无序 unordered 列表设置不同的列表元素标记 markers，使用图片作为列表元素标记，给列表和列表元素添加背景色。
+_list_ 可以用来给有序 ordered 列表 和无序 unordered 列表设置不同的列表元素标记 markers，使用图片作为列表元素标记，给列表和列表元素添加背景色。
 
 ### List item marker
 
@@ -64,17 +64,17 @@ CSS list 属性可以用来给有序 ordered 列表 和无序 unordered 列表�
 + upper-latin（同 alpha）
 + upper-roman
 
-注意：<span class="t-blue">_list-style-type_ 只用于列表父元素 `<ul>`, `<ol>` ，而**不是**列表子元素 `<li>`</span>
+注意：_list-style-type_ 只用于列表父元素 `<ul>`, `<ol>` ，而**不是**列表子元素 `<li>`。
 
 ### 使用图片作为列表元素标记
 
-要使用 _list-style-image_ 属性，默认值为 `none`。只要将属性值设为图片 url 即可。
+_list-style-image_ 属性，默认值为 `none`。只要将属性值设为图片 url 即可。
 
-注意：即使使用图片作为标记，也要设定 _list-style-type_ 属性，这样在图片不可用的情况下也有 fallback。
+注意：使用图片作为标记，也要设定 _list-style-type_ 属性，这样在图片不可用的情况下也有 fallback。
 
 ### 指定 list item marker 的位置
 
-使用 _list-sytle-position_ 属性来指定**列表元素标记的位置是出现在内容流的里面，还是外面**。具体见下面的例子。
+使用 _list-sytle-position_ 属性来指定列表元素**标记的位置是出现在内容流的里面，还是外面**。具体见下面的例子。
 
 `outside`：（默认值）
 
@@ -98,17 +98,13 @@ _list-style_ 属性是以上三个属性的简写形式。需要遵循的顺序�
 
 ## CSS Tables
 
-使用 CSS 可以极大程度上改善 HTML 表格的样式。
-
 ### Table Borders
 
-给表格设置边框的时候，注意：both `<table>` and the `<th>` and `<td>` elements have **separate borders**. 表格和单元格都有各自独立的边框。
+给表格设置边框的时候，注意 `<table>`、`<th>` 和 `<td>` 的边框是**separate borders**。
 
 在 `<table>` 元素上，使用 _border-collapse_ 属性设置表格的边框<span class="t-red">是否要合并成一个单边边框</span>。
 
-**默认值**是 `separate`，这样 _border-spacing_ 和 _empty-cells_ 属性就**不能被忽略**。
-
-当取值为 `collapse` 时，表格边框就会合并成 a single border。
+**默认值**是 `separate`。当取值为 `collapse` 时，表格边框就会合并成 a single border。
 
 **独立边框模式下**，以下两个属性都是只在 `<table>` 元素上设置。
 
@@ -126,7 +122,7 @@ _list-style_ 属性是以上三个属性的简写形式。需要遵循的顺序�
 
 默认地，在水平方向上，`<th>` 表头单元格里的元素**中心**对齐，`<td>` 普通单元格里的元素为**左**对齐。
 
-而竖直方向上，单元格的元素是居中 middle 对齐。
+而竖直方向上，单元格的元素是居中对齐。
 
 ### Table padding
 

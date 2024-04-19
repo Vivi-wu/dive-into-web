@@ -54,7 +54,7 @@ p {
 4. 跟 sass 等预处理器的区别：
 
 + css variables只能定义**属性值**
-+ 变量值不能直接进行math运输，需要借助 `calc()` 函数
++ 变量值不能直接进行 math 运算，需要借助 `calc()` 函数
 
 ```css
 .margin {

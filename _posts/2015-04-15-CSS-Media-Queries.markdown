@@ -4,7 +4,7 @@ category: CSS
 ---
 本文为 <a href="https://www.w3.org/TR/css3-mediaqueries/" target="_blank">W3C Recommendation Media Queries</a> 文档阅读笔记。
 
-A media query consists of a **media type** and **zero or more expressions** that check for the conditions of particular media features. 一个媒体查询由一种媒体类型和 0 个或多个表达式（用于检查某种媒体特征的条件）构成。
+一个媒体查询由一种 **media type** 和 0 个或多个 **expressions**（用于检查某种媒体特征的条件）构成。
 
 通过使用媒体查询，可以为特定范围的输出设备量身定制样式，而不需要改变其内容。
  
@@ -50,7 +50,7 @@ A media query consists of a **media type** and **zero or more expressions** that
 
 ### Error Handling
 
-1. Unknown media type 未知的媒体类型，或者规定的媒体类型与设备不匹配
+1. Unknown media type，或者规定的媒体类型与设备不匹配
 2. Unknown media features 未知的媒体特征，比如：
 
     ```css
@@ -74,7 +74,7 @@ A media query consists of a **media type** and **zero or more expressions** that
     @media test;,all { body { background:lime } } /* semicolon terminates the @media rule in CSS */
     ```
 
-Media features 的类型和取值规范参阅文档，因为比较多，就不搬了。
+Media features 的类型和取值规范参阅文档，比较多，就不搬了。
 
 除了使用 `@media` 引入媒体查询，还可以跟 HTML, XHTML, XML 以及 `@import` 一起用：
 

@@ -4,13 +4,13 @@ category: CSS
 ---
 CSS 有一些不同的单位用来描述一个长度 length。许多 CSS 属性可取值 length（即一个浮点数字+css unit），如：width, margin, padding, font-size, border-width, 等。
 
-<span class="t-red">表示长度的数字和单位之间**不能**有 whitespace 空格</span>。
+表示长度的数字和单位之间**不能**有 whitespace 空格。
 
-但如果 value 值为 0，单位可以**缺省**。 
+如果 value 值为 0，单位可以**缺省**。 
 
 对于一些 CSS 属性，length 允许负值。
 
-有两种类型的 length 单位，相对的和绝对的。
+CSS 有两种类型的 length 单位，相对的和绝对的。
 
 <!--more-->
 
@@ -36,7 +36,7 @@ em 和 rem 长度单位常用于创建可缩放的布局。
 
 ### vm／vh 
 
-vn 是 CSS3 新增的单位，代表 viewport 宽的 `1%`。那么 `100vm` 就表示整个 viewport 宽度。视图高度的百分之几则用 `vh` 表示。
+vm 是 CSS3 新增的单位，代表 viewport 宽的 `1%`。那么 `100vm` 就表示整个 viewport 宽度。视图高度的百分之几则用 `vh` 表示。
 
 ## Absolute Lengths  
 

@@ -16,7 +16,7 @@ category: CSS
 
 2. 设 _max-width_ 属性值为 `100%`
   
-    这样如果父元素的容器宽度小于图片原始宽度，图片会相应地缩小显示。若父元素容器宽度（远）大于图片宽度，图片至多按原始尺寸显示，而不会无限放大。
+    这样如果父元素的容器宽度小于图片原始宽度，图片会相应地缩小显示。若父元素容器宽度（远）大于图片宽度，图片**至多按原始尺寸显示**，而不会无限放大。
 
 3. 背景图通过设定 _background-size_ 属性，也可以对容器放大和调整尺寸作出响应，参看 CSS Background 章节。
 
@@ -30,7 +30,7 @@ category: CSS
 
 ## 媒体查询
 
-<span class="t-blue">把适用于手机屏幕的 css 代码作为一般情况</span>，而用于大屏幕的 css 代码放在 media queries 媒体查询里，这就是 **mobile first** 的思路。
+把适用于手机屏幕的 css 代码作为一般情况，而用于大屏幕的 css 代码放在 media queries 媒体查询里，这就是 **mobile first** 的思路。
 
 ## Viewport
 
@@ -46,7 +46,7 @@ viewport 是一个网页中用户可以看到的区域。经常看到下面这�
 
 正如猜测的，就目前来说：Without initial scale you get the zooming bug in rotation(and sometimes compounded effects on double rotation) and media queries for the landscape mode being ignored. No such problems occur when the initial scale=1 is added.
 
-## Grid system
+## Grid system 栅格系统
 
 原文地址：[How to build a responsive grid system](https://zellwk.com/blog/responsive-grid-system/)
 
@@ -58,7 +58,7 @@ viewport 是一个网页中用户可以看到的区域。经常看到下面这�
 
 ### 具体步骤
 
-1. 选择一种技术实现你的栅格：CSS Grid（目前主流浏览器都不支持），Flexbox，或者最简单的 floats
+1. 选择一种技术实现你的栅格：CSS Grid，Flexbox，或者最简单的 floats
 2. 设置所有元素的盒模型为边框盒：
 
     *, *:before, *:after { box-sizing: inherit; }

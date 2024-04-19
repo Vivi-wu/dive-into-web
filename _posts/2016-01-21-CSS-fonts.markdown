@@ -38,7 +38,7 @@ _font-family_ 属性像一个“后备”系统，拥有一些字体名称。每
 
 对于仿宋、楷体，最好在字号大于 14px 的情况下使用，否则影响清晰度。
 
-<span class="t-blue">目前在 ios、android、winphone，三种手机操作系统中的默认字体都是类似**微软雅黑**的 Sans-serif 无衬线字体。</span>
+目前在 ios、android、winphone，三种手机操作系统中的默认字体都是类似**微软雅黑**的 Sans-serif 无衬线字体。
 
 **注意**: 如果字体集名称多余一个单词，则必须用**双引号**括起来。如: "Times New Roman".
 
@@ -108,7 +108,7 @@ _font-variant_ 属性用来设定文本是否以 small-caps 字体输出
 
 <span style="font-variant:small-caps;color:red;background-color:rgb(204,204,255);">Hey we are Small Caps Fonts.</span>
 
-## All properties in one declaration
+## All in one
 
 _font_ 属性用来将所有 font 相关的属性写在一起,  (in order):
 

@@ -2,9 +2,9 @@
 title:  "Keep your footer at the bottom of the page"
 category: CSS
 ---
-项目里遇到的问题，让 footer 总是显示在**页面**最下方。注意，这里讨论的不是让 footer 固定在 viewport（或浏览器窗口）的底部。
+项目里遇到的问题，让 footer 总是显示在**页面**最下方。（这里讨论的不是让 footer 固定在 viewport（或浏览器窗口）的底部）。
 
-假设你还没有对 `<html>`，`<body>`，`<footer>` 这些元素的 _position_ 或 _height_ 属性做任何改动。
+背景：还没有对 `<html>`，`<body>`，`<footer>` 这些元素的 _position_ 或 _height_ 属性做任何改动。
 
 ## 问题描述
 
@@ -28,7 +28,7 @@ category: CSS
       width: 100%;  
     }
 
-然而理想和现实是有差距滴。这样写，可以解决 short page 页脚的问题。
+然而这样写，可以解决 short page 页脚的问题。
 
 对于 long page 乍一看 footer 放置在了浏览器的底部，**遮住了页面靠近浏览器底部的内容**（所以记得给 body 内容区域设置 _padding-bottom_）。当你向下滚动页面时，会看到 footer 一直被定在那个“初始”位置。
 
@@ -43,7 +43,7 @@ category: CSS
 中文翻译重点：
 
 + `<html>` 和 `<body>` 元素是不同的块级元素，是父/子元素的关系
-+ <span class="t-blue">`html` 元素的宽和高由浏览器窗口决定</span>
++ <span class="t-blue">html 元素的宽和高由浏览器窗口决定</span>
 + `<html>` 元素默认 _overflow_ 属性值为 _auto_，当需要时自动出现 scrollbar
 + 大部分浏览器内置的页面边距应用在 `<body>` 的 _margin_ 上，而**不是** `<html>` 的 _padding_
 + 块级元素如果不指定高度，会根据其包裹的内容自动增长高度；如果为其指定高度，接下来发生的事就要取决于 overflow 这个属性的值了。
@@ -83,7 +83,7 @@ category: CSS
 
 这个添加改动对于 long page 是没有明显影响的。
 
-记得**给长页面可视区域父元素设置底部内边距**
+最后，记得**给长页面可视区域父元素设置底部内边距**。
 
 ### Other
 

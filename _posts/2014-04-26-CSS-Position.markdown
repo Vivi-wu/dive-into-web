@@ -2,6 +2,8 @@
 title:  "CSS Position"
 category: CSS
 ---
+## CSS Position
+
 _position_ 属性指定了一个元素放置方法的类型，一共有四种取值：`static`，`relative`，`fixed`，`absolute`。
 
 ## Static Positioning
@@ -16,11 +18,9 @@ HTML 元素总是<span class="t-blue">根据正常的页面流，从上到下，
 
 ## Relative Positioning
 
-元素位置属性值为 `relative` 时，是 <span class="t-blue">relative to its normal position</span> 相对于正常情况下它应该在的位置放置。
+元素位置属性值为 `relative` 时，是相对于正常情况下它应该在的位置放置。
 
-<span class="t-blue">The reserved space for the element is still preserved in the normal flow</span>.
-
-相对放置的元素在正常页面流里**本来占据的空间仍然有效**，即**没有**被从页面流里**剔除**，也不影响布局。
+relative 放置的元素在正常页面流里**本来占据的空间仍然有效**，即**没有**被从页面流里**剔除**，也不影响布局。
 
 <div style="background-color:#FFF1F1;width:20rem;">Box 1 Normal positioning</div>
 <div style="background-color:#bca590;width:20rem;">Box 2 Normal positioning</div>
@@ -31,22 +31,21 @@ HTML 元素总是<span class="t-blue">根据正常的页面流，从上到下，
 
 ## Fixed Positioning
 
-元素位置属性值为 `fixed` 时，是 <span class="t-blue">relative to the viewport</span> 相对于视图浏览器窗口放置的。即使页面滚动，它也待在同样的位置。
+元素位置属性值为 `fixed` 时，是相对于 viewport 浏览器窗口放置的。即使页面滚动，它也待在同样的位置。
 
-拥有固定位置的元素是固定在视窗最大可视范围上，<ins>如果不指定位置 (top, left, right, bottom) 时，元素会固定在原本的位置</ins>(持保留意见)；而指定位置后，就会以视窗最大可视范围的边界为绝对基准点。
+fixed 放置的元素是固定在视窗最大可视范围上，<ins>如果不指定位置 (top, left, right, bottom) 时，元素会固定在原本的位置</ins>(持保留意见)；而指定位置后，就会以视窗最大可视范围的边界为绝对基准点。
 
-Fixed positioned elements are removed from the normal flow. 固定位置的元素被从正常的页面流中**剔除**，文档和其他元素表现得就像这个固定位置的元素不存在一样。
+固定位置的元素被从正常的页面流中**剔除**，文档和其他元素表现得就像这个固定位置的元素不存在一样。
 
 ## Absolute Positioning
 
-元素位置属性值为 `absolute` 是 <span class="t-blue">relative to the nearest positioned ancestor</span>（相对于最近的位置属性值非 static 的祖先元素放置）. If no such element is found, it use the document body `<html>`.
+元素位置属性值为 `absolute` 是相对于最近的位置属性值非 `static` 的祖先元素放置）. 如果不存在这样的祖先元素，it use the document body `<html>`.
 
 绝对放置的元素随页面一起滚动。
 
 ### top, bottom, left, right
 
-Elements can be positioned using the top, bottom, left, and right properties. However, these properties will **not work unless** the position property is set first (as absolute, relative, or fixed, **anything except `static`**).
-元素可以使用上、下、左、右，四个方向的属性来定位，但必须先指定 position 这个性质（即，如果元素的位置属性还是默认值 static，这四个方向性质不会有任何效果）。
+元素可以使用上、下、左、右，四个方向的属性来定位，但必须先指定 position 这个性质（属性不是默认值 static）。
 
 可取的值有：
 
@@ -57,7 +56,7 @@ Elements can be positioned using the top, bottom, left, and right properties. Ho
 方向属性根据 _position_ 的值，又有不同的工作方式：
 
 + 对于 relatiely-positioned 的元素，是根据它正常的位置，来上下左右调整元素。
-+ 对于 <span class="t-red">absolutely positioned elements</span> (_position_ 取值为 `absolute` 或 `fixed`), top 属性表示该元素的上边界高于（取负值）或低于（取正值）其最近的**非静态放置**的祖先元素的上边界。
++ 对于 absolutely positioned 的元素 (_position_ 取值为 `absolute` 或 `fixed`), top 属性表示该元素的上边界高于（取负值）或低于（取正值）其最近的**非静态放置**的祖先元素的上边界。
 
 bottom、left、right 属性同理。
 
@@ -65,15 +64,15 @@ bottom、left、right 属性同理。
 
 当元素被从 normal flow 中删除，他们就可以覆盖其他元素。
 
-_z-index_ 属性指定了 stack order of an element 元素的叠放顺序. 可取值为：
+_z-index_ 属性指定了元素的叠放顺序. 可取值为：
 
 + `auto` 默认值，叠放顺序同它的父元素
 + number，可正 positive 可负 negative。值越大的，放得越靠上面。
 
 注意：
 
-+ 只有设置在非 static 放置 (position as absolute, relative, or fixed, **anything except `static`**) 的元素上才起作用
-+ 如果两个 positioned elements 重叠了，**都没有明确指定 _z-index_** 的值, the element **positioned last** in the HTML code will be **shown on top**. <span class="t-blue">代码位于 HTML 文件后面的元素将显示在上面</span>。
++ _z-index_ 只有设置在非 static 放置 (position 的值是 **anything except `static`**) 的元素上才起作用
++ 如果两个 positioned elements 重叠了，**都没有明确指定 _z-index_** 的值, <span class="t-blue">代码位于 HTML code后面的元素将显示在上面</span>。
 
 ## Clip
 
@@ -81,7 +80,7 @@ _clip_ 使我们可以用一个**矩形框**来剪切一个 absolutely positione
 
 1. 被矩形框框住的区域被保留（visible）。
 2. 从元素的左上角开始剪切。
-3. 如果溢出设为可见，这个属性就无效了。 **not work** if `overflow:visible`.
+3. 如果溢出设为可见（`overflow:visible`），这个属性就无效了。
 
 可取值：
 
