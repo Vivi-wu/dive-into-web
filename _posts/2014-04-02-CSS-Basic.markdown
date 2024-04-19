@@ -105,6 +105,7 @@ _url_ 可以是**字符串**，也可以是 **url()**。
 1. _Browser default_ 浏览器默认样式
 2. _External style_ sheet 和 _Internal style_ sheet (in the head section) 注意：外部样式表和内部样式表在头部书写的顺序也会影响优先级，**写在后面的优先级高**。
 3. _Inline style_
+4. 使用 !important
 
 同一个 HTML 元素应用多个 CSS class 重复定义相同属性时，样式规则写在最后的覆盖前面所有，**与 class 书写顺序无关**。
 

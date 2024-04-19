@@ -63,38 +63,39 @@ Tip: 同样的，可以只针对一条边来一次性设定边框样式，规则
 
 _border-top_, _border-right_, _border-bottom_, _border-left_
 
-### 实例1：画等腰直角三角形
+## 示例
 
-<div style="width:100px;height:50px;border-width:1rem;background-color:pink;border-style:solid;border-color: black gray black gray;margin-bottom:1rem;margin-right:1rem;float:left;"></div>
+1. 画等腰直角三角形
 
-当边框调到很粗的时候，每条边的边框会出现三角形的基本轮廓。因此我们可以借助 CSS border 绘制三角形。
+    <div style="width:100px;height:50px;border-width:1rem;background-color:pink;border-style:solid;border-color: black gray black gray;margin-bottom:1rem;margin-right:1rem;float:left;"></div>
 
-<div style="margin-bottom:1rem">
-<span>上：</span><div style="display:inline-block;width:0;height:0;border-width:20px;border-style:solid;border-color:transparent transparent #363532 transparent;"></div>
-<span>右：</span><div style="display:inline-block;width:0;height:0;border-width:20px;border-style:solid;border-color:transparent transparent transparent #363532;"></div>
-<span>下：</span><div style="display:inline-block;width:0;height:0;border-width:20px;border-style:solid;border-color:#363532 transparent transparent transparent;"></div>
-<span>左：</span><div style="display:inline-block;width:0;height:0;border-width:20px;border-style:solid;border-color:transparent #363532 transparent transparent;"></div>
-</div>
+    当边框调到很粗的时候，每条边的边框会出现三角形的基本轮廓。因此我们可以借助 CSS border 绘制三角形。
+
+    <div style="margin-bottom:1rem">
+    <span>上：</span><div style="display:inline-block;width:0;height:0;border-width:20px;border-style:solid;border-color:transparent transparent #363532 transparent;"></div>
+    <span>右：</span><div style="display:inline-block;width:0;height:0;border-width:20px;border-style:solid;border-color:transparent transparent transparent #363532;"></div>
+    <span>下：</span><div style="display:inline-block;width:0;height:0;border-width:20px;border-style:solid;border-color:#363532 transparent transparent transparent;"></div>
+    <span>左：</span><div style="display:inline-block;width:0;height:0;border-width:20px;border-style:solid;border-color:transparent #363532 transparent transparent;"></div>
+    </div>
 
 
-```css
-div { /* 向上的三角形 */
-  width: 0;
-  height: 0;
-  border-width: 20px;
-  border-style: solid;
-  border-color: transparent transparent #363532 transparent;
-}
-```
+    ```css
+    div { /* 向上的三角形 */
+        width: 0;
+        height: 0;
+        border-width: 20px;
+        border-style: solid;
+        border-color: transparent transparent #363532 transparent;
+    }
+    ```
+2. 画非等腰三角形
 
-### 实例2：画非等腰三角形
+    通过设置元素宽、高为 0，边框样式为 solid，上边框设置一定的宽度和颜色，左右两边设为同尺寸透明边框，可绘制出非直角三角形。
 
-通过设置元素宽、高为 0，边框样式为 solid，上边框设置一定的宽度和颜色，左右两边设为同尺寸透明边框，可绘制出非直角三角形。
+    下面用 CSS 实现一个简单的三步操作进度条：
 
-下面用 CSS 实现一个简单的三步操作进度条：
-
-<p data-height="400" data-theme-id="0" data-slug-hash="GNoXNR" data-default-tab="result" data-user="VivienneWU" data-embed-version="2" data-pen-title="CSS progress bar" class="codepen">See the Pen <a href="http://codepen.io/VivienneWU/pen/GNoXNR/">CSS progress bar</a> by Vivienne (<a href="http://codepen.io/VivienneWU">@VivienneWU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+    <p data-height="400" data-theme-id="0" data-slug-hash="GNoXNR" data-default-tab="result" data-user="VivienneWU" data-embed-version="2" data-pen-title="CSS progress bar" class="codepen">See the Pen <a href="http://codepen.io/VivienneWU/pen/GNoXNR/">CSS progress bar</a> by Vivienne (<a href="http://codepen.io/VivienneWU">@VivienneWU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+    <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
 ## CSS3 Borders 新属性
 
