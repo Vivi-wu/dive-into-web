@@ -16,7 +16,7 @@ CCSS 的基本原则：
 
 + 可重用的 CSS 组件**不是**仅仅存在 DOM 树上某个特殊部分，或者需要配合使用特定的元素类型。
 + 每一个组件应该是隔离的，它不直接改变、依赖其他 CSS 组件。
-+ **隔离比代码重用更重要！**，因为重用可能增加依赖，导致 css 可管理性降低
++ **隔离比代码重用更重要**！因为重用可能增加依赖，导致 css 可管理性降低。
 
 还有一些说得模棱两可，此处省略。
 
@@ -70,7 +70,7 @@ styles
     + `_bootstrap-overrides.scss` 只用来放置**覆盖框架源码的CSS**。
 
 4. 以上没有提到的，任何可重用的 CSS 单元被认为是一个组件，放到 `components/` 目录下。
-5. 有一点很重要，组件里 CSS 类的定义顺序反应了 HTML 的结构。
+5. 组件里 CSS 类的定义顺序反应了 HTML 的结构。
 6. 参考一下 <a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html" target="_blank">Sass guideline</a>。
 
 ## Naming Convention 命名规范
