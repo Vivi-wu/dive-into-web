@@ -43,7 +43,7 @@ _min-*_ 可取的值：
 
 The CSS box model consists of: **margins**, **borders**, **padding**, and the actual **content**.
 
-当我们用 CSS 设定元素的宽和高时，只是设定了 **content area** 内容区域的宽和高. 因此<span class="t-red">在计算元素完整的尺寸时，要加上内边距、边框和外边距</span>。
+当我们用 CSS 设定元素的宽和高时，只是设定了 **content area** 内容区域的宽和高。在计算元素完整的尺寸时，要加上内边距、边框和外边距。
 
 ### CSS Margins
 
@@ -131,19 +131,20 @@ _outline_ 用来设定元素的轮廓——围绕元素所画的线，**outside 
 + outline-style (**required**): `none`
 + outline-color: `invert`
 
-### 实现外边线圆角效果
+### 示例
 
-```css
-input:focus {
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-}
-```
+1. 实现外边线圆角效果
 
-### 清除 input 框聚焦时显示的边框
+    ```css
+    input:focus {
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    }
+    ```
+2. 清除 input 框聚焦时显示的边框
 
-```css
-:focus-visible {
-  outline: none;
-  box-shadow: none;
-}
-```
+    ```css
+    :focus-visible {
+      outline: none;
+      box-shadow: none;
+    }
+    ```
