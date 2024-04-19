@@ -5,7 +5,7 @@ category: CSS
 
 ## CSS Borders
 
-+ _border-style_ 属性指定要显示什么类型的边框。可能的取值:
++ _border-style_ 指定要显示什么类型的边框。可能的取值:
 
     + `none`: 没有边框
     + `dotted`: 小方块（像素点）连成的
@@ -25,7 +25,7 @@ category: CSS
 
 ### 赋值的形式
 
-_border-style_ 可以同时拥有**1**到**4**个值，按照 <span class="t-blue">上 右 下 左 --> 顺时针</span> 赋值。_border-width_ 和 _border-color_ 的赋值同样适用。
+_border-style_ 可以同时拥有**1**到**4**个值，按照 <span class="t-blue">上 右 下 左</span> 顺时针赋值。_border-width_ 和 _border-color_ 的赋值同理。
 
 1. border-style: <span class="t-red">dotted solid double dashed</span>;。效果如下：
 
@@ -43,9 +43,9 @@ _border-style_ 可以同时拥有**1**到**4**个值，按照 <span class="t-blu
 
     <div style="border-style: dotted;border-width: 4px;height: 2rem;max-width: 28rem;"></div>
 
-**注意**: <span class="t-blue">除非先设定 **border-style** 性质，否则任何 border 性质（如：width、color...）都不会产生效果</span>。
+注意: 除非先设定 **border-style**，否则任何 border 性质（如：width、color...）都不会产生效果。
 
-### Individual Sides 单独边框
+### Individual Sides 单个边框
 
 我们可以单独对一条边（top，right，bottom，left）的边框进行设定。
 
@@ -53,23 +53,21 @@ _border-style_ 可以同时拥有**1**到**4**个值，按照 <span class="t-blu
 
 ### All in one 简写形式
 
-可使用 _border_ 属性一次性设定边框四条边的样式，如果有一个值没有设定，也是允许的。但应遵循的顺序如下：
+可使用 _border_ 属性一次性设定四条边的边框样式，如果有一个值没有设定，也是允许的。但应遵循的顺序如下：
 
 + border-width: medium（默认值）
 + border-style (**required**): none（默认值）
 + border-color: 元素的 color 即字体颜色（默认值）
 
-Tip: 同样的，可以只针对一条边来一次性设定边框样式。规则同上。
+Tip: 同样的，可以只针对一条边来一次性设定边框样式，规则同上。
 
 _border-top_, _border-right_, _border-bottom_, _border-left_
 
-### CSS 画等腰直角三角形
+### 实例1：画等腰直角三角形
 
 <div style="width:100px;height:50px;border-width:1rem;background-color:pink;border-style:solid;border-color: black gray black gray;margin-bottom:1rem;margin-right:1rem;float:left;"></div>
 
-当边框调到很粗的时候，每条边的边框会出现三角形的基本轮廓。
-
-<p style="clear:left;">因此我们可以借助 CSS border 绘制三角形。</p>
+当边框调到很粗的时候，每条边的边框会出现三角形的基本轮廓。因此我们可以借助 CSS border 绘制三角形。
 
 <div style="margin-bottom:1rem">
 <span>上：</span><div style="display:inline-block;width:0;height:0;border-width:20px;border-style:solid;border-color:transparent transparent #363532 transparent;"></div>
@@ -89,11 +87,11 @@ div { /* 向上的三角形 */
 }
 ```
 
-### CSS 画非等腰三角形
+### 实例2：画非等腰三角形
 
 通过设置元素宽、高为 0，边框样式为 solid，上边框设置一定的宽度和颜色，左右两边设为同尺寸透明边框，可绘制出非直角三角形。
 
-下面借助 CSS 实现一个简单的三步操作进度条：
+下面用 CSS 实现一个简单的三步操作进度条：
 
 <p data-height="400" data-theme-id="0" data-slug-hash="GNoXNR" data-default-tab="result" data-user="VivienneWU" data-embed-version="2" data-pen-title="CSS progress bar" class="codepen">See the Pen <a href="http://codepen.io/VivienneWU/pen/GNoXNR/">CSS progress bar</a> by Vivienne (<a href="http://codepen.io/VivienneWU">@VivienneWU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
@@ -102,7 +100,7 @@ div { /* 向上的三角形 */
 
 1. _border-radius_ 该属性实际上是 border-**top**-**left**-radius, border-**top**-**right**-radius, border-**bottom**-**right**-radius 和 border-**bottom**-**left**-radius 这四个属性的 all in one 缩写形式。
 
-    通过给 _border-radius_ 属性赋予不同个数的值，来指定盒模型每一个顶点的**圆**角。当取值为：
+    通过给 _border-radius_ 属性赋予不同个数的值，来指定盒模型每一个顶点的**圆角**。当取值为：
 
     + 四个值：左上角、右上角、右下角、左下角
 
@@ -122,9 +120,7 @@ div { /* 向上的三角形 */
 
     该属性还有可选的第二个值，如：`border-radius: 100px/40px`，可得到**椭圆**角。
 
-2. _box-shadow_ 给元素添加水平和（或）竖直方向上的阴影，设定阴影的颜色、模糊效果。Tip: 通过给 _::before_ and _::after_ 伪类添加 shadow，可以实现有趣的效果。
-
-    该属性可以给一个元素添加**一个**或**多个**阴影，使用**逗号**来分隔开每一种阴影效果。
+2. _box-shadow_ 可以给一个元素添加**一个**或**多个**水平和（或）竖直方向上的阴影，使用**逗号**来分隔开每一种阴影效果。Tip: 通过给 _::before_ and _::after_ 伪类添加 shadow，可以实现有趣的效果。
 
     `box-shadow: none|h-shadow v-shadow blur spread color |inset|initial|inherit;`
 
@@ -134,9 +130,9 @@ div { /* 向上的三角形 */
     + blur: 可选的, 模糊的距离
     + spread: 可选的, 阴影的尺寸大小，允许负值
     + color: 可选的, 默认是**黑色**，<span class="t-blue">PC 端 Safari 中，颜色值是 required。如果不指定颜色，将不显示阴影</span>
-    + inset: 可选的, 把默认的 outset 外部阴影显示为 inner shadow，向内的阴影。
+    + inset: 可选的, 把默认的 outset 外部阴影显示为 inner shadow 向内的阴影。
 
-3. _border-image_ 该属性有包含三部分：所需的图片，裁剪图片的位置（将图片分为9部分，像一个井字棋盘，It then places the corners at the corners, and the middle sections are repeated or stretched as you specify.），定义中间部分是否需要重复或拉伸。是以下属性的 all in one 简写形式。
+3. _border-image_ 该属性包含三部分：所需的图片，裁剪图片的位置（将图片分为9部分，像一个井字棋盘，It then places the corners at the corners, and the middle sections are repeated or stretched as you specify.），定义中间部分是否需要重复或拉伸。是以下属性的 all in one 简写形式。
 
     + border-**image-source**
     + border-**image-slice**
@@ -144,8 +140,8 @@ div { /* 向上的三角形 */
     + border-**image-outset** 默认值是 0
     + border-**image-repeat**（可取值 `stretch` **默认值**，`repeat`，`round`，`space`）
 
-    其中，_border-image-repeat_ 取值为 `round` 时，是说图片按照整数的 tiles 重复排列以填充边框区域，如果不满足整数，图片会 rescaled 重新缩放来填充。
+    其中，_border-image-repeat_ 取值为 `round` 时，图片按照整数的 tiles 重复排列以填充边框区域，如果不满足整数，图片会 rescaled 重新缩放来填充。
 
     当取值为 `space` 时，也是要求按整数个 tiles 重复排列来填充，如果不满足，剩余的空间将平均分配到 tiles 的周围。
 
-**注意**：<span class="t-blue">要使用图片边框，需要设置 **border** 性质</span>。
+**注意**：要使用图片边框，需设置 **border** 性质。

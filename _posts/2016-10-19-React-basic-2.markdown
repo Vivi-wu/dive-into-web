@@ -2,7 +2,7 @@
 title:  "React.js 入门（二）"
 category: JavaScript
 ---
-本章主要写 React 的数据操作
+本章主要写 React 的数据操作。
 
 ## state 状态
 

@@ -2,7 +2,7 @@
 title:  "React.js 入门（一）"
 category: JavaScript
 ---
-React 是一个声明式的灵活高效的用于构建 UI 的 js 库。由 Facebook 创建的开源项目。
+React 是由 Facebook 创建的一个声明式的用于构建 UI 的 JS 库。
 
 借助 React 通过小的、相互独立的代码片段（component，即组件）可以构建复杂的用户界面。
 

@@ -47,7 +47,7 @@ Redux:
 + 通过reducers更新状态
 
 MobX：
-+ 可以有多个 store（许多应用设计有至少2个sote，一个为当前应用设计的UI store，一个可复用的领域状态）
++ 可以有多个 store（许多应用设计有至少2个store，一个为当前应用设计的UI store，一个可复用的领域状态）
 + 无需进一步交互的任何可从state推导出的东西，都是推导
 + action是可以改变state的一段代码
 + state改变时，所有推导自动更新
@@ -57,7 +57,7 @@ learning curve：Mobx（Redux - Flux architecture and functional programming con
 data structure：MobX（Redux：纯JS对象存储state，需手动跟踪变化，更难维护大型状态；MobX使用可观察数据，通过隐式订阅自动跟踪更改）
 代码量：MobX（Redux 本质上是显式的，必须对许多功能进行显式编码。MobX相比代码量少，易于学习和设置）
 Developer community：Redux（从github start数、npm周下载量）
-scalability： Redux（纯函数易扩展、测试）
+scalability：Redux（纯函数易扩展、测试）
 
 如果您希望快速起步并以更少的代码构建简单的应用程序，那么选 MobX。
 

@@ -128,9 +128,10 @@ ES6的继承机制，实质是先创造父类的实例对象 this（所以必须
 
 当我们使用箭头函数时，函数体内的 **this** 对象，就是定义时所在的对象，而不是使用时的对象。
 
++ 没有自己的 this，它会捕获其所在上下文的 this 值，作为自己的 this 值。
 + 没有自己的 arguments 对象！！
 + 没有 prototypes
-+ 不能被用做 constructor
++ 不能被用做 constructor，不能使用 new 操作符创建实例
 + 大于1个入参时，`()` 是必须的
 + 当使用箭头函数缺省 `{}` 时，可省掉 `return` 关键词（这是implicit return）
 
