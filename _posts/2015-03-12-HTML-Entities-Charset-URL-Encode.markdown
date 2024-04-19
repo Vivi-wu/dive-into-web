@@ -24,7 +24,7 @@ OR
 
 + If you use an HTML entity name, or number, the character will always display correctly. This is independent of what character set (encoding) your page uses!
 无论用实体名还是数字，字符都会正确显示，这个是独立于网页所使用的编码字符集的。
-+ Remember that **browsers will always truncate spaces in HTML pages**. If you write 10 spaces in your text, the browser will remove 9 of them. To add real spaces to your text, you can use the _&nbsp;_ character entity. 为了在文本中加入1个以上的空格，可以使用 _&nbsp;_ 字符实体
++ Remember that **browsers will always truncate spaces in HTML pages**. If you write 10 spaces in your text, the browser will remove 9 of them. 为了在文本中加入1个以上的空格，可以使用 `&nbsp;` 字符实体。
 + Symbols 实体用法一样。
 
 注意： **Entity names 是 case sensitive** 大小写敏感的！
@@ -77,7 +77,7 @@ scheme://host.domain:port/path/filename
 
 说明:
 
-+ _scheme_ - defines the **type** of Internet service. （most common type is **http**）
++ _scheme_ - defines the **type** of Internet service.（most common type is **https**）
 + _host_ - defines the **domain host** (default host for http is **www**)
 + _domain_ - defines the Internet **domain name**, like w3schools.com
 + _port_ - defines the **port number** at the host (default port number for http is **80**)

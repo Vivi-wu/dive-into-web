@@ -36,17 +36,17 @@ category: HTML
 
 #### preload
 
-当rel的值为 preload，配合属性 _as_（资源类型），指定你的页面在 laoding 后马上（你想要在页面加载生命周期的早期、浏览器主渲染流程开始时预加载）需要的资源。
+当rel的值为 preload，配合属性 _as_（资源类型），指定你的页面在 loading 后马上（你想要在页面加载生命周期的早期、浏览器主渲染流程开始时预加载）需要的资源。
 
 观察到：同一个资源文件指定预加载与 head 部分书写正常的 link 引入不冲突。
 
-目前浏览器支持率 84.75%。IE、FF不支持
+目前浏览器支持率 97.05%。IE不支持
 
 #### prefetch
 
-当rel的值为 prefetch，用于（当前页加载完，在浏览器的空闲时间）预拉取下一个导航/页面所需的资源。对当前页没什么用。浏览器给 prefetch 的资源优先级低于 preload
+当rel的值为 prefetch，用于（当前页加载完，在浏览器的空闲时间）预拉取下一个导航/页面所需的资源。对当前页没什么用。浏览器给 prefetch 的资源优先级低于 preload。
 
-目前浏览器支持率 80.22%。Safari不支持
+目前浏览器支持率 80.05%。Safari不支持
 
 ### HTML `<meta>`
 
@@ -76,13 +76,14 @@ Examples;
     ```html
     <meta name="google-site-verification" content="...verification token" />
     ```
+
 ### HTML `<script>`
 
 该元素用来定义客户端的JavaScript，在该元素内所写的JS代码在页面加载时会被parser，当然 `<script>`也可以写在 `<body>` 里任何地方。
 
 ## HTML `<base>`
 
-The `<base>` tag **specifies the base URL/target for all relative URLs in a document**. <span class="t-blue">该标签指定了一个文件中所有相对URL的基地址和target目标地址</span>(具体取值参考links章节)。比如 `<img>` 标签引用images文件夹里的图片，其属性 _src_的值可以直接写文件名。
+The `<base>` tag 该标签指定了**一个HTML文档中所有相对URL的基地址和target目标地址**(具体取值参考links章节)。比如 `<img>` 标签引用images文件夹里的图片，其属性 _src_的值可以直接写文件名。
 
     <head>
       <base href="http://blog.csdn.net/images/" target="_blank">

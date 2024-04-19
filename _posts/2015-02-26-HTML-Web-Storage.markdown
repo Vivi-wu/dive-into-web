@@ -84,14 +84,19 @@ _window.sessionStorage_ 是 H5 Web Storage API 第二种类型，用法、优劣
 
 补充：
 
-+ clear() 函数删除存储列表中所有的数据，空的 Storage 对象调用此函数也是安全的，只是不执行任何操作。
++ `clear()` 函数删除存储列表中所有的数据，空的 Storage 对象调用此函数也是安全的，只是不执行任何操作。
 + 如果用户已关闭了网站的存储，或存储达到其最大的容量，此时设置数据将抛出 QUOTA_EXCEEDED_ERR 错误。
-+ 只要有同源的 Storage 事件发生（包括 SessionStorage 和 LocalStorage 触发的事件），已注册的所有事件侦听器作为事件处理程序就会接到相应的 Storage 事件。该事件中包含与存储变化有关的信息。如果是新添加的数据，则 oldValue 属性值为 null；如果是被删除的数据，则 newValue 属性值为 null。
++ 只要有同源的 Storage 事件发生（包括 SessionStorage 和 LocalStorage 触发的事件），已注册的所有事件侦听器作为事件处理程序就会接到相应的 Storage 事件。该事件中包含与存储变化有关的信息。如果是新添加的数据，则 oldValue 属性值为 _null_；如果是被删除的数据，则 newValue 属性值为 _null_。
 + 关闭当前 tab 可以自动清除 sessionStorage，但登出操作在同一个tab页进行，故需要手动清除.
 
 ## IndexedDB
 
-目前支持性不如 Web Storage API。
+IndexedDB 是一个事务型基于 JavaScript 的面向对象数据库，用于在客户端存储大量的结构化数据（也包括文件/二进制大型对象（blobs））。只需要指定数据库模式，打开与数据库的连接，然后检索和更新一系列**事务**。
+
++ 该 API 可以存储结构化克隆算法支持的任何对象。
++ 使用**键**索引实现对数据的高性能搜索。
++ 操作是异步执行。
++ 遵守同源策略。
 
 优势：
 
@@ -102,4 +107,4 @@ _window.sessionStorage_ 是 H5 Web Storage API 第二种类型，用法、优劣
 
 劣势：
 
-比 Web Storage API 用起来复杂。
+相比 Web Storage API 用起来复杂。如果你更喜欢一个简单的 API，可以考虑使用第三方库。
