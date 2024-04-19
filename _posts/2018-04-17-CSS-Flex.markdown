@@ -3,7 +3,11 @@ title:  "CSS Flex布局"
 category: CSS
 ---
 
-## flex
+## CSS Flexbox布局
+
+提供了一种更加灵活的方式来对元素进行布局，使得页面的布局更加灵活、响应式。如：创建multi-column布局。
+
+### flex
 
 该属性是 _flex-grow_、 _flex-basis_ 和 _flex-shrink_ 三个属性的缩写形式。
 

@@ -2,17 +2,9 @@
 title:  "CSS Float"
 category: CSS
 ---
-display 为 inline 的元素，只设定 float 为 left／right，其 display 值自动变为了 block。不明原因（待更新），`<a>` `<img>` 都是。
+## CSS Float
 
-使用 CSS 浮动，一个元素可以被水平地推到左边或右边（not up or down），其后的元素将 wrap around it，而它前面的元素不受影响。
-
-通常用于图片。但在处理页面布局时也很有用。
-
-如果把一些浮动元素一个接一个放在一起，它们将一个个相挨着从左往右排列，只要那一行还有空间。
-
-没地方了则自动换行。移到下一行的元素依然遵循相同的浮动规律。
-
-<!--more-->
+使用 CSS 浮动，一个元素可以被水平地推到左边或右边（not up or down），其后的元素将 wrap around it，而它前面的元素不受影响。通常用于图片。但在处理页面布局时也很有用。
 
 取值：
 
@@ -20,7 +12,13 @@ display 为 inline 的元素，只设定 float 为 left／right，其 display �
 + `left`，浮动到左边
 + `right`，浮动到右边
 
-### Examples
+如果把一些彼此相邻的元素设置相同的 float 值，它们将相挨着从左往右排列，只要所在的那一行还有空间，否则自动换行。移到下一行的元素依然遵循相同的浮动规律。
+
+display 为 inline 的元素，只设定 _float_ 为 left／right，其 _display_ 值自动变为了 block。不明原因（待更新）.
+
+<!--more-->
+
+### 示例
 
 1. 实现报纸上首行第一个字母大写，并突出显示的功能
 
@@ -49,18 +47,66 @@ display 为 inline 的元素，只设定 float 为 left／right，其 display �
     <p data-height="244" data-theme-id="0" data-slug-hash="MbBBOJ" data-default-tab="result" data-user="VivienneWU" data-embed-version="2" data-pen-title="Horizontal menu" class="codepen">See the Pen <a href="http://codepen.io/VivienneWU/pen/MbBBOJ/">Horizontal menu</a> by Vivienne (<a href="http://codepen.io/VivienneWU">@VivienneWU</a>) on <a href="http://codepen.io">CodePen</a>.</p>
     <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-    方法一实现的子菜单栏之间的空隙是因为 inline 级元素之间多个 white spaces 输出为一个空白格。
+    **注意**：方法一实现的子菜单栏之间存在空隙。原因：inline 级元素之间多个 white spaces 输出为一个空白格。
 
-### Turn Off Float
+### Turn Off Float 清除浮动
 
-子元素浮动导致父元素高度坍塌，所谓**清除浮动**主要是消除子元素浮动带来的影响。
+子元素浮动导致父元素高度坍塌，**清除浮动**用来消除子元素浮动带来的影响。
 
-1. 较笨的方法：设浮动元素的父元素的高度等于浮动元素的高
-2. 使用 _clear_ 来指定元素的哪一边不允许其他浮动元素存在。取值：
+1. 较笨的方法：设浮动元素的父元素的高度 = 浮动元素的高度
+2. 使用 _clear_ 来指定元素的哪一边**不允许**其他浮动元素存在。取值：
 
     + `none` **默认值**，两边都允许有浮动的元素存在
     + `both` 左右两边都不允许有浮动元素存在，效果如同 `<div>` 强制换行
     + `left`，`right` 左／右边不允许有浮动元素
-3. **推荐**设浮动元素的父元素`overflow:hidden|auto|scroll`。
 
-    解释：正常父元素包含浮动子元素，父元素的高度确实为 0。但是设父元素 overflow:hidden; 后，首先会计算 height:auto; 的真实高度，由于其触发了BFC（块级排版上下文，父元素必须要为它的内容开辟一个新的独立的摆放空间），需要包含子元素。实现了清除浮动效果。
+    
+    举例：div1 元素的 CSS 样式中使用了浮动，试图通过在 div1 上设置 _clear:right;_ 来强迫 div2 下移，是不可行的。正确的做法是在 div2 的 CSS 样式中使用 _clear:left;_ 来指定 div2 元素左边不允许出现浮动元素，这样 div2 就被迫下移一行。
+
+3. **推荐**设浮动元素的父元素 `overflow: hidden|auto|scroll`
+
+    这种方法创建了一个新的包含浮动元素的BFC（块级格式上下文）。父元素变成了布局中的一个 mini-layout，为它的内容开辟一个新的独立的摆放空间。任何子元素都将被包含在其中，进而实现清除浮动效果。
+
+    **缺点**：有时会出现不需要的滚动条或剪裁的阴影。此外，对于未来的开发人员来说，不清楚为什么这里要使用 overflow 。因此如果使用 overflow，最好对代码进行注释。
+
+4. **新的推荐**设浮动元素的父元素 `display: flow-root`
+
+    该方法创建一个不会产生任何其他潜在副作用问题的新的 BFC，容器内的所有内容都会参与 BFC，浮动元素也就不会溢出。
+    
+    **优点**：从名称上看 flow-root 很好理解，它创建一个新的用于流式布局的上下文，行为如同 `<html>` 根元素。
+
+## BFC 块级格式化上下文
+
+Block Formatting Context 是块级盒子的布局过程渲染的区域，也是浮动元素与其他元素交互的区域。
+
+BFC的特性：
++ 内部的盒子在垂直方向上一个接一个地放置。
++ BFC的区域不会与 float box 重叠。
++ 垂直方向上，BFC的 margin box 与包含块的边缘相接触，即使存在浮动元素。
++ 计算BFC的高度时，浮动元素也参与计算。
++ 可以包含浮动元素。
+
+### 创建 BFC 的方法
+
++ 文档根元素（`<html>`）。
++ 浮动元素（_float_ **不是**none）。
++ 绝对定位元素（position: _absolute_ 或 _fixed_）。
++ 行内块元素（display: inline-block）。
++ 表格单元格（display: table-cell）。
++ 表格标题（display: table-caption）。
++ 块元素的溢出值不为 visible（_overflow_ **不是** visible 或 clip）。
++ 弹性盒子元素（display为 _flex_ 或 _inline-flex_）。
++ 网格容器元素（display为 _grid_ 或 _inline-grid_）。
++ 多列容器（column-count 或 column-width **不为** auto，且含有 _column-count:1_ 的元素）。
++ column-span为all的元素。 
++ 使用 display: flow-root。
+
+### 应用场景
+
+1. **包含内部浮动**：使浮动内容和旁边内容具有相同的高度。参考“清除浮动”一节。
+
+2. **自适应两栏布局**：在两栏布局中，通常一边是固定宽度，另一边是自适应宽度。比如：左边固定，右边自适应。可以在右边元素上设置 `display: flow-root` 创建新的 BFC。原因：在正常文档流中建立的 BFC 不得与元素本身所在的块 BFC 的任何浮动元素的外边距重叠。
+
+3. **阻止外边距重叠**：当两个垂直相邻的元素外边距（margin-bottom 与 margin-top）重叠时，可以通过将下面的元素内嵌到一个 `overflow: hidden` 的元素里（创建一个新 BFC），从而确保外边距的行为符合预期。
+
+4. **实现等高列布局**：在需要实现等高列布局时，可以通过创建BFC来避免高度塌陷问题。每个列都成为一个BFC，这样它们的高度就会独立计算，从而实现等高。
