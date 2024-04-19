@@ -66,9 +66,9 @@ CSS 颜色有三种基本表示方法：
 
 + _background-attachment_，用来<span class="t-blue">指定背景图片是否位置固定，还是与页面剩余部分一起滚动</span>。
 
-    + `scroll`，**默认值**。即背景图默认跟着它的元素相对于 viewport 一起滚动，但是**元素内容（local view）滚动，背景图不动**。
-    + `fixed`，背景图相对于 viewport 和元素内容（local view）**都是固定不动的**。
-    + `local`，背景图跟着它的元素相对于 viewport 一起滚动，**元素内容滚动，背景图也一起动**。
+    + `scroll`，**默认值**。即在元素外滚动，背景图跟着它所在的元素相对于 viewport 一起滚动；在元素内滚动，**元素内容（local view）动，背景图不动**。
+    + `fixed`，无论在元素外还是元素内滚动，背景图相对于 viewport 和它所在的元素内容（local view）**都是固定不动的**。
+    + `local`，无论在元素外还是元素内滚动，背景图**都是跟着它所在的元素内容（local view）一起滚动**。
 
 ### All in one 简写形式
 

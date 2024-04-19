@@ -8,50 +8,46 @@ CSS 的范围属性用来控制元素 content 区域的高和宽，**不包含**
 
 ### Height & Width
 
-基本的 _height_, _width_ 属性可取的值：
+可取的值：
 
 + `auto`: **默认值**，浏览器来计算
-+ length: 以 px, cm, 等为单位具体的值
++ length: 以 px、cm，等为单位的具体的值
 + %: 以**所包含的内容模块**的百分比显示
 
 <!--more-->
 
 ### Max-height、Max-width、Min-height、Min-width
 
-设定尺寸最大值用来解决的问题如：某元素设定了 _max-width_，当浏览器宽度大于它时，元素的宽度即为这个最大宽度，不会改变。而当浏览器宽度减小，直到小于元素最大宽度时，**元素将随着浏览器一起减小**（有 responsive 的效果）。
-
-如果不设定最大宽度，则在浏览器窗口宽度小于元素宽度时，窗口出现横向 scrollbar。
+**设定尺寸最大值**用来解决的问题，如：某元素设定了 _max-width_，当浏览器宽度大于它时，元素的宽度即为这个最大宽度，不会改变。而当浏览器宽度减小，直到小于元素最大宽度时，**元素将随着浏览器一起减小**（有 responsive 的效果）。如果不设定最大宽度，则在浏览器窗口宽度小于元素宽度时，窗口出现横向 scrollbar。
 
 _max-*_ 可取的值：
 
 + `none`: **默认值**，意思是默认没有最大宽度或高度
-+ length: 以 px, cm, 等为单位具体的值
++ length: 以 px、cm，等为单位的具体的值
 + %: in percent of the containing block
 
-**注意**: <span class="t-blue">_max-height/width_ 属性的值覆盖 _height/width_ 所设定的值</span>。
+**注意**: _max-height/width_ 属性的值覆盖 _height/width_ 所设定的值。
 
 设定尺寸最小值用来保证视图范围小的情况下，内容依然可读。
 
 _min-*_ 可取的值：
 
-+ length: 默认值为 **0**，以 px, cm, 等为单位具体的值
++ length: 默认值为 **0**，以 px、cm，等为单位的具体的值
 + %
 
-**注意**: <span class="t-blue">_min-height/width_ 属性的值覆盖 _max-height/width_ 属性和 _height/width_ 所设定的值</span>。
+**注意**: _min-height/width_ 属性的值覆盖 _max-height/width_ 属性和 _height/width_ 所设定的值。
 
-## CSS Box Model
+## CSS Box Model 盒模型
 
-所有 HTML 元素可以被认为是一些盒子。在 CSS 中，当讨论设计和布局时，会用到 box model 盒模型。
+所有 HTML 元素可以被认为是一些盒子。在 CSS 中，当讨论设计和布局时，会用到 box model。
 
 The CSS box model consists of: **margins**, **borders**, **padding**, and the actual **content**.
 
-正如上面所写到的，当我们用 CSS 设定元素的宽和高时，只是设定了 the width and height of the **content area**. 因此<span class="t-red">在计算元素完整的尺寸时，要加上内边距、边框和外边距</span>。
-
-在 IE 早期浏览器中如果 `!DOCTYPE` 文档声明没有指定 standards-compliant 模式渲染，则 _width_ 宽高属性除了包含 content box 还加上左右 padding 和左右 border。
+当我们用 CSS 设定元素的宽和高时，只是设定了 **content area** 内容区域的宽和高. 因此<span class="t-red">在计算元素完整的尺寸时，要加上内边距、边框和外边距</span>。
 
 ### CSS Margins
 
-_margin_ 属性用来设定元素边框外边空白区域（**outside** the border）的大小。
+_margin_ 属性用来设定元素**边框外边**空白区域的大小。
 
 **注意**：<span class="t-blue">外边距是完全**透明的**，没有 background color</span>。
 
@@ -59,16 +55,16 @@ _margin_ 属性实际上是 _margin-top_, _margin-right_, _margin-bottom_, _marg
 
 可以取值类型：
 
-+ `auto`，浏览器来计算外边距。
++ `auto`，浏览器来计算外边距
 + length，以 px，pt，cm 等为单位来指定，默认值是**0**
 + %，基于所包含**元素的宽度**的百分比
 + inherit
 
-外边距可以取<span class="t-red">负值</span>，因为两个元素可以重叠 overlap。
+外边距可以取<span class="t-red">负值</span>，因为两个元素可以 overlap 重叠。
 
 ### CSS Paddings
 
-_padding_ 属性用来设定元素的内容和元素的边框之间空白区域（**inside** the border）的大小。
+_padding_ 属性用来设定元素的**边框和内容之间**空白区域的大小。
 
 **注意**：<span class="t-blue">内边距受到元素的 background color 影响</span>。
 
@@ -82,15 +78,15 @@ _padding_ 属性实际上是 _padding-top_, _padding-right_, _padding-bottom_, _
 
 ## CSS3 Box Sizing
 
-上面提到 CSS 设定元素的宽和高，只是限定了实际内容区域的大小，是针对默认情况。CSS3 引入 _box-sizing_ 属性，因此再讲宽高就要看情况了。
+CSS3 引入 _box-sizing_ 属性，再讲宽高就要看情况了。
 
 该属性**默认值**是 `content-box`，也就是上面提到的一般情况。
 
-如果设定元素的 `box-sizing: border-box;` ，那么 <span class="t-blue">CSS 宽、高 属性值相同的两个元素，即使其中一个含内边距、边框，它们看起来也是一样大小</span>。
+如果设定元素的 `box-sizing: border-box;` ，那么CSS 宽、高属性值相同的两个元素，即使其中一个含内边距、边框，它们看起来也是一样大小。
 
-新属性的引入是解决：虽然我们用 CSS 指定了元素的 _width_, _height_ 属性，但如果元素还设有内边距和边框，最终看到的元素看起来比预想的要大。长久以来，为了让元素满足设计尺寸，不得不减小 CSS _width_, _height_ 的值。
+新属性的引入是解决：虽然我们用 CSS 指定了元素的 _width_, _height_ 属性，但如果元素还设有padding和border，最终看到的元素看起来比预想的要大。长久以来，为了让元素满足设计尺寸，不得不减小 CSS _width_, _height_ 的值。
 
-通过 DOM Element 查看，两个元素**有无内边距、边框**得到了**完全一样的值**：
+通过 DOM Element 查看，两个元素**有无内边距、边框**得到了完全一样的值：
 
     element.offsetWidth = width + padding + border + (scrollbar)
     element.clientWidth = width + padding
@@ -98,8 +94,6 @@ _padding_ 属性实际上是 _padding-top_, _padding-right_, _padding-bottom_, _
 那么它们有区别吗？通过浏览器开发工具 Computed 和模型图可以看到，含内边距和边框的元素，它的内容区域宽要小得多。
 
 因为 _box-sizing_ 属性使得设置元素尺寸更加 intuitive 直觉性，许多浏览器已经使用 `box-sizing: border-box;` 在许多表单元素上。（除了 `<input>`, `<textarea>`）
-
-element.offsetHeight 为只读属性，返回一个元素的cssheight，包括边框、padding和横向滚动条（如果有）
 
 ## CSS Outline
 
@@ -126,22 +120,8 @@ _outline_ 用来设定元素的轮廓——围绕元素所画的线，**outside 
  在 Mac Safari 和 Chrome 中测试，目前均不支持 **invert** 关键字)。
 + _outline-width_ 设定四条边的轮廓的宽度。宽度可以用指定的尺寸（以 px，pt，cm，em 等为单位），或者使用三个预定义的值（`thin`, `medium`, 或 `thick`）
 + _outline-offset_ 指定轮廓和边框之间的距离，默认值为 **0**.
-+ 实现外边线圆角效果，可以结合 _box-shadow_ 实现
 
-```css
-input:focus {box-shadow: 0 0 0 2px rgba($cf-primary, 0.1);}
-```
-
-**注意**: <span class="t-blue">同边框一样，除非先设定 **outline-style** 这个属性，否则任何 outline 性质（如：outline width、outline color...）都不会产生效果</span>。
-
-清除 input 框聚焦时显示的边框
-
-```css
-:focus-visible {
-  outline: none;
-  box-shadow: none;
-}
-```
+**注意**: 同边框一样，除非先设定 **outline-style** 这个属性，否则任何 outline 性质（如：outline width、outline color...）都不会产生效果。
 
 ### All in one 简写形式
 
@@ -150,3 +130,20 @@ input:focus {box-shadow: 0 0 0 2px rgba($cf-primary, 0.1);}
 + outline-width: `medium`
 + outline-style (**required**): `none`
 + outline-color: `invert`
+
+### 实现外边线圆角效果
+
+```css
+input:focus {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+```
+
+### 清除 input 框聚焦时显示的边框
+
+```css
+:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+```
