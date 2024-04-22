@@ -6,7 +6,7 @@ JS 对象是可以包含多个值的变量。这些值以 `name: value` 对的�
 
 在JS中，<span class="t-blue">all data types have a `valueOf()` 和 `toString()` 方法</span>.
 
-## 创建对象
+## 创建新对象
 
 1.Using an Object Literal，最简单的方法
 
@@ -20,7 +20,6 @@ var person = {
     age:50
 };
 ```
-
 <!--more-->
 
 2.Using the JavaScript Keyword **new**
