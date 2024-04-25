@@ -2,6 +2,58 @@
 title:  "命令行工具及Shell语句tips"
 category: Other
 ---
+## Shell语句tips
+
+本文摘录《The Missing Semester of Your CS Education(2020)》视频里提到的 shell 命令。
+
+```sh
+date # 显示当前日期时间
+echo "Hello, world" # 输出 Hello, world
+echo Hello\ world # 一样的效果
+echo hello > hello.txt # 输出 hello 到 hello.txt 文件
+cat hello.txt # 显示 hello.txt 文件内容
+cat < hello.txt  >> hello2.txt # 将 hello.txt 文件内容追加到 hello2.txt 文件末尾
+which echo # 显示 echo 命令的路径
+pwd # 打印当前目录路径
+cd /home # 切换到 /home 目录
+cd .. # 切换到上级目录
+cd ./home # 切换到当前目录下的 home 目录
+cd - # 切换到上一次所在目录
+ls # 列出当前目录下的文件和目录
+ls -l # 列出详细信息，包括文件权限、所有者、大小、修改日期
+mkdir My\ Photos # 创建目录 My Photos
+rmdir My\ Photo/ # 删除目录 My Photo/
+rm test.txt # 删除文件 test.txt
+man ls # 查看 ls 命令的手册，按 q 退出
+exit # 退出当前用户
+open index.html # 在默认浏览器中打开 index.html 文件
+```
+
+<!--more-->
+
+### pipe 命令
+
+作用是将左侧的命令的输出作为右侧的命令的输入。
+
+```sh
+ls -l / | tail -n1 # 列出根目录下最后一个文件或目录
+curl --head --silent baidu.com | grep -i content-length # 获取网页内容长度
+```
+
+### sudo 命令
+
+作用是以超级用户权限执行命令。比如一些文件被限制只能用超级用户权限才能修改。两种方法：一是切换到 root 用户，二是使用 tee 命令。
+
+```sh
+sudo su # 切换到 root 用户
+echo 10 | sudo tee brightness # 输出 10 到 brightness 文件，并以 root 用户权限写入
+```
+
+### 清屏
+
+ctrl + l
+
+## windows系统Shell使用
 在Windows系统 git-bash 终端命令行工具里，实用Windows资源管理器打开当前文件夹/目录
 
 ```bash
@@ -10,7 +62,9 @@ start .
 
 [一个比较全的windows用户命令行汇总](http://johnatten.com/2012/09/08/basic-git-command-line-reference-for-windows-users/)
 
-## 执行 shell 文件
+## 示例
+
+### 执行 shell 文件
 
 使用 *.sh 文件，在命令行终端里运行 ./*.sh
 
@@ -22,9 +76,7 @@ Mac 下提示“permission denied”，解决：
 chmod 755 文件名.sh
 ```
 
-<!--more-->
-
-## 输出日期时间
+### 输出日期时间
 
 ```sh
 echo "今天是`date`"
@@ -34,39 +86,33 @@ TIMESTAMP=`date "+%Y-%m-%d %H:%M:%S"`
 echo "自定义日期时间输出 $TIMESTAMP"
 ```
 
-## 从 iconfont.cn 下载字体文件到当前目录下
+### 从 iconfont.cn 下载字体文件到当前目录下
 
 ```sh
 curl -v --cookie "cna=mTNtFEok3SkCAdy/utIDGBNM;EGG_SESS_ICONFONT=U8AXvqwdm-42-umGXGwgKq_Emj2wuVCkA87TjZ3dn6xm2T4whio3sIKoy4kjkuBSusLMQ-0MhcjWBE1FwhfGmHa4MwEHgW7pCbfU0Hhk3uY-kuveEaSWqxlut4MQVPKIeSSVMupL3DmRr12ReN1T2N42hwjutmR7MXZUdpP2MKhd3KnGyvF-m5v25bLDdQ4_6v4TEkYINuWDnZUYFvmlUU-zLA2yUIJnAXT1l7IE6mcwan95FbClOMPyq5OP_nLNdLq-J16YgAVR8l_XWPWku2xnCXnPkd2OVoNrV95rv73IlDKsd_jGq1DwbQh1GHEAFg-J13jkl9xYuXnDON2qtwxPaBoMdLeDStDkAQT1ly_MA9-ylpzcuaBBc8SBqIrtrsFn7mjsYel-sv8NGpTKIqMp47AoAkoBGaUxHrycjQM-9OnQJQK7ADr3sXbwGmeNQc3c1GH-hFm3cJS4UYAvf5nOBVJUf2Ap-GpV7uV8JUAIPM45cQThrxB1QTzpDhHu1Ngd8xuwG3Y6jKQawTJMY4H817sRld6_0sW4pcEDleYsp66BMA2eW61q0nfu2j2oCsVl4UAztS9xo0ePXrirAITDPm_xR9iu-pjGVb-ewjhyoWpjEK2YT0vVE6hBUbtiCgwKCn99mik6CCUt5-ZXc3C_wAitmL1AWZ5FB3ASWkBDQpAROHMsXpIb-Ryn_iCmcmh54XopgVw1NuB7Z0P0136Ur9NUGnYkgZ6RRl7yAECTMVr8kUFmPteLcr3-hgbvzTeD1IqiBIUhHnLtG0dJDF0bEErb5rgrj5GwDPPU2k6QwzirhH9hnqxIHOLYDc35or5svYSdRhaMtH7ScBvOuRsOAYQsXI1SzRNcnwPI22tmzS4k3twc5CJZety0bVln5JsnWeUNJ1chcJ8kaWCssuLMkG538LgwrOF8eUhpOGNELgipd28XNcKMd3VCAjKRdz301BNqCfilPPnAJiRITJmQ0EFnQS90TZMvmuaXrMWXirfIYa5MxdrYrO_kOcXWGkFJHvU1nTHjptxmwUGGWjr-47eE5-d5P0l_OcsG5k5wEX9bASRI8R7-MDxwpen1b0nYSDCpjERlZ-HoJijpsw==;trace=AQAAAKHxKXcbeQoAg19EZSNDhCJwSspr;ctoken=AkUxJUxFFHzd3gQ7fGGvWiSY;u=835843;u.sig=m5P7qa1Gc4S42xqNJtLhyDkgl2gyhmUJgrUEdkVhFAg;isg=BIGB_fAau04Xqdd6y9_noZfKkM2brvWg4aPV3OPWJAiXyqGcK_zfcK7LqD6MQo3Y" https://www.iconfont.cn/api/project/download.zip\?spm\=a313x.7781069.1998910419.d7543c303\&pid\=1969599\&ctoken\=AkUxJUxFFHzd3gQ7fGGvWiSY --output download.zip
 ```
 
-### 解压文件
+1. 解压文件
 
-```sh
-unzip download.zip
-```
+    ```sh
+    unzip download.zip
+    ```
+2. 删除以指定字符开头的文件
 
-### 删除以指定字符开头的文件
+    ```sh
+    rm -rf icon*
+    ```
+3. copy文件到指定目标，并重命名
 
-```sh
-rm -rf icon*
-```
+    ```sh
+    cp font_*/*.js ../public/font/iconfont_v1.js
+    ```
 
-### copy 文件到指定目标并 rename
-
-```sh
-cp font_*/*.js ../public/font/iconfont_v1.js
-```
-
-### curl 常用参数
-
-不设置请求method则默认为 get。
+curl 指令不设置请求method的值则默认为 get。下面指令表示设置请求头，并带上 cookie。
 
 ```sh
 curl -H 'custom-header:值' -b ‘_ga=cookie1;_gid=cookie2’ http://www.example.com
 ```
-
-设置请求头，并带上 cookie
 
 ### 查找 Node 进程 pid
 
