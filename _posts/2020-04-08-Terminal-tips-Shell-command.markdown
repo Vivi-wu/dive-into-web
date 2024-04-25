@@ -11,6 +11,7 @@ date # 显示当前日期时间
 echo "Hello, world" # 输出 Hello, world
 echo Hello\ world # 一样的效果
 echo hello > hello.txt # 输出 hello 到 hello.txt 文件
+echo $? # 显示上一条命令的返回值，0 表示成功，非 0 表示失败
 cat hello.txt # 显示 hello.txt 文件内容
 cat < hello.txt  >> hello2.txt # 将 hello.txt 文件内容追加到 hello2.txt 文件末尾
 which echo # 显示 echo 命令的路径
@@ -27,9 +28,17 @@ rm test.txt # 删除文件 test.txt
 man ls # 查看 ls 命令的手册，按 q 退出
 exit # 退出当前用户
 open index.html # 在默认浏览器中打开 index.html 文件
+grep foobar mcd.sh # 在 mcd.sh 文件中搜索 foobar 字符串
+grep -R foobar . # 在当前目录及其子目录下搜索 foobar 字符串
+diff <(ls foo) <(ls bar) # 比较并显示 foo 和 bar 目录下的文件和目录
+find . -name test -type d # 在当前目录下查找名为 test 的目录
+touch project{1..3} # 创建 project1、project2、project3 三个空文件
+rm project{1..3} # 删除 project1、project2、project3 三个文件
+history | grep grep # 显示在终端里运行过的命令中包含 grep 的命令
 ```
 
 <!--more-->
+有一些保留的命令行参数，如：`$0` 至 `$9`，表示上一条命令的第 0 至 9 个参数。`$_` 表示上一条命令的最后一个参数。
 
 ### pipe 命令
 
