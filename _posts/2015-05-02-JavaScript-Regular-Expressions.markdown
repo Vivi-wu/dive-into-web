@@ -37,8 +37,8 @@ category: JavaScript
 表示**数量**的：
 
 + `n+`, contains at least one, **至少**包含**一个** n
-+ `n*`, contains zero or more occurrences of n, 包含 **0 个**或**多个** n，贪婪匹配（匹配**尽可能多**的字符）
-+ `n?`, contains zero or one occurrences of n, 包含 **0 个**或 **1 个** n，懒惰匹配（匹配**尽可能少**的字符）
++ `n*`, contains zero or more occurrences of n, 包含 **0 个**或**多个** n，贪婪匹配（**匹配尽可能多**的字符）
++ `n?`, contains zero or one occurrences of n, 包含 **0 个**或 **1 个** n，懒惰匹配（**匹配尽可能少**的字符）
 + `n{X}`, contains a sequence of X n's, 必须**连续匹配 X 个 n**
 + `n{X,Y}`, contains a sequence of X to Y n's，包含 **X 到 Y 个连续的** n，不少于 X 个，不多于 Y 个
 + `n{X,}`, contains a sequence of at least X n's，重复匹配 X 次或更多次
@@ -47,7 +47,7 @@ category: JavaScript
 + `?=n`, any string that is followed by a specific string n，**后面跟着** n
 + `?!n`, any string that is not followed by a specific string n，后面**不**跟着 n
 
-上面都是针对单个字符的重复匹配，如果要多个字符，就需要使用 `(x)`，用小括号来指定子表达式(也叫做**分组**)，然后就可以指定这个子表达式的重复次数，或进行其它操作。
+上面都是针对单个字符的重复匹配，如果要多个字符，就需要使用 `(xxx)`，用小括号来指定子表达式(也叫做**分组**)，然后就可以指定这个子表达式的重复次数，或进行其它操作。
 
 字符转义：
 

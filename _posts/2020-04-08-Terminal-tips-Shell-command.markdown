@@ -4,6 +4,8 @@ category: Other
 ---
 ## Shell语句tips
 
+Shell 是Unix系统下的一种命令行解释器。
+
 本文摘录《The Missing Semester of Your CS Education(2020)》视频里提到的 shell 命令。
 
 ```sh
@@ -30,11 +32,15 @@ exit # 退出当前用户
 open index.html # 在默认浏览器中打开 index.html 文件
 grep foobar mcd.sh # 在 mcd.sh 文件中搜索 foobar 字符串
 grep -R foobar . # 在当前目录及其子目录下搜索 foobar 字符串
+grep -v 'moon' # 搜索不包含 moon 字符串的行
 diff <(ls foo) <(ls bar) # 比较并显示 foo 和 bar 目录下的文件和目录
 find . -name test -type d # 在当前目录下查找名为 test 的目录
 touch project{1..3} # 创建 project1、project2、project3 三个空文件
 rm project{1..3} # 删除 project1、project2、project3 三个文件
 history | grep grep # 显示在终端里运行过的命令中包含 grep 的命令
+alias gs # 查看指定命令的别名
+unalias gs # 删除指定命令的别名
+
 ```
 
 <!--more-->
@@ -42,16 +48,22 @@ history | grep grep # 显示在终端里运行过的命令中包含 grep 的命�
 
 ### pipe 命令
 
-作用是将左侧的命令的输出作为右侧的命令的输入。
+作用是将左侧的命令的输出作为右侧的命令的输入。通过管道命令，shell可以用一行命令执行复杂的操作。
 
 ```sh
 ls -l / | tail -n1 # 列出根目录下最后一个文件或目录
 curl --head --silent baidu.com | grep -i content-length # 获取网页内容长度
+cat mcd.sh | wc -l # 统计并显示 mcd.sh 内容的行数，包含空行
+sort | uniq -c # 统计并显示排序后的结果中每个元素出现的次数
+sort -nk1,1 | awk '{print $2}' | paste -sd, # 显示第二列排序后的结果，并用逗号分隔显示在一行
+echo "1+2" | bc # 计算 1+2 的结果
+awk '$1 != 1 {print $1}' | paste -sd+ | bc # 计算第1列不等于1的数字之和，并显示结果
+grep nightly | sed 's/-x86.*//' | xargs npm uninstall # 卸载所有包含 nightly 的 npm 包。sed 作用是替换字符串，这里是将 -x86 后的内容替换为空；xargs 作用是将前面命令的输出作为后面命令的输入
 ```
 
 ### sudo 命令
 
-作用是以超级用户权限执行命令。比如一些文件被限制只能用超级用户权限才能修改。两种方法：一是切换到 root 用户，二是使用 tee 命令。
+作用是以超级用户权限执行命令。比如一些文件被限制只能用超级用户权限才能修改。两种方法：一是切换到 root 用户再执行，二是直接使用 sudu 执行命令。
 
 ```sh
 sudo su # 切换到 root 用户
@@ -71,7 +83,20 @@ start .
 
 [一个比较全的windows用户命令行汇总](http://johnatten.com/2012/09/08/basic-git-command-line-reference-for-windows-users/)
 
-## 示例
+## SSH
+
+SSH是一个安全的shell，用于远程登录到另一台计算机。也可以在远程机器上执行shell命令，并将结果显示在本地终端。
+
+```sh
+ssh user@host # 登录远程主机，host可以是ip地址也可以是域名
+ssh user@host ls -la # 在远程主机上执行 ls -la 命令并显示结果
+scp notes.md user@host:/path/to/notes_remote.md # 复制文件到远程主机。批量上传文件可以使用 rsync 命令，遇网络中断支持断点续传。
+```
+
++ 使用SSH keys可以避免每次登录时输入密码。
++ 使用 ~/.ssh/config 文件，配置hostname、user、IdentityFile等，可以简化 SSH 登录过程。
+
+## 更多示例
 
 ### 执行 shell 文件
 
@@ -123,6 +148,22 @@ curl 指令不设置请求method的值则默认为 get。下面指令表示设�
 curl -H 'custom-header:值' -b ‘_ga=cookie1;_gid=cookie2’ http://www.example.com
 ```
 
+### 监控进程内存使用情况
+
+Mac终端：
+
+```sh
+top -pid 7272
+```
+
+### 提取视频帧另存为图片
+
+下面的命令的作用是提取视频第一帧，使用图片处理为灰度图，并保存为 output.png 文件，然后用 feh 图片查看器显示图片。macOS需要额外安装convert、feh工具
+
+```sh
+ffmpeg -loglevel panic -i input.mp4 -frames 1 -f image2 - | convert - -colorspace gray - | tee output.png ｜ feh output.png
+```
+
 ### 查找 Node 进程 pid
 
 虽然可以通过代码输出 `console.log(process.pid)`, 但是以下可以不侵入代码，通过端口号在终端里定位进程。
@@ -140,10 +181,12 @@ lsof -i tcp:9292
 kill -9 22133
 ```
 
-### 监控进程内存使用情况
+## Unix 信号
 
-Mac终端：
+在终端输入 ctrl + c 向系统发送 _SIGINT_ 信号，告诉程序停止运行。
 
-```sh
-top -pid 7272
-```
+_SIGQUIT_ 信号用于终止进程（对大多数程序效果同上），_SIGKILL_ 信号用于杀死进程。
+
+_SIGHUP_ 信号用于通知程序终端挂起，可用于重启程序。
+
+_SIGCONT_ 信号用于恢复进程，可用于暂停的程序。
