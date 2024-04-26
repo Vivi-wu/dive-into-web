@@ -2,16 +2,16 @@
 title:  "Practical Git commands"
 category: Other
 ---
+Git 作为一种 version control system，能够跟踪代码或文件目录的历史变化。无论是独自工作还是与他人合作都是很有帮助的工具。本文介绍 Git 相关知识和常用命令。
+
 查看 git 版本
 
-     git --version
+    git --version
 
-初次下载安装后常用的配置：
+首次下载安装后常用的配置：
 
     git config --global user.name "Vivienne"
     git config --global user.email vivienne@example.com
-    git config --global alias.pl pull
-    git config --global alias.ps push
 
 可在 `～/.gitconfig` 文件里查看 Git 全局配置。
 
@@ -25,95 +25,94 @@ category: Other
 
     git init
 
-创建本地仓库（该命令通常是新项目中你会运行的第一个命令）
+创建本地仓库（该命令通常是新项目中你会运行的第一条命令）
 
-This command creates a .git subdirectory in the project root, which contains all of the necessary metadata for the repo, and makes it possible to start recording revisions of the project.
-该命令在项目根目录里创建了 `.git` 子目录，使得它可以开始记录项目的版本。
+该命令在项目根目录里创建了 `.git` 子目录——包含当前repo所有必要元数据，使得它可以开始记录项目的版本。
 
-注意：<span class="t-blue">Git will **not** create a master branch until you commit something. 运行此命令后，只有在你提交了一些东西，Git才会创建 master 分支。</span>
+注意：<span class="t-blue">Git will **not** create a master branch until you commit something. 只有在你提交了一些东西，Git才会创建 master 分支。</span>
 
 随便在目录里添加一个文件，git add them then git commit，此时才真正完成 master 分支的创建。
 
-    git clone
+复制一个已有的 Git 仓库到本地。默认复制仓库所有历史记录，如果一个仓库有巨大的修改记录，则需要花费较长时间。
 
-This command copies an existing Git repository. 复制远端仓库到本地。
+    git clone
+    git clone --shallow # 只复制最近的一次提交记录
 
 Cloning automatically creates a remote connection called **origin** pointing back to the original repository.
 
 ## Inspecting a repository
 
+该命令显示**工作分支**和**临时集结区域**的状态——哪些文件集结了、没有被集结，还是没有被追踪。
+
     git status
-
-This command displays the state of the working directory and the staging area. List which files are staged, unstaged, and untracked. 该命令显示工作分支和临时集结区域的状态，哪些文件集结了，没有被集结，还是没有被追踪。
-
-    git log
-    git log -p <file>
-    git log --pretty=oneline
-    git log <commit> 以某个 commit 作为查看历史的起点
 
 显示当前分支的版本历史，含提交的 hash ID 和提交信息。
 
+    git log
+    git log --all --graph --decorate --oneline # 以树形展示简短的提交信息(commitId 与 commit msg)，以显示所有分支的历史
+    git log -p <file>
+    git log <commit> # 以某个 commit 作为查看历史的起点
+
 ## Saving changes
 
+比较当前文件和集结区文件的诧异。也可以不指定文件名，直接运行 `git diff`，这样会显示所有改动文件的诧异。
+
     git diff <filename>
-
-比较当前文件和集结区文件的诧异，也可以不指定文件名，直接运行 `git diff`，这样会显示所有改动文件的诧异。
-
-    git add <filename>
+    git diff <commit> HEAD <filename> # 比较指定文件在指定的 commit 中与当前分支的差异
 
 Stage all changes in filename for the next commit. 添加指定文件到暂存区。
 
-    git commit -a
+    git add <filename>
 
 把被修改、被删除的文件从暂存区提交到本地仓库，没有被 git 管理/追踪到的 new file 不会受影响。
 
-    git commit -m "Commit message"
+    git commit -a
 
 提交暂存区的改动到本地仓库，并附上说明信息。
 
+    git commit -m "Commit message"
+
 ### 使用指定编辑器来编写 commit 信息
 
-Git 默认会调用你的环境变量 editor 定义的值作为文本编辑器，如果没有定义，则调用 **Vi** 来创建和编辑提交信息。
+Git 默认会调用你的环境变量 editor 定义的值作为文本编辑器。如果没有定义，则调用 **Vi** 来创建和编辑提交信息。
 
 使用 `core.editor` 改变默认编辑器：
 
     git config --global core.editor emacs
 
-这样输入 git commit --> enter，会自动打开 emacs 编辑器。
+这样输入 git commit --> enter，终端自动打开 emacs 编辑器。
 
 ### 隐藏
 
-把 changes 从工作分支上暂时隐藏，一个 stash 实际上就是一个 commit。
-
-Stash 属于本地 Git 仓库，不会通过 push 推到远端。
-
-    git stash
+把 changes 从工作分支上暂时隐藏，一个 stash 实际上就是一个 commit。Stash 属于本地 Git 仓库，不会通过 push 推到远端。
 
 默认地，Git 不会隐藏 untracked 或 ignored 的文件。加 `-u` 可以隐藏 untracked 文件；加 `-a`（`--all`）可把 ignored 文件包含进来。最好给 stash 记录添加描述 `git stash save "message"`。
 
-    git stash list
+    git stash
 
 查看暂存列表
 
-    git stash pop stash@{2}
+    git stash list
 
 默认地，re-apply 最新创建的 stash（即 stash@{0} 的记录），然后在 stash 列表中删除该记录。可通过指定 num 暂存操作序号。
 
-    git stash apply
+    git stash pop stash@{2}
 
 重新应用 changes 到工作分支，并**保留**在 stash 中，这样可以把 stashed 的 changes 应用于多个分支。
 
-    git stash branch <branch_name>
+    git stash apply
 
 为避免当前分支的 changes 与 stash 的改变在 pop 或 apply 时有冲突，通过上述把 stashed 改变应用到新分支。
 
-    git stash show -p
+    git stash branch <branch_name>
 
 对比 stash 和当前提交的不同。
 
-    git stash clear
+    git stash show -p
 
 清空 stash 暂存记录。或者删除指定隐藏记录 `git stash drop stash@{1}`。
+
+    git stash clear
 
 ### Apply已存在的commit到其他分支
 
@@ -135,44 +134,42 @@ This command provide a convenient way to fix up the most recent commit. It lets 
 
 ## Using Branches
 
-通过在分支里开发功能，不仅使同时开发不同功能成为可能，而且保持主 master 分支不会遭到有问题代码的伤害。
+列出本地仓库中所有分支。
 
     git branch
+    git brach -vv # 显示所有分支，以及每个分支最后一次提交的 commit message
 
-List all of the branches in your repository. 列出本地仓库中所有分支。
+列出所有远端仓库的分支，分支名由他们所属的 remote 名开始，以区别于本地分支。
 
     git branch -r
 
-列出所有远端仓库的分支，分支名由他们所属的 remote 名开始，以区别于本地分支。
 The current branch will be highlighted with an asterisk 星号(*). 当前所在分支前以星号标记。
+
+Create a new branch called branch_name. 创建一个新分支（停留在当前分支）。若切换到该分支需要使用 `git checkout <branch_name>`。
 
     git branch <branch_name>
 
-Create a new branch called branch_name. 创建一个新分支（停留在当前分支）。
+或直接使用：
 
     git checkout -b <new-branch>
 
-Create and check out new-branch. 创建一个新分支，并切换到该分支。
+删除指定 local 分支。如果该分支还没有 merge 到当前分支，则 Git 会阻止操作并提示 error。此时若要强制删除分支，使用 `-D` 作为参数。
 
     git branch -d <branch_name>
 
-删除指定 local 分支。如果该分支还没有 merge 到当前分支，则 Git 会阻止操作并提示 error。此时若要强制删除分支，使用 `-D` 作为参数。
+删除 fetch 到本地的 remote 分支。
 
     git branch -d -r <branch_name>
 
-删除 fetch 到本地的 remote 分支，即删除 remote-tracking branch。或执行以下操作：
+或执行以下操作：
+删除远端仓库工作分支。**注意**：确保该分支代码已上线再删除。
 
     git push origin --delete <branch_name>
 
-删除远端仓库工作分支（代替在 bitbucket 上手动删除）。**注意**：确保该分支代码已上线再删除。
-
-    git checkout <existing-branch>
-
-Check out the specified branch. This makes existing-branch the current branch, and updates the working directory to match. 跳转到已经创建的指定分支上，使得它成为当前工作分支。
+Rename the current branch to branch_new_name. 重命名当前分支。
 
     git branch -m <branch_new_name>
 
-Rename the current branch to branch_new_name. 重命名当前分支。
 
 ## Git 内部原理
 
@@ -230,40 +227,42 @@ Git 主要的对象类型除了数据对象、树对象 提交对象，还有标
 
 ## Syncing
 
-    git remote -v
-
 List the remote connections you have to other repositories. 列出所有与其他远端仓库的链接名，以及它们对应的 url。
+
+    git remote -v
 
 不加 `-v` 参数，则只显示 remote name。
 
-    git remote add myOrigin remote_repository_URL
-
 **添加**一个名为 myOrigin 的新的与远端仓库的链接。
 
-    git remote set-url origin remote_repository_URL
+    git remote add myOrigin remote_repository_URL
 
 **修改**名为 origin 的与远端仓库的链接的 url 值。
 
-    git fetch <remote_name>
+    git remote set-url origin remote_repository_URL
 
 把远端仓库的所有分支、标签拉取下来，取下来的内容也被视为远端分支，所以不会影响你本地开发工作。
+
+    git fetch <remote_name>
+
 与人合作同一个任务时，先运行 `git fetch`命令，把他的分支取下来，然后 `git checkout <分支名>`，在本地创建同名新分支，并跳转过去。
+
+Before fetching, remove any remote-tracking references that no longer exist on the remote. 删除本地所有 `remotes/<remote_name>/<branch_name>`在远程库中已经不存在的分支。
 
     git fetch --prune origin
     git fetch -p origin
 
-Before fetching, remove any remote-tracking references that no longer exist on the remote.
-删除本地所有 `remotes/<remote_name>/<branch_name>`在远程库中已经不存在的分支。
+取得指定的在远端的**当前分支**的副本，然后立刻把它合并到当前工作分支。This is the same as `git fetch <remote_name>` followed by `git merge origin/<current-branch>`. 
 
     git pull <remote_name>
 
-Fetch the specified remote's copy of the **current** branch and immediately merge it into the local copy. This is the same as `git fetch <remote_name>` followed by `git merge origin/<current-branch>`.
-
-取得指定的在远端的当前分支的副本，然后立刻把它合并到当前工作分支。
+通过该指令把本地仓库指定分支所有 necessary 的提交和 internal 对象传到远端仓库。该指令在目的仓库创建一个本地分支。为了阻止你overwrite提交，Git won't let you push when it results in a non-fast-forward merge in the destination repository。
 
     git push <remote_name> <branch_name>
 
-Push the specified branch to remote, along with all of the necessary commits and internal objects. This creates a local branch in the destination repository. To prevent you from overwriting commits, Git won't let you push when it results in a non-fast-forward merge in the destination repository. 把指定分支推到远端，通过该指令把本地仓库的提交传到远端仓库。该指令在目的仓库创建一个本地分支，以阻止你重写提交，在远端仓库造成冲突。
+如果希望只使用 `git push` 完成推送，而不指定远程仓库名和分支名，则可以设置：
+
+    git branch --set-upstream-to=<remote_name>/<branch_name>
 
 ### 将一个分支里的更新集成到另一个分支上
 
@@ -277,7 +276,7 @@ Push the specified branch to remote, along with all of the necessary commits and
     // 或者
     git checkout feature-branch
     git merge master
-    // 如果有冲突，解决冲突 → save file → `git add` → `git commit`
+    // 如果有冲突，解决冲突 → save file → `git add` → `git merge --continue`
 
 这样会在 feature 分支创建新的 merge 提交.
 
@@ -337,11 +336,10 @@ Move the current branch tip backward to commit and reset both the staging area a
 
 Reference logs, or "reflogs", 记录了分支和其他参考信息在本地仓库更新的时间。
 
-### 查看某一个版本的master分支代码
+### git checkout 其他用法
 
-Checking out Revision commitId (master)
-
-    git checkout -f commitId
+    git checkout -f <commit> # 强制切换到当前分支某一个版本的代码
+    git checkout <filename> # 放弃对文件进行的修改，重新从暂存区中取出原文件
 
 ## Git 文件状态
 
@@ -405,3 +403,7 @@ tracked 又分为三种状态：
 解法一：把 remote url 从ssh改为https
 
 解法二：在生成 SSH key 的时候，当终端提示设置 password 跳过就行（因为密码不是必须的）
+
+### 查看文件中每一行最近的修改信息
+
+    git blame <filename>
