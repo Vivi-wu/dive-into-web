@@ -40,7 +40,7 @@ rm project{1..3} # 删除 project1、project2、project3 三个文件
 history | grep grep # 显示在终端里运行过的命令中包含 grep 的命令
 alias gs # 查看指定命令的别名
 unalias gs # 删除指定命令的别名
-
+cmp mcd.sh mcd.dec.sh # 比较两个文件是否相同。可以使用 echo $? 查看返回值，0 表示相同，非 0 表示不同。
 ```
 
 <!--more-->
@@ -148,6 +148,17 @@ curl 指令不设置请求method的值则默认为 get。下面指令表示设�
 curl -H 'custom-header:值' -b ‘_ga=cookie1;_gid=cookie2’ http://www.example.com
 ```
 
+### 查看网络连接耗时
+
+```sh
+time curl https://www.baidu.com/
+
+# 输出结果，real 表示网络请求总共耗时，user 表示用户态耗时，sys 表示内核态耗时，两者相加是执行命令的总耗时。可以看出绝大多数时间花费在网络等待上。
+real	0m0.160s 
+user	0m0.022s
+sys 	0m0.013s
+```
+
 ### 监控进程内存使用情况
 
 Mac终端：
@@ -180,6 +191,19 @@ lsof -i:3011
 lsof -i tcp:9292
 kill -9 22133
 ```
+
+### source script.sh 和 ./script.sh 的区别
+
+一些术语：
+
++ shell session：一个终端会话，每个session有自己的环境变量、命令历史、当前工作目录等。
++ bash instance：一个新的bash实例/进程，可以用来执行命令，但不能改变当前目录。一个bash instance，可以有多个shell session，
+
+前者告诉当前的shell session执行script.sh，后者启动一个新的bash实例，然后在那里执行script.sh。
+
+区别：当script.sh试图改变目录，后者执行时会改变目录，但当程序退出并返回你的shell时，你的shell仍然保持在相同的位置。
+
+或者script.sh定义一些函数，你想在shell session里执行这些函数。你需要source这个script.sh，而不是执行它。如果你执行它，那些函数会被定义在启动的bash实例里，而不是定义在你当前的shell session里。
 
 ## Unix 信号
 

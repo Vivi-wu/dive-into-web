@@ -16,19 +16,6 @@ npm config get registry
 ```
 
 <!--more-->
-
-## Semantic Versioning 语义化版本
-
-版本格式：MAJOR.MINOR.PATCH（主版本号.次版本号.修订号）如：1.0.0
-
-版本号递增规则如下：
-
-+ 主版本号：发布了不兼容的 API 修改
-+ 次版本号：发布了向下兼容的功能性新增 add
-+ 修订号：发布了向下兼容的问题修正 fix
-
-先行版本号及版本编译元数据，可以加到“主版本号.次版本号.修订号”的后面作为延伸。如：1.0.0-beta
-
 ## npm脚本指令
 
 [npm-scripts](https://docs.npmjs.com/misc/scripts)
