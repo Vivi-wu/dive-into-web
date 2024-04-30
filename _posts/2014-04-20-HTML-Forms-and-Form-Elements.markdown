@@ -266,3 +266,16 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
     ```css
     input[type="search"]::-webkit-search-cancel-button{display: none;}
     ```
+
+### 获取表单提交的数据
+
+`new FormData()` 创建的对象会自动将 form 中的表单值包含进去，文件内容会被编码之后包含进去。**注意**：所有的输入元素都需要有 name 属性，否则无法访问到值。
+
+```javascript
+var formData = new FormData(document.getElementById("myForm"));
+var data = Objec.fromEntries(formData.entries());
+```
+
+`FormData.entries()` 返回一个包含 FormData 里所有键值对的 iterator。浏览器 console 直接打印是 `{}`。
+`Object.entries()` 方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值对数组。
+`Object.fromEntries()` 方法是 Object.entries() 的逆操作，用于将一个键值对数组转为对象。
