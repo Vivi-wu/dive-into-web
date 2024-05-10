@@ -24,6 +24,7 @@ cd ./home # 切换到当前目录下的 home 目录
 cd - # 切换到上一次所在目录
 ls # 列出当前目录下的文件和目录
 ls -l # 列出详细信息，包括文件权限、所有者、大小、修改日期
+mv meow.c woof.c # 重命名文件 meow.c 为 woof.c
 mkdir My\ Photos # 创建目录 My Photos
 rmdir My\ Photo/ # 删除目录 My Photo/
 rm test.txt # 删除文件 test.txt

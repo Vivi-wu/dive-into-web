@@ -45,7 +45,7 @@ function saveTabData(tab) {
 + 在项目目录下创建一个 manifest.json 文件，一切开始
 + 插件管理页：[chrome://extensions](chrome://extensions)，右上角开启 developer mode，工具栏选择“加载已解压扩展程序”，指向项目目录
 + 每次修改 manifest.json 文件，需要在扩展程序页的插件卡片上，点击“reload”；点击“查看视图”的背景页，可以打开devtools
-+ 使用 storage api可以让多个组件获取和更新一个value
++ 使用 storage api 可以让多个组件获取和更新一个value
 + 使用到的 chrome api 都需要注册到 manifest 文件的 permissions 中
 + 在 page_action 的 default_icon 字段设置**浏览器工具条**中该插件的图标，而扩展程序管理页卡片上的图标，则通 icon 字段设置
 + 声明了 page_action，还需要在 logic 文件里告诉浏览器用户何时与指定页面交互。
