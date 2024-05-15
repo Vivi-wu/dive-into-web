@@ -267,6 +267,15 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
     input[type="search"]::-webkit-search-cancel-button{display: none;}
     ```
 
+### 网站接入 Google search
+
+```html
+<form action="https://www.google.com/search" method="get">
+  <input type="text" name="q" placeholder="使用 Google 搜索">
+  <button type="submit">搜索</button>
+</form>
+```
+
 ### 获取表单提交的数据
 
 `new FormData()` 创建的对象会自动将 form 中的表单值包含进去，文件内容会被编码之后包含进去。**注意**：所有的输入元素都需要有 name 属性，否则无法访问到值。

@@ -4,7 +4,7 @@ category: HTML
 ---
 ## What is HTML?
 
-HTML is a **markup** language for **describing** web documents. 它是一种用于描述网页文件的标记语言。
+HTML is a **markup** language for **describing** web documents. HTML不是一种编程语言，而是一种用于描述网页文件的标记语言。
 
 + HTML stands for **H**yper **T**ext **M**arkup **L**anguage, a markup language is a set of markup tags
 + 每一个标签描述了 HTML 文件的内容

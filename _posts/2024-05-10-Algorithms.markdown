@@ -127,8 +127,8 @@ Else
 表示可能要计数的上限，通常用来考虑**最差的情况**worst case。运行效率从高到低依次为：
 
 + O(1)：常数时间（并不是说只需要一步，而是指不论规模多大，某件事只需执行一步或一定数量的步骤），如：打印。
-+ O(logn)：Binary search。
-+ O(n)：Linear search。
++ O(logn)：Binary search、Binary search tree（二叉搜索树）。
++ O(n)：Linear search、Hash table/dictionary 的查找。
 + O(nlogn)：Merge sort。
 + O(n^2)：n个人做n件事，如：Selection sort、冒泡排序。
 
@@ -136,7 +136,7 @@ Else
 
 表示下限，算法在**最好的情况**下需要的步骤。运行效率从高到低依次为：
 
-+ Ω(1)：Linear search、Binary search。
++ Ω(1)：Linear search、Binary search、Hash table/dictionary 的查找。
 + Ω(n)：冒泡排序。
 + Ω(nlogn)：Merge sort。
 + Ω(n^2)：Selection sort。
