@@ -2,6 +2,7 @@
 title:  "算法"
 category: Other
 ---
+If you want to improve your performance in terms of time and avoid stupid coping of data from one place to another again and again, if you want to save time, you're going to have to give up some space. 如果你想要节省时间，你将不得不放弃一些空间。
 
 Think algorithmically. 以算法的方式思考，将现实世界里的问题量化，将知识转化为实际编写代码来解决这些问题。
 
@@ -28,6 +29,32 @@ Else if 50 < doors[middle]
 Else if 50 > doors[middle]
     Search doors[middle+1] through doors[n-1]
 ```
+## Linked List
+
+把计算机的内存想象成一个canvas画布，把东西放到任何我们想要、任何 available 有空的位置上。每个值使用一个节点，并使用一个额外的指针来找到第一个节点。
+
+举例，数字1、2、3，分别对应内存地址0x123、0x456、0x789，除了为数字实际分配的内存外，为每个数字的指针也分配内存。与数字1绑定的指针内存里存放指向下一个元素的地址，这里是0x456。以此类推，数字2对应的指针内存里存放0x789。数字3则存放0x0，即 _NULL_，来终止列表。再使用一个额外的内存，来指向数字1的地址0x123。
+
+| 操作 | 运行效率 | 说明 |  
+| --- | :---: | --- |
+| 前置添加 | O(1) | prepend 一个元素只需修改指针指向，与链表长度无关。 |
+| 后置追加 | O(n) | append 一个元素需要遍历整个链表，找到列表的尾部。 |
+| 按顺序插入 | O(n) | insertion 最差的情况下位于链表的末尾。 |
+| 搜索 | O(n) | 由于每个节点在内存中的位置是随机的（不像数组建立在连续的内存块上，可以应用binary search），因此要找目标元素需要**遍历整个链表**。 |
+
+### Hash table Search
+
+理解哈希表的最简单的方式是——an array of linked lists（一个链表的数组）。如果将世界视为两个维度：
+
++ 垂直方向使用一个数组（这样就能获得数组的速度，因为数组中一切都是连续的），其 size 大小固定，通过简单的运算可以在 constant time 内定位到任意位置。无论是中间，还是第一个或最后一个。数组项是_null_或指向链表第一个节点的指针。
++ 水平方向使用linked list链表
+
+常见的哈希表应用如联系人电话簿，按a-z 26个字母排序，将首字母相同的人放在一起。以此推理该数据结构搜索的算法效率：
+
++ 最坏的情况下，比如所有人的姓名首字母都相同，相当于你有的只是一个链表。
++ 最好的情况下，比如不仅考虑首字母，还有第二个、第三个字母，即提供一个更大的数组（大小变为`26*26*26=17576`），足够将所有联系人都放在数组里，相当于只有an array of names（一个名称的列表）。找出每个位置就变成了计算 constant time，考虑三个字母的情况也就是计算3个位置的常量时间。
+
+而由于数组的连续性，会浪费大量的空间（并不存在一些字母组合开头的联系人），trade-off 是**以空间换时间**。
 
 ## 排序
 
@@ -114,7 +141,7 @@ Else
 
 该算法的效率为`O(nlogn)`。
 
-## 算法的运行时间
+## 算法的运行效率/运行时间
 
 当谈论算法的好坏时，通常指的是算法的 Running time 或者 efficiency。
 
@@ -124,27 +151,32 @@ Else
 
 ### 大写英文字母 O
 
-表示可能要计数的上限，通常用来考虑**最差的情况**worst case。运行效率从高到低依次为：
+表示可能要计数的上限，通常用来考虑 **worst case** 最差的情况下。运行效率从高到低依次为：
 
-+ O(1)：常数时间（并不是说只需要一步，而是指不论规模多大，某件事只需执行一步或一定数量的步骤），如：打印。
-+ O(logn)：Binary search、Binary search tree（二叉搜索树）。
-+ O(n)：Linear search、Hash table/dictionary 的查找。
-+ O(nlogn)：Merge sort。
-+ O(n^2)：n个人做n件事，如：Selection sort、冒泡排序。
+| 运行效率 | 算法 | 说明 |
+| --- | --- | --- |
+| O(1) | 打印 | 常量时间：并不是说只需要一步，而是指不论规模多大，某件事只需执行一步或一定数量的步骤 |
+| O(logn) | Binary search、Binary search tree（二叉搜索树） |
+| O(n) | Linear search、Hash table/dictionary search |
+| O(nlogn) | Merge sort |
+| O(n^2) | Selection sort、冒泡排序 | n个人做n件事 |
 
 ### 大写希腊字母 Ω
 
-表示下限，算法在**最好的情况**下需要的步骤。运行效率从高到低依次为：
+表示下限，算法在 **best case** 最好的情况下需要的步骤。运行效率从高到低依次为：
 
-+ Ω(1)：Linear search、Binary search、Hash table/dictionary 的查找。
-+ Ω(n)：冒泡排序。
-+ Ω(nlogn)：Merge sort。
-+ Ω(n^2)：Selection sort。
+| 运行效率 | 算法 |
+| --- | --- |
+| Ω(1) | Linear search、Binary search、Hash table/dictionary search |
+| Ω(n) | 冒泡排序 |
+| Ω(nlogn) | Merge sort |
+| Ω(n^2) | Selection sort |
 
 ### 大写罗马字母 Θ
 
-表示算法在最好和最坏的情况下运行时间相同，即 O 和 Ω 相同
+表示算法在最好和最坏的情况下运行效率相同，即 O 和 Ω 相同。
 
-+ Θ(n)，仍然需要n步。
-+ Θ(nlogn)：Merge sort。
-+ Θ(n^2)：Selection sort。
+| 运行效率 | 算法 |
+| --- | --- |
+| Θ(nlogn) | Merge sort |
+| Θ(n^2) | Selection sort |
