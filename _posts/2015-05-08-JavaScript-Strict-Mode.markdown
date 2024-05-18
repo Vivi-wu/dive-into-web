@@ -138,3 +138,9 @@ function downScripts() {
 
 + 不 block the page
 + 当DOM is ready时执行(但是 before `DOMContentLoaded` 事件)
+
+## 哈佛大学CS50
+
+1. 参数名称与变量名称保持一致，是一种惯例，for visual convienence 便于阅读。
+2. copy + paste 有时走捷径看似节省了时间，但当项目文件中出现了相同的代码。任何东西的重复，都是不好的设计。
+3. Client-side validation is not robust（仅通过 input attributes 使用浏览器验证，不是健壮的防御）。fu wu服务器经常被黑客攻击的一个原因就是没有做服务端验证。因此，永远不要信任用户的输入，比如：SQL injection attack。

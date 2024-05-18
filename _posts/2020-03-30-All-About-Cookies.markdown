@@ -2,11 +2,9 @@
 title:  "All About Cookies"
 category: JavaScript
 ---
-最近在公司技术论坛写了一篇关于Cookies的博文，搬过来。顺便整理下以前博文里相关的内容。
-
 本文内容基于这篇英文博客 [All about cookies](https://humanwhocodes.com/blog/2009/05/05/http-cookies-explained/)。
 
-HTTP Cookie也简称为“Cookie”，根据wikipedia记载，最早是在1994年由Netscape网络浏览器开发者 [Lou Montulli]([https://en.wikipedia.org/wiki/Lou_Montulli](https://en.wikipedia.org/wiki/Lou_Montulli)) 提出并用于网络通信。
+HTTP Cookie也简称为“Cookie”，根据wikipedia记载，最早是在1994年由Netscape网络浏览器开发者 [Lou Montulli]([https://en.wikipedia.org/wiki/Lou_Montulli](https://en.wikipedia.org/wiki/Lou_Montulli)) 提出并用于网络通信。服务端借助 cookie 实现用户与服务端之间的状态。
 
 <!--more-->
 
@@ -17,6 +15,8 @@ HTTP Cookie也简称为“Cookie”，根据wikipedia记载，最早是在1994�
 
 简单总结Cookie的工作原理：
 > 服务器或网页指示浏览器通过以纯文本文件形式，将用户状态信息存储在用户的计算机里，然后根据一定的规则将 Cookie 的值与后续每一个HTTP请求一起发回。
+
+今天即使你习惯使用隐私模式并清除你的浏览器标签，服务器仍然有可能跟踪你，比如：基于IP地址、安装的特定浏览器插件或字体。
 
 ### Cookie 文件
 上面提到，Cookie以文本文件的形式存储在用户的电脑里，那么这个文件具体在哪里？长什么样？

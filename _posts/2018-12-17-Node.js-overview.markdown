@@ -245,7 +245,7 @@ app.use(async (ctx, next) => {
 
 ### MVC
 
-最初接触web编程时学习的概念：Model-View-Controller，中文“模型-视图-控制器”。Controller负责业务逻辑，如：数据库操作，校验。View负责显示逻辑，替换变量输出用户最终看到的页面。Model是传给View的JS数据对象。
+最初接触web编程时学习的概念：Model-View-Controller，中文“模型-视图-控制器”。Controller 负责业务逻辑，如：数据库操作，表单提交校验。View 是人看到的一切，比如：模版、HTML页面、CSS样式、JavaScript脚本。负责显示逻辑，替换变量输出用户最终看到的页面。Model 模型即所有数据存储的地方，如：数据库、全局字典。是传给 View 的JS数据对象。
 
 ### Sequelize数据库
 

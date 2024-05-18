@@ -111,7 +111,7 @@ Conditional requests are HTTP requests [RFC7231] that include one or more header
 
 400 - Bad Request，客户端传入参数的错误，如必选参数没有传入等
 404 - Not Found，接口要访问的资源不存在，一般是URL或URL的参数错误
-405 - Method Not Allowed，接口访问的Method不正确，比如应该使用GET的接口使用了POST访问等
+405 - Method Not Allowed，接口访问的 Method 不正确，比如应该使用 GET 的接口使用了 POST 方法访问等
 500 - Internal Server Error，其它类型的错误默认都会返回500
 
 更全的解释看[这里](https://www.haorooms.com/post/long_lianjie_websocket)
