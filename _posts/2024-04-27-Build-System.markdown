@@ -6,12 +6,12 @@ category: Other
 
 构建系统是指用来自动化执行编译、链接、打包、测试等一系列操作的软件。你定义规则告诉这些工具如何执行命令、处理依赖关系、向目标文件输出结果。
 
-针对不同目的、不同语言有不同的构建系统，如 Java 的 Maven、JavaScript 的 npm等。
+针对不同目的、不同语言有不同的构建系统，如 Java 的 Maven、JavaScript 的 npm 等。
 
 Make 是最古老的构建系统，几乎存在于所有操作系统上。Make 命令将在当前目录里寻找名为 Makefile 的文件，然后根据 Makefile 的规则执行命令。
 
 <!-- more -->
-如果 makefil 中涉及的依赖没有发生变化，再次运行 make 命令将不会重新编译，而是直接使用上次编译的结果。即尝试做最少的工作来实现目标。
+如果 makefile 中涉及的依赖没有发生变化，再次运行 make 命令将不会重新编译，而是直接使用上次编译的结果。即尝试做最少的工作来实现目标。
 
 Makefile 也是一种 DSL（Domain Specific Language）语言。
 
@@ -31,7 +31,7 @@ Makefile 也是一种 DSL（Domain Specific Language）语言。
 
 ### Lockfile
 
-Lockfile 是指锁定依赖版本的一种机制，其内容主要一系列依赖和它们当前使用的版本。
+Lockfile 是指锁定依赖版本的一种机制，其内容主要是一系列依赖和它们当前使用的版本。
 
 + 确保你不会意外更新什么东西
 + 让构建过程更快，只要lockfile中依赖没有更新，就直接使用之前构建安装的依赖（无需下载和安装）
