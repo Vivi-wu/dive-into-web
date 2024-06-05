@@ -11,7 +11,7 @@ category: JavaScript
 <!--more-->
 
 + TS是JS的超集，因此的任何可执行的JS语句都是合法的TS。
-+ TS不会改变JS代码的runtime行为/表现，这个是TS的一个foundational promise
++ TS不会改变JS代码的runtime行为/表现，这个是TS的一个foundational promise。
 
 有两种语法构建TS的类型：_interface_ 和 _type_。建议使用前者，只在特殊类型使用后者（如：由简单类型组合创建复杂的类型）。
 

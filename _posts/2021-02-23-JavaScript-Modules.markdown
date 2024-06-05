@@ -75,3 +75,5 @@ export default await colors;
 ## CommonJS（Node.js）
 
 ## RequireJS（基于AMD模块系统）
+
+RequireJS 是一个非常小巧的JavaScript模块载入框架（防止js加载阻塞页面渲染），是AMD规范最好的实现者之一，同时可以和其他的框架协同工作。
