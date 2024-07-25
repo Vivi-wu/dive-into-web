@@ -48,7 +48,7 @@ _font-style_ 属性有 3 种值：
 
 + `normal` 正常显示
 + `italic` 斜体
-+ `oblique` 倾斜, oblique is very similar to italic, but less supported
++ `oblique` 常规字体的倾斜版。oblique is very similar to italic, but less supported
 
 斜体（italic）是一种简单的字体风格，对每个字母的结构有一些小改动，来反映变化的外观。与此不同，倾斜（oblique）文本则是正常竖直文本的倾斜版本。通常情况下，italic 和 oblique 文本在 web 浏览器中看上去完全一样。
 
@@ -99,7 +99,7 @@ _font-weight_ 用来设定字体的粗细，取值：
 
 ## Font variant
 
-_font-variant_ 属性用来设定文本是否以 small-caps 字体输出
+_font-variant_ 属性用来设定文本是否以 small-caps 小型大写字体输出：
 
 + `normal` 默认值
 + `small-caps`

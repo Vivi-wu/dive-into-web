@@ -164,7 +164,31 @@ _filter_ 属性给元素应用**一个或多个** graphical 效果，如：模�
 + `hue-rotate(deg)`，色调
 + `url()` SVG 过滤器，目前浏览器支持情况不好
 
-## Cursor光标样式
+## 应用
+
+### CSS spirit 精灵图
+
+又称为雪碧图，把很多小图标整合成一个图片，通过 background-position 分别指定使用这张图片中的哪个小图标。好处：减少外部请求数量。
+
+```css
+.home-icon {
+  width: 16px;
+  height: 16px;
+  background: url('sprite.png') no-repeat 0 0;
+}
+.next-icon {
+  width: 16px;
+  height: 16px;
+  background: url('sprite.png') no-repeat -16px 0;
+}
+.prev-icon {
+  width: 16px;
+  height: 16px;
+  background: url('sprite.png') no-repeat -32px 0;
+}
+```
+
+### Cursor光标样式
 
 可以通过 _caret_ （caret-shape、caret-color）改变输入框光标的颜色和形状。
 

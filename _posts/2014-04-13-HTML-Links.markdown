@@ -28,7 +28,7 @@ The HTML `<a>` tag defines a hyperlink that you can click on to jump to another 
 
 + An <span style="color:blue;text-decoration:underline;">unvisited</span> link is underlined and blue 未访问的链接，下划线，蓝色
 + A <span style="color:purple;text-decoration:underline;">visited</span> link is underlined and purple 已访问过的链接，下划线，紫色
-+ An <span style="color:red;text-decoration:underline;">active</span> link is underlined and red 活跃的链接（mouseover时），下划线，红色
++ An <span style="color:red;text-decoration:underline;">active</span> link is underlined and red 链接按下去不松开时，下划线，红色
 
 ### The _href_ Attribute
 

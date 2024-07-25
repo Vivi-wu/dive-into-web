@@ -43,11 +43,11 @@ _list_ 可以用来给有序 ordered 列表 和无序 unordered 列表设置不�
 
 ### List item marker
 
-使用 _list-style-type_ 属性来设置列表元素标记。默认值是 `disc`（实心小黑圆）。
+使用 _list-style-type_ 来设置列表元素标记。默认值是 `disc`（实心小黑圆）。
 
 在 HTML List 章节提到有序列表可以在元素 `<ol>` 上通过 _type_ 特性值来设置列表元素的标记，而 CSS 设置无序列表 `<ul>` 元素标记的值只有**四**种。
 
-所以这里只讲用 CSS 设置**有序列表**元素样式可取的值：
+这里只列举 CSS 设置**有序列表**元素样式可取的值：
 
 + armenian（亚美尼亚计数文字）
 + cjk-ideographic（中文：一，二，三）
@@ -102,7 +102,7 @@ _list-style_ 属性是以上三个属性的简写形式。需要遵循的顺序�
 
 给表格设置边框的时候，注意 `<table>`、`<th>` 和 `<td>` 的边框是**separate borders**。
 
-在 `<table>` 元素上，使用 _border-collapse_ 属性设置表格的边框<span class="t-red">是否要合并成一个单边边框</span>。
+在 `<table>` 元素上，使用 _border-collapse_ 属性设置表格的边框是否要合并成一个单边边框。
 
 **默认值**是 `separate`。当取值为 `collapse` 时，表格边框就会合并成 a single border。
 
@@ -114,7 +114,7 @@ _list-style_ 属性是以上三个属性的简写形式。需要遵循的顺序�
     + initial
     + inherit
 
-2. _empty-cells_ 设定是否隐藏表格中空的单元格的边框、背景。**默认值**是 `show`。希望隐藏的话，属性值设为 `hide`
+2. _empty-cells_ 设定是否隐藏表格中空的单元格的边框、背景。**默认值**是 `show`。希望隐藏的话，属性值设为 `hide`。
 
 ### Horizontal & Vertical alignment
 
@@ -130,7 +130,7 @@ _list-style_ 属性是以上三个属性的简写形式。需要遵循的顺序�
 
 ### Table caption
 
-使用 _caption-side_ 属性指定表格标题的位置。该属性在元素 `<caption>` （需要包裹在 `<table>` 元素里）上设置。
+使用 _caption-side_ 属性指定表格标题的位置。该属性用于`<caption>`元素（需要包裹在 `<table>` 元素里）。
 
 默认值是 `top`，还可以取值 `bottom`。
 
