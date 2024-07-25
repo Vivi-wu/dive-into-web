@@ -4,7 +4,7 @@ category: HTML
 ---
 ## Unordered HTML List 无序列表
 
-Starts with the `<ul>` tag. Each list item starts with the `<li>` tag. 无序列表项目由小黑实心圆标记。
+Starts with the `<ul>` tag. Each list item starts with the `<li>` tag. 无序列表项目默认由小黑实心圆标记。
 
     <ul>
       <li>Coffee</li>
@@ -17,7 +17,7 @@ Starts with the `<ul>` tag. Each list item starts with the `<li>` tag. 无序列
 
 ## Ordered HTML List 有序列表
 
-Starts with the `<ol>` tag. Each list item starts with the `<li>` tag and are marked with numbers. 数字列表每个元素由数字标记
+Starts with the `<ol>` tag. Each list item starts with the `<li>` tag and are marked with numbers. 数字列表默认每个元素由数字标记
 
 <!--more-->
 

@@ -2,19 +2,15 @@
 title:  "HTML Heading, Paragraph, Text Formatting"
 category: HTML
 ---
-## Headings
+## Headings 标题
 
-Headings are defined with the `<h1>` (the most important heading) to `<h6>` (the least important) heading tags.
+HTML文档一共有从`<h1>`到`<h6>`，共6个级别的标题，重要性依次递减。
 
 **注意**：不要使用heading来实现文本字体的**加粗**或<span style="font-size:large;">加大</span>效果。因为搜索引擎使用 heading 来索引网页的结构和内容。
 
 <!--more-->
 
-## Horizontal Rules
-
-`<hr>` 元素在网页中创建水平横线，可用于分隔内容。
-
-## Paragraphs
+## Paragraphs 段落
 
 HTML使用 `<p>` 元素来定义段落。
 
@@ -31,6 +27,10 @@ HTML使用 `<p>` 元素来定义段落。
 ### HTML `<pre>` Element
 
 该元素定义了 pre-formatted text, 使用该元素来保留其中 text node 里的空格和分段格式。
+
+## Horizontal Rules
+
+`<hr>` 元素在网页中创建水平横线，可用于分隔内容。
 
 ## Text Formatting
 

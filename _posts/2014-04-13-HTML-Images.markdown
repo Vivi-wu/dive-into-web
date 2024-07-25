@@ -2,10 +2,9 @@
 title:  "HTML Images"
 category: HTML
 ---
-## Images Syntax
+## Images 图像标签
 
-The `<img>` tag 定义了HTML的图片，it is empty, it **contains attributes only**, and has **no closing tag**.
-该标签是空的，只包含属性。
+`<img>` tag 定义了HTML的图片，it is empty, it **contains attributes only**, and has **no closing tag**. 该标签是空的，只包含属性。
 
 The `<img>` tag has two **required** attributes: _src_ and _alt_.
 
@@ -15,14 +14,17 @@ The `<img>` tag has two **required** attributes: _src_ and _alt_.
 
 <!--more-->
 
-## The Alt Attribute
+### The Src Attribute
 
-The _alt_ attribute provides alternative text for an image if it cannot be displayed (because of slow connection, an error in the src attribute, or if the user uses a screen reader)
-该属性为一个图片提供可替换的文字信息，如果用户因为某些原因无法看到它，或浏览器无法找到图片，会显示alt值定义的文本。
+用来设置引入图片的URL路径。
+
+### The Alt Attribute
+
+该属性为一个图片提供可替代的文本内容。如果用户因为某些原因无法看到它，或浏览器无法找到图片，会显示alt值定义的文本。
 
 Note: A web page will not validate correctly without the image's Alt attribute.
 
-## Image Size - Height and Width
+### Image Size - Height and Width
 
 图片尺寸可以通过`<img>`标签的 _style_, 即inline css设定，也可以通过 _height_ and _width_ 特性设定。默认以pixel为单位。
 

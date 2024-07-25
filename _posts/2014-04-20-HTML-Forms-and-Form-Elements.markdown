@@ -4,7 +4,9 @@ category: HTML
 ---
 ## Overview
 
-The `<form>` element defines an HTML form, 该元素定义了一个HTML表单，用于**收集用户输入**。表单包含 **form element**，由不同类型的输入元素组成，可以是 input elements（是最重要的表单元素，将在专门的章节写），多选框，单选框，提交按钮等。
+`<form>` 定义了一个HTML表单，用于**收集用户输入**。是用户操作网页与服务器之间交互的主要方式之一。
+
+表单包含 **form element**，由不同类型的输入元素组成，可以是 input elements（是最重要的表单元素，将在专门的章节写），多选框，单选框，提交按钮等。
 
 ### The _action_ Attribute
 
@@ -14,11 +16,9 @@ The `<form>` element defines an HTML form, 该元素定义了一个HTML表单，
 
 ### The _method_ Attribute
 
-该特性指定了在提交表单时使用的 HTTP 的方法 （**GET** or **POST**）
+该特性指定了在提交表单时使用的 HTTP 的方法 （**GET** or **POST**），默认是 **GET**。
 
     <form action="action_page.php" method="GET">
-
-默认是 **GET**.
 
 <!--more-->
 
@@ -109,13 +109,17 @@ POST 不限制，因为数据是 HTTP 的实体，且使用 MIME（Multipurpose 
 </div>
 <br/>
 
-通常 `<select>` 显示的文本是**第一个选项的文本**，可以通过在指定的 `<option>` 元素上添加 _selected_ 特性，让它作为默认被选项。
+通常 `<select>` 显示的文本是**第一个选项的文本**。可以通过在指定的 `<option>` 元素上添加 _selected_ 特性，让它作为默认被选项。
 
 与之相关的还有 `<optgroup>` 元素，用来把下拉列表里相关的 options 分组到一起。
 
+### Multiple 属性
+
+设置 _multiple_ 属性，可以同时选择多个选项。方式：鼠标选中一个选项，按住 ctrl 键再点击其他选项。
+
 ## The `<textarea>` Element
 
-该元素定义了一个 multi-line 多行输入区域。
+该元素定义了一个 multi-line 多行文本输入区域。
 
     <textarea name="message" rows="10" cols="30">
     The cat was playing in the garden.
