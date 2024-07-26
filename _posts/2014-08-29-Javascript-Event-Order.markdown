@@ -2,6 +2,16 @@
 title:  "JavaScript Event order"
 category: JavaScript
 ---
+常见的事件注册方法可以参看《HTML Forms and Form Elements》章节表单提交事件的例子。
+
+事件流：当触发某个元素的事件时，事件会按照DOM树的结构进行传播，传播过程分为捕获阶段和冒泡阶段。
+
+捕获阶段：从最外层的 document 节点开始，逐层向内/下传播，直到目标元素。
+
+冒泡阶段：从目标元素开始，逐层向外/上传播，直到最外层的 document 节点。
+
+<!--more-->
+
 本文从 [这篇文章](http://www.quirksmode.org/js/events_order.html) 里翻译主要内容。
 
 ## 问题描述
@@ -14,11 +24,9 @@ category: JavaScript
 
 在探讨上面的问题时，先来看一下模型。
 
-<!--more-->
-
 ### Two models
 
-在过去，关于事件执行顺序，Netscape 认为，元素 1 的 event handler 先执行，称为 event **capturing** 事件**捕捉**。
+在过去，关于事件执行顺序，Netscape 认为，元素 1 的 event handler 先执行，称为 event **capturing** 事件**捕获**。
 
 <img src="{{ "/assets/images/capturing.png" | prepend: site.baseurl }}" alt="Event capturing">
 
@@ -26,15 +34,15 @@ Microsoft 认为元素 2 的 event handler 先执行，称为 event **bubbling**
 
 <img src="{{ "/assets/images/bubbling.png" | prepend: site.baseurl }}" alt="Event bubbling">
 
-W3C 在这个纷争里选择了中立态度，在 W3C 事件模型里，任何事件首**先**被**捕捉**，直到事件到达目标元素，接着**再冒泡**上来。
+W3C 在这个纷争里选择了中立态度，在 W3C 事件模型里，任何事件首**先**被**捕获**，直到事件到达目标元素，接着**再冒泡**上来。
 
 <img src="{{ "/assets/images/w3c_event_model.png" | prepend: site.baseurl }}" alt="w3c event model">
 
-作为开发人员，可以决定是在捕捉阶段，还是冒泡阶段来注册事件处理函数，通过 `addEventListener()` 方法。
+作为开发人员，可以决定是在捕获阶段，还是冒泡阶段通过 `addEventListener()` 方法来注册事件处理函数。
 
-该函数最后一个参数如果为 `true`，表示为 capturing **捕捉阶段注册事件 handler**，若设为 `false`，则表示为 **冒泡阶段注册事件 handler**。
+该函数最后一个参数如果为 `true`，表示为 capturing **捕获阶段注册事件 handler**，若设为 `false`，则表示为 **冒泡阶段注册事件 handler**。
 
-## 区别举例
+### 区别举例
 
 下面通过举例说明，不同的事件注册函数设置，会有什么不同结果。
 
@@ -43,9 +51,9 @@ W3C 在这个纷争里选择了中立态度，在 W3C 事件模型里，任何�
     element1.addEventListener('click',doSomething2,true)
     element2.addEventListener('click',doSomething,false)
 
-1. click 事件首先开始于 capturing 阶段。事件检查**元素 2**是否有任何祖先元素，在捕捉阶段注册了 event handler。
+1. click 事件首先开始于 capturing 阶段。事件检查**元素 2**是否有任何祖先元素，在捕获阶段注册了 event handler。
 2. 找到了！**元素 1** 的 `doSomething2()` 被执行。
-3. 事件一直向下传递直到到达目标本身，再没有找到任何 handler for 捕捉阶段。接着，事件进入 bubbling 阶段，执行**元素 2** 为冒泡阶段注册的 `doSomething()`
+3. 事件一直向下传递直到到达目标本身，再没有找到任何 handler for 捕获阶段。接着，事件进入 bubbling 阶段，执行**元素 2** 为冒泡阶段注册的 `doSomething()`
 4. 事件再次向上传递，检查目标元素是否有任何祖先元素，在冒泡阶段注册了 event handler。没有！所以没有事都没发生。
 
 情况二：
@@ -53,7 +61,7 @@ W3C 在这个纷争里选择了中立态度，在 W3C 事件模型里，任何�
     element1.addEventListener('click',doSomething2,false)
     element2.addEventListener('click',doSomething,false)
 
-1. click 事件开始于 capturing 阶段。事件检查**元素 2**是否有任何祖先元素，在捕捉阶段为 _onclick_ 注册了 event handler。没有！
+1. click 事件开始于 capturing 阶段。事件检查**元素 2**是否有任何祖先元素，在捕获阶段为 _onclick_ 注册了 event handler。没有！
 2. 事件一直向下传递直到到达目标本身。接着，事件进入 bubbling 阶段，执行**元素 2** 为冒泡阶段注册的 `doSomething()`
 3. 事件再次向上传递，检查目标元素是否有任何祖先元素，在冒泡阶段注册了 event handler。
 4. 找到了！**元素 1** 的 `doSomething2()` 被执行。
@@ -66,15 +74,9 @@ W3C 在这个纷争里选择了中立态度，在 W3C 事件模型里，任何�
 
 被**视为**是在 bubbling **冒泡阶段的注册**。
 
-## 使用
-
-Setting **document–wide** event handlers is **necessary** in **drag–and–drop** scripts.
-
-因为任何事件 bubbling 最终会传到 document，把事件 handlers 注册在 document 级别，使得 _onmousemove_, _onmouseup_ 等事件处理函数总是能被执行，不管用户怎样移动鼠标。
-
 ### currentTarget
 
-理解<span class="t-blue">在 capturing 和 bubbling 阶段（if any），目标元素 **dose not change** 不变</span>，这一点很重要！
+理解<span class="t-blue">在 capturing 和 bubbling 阶段（if any），目标元素不变</span>，这一点很重要！
 
 在上面的例子里，目标 _target_ 总是保留一个指向**元素 2** 的 reference.
 
@@ -93,11 +95,15 @@ _target_ / _srcElement_ 都不能给出答案，因为他们都指向元素 2（
 
 <ins>不幸的是， Microsoft 事件注册模型中，`this` 关键字不指向 HTML 元素，也不包含类似 currentTarget 的属性</ins>。
 
+### relatedTarget
+
+只读属性。比如光标失焦事件，此时 `relatedTarget` 指的是接收到 focus（光标聚焦的）`EventTarget`。对于无法聚焦的元素，该属性返回 _null_.
+
 ### Turning it off
 
 更多的情况下，你是希望关掉所有的 capturing 和 bubbling，为保持函数之间不要互现干扰。
 
-Besides, if your document structure is very complex (lots of nested tables and such) you may save system resources by turning off bubbling. 如果你的文档结构非常复杂，bubbling 花费时间去查找每一个祖先元素。
+此外，如果你的文档结构非常复杂，bubbling 花费时间去查找每一个祖先元素。
 
 下面说一下停止冒泡阶段的传递的方法。
 
@@ -165,6 +171,27 @@ Promise.then 是异步执行的，而创建 Promise 实例 （executor）是同�
 // 4
 ```
 
-### relatedTarget
+## 事件委托
 
-只读属性。比如光标失焦事件，此时 ` relatedTarget` 指的是接收到 focus（光标聚焦的） `EventTarget`。对于无法聚焦的元素，该属性返回 null
+当为大量HTML元素注册相同的事件，并且事件的处理函数完全相同，可以使用事件委托来优化性能。
+
+怎么做？在这些HTML元素共同的父级元素注册事件。
+
+```html
+<ul id="list">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ul>
+
+<script>
+  var list = document.getElementById('list');
+  list.addEventListener('click', function(event) {
+    var target = event.target;
+    if (target.nodeName.toLowerCase() === 'li') {
+      console.log(target.textContent);
+    }
+  });
+  // 点击任何一个 li 元素都会触发该事件处理函数
+</script>
+```

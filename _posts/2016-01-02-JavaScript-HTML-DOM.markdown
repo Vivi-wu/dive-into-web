@@ -16,9 +16,9 @@ HTML DOM 规定了如何获取、改变、添加或删除 HTML 元素。
 
 ### HTML DOM Document
 
-当一个 HTML 文档加载入浏览器中，它就变成了一个 document object.
+当一个 HTML 文档加载入浏览器中，它就变成了一个 `document` 对象.
 
-HTML DOM Document 对象是页面中所有其他元素的主人。如果你想获取一个页面中的某个元素，always 从获取 document 对象开始。
+如果你想获取一个页面中的某个元素，always 从获取 document 对象开始。
 
 第一个 HTML DOM Level 1（1998）定义了11个对象，对象集合和属性。下面列举一些：
 
@@ -105,7 +105,7 @@ HTML DOM Document 对象是页面中所有其他元素的主人。如果你想�
 
 常见的查找 HTML 元素的方法:
 
-+ `getElementById(`'myEle'`)`, 如果找到，返回该元素作为一个 object，没找到，返回 _null_
++ `getElementById(`'myEle'`)`, 如果找到，返回该元素作为一个 object，没找到则返回 _null_
 + `getElementsByTagName(`'p'`)`, 以标签名查找。该方法返回一个 **node list**（像 array 一样的 nodes 集合），因此 nodes 可以使用 **index number** 像数组那样获取，也可使用 _length_ 属性，获取 node list 长度。但是 <span class="t-blue">node list 不是数组！</span>不能使用数组的方法，比如 `valueOf()` 或者 `join()`
 + `getElementsByClassName(`'test'`)`, 以 CSS 样式名查找。
 + `document.querySelectorAll( CSS selectors)`, 查找所有匹配一个特定 CSS 选择器的 HTML 元素。其中 CSS 选择器<span class="t-blue">可以是由逗号分隔的 string</span>。
@@ -167,7 +167,7 @@ HTML DOM Document 对象是页面中所有其他元素的主人。如果你想�
 
 ### Node Value
 
-_nodeValue_ 对于元素节点，是 **undefined**；对于文本节点，就是**文字本身**；对于特性节点，就是**特性值**。
+_nodeValue_ 对于元素节点，是 **undefined**；对于文本节点，就是**文字本身**；对于属性节点，就是**特性值**。
 
 注意：元素包含的文字内容是 text node，而不是 text。
 
