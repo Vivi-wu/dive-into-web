@@ -8,7 +8,7 @@ JS 对象是可以包含多个值的变量。这些值以 `name: value` 对的�
 
 ## 创建新对象
 
-1.Using an Object Literal，最简单的方法
+1.Using an Object Literal
 
 同数组一样，空格和换行不重要。
 
@@ -88,13 +88,13 @@ JS对象是易变的，由 reference 获取，而不是 value。
     var x = person;
     x.age = 10;           // This will change both x.age and person.age
 
-x is **not a copy** of person. It **is** person. Both x and person points to the **same** object。因为它们都指向同一个对象。
+x is **not a copy** of person. It **is** person. 它们都指向同一个对象。
 
 ## JavaScript Object properties
 
 name:value 称为JS对象的 **properties** 属性。
 
-**获取**对象的**属性**有两种方法：`objectName.propertyName` 或者 `objectName["propertyName"]`。
+**读取**对象的属性有两种方法：`objectName.propertyName` 或者 `objectName["propertyName"]`。
 
 后者也可以使用 expression 表达式：`objectName[expression]`，只要表达式被评估是属性的 name。
 
@@ -133,21 +133,20 @@ JS对象要执行的操作，存放在 properties 里作为 **function definitio
 + 获取对象的方法：`objectName.methodName()`
 + 给 existing 对象添加新方法：`objectName.methodName ＝ function() { code lines };`
 
-The methodName property will execute (as a function) when it is invoked with `()`. 在后面加括号，这个属性将作为一个函数来执行。
-
-如果不加后面的 `()`，则返回 function definition 函数定义。
+在 methodName property 后面加 `()` 括号，这个属性将作为一个函数来执行。如果不加后面的 `()`，则返回 function definition 函数定义。
 
 ## JavaScript Object Prototypes
 
-使用 an object constructor function 对象构造函数，创建对象的原型。如上面的例子中，构造函数就是 person 对象的原型。
+在 JS 中，函数是一个包含属性和方法的 Function 类型的对象。而原型（Prototype）就是 Function 类型对象的一个属性。
 
-All JavaScript objects inherit the properties and methods from their prototype. 所有JS对象从它们的原型，继承属性和方法。
++ 在函数定义时就包含了 prototype 属性，其初始值是一个空对象。
++ 原型用于保存对象的共享属性和方法。
++ 原型的属性可以有默认值。
++ 使用对象构造函数，创建对象的原型。如上面创建对象第3个例子中，构造函数就是 person 对象的原型。
 
 用 new 关键字创建的对象，继承该类对象的原型，如 new Date()，继承 `Date.prototype`。
 
 原型链 prototype chain 的根节点是 `Object.prototype`（其包含方法 toString()，这也是为什么所有 js 变量都可使用 toString 方法）
-
-Prototype properties can have prototype values (default values) 原型的属性可以有默认值。
 
 当我们尝试获取一个对象的属性发现不存在时，JS 会检测该对象的原型上是否存在那个属性。
 

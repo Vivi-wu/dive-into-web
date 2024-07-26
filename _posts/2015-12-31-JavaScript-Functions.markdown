@@ -20,16 +20,22 @@ Function names can contain letters 字母, digits 数字, underscores 下划线,
 
 ### Function Declarations 函数声明
 
-使用**函数语句**声明函数，函数被声明以后不会立即执行。
+使用**函数语句**声明函数，函数被声明以后不会立即执行。因为函数声明不是一个可执行的语句，所以在结尾处不加分号。
 
-Since a function declaration is not an executable statement, it is not common to end it with a semicolon. 因为函数声明不是一个可执行的语句，所以在结尾处不加分号。
+```js
+function myFunction(a, b) {
+  return a * b;
+}
+```
 
 ### Function Expressions 函数表达式
 
-JS函数可以使用表达式来定义。
+JS函数可以使用表达式/字面量方式来定义。
 
-    var x = function (a, b) {return a * b};
-    var z = x(4, 3);
+```js
+var fn = function (a, b) {return a * b};
+var z = fn(4, 3);
+```
 
 上面定义的函数是一个 **anonymous function** 无名函数，因为函数表达式存储在一个变量里，所以使用**变量名**来调用。
 
@@ -45,8 +51,10 @@ JS函数可以使用表达式来定义。
 
 当然也可以使用函数构造器来创建函数。通常避免使用 new 关键字。
 
-    var myFunction = new Function("a", "b", "return a * b");
-    var x = myFunction(4, 3);
+```js
+var myFunction = new Function("a", "b", "return a * b");
+var x = myFunction(4, 3);
+```
 
 ## Hoisting
 
@@ -76,7 +84,7 @@ var y = 7; // Initialize y
 
 函数可以有 0 或多个参数。
 
-关于函数的行参（函数定义里列出的参数名称），实参（函数调用是传递进来的 real 值）一些知识。
+函数的行参（函数定义里列出的参数名称）与实参（函数调用是传递进来的 real 值）：
 
 + 函数定义不指定参数的 data type
 + 传递参数时不检查参数 type
@@ -84,7 +92,7 @@ var y = 7; // Initialize y
 + 如果接收到的参数个数**少于**函数声明参数列表，the missing values are set to: **undefined**，最好给参数设置一个默认值。(参看 JavaScript Strict Mode 章节)
 + 如果接收到的参数个数**多于**声明参数列表里，这些参数 can be reached using the `arguments` object（JS函数内置对象，包含一个 array 放置函数调用时传递进来的参数）
 
-使用函数**内置参数对象** `arguments`，可以轻松实现输入值相加等操作。
+使用函数**内置参数对象** `arguments`，可以实现输入值相加等操作。
 
 ```js
 function sumAll() {
@@ -183,4 +191,4 @@ var charsInBody = (function counter(elm) {
 
 函数遇到 **return** 语句，立刻停止执行。通常计算一个返回值，给调用者。
 
-如果函数内没有 return 语句，或写为空返回（不指定 return 值），则函数返回 undefined
+如果函数内没有 return 语句，或写为空返回（不指定 return 值），则函数返回 _undefined_

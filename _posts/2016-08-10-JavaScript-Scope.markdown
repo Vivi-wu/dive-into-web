@@ -18,19 +18,17 @@ JS 的 block 没有作用域，只有 functions 有作用域。
 
 每个定义的函数都有自己的局部作用域，local scope 可以层层嵌套。
 
-Whenever JavaScript executes a function, a 'scope' object is created to hold the local variables created within that function.无论何时执行一个函数，一个scope对象被创建，用于保存那个函数内部创建的局部变量。
+无论何时执行一个函数，就有一个 scope 对象被创建，用于保存那个函数内部创建的局部变量。
 
 <!--more-->
 
-Any locally scoped items are not visible in the global scope - **unless exposed**，局部作用域里的东西对全局作用域不可见，除非对外暴露。
+在函数内部以 **var** 关键字声明的变量，是局部变量。声明在函数外部的变量，是全局变量。
 
-在函数内部以 **var** 关键字声明的变量，就是局部变量。声明在函数外部的变量，就是全局变量。
+局部作用域里的任何东西对全局作用域都是不可见，除非对外暴露。
 
 ## Function Scope
 
-All scopes in JavaScript are created with Function Scope **only**，JS中所有作用域只能由**函数作用域**创建。
-
-而不是由 for，while，或者 if，switch 等表达式语句创建。
+JS中所有作用域只能由**函数作用域**创建，而不是由 for，while，或者 if，switch 等表达式语句创建。
 
 ## Lexical Scope / Closures
 
@@ -46,7 +44,30 @@ All scopes in JavaScript are created with Function Scope **only**，JS中所有�
 
 当我们访问一个变量的时候，JavaScript 从最里面的作用域沿着作用域链向外部开始查找，直到找到我们想要的那个变量/对象/函数。
 
-### Closure 闭包
+### 其他
+
+在 HTML 中，全局 scope 就是窗口对象，因此 all global variables belong to the window object.
+
++ 局部变量只可以被定义它的函数使用，可以与全局变量重名。
++ 不使用关键字 **var** 创建的变量, are always global, 即使写在一个函数内部，也自动变为全局变量。
++ 只要你的应用（浏览器窗口或网页）在运行，全局变量就存在。
++ 局部变量在函数调用时创建，在函数执行结束时删除。
++ function argument 作为局部变量在函数内被使用。
+
+## Closure 闭包
+
+能够读取其他函数内部变量的函数，称为闭包。
+
+```js
+var b; // 闭包
+function f(){
+  var a = 'a';
+  b = function() {
+    return a + 'b';
+  };
+  return a;
+}
+```
 
 下面的例子中要实现计数加1的功能，但因为局部变量的生命周期只维持在函数调用期间，所以无论调用多少次 add 函数，结果都是 1.
 
@@ -60,8 +81,6 @@ add();
 add();
 // the counter should now be 3, but it does not work !
 ```
-
-一个能展现**闭包**是如何起作用的例子，就**是返回一个函数索引**。
 
 下面的例子使用闭包，解决了自增计数的问题。
 
@@ -83,15 +102,17 @@ add();
 3. 变量 add 成为一个可以获取父 scope 中变量 counter 的函数
 4. The counter is protected by the scope of the anonymous function（我认为这里指的是父函数）, and can only be changed using the add function
 
-### 其他
+### 闭包的特点与作用
 
-在 HTML 中，全局 scope 就是窗口对象，因此 all global variables belong to the window object.
+特点：
++ 在函数中定义有共享意义的局部变量
++ 函数（f）中声明有内嵌函数（g），g对f中的局部变量进行访问
++ 函数（f）向外返回此内嵌函数（g），外部通过g持有并访问声明在f中的局部变量
 
-+ 局部变量只可以被定义它的函数使用，可以与全局变量重名。
-+ 不使用关键字 **var** 创建的变量, are always global, 即使写在一个函数内部，也自动变为全局变量。
-+ 只要你的应用（浏览器窗口或网页）在运行，全局变量就存在。
-+ 局部变量在函数调用时创建，在函数执行结束时删除。
-+ function argument 函数参数作为局部变量在函数内被使用。
+作用：
++ 提供可共享的局部变量
++ 保护共享的局部变量，提供专门的读写变量的（闭包）函数
++ 避免全局污染
 
 ## Changing scope with .call() .apply() 和 .bind()
 
