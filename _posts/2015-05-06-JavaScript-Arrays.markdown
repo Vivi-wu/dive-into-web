@@ -297,11 +297,22 @@ arryB.forEach(index => arryA.splice(index, 1))
 
 #### 数组去重
 
-`Set` 对象允许我们存储任何数据类型的唯一值，whether primitive values or object references.
+使用数组新特性 `Set` 对象允许我们存储任何数据类型的唯一值，whether primitive values or object references.
 
 ```js
 // 在 Set 和 Array 之间转换
 const mySet = new Set([1, 2, 3, 4]);
 console.log(mySet.size); // 4
 console.log([...mySet]); // [1, 2, 3, 4]
+```
+
+#### 最大最小值
+
+使用数学类的 `Math.max()` 和 `Math.min()` 方法可以求出数组中的最大值和最小值。
+
+```js
+const arr = [1, 2, 3, 4, 5];
+const max = Math.max(...arr);
+const min = Math.min(...arr);
+console.log(max, min); // 5 1
 ```

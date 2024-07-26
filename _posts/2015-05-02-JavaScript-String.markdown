@@ -166,3 +166,11 @@ Whitespace in this context is all the whitespace characters (space, tab, no-brea
 referenceStr.localeCompare(compareString[, locales[, options]])
 ```
 返回**负数**表示，reference string 在 compare string 前面；**正数**表示reference string排在后面；**0**表示相等。
+
+### 重复
+
+使用 `repeat()` 方法，重复一个字符串 n 次。
+
+```js
+"hello ".repeat(5); // "hello hello hello hello hello"
+```
