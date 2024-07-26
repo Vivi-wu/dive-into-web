@@ -117,65 +117,25 @@ var d = new Date("Wed Mar 25 2015 09:56:24 GMT+0100 (W. Europe Standard Time)");
 + `toISOString()`，使用 ISO format 将日期对象转为字符串。格式为（_YYYY-MM-DDTHH:mm:ss.sssZ_），其时区总是 **zero** UTC offset，即 UTC 时间（末尾的"Z"表示UTC时间）
 + `toJSON()`，将日期对象转为 <strong>JSON 日期格式</strong>的字符串（_2016-10-18T11:46:01.970Z_），格式同 toISOString()（ISO-8601 standard）.
 + `toUTCString()`，`toGMLString()`，根据世界时间将日期对象转为字符串（_Tue, 18 Oct 2016 11:46:01 GMT_）
-+ `toDateString()`，converts the date (not the time **不含时间**) of a Date object into a readable string (结果为 _Tue Oct 18 2016_)
++ `toDateString()`，把日期对象的日期部分转为字符串 (结果为 _Tue Oct 18 2016_)
 
 ## Get Date
 
-<table>
-<thead>
-  <tr>
-    <th>方法</th>
-    <th>描述</th>
-  </tr>
-</thead>
-<tbody>
-<tr>
-  <td>getDate()</td>
-  <td>Get the day as a number 一个月中的 (1-31) 几号</td>
-</tr>
-<tr>
-  <td>getDay()</td>
-  <td>Get the weekday as a number (<b>0-6</b>) 星期几</td>
-</tr>
-<tr>
-  <td>getFullYear()</td>
-  <td>Get the four digit year (yyyy) 哪一年</td>
-</tr>
-<tr>
-  <td>getHours()</td>
-  <td>Get the hour (0-23)</td>
-</tr>
-<tr>
-  <td>getMilliseconds()</td>
-  <td>Get the milliseconds (0-999)</td>
-</tr>
-<tr>
-  <td>getMinutes()</td>
-  <td>Get the minutes (0-59)</td>
-</tr>
-<tr>
-  <td>getMonth()</td>
-  <td>Get the month (<b>0-11</b>) 几月</td>
-</tr>
-<tr>
-  <td>getSeconds()</td>
-  <td>Get the seconds (0-59)</td>
-</tr>
-<tr>
-  <td>getTime()</td>
-  <td>返回指定日期距离 0 时的 milliseconds。无论在哪个 timezone 得到的值都相同，结果同 valueOf()</td>
-</tr>
-<tr>
-  <td>Date.now()</td>
-  <td>返回自从 January 1, 1970 00:00:00 UTC 到现在的毫秒数。
-    <code>Date.now() === new Date().getTime()</code>
-  </td>
-</tr>
-<tr>
-  <td>Date.UTC(year,month,date,hours,minutes,seconds,milliseconds)</td>
-  <td>前三个参数是 required 的，该方法根据世界时间，返回自从1970年1月1日午夜开始到指定日期的毫秒数</td>
-</tr>
-</tbody></table>
+获取日期的常用方法：
+
+| 方法 | 描述 |
+| --- | --- |
+| getDate() | Get the day as a number，一个月中的 (1-31) 几号 |
+| getDay() | Get the weekday as a number，一个星期中的（0-6）星期几 |
+| getFullYear() | Get the four digit year (yyyy) 哪一年 |
+| getHours() | Get the hour (0-23) 小时 |
+| getMilliseconds() | Get the milliseconds (0-999) 毫秒 |
+| getMinutes() | Get the minutes (0-59) 分钟 |
+| getMonth() | Get the month **0-11** 月份 |
+| getSeconds() | Get the seconds (0-59) 秒 |
+| getTime() | 返回指定日期距离 0 时（January 1, 1970）的 milliseconds。无论在哪个 timezone 得到的值都相同，结果同 valueOf()。 |
+| Date.now() | 返回自从 January 1, 1970 00:00:00 UTC 到现在的毫秒数。等同于 `new Date().getTime()` |
+| Date.UTC(year, month, date, hours, minutes, seconds, milliseconds) | 前三个参数是 required 的，该方法根据世界时间，返回自从1970年1月1日午夜开始到指定日期的毫秒数 |
 
 In JavaScript, <span class="t-blue">the first (0) of the <em>week</em> means "Sunday"</span>，JS中的星期是<b>从星期天开始</b>。
 

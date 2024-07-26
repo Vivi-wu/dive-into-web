@@ -113,6 +113,7 @@ String(undefined)       // "undefined"
 以下均返回 false：
 
 ```js
+Boolean()
 Boolean(false)    
 Boolean(0)        
 Boolean(-0)       

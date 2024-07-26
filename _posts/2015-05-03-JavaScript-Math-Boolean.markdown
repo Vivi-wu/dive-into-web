@@ -16,6 +16,7 @@ category: JavaScript
 + `Math.floor(x)`，四舍五入，返回**向下**最接近参数 x 的整数
 + `Math.pow(x, n)`，返回 x 的 n 次幂
 + `Math.abs(x)`，返回数字 x 的绝对值
++ `Math.trunc(x)`，返回数字 x 的整数部分
 
 <!--more-->
 
@@ -31,9 +32,9 @@ Math.floor(4.7);            // returns 4
 
 ### Math Constants
 
-`Math.E` 自然对数函数的底数，又称 Euler's 欧拉数 (approx. 2.718)
+`Math.E` 自然对数函数的底数，又称 Euler's 欧拉常数 (approx. 2.718)
 
-`Math.PI`  (approx. 3.14)
+`Math.PI`  (approx. 3.14159)
 
 `Math.SQRT2` square root of 2 (2的平方根 approx. 1.414)
 
