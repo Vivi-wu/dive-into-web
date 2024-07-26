@@ -42,13 +42,17 @@ function isArray(myArray) {
 
 未初始化的变量 person 其值是 undefined，typeof 结果也是 undefined。
 
-    person = undefined;
+下列情况会返回 _undefined_：
 
-经过上述操作，变量的值设为 undefined，类型 type 也变为 undefined。
++ 访问未定义的变量
++ 没有定义 `return` 表达式的函数隐式返回
++ `return` 表达式没有显示的返回值
++ 访问不存在的属性
++ 任何被设置为 `undefined` 的变量
 
 ### Null
 
-JS中 `null` 表示什么都不是、不存在。<span class="t-blue">与 undefined 不同，`typeof null` 的结果是 `object`</span>。
+`null` 表示一个不再指向任何内存空间地址的变量。<span class="t-blue">与 undefined 不同，`typeof null` 的结果是 `object`</span>。
 
     null == undefined;  // true
     null === undefined; // false

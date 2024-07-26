@@ -16,9 +16,9 @@ JS数组用于在一个变量名下存储多个具有共性的数值。
 
 1. 创建数组：
 
-    (1)使用数组常量， `var array-name = [item1, item2, ...];`
+    (1)字面量：使用数组常量， `var array-name = [item1, item2, ...];`
 
-    (2)使用 new 关键字， var array-name = new Array(item1, item2, ...);
+    (2)构造函数方式：使用 new 关键字， var array-name = new Array(item1, item2, ...);
 
     通常使用第一种方法，更快更简单，第二种方法可能会产生 unexpected 结果。
 
@@ -26,8 +26,8 @@ JS数组用于在一个变量名下存储多个具有共性的数值。
         var points = new Array(40);       // Creates an array with 40 undefined elements !
         var steps = [ ...Array(4).keys() ].map(ele => ele + 1) // 创建 [1, 2, 3, 4]
 
-2. 获取数组项：`var item = array-name[index];`
-3. 改变数组项：`array-name[index] = value;`
+2. 读取数组项：`var item = array-name[index];`
+3. 修改数组项：`array-name[index] = value;`
 
 ## Arrays are Objects
 
@@ -118,7 +118,7 @@ var tmpArry = Array.prototype.slice.call(document.querySelectorAll('[type="check
 因为JS Array 是特殊的 object，因此可以使用操作符 **delete**。（原因见 Object 章节）
 
     var fruits = ["Banana", "Orange", "Apple", "Mango"];
-    delete fruits[0];    // 数组 fruits 中第一个元素将变成 undefined
+    delete fruits[0];    // fruits 数组中第一个元素变成 undefined
 
 这样会在数组中产生一些 `undefined` 的空洞，因此删除数组首尾的元素时**最好使用 pop() 或 shift()**。
 
@@ -254,7 +254,7 @@ parseInt("1", 0, ["1", "2"]) // 十进制输出 '1'
 parseInt("2", 1, ["1", "2"]) // 无法转为number，radix值必须从2到36
 ```
 
-### 补充
+### 遍历
 
 对数组中每一项执行一个操作：
 
