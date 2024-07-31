@@ -23,7 +23,8 @@ JS数组用于在一个变量名下存储多个具有共性的数值。
     通常使用第一种方法，更快更简单，第二种方法可能会产生 unexpected 结果。
 
         var points = new Array(40, 100);  // Creates an array with two elements (40 and 100)
-        var points = new Array(40);       // Creates an array with 40 undefined elements !
+        var points = new Array(40);       // 创建一个数组长度为 40，每个元素都是 undefined 的数组
+        var point = Array.of(40);         // 创建一个数组长度为 1，元素为 40 的数组
         var steps = [ ...Array(4).keys() ].map(ele => ele + 1) // 创建 [1, 2, 3, 4]
 
 2. 读取数组项：`var item = array-name[index];`
@@ -83,7 +84,7 @@ fruits instanceof Object;    // returns true
 JS数组也有 `indexOf()`，`lastIndexOf()` 方法，返回数组中指定 item 的位置，没找到返回 `-1`。
 
 + `includes(searchElement[, fromIndex])`，该方法检查数组中是否含有某元素，有则返回 true，无则返回 false。比较strings和characters时，是 case-sensitive 的。
-+ `find(`callback`)`，接收函数同 every() 方法，返回数组中第一个满足test函数的数组项，没找到返回 `undefined`.
++ `find(`callback`)`，接收函数同 every() 方法，返回数组中**第一个满足**test函数的**数组项**，没找到返回 `undefined`.
 
 ### Convert Arrays to Strings
 
@@ -99,11 +100,17 @@ fruits.join("");    // 结果是：BananaOrangeAppleMango
 fruits.join();      // 结果是：Banana,Orange,Apple,Mango
 ```
 
-### Convert ArrayLike list to Arrays
+### Convert ArrayLike list to Arrays 类数组转数组
 
 ```js
 var tmpArry = Array.prototype.slice.call(document.querySelectorAll('[type="checkbox"]:checked'))
 // 获取页面上所有选中的多选框HTMLElement
+```
+
+ES6 新特性：
+
+```js
+let items = Array.from(document.querySelectorAll('li'));
 ```
 
 ### Remove elements
@@ -236,9 +243,9 @@ _start_ 未定义，则从 0 开始；大于 array length 返回 `[]`。
 
 有时我们需要对数组中每个元素进行测试。
 
-+ `every()`，依次检验数组中的元素是否**全部**通过某种测试，全部通过返回 `true`。一旦**遇到不通过的**数组元素，**立即停止检查**剩下的元素，返回 `false`。
++ `every()`，依次检验数组中的元素是否**全部**通过某种测试，全部通过返回 `true`。一旦**遇到不通过**的数组元素，**立即停止检查**剩下的元素，返回 `false`。
 + `some()`，依次检查数组中的元素是否**至少有一个**通过某种测试的，一旦**遇到通过的**数组元素，**立即停止检查**剩下的元素，返回 `true`。全都不通过，返回 `false`。
-+ `filter()`，返回由所有**通过某种测试的数组元素**所组成的**新数组**。如果数组项都不满足条件，则返回 `[]`。该方法比 for 循环快；如果使用 predefined 函数将比使用 anonymous 函数更快。
++ `filter()`，返回由所有**通过某种测试的数组元素**组成的**新数组**。如果数组项都不满足条件，则返回 `[]`。该方法比 for 循环快；如果使用 predefined 函数将比使用 anonymous 函数更快。
 + `findIndex()`，返回数组中第一个通过test函数的item的**索引**，否则返回 `-1`。
 
 以上方法都是类似的结构：
@@ -259,7 +266,7 @@ parseInt("2", 1, ["1", "2"]) // 无法转为number，radix值必须从2到36
 对数组中每一项执行一个操作：
 
 + `forEach(callback[, thisArg])`，让数组中每一项都执行一次给定的函数操作。特别要注意的是：**没有办法中止或者跳出 forEach 循环，除非抛出一个异常**。如有要中断的必要，不如使用一个简单的 for 循环实现。
-+ `map(callback[, thisArg])` ，该方法返回一个由原数组中的**每个元素调用指定方法的返回值**组成的新数组。
++ `map(callback[, thisArg])` ，该方法返回一个由原数组中的**每个元素调用指定方法的返回值**组成的**新数组**。
 
     此处 callback 参数同上面的 every() 等函数，多了一个可选的 thisArg 参数，用来指定 callback 函数内 this 的值的对象。
 
