@@ -209,3 +209,43 @@ tmpArry = Object.values(this.otherStoreUrl).filter(ele => ele.length > 1)
 + 不能复制属性值为 function 的 属性
 + 不能复制属性值为 _undefined_ 的属性（值为 _null_ 可以）
 + 属性值为 JS Date 对象的复制结果变为 ISO 标准日期格式（YYYY-MM-DDTHH:mm:ss.sssZ）的字符串
+
+## 继承
+
+继承是面向对象软件技术中的一个概念，使得复用代码非常容易，缩短开发周期，降低开发费用。
+
+子类继承父类的特征和行为，子类对象（实例）具有父类的所有属性和方法，或子类从父类继承方法，使其具有与父类相同的行为。
+
+### 原型式继承
+
+定义一个函数，在函数中创建一个临时性的构造函数，将参数传入的对象作为这个构造函数的原型，最后返回这个构造函数的实例。
+
+```js
+function myObject(o) {
+    function F() {}
+    F.prototype = o;
+    return new F();
+}
+let person = {
+    name: "John",
+    friends: ["Alice", "Bob"]
+};
+let anotherPerson = new myObject(person);
+anotherPerson.friends.push("Charlie");
+console.log(anotherPerson.friends); // ['Alice', 'Bob', 'Charlie']
+```
+
+### 构造函数继承
+
+在子对象的构造函数中调用父对象的构造函数。具体通过 `call()` 或 `apply()` 方法实现。
+
+```js
+function SuperType() {
+    this.colors = ["red", "blue", "green"];
+}
+function SubType() {
+    SuperType.call(this); // 或 SuperType.apply(this, arguments);
+}
+let instance = new SubType();
+console.log(instance.colors); // ["red", "blue", "green"]
+```

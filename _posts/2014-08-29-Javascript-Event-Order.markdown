@@ -131,20 +131,73 @@ function doSomething(e) {
 
 ## Event Loop
 
-事件循环非 JS 独有。所谓的 Event Loop 是负责执行队列中的回调，并且将其压入到函数调用栈中的机制。
+Event Loop 是一个异步处理结构，用于查询、等待和发送消息和事件。
 
-其中的调用栈（Call Stack ，LIFO 先进后出）会记录所有的函数调用信息。当我们调用某个函数时，会将其参数与局部变量等压入栈中；在执行完毕后，会弹出栈首的元素。而堆（Heap）则存放了大量的非结构化数据，譬如程序分配的变量与对象。队列（Callback Queue，先入先出）则包含了一系列待处理的信息与相关联的回调函数。
+时间循环的工作方式：负责执行队列中的回调，并将其压入函数调用栈。其中的调用栈（Call Stack ，LIFO 先进后出）会记录所有的函数调用信息。当调用某个函数时，会将其参数与局部变量等压入栈中；在执行完毕后，会弹出栈首的元素。而堆（Heap）则存放了大量的非结构化数据，譬如程序分配的变量与对象。队列（Callback Queue，FIFO 先入先出）则包含了一系列待处理的信息与相关联的回调函数。
 
 每个 JavaScript 运行时都必须包含一个任务队列。
 
 譬如按钮点击或者 HTTP 请求响应都会作为消息存放在任务队列中；需要注意的是，仅当这些事件的回调函数存在时才会被放入任务队列，否则会被直接忽略。
 
-JavaScript 中的任务分为 MacroTask 与 MicroTask 两种。
+### 异步任务分类
 
-+ MacroTask 包含了 setTimeout, setInterval, setImmediate, requestAnimationFrame, I/O, UI rendering 等
-+ MicroTask 包含了 process.nextTick, Promises, Object.observe, MutationObserver 等
++ MacroTask（宏任务，一般是用户发起的任务）包含了 setTimeout, setInterval, setImmediate, requestAnimationFrame, I/O, UI rendering 等
++ MicroTask（微任务，一般是操作系统引擎发起的任务）包含了 process.nextTick, Promises, Object.observe, MutationObserver 等
+
+### 执行优先级
+
+同步任务-》微任务-》宏任务
+
+举例：
+
+```js
+console.log(1); // 同步任务
+
+setTimeout(() => {
+  console.log(2); // 宏任务
+}, 0);
+
+new Promise((resolve, reject) => {
+  console.log(3); // 同步任务
+  resolve();
+  console.log(4); // 同步任务
+}).then(() => {
+  console.log(5); // 微任务
+});
+console.log(6); // 同步任务
+
+// 输出：1 3 4 6 5 2
+```
 
 ## Promise
+
+| 方式 | 说明 | 优点 | 缺点 |
+| --- | --- | --- | --- |
+| 同步执行 | 所有任务组成一个序列，前一个任务结束，才会执行下一个任务 | 任务不会遗漏 | 执行总时间长，前序任务会阻塞后续任务 |
+| 异步执行 | 所有任务并发执行，谁先执行完毕，谁先响应 | 执行速度快，程序执行总时间短 | 早期JS为在异步执行环境下，实现任务按序执行必须层层嵌套回调函数，开发工作量大、逻辑复杂、容易出错 |
+
+Promise 构造器指定某个任务完成后，根据这个任务执行的不同结果，去执行不同的回调函数（即下一个任务）。
+
+共有三种状态：
++ pending：初始状态，任务还完成时触发
++ fulfilled：任务完成后触发
++ rejected：任务失败后出发
+
+用例：
+```js
+function Hello() {
+  return new Promise((resolve, reject) => {
+    console.log('in Hello function');
+    setTimeout(resolve, 1000);
+    // setTimeout(reject, 1000); // 失败时调用 reject
+  })
+}
+Hello().then(() =>{
+  console.log('from resolve')
+}).catch(() => {
+  console.log('from reject')
+})
+```
 
 Promise.then 是异步执行的，而创建 Promise 实例 （executor）是同步执行的。
 
