@@ -36,3 +36,85 @@ const parts = ['shoulders', 'knees'];
 const lyrics = ['head', ...parts, 'and', 'toes'];
 //  ["head", "shoulders", "knees", "and", "toes"]
 ```
+
+## 迭代器 iterator
+
+早期使用 for 循环方式遍历数据。迭代器为各种数据结构提供统一的访问接口。
+
+## 生成器 generator
+
+列表中所有元素都存在内存中，当数据量过大时，非常耗内存。如果列表元素可以按照某种算法推算出来，就可以在循环中不断推算出后续元素。从而避免创建完整的列表，节省内存。
+
+## Proxy
+
+Proxy 和 Reflect 是ES6为操作对象引入的API。Proxy 可以对目标对象的读取、函数调用等操作进行拦截，并根据自己的逻辑进行处理。
+
+Proxy 不直接操作对象，而是通过对象的代理对象进行操作。Reflect 挂载了很多静态方法（类似 `Math.round()` 直接使用，而无需 new 操作）
+
+Proxy 对象由两部分组成：
++ target：目标对象。
++ handler：一个对象，其属性是一组函数，声明了对target的指定行为。
+
+举例：
+
+```js
+let person = { name: 'Jack', age: 20 };
+let handler = {
+  get: function(target, key) {
+    console.log(`Getting ${key}`);
+    return target[key];
+  },
+  set: function(target, key, value) {
+    console.log(`Setting ${key} = ${value}`);
+    target[key] = value;
+  }
+};
+
+let proxy = new Proxy(person, handler);
+
+proxy.name;
+// Getting name
+// "Jack"
+
+proxy.age = 21; 
+// Setting age = 21
+// 21
+```
+
+### handler 对象方法
+
+除了上面提到的 `get` 和 `set` 方法，还有 `apply`、`has` 等。
+
+其中 `apply(target, cxt, args)` 方法用于拦截函数的调用，并返回函数执行结果。
+
+```js
+function sub(a, b) {
+  return a - b;
+}
+let handler = {
+  apply: function(target, cxt, args) {
+    console.log('handler.apply called');
+    return Reflect.apply(...arguments); // 等同于 Function.prototype.apply.call(target, cxt, args)
+  }
+};
+let proxy = new Proxy(sub, handler);
+proxy(10, 3);
+// handler.apply called
+// 7
+```
+
+`has(target, key)` 方法用于拦截 `in` 操作符，判断target对象是否存在属性key。此方法不能判断属性是对象自身的，还是继承的。
+
+```js
+let handler = {
+  has: function(target, key) {
+    console.log('handler.has called');
+    return key in target;
+  }
+};
+let exam = { name: 'John' };
+let proxy = new Proxy(exam, handler);
+'name' in proxy;
+// handler.has called
+// true
+```
