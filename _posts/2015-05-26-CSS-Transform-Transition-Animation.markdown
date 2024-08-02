@@ -43,7 +43,7 @@ _transform-origin_ 用来修改元素变形的原点位置。可取的值从左�
 
 _transition_ 属性使我们能够在给定的时间段里平滑地改变属性值。
 
-注意：<span class="t-blue">transition 写在元素的默认状态里</span>。
+注意：transition 写在元素的**默认状态**样式定义里。
 
 为实现特效（过渡）, **必须至少指定**:
 

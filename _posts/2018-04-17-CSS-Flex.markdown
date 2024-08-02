@@ -5,7 +5,15 @@ category: CSS
 
 ## CSS Flexbox
 
-提供了一种更加灵活的方式来对元素进行布局，使得页面的布局更加灵活、响应式。如：创建multi-column布局。
+弹性盒子是一种当页面需要适应不同的屏幕大小以及设备类型时，确保元素拥有恰当的行为的布局方式。
+
+它提供了一种更加灵活的方式来对元素进行布局（排列、对齐、分配空白空间）。如：创建multi-column布局。
+
+### 基本概念
+
+flex container 伸缩容器、flex item 伸缩项目、axis 轴（main axis主轴、cross axis交叉轴）、direction 方向（row、column）、wrap 换行。
+
+<!--more-->
 
 ### flex
 
@@ -17,8 +25,6 @@ category: CSS
 + 如果所有子元素 _flex-grow_ 的值都相等，则 flex 容器中的**剩余空间将平均分配给所有子元素**。
 
 通过在子元素上设置 `flex: 1 1 0;` 可实现 flex 容器被平均分配的效果。
-
-<!--more-->
 
 ## flex-flow
 
