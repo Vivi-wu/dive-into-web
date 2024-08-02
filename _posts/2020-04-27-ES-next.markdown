@@ -5,7 +5,65 @@ category: JavaScript
 
 ## 异步函数
 
-由 async 标记的函数称为异步函数，在异步函数中，可以用 await 调用另一个异步函数。
+使用 `async` 关键字声明的函数称为异步函数。
+
+`async` 与 `await` 关键字可以使用更简洁的方式写出基于 Promise 的异步行为，而无需刻意地链式调用 promise。
+
+举例：
+
+```js
+const fetchUser = async (id) => {
+    try {
+        const user = await fetchData(id);
+        console.log('User:', user);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
+fetchUser(123);
+```
+
+### async 语法
+
+特征是在 function 名字前加 `async` 关键字。
+
+1、Async 函数返回一个 Promise 对象，可以使用 `then` 方法添加回调函数。
+
+```js
+async function helloAsync() {
+    return 'Hello, async!';
+}
+console.log(helloAsync()); // Promise { <state>: "pending" }
+
+helloAsync().then(result => {
+    console.log(result)
+});
+// Hello, async!
+```
+
+2、async 函数执行时遇到 `await` 关键字就**先暂停执行**，等到触发的异步操作完成，再恢复 async 函数的执行并返回解析值。
+
+`await` 关键字仅在 async 函数中有效。
+
+```js
+function testAwait() {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            console.log('testAwait');
+            resolve();
+        }, 1000);
+    });
+}
+
+async function helloAsync() {
+    await testAwait();
+    console.log('helloAsync');
+}
+
+helloAsync();
+// testAwait
+// helloAsync
+```
 
 ## computed property name
 

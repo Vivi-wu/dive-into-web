@@ -2,17 +2,52 @@
 title:  "JavaScript模块化"
 category: JavaScript
 ---
-将 JS 分成独立的模块，在需要时引入。
+## ES Modules
+
+ES6 模块是一种在JavaScript中定义和导出可重用代码的标准化方法。
+
++ 使用 `import` 和 `export` 关键字来定义和导出代码。
++ 可以在应用程序中按需加载。
++ 提供了一种在应用程序中管理依赖项的方式，使代码更易维护和扩展。
+
+<!--more-->
 
 注意，模块的功能被引入单一脚本的作用域，它们非全局作用域可见。
 
-## ES Modules
+## 语法
 
-现代浏览器原生支持模块功能。一个js文件即一个 module。
+现代浏览器原生支持模块功能。一个.js文件即一个 module。
 
-在想要导出模块 item 前加 `export`，通过 `import` 语句在 `{}` 中以逗号分隔引入需要的功能。
+在一个文件中，可以有多个 export、import，但只能有一个 `export default`。
 
-<!--more-->
+通过 `export` 方式导出，在 `import` 导入时，要加 `{}` 且以逗号分隔引入需要的功能。`export default` 导出则不需要。
+
+export default向外暴露的成员，可以使用任意变量来接收。
+
+```js
+// app.js
+export function myLogger(msg) {
+  console.log('myLogger:', msg);
+}
+export class MyClass {
+  constructor() {
+    ...
+  }
+}
+// MyDefaultExport.js
+export default function myFunction() {
+  ...
+}
+
+// main.js
+import { myLogger, MyClass } from 'app.js';
+import MyDefaultComponent from './MyDefaultExport';
+
+const MyComponent = () => {};
+export default MyComponent;
+```
+
+## 实例
 
 通过以下方式在 html 中引入模块文件。
 ```html
