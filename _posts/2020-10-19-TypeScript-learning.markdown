@@ -6,11 +6,14 @@ category: JavaScript
 
 在不运行代码的情况下检测代码中的错误，称为**静态检查**。根据要操作的值的类型，来确定是什么错误和什么不是错误，称为**静态类型检查**。
 
-总结：TypeScript是静态类型检查器。
-
 <!--more-->
 
+## 基本概念
+
+TypeScript 是静态类型检查器。
+
 + TS是JS的超集，因此的任何可执行的JS语句都是合法的TS。
++ TS可以通过 TypeScript 编译器或 Babel 转译为原生JS代码。
 + TS不会改变JS代码的runtime行为/表现，这个是TS的一个foundational promise。
 
 有两种语法构建TS的类型：_interface_ 和 _type_。建议使用前者，只在特殊类型使用后者（如：由简单类型组合创建复杂的类型）。
@@ -140,21 +143,40 @@ let colorName: string = Color[c]; // "Green"
 console.log(Color[4]);            // "Blue"
 ```
 
-### Unknown
-
-当我们不确定变量的类型或者希望接受 API 里的任何类型的值，可以设其类型为 _unknown_
-
-无法对 unknown 的变量使用任何其他明确类型的方法，除 Object 的 _valueOf()_ 和 _toString()_。
-
 ### Any
 
-当变量的类型信息不明确（与已有的js代码一起协作时），使用 _any_ 类型可以让变量免除类型检查。
+当变量的类型信息不明确（JS中很多API**允许接收任意类型**的参数，当TS与已有的js代码一起协作时），使用 _any_ 类型可以让变量**免除类型检查**。
 
 该类型允许变量访问任意属性，甚至是不存在的属性。
 
 any 类型会穿透对象的属性。
 
-使用 any 会丢失掉使用TS的主要动机——类型安全，非必要时应尽量避免。
+使用 _any_ 会丢失掉使用TS的主要动机——类型安全，非必要时应尽量避免。
+
+### Unknown
+
+_unknown_ 与 _any_ 类似，同样表示允许接收任意类型。但比 any 更安全。
+
+无法对 unknown 的变量使用任何其他明确类型的方法，除 Object 的 _valueOf()_ 和 _toString()_。
+
+举例：
+
+```ts
+let value_unknown: unknown;
+// 以下ts会自动报错，因为当前没有明确变量是什么类型。
+value_unknown.foo.bar; // Error: Object is of type 'unknown'.
+value_unknown(); // Error: Object is of type 'unknown'.
+
+// 在对unknown类型的变量进行类型检查之前，不能进行任何操作。要这样做：
+if (typeof value_unknown === "function") {
+  value_unknown();
+}
+
+let value_any: any;
+// 以下TS不会报错，但最终运行时会报错。因此，any虽然使用灵活，但存在安全隐患。
+value_any.foo.bar; // OK
+value_any(); // OK
+```
 
 ### set new property on `window` object
 
@@ -192,4 +214,18 @@ class Foo {
 
 ```ts
 type ordinaryObject = {[key: string]: number};
+```
+
+## 运行 .ts文件
+
+全局安装 tsc 编译器：
+
+```bash
+npm install -g typescript
+```
+
+编译：
+
+```bash
+tsc hello.ts
 ```
