@@ -87,7 +87,7 @@ _window.sessionStorage_ 是 H5 Web Storage API 第二种类型，用法、优劣
 + `clear()` 函数删除存储列表中所有的数据，空的 Storage 对象调用此函数也是安全的，只是不执行任何操作。
 + 如果用户已关闭了网站的存储，或存储达到其最大的容量，此时设置数据将抛出 QUOTA_EXCEEDED_ERR 错误。
 + 只要有同源的 Storage 事件发生（包括 SessionStorage 和 LocalStorage 触发的事件），已注册的所有事件侦听器作为事件处理程序就会接到相应的 Storage 事件。该事件中包含与存储变化有关的信息。如果是新添加的数据，则 oldValue 属性值为 _null_；如果是被删除的数据，则 newValue 属性值为 _null_。
-+ 关闭当前 tab 可以自动清除 sessionStorage，但登出操作在同一个tab页进行，故需要手动清除.
++ 打开多个相同URL的标签页，每个标签页创建各自的 sessionStorage 对象。关闭对应标签页，会清除该标签页的 sessionStorage 对象。
 
 ## IndexedDB
 
