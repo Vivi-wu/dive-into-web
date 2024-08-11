@@ -108,3 +108,22 @@ IndexedDB 是一个事务型基于 JavaScript 的面向对象数据库，用于�
 劣势：
 
 相比 Web Storage API 用起来复杂。如果你更喜欢一个简单的 API，可以考虑使用第三方库。
+
+## 同源策略
+
+目的：保证用户信息的安全，防止恶意网站窃取数据。
+
+协议、主域名、子域名和端口号都相同，则为同源。
+
+有三种行为受到同源策略限制：
++ Cookie、LocalStorage 和 IndexedDB 无法读取。
++ DOM 无法获得。
++ AJAX 请求无法发送。
+
+但一个网站很难掌握所有的资源，因此就需要跨域访问：
+1. CORS（Cross-Origin Resource Sharing）：允许服务器设置 Access-Control-Allow-Origin 头，允许跨域请求。
+
+    主要应用三种场景：简单请求（GET、HEAD、POST，头部字段仅包含Accept、Accept-Language、Content-Language、Content-Type，其中Content-Type的值仅限于这3者之一：application/x-www-form-urlencoded、multipart/form-data、text/plain）、预检请求（PUT、DELETE、OPTIONS等，可以自定义头部，向服务器发送application/json格式的数据）、认证请求。
+    预检请求：在正式请求之前，客户端发送一个 OPTIONS 请求，询问服务器是否允许跨域请求。服务器成功响应后，返回 Access-Control-Allow-Methods 头，客户端再发送实际请求。
+
+2. JSONP（JSON with Padding）：通过动态创建 script 标签，请求跨域资源，并在请求成功后执行回调函数。参看JavaScript JSON章节。

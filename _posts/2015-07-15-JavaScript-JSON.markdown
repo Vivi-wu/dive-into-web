@@ -2,7 +2,7 @@
 title:  "JavaScript JSON, JSONP"
 category: JavaScript
 ---
-JSON 是指 **J**ava**S**cript **O**bject **N**otation, 是一种轻量级的数据存储和传输格式，独立于语言（text only，可用任何编程语言来读取和生产 JSON 数据）。
+JSON 是指 **J**ava**S**cript **O**bject **N**otation, 是一种轻量级的数据存储和传输格式，独立于语言（text only，可用任何编程语言来读取和生产 JSON 数据），常用于跨平台的数据交换。
 
 JSON 可以“自描述”（human readable），容易理解。
 
@@ -114,8 +114,6 @@ Retrieve Theme: [
 
 ## JSONP
 
-目前并没有遇到需要使用 JSONP 的场景，但是有至少两次面试都被问到这个问题😓
-
 常见的答案是：用来解决纯前端 Ajax 不能跨域请求资源文件的问题。
 
 一句话说明：引用一段脚本，执行页面里定义的方法。
@@ -130,6 +128,6 @@ Retrieve Theme: [
 2. Ajax 通过服务端代理一样可以实现跨域，jsonp 本身也不排斥同域的数据的获取。
 3. jsonp 是一种方式或者说非强制性协议，如同 ajax 一样，它也不一定非要用 json 格式来传递数据，只不过提供公共通用服务还是选择支持广泛的数据格式，以便不同端处理数据。
 4. jsonp 的 Content-Type 是 `text/javascript`。
-5. jsonp 只支持 get 请求。
+5. jsonp 只支持 get 请求。应用少，慢慢被淘汰。
 
 对于拥有 _src_ 属性的标签都拥有跨域的能力，比如 `<script>`、`<img>`、`<iframe>`。

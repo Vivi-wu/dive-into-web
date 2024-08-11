@@ -282,6 +282,8 @@ The size of a text area can be specified by the _cols_ and _rows_ attributes, or
 
 ### 获取表单提交的数据
 
+FormData 是 HTML5 新增的接口，可以模拟表单数据，向服务器上传数据。不仅支持字符串传输，还支持文件的二进制传输。可用于视频、图片、音频的上传。
+
 `new FormData()` 创建的对象会自动将 form 中的表单值包含进去，文件内容会被编码之后包含进去。**注意**：所有的输入元素都需要有 name 属性，否则无法访问到值。
 
 ```javascript
