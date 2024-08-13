@@ -16,7 +16,7 @@ category: CSS
 
 ### 与 Flex 布局的区别
 
-+ 后者用来实现一维空间布局，in a row / column
++ Grid 布局是一种二维布局系统，Flex用来实现一维空间布局，in a row / column
 + 当 wrap flex 元素时，新的每一个行都变成一个新的 flex 容器，沿行所在的轴分配空间
 + 当需要既沿 row 轴又沿 column 轴对齐元素时，就应该使用 Grid 布局
 + Flex box：让内容的尺寸决定每个元素所占的单独空间
@@ -28,7 +28,7 @@ category: CSS
 
 ### Gird track 栅格轨道
 
-是栅格上任意两条线之间的space。通过 _grid-template-columns_ 和 _grid-template-rows_ 定义**列**和**行**的宽度。
+栅格轨道是栅格上任意两条线之间的space。通过 _grid-template-columns_ 和 _grid-template-rows_ 定义**列**和**行**的宽度。
 
 如此定义的栅格即为 explicit grid。
 
@@ -36,7 +36,11 @@ category: CSS
 
     grid-template-columns: 500px 1fr 2fr;
 
-2. 同时使用固定单位和 flexible 单位时，**先从可用空间里减去固定宽度**，再根据所占比例划分剩余空间。定义大型栅格多条轨道时，可使用 `repeat(重复次数, 重复pattern)` 实现重复全部或部分track列表。
+2. 同时使用固定单位和 flexible 单位时，**先从可用空间里减去固定宽度**，再根据所占比例划分剩余空间。
+3. 定义大型栅格多条轨道时，可使用 `repeat(重复次数, 重复pattern)` 实现重复全部或部分track列表。如：
+
+    grid-template-columns: repeat(3, 33.33%); // 3列，每列33.33%宽
+    grid-template-rows: repeat(2, 50px); // 2行，每行50px高
 
 #### auto-fill vs. auto-fit
 
@@ -44,7 +48,7 @@ category: CSS
 
 <video controls="" width="800" src="https://cdn.css-tricks.com/wp-content/uploads/2017/12/auto-fill-devtools.mov"></video>
 
-#### implicit grid
+#### implicit grid 未明确设定大小的栅格
 
 如果内容被放置在 defined grid 之外，则会创建隐含的 gird。
 
@@ -69,7 +73,7 @@ category: CSS
 
 ### Gutters 间隙
 
-栅格单元格之间的空隙通过 _grid-column-gap_ 和 _grid-row-gap_ 属性创建（缩写属性为 _grid-gap_）。
+栅格单元格之间的空隙/间距，通过 _grid-column-gap_ 和 _grid-row-gap_ 属性创建（缩写属性为 _grid-gap_）。
 
 + gap 所占据的空间在计算弹性长度 `fr` 时，**先从可用空间里减去**
 + 空隙里不能放任何东西
@@ -92,9 +96,9 @@ grid-template-areas:
 
 ### Alignment 对齐
 
-通过 _align-items_ 设置 grid area 中的元素在 block/column 轴上对齐的方式。
-
-通过 _justify-items_ 设置 grid area 中的元素在 inline/row 轴上对齐的方式。
++ 通过 _align-items_ 设置 grid area 中的元素在 block/column 轴上对齐的方式。
++ 通过 _justify-items_ 设置 grid area 中的元素在 inline/row 轴上对齐的方式。
++ 合并简写形式为 `place-items: <align> / <justify>;`
 
 当栅格 track 占据的区域**比栅格容器小时**，可以通过 _align-content_ 和 _justify-content_ 设置栅格的整体内容在 column/row 轴的对齐方式。
 

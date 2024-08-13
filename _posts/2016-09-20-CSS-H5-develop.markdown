@@ -93,6 +93,15 @@ document.querySelector('meta[name="viewport"]').setAttribute('content','width=de
 
 然而我们发现，无论是 iPhone5 还是 iPhone6，即使设备像素变了（320px ——> 375px），可是元素的宽度并没有变（始终是 PSD 中量的尺寸），因为它们的 `window.devicePixelRatio` 都是 2。
 
+另一种做法：
+
+```javascript
+const targetH = 640;
+const scale = document.documentElement.clientHeight / targetH;
+let meta = document.querySelector('meta[name="viewport"]');
+meta.content = `initial-scale=${scale}, maximum-scale=${scale}, user-scalable=no`;
+```
+
 ### 听听设计师怎么说
 
 rem 简单粗暴的实现，使得“屏幕越大按钮越大”。设计师认为“屏幕的尺寸和字体的大小不应该是一个完全正比或者说线性的关系”。

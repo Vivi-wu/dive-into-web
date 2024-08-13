@@ -2,7 +2,9 @@
 title:  "CSS Responsive Web Design"
 category: CSS
 ---
-当你使用 CSS 和 HTML 通过重定义大小、隐藏、收缩、拉伸或者移动内容，使它在所有屏幕上看起来不错，这就叫做响应式设计。
+当你使用 CSS 和 HTML 通过重定义大小、隐藏、收缩、拉伸或者移动内容，使同一个域名下同一个网页在所有屏幕上看起来不错，这就叫做响应式设计。
+
+响应式设计根据不同屏幕显示的需求，来调整网页显示的内容，其布局也随屏幕尺寸变化而变化。自适应布局的页面，不论屏幕尺寸如何变化，其内容和布局都是一样的。
 
 本文列举一些面向响应式 Web 设计的技巧。
 
@@ -34,7 +36,7 @@ category: CSS
 
 ## Viewport
 
-viewport 是一个网页中用户可以看到的区域。经常看到下面这段代码，为什么要这样做？
+viewport 是终端屏幕上用来显示网页的区域。可能比浏览器可是区域大，也可以比浏览器可是区域小。经常看到下面这段代码，为什么要这样做？
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
 
@@ -42,9 +44,9 @@ viewport 是一个网页中用户可以看到的区域。经常看到下面这�
 
 只设定这个的话，在 iPhone 上，当旋转至横屏模式，手机会显示一个 weird 的放大结果。
 
-`initial-scale=1.0` 设置浏览器第一次加载页面的初始放大等级。添加上面这个设置，横屏、竖屏就会有一样的放大效果。
+`initial-scale=1.0` 设置浏览器第一次加载页面的初始放大等级。添加上面这个设置，横屏、竖屏就会有一样的放大效果。就目前来说：Without initial scale you get the zooming bug in rotation(and sometimes compounded effects on double rotation) and media queries for the landscape mode being ignored. 如果不设置此属性，当手机屏幕尺寸远远小于元素尺寸时，系统会自动缩小元素（等比例缩放）。
 
-正如猜测的，就目前来说：Without initial scale you get the zooming bug in rotation(and sometimes compounded effects on double rotation) and media queries for the landscape mode being ignored. No such problems occur when the initial scale=1 is added.
+通过添加 `user-scalable=no` 禁止用户缩放。
 
 ## Grid system 栅格系统
 
