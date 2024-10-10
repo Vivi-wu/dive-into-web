@@ -162,9 +162,11 @@ nav.addEventListener('click', function () {
 }, false);
 ```
 
-上面的办法改变了作用域，但是写了一个没什么用的函数。使用 `.bind()` 不同于 call 和 apply，不会 invoke 一个函数（即立即执行）。<span class="t-blue">改变定义时的 scope</span>
+上面的办法改变了作用域，但是写了一个没什么用的函数。改进：使用 `.bind()` 改变定义时的 scope。不同于 call 和 apply，bind 不会 invoke 一个函数（即立即执行）。
 
-    nav.addEventListener('click', toggleNav.bind(scope, arg1, arg2), false);
+```js
+nav.addEventListener('click', toggleNav.bind(scope, arg1, arg2), false);
+```
 
 此外，还可以借助**闭包**实现定义时改变上下文。
 

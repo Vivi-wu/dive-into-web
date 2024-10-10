@@ -23,7 +23,7 @@ Git 作为一种 version control system，能够跟踪代码或文件目录的�
 
 ## Setting up a repository
 
-    git init
+    git init <direcotry>
 
 创建本地仓库（该命令通常是新项目中你会运行的第一条命令）
 

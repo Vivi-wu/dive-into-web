@@ -157,6 +157,7 @@ setTimeout(() => {
   console.log(2); // 宏任务
 }, 0);
 
+// Promise.then 是异步执行的，而创建 Promise 实例（executor）是同步执行的。
 new Promise((resolve, reject) => {
   console.log(3); // 同步任务
   resolve();
@@ -179,7 +180,7 @@ console.log(6); // 同步任务
 Promise 构造器指定某个任务完成后，根据这个任务执行的不同结果，去执行不同的回调函数（即下一个任务）。
 
 共有三种状态：
-+ pending：初始状态，任务还完成时触发
++ pending：初始状态，任务还未完成时触发
 + fulfilled：任务完成后触发
 + rejected：任务失败后出发
 
@@ -197,31 +198,6 @@ Hello().then(() =>{
 }).catch(() => {
   console.log('from reject')
 })
-```
-
-Promise.then 是异步执行的，而创建 Promise 实例 （executor）是同步执行的。
-
-```js
-(function test() {
-  setTimeout(function() {console.log(4)}, 0);
-  new Promise(function executor(resolve) {
-    console.log(1);
-    for( var i=0 ; i<1000 ; i++ ) {
-        i == 999 && console.log(i);
-    }
-    console.log(2);
-  }).then(function() {
-    console.log(5);
-  });
-  console.log(3);
-})();
-
-// 执行结果：
-// 1
-// 2
-// 3
-// 5
-// 4
 ```
 
 ## 事件委托

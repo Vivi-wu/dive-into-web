@@ -98,7 +98,7 @@ $(function(){
 })
 ```
 
-### 用原型扩展函数
+### 用原型扩展函数功能
 
 给 **Function 对象**添加方法，如下例，在函数执行之前添加错误检查，提高代码的健壮性。
 
@@ -107,12 +107,13 @@ $(function(){
 需要在函数外部把执行时的 this （参考JS object章节，当 this 用在函数内，它指拥有这个函数的对象）传进来。
 
 ```js
-Function.prototype.createInterceptor = function createInterceptor(fn) { // 也可以是无名函数
-  var scope = {};
-  var _this = this;    // 运行时，此处的 this 指拥有 createInterceptor() 函数的对象
-  return function() {
+// 给 Function 对象的原型添加了一个新方法 createInterceptor。所有的函数都将继承这个方法
+Function.prototype.createInterceptor = function createInterceptor(fn) { // 参数是一个函数，用于拦截调用并决定是否继续执行原函数。也可以是无名函数
+  var scope = {}; // 作为拦截器和原函数共享的上下文（即 this 指向的对象）
+  var _this = this; // 当前函数的上下文，即 createInterceptor 方法被调用时的对象（上下文）interceptMe() 函数。
+  return function() { // 返回一个匿名函数，将作为拦截器，包装原函数的调用。
     if (fn.apply(scope, arguments)) {
-      return _this.apply(scope, arguments);    // 因为JS函数本身是对象，此处运行时指 function interceptMe(x){}
+      return _this.apply(scope, arguments); // 调用原函数
     } else {
       return null;
     }

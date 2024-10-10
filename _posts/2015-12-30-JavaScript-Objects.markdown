@@ -146,7 +146,7 @@ JS对象要执行的操作，存放在 properties 里作为 **function definitio
 
 用 new 关键字创建的对象，继承该类对象的原型，如 new Date()，继承 `Date.prototype`。
 
-原型链 prototype chain 的根节点是 `Object.prototype`（其包含方法 toString()，这也是为什么所有 js 变量都可使用 toString 方法）
+原型链 prototype chain 的根节点是 `Object.prototype`（其包含方法 toString()，这也是为什么所有 js 变量都可使用 toString 方法）。
 
 当我们尝试获取一个对象的属性发现不存在时，JS 会检测该对象的原型上是否存在那个属性。
 
@@ -216,15 +216,13 @@ tmpArry = Object.values(this.otherStoreUrl).filter(ele => ele.length > 1)
 
 子类继承父类的特征和行为，子类对象（实例）具有父类的所有属性和方法，或子类从父类继承方法，使其具有与父类相同的行为。
 
-### 原型式继承
-
-定义一个函数，在函数中创建一个临时性的构造函数，将参数传入的对象作为这个构造函数的原型，最后返回这个构造函数的实例。
+### 原型式/链继承
 
 ```js
-function myObject(o) {
-    function F() {}
-    F.prototype = o;
-    return new F();
+function myObject(o) { // 1、定义一个函数
+    function F() {} // 2、在函数中创建一个临时性的构造函数
+    F.prototype = o; // 3、将函数入参（一个对象）作为这个构造函数的原型
+    return new F(); // 4、返回这个构造函数的实例
 }
 let person = {
     name: "John",
